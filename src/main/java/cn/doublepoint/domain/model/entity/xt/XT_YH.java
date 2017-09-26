@@ -19,4 +19,20 @@ public class XT_YH {
 	
 	@Column
 	private String yhbh;
+
+	public long getBs() {
+		return bs;
+	}
+
+	public void setBs(long bs) {
+		this.bs = bs;
+	}
+
+	public String getYhbh() {
+		return yhbh;
+	}
+
+	public void setYhbh(String yhbh) {
+		this.yhbh = yhbh;
+	}
 }
