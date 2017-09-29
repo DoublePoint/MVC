@@ -1,8 +1,8 @@
 package TestXMLReader;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,47 +21,8 @@ public class DOMTest {
 
 	@Test
 	public void test() {
-		Date date=new Date();
-		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+		List<ModelModel> entityModelList=new ArrayList<ModelModel>();
 		
-		String entityNameString=""
-				,entityCodeString="";
-		StringBuffer sbBuffer = new StringBuffer();
-		sbBuffer.append("/**                                                               \r\n");
-		sbBuffer.append("* 创   建   人： 刘磊                                             \r\n");
-		
-		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* 创   建   时   间 ："+formatter.format(date)+"                      \r\n");
-		
-		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* 类   说   明 ：                                                 \r\n");
-		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* 修   改   人：          修   改   日   期：                     \r\n");
-		sbBuffer.append("*/                                                                \r\n");
-		sbBuffer.append("package cn.doublepoint.domain.model.entity.xt;                    \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("import javax.persistence.Column;                                  \r\n");
-		sbBuffer.append("import javax.persistence.Entity;                                  \r\n");
-		sbBuffer.append("import javax.persistence.Id;                                      \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("@Entity                                                           \r\n");
-		sbBuffer.append("public class %EntityName% {                                              \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("	@Id                                                              \r\n");
-		sbBuffer.append("	@Column                                                          \r\n");
-		sbBuffer.append("	private long bs;                                                 \r\n");
-		sbBuffer.append("	                                                                 \r\n");
-		sbBuffer.append("	@Column                                                          \r\n");
-		sbBuffer.append("	private String yhbh;                                             \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("	public long getBs() {                                            \r\n");
-		sbBuffer.append("		return bs;                                                     \r\n");
-		sbBuffer.append("	}                                                                \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("	public void setBs(long bs) {                                     \r\n");
-		sbBuffer.append("		this.bs = bs;                                                  \r\n");
-		sbBuffer.append("	}                                                                \r\n");
-		sbBuffer.append("}\r\n");
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -71,33 +32,70 @@ public class DOMTest {
 			Node classesElementNode = classesList.item(0);
 			NodeList classElementNodeList = classesElementNode.getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
+				List<ModelField> fieldList=new ArrayList<ModelField>();
+				ModelModel entityModel=new ModelModel();
 				Node classElementNode = classElementNodeList.item(i);
 				NodeList classChildrenList = classElementNode.getChildNodes();
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
+					
 					Node item=classChildrenList.item(j);
 					String nodeName=item.getNodeName();
-					String nodeValue=item.getNodeValue();
-					if(nodeName.equals("a:Name")){
-						entityNameString=nodeValue;
-					}
-					else if(nodeName.equals("a:Code")){
-						entityCodeString=nodeValue;
-					}
-					if (item.getNodeType() == Node.ELEMENT_NODE) {
-						// 获取了element类型节点的节点名
-						System.out.print("第" + (i + 1) + "个节点的节点名："+ classChildrenList.item(j).getNodeName());
-						// 获取了element类型节点的节点值
-						System.out.println("--节点值是："
-								+ classChildrenList.item(j).getFirstChild()
-										.getNodeValue());
-						// System.out.println("--节点值是：" +
-						// childNodes.item(k).getTextContent());
+					String nodeValue=item.getTextContent();
+					if(nodeValue==null||nodeValue=="")
+						break;
+					switch (nodeName) {
+					case "a:Name":
+						entityModel.setModelName(nodeValue);
+						break;
+					case "a:Code":
+						entityModel.setModelCode(nodeValue);
+						break;
+					case "a:Comment":
+						entityModel.setModelComment(nodeValue);
+						break;
+					case "a:Stereotype":
+						entityModel.setModelType(nodeValue);
+						break;
+					case "c:Attributes":
+						{
+							NodeList attributeNodeList=item.getChildNodes();
+							
+							for(int k=0;k<attributeNodeList.getLength();k++){
+								
+								ModelField field=new ModelField();
+								Node attributeNode=attributeNodeList.item(k);
+								for (int l = 0; l < attributeNode.getChildNodes().getLength(); l++) {
+									Node attributeChildNode=attributeNode.getChildNodes().item(l);
+									String attributeChildNodeNameString=attributeChildNode.getNodeName();
+									String attributeChildNodeValueString=attributeChildNode.getTextContent();
+									if(attributeChildNodeValueString==null||attributeChildNodeValueString=="")
+										break;
+									switch (attributeChildNodeNameString) {
+									case "a:Name":
+										field.setFieldComment(attributeChildNodeValueString);
+										break;
+									case "a:Code":
+										field.setFieldName(attributeChildNodeValueString);
+										break;
+									case "a:DataType":
+										field.setFieldType(attributeChildNodeValueString);
+										break;
+									default:
+										break;
+								}
+								
+								}
+								fieldList.add(field);
+							}
+						}
+						break;
+					default:
+						break;
 					}
 				}
-
+				entityModel.setFields(fieldList);
+				entityModelList.add(entityModel);
 			}
-			System.out.println(sbBuffer.toString());
-
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -105,6 +103,9 @@ public class DOMTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		for (ModelModel modelModel : entityModelList) {
+			System.out.println(modelModel.getCotent());
+		}
+		
 	}
-
 }
