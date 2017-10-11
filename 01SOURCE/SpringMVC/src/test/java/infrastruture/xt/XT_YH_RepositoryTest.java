@@ -1,8 +1,8 @@
 /** 
-* ´´½¨ÈË£º ÁõÀÚ
-* ´´½¨Ê±¼ä£º2017-9-25 ÏÂÎç11:38:56 
-* ÀàËµÃ÷ £º
-* ĞŞ¸ÄÈË£º          ĞŞ¸ÄÈÕÆÚ£º
+* åˆ›å»ºäººï¼š åˆ˜ç£Š
+* åˆ›å»ºæ—¶é—´ï¼š2017-9-25 ä¸‹åˆ11:38:56 
+* ç±»è¯´æ˜ ï¼š
+* ä¿®æ”¹äººï¼š          ä¿®æ”¹æ—¥æœŸï¼š
 */ 
 package infrastruture.xt;
 
@@ -25,7 +25,7 @@ public class XT_YH_RepositoryTest {
 	@Test
 	public void saveXT_RY(){
 		XT_YH yh=new XT_YH();
-		yh.setBs(1);
+		yh.setBs(2);
 		yh.setYhbh("2");
 		repository.save(yh);
 	}

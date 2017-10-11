@@ -1,11 +1,11 @@
 /** 
-* ´´   ½¨   ÈË£º ÁõÀÚ
+* åˆ›   å»º   äººï¼š åˆ˜ç£Š
 * 
-* ´´   ½¨   Ê±   ¼ä £º 2017-9-29 ÏÂÎç10:21:35
+* åˆ›   å»º   æ—¶   é—´ ï¼š 2017-9-29 ä¸‹åˆ10:21:35
 * 
-* Àà   Ëµ   Ã÷ £º
+* ç±»   è¯´   æ˜ ï¼š
 * 
-* ĞŞ   ¸Ä   ÈË£º          ĞŞ   ¸Ä   ÈÕ   ÆÚ£º
+* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š
 */ 
 package TestXMLReader;
 
@@ -91,15 +91,15 @@ private String modelType;
 		
 		StringBuffer sbBuffer = new StringBuffer();
 		sbBuffer.append("/**                                                               \r\n");
-		sbBuffer.append("* ´´   ½¨   ÈË£º ÁõÀÚ                                             \r\n");
+		sbBuffer.append("* åˆ›   å»º   äººï¼š åˆ˜ç£Š                                             \r\n");
 		
 		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* ´´   ½¨   Ê±   ¼ä £º"+formatter.format(date)+"                      \r\n");
+		sbBuffer.append("* åˆ›   å»º   æ—¶   é—´ ï¼š"+formatter.format(date)+"                      \r\n");
 		
 		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* Àà   Ëµ   Ã÷ £º     "+modelComment+"    \r\n");
+		sbBuffer.append("* ç±»   è¯´   æ˜ ï¼š     "+modelComment+"    \r\n");
 		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* ĞŞ   ¸Ä   ÈË£º          ĞŞ   ¸Ä   ÈÕ   ÆÚ£º                     \r\n");
+		sbBuffer.append("* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š                     \r\n");
 		sbBuffer.append("*/                                                                \r\n");
 		sbBuffer.append("package cn.doublepoint.domain.model.entity.xt;                    \r\n");
 		sbBuffer.append("                                                                  \r\n");

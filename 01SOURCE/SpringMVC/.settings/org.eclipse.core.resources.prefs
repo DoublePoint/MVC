@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/NewFile.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/test.jsp=UTF-8
+encoding//src/main/java/cn/doublepoint=UTF-8
+encoding//src/test/java=UTF-8
 encoding//src/test/java/TestXMLReader/DOMTest.java=UTF-8
