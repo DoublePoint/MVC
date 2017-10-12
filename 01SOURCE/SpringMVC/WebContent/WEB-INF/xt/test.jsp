@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="WEB-INF/jsp/css/layui.css"  media="all">
+  <link rel="stylesheet" href="css/layui.css"  media="all">
   
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
@@ -180,7 +180,7 @@
   </div>
 </div>             
           
-<script src="web-inf/jsp/layui.js" charset="utf-8"></script>
+<script src="script/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
 layui.use('element', function(){

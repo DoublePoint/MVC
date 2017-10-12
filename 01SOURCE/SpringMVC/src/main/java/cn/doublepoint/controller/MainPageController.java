@@ -17,7 +17,7 @@ public class MainPageController {
 
 	@RequestMapping(value="/hello")
 	public String hello(){
-		return "test";
+		return "/xt/test";
 	}
 
 }
