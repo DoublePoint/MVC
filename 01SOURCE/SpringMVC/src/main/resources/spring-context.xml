@@ -89,7 +89,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- 配置SpringData ，也就是扫描Repository的包-->
-    <jpa:repositories base-package="cn.doublepoint" entity-manager-factory-ref="entityManagerFactory"/>
+    <jpa:repositories base-package="cn.doublepoint.infrastructure.xt" entity-manager-factory-ref="entityManagerFactory"/>
 	<!-- 配置自动扫描的包（包括其下子包） -->
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 ,去除controller-->
     <context:component-scan base-package="cn.doublepoint">

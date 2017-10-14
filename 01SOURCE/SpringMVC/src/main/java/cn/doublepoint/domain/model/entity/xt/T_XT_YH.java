@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class XT_YH {
+public class T_XT_YH {
 
 	@Id
 	@Column

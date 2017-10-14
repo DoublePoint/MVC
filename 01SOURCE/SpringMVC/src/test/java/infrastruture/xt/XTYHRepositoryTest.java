@@ -13,18 +13,18 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.doublepoint.domain.model.entity.xt.XT_YH;
-import cn.doublepoint.infrastructure.xt.XT_YH_Repository;
+import cn.doublepoint.domain.model.entity.xt.T_XT_YH;
+import cn.doublepoint.infrastructure.xt.XTYHRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(locations={"classpath:spring-context.xml"})  
-public class XT_YH_RepositoryTest {
+public class XTYHRepositoryTest {
 	
 	@Resource
-	XT_YH_Repository repository;
+	XTYHRepository repository;
 	@Test
 	public void saveXT_RY(){
-		XT_YH yh=new XT_YH();
+		T_XT_YH yh=new T_XT_YH();
 		yh.setBs(2);
 		yh.setYhbh("2");
 		repository.save(yh);

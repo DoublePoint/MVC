@@ -97,7 +97,7 @@ private String modelType;
 		sbBuffer.append("* 创   建   时   间 ："+formatter.format(date)+"                      \r\n");
 		
 		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* 类   说   明 ：     "+modelComment+"    \r\n");
+		sbBuffer.append("* 类   说   明 ：     "+modelName+"："+modelComment+"    \r\n");
 		sbBuffer.append("*                                                                 \r\n");
 		sbBuffer.append("* 修   改   人：          修   改   日   期：                     \r\n");
 		sbBuffer.append("*/                                                                \r\n");
@@ -108,7 +108,8 @@ private String modelType;
 		sbBuffer.append("import javax.persistence.Id;                                      \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		sbBuffer.append("@Entity                                                           \r\n");
-		sbBuffer.append("public class "+modelName+" {                                              \r\n");
+		sbBuffer.append("@Table(name=\"+"+modelCode+"+\")                                                   \r\n");
+		sbBuffer.append("public class "+modelCode+" {                                              \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		//===================================
 		for (int i=0;i<fields.size();i++) {

@@ -27,7 +27,7 @@ public class DOMTest {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document document = db.parse("file:/d://ProgramFiles//springmvc//00参考文件/BaseInfrastructure//后台.oob");// 传入文件名可以是相对路径也可以是绝对路径
+			Document document = db.parse("file:/F://AllProject//01SOURCE//SpringMVC//src//test//java//TestXMLReader//后台.oob");// 传入文件名可以是相对路径也可以是绝对路径
 			NodeList classesList = document.getElementsByTagName("c:Classes");
 			Node classesElementNode = classesList.item(0);
 			NodeList classElementNodeList = classesElementNode.getChildNodes();
