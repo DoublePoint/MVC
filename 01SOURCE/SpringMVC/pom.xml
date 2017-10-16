@@ -103,7 +103,7 @@
 
 
 	<build>
-		<finalName>open</finalName>
+		<!-- <finalName>open</finalName> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
