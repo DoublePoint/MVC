@@ -7,10 +7,8 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.taglib;
+package cn.doublepoint.taglib.menu;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,16 +28,7 @@ public class MenuTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		JspWriter out = this.pageContext.getOut();
 		Configuration conf = new Configuration();
-//		conf.setServletContextForTemplateLoading(this.pageContext.getServletContext(), "tlds/menu");
-//		conf.setClassForTemplateLoading(this.getClass(),"tlds/menu");
-//		conf.setClassForTemplateLoading(MenuTag.class, "tlds/menu");
-		try {
-			File file=new File(this.getClass().getClassLoader().getResource("tlds/menu").getPath());
-			conf.setDirectoryForTemplateLoading(file);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		conf.setServletContextForTemplateLoading(this.pageContext.getServletContext(), "tlds/menu");
 		conf.setDefaultEncoding("UTF-8");
         Map<String, Menu> root = new HashMap<String, Menu>();  
         root.put("parameters", new Menu());  

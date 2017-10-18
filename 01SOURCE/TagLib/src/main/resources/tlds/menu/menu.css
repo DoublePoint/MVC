@@ -1,0 +1,184 @@
+/* ThemeIEMenu Style Sheet */
+/**
+ * 	第一级菜单，鼠标放上后和选中后的样式
+ */
+.tablexg{
+    border-left:1px solid #979696;/**左边框样式**/
+	border-bottom:1px solid #979696;/**下边框样式**/
+	border-right:1px solid #979696;/**右边框样式**/
+	border-top:1px solid #979696;/**上边框样式**/
+	background-color:#efefef;/**背景颜色**/
+}
+/**
+ * 	子菜单样式
+ */
+.ThemeIESubMenu
+{
+	float:left; /**定位**/
+	/**
+	filter:progid:DXImageTransform.Microsoft.Shadow (Color=#333333,Direction=120,strength=5);
+    **/
+    filter:alpha(opacity=90);-moz-opacity:.90;opacity:.90;/**滤镜定义透明度**/
+    color:#000000;/**字体颜色**/
+}
+/**
+ * 	子菜单鼠标经过时的样式
+ */
+.ThemeIEMainItemHover,.ThemeIEMainItemActive,
+.ThemeIEMenuItemHover,.ThemeIEMenuItemActive
+{
+	
+	background-color:	#3169C5;/**背景颜色**/
+	color:white;/**字体颜色**/
+}
+.menu-column-background{
+		background:url(./images/menu-bg.png) no-repeat ; 
+}
+.first-menu-column-background{
+		background:url(./images/first-menu-bg.png) no-repeat ; 
+}
+.menu
+ /**
+   * 第一级菜单的样式
+   */
+.ThemeIEMenu,.ThemeIESubMenuTable
+{
+	cursor:		default;/**鼠标样式**/
+	font-size:	12px;/**字体大小**/
+	padding:	0;/**内边距**/
+	border:		0;/**无边框设置**/
+	white-space:	nowrap;/**设定不换行**/
+	WORD-BREAK: break-all;
+	border-collapse: collapse;
+	TABLE-LAYOUT: fixed;/**设定表格不被撑开**/
+	background-repeat:repeat-x;/**背景图片x方向扩展**/
+	width: 100%;/**显示宽度**/
+	align:left;/**水平方向字体显示位置**/
+}
+/**
+ * 	子菜单外层table的样式
+ */
+.subMenuTable{
+	width:100%;/**显示宽度**/
+	border:0;/**无边框设置**/
+	font-family:arial;/**字体设置**/
+	font-size:12px;/**字体大小**/
+	cursor:default;/**鼠标样式**/
+	background-repeat:no-repeat;/**背景图片不重复扩展**/
+	valign:middle;/**垂直方向字体显示位置**/
+	align:left;/**水平方向字体显示位置**/
+	
+}
+/**
+ * 	鼠标离开一级菜单时，效果消失的样式
+ */
+.tablenoxg{
+	border:0px;/**无边框设置**/
+}
+/**
+ * 	每个子菜单行的样式
+ */
+.ThemeIEMainItem,.ThemeIEMainItemHover,.ThemeIEMainItemActive,
+.ThemeIEMenuItem,.ThemeIEMenuItemHover,.ThemeIEMenuItemActive
+{
+	padding:	1px 1px 1px 1px;/**内边距设置**/
+	white-space:	nowrap;/**不换行设置**/
+	vertical-align: middle;/**垂直方向字体显示位置**/
+	align: center;/**水平方向字体显示位置**/
+	height:24px;/**显示高度**/
+
+}
+/**
+ * 	一级菜单的每个菜单项的样式
+ */
+.mainMenuItem{
+	padding:	1px 1px 1px 1px;/**内边距设置**/
+	white-space:	nowrap;/**不换行设置**/
+	vertical-align: middle;/**垂直方向字体显示位置**/
+	align: center;/**水平方向字体显示位置**/
+}
+/**
+ * 	一级菜单左右箭头的样式，牵扯js宽度的计算，不建议修改以下属性
+ */
+.tag{ /* position:relative;height:30px;display:block;top:0; */}
+	.tag .ctrl{width:10px; height:18px; overflow:hidden; text-indent:-9999px; background:url(./images/tc.gif) no-repeat; cursor:pointer}
+	.tag .tablectrl{width:10px; height:30px; overflow:hidden; text-indent:-9999px; background:url(./images/tc.gif) no-repeat; cursor:pointer}
+	.tag .goLeft{float:left;background-position:0 -1px}
+	.tag .goRight{float:right;background-position:100% -1px;}
+	.tag .leftAct{background-position:0 -56px}
+	.tag .rightAct{background-position:100% -56px}
+	.tag .leftEnd{background-position:0 -29px}
+	.tag .rightEnd{background-position:100% -29px}
+	/* .tag .tagScorll{overflow:hidden; position:absolute;bottom:-1px;*bottom:-2px;left:14px;right:14px;width:100%;height:30px} */
+
+.menubar{
+	
+	display:inline-block;
+}
+.ks-menubar-mouseover{
+	color:red;
+}
+
+
+     .menu{
+		width:1024px;
+		height:540px;
+		background:white;
+		position:absolute;
+		z-index:20000;
+		left:0px;
+		top:37px;	
+		border-right:2px solid #D6D6D6;
+		border-left:2px solid #D6D6D6;
+		border-bottom:2px solid #D6D6D6;
+	}
+	
+	
+	.menuIframe{
+		width:1024px;
+		height:540px;
+		background:white;
+		position:absolute;
+		z-index:19999;
+		left:0px;
+		top:37px;	
+	}
+	.menucontent{
+		height:100%;
+		width:256px;
+		display:inline-block;
+	}
+	.menu-title{
+		color:#333333;
+		font-size:14px;
+		font-weight:bold;
+		height:60px;
+		padding-left:40px;
+		padding-top:20px;
+		/*background:url(./images/menubar.png) ;*/
+	}
+	.menu-item{
+		color:#333333;
+		font-size:12px;
+		height:30px;
+		padding-left:40px;
+		line-height:30px
+	}
+	.item-selected{
+		background:url(./images/menuitem-select.png) ;
+	}
+	.item-over{
+		background:url(./images/menuitem-over.png) ;
+	}
+	.menu-name{
+		width:178px;
+		float:left;
+		height:30px;
+	}
+	.menu-arrow{
+	   width:30px;
+	   float:right; 
+	}
+	
+	
+	
