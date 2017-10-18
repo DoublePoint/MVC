@@ -32,14 +32,14 @@ public class MenuTag extends TagSupport {
 		Configuration conf = new Configuration();
 //		conf.setServletContextForTemplateLoading(this.pageContext.getServletContext(), "tlds/menu");
 //		conf.setClassForTemplateLoading(this.getClass(),"tlds/menu");
-//		conf.setClassForTemplateLoading(MenuTag.class, "tlds/menu");
-		try {
-			File file=new File(this.getClass().getClassLoader().getResource("tlds/menu").getPath());
-			conf.setDirectoryForTemplateLoading(file);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		conf.setClassForTemplateLoading(this.getClass(), "/tlds/menu");
+//		try {
+//			File file=new File(this.getClass().getClassLoader().getResource("tlds/menu").getPath());
+//			conf.setDirectoryForTemplateLoading(file);
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		conf.setDefaultEncoding("UTF-8");
         Map<String, Menu> root = new HashMap<String, Menu>();  
         root.put("parameters", new Menu());  

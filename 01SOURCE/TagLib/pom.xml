@@ -62,6 +62,16 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+			<artifactId>maven-jar-plugin</artifactId>
+			<configuration>					
+				<classesDirectory>target/classes/</classesDirectory>
+				<archive>
+					<addMavenDescriptor>true</addMavenDescriptor>
+				</archive>
+			</configuration>
+		</plugin>
 		</plugins>
 	</build>
 </project>

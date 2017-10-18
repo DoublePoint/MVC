@@ -65,4 +65,11 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.jpg</url-pattern>
 	</servlet-mapping>
+	
+	<jsp-config>  
+      <taglib>  
+          <taglib-uri>http://ll.taglib/menu</taglib-uri>  
+          <taglib-location>/WEB-INF/tlds/ll.tld</taglib-location>  
+      </taglib>  
+  </jsp-config>  
 </web-app>

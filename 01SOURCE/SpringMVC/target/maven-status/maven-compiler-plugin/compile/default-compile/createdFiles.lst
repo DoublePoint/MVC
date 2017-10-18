@@ -1,7 +1,0 @@
-cn\doublepoint\controller\MainPageController.class
-cn\doublepoint\infrastructure\xt\XTYHRepository.class
-cn\doublepoint\infrastructure\xt\XTCDRepository.class
-cn\doublepoint\domain\model\entity\xt\T_XT_YH.class
-cn\doublepoint\controller\xt\XTCDController.class
-cn\doublepoint\domain\model\entity\BaseEntity.class
-cn\doublepoint\domain\model\entity\xt\T_XT_CD.class
