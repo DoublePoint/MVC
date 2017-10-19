@@ -100,7 +100,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.doublePoint.taglib</groupId>
-			<artifactId>TagLib</artifactId>
+			<artifactId>TagLib</artifactId> 
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

@@ -1,11 +1,8 @@
-package TestXMLReader;
+package TestP;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import TestXMLReader.CONSTANT;
 
 /**
  * DOM方式解析xml
@@ -147,7 +146,7 @@ public class DOMTest {
 				// // TODO Auto-generated catch block
 				// e.printStackTrace();
 				// }
-				 System.out.println(modelModel.getCotent().toString());
+				// System.out.println(modelModel.getCotent().toString());
 			}
 		}
 	}
