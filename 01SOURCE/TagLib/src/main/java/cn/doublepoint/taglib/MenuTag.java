@@ -9,8 +9,6 @@
 */
 package cn.doublepoint.taglib;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +21,15 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 public class MenuTag extends TagSupport {
+	private String ll_class;
+	
+	public String getLl_class() {
+		return ll_class;
+	}
+	public void setLl_class(String ll_class) {
+		this.ll_class = ll_class;
+	}
+
 	private final String  templateFileName="menu.ftl";
 
 	private static final long serialVersionUID = 1L;
@@ -30,23 +37,15 @@ public class MenuTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		JspWriter out = this.pageContext.getOut();
 		Configuration conf = new Configuration();
-//		conf.setServletContextForTemplateLoading(this.pageContext.getServletContext(), "tlds/menu");
-//		conf.setClassForTemplateLoading(this.getClass(),"tlds/menu");
 		conf.setClassForTemplateLoading(this.getClass(), "/tlds/menu");
-//		try {
-//			File file=new File(this.getClass().getClassLoader().getResource("tlds/menu").getPath());
-//			conf.setDirectoryForTemplateLoading(file);
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 		conf.setDefaultEncoding("UTF-8");
-        Map<String, Menu> root = new HashMap<String, Menu>();  
-        root.put("parameters", new Menu());  
+        Map<String, MenuTag> root = new HashMap<String, MenuTag>();  
+        root.put("menu", this);  
 		Template tl;
 		try {
 			tl = conf.getTemplate(templateFileName);
 			tl.process(root, out);
+			out.write("222222222"+this.getLl_class());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -9,6 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<ll:Menu/>
+	<ll:Menu ll_class="layui-nav layui-nav-tree layui-inline"/>
 </body>
 </html>
