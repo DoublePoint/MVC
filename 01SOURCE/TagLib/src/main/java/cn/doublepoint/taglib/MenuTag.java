@@ -15,12 +15,12 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.TagSupport;
 
+import cn.doublepoint.taglib.base.BaseTagSupport;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-public class MenuTag extends TagSupport {
+public class MenuTag extends BaseTagSupport {
 	private String ll_class;
 	
 	public String getLl_class() {
