@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.taglib.ajaxdatagird;
+package cn.doublepoint.taglib.ajaxdatagrid;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,29 +31,7 @@ public class AjaxDataGrid {
 	  private int startyear = 1900;
 	  Calendar calendar = Calendar.getInstance();
 	  private int endyear = this.calendar.get(1) + 50;
-	  
-	  public void setStartyear(int startyear)
-	  {
-	    this.startyear = startyear;
-	  }
-	  
-	  public void setEndyear(int endyear)
-	  {
-	    this.endyear = endyear;
-	  }
-	  
-	  public void setShowpagerbar(boolean showpagerbar)
-	  {
-	    this.showpagerbar = showpagerbar;
-	  }
-	  
 	  private boolean collapseoninit = false;
-	  
-	  public void setCollapseoninit(boolean collapseoninit)
-	  {
-	    this.collapseoninit = collapseoninit;
-	  }
-	  
 	  private boolean initData = true;
 	  private boolean showPager = true;
 	  private boolean supportFilter = false;
@@ -88,22 +66,41 @@ public class AjaxDataGrid {
 	  private String contextPath;
 	  private String colModelKey;
 	  private String postInit;
-	  private ValidateUtils validateUtil;
 	  private boolean customRowNum = false;
 	  private boolean showtooltip = false;
 	  private boolean isPercentLayout = false;
 	  private boolean escapeHtml = true;
 	  private boolean showtipsonturnpage = true;
+	  private boolean isexporthidecols = false;
+	  private Map<String, String> tagList;
+	  private PageContext pageContext;
+	  private String onContextMenu;
+	  
+	  public void setStartyear(int startyear)
+	  {
+	    this.startyear = startyear;
+	  }
+	  
+	  public void setEndyear(int endyear)
+	  {
+	    this.endyear = endyear;
+	  }
+	  
+	  public void setShowpagerbar(boolean showpagerbar)
+	  {
+	    this.showpagerbar = showpagerbar;
+	  }
+	  
+	  
+	  public void setCollapseoninit(boolean collapseoninit)
+	  {
+	    this.collapseoninit = collapseoninit;
+	  }
 	  
 	  public void setShowtipsonturnpage(boolean showtipsonturnpage)
 	  {
 	    this.showtipsonturnpage = showtipsonturnpage;
 	  }
-	  
-	  private boolean isexporthidecols = false;
-	  private Map<String, String> tagList;
-	  private PageContext pageContext;
-	  private String onContextMenu;
 	  
 	  public void setIsexporthidecols(boolean isexporthidecols)
 	  {
@@ -118,11 +115,6 @@ public class AjaxDataGrid {
 	  public void setCustomrownum(boolean customrownum)
 	  {
 	    this.customRowNum = customrownum;
-	  }
-	  
-	  public void setValidateUtil(ValidateUtils validateUtil)
-	  {
-	    this.validateUtil = validateUtil;
 	  }
 	  
 	  public void setTagList(Map<String, String> tagList)
@@ -140,146 +132,9 @@ public class AjaxDataGrid {
 	    this.onContextMenu = onContextMenu;
 	  }
 	  
-	  public AjaxDataGrid(ValueStack stack, HttpServletRequest request, HttpServletResponse response)
-	  {
-	    super(stack, request, response);
-	  }
-	  
 	  protected String getDefaultTemplate()
 	  {
 	    return "ajaxdatagrid/ajaxdatagrid";
-	  }
-	  
-	  protected void evaluateExtraParams()
-	  {
-	    super.evaluateExtraParams();
-	    
-	    boolean hasLineno = false;
-	    for (int i = 0; i < this.gridColumnList.size(); i++)
-	    {
-	      Map<String, Object> columnProp = (Map)this.gridColumnList.get(i);
-	      String type = columnProp.get("type").toString();
-	      if ("lineno".equals(type))
-	      {
-	        hasLineno = true;
-	        break;
-	      }
-	    }
-	    addParameter("startyear", Integer.valueOf(this.startyear));
-	    addParameter("endyear", Integer.valueOf(this.endyear));
-	    addParameter("width", this.width);
-	    addParameter("height", this.height);
-	    addParameter("groupField", this.groupField);
-	    addParameter("grouptitle", this.grouptitle);
-	    addParameter("showQueryBar", Boolean.valueOf(this.showQueryBar));
-	    addParameter("initData", Boolean.valueOf(this.initData));
-	    addParameter("escapeHtml", Boolean.valueOf(this.escapeHtml));
-	    addParameter("showPager", Boolean.valueOf(this.showPager));
-	    addParameter("supportFilter", Boolean.valueOf(this.supportFilter));
-	    addParameter("supportOrder", Boolean.valueOf(this.supportOrder));
-	    addParameter("supportToExcel", Boolean.valueOf(this.supportToExcel));
-	    addParameter("supportToExcelFull", Boolean.valueOf(this.supportToExcelFull));
-	    addParameter("supportToPdf", Boolean.valueOf(this.supportToPdf));
-	    addParameter("supportToPdfFull", Boolean.valueOf(this.supportToPdfFull));
-	    addParameter("customExport", Boolean.valueOf(this.customExport));
-	    addParameter("showToolBar", Boolean.valueOf(this.showToolBar));
-	    addParameter("showpagerbar", Boolean.valueOf(this.showpagerbar));
-	    addParameter("collapseoninit", Boolean.valueOf(this.collapseoninit));
-	    addParameter("supportAdd", Boolean.valueOf(this.supportAdd));
-	    addParameter("supportDelete", Boolean.valueOf(this.supportDelete));
-	    addParameter("supportRefresh", Boolean.valueOf(this.supportRefresh));
-	    addParameter("nowrap", Boolean.valueOf(this.nowrap));
-	    addParameter("titleAlign", this.titleAlign);
-	    addParameter("contextPath", this.contextPath);
-	    addParameter("rowOfPage", Integer.valueOf(this.rowOfPage));
-	    addParameter("clientSortable", Boolean.valueOf(this.clientSortable));
-	    addParameter("postInit", this.postInit);
-	    addParameter("onContextMenu", this.onContextMenu);
-	    addParameter("customRowNum", Boolean.valueOf(this.customRowNum));
-	    addParameter("showtooltip", Boolean.valueOf(this.showtooltip));
-	    addParameter("isPercentLayout", Boolean.valueOf(this.isPercentLayout));
-	    addParameter("customtooltipfunc", this.customtooltipfunc);
-	    addParameter("showtipsonturnpage", Boolean.valueOf(this.showtipsonturnpage));
-	    addParameter("isexporthidecols", Boolean.valueOf(this.isexporthidecols));
-	    if (!"".equals(this.url)) {
-	      this.action = this.url;
-	    }
-	    addParameter("action", this.action);
-	    addParameter("rowHeight", this.rowHeight);
-	    addParameter("preSubmit", this.preSubmit);
-	    addParameter("postSubmit", this.postSubmit);
-	    boolean showLargeData = false;
-	    if (this.rowOfPage >= this.largeDataThreshold)
-	    {
-	      showLargeData = true;
-	      this.readonly = true;
-	    }
-	    addParameter("showLargeData", Boolean.valueOf(showLargeData));
-	    if ((this.colModelKey != null) && (!"".equals(this.colModelKey)))
-	    {
-	      List<DynaColumnModel> titleInfo = (List)findValue("dynaColumnModel." + this.colModelKey);
-	      if (titleInfo != null)
-	      {
-	        List<Map<String, Object>> dropList = new ArrayList();
-	        List<Map<String, Object>> droptreeList = new ArrayList();
-	        List<Map<String, Object>> dyndropList = new ArrayList();
-	        List<Map<String, Object>> inputbuttonList = new ArrayList();
-	        DynaColumnModelUtil.prepareGridColumnModel(this.gridColumnList, titleInfo, this.validateUtil, dropList, 
-	          droptreeList, dyndropList, inputbuttonList, this.pageContext, this.tagList);
-	        if (dropList.size() > 0) {
-	          addParameter("dropList", dropList);
-	        }
-	        if (droptreeList.size() > 0) {
-	          addParameter("droptreeList", droptreeList);
-	        }
-	        if (dyndropList.size() > 0) {
-	          addParameter("dyndropList", dyndropList);
-	        }
-	        if (inputbuttonList.size() > 0) {
-	          addParameter("inputbuttonList", inputbuttonList);
-	        }
-	      }
-	    }
-	    MultiHeaderUtil mhu = new MultiHeaderUtil();
-	    mhu.setGridColumnList(this.gridColumnList);
-	    Map<String, List<Map<String, Object>>> map = new TreeMap();
-	    List<Map<String, Object>> columnList = mhu.getMultiHeaderInfo(map);
-	    addParameter("isMultitle", Boolean.valueOf(mhu.isMultiTitle(this.gridColumnList)));
-	    addParameter("titleMap", map);
-	    addParameter("gridColumnList", columnList);
-	    if (this.lockedRowNum <= 0) {
-	      this.lockedRowNum = map.size();
-	    } else {
-	      this.lockedRowNum += map.size();
-	    }
-	    if (hasLineno) {
-	      if (this.lockedColumnNum <= 0) {
-	        this.lockedColumnNum = 1;
-	      } else {
-	        this.lockedColumnNum += 1;
-	      }
-	    }
-	    if (((!this.readonly) || (this.lockedRowNum != map.size())) && (this.groupField != null) && (!"".equals(this.groupField))) {
-	      for (int i = 0; i < columnList.size(); i++)
-	      {
-	        Map<String, Object> columnProp = (Map)columnList.get(i);
-	        Object columnName = columnProp.get("name");
-	        if ((columnName != null) && (this.groupField.equals(columnName.toString())))
-	        {
-	          this.readonly = true;
-	          this.lockedRowNum = map.size();
-	          break;
-	        }
-	      }
-	    }
-	    addParameter("lockedRowNum", Integer.valueOf(this.lockedRowNum));
-	    addParameter("lockedColumnNum", Integer.valueOf(this.lockedColumnNum));
-	    addParameter("readonly", Boolean.valueOf(this.readonly));
-	    addParameter("onready", this.onready);
-	    addParameter("rowStyleFunc", this.rowStyleFunc);
-	    addParameter("cellStyleFunc", this.cellStyleFunc);
-	    addParameter("queryFunc", this.queryFunc);
-	    addParameter("type", this.type);
 	  }
 	  
 	  public void setWidth(String width)

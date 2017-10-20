@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.taglib;
+package cn.doublepoint.taglib.menu;
 
 import java.util.HashMap;
 import java.util.Map;

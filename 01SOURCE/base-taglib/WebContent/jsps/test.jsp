@@ -10,5 +10,6 @@
 </head>
 <body>
 	<ll:Menu ll_class="layui-nav layui-nav-tree layui-inline"/>
+	<ll:AjaxDataGrid/>
 </body>
 </html>

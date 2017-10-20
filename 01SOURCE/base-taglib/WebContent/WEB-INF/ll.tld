@@ -9,7 +9,7 @@
 	<uri>http://ll.taglib/menu</uri>
 	<tag>
 		<name>Menu</name>
-		<tag-class>cn.doublepoint.taglib.MenuTag</tag-class>
+		<tag-class>cn.doublepoint.taglib.menu.MenuTag</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
@@ -17,5 +17,10 @@
 			<!-- 属性值是否为表达式？一般是EL表达式 -->
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+	</tag>
+	<tag>
+		<name>AjaxDataGrid</name>
+		<tag-class>cn.doublepoint.taglib.ajaxdatagrid.AjaxDataGridTag</tag-class>
+		<body-content>empty</body-content>
 	</tag>
 </taglib>
