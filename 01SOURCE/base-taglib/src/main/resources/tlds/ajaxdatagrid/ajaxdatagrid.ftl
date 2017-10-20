@@ -1,4 +1,4 @@
-201710201718<table id="demo"></table>
+<table id="demo"></table>
 <script>
 layui.use('table', function(){
   var table = layui.table;
