@@ -1,4 +1,4 @@
-<table id="demo"></table>
+201710201718<table id="demo"></table>
 <script>
 layui.use('table', function(){
   var table = layui.table;
@@ -96,7 +96,7 @@ layui.use('table', function(){
       ,"logins": "106"
       ,"joinTime": "2016-10-14"
     }]
-    ,height: 272
+    ,height: 'full-335'
     ,cols: [[ //标题栏
       {checkbox: true, LAY_CHECKED: true} //默认全选
       ,{field: 'id', title: 'ID', width: 80, sort: true}

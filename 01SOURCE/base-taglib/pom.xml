@@ -49,7 +49,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.3.1</version>
 		</dependency>
-		
+
 		<!-- 父项目 -->
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
@@ -62,23 +62,13 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
 				</configuration>
 			</plugin>
-			
-			<plugin>
-			<artifactId>maven-jar-plugin</artifactId>
-			<configuration>					
-				<classesDirectory>target/classes/</classesDirectory>
-				<archive>
-					<addMavenDescriptor>true</addMavenDescriptor>
-				</archive>
-			</configuration>
-		</plugin>
 		</plugins>
 	</build>
 </project>
