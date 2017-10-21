@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.doublepoint.base</groupId>
-	<artifactId>BaseWeb</artifactId>
+	<artifactId>base-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Spring MVC基础项目</description>
 	<properties>
@@ -93,11 +93,6 @@
 		</dependency>
 
 		<!-- jsp中jstl注解使用jar包 -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-taglib</artifactId> 

@@ -1,26 +1,31 @@
-<%/* 
- * 创   建   人： 刘磊
- * 
- * 创   建   时   间 ： 2017-10-11 下午10:02:29
- * 
- * 类   说   明 ：
- * 
- * ******************修改日志***********************************
- * 
- * 修改人： 修改日期： 修改内容：
- * 
- * 修改人： 修改日期： 修改内容：
-*/%>
+
+<%
+	/* 
+	 * 创   建   人： 刘磊
+	 * 
+	 * 创   建   时   间 ： 2017-10-11 下午10:02:29
+	 * 
+	 * 类   说   明 ：
+	 * 
+	 * ******************修改日志***********************************
+	 * 
+	 * 修改人： 修改日期： 修改内容：
+	 * 
+	 * 修改人： 修改日期： 修改内容：
+	*/
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ taglib prefix="ll" uri="http://ll.taglib/menu"%>
 <html>
 <head>
-	<%@ include file="/template/base.jsp"%>
-	<script type="text/javascript" src="cdScript.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/global.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
+<%@ include file="/template/base.jsp"%>
+<script type="text/javascript" src="cdScript.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/layui/css/global.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin"
@@ -33,7 +38,7 @@
 						style="font-size: 22px;">BeginnerAdmin</span>
 					</a>
 					<div class="admin-side-toggle">
-						<i class="fa fa-bars" aria-hidden="true" style="margin-top:7px;"></i>
+						<i class="fa fa-bars" aria-hidden="true" style="margin-top: 7px;"></i>
 					</div>
 				</div>
 				<ul class="layui-nav">
@@ -65,7 +70,7 @@
 		<div class="layui-side layui-bg-black" id="admin-side">
 			<div class="layui-side-scroll" id="admin-navbar-side"
 				lay-filter="side">
-				<ll:Menu ll_class="layui-nav layui-nav-tree layui-inline"/>
+				<ll:Menu ll_class="layui-nav layui-nav-tree layui-inline" />
 			</div>
 		</div>
 		<div class="layui-body"
@@ -79,7 +84,8 @@
 				<div class="layui-tab-content"
 					style="min-height: 150px; padding: 5px 0 0 0;">
 					<div class="layui-tab-item layui-show">
-						<ll:AjaxDataGrid/>
+						<%-- <ll:AjaxDataGrid /> --%>
+						<iframe src="dataajaxgrid.jsp"></iframe>
 					</div>
 				</div>
 			</div>
@@ -93,4 +99,4 @@
 		</div>
 	</div>
 </body>
-	</html>
+</html>
