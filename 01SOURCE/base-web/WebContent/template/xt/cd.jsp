@@ -60,8 +60,7 @@
 							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 						</li>
 					</ul> -->
-			</div>
-		</div>
+			</div>		</div>
 		<div class="layui-side layui-bg-black" id="admin-side">
 			<div class="layui-side-scroll" id="admin-navbar-side"
 				lay-filter="side">
