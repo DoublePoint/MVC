@@ -1,3 +1,4 @@
+var bodyHeight;
 layui.use(['element','layer','jquery'], function(){
   var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
   var layer	=layui.layer;
@@ -33,8 +34,10 @@ layui.use(['element','layer','jquery'], function(){
   //iframe自适应
   $(window).on('resize', function () {
       var $content = $('.admin-nav-card .layui-tab-content');
-      $content.height($(this).height() - 147);
+      $content.height($(this).height() - 142);
       $content.find('iframe').each(function () {
+    	  bodyHeight=$content.height();
+//    	  alert(bodyHeight);
           $(this).height($content.height());
       });
   }).resize();

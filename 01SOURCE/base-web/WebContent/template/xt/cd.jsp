@@ -81,7 +81,7 @@
 						aria-hidden="true"></i> <cite>控制面板</cite></li>
 				</ul>
 				<div class="layui-tab-content"
-					style="min-height: 150px; padding: 5px 0 0 0;">
+					style="min-height: 150px; padding: 0px 0 0 0;">
 					<div class="layui-tab-item layui-show">
 						<%-- <ll:AjaxDataGrid /> --%>
 						<iframe src="dataajaxgrid.jsp"></iframe>
