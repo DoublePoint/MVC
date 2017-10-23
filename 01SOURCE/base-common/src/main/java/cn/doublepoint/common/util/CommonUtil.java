@@ -16,8 +16,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import cn.doublepoint.common.util.theme.ThemTagProperty;
-import cn.doublepoint.common.util.theme.ThemTagProperty2;
+import com.google.gson.Gson;
 
 public class CommonUtil {
 	private static final long serialVersionUID = 1L;
@@ -208,14 +207,14 @@ public class CommonUtil {
 		return new Timestamp(current);
 	}
 
-	public static String getThemeTagPropertyValue(String propertyName) {
-		String theme = ApplicationUtil.getAppConfig().getTheme();
-		String propertyValue = "";
-		if ("haiyisoft".equals(theme)) {
-			propertyValue = ThemTagProperty.getPropertiesValue(propertyName);
-		} else if ("haiyisoft2".equals(theme)) {
-			propertyValue = ThemTagProperty2.getPropertiesValue(propertyName);
-		}
-		return propertyValue;
+	/**
+	 * 对象转变成json字符串
+	 * @param object
+	 * @return
+	 */
+	public static String tojson(Object object){
+		Gson gson=new Gson();
+		String returnstr=gson.toJson(object);
+		return returnstr;
 	}
 }

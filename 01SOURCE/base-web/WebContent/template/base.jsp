@@ -19,3 +19,6 @@
 <script
 	src="${pageContext.request.contextPath}/template/ftls/menu/menutag.js"
 	charset="utf-8"></script>
+<script type="text/javascript">
+var $$pageContextPath="${pageContext.request.contextPath}";
+</script>
