@@ -1,0 +1,1 @@
+var DoublePoint={};//全局对象

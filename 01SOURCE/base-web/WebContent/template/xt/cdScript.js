@@ -1,8 +1,7 @@
 var bodyHeight;
-layui.use(['element','layer','jquery'], function(){
+layui.use(['element','layer'], function(){
   var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
   var layer	=layui.layer;
-  var $=layui.jquery;
   //监听导航点击
   element.on('nav(demo)', function(elem){
     
@@ -41,5 +40,9 @@ layui.use(['element','layer','jquery'], function(){
           $(this).height($content.height());
       });
   }).resize();
+  
+  menu.setData();
 });
+
+
 

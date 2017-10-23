@@ -23,13 +23,14 @@ import cn.doublepoint.taglib.base.BaseTagSupport;
 import cn.doublepoint.taglib.menu.MenuTag;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.utility.DateUtil.TrivialDateToISO8601CalendarFactory;
 
 public class AjaxDataGridTag extends BaseTagSupport {
-	
+
 	private static final long serialVersionUID = -8732133881974659484L;
-	
-	private final String TEMPLATE_FILE_NAME="ajaxdatagrid.ftl";
-	
+
+	private final String TEMPLATE_FILE_NAME = "ajaxdatagrid.ftl";
+
 	private String type = "";
 	private String width = "400px";
 	private String height = "300px";
@@ -81,15 +82,14 @@ public class AjaxDataGridTag extends BaseTagSupport {
 	private boolean isexporthidecols = false;
 	private List<Map<String, Object>> gridColumnList = new ArrayList();
 	private boolean collapseoninit = false;
-	
-	
+
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = this.pageContext.getOut();
 		Configuration conf = new Configuration();
-		conf.setClassForTemplateLoading(this.getClass(), "/tlds/ajaxdatagrid");
+		conf.setClassForTemplateLoading(this.getClass(), "/ftls/ajaxdatagrid");
 		conf.setDefaultEncoding("UTF-8");
-        Map<String, MenuTag> root = new HashMap<String, MenuTag>();  
+		Map<String, MenuTag> root = new HashMap<String, MenuTag>();
 		Template tl;
 		try {
 			tl = conf.getTemplate(TEMPLATE_FILE_NAME);
@@ -99,10 +99,11 @@ public class AjaxDataGridTag extends BaseTagSupport {
 		}
 		return 0;
 	}
+
 	public int doEndTag() throws JspException {
 		return super.doEndTag();
 	}
-	
+
 	public void setStartyear(int startyear) {
 		this.startyear = startyear;
 	}
@@ -114,17 +115,14 @@ public class AjaxDataGridTag extends BaseTagSupport {
 	public void setShowpagerbar(boolean showpagerbar) {
 		this.showpagerbar = showpagerbar;
 	}
-	
 
 	public void setCollapseoninit(boolean collapseoninit) {
 		this.collapseoninit = collapseoninit;
 	}
 
-	
 	public void setSupporttopdffull(boolean supportToPdfFull) {
 		this.supportToPdfFull = supportToPdfFull;
 	}
-
 
 	public void setShowtooltip(boolean showtooltip) {
 		this.showtooltip = showtooltip;
@@ -134,12 +132,9 @@ public class AjaxDataGridTag extends BaseTagSupport {
 		this.customRowNum = customrownum;
 	}
 
-	
-
 	public void setShowtipsonturnpage(boolean showtipsonturnpage) {
 		this.showtipsonturnpage = showtipsonturnpage;
 	}
-	
 
 	public void setIsexporthidecols(boolean isexporthidecols) {
 		this.isexporthidecols = isexporthidecols;
@@ -148,8 +143,6 @@ public class AjaxDataGridTag extends BaseTagSupport {
 	public void setOncontextmenu(String onContextMenu) {
 		this.onContextMenu = onContextMenu;
 	}
-
-	
 
 	public void release() {
 		super.release();

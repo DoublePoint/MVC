@@ -17,15 +17,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="ll" uri="http://ll.taglib/menu"%>
 <html>
 <head>
 <%@ include file="/template/base.jsp"%>
-<script type="text/javascript" src="cdScript.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/template/layui/css/global.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/global.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin"
@@ -60,16 +57,12 @@
 							</dd>
 						</dl></li>
 				</ul>
-				<!-- <ul class="layui-nav admin-header-item-mobile">
-						<li class="layui-nav-item">
-							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
-						</li>
-					</ul> -->
-			</div>		</div>
+			</div>
+		</div>
 		<div class="layui-side layui-bg-black" id="admin-side">
 			<div class="layui-side-scroll" id="admin-navbar-side"
 				lay-filter="side">
-				<ll:Menu ll_class="layui-nav layui-nav-tree layui-inline" />
+				<ll:Menu id="menu" />
 			</div>
 		</div>
 		<div class="layui-body"
@@ -83,7 +76,6 @@
 				<div class="layui-tab-content"
 					style="min-height: 150px; padding: 0px 0 0 0;">
 					<div class="layui-tab-item layui-show">
-						<%-- <ll:AjaxDataGrid /> --%>
 						<iframe src="dataajaxgrid.jsp"></iframe>
 					</div>
 				</div>
@@ -98,4 +90,5 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="cdScript.js"></script>
 </html>

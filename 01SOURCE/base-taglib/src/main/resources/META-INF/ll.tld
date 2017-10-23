@@ -13,8 +13,12 @@
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>ll_class</name>
+			<name>id</name>
 			<!-- 属性值是否为表达式？一般是EL表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>style</name>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>

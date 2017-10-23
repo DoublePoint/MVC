@@ -1,7 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/template/base.jsp=UTF-8
+encoding//WebContent/template/xt/ajaxdatagrid.jsp=UTF-8
 encoding//WebContent/template/xt/cd.jsp=UTF-8
-encoding//WebContent/template/xt/dataajaxgrid.jsp=UTF-8
 encoding//WebContent/template/xt/test.jsp=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/java/cn/doublepoint=UTF-8
