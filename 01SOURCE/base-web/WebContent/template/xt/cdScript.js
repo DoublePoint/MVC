@@ -3,9 +3,9 @@ layui.use(['element','layer'], function(){
   var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
   var layer	=layui.layer;
   //监听导航点击
-  element.on('nav(demo)', function(elem){
-    
-  });
+//  element.on('nav(demo)', function(elem){
+//    
+//  });
   $('.admin-side-toggle').on('click', function () {
 	    var sideWidth = $('#admin-side').width();
 	    if (sideWidth === 200) {
@@ -36,12 +36,30 @@ layui.use(['element','layer'], function(){
       $content.height($(this).height() - 142);
       $content.find('iframe').each(function () {
     	  bodyHeight=$content.height();
-//    	  alert(bodyHeight);
+    	  alert(bodyHeight);
           $(this).height($content.height());
       });
   }).resize();
   
-  menu.setData();
+  
+  var dataList=[];
+  
+  var data1={
+		  cdmc:"权限管理",
+		  link:"www.baidu.com"
+  }
+  var data2={
+		  cdmc:"菜单管理",
+		  link:"www.baidu.com"
+  }
+  var data3={
+		  cdmc:"角色管理",
+		  link:"www.baidu.com"
+  }
+  dataList.push(data1);
+  dataList.push(data2);
+  dataList.push(data3);
+  menu.setData(dataList);
 });
 
 

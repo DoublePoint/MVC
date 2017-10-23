@@ -32,7 +32,7 @@
 				<div class="admin-login-box">
 					<a class="logo" style="left: 0;"
 						href="http://beginner.zhengjinfan.cn/demo/beginner_admin/"> <span
-						style="font-size: 22px;">BeginnerAdmin</span>
+						style="font-size: 22px;">基础设施系统</span>
 					</a>
 					<div class="admin-side-toggle">
 						<i class="fa fa-bars" aria-hidden="true" style="margin-top: 7px;"></i>
@@ -76,7 +76,7 @@
 				<div class="layui-tab-content"
 					style="min-height: 150px; padding: 0px 0 0 0;">
 					<div class="layui-tab-item layui-show">
-						<iframe src="dataajaxgrid.jsp"></iframe>
+						<iframe src="ajaxdatagrid.jsp"></iframe>
 					</div>
 				</div>
 			</div>
