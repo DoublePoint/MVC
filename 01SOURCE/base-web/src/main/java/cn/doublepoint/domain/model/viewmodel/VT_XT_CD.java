@@ -7,19 +7,12 @@
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */
-package cn.doublepoint.domain.model.entity.xt;
+package cn.doublepoint.domain.model.viewmodel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
 
-@Entity
-@Table(name = "XT_CD")
-public class T_XT_CD {
+public class VT_XT_CD {
 
-	@Id
-	@Column
 	private long cdbs;
 
 	public long getCdbs() {
@@ -30,7 +23,6 @@ public class T_XT_CD {
 		this.cdbs = cdbs;
 	}
 
-	@Column
 	private String cdmc;
 
 	public String getCdmc() {
@@ -41,7 +33,6 @@ public class T_XT_CD {
 		this.cdmc = cdmc;
 	}
 
-	@Column
 	private long sjcdbs;
 
 	public long getSjcdbs() {
@@ -51,8 +42,7 @@ public class T_XT_CD {
 	public void setSjcdbs(long sjcdbs) {
 		this.sjcdbs = sjcdbs;
 	}
-
-	@Column
+	
 	private int cdpx;
 
 	public long getCdpx() {
@@ -63,7 +53,6 @@ public class T_XT_CD {
 		this.cdpx = cdpx;
 	}
 
-	@Column
 	private int gxsj;
 
 	public long getGxsj() {
@@ -74,7 +63,6 @@ public class T_XT_CD {
 		this.gxsj = gxsj;
 	}
 
-	@Column
 	private int cjsj;
 
 	public long getCjsj() {
@@ -85,5 +73,14 @@ public class T_XT_CD {
 		this.cjsj = cjsj;
 	}
 
+	private List<VT_XT_CD> zcdlb;//子菜单列表
+
+	public List<VT_XT_CD> getZcdlb() {
+		return zcdlb;
+	}
+
+	public void setZcdlb(List<VT_XT_CD> zcdlb) {
+		this.zcdlb = zcdlb;
+	}
 	
 }

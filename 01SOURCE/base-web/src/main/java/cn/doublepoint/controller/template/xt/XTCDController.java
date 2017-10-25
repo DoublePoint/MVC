@@ -35,6 +35,7 @@ public class XTCDController {
 	@ResponseBody
 	public List<T_XT_CD> cdDataList() {
 		List<T_XT_CD> xtcdList=xtcdRepository.findAll();
+		
 		return xtcdList;
 	}
 }
