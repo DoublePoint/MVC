@@ -21,7 +21,7 @@
 		</dependency>
 		<!-- gson需用 -->
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
+			<groupId>com.google.code.gson</groupId> 
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
 		</dependency>
