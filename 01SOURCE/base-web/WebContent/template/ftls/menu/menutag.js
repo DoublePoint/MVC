@@ -30,7 +30,6 @@ Menu.prototype = {
 }
 
 var MenuLi = function(config) {
-
 	if (config == null) {
 		this.cssClass = "layui-nav-item layui-nav-itemed";
 		return;
@@ -73,21 +72,32 @@ var MenuLi = function(config) {
 
 MenuLi.prototype = {
 	getHtmlAsMenu : function() {
-		return '<li class="' + this.cssClass + '"><a href="javascript:;">'
-				+ this.cdmc + '<span class="layui-nav-more"></span></a>'
-				+ getHtmlAsMenuItem() + '</li>';
+		var $li=$("<li></li>");
+		var $a=$("<a></a>");
+		var $span=$("<span></span>");
+		$span.attr("class","layui-nav-more");
+		$a.append(this.cdmc);
+		$a.append($span);
+		$li.attr("class",this.cssClass);
+		$li.append($a);
+		return $(li).prop("outerHTML");
 	},
 	getHtmlAsMenuItem : function() {
 		if (childrenMenuList.length <= 0) {
 			return "";
 		}
-		var retrunhtml = "";
-		returnhtml = returnhtml + '<dl class="layui-nav-child">';
+		
+		$dl=$("<dl></dl>");
+		$dl.attr("class","layui-nav-child");
 		for (var i = 0; i < this.childrenMenuList.lenth; i++) {
-			returnhtml = returnhtml + '<dd><a href="' + this.link + '">'
-					+ this.cdmc + '</a></dd>';
+			$a=$("<a></a>");
+			$a.attr("href",this.link);
+			var $dd=$("<dd></dd>")
+			$dd.append($a);
+			$dl.append($dd);
 		}
-		returnhtml = returnhtml + '</dl>';
+		
+		return $dl.prop("outerHTML");
 	}
 
 }

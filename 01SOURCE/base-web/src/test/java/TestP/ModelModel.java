@@ -95,18 +95,25 @@ public class ModelModel {
 		sbBuffer.append("*/                                                                \r\n");
 		// sbBuffer.append("package cn.doublepoint.domain.model.entity.xt;
 		// \r\n");
-		sbBuffer.append("package com.haiyisoft.billing.domain.model.entity.corePrice;  \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("                                                                  \r\n");
+		
 
 		switch (modelType) {
 		case CONSTANT.CLASS_TYPE_ENTITY:
+			sbBuffer.append("package package cn.doublepoint.domain.model.entity.xt;  \r\n");
+			sbBuffer.append("                                                                  \r\n");
+			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildEntityClassBody());
 			break;
 		case CONSTANT.CLASS_TYPE_ENUM:
+			sbBuffer.append("package package cn.doublepoint.domain.model.enum.xt;  \r\n");
+			sbBuffer.append("                                                                  \r\n");
+			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildEnumClassBody());
 			break;
 		case CONSTANT.CLASS_TYPE_VALUEOBJECT:
+			sbBuffer.append("package package cn.doublepoint.domain.model.valueobject.xt;  \r\n");
+			sbBuffer.append("                                                                  \r\n");
+			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildValueObjectClassBody());
 			break;
 		default:
@@ -127,11 +134,11 @@ public class ModelModel {
 		sbBuffer.append("import javax.persistence.Table;                                      \r\n");
 		sbBuffer.append("import java.math.BigDecimal;\r\n");
 		sbBuffer.append("import java.sql.Timestamp;\r\n");
-		sbBuffer.append("import com.haiyisoft.common.domain.model.ConcurrencySafeEntity;\r\n");
+		sbBuffer.append("    \r\n");
 		sbBuffer.append("@Entity                                                           \r\n");
 		sbBuffer.append("@Table(name=\"" + modelCode + "\")                                                   \r\n");
-		sbBuffer.append("public class " + modelCode
-				+ "  extends ConcurrencySafeEntity{                                              \r\n");
+		sbBuffer.append("public class " + "T_"+modelCode
+				+ "  extends BaseEntity{                                              \r\n");
 		sbBuffer.append("	/**                                                                  \r\n");
 		sbBuffer.append("	 *                                                                    \r\n");
 		sbBuffer.append("	 */                                                                  \r\n");
@@ -194,12 +201,10 @@ public class ModelModel {
 		sbBuffer.append("import javax.persistence.Temporal;                                      \r\n");
 		sbBuffer.append("import javax.persistence.TemporalType;                                      \r\n");
 		sbBuffer.append("import com.haiyisoft.billing.common.CalcType;                                      \r\n");
-		sbBuffer.append(
-				"import com.haiyisoft.common.domain.model.IdentifiedValueObject;                                      \r\n");
 
 		sbBuffer.append("@Embeddable                                                           \r\n");
 		sbBuffer.append("public class " + modelCode
-				+ " extends IdentifiedValueObject {                                              \r\n");
+				+ " extends BaseValueObject {                                              \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		// ===================================
 		for (int i = 0; i < fields.size(); i++) {

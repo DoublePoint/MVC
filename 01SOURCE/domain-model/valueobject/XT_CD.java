@@ -1,30 +1,23 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-26 18:38:997                      
+* 创   建   时   间 ：2017-10-26 17:58:191                      
 *                                                                 
 * 类   说   明 ：     系统菜单    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package  cn.doublepoint.domain.model.entity.xt;  
+package package cn.doublepoint.domain.model.valueobject.xt;  
                                                                   
                                                                   
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import cn.doublepoint.domain.model.entity.BaseEntity;
-    
-@Entity                                                           
-@Table(name="XT_CD")                                                   
-public class T_XT_CD  extends BaseEntity{                                              
-	/**                                                                  
-	 *                                                                    
-	 */                                                                  
-     private static final long serialVersionUID = 1L;                                                             
-                                                                  
+import javax.persistence.Embeddable;                                  
+import javax.persistence.EnumType;                                  
+import javax.persistence.Enumerated;                                      
+import javax.persistence.Temporal;                                      
+import javax.persistence.TemporalType;                                      
+import com.haiyisoft.billing.common.CalcType;                                      
+@Embeddable                                                           
+public class XT_CD extends BaseValueObject {                                              
                                                                   
 	@Id                                                              
 	@Column (name = "cdbs")                                  
@@ -84,7 +77,7 @@ public class T_XT_CD  extends BaseEntity{
 		return gxsj;                                                     
 	}                                                                
                                                                   
-	public void setGxsj(DateTime gxsj) {                                     
+	public void setGxsj(datetime gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  

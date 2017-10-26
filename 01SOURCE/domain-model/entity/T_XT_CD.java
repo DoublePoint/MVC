@@ -7,15 +7,15 @@
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package  cn.doublepoint.domain.model.entity.xt;  
+package package cn.doublepoint.domain.model.entity.xt;  
                                                                   
                                                                   
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import cn.doublepoint.domain.model.entity.BaseEntity;
+import javax.persistence.Column;                                  
+import javax.persistence.Entity;                                  
+import javax.persistence.Id;                                      
+import javax.persistence.Table;                                      
+import java.math.BigDecimal;
+import java.sql.Timestamp;
     
 @Entity                                                           
 @Table(name="XT_CD")                                                   
@@ -84,7 +84,7 @@ public class T_XT_CD  extends BaseEntity{
 		return gxsj;                                                     
 	}                                                                
                                                                   
-	public void setGxsj(DateTime gxsj) {                                     
+	public void setGxsj(datetime gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  

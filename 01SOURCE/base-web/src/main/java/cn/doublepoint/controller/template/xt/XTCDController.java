@@ -27,7 +27,6 @@ public class XTCDController {
 	@RequestMapping("/cd")
 	public String cd(Map<String, Object> model) {
 		model.put("cd", xtcdRepository.findAll());
-
 		return "/xt/cd";
 	}
 
