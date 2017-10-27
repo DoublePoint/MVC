@@ -7,7 +7,7 @@
  * 
  * 修   改   人：          修   改   日   期：
  */
-package TestP;
+package cn.doublepoint.helper;
 
 public class ModelField {
 	

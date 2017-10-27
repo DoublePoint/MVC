@@ -1,13 +1,13 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-26 18:38:12                      
+* 创   建   时   间 ：2017-10-27 13:24:983                      
 *                                                                 
 * 类   说   明 ：     系统角色    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package package cn.doublepoint.domain.model.valueobject.xt;  
+package cn.doublepoint.domain.model.valueobject.xt;  
                                                                   
                                                                   
 import javax.persistence.Embeddable;                                  

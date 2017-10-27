@@ -7,11 +7,13 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package TestXMLReader;
+package cn.doublepoint.helper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import cn.doublepoint.billing.CONSTANT;
 
 public class ModelModel {
 
@@ -78,33 +80,40 @@ public class ModelModel {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 
 		StringBuffer sbBuffer = new StringBuffer();
-		sbBuffer.append("/** \r\n");
-		sbBuffer.append("* 创   建   人： 刘磊 \r\n");
+		sbBuffer.append("/**                                                               \r\n");
+		sbBuffer.append("* 创   建   人： 刘磊                                             \r\n");
 
-		sbBuffer.append("* \r\n");
-		sbBuffer.append("* 创   建   时   间 ：" + formatter.format(date) + "\r\n");
+		sbBuffer.append("*                                                                 \r\n");
+		sbBuffer.append("* 创   建   时   间 ：" + formatter.format(date) + "                      \r\n");
 
-		sbBuffer.append("* \r\n");
+		sbBuffer.append("*                                                                 \r\n");
 		// sbBuffer.append("* 类 说 明 ：
 		// "+modelName+"："+modelComment==null?"":modelComment+" \r\n");
-		sbBuffer.append("* 类   说   明 ：     " + modelName + "\r\n");
-		sbBuffer.append("* \r\n");
-		sbBuffer.append("* 修   改   人：          修   改   日   期： \r\n");
-		sbBuffer.append("*/\r\n");
+		sbBuffer.append("* 类   说   明 ：     " + modelName + "    \r\n");
+		sbBuffer.append("*                                                                 \r\n");
+		sbBuffer.append("* 修   改   人：          修   改   日   期：                     \r\n");
+		sbBuffer.append("*/                                                                \r\n");
 		// sbBuffer.append("package cn.doublepoint.domain.model.entity.xt;
 		// \r\n");
-		sbBuffer.append("package com.haiyisoft.billing.domain.model.entity.corePrice;\r\n");
-		sbBuffer.append("\r\n");
-		sbBuffer.append("\r\n");
+		
 
 		switch (modelType) {
 		case CONSTANT.CLASS_TYPE_ENTITY:
+			sbBuffer.append("package cn.doublepoint.domain.model.entity.xt;  \r\n");
+			sbBuffer.append("                                                                  \r\n");
+			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildEntityClassBody());
 			break;
 		case CONSTANT.CLASS_TYPE_ENUM:
+			sbBuffer.append("package cn.doublepoint.domain.model.enum.xt;  \r\n");
+			sbBuffer.append("                                                                  \r\n");
+			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildEnumClassBody());
 			break;
 		case CONSTANT.CLASS_TYPE_VALUEOBJECT:
+			sbBuffer.append("package cn.doublepoint.domain.model.valueobject.xt;  \r\n");
+			sbBuffer.append("                                                                  \r\n");
+			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildValueObjectClassBody());
 			break;
 		default:
@@ -119,68 +128,41 @@ public class ModelModel {
 
 	private StringBuffer buildEntityClassBody() {
 		StringBuffer sbBuffer = new StringBuffer();
-		sbBuffer.append("import javax.persistence.Column;\r\n");
-		sbBuffer.append("import javax.persistence.Entity;\r\n");
-		sbBuffer.append("import javax.persistence.Id;\r\n");
-		sbBuffer.append("import javax.persistence.Table;\r\n");
+		sbBuffer.append("import javax.persistence.Column;                                  \r\n");
+		sbBuffer.append("import javax.persistence.Entity;                                  \r\n");
+		sbBuffer.append("import javax.persistence.Id;                                      \r\n");
+		sbBuffer.append("import javax.persistence.Table;                                      \r\n");
 		sbBuffer.append("import java.math.BigDecimal;\r\n");
 		sbBuffer.append("import java.sql.Timestamp;\r\n");
-		sbBuffer.append("import com.haiyisoft.common.domain.model.ConcurrencySafeEntity;\r\n");
-		sbBuffer.append("@Entity \r\n");
-		sbBuffer.append("@Table(name=\"" + modelCode.substring(0, 1).toLowerCase()+modelCode.substring(1).replaceAll("[A-Z]", "_$0").toLowerCase()
-				+ "\") \r\n");
-		sbBuffer.append("public class " + modelCode
-				+ "  extends ConcurrencySafeEntity{\r\n");
-		sbBuffer.append("	/**\r\n");
-		sbBuffer.append("	 *\r\n");
-		sbBuffer.append("	 */\r\n");
+		sbBuffer.append("    \r\n");
+		sbBuffer.append("@Entity                                                           \r\n");
+		sbBuffer.append("@Table(name=\"" + modelCode + "\")                                                   \r\n");
+		sbBuffer.append("public class " + "T_"+modelCode
+				+ "  extends BaseEntity{                                              \r\n");
+		sbBuffer.append("	/**                                                                  \r\n");
+		sbBuffer.append("	 *                                                                    \r\n");
+		sbBuffer.append("	 */                                                                  \r\n");
 		sbBuffer.append(
-				"     private static final long serialVersionUID = 1L; \r\n");
-		sbBuffer.append("\r\n");
-		sbBuffer.append("\r\n");
+				"     private static final long serialVersionUID = 1L;                                                             \r\n");
+		sbBuffer.append("                                                                  \r\n");
+		sbBuffer.append("                                                                  \r\n");
 		// ===================================
 		for (int i = 0; i < fields.size(); i++) {
 			if (i == 0) {
-				sbBuffer.append("	@Id\r\n");
+				sbBuffer.append("	@Id                                                              \r\n");
 			}
-			sbBuffer.append(fields.get(i).getFieldContent());
+			sbBuffer.append(fields.get(i).getEntityFieldContent());
 		}
-		for (int i = 0; i < fields.size(); i++) {
-			sbBuffer.append(fields.get(i).getGetFunctionContent());
-		}
-		for (int i = 0; i < fields.size(); i++) {
-			sbBuffer.append(fields.get(i).getSetFunctionContent());
-		}
-		sbBuffer.append("	protected " + modelCode+ "(){\r\n");
-		sbBuffer.append("		super();\r\n");
-		sbBuffer.append("	}\r\n");
-
-		sbBuffer.append("	protected " + modelCode + "(");
-		
-		for (int i = 0; i < fields.size(); i++) {
-			if (i == fields.size() - 1) {
-				sbBuffer.append("			" + fields.get(i).getFieldType() + " " + fields.get(i).getFieldName() + "\r\n");
-			} else {
-				sbBuffer.append("			" + fields.get(i).getFieldType() + " " + fields.get(i).getFieldName() + ",\r\n");
-			}
-		}
-		sbBuffer.append(")");
-		sbBuffer.append("{\r\n");
-		for (int i = 0; i < fields.size(); i++) {
-			sbBuffer.append(
-					"		this." + fields.get(i).getFieldName() + " = " + fields.get(i).getFieldName() + ";\r\n");
-		}
-		sbBuffer.append("	}\r\n");
 		return sbBuffer;
 	}
 
 	private StringBuffer buildEnumClassBody() {
 		StringBuffer sbBuffer = new StringBuffer();
-		sbBuffer.append("import java.util.HashMap;\r\n");
-		sbBuffer.append("import java.util.Map;\r\n");
+		sbBuffer.append("import java.util.HashMap;                                  \r\n");
+		sbBuffer.append("import java.util.Map;                                  \r\n");
 
-		sbBuffer.append("public enum " + modelCode + " {\r\n");
-		sbBuffer.append("\r\n");
+		sbBuffer.append("public enum " + modelCode + " {                                              \r\n");
+		sbBuffer.append("                                                                  \r\n");
 		// ===================================
 		for (int i = 0; i < fields.size(); i++) {
 			boolean isLast = false;
@@ -213,23 +195,21 @@ public class ModelModel {
 
 	private StringBuffer buildValueObjectClassBody() {
 		StringBuffer sbBuffer = new StringBuffer();
-		sbBuffer.append("import javax.persistence.Embeddable;\r\n");
-		sbBuffer.append("import javax.persistence.EnumType;\r\n");
-		sbBuffer.append("import javax.persistence.Enumerated;\r\n");
-		sbBuffer.append("import javax.persistence.Temporal;\r\n");
-		sbBuffer.append("import javax.persistence.TemporalType;\r\n");
-		sbBuffer.append("import com.haiyisoft.billing.common.CalcType;\r\n");
-		sbBuffer.append(
-				"import com.haiyisoft.common.domain.model.IdentifiedValueObject;\r\n");
+		sbBuffer.append("import javax.persistence.Embeddable;                                  \r\n");
+		sbBuffer.append("import javax.persistence.EnumType;                                  \r\n");
+		sbBuffer.append("import javax.persistence.Enumerated;                                      \r\n");
+		sbBuffer.append("import javax.persistence.Temporal;                                      \r\n");
+		sbBuffer.append("import javax.persistence.TemporalType;                                      \r\n");
+		sbBuffer.append("import com.haiyisoft.billing.common.CalcType;                                      \r\n");
 
-		sbBuffer.append("@Embeddable \r\n");
+		sbBuffer.append("@Embeddable                                                           \r\n");
 		sbBuffer.append("public class " + modelCode
-				+ " extends IdentifiedValueObject {\r\n");
-		sbBuffer.append("\r\n");
+				+ " extends BaseValueObject {                                              \r\n");
+		sbBuffer.append("                                                                  \r\n");
 		// ===================================
 		for (int i = 0; i < fields.size(); i++) {
 			if (i == 0) {
-				sbBuffer.append("	@Id\r\n");
+				sbBuffer.append("	@Id                                                              \r\n");
 			}
 			sbBuffer.append(fields.get(i).getEntityFieldContent());
 		}

@@ -1,15 +1,18 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-26 18:38:997                      
+* 创   建   时   间 ：2017-10-27 13:24:981                      
 *                                                                 
 * 类   说   明 ：     系统菜单    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package  cn.doublepoint.domain.model.entity.xt;  
+package cn.doublepoint.domain.model.entity.xt;  
                                                                   
                                                                   
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -78,23 +81,23 @@ public class T_XT_CD  extends BaseEntity{
 		this.cdpx = cdpx;                                                  
 	}                                                                
 	@Column (name = "gxsj")                                  
-	private datetime gxsj; //更新时间                                                
+	private Date gxsj; //更新时间                                                
 	                                                                 
-	public datetime getGxsj() {                                            
+	public Date getGxsj() {                                            
 		return gxsj;                                                     
 	}                                                                
                                                                   
-	public void setGxsj(DateTime gxsj) {                                     
+	public void setGxsj(Date gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
-	private datetime cjsj; //创建时间                                                
+	private Timestamp cjsj; //创建时间                                                
 	                                                                 
-	public datetime getCjsj() {                                            
+	public Timestamp getCjsj() {                                            
 		return cjsj;                                                     
 	}                                                                
                                                                   
-	public void setCjsj(datetime cjsj) {                                     
+	public void setCjsj(Timestamp cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
 }

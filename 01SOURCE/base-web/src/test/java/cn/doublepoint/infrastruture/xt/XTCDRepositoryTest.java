@@ -7,7 +7,10 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package infrastruture.xt;
+package cn.doublepoint.infrastruture.xt;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -30,6 +33,8 @@ public class XTCDRepositoryTest {
 	public void testSaveXTCD(){
 		T_XT_CD cd=new T_XT_CD();
 		cd.setCdbs(2);
+		cd.setCjsj(new Timestamp(100000));
+		cd.setGxsj(new Date());
 		repository.save(cd);
 	}
 }

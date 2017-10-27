@@ -1,4 +1,4 @@
-package TestP;
+package cn.doublepoint.helper;
 
 import org.junit.Test;
 

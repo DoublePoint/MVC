@@ -4,7 +4,7 @@
 * 类说明 ：
 * 修改人：          修改日期：
 */ 
-package infrastruture.xt;
+package cn.doublepoint.infrastruture.xt;
 
 import javax.annotation.Resource;
 

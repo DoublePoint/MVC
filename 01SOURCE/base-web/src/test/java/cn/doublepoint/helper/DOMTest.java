@@ -1,11 +1,8 @@
-package TestXMLReader;
+package cn.doublepoint.helper;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import cn.doublepoint.billing.CONSTANT;
+
 /**
  * DOM方式解析xml
  */
@@ -33,7 +32,7 @@ public class DOMTest {
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse(
-					"file:/D:/HaiyiProject//PROJECT_UEP_CLOUD//trunk//14参考资料//ElectricityCharge//CorePriceModel.oom");// 传入文件名可以是相对路径也可以是绝对路径
+					"file:/F://AllProject//00参考文件//BaseInfrastructure//系统支撑.oom");// 传入文件名可以是相对路径也可以是绝对路径
 			NodeList classesList = document.getElementsByTagName("c:Classes");
 			Node classesElementNode = classesList.item(0);
 			NodeList classElementNodeList = classesElementNode.getChildNodes();
@@ -119,15 +118,15 @@ public class DOMTest {
 				File file;
 				switch (modelModel.getModelType()) {
 				case CONSTANT.CLASS_TYPE_ENTITY:
-					file = new File("D:/HaiyiProject/PROJECT_UEP_CLOUD/trunk/14参考资料/ElectricityCharge/model/entity/corePrice/"
-							+ modelModel.getModelCode() + ".java");
+					file = new File("F:/AllProject/01SOURCE/domain-model/entity/"
+							+ "T_"+modelModel.getModelCode() + ".java");
 					break;
 				case CONSTANT.CLASS_TYPE_ENUM:
-					file = new File("D:/HaiyiProject/PROJECT_UEP_CLOUD/trunk/14参考资料/ElectricityCharge/model/enum/corePrice/"
+					file = new File("F:/AllProject/01SOURCE/domain-model/enum/"
 							+ modelModel.getModelCode() + ".java");
 					break;
 				default:
-					file = new File("D:/HaiyiProject/PROJECT_UEP_CLOUD/trunk/14参考资料/ElectricityCharge/model/ValueObject/corePrice/"
+					file = new File("F:/AllProject/01SOURCE/domain-model/valueobject/"
 							+ modelModel.getModelCode() + ".java");
 					break;
 				}
@@ -147,7 +146,7 @@ public class DOMTest {
 				// // TODO Auto-generated catch block
 				// e.printStackTrace();
 				// }
-				 System.out.println(modelModel.getCotent().toString());
+				// System.out.println(modelModel.getCotent().toString());
 			}
 		}
 	}

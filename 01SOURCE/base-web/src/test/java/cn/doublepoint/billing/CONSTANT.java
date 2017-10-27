@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package TestXMLReader;
+package cn.doublepoint.billing;
 
 public class CONSTANT {
 	public static final String FIELD_TYPE_ENTITY = "ENTITYFIELDTYPE";

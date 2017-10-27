@@ -7,7 +7,7 @@
  * 
  * 修   改   人：          修   改   日   期：
  */
-package TestXMLReader;
+package cn.doublepoint.billing;
 
 public class ModelField {
 	

@@ -1,13 +1,13 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-26 18:38:12                      
+* 创   建   时   间 ：2017-10-27 13:24:985                      
 *                                                                 
 * 类   说   明 ：     系统公告    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package package cn.doublepoint.domain.model.valueobject.xt;  
+package cn.doublepoint.domain.model.valueobject.xt;  
                                                                   
                                                                   
 import javax.persistence.Embeddable;                                  
@@ -51,23 +51,23 @@ public class XT_GG extends BaseValueObject {
 		this.ggnr = ggnr;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
-	private datetime cjsj; //创建时间                                                
+	private Date cjsj; //创建时间                                                
 	                                                                 
-	public datetime getCjsj() {                                            
+	public Date getCjsj() {                                            
 		return cjsj;                                                     
 	}                                                                
                                                                   
-	public void setCjsj(datetime cjsj) {                                     
+	public void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
 	@Column (name = "gxsj")                                  
-	private datetime gxsj; //更新时间                                                
+	private Date gxsj; //更新时间                                                
 	                                                                 
-	public datetime getGxsj() {                                            
+	public Date getGxsj() {                                            
 		return gxsj;                                                     
 	}                                                                
                                                                   
-	public void setGxsj(datetime gxsj) {                                     
+	public void setGxsj(Date gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
 }
