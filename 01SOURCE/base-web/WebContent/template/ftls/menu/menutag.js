@@ -64,7 +64,8 @@ var MenuLi = function(config) {
 				config.cdmc = data.cdmc;
 				config.childrenMenuList = data.childrenMenuList;
 				var menuLi = new MenuLi(config);
-				this.menuList.push(menuLi);
+				this.childrenMenuList=new Array();
+				this.childrenMenuList.push(menuLi);
 			}
 		}
 	}

@@ -13,9 +13,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
-import cn.doublepoint.domain.model.viewmodel.xt.VT_XT_CD;
 
 public interface XTCDRepository extends JpaRepository<T_XT_CD,Long>{
 
@@ -32,5 +32,5 @@ public interface XTCDRepository extends JpaRepository<T_XT_CD,Long>{
 	 * @return
 	 */
 	@Query("select cd from T_XT_CD cd where cd.sjcdbs=:sjcdbs  order by cd.cdpx")
-	public List<T_XT_CD> findChildrenXTCD(long sjcdbs); 
+	public List<T_XT_CD> findChildrenXTCD(@Param("sjcdbs") long sjcdbs); 
 }
