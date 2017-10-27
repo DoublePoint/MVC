@@ -1,4 +1,4 @@
-package cn.doublepoint.infrastructure.xt;
+package cn.doublepoint.port.adapter.template.persistence.xt;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

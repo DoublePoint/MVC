@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 
 import cn.doublepoint.common.util.config.AppConfig;
 
-public class ApplicationUtil {
+public class ApplicationUtils {
 	private static ApplicationContext applicationContext;
 	  
 	  public static AppConfig getAppConfig()

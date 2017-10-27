@@ -18,7 +18,7 @@ import java.util.Locale;
 
 //import com.google.gson.Gson;
 
-public class CommonUtil {
+public class CommonUtils {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 获取数据库时间

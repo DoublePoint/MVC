@@ -10,7 +10,7 @@ Menu.prototype = {
 	setData : function(dataList) {
 		if (dataList == null)
 			return;
-		// $("#"+this.id).empty();
+		$("#"+this.id).empty();
 		this.menuList = new Array();
 		for (var i = 0; i < dataList.length; i++) {
 			var data = dataList[i];
@@ -24,7 +24,7 @@ Menu.prototype = {
 		}
 
 		for (var i = 0; i < this.menuList.length; i++) {
-			$("#" + this.id).append(this.menuList[i].getHtml());
+			$("#" + this.id).append(this.menuList[i].getHtmlAsMenu());
 		}
 	}
 }
@@ -80,7 +80,7 @@ MenuLi.prototype = {
 		$a.append($span);
 		$li.attr("class",this.cssClass);
 		$li.append($a);
-		return $(li).prop("outerHTML");
+		return $li.prop("outerHTML");
 	},
 	getHtmlAsMenuItem : function() {
 		if (childrenMenuList.length <= 0) {

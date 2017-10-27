@@ -11,7 +11,7 @@
  * 
  * 修改人： 修改日期： 修改内容：
 */ 
-package cn.doublepoint.controller.template.xt;
+package cn.doublepoint.port.adapter.template.service.xt;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

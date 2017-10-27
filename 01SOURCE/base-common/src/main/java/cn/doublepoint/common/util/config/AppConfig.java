@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 
-import cn.doublepoint.common.util.ApplicationUtil;
+import cn.doublepoint.common.util.ApplicationUtils;
 
 public class AppConfig {
 	private static final long serialVersionUID = 1L;
@@ -478,7 +478,7 @@ public class AppConfig {
 	  public String getTheme()
 	  {
 	    String strTheme = "";
-	    Map<String, String> typeMap = ApplicationUtil.getAppConfig().getAppExtProp();
+	    Map<String, String> typeMap = ApplicationUtils.getAppConfig().getAppExtProp();
 	    if ((typeMap.get("theme") != null) && (!"".equals(typeMap.get("theme")))) {
 	      strTheme = (String)typeMap.get("theme");
 	    } else {
