@@ -67,11 +67,11 @@
 		</div>
 		<div class="layui-body"
 			style="bottom: 0; border-left: solid 2px #1AA094;" id="admin-body">
-			<div class="layui-tab admin-nav-card layui-tab-brief"
+			<div class="layui-tab admin-nav-card layui-tab-brief"  lay-allowclose="true"
 				lay-filter="admin-tab">
 				<ul class="layui-tab-title">
 					<li class="layui-this"><i class="fa fa-dashboard"
-						aria-hidden="true"></i> <cite>控制面板</cite></li>
+						aria-hidden="true"></i> <cite>控制面板</cite><span class="layui-badge">未保存</span></li>
 				</ul>
 				<div class="layui-tab-content"
 					style="min-height: 150px; padding: 0px 0 0 0;">

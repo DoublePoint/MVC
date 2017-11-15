@@ -57,14 +57,14 @@ var MenuLi = function(config) {
 		this.childrenMenuList = new Array();
 	} else {
 		var childrenMenuList = config.childrenMenuList;
+		this.childrenMenuList=new Array();
 		for (var i = 0; i < config.childrenMenuList.length; i++) {
 			var data = childrenMenuList[i];
 			if (data != null) {
-				var config = {};
-				config.cdmc = data.cdmc;
-				config.childrenMenuList = data.childrenMenuList;
-				var menuLi = new MenuLi(config);
-				this.childrenMenuList=new Array();
+				var config2 = {};
+				config2.cdmc = data.cdmc;
+				config2.childrenMenuList = data.childrenMenuList;
+				var menuLi = new MenuLi(config2);
 				this.childrenMenuList.push(menuLi);
 			}
 		}
@@ -81,21 +81,24 @@ MenuLi.prototype = {
 		$a.append($span);
 		$li.attr("class",this.cssClass);
 		$li.append($a);
+		$li.append(this.getHtmlAsMenuItem());
 		return $li.prop("outerHTML");
 	},
 	getHtmlAsMenuItem : function() {
-		if (childrenMenuList.length <= 0) {
+		if (this.childrenMenuList.length <= 0) {
 			return "";
 		}
 		
-		$dl=$("<dl></dl>");
+		$dl=$("<dl style='padding-left:10px;'></dl>");
 		$dl.attr("class","layui-nav-child");
-		for (var i = 0; i < this.childrenMenuList.lenth; i++) {
+		for (var i = 0; i < this.childrenMenuList.length; i++) {
 			$a=$("<a></a>");
-			$a.attr("href",this.link);
+			$a.attr("href",this.childrenMenuList[i].link);
+			$a.append(this.childrenMenuList[i].cdmc);
 			var $dd=$("<dd></dd>")
 			$dd.append($a);
 			$dl.append($dd);
+			
 		}
 		
 		return $dl.prop("outerHTML");

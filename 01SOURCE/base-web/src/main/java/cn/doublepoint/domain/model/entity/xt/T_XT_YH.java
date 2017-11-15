@@ -12,8 +12,10 @@ package cn.doublepoint.domain.model.entity.xt;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="xt_yh")
 public class T_XT_YH {
 
 	@Id

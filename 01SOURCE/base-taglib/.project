@@ -3,6 +3,7 @@
 	<name>base-taglib</name>
 	<comment></comment>
 	<projects>
+		<project>base-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

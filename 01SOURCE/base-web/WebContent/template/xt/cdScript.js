@@ -3,9 +3,19 @@ layui.use([ 'element', 'layer' ], function() {
 	var element = layui.element; // 导航的hover效果、二级菜单等功能，需要依赖element模块
 	var layer = layui.layer;
 	// 监听导航点击
-	// element.on('nav(demo)', function(elem){
-	//    
-	// });
+	element.on('nav(demo)', function(elem) {
+		layer.msg(elem.text());
+		// 新增一个Tab项
+		element.tabAdd('admin-tab', {
+			title : elem.text() // 用于演示
+			,
+			content : '<iframe src="ajaxdatagrid.jsp"></iframe>',
+			id : elem.text()
+		// 实际使用一般是规定好的id，这里以时间戳模拟下
+		});
+		 //切换到指定Tab项
+	    element.tabChange('admin-tab', elem.text()); //切换到：用户管理
+	});
 	$('.admin-side-toggle').on('click', function() {
 		var sideWidth = $('#admin-side').width();
 		if (sideWidth === 200) {
@@ -53,7 +63,7 @@ $.ajax({
 	async : false,
 	success : function(data) {
 		menu.setData(data);
-		
+
 	},
 	error : function() {
 		alert("error");
