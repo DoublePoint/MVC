@@ -21,8 +21,10 @@
 <head>
 <%@ include file="/template/base.jsp"%>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/global.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/layui/css/global.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin"
@@ -76,7 +78,10 @@
 				<div class="layui-tab-content"
 					style="min-height: 150px; padding: 0px 0 0 0;">
 					<div class="layui-tab-item layui-show">
-						<iframe src="ajaxdatagrid.jsp"></iframe>
+						<%-- <iframe
+							src="${pageContext.request.contextPath}/template/xt/ajaxdatagrid.jsp"></iframe> --%>
+							<iframe
+							src="${pageContext.request.contextPath}/template/xt/cd"></iframe>
 					</div>
 				</div>
 			</div>
@@ -90,5 +95,6 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="cdScript.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/template/xt/index/indexScript.js"></script>
 </html>

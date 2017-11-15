@@ -18,12 +18,10 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
-import cn.doublepoint.common.util.CommonUtil;
 import cn.doublepoint.taglib.base.BaseTagSupport;
 import cn.doublepoint.taglib.menu.MenuTag;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import freemarker.template.utility.DateUtil.TrivialDateToISO8601CalendarFactory;
 
 public class AjaxDataGridTag extends BaseTagSupport {
 
