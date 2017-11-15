@@ -23,18 +23,6 @@ public class XTCDController {
 	@Resource 
 	XTCDQueryService  XTCDQueryService;
 	
-	
-	/**
-	 * 获取系统菜单
-	 * 
-	 * @return 返回系统菜单
-	 */
-	@RequestMapping("/cd")
-	public String cd(Map<String, Object> model) {
-		model.put("cd", xtcdRepository.findAll());
-		return "/xt/cd/cd";
-	}
-
 	@RequestMapping("/cdDataList")
 	@ResponseBody
 	public List<VT_XT_CD> cdDataList() {
@@ -47,9 +35,9 @@ public class XTCDController {
 	 * 
 	 * @return 返回系统菜单
 	 */
-	@RequestMapping("/cd-save")
+	@RequestMapping("/cd")
 	public String cdSave() {
-		return "/xt/cd/cdSaveDialog";
+		return "/xt/cd/cd";
 	}
 	/**
 	 * 菜单管理
