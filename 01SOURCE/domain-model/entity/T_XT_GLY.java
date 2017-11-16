@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-27 13:24:974                      
+* 创   建   时   间 ：2017-11-16 18:06:790                      
 *                                                                 
 * 类   说   明 ：     系统管理员    
 *                                                                 
@@ -38,23 +38,23 @@ public class T_XT_GLY  extends BaseEntity{
 		this.glybs = glybs;                                                  
 	}                                                                
 	@Column (name = "dlzh")                                  
-	private string dlzh; //登录账号                                                
+	private String dlzh; //登录账号                                                
 	                                                                 
-	public string getDlzh() {                                            
+	public String getDlzh() {                                            
 		return dlzh;                                                     
 	}                                                                
                                                                   
-	public void setDlzh(string dlzh) {                                     
+	public void setDlzh(String dlzh) {                                     
 		this.dlzh = dlzh;                                                  
 	}                                                                
 	@Column (name = "dlmm")                                  
-	private string dlmm; //登录密码                                                
+	private String dlmm; //登录密码                                                
 	                                                                 
-	public string getDlmm() {                                            
+	public String getDlmm() {                                            
 		return dlmm;                                                     
 	}                                                                
                                                                   
-	public void setDlmm(string dlmm) {                                     
+	public void setDlmm(String dlmm) {                                     
 		this.dlmm = dlmm;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  

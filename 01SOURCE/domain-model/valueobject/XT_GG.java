@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-27 13:24:985                      
+* 创   建   时   间 ：2017-11-16 18:06:809                      
 *                                                                 
 * 类   说   明 ：     系统公告    
 *                                                                 
@@ -41,13 +41,13 @@ public class XT_GG extends BaseValueObject {
 		this.gglb = gglb;                                                  
 	}                                                                
 	@Column (name = "ggnr")                                  
-	private string ggnr; //公告内容                                                
+	private String ggnr; //公告内容                                                
 	                                                                 
-	public string getGgnr() {                                            
+	public String getGgnr() {                                            
 		return ggnr;                                                     
 	}                                                                
                                                                   
-	public void setGgnr(string ggnr) {                                     
+	public void setGgnr(String ggnr) {                                     
 		this.ggnr = ggnr;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  

@@ -7,8 +7,7 @@ layui.use([ 'element', 'layer' ], function() {
 		layer.msg(elem.text());
 		// 新增一个Tab项
 		element.tabAdd('admin-tab', {
-			title : elem.text() // 用于演示
-			,
+			title : elem.text(), // 用于演示
 			content : '<iframe src="ajaxdatagrid.jsp"></iframe>',
 			id : elem.text()
 		// 实际使用一般是规定好的id，这里以时间戳模拟下
@@ -63,7 +62,6 @@ $.ajax({
 	async : false,
 	success : function(data) {
 		menu.setData(data);
-
 	},
 	error : function() {
 		alert("error");

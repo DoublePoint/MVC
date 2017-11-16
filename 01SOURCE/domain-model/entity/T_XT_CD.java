@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-27 13:24:981                      
+* 创   建   时   间 ：2017-11-16 18:06:798                      
 *                                                                 
 * 类   说   明 ：     系统菜单    
 *                                                                 
@@ -46,6 +46,16 @@ public class T_XT_CD  extends BaseEntity{
                                                                   
 	public void setCdmc(String cdmc) {                                     
 		this.cdmc = cdmc;                                                  
+	}                                                                
+	@Column (name = "cdlj")                                  
+	private int cdlj; //菜单链接                                                
+	                                                                 
+	public int getCdlj() {                                            
+		return cdlj;                                                     
+	}                                                                
+                                                                  
+	public void setCdlj(int cdlj) {                                     
+		this.cdlj = cdlj;                                                  
 	}                                                                
 	@Column (name = "sjcdbs")                                  
 	private long sjcdbs; //上级菜单标识                                                
