@@ -26,13 +26,6 @@ public class XTCDController {
 	@Resource 
 	XTCDQueryService  XTCDQueryService;
 	
-	@RequestMapping("/cdDataList")
-	@ResponseBody
-	public List<VT_XT_CD> cdDataList() {
-		List<VT_XT_CD> xtcdLists=XTCDQueryService.loadXTCD();
-		return xtcdLists;
-	}
-	
 	/**
 	 * 菜单添加修改弹窗
 	 * 
@@ -42,7 +35,6 @@ public class XTCDController {
 	public String cdSave() {
 		return "/xt/cd/cd";
 	}
-<<<<<<< HEAD
 
 	@RequestMapping("/cdDataList")
 	@ResponseBody
@@ -51,7 +43,7 @@ public class XTCDController {
 		if(xtcdLists==null)
 			xtcdLists=new ArrayList<VT_XT_CD>();
 		return xtcdLists;
-=======
+	}
 	/**
 	 * 菜单管理
 	 * 
@@ -60,6 +52,5 @@ public class XTCDController {
 	@RequestMapping("/cd-management")
 	public String cdManagement() {
 		return "/xt/cd/cdManagement";
->>>>>>> bf17ff6ea5ed7c787092f3ccd0d7150de2d56315
 	}
 }
