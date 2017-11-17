@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-16 18:06:807                      
+* 创   建   时   间 ：2017-11-17 21:56:767                      
 *                                                                 
 * 类   说   明 ：     系统管理员登录日志    
 *                                                                 
@@ -21,33 +21,33 @@ public class XT_GLYDLRZ extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "glydlrzbs")                                  
-	private long glydlrzbs; //管理员登录日志标识                                                
+	private Long glydlrzbs; //管理员登录日志标识                                                
 	                                                                 
-	public long getGlydlrzbs() {                                            
+	public Long getGlydlrzbs() {                                            
 		return glydlrzbs;                                                     
 	}                                                                
                                                                   
-	public void setGlydlrzbs(long glydlrzbs) {                                     
+	public void setGlydlrzbs(Long glydlrzbs) {                                     
 		this.glydlrzbs = glydlrzbs;                                                  
 	}                                                                
 	@Column (name = "glybs")                                  
-	private long glybs; //管理员标识                                                
+	private Long glybs; //管理员标识                                                
 	                                                                 
-	public long getGlybs() {                                            
+	public Long getGlybs() {                                            
 		return glybs;                                                     
 	}                                                                
                                                                   
-	public void setGlybs(long glybs) {                                     
+	public void setGlybs(Long glybs) {                                     
 		this.glybs = glybs;                                                  
 	}                                                                
 	@Column (name = "glydlsj")                                  
-	private int glydlsj; //管理员登录时间                                                
+	private Integer glydlsj; //管理员登录时间                                                
 	                                                                 
-	public int getGlydlsj() {                                            
+	public Integer getGlydlsj() {                                            
 		return glydlsj;                                                     
 	}                                                                
                                                                   
-	public void setGlydlsj(int glydlsj) {                                     
+	public void setGlydlsj(Integer glydlsj) {                                     
 		this.glydlsj = glydlsj;                                                  
 	}                                                                
 	@Column (name = "mmsrsfyw")                                  

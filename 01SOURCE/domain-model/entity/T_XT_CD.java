@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-16 18:06:798                      
+* 创   建   时   间 ：2017-11-17 21:56:763                      
 *                                                                 
 * 类   说   明 ：     系统菜单    
 *                                                                 
@@ -28,13 +28,13 @@ public class T_XT_CD  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "cdbs")                                  
-	private long cdbs; //菜单标识                                                
+	private Long cdbs; //菜单标识                                                
 	                                                                 
-	public long getCdbs() {                                            
+	public Long getCdbs() {                                            
 		return cdbs;                                                     
 	}                                                                
                                                                   
-	public void setCdbs(long cdbs) {                                     
+	public void setCdbs(Long cdbs) {                                     
 		this.cdbs = cdbs;                                                  
 	}                                                                
 	@Column (name = "cdmc")                                  
@@ -48,43 +48,43 @@ public class T_XT_CD  extends BaseEntity{
 		this.cdmc = cdmc;                                                  
 	}                                                                
 	@Column (name = "cdlj")                                  
-	private int cdlj; //菜单链接                                                
+	private Integer cdlj; //菜单链接                                                
 	                                                                 
-	public int getCdlj() {                                            
+	public Integer getCdlj() {                                            
 		return cdlj;                                                     
 	}                                                                
                                                                   
-	public void setCdlj(int cdlj) {                                     
+	public void setCdlj(Integer cdlj) {                                     
 		this.cdlj = cdlj;                                                  
 	}                                                                
 	@Column (name = "sjcdbs")                                  
-	private long sjcdbs; //上级菜单标识                                                
+	private Long sjcdbs; //上级菜单标识                                                
 	                                                                 
-	public long getSjcdbs() {                                            
+	public Long getSjcdbs() {                                            
 		return sjcdbs;                                                     
 	}                                                                
                                                                   
-	public void setSjcdbs(long sjcdbs) {                                     
+	public void setSjcdbs(Long sjcdbs) {                                     
 		this.sjcdbs = sjcdbs;                                                  
 	}                                                                
 	@Column (name = "cdcj")                                  
-	private int cdcj; //菜单层级                                                
+	private Integer cdcj; //菜单层级                                                
 	                                                                 
-	public int getCdcj() {                                            
+	public Integer getCdcj() {                                            
 		return cdcj;                                                     
 	}                                                                
                                                                   
-	public void setCdcj(int cdcj) {                                     
+	public void setCdcj(Integer cdcj) {                                     
 		this.cdcj = cdcj;                                                  
 	}                                                                
 	@Column (name = "cdpx")                                  
-	private int cdpx; //菜单排序                                                
+	private Integer cdpx; //菜单排序                                                
 	                                                                 
-	public int getCdpx() {                                            
+	public Integer getCdpx() {                                            
 		return cdpx;                                                     
 	}                                                                
                                                                   
-	public void setCdpx(int cdpx) {                                     
+	public void setCdpx(Integer cdpx) {                                     
 		this.cdpx = cdpx;                                                  
 	}                                                                
 	@Column (name = "gxsj")                                  

@@ -1,9 +1,9 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-17 21:56:755                      
+* 创   建   时   间 ：2017-11-17 22:04:229                      
 *                                                                 
-* 类   说   明 ：     系统管理员    
+* 类   说   明 ：     足迹    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
@@ -18,8 +18,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
     
 @Entity                                                           
-@Table(name="XT_GLY")                                                   
-public class T_XT_GLY  extends BaseEntity{                                              
+@Table(name="ZL_ZJ")                                                   
+public class T_ZL_ZJ  extends BaseEntity{                                              
 	/**                                                                  
 	 *                                                                    
 	 */                                                                  
@@ -27,54 +27,44 @@ public class T_XT_GLY  extends BaseEntity{
                                                                   
                                                                   
 	@Id                                                              
-	@Column (name = "glybs")                                  
-	private Long glybs; //管理员标识                                                
+	@Column (name = "足迹标识")                                  
+	private Integer 足迹标识; //足迹标识                                                
 	                                                                 
-	public Long getGlybs() {                                            
-		return glybs;                                                     
+	public Integer get足迹标识() {                                            
+		return 足迹标识;                                                     
 	}                                                                
                                                                   
-	public void setGlybs(Long glybs) {                                     
-		this.glybs = glybs;                                                  
+	public void set足迹标识(Integer 足迹标识) {                                     
+		this.足迹标识 = 足迹标识;                                                  
 	}                                                                
-	@Column (name = "dlzh")                                  
-	private String dlzh; //登录账号                                                
+	@Column (name = "用户标识")                                  
+	private Integer 用户标识; //用户标识                                                
 	                                                                 
-	public String getDlzh() {                                            
-		return dlzh;                                                     
+	public Integer get用户标识() {                                            
+		return 用户标识;                                                     
 	}                                                                
                                                                   
-	public void setDlzh(String dlzh) {                                     
-		this.dlzh = dlzh;                                                  
+	public void set用户标识(Integer 用户标识) {                                     
+		this.用户标识 = 用户标识;                                                  
 	}                                                                
-	@Column (name = "dlmm")                                  
-	private String dlmm; //登录密码                                                
+	@Column (name = "浏览类型")                                  
+	private Integer 浏览类型; //浏览类型                                                
 	                                                                 
-	public String getDlmm() {                                            
-		return dlmm;                                                     
+	public Integer get浏览类型() {                                            
+		return 浏览类型;                                                     
 	}                                                                
                                                                   
-	public void setDlmm(String dlmm) {                                     
-		this.dlmm = dlmm;                                                  
+	public void set浏览类型(Integer 浏览类型) {                                     
+		this.浏览类型 = 浏览类型;                                                  
 	}                                                                
-	@Column (name = "cjsj")                                  
-	private Date cjsj; //创建时间                                                
+	@Column (name = "信息标识")                                  
+	private Integer 信息标识; //信息标识                                                
 	                                                                 
-	public Date getCjsj() {                                            
-		return cjsj;                                                     
+	public Integer get信息标识() {                                            
+		return 信息标识;                                                     
 	}                                                                
                                                                   
-	public void setCjsj(Date cjsj) {                                     
-		this.cjsj = cjsj;                                                  
-	}                                                                
-	@Column (name = "gxsj")                                  
-	private Date gxsj; //更新时间                                                
-	                                                                 
-	public Date getGxsj() {                                            
-		return gxsj;                                                     
-	}                                                                
-                                                                  
-	public void setGxsj(Date gxsj) {                                     
-		this.gxsj = gxsj;                                                  
+	public void set信息标识(Integer 信息标识) {                                     
+		this.信息标识 = 信息标识;                                                  
 	}                                                                
 }

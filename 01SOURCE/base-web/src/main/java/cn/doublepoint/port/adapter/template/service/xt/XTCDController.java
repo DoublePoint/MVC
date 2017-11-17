@@ -2,17 +2,17 @@ package cn.doublepoint.port.adapter.template.service.xt;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
+import cn.doublepoint.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.application.template.xt.XTCDQueryService;
+import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.port.adapter.template.persistence.xt.XTCDRepository;
 
@@ -24,7 +24,10 @@ public class XTCDController {
 	XTCDRepository xtcdRepository;
 
 	@Resource 
-	XTCDQueryService  XTCDQueryService;
+	XTCDQueryService  xtcdQueryService;
+	
+	@Resource
+	XTCDApplicationService xtcdApplicationService;
 	
 	/**
 	 * 菜单添加修改弹窗
@@ -39,7 +42,7 @@ public class XTCDController {
 	@RequestMapping("/cdDataList")
 	@ResponseBody
 	public List<VT_XT_CD> cdDataList() {
-		List<VT_XT_CD> xtcdLists=XTCDQueryService.loadXTCD();
+		List<VT_XT_CD> xtcdLists=xtcdQueryService.loadXTCD();
 		if(xtcdLists==null)
 			xtcdLists=new ArrayList<VT_XT_CD>();
 		return xtcdLists;
@@ -62,5 +65,13 @@ public class XTCDController {
 	@RequestMapping("/cdDialog")
 	public String cdDialog() {
 		return "/xt/cd/cdDialog";
+	}
+	
+	@RequestMapping("/cd/add")
+	@ResponseBody
+	public T_XT_CD  add(@RequestBody T_XT_CD cd){
+		
+		xtcdApplicationService.createXTCD(cd);
+		return cd;
 	}
 }

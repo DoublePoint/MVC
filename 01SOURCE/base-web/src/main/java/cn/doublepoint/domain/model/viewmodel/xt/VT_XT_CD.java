@@ -29,18 +29,18 @@ public class VT_XT_CD extends BaseEntity {
 	/**                                                                  
 	 *                                                                    
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 	
 	@Resource
 	XTCDRepository repository;
 
-	private long cdbs; // 菜单标识
+	private Long cdbs; // 菜单标识
 
-	public long getCdbs() {
+	public Long getCdbs() {
 		return cdbs;
 	}
 
-	public void setCdbs(long cdbs) {
+	public void setCdbs(Long cdbs) {
 		this.cdbs = cdbs;
 	}
 
@@ -54,33 +54,33 @@ public class VT_XT_CD extends BaseEntity {
 		this.cdmc = cdmc;
 	}
 
-	private long sjcdbs; // 上级菜单标识
+	private Long sjcdbs; // 上级菜单标识
 
-	public long getSjcdbs() {
+	public Long getSjcdbs() {
 		return sjcdbs;
 	}
 
-	public void setSjcdbs(long sjcdbs) {
+	public void setSjcdbs(Long sjcdbs) {
 		this.sjcdbs = sjcdbs;
 	}
 
-	private int cdcj; // 菜单层级
+	private Integer cdcj; // 菜单层级
 
-	public int getCdcj() {
+	public Integer getCdcj() {
 		return cdcj;
 	}
 
-	public void setCdcj(int cdcj) {
+	public void setCdcj(Integer cdcj) {
 		this.cdcj = cdcj;
 	}
 
-	private int cdpx; // 菜单排序
+	private Integer cdpx; // 菜单排序
 
-	public int getCdpx() {
+	public Integer getCdpx() {
 		return cdpx;
 	}
 
-	public void setCdpx(int cdpx) {
+	public void setCdpx(Integer cdpx) {
 		this.cdpx = cdpx;
 	}
 

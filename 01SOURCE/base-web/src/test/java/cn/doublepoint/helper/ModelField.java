@@ -9,6 +9,8 @@
  */
 package cn.doublepoint.helper;
 
+import java.util.Date;
+
 public class ModelField {
 	
 	
@@ -56,13 +58,13 @@ public class ModelField {
 		
 		StringBuffer sbBuffer=new StringBuffer();
 		sbBuffer.append("	@Column (name = \""+ fieldName.replaceAll("[A-Z]", "_$0").toLowerCase()+"\")                                  \r\n");
-		sbBuffer.append("	private "+fieldType+" "+fieldName+"; //"+fieldComment+"                                                \r\n");
+		sbBuffer.append("	private "+switchFieldType(fieldType)+" "+fieldName+"; //"+fieldComment+"                                                \r\n");
 		sbBuffer.append("	                                                                 \r\n");
-		sbBuffer.append("	public "+fieldType+" get"+firstCharUpperString+"() {                                            \r\n");
+		sbBuffer.append("	public "+switchFieldType(fieldType)+" get"+firstCharUpperString+"() {                                            \r\n");
 		sbBuffer.append("		return "+fieldName+";                                                     \r\n");
 		sbBuffer.append("	}                                                                \r\n");
 		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("	public void set"+firstCharUpperString+"("+fieldType+" "+fieldName+") {                                     \r\n");
+		sbBuffer.append("	public void set"+firstCharUpperString+"("+switchFieldType(fieldType)+" "+fieldName+") {                                     \r\n");
 		sbBuffer.append("		this."+fieldName+" = "+fieldName+";                                                  \r\n");
 		sbBuffer.append("	}                                                                \r\n");			
 		return sbBuffer;
@@ -74,5 +76,20 @@ public class ModelField {
 		String str=isLast?";":",";
 		sbBuffer.append("	"+fieldName.toUpperCase()+"(\""+index+"\")"+str+""+"//"+fieldComment+"\r\n");
 		return sbBuffer;
+	}
+	
+	private String switchFieldType(String fieldType){
+		switch (fieldType.toLowerCase()) {
+		case "int":
+			return "Integer";
+		case "long":
+			return "Long";
+		case "string":
+			return "String";
+		case "date":
+			return "Date";
+		default:
+			return fieldType;
+		}
 	}
 }

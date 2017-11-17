@@ -29,14 +29,14 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">菜单名称</label>
 				<div class="layui-input-block">
-					<input type="text" name="cdmc" lay-verify="title"
+					<input type="text" name="cdmc" lay-verify="title" value="111111"
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">菜单链接</label>
 				<div class="layui-input-block">
-					<input type="text" name="cdlj" lay-verify="required"
+					<input type="text" name="cdlj" lay-verify="required" value="222222"
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">菜单序号</label>
 				<div class="layui-input-block">
-					<input type="text" name="cdpx" lay-verify="required"
+					<input type="text" name="cdpx" lay-verify="required"  value="333333"
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">上级菜单</label>
 				<div class="layui-input-block">
-					<input type="text" name="sjcd" lay-verify="required"
+					<input type="text" name="sjcd" lay-verify="required"  value="444444"
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
@@ -63,54 +63,7 @@
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
-
-
 		</form>
-
-		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-		<script>
-			layui
-					.use(
-							[ 'form', 'layedit', 'laydate', 'tree' ],
-							function() {
-								var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
-								//日期
-								laydate.render({
-									elem : '#date'
-								});
-								laydate.render({
-									elem : '#date1'
-								});
-
-								//创建一个编辑器
-								var editIndex = layedit
-										.build('LAY_demo_editor');
-
-								//自定义验证规则
-								form.verify({
-									title : function(value) {
-										if (value.length < 5) {
-											return '标题至少得5个字符啊';
-										}
-									},
-									pass : [ /(.+){6,12}$/, '密码必须6到12位' ],
-									content : function(value) {
-										layedit.sync(editIndex);
-									}
-								});
-
-								//监听提交
-								form.on('submit(demo1)', function(data) {
-									
-									
-									
-									parent.layer.alert(JSON.stringify(data.field), {
-										title : '最终的提交信息'
-									})
-									return false;
-								});
-
-							});
-		</script>
 	</div>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/template/xt/cd/cdDialogScript.js"></script>
 </body>

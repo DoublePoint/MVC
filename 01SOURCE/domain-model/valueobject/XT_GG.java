@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-16 18:06:809                      
+* 创   建   时   间 ：2017-11-17 21:56:767                      
 *                                                                 
 * 类   说   明 ：     系统公告    
 *                                                                 
@@ -21,13 +21,13 @@ public class XT_GG extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "ggbs")                                  
-	private long ggbs; //公告标识                                                
+	private Long ggbs; //公告标识                                                
 	                                                                 
-	public long getGgbs() {                                            
+	public Long getGgbs() {                                            
 		return ggbs;                                                     
 	}                                                                
                                                                   
-	public void setGgbs(long ggbs) {                                     
+	public void setGgbs(Long ggbs) {                                     
 		this.ggbs = ggbs;                                                  
 	}                                                                
 	@Column (name = "gglb")                                  

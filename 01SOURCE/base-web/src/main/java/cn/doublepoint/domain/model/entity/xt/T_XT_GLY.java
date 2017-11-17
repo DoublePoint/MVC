@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-27 13:24:974                      
+* 创   建   时   间 ：2017-11-17 21:56:755                      
 *                                                                 
 * 类   说   明 ：     系统管理员    
 *                                                                 
@@ -30,13 +30,13 @@ public class T_XT_GLY  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "glybs")                                  
-	private long glybs; //管理员标识                                                
+	private Long glybs; //管理员标识                                                
 	                                                                 
-	public long getGlybs() {                                            
+	public Long getGlybs() {                                            
 		return glybs;                                                     
 	}                                                                
                                                                   
-	public void setGlybs(long glybs) {                                     
+	public void setGlybs(Long glybs) {                                     
 		this.glybs = glybs;                                                  
 	}                                                                
 	@Column (name = "dlzh")                                  

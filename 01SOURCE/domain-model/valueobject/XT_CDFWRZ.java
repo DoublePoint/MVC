@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-16 18:06:803                      
+* 创   建   时   间 ：2017-11-17 21:56:765                      
 *                                                                 
 * 类   说   明 ：     系统菜单访问日志    
 *                                                                 
@@ -21,23 +21,23 @@ public class XT_CDFWRZ extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "cdfwrzbs")                                  
-	private int cdfwrzbs; //菜单访问日志标识                                                
+	private Integer cdfwrzbs; //菜单访问日志标识                                                
 	                                                                 
-	public int getCdfwrzbs() {                                            
+	public Integer getCdfwrzbs() {                                            
 		return cdfwrzbs;                                                     
 	}                                                                
                                                                   
-	public void setCdfwrzbs(int cdfwrzbs) {                                     
+	public void setCdfwrzbs(Integer cdfwrzbs) {                                     
 		this.cdfwrzbs = cdfwrzbs;                                                  
 	}                                                                
 	@Column (name = "cdbs")                                  
-	private long cdbs; //菜单标识                                                
+	private Long cdbs; //菜单标识                                                
 	                                                                 
-	public long getCdbs() {                                            
+	public Long getCdbs() {                                            
 		return cdbs;                                                     
 	}                                                                
                                                                   
-	public void setCdbs(long cdbs) {                                     
+	public void setCdbs(Long cdbs) {                                     
 		this.cdbs = cdbs;                                                  
 	}                                                                
 	@Column (name = "fwsj")                                  

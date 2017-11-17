@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-16 18:06:805                      
+* 创   建   时   间 ：2017-11-17 21:56:766                      
 *                                                                 
 * 类   说   明 ：     系统角色    
 *                                                                 
@@ -21,13 +21,13 @@ public class XT_JS extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "jsbs")                                  
-	private long jsbs; //角色标识                                                
+	private Long jsbs; //角色标识                                                
 	                                                                 
-	public long getJsbs() {                                            
+	public Long getJsbs() {                                            
 		return jsbs;                                                     
 	}                                                                
                                                                   
-	public void setJsbs(long jsbs) {                                     
+	public void setJsbs(Long jsbs) {                                     
 		this.jsbs = jsbs;                                                  
 	}                                                                
 	@Column (name = "jsmc")                                  
@@ -41,23 +41,23 @@ public class XT_JS extends BaseValueObject {
 		this.jsmc = jsmc;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
-	private int cjsj; //创建时间                                                
+	private Integer cjsj; //创建时间                                                
 	                                                                 
-	public int getCjsj() {                                            
+	public Integer getCjsj() {                                            
 		return cjsj;                                                     
 	}                                                                
                                                                   
-	public void setCjsj(int cjsj) {                                     
+	public void setCjsj(Integer cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
 	@Column (name = "gxsj")                                  
-	private int gxsj; //更新时间                                                
+	private Integer gxsj; //更新时间                                                
 	                                                                 
-	public int getGxsj() {                                            
+	public Integer getGxsj() {                                            
 		return gxsj;                                                     
 	}                                                                
                                                                   
-	public void setGxsj(int gxsj) {                                     
+	public void setGxsj(Integer gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
 }

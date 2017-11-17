@@ -1,9 +1,9 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-11-17 21:56:755                      
+* 创   建   时   间 ：2017-11-17 22:04:228                      
 *                                                                 
-* 类   说   明 ：     系统管理员    
+* 类   说   明 ：     系统用户    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
@@ -18,8 +18,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
     
 @Entity                                                           
-@Table(name="XT_GLY")                                                   
-public class T_XT_GLY  extends BaseEntity{                                              
+@Table(name="XT_YH")                                                   
+public class T_XT_YH  extends BaseEntity{                                              
 	/**                                                                  
 	 *                                                                    
 	 */                                                                  
@@ -27,15 +27,15 @@ public class T_XT_GLY  extends BaseEntity{
                                                                   
                                                                   
 	@Id                                                              
-	@Column (name = "glybs")                                  
-	private Long glybs; //管理员标识                                                
+	@Column (name = "yhbs")                                  
+	private Long yhbs; //用户标识                                                
 	                                                                 
-	public Long getGlybs() {                                            
-		return glybs;                                                     
+	public Long getYhbs() {                                            
+		return yhbs;                                                     
 	}                                                                
                                                                   
-	public void setGlybs(Long glybs) {                                     
-		this.glybs = glybs;                                                  
+	public void setYhbs(Long yhbs) {                                     
+		this.yhbs = yhbs;                                                  
 	}                                                                
 	@Column (name = "dlzh")                                  
 	private String dlzh; //登录账号                                                
@@ -47,15 +47,35 @@ public class T_XT_GLY  extends BaseEntity{
 	public void setDlzh(String dlzh) {                                     
 		this.dlzh = dlzh;                                                  
 	}                                                                
-	@Column (name = "dlmm")                                  
-	private String dlmm; //登录密码                                                
+	@Column (name = "email")                                  
+	private String email; //邮箱                                                
 	                                                                 
-	public String getDlmm() {                                            
-		return dlmm;                                                     
+	public String getEmail() {                                            
+		return email;                                                     
 	}                                                                
                                                                   
-	public void setDlmm(String dlmm) {                                     
-		this.dlmm = dlmm;                                                  
+	public void setEmail(String email) {                                     
+		this.email = email;                                                  
+	}                                                                
+	@Column (name = "mm")                                  
+	private String mm; //密码                                                
+	                                                                 
+	public String getMm() {                                            
+		return mm;                                                     
+	}                                                                
+                                                                  
+	public void setMm(String mm) {                                     
+		this.mm = mm;                                                  
+	}                                                                
+	@Column (name = "sjh")                                  
+	private String sjh; //手机号                                                
+	                                                                 
+	public String getSjh() {                                            
+		return sjh;                                                     
+	}                                                                
+                                                                  
+	public void setSjh(String sjh) {                                     
+		this.sjh = sjh;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
 	private Date cjsj; //创建时间                                                
@@ -67,14 +87,14 @@ public class T_XT_GLY  extends BaseEntity{
 	public void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
-	@Column (name = "gxsj")                                  
-	private Date gxsj; //更新时间                                                
+	@Column (name = "xgsj")                                  
+	private Date xgsj; //修改时间                                                
 	                                                                 
-	public Date getGxsj() {                                            
-		return gxsj;                                                     
+	public Date getXgsj() {                                            
+		return xgsj;                                                     
 	}                                                                
                                                                   
-	public void setGxsj(Date gxsj) {                                     
-		this.gxsj = gxsj;                                                  
+	public void setXgsj(Date xgsj) {                                     
+		this.xgsj = xgsj;                                                  
 	}                                                                
 }

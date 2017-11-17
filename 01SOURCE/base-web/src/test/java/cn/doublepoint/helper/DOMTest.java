@@ -32,7 +32,7 @@ public class DOMTest {
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse(
-					"file:/F://AllProject//00参考文件//BaseInfrastructure//系统支撑.oom");// 传入文件名可以是相对路径也可以是绝对路径
+					"file:/F://AllProject//00参考文件//BaseInfrastructure//前台.oom");// 传入文件名可以是相对路径也可以是绝对路径
 			NodeList classesList = document.getElementsByTagName("c:Classes");
 			Node classesElementNode = classesList.item(0);
 			NodeList classElementNodeList = classesElementNode.getChildNodes();

@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-10-27 13:24:982                      
+* 创   建   时   间 ：2017-11-17 21:56:764                      
 *                                                                 
 * 类   说   明 ：     系统权限    
 *                                                                 
@@ -30,33 +30,33 @@ public class T_XT_QX  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "qxbs")                                  
-	private long qxbs; //权限标识                                                
+	private Long qxbs; //权限标识                                                
 	                                                                 
-	public long getQxbs() {                                            
+	public Long getQxbs() {                                            
 		return qxbs;                                                     
 	}                                                                
                                                                   
-	public void setQxbs(long qxbs) {                                     
+	public void setQxbs(Long qxbs) {                                     
 		this.qxbs = qxbs;                                                  
 	}                                                                
 	@Column (name = "qxmc")                                  
-	private int qxmc; //权限名称                                                
+	private Integer qxmc; //权限名称                                                
 	                                                                 
-	public int getQxmc() {                                            
+	public Integer getQxmc() {                                            
 		return qxmc;                                                     
 	}                                                                
                                                                   
-	public void setQxmc(int qxmc) {                                     
+	public void setQxmc(Integer qxmc) {                                     
 		this.qxmc = qxmc;                                                  
 	}                                                                
 	@Column (name = "qxz")                                  
-	private long qxz; //权限值                                                
+	private Long qxz; //权限值                                                
 	                                                                 
-	public long getQxz() {                                            
+	public Long getQxz() {                                            
 		return qxz;                                                     
 	}                                                                
                                                                   
-	public void setQxz(long qxz) {                                     
+	public void setQxz(Long qxz) {                                     
 		this.qxz = qxz;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  

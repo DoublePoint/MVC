@@ -32,7 +32,7 @@ public class XTCDRepositoryTest {
 	@Test
 	public void testSaveXTCD(){
 		T_XT_CD cd=new T_XT_CD();
-		cd.setCdbs(2);
+		cd.setCdbs(Long.valueOf(2));
 		cd.setCjsj(new Timestamp(100000));
 		cd.setGxsj(new Date());
 		repository.save(cd);

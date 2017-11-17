@@ -25,8 +25,7 @@ public class XTYHRepositoryTest {
 	@Test
 	public void saveXT_RY(){
 		T_XT_YH yh=new T_XT_YH();
-		yh.setBs(2);
-		yh.setYhbh("2");
+		yh.setYhbs(2L);
 		repository.save(yh);
 	}
 }
