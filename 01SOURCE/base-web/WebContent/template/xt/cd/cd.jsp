@@ -22,10 +22,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/base.jsp"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
 </head>
 <body>
-
 	<div class="layui-row">
 		<!-- <div class="layui-col-md2">
 			<ul id="demo"></ul>
@@ -45,7 +45,13 @@
 				<i class="layui-icon"></i>
 			</button>
 		</div>
-		<ll:AjaxDataGrid />
+
 		<!-- </div> -->
 	</div>
+	<ll:AjaxDataGrid />
+	<style>
+.layui-table-view {
+	margin: 0px;
+}
+</style>
 </body>
