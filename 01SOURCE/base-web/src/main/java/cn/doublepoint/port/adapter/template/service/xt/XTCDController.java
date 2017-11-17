@@ -53,4 +53,14 @@ public class XTCDController {
 	public String cdManagement() {
 		return "/xt/cd/cdManagement";
 	}
+	
+	/**
+	 * 菜单管理
+	 * 
+	 * @return 返回系统菜单
+	 */
+	@RequestMapping("/cdDialog")
+	public String cdDialog() {
+		return "/xt/cd/cdDialog";
+	}
 }

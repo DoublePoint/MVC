@@ -22,6 +22,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/base.jsp"%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 		</div>
 		<div class="layui-col-md10" > -->
 		<div class="layui-btn-group">
-			<button class="layui-btn layui-btn-sm">
+			<button class="layui-btn layui-btn-sm" onclick="showAddDialog()">
 				<i class="layui-icon"></i>
 			</button>
 			<button class="layui-btn layui-btn-sm">
