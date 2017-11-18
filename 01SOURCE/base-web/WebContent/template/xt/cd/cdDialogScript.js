@@ -35,10 +35,12 @@ layui.use([ 'form', 'layedit', 'laydate', 'tree' ],
 			//data : data.field,
 			data : JSON.stringify(data.field),
 			success : function(data1) {
-				alert(data1.cdmc);
+				//提示层
+				parent.layer.msg('保存成功');
 			},
 			error:function(ecx){
-				alert(ecx.responseText);
+				parent.layer.msg('保存失败');
+//				alert(ecx.responseText);
 			}
 	
 			});

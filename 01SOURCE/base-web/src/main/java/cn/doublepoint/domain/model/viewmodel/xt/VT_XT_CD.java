@@ -104,18 +104,18 @@ public class VT_XT_CD extends BaseEntity {
 		this.cjsj = cjsj;
 	}
 
-	private List<VT_XT_CD> childrenMenuList;
+	private List<VT_XT_CD> childrenCDList;
 
-	public List<VT_XT_CD> getChildrenMenuList() {
-		return childrenMenuList;
+	public List<VT_XT_CD> getChildrenCDList() {
+		return childrenCDList;
 	}
 
 	public VT_XT_CD() {
 		super();
 	}
 
-	public void setChildrenMenuList(List<VT_XT_CD> childrenMenuList) {
-		this.childrenMenuList = childrenMenuList;
+	public void setChildrenCDList(List<VT_XT_CD> childrenCDList) {
+		this.childrenCDList = childrenCDList;
 	}
 	public VT_XT_CD(T_XT_CD cd) {
 		super();

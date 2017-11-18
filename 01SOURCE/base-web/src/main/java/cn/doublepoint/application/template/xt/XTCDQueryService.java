@@ -37,7 +37,7 @@ public class XTCDQueryService {
 			return null;
 		for(int i=0;i<rootCdList.size();i++){
 			List<T_XT_CD> childrenList=xtcdRepository.findChildrenXTCD(rootCdList.get(i).getCdbs());
-			rootCdList.get(i).setChildrenMenuList(CommonBeanUtils.copyTo(childrenList, VT_XT_CD.class));
+			rootCdList.get(i).setChildrenCDList(CommonBeanUtils.copyTo(childrenList, VT_XT_CD.class));
 		}
 		return rootCdList;
 	}
@@ -46,8 +46,17 @@ public class XTCDQueryService {
 	 * 查询最底层菜单
 	 * @return 最底层菜单列表
 	 */
-	private List<VT_XT_CD> findRootXTCD(){
+	public List<VT_XT_CD> findRootXTCD(){
 		List<T_XT_CD> xtcdList=xtcdRepository.findRootXTCD();
+		List<VT_XT_CD> resultCdList=CommonBeanUtils.copyTo(xtcdList, VT_XT_CD.class);
+		return resultCdList;
+	}
+	/**
+	 * 查询最底层菜单
+	 * @return 最底层菜单列表
+	 */
+	public List<VT_XT_CD> findChildrenXTCD(VT_XT_CD cd){
+		List<T_XT_CD> xtcdList=xtcdRepository.findChildrenXTCD(cd.getCdbs());
 		List<VT_XT_CD> resultCdList=CommonBeanUtils.copyTo(xtcdList, VT_XT_CD.class);
 		return resultCdList;
 	}

@@ -29,14 +29,14 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">菜单名称</label>
 				<div class="layui-input-block">
-					<input type="text" name="cdmc" lay-verify="title" value="111111"
+					<input type="text" name="cdmc" 
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">菜单链接</label>
 				<div class="layui-input-block">
-					<input type="text" name="cdlj" lay-verify="required" value="222222"
+					<input type="text" name="cdlj" lay-verify="required" 
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">菜单序号</label>
 				<div class="layui-input-block">
-					<input type="text" name="cdpx" lay-verify="required"  value="333333"
+					<input type="text" name="cdpx" lay-verify="required"  
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">上级菜单</label>
 				<div class="layui-input-block">
-					<input type="text" name="sjcd" lay-verify="required"  value="444444"
+					<input type="text" name="sjcd" lay-verify="required"  
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>

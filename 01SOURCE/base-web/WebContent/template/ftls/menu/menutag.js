@@ -17,6 +17,7 @@ Menu.prototype = {
 			if (data != null) {
 				var config = {};
 				config.cdmc = data.cdmc;
+				config.cdlj=data.cdlj;
 				config.childrenMenuList = data.childrenMenuList;
 				var menuLi = new MenuLi(config);
 				this.menuList.push(menuLi);
@@ -42,10 +43,10 @@ var MenuLi = function(config) {
 		this.cssClass = config.cssClass;
 
 	// 超链接
-	if (config.link == null) {
-		this.link = "javascript:;";
+	if (config.cdlj == null) {
+		this.cdlj = "javascript:;";
 	} else
-		this.link = config.link;
+		this.cdlj = config.cdlj;
 
 	// 是否有
 	if (config.cdmc == null) {
@@ -78,6 +79,7 @@ MenuLi.prototype = {
 		var $span=$("<span></span>");
 		$span.attr("class","layui-nav-more");
 		$a.append(this.cdmc);
+		$a.attr("href",this.cdlj);
 		$a.append($span);
 		$li.attr("class",this.cssClass);
 		$li.append($a);

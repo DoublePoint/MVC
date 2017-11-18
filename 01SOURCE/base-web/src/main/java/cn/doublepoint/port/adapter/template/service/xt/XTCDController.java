@@ -24,7 +24,7 @@ public class XTCDController {
 	XTCDRepository xtcdRepository;
 
 	@Resource 
-	XTCDQueryService  xtcdQueryService;
+	XTCDQueryService  xTCDQueryService;
 	
 	@Resource
 	XTCDApplicationService xtcdApplicationService;
@@ -42,7 +42,7 @@ public class XTCDController {
 	@RequestMapping("/cdDataList")
 	@ResponseBody
 	public List<VT_XT_CD> cdDataList() {
-		List<VT_XT_CD> xtcdLists=xtcdQueryService.loadXTCD();
+		List<VT_XT_CD> xtcdLists=xTCDQueryService.loadXTCD();
 		if(xtcdLists==null)
 			xtcdLists=new ArrayList<VT_XT_CD>();
 		return xtcdLists;
