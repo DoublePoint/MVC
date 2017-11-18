@@ -34,13 +34,13 @@ public class VT_XT_CD extends BaseEntity {
 	@Resource
 	XTCDRepository repository;
 
-	private Long cdbs; // 菜单标识
+	private String cdbs; // 菜单标识
 
-	public Long getCdbs() {
+	public String getCdbs() {
 		return cdbs;
 	}
 
-	public void setCdbs(Long cdbs) {
+	public void setCdbs(String cdbs) {
 		this.cdbs = cdbs;
 	}
 
@@ -54,13 +54,13 @@ public class VT_XT_CD extends BaseEntity {
 		this.cdmc = cdmc;
 	}
 
-	private Long sjcdbs; // 上级菜单标识
+	private String sjcdbs; // 上级菜单标识
 
-	public Long getSjcdbs() {
+	public String getSjcdbs() {
 		return sjcdbs;
 	}
 
-	public void setSjcdbs(Long sjcdbs) {
+	public void setSjcdbs(String sjcdbs) {
 		this.sjcdbs = sjcdbs;
 	}
 

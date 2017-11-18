@@ -1,7 +1,16 @@
-function showAddDialog() {
+function onClickAdd() {
 	layui.use([ 'element', 'layer' ], function() {
 		var element = layui.element; // 导航的hover效果、二级菜单等功能，需要依赖element模块
 		// var layer = layui.layer;
+		var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+		var nodes=treeObj.getSelectedNodes();
+		if(nodes.length==0){
+			alert("请选择父节点");
+			return;
+		}
+		else{
+			cdbs=nodes[0].cdbs;
+		}
 		parent.layer.open({
 			type : 2,
 			title : "添加菜单",
@@ -12,36 +21,37 @@ function showAddDialog() {
 			maxmin : true,
 			content : $$pageContextPath + '/template/xt/cdDialog'
 		});
-		
-		layer.open({
-	        type: 2 //此处以iframe举例
-	        ,title: '当你选择该窗体时，即会在最顶端'
-	        ,area: ['390px', '260px']
-	        ,shade: 0
-	        ,maxmin: true
-	        ,offset: [ //为了演示，随机坐标
-	          Math.random()*($(window).height()-300)
-	          ,Math.random()*($(window).width()-390)
-	        ] 
-	        ,content: 'http://layer.layui.com/test/settop.html'
-	        ,btn: ['继续弹出', '全部关闭'] //只是为了演示
-	        ,yes: function(){
-	          $(that).click(); 
-	        }
-	        ,btn2: function(){
-	          layer.closeAll();
-	        }
-	        
-	        ,zIndex: layer.zIndex //重点1
-	        ,success: function(layero){
-	          layer.setTop(layero); //重点2
-	        }
-	      });
 	});
-	
-	
 }
-
+function onClickDelete(){
+	layer.confirm('您是如何看待前端开发？', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			var checkStatus = tableLayui.checkStatus('demo')
+		     ,data = checkStatus.data;
+		     layer.alert(JSON.stringify(data));
+		     $.ajax({
+		 		url : $$pageContextPath + "/template/xt/cd/cdDelete",
+		 		type : "POST",
+		 		contentType:'application/json;charset=UTF-8',
+		 		dataType : "json",
+		 		data : JSON.stringify(data),
+		 		async : false,
+		 		success : function(data) {
+		 			layer.msg('删除成功');
+		 		},
+		 		error : function() {
+		 			alert("error");
+		 		}
+		 	});
+		}, function(){
+		  layer.msg('也可以这样', {
+		    time: 20000, //20s后自动关闭
+		    btn: ['明白了', '知道了']
+		  });
+		});
+	 
+}
 var tabldHeight;
 var tableLayui;
 layui.use([ 'table', 'jquery' ], function() {
@@ -50,29 +60,119 @@ layui.use([ 'table', 'jquery' ], function() {
 	$(window).on('resize', function() {
 		setData();
 	}).resize();
-	
+
 });
 
-function setData(){
+function setData() {
+	var cd = {};
+	cd.cdbs = "";
 	$.ajax({
 		url : $$pageContextPath + "/template/xt/cdDataList",
 		type : "POST",
+		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
-		data : {
-			"a" : 1,
-			"b" : 2,
-			"c" : 3
-		},
+		data : JSON.stringify(cd),
 		async : false,
 		success : function(data) {
 			tableLayui.render({
 				elem : '#demo',
-				data :  data,
+				data : data,
 				// height : 'auto',
 				// height : '400',
-				//height : $("#demo").parent().height(),
-				height : $(window).height()-40,
-				//height : $(window).height()-$("#demo").parent().find("layui-btn-group").height(),
+				// height : $("#demo").parent().height(),
+				height : $(window).height() - 40,
+				id:"demo",
+				// height :
+				// $(window).height()-$("#demo").parent().find("layui-btn-group").height(),
+				cols : [ [ // 标题栏
+				{
+					checkbox : true,
+					LAY_CHECKED : false
+				} // 默认全选
+				, {
+					field : 'cdbs',
+					title : '菜单标识',
+					width : 230,
+					sort : true
+				}, {
+					field : 'cdmc',
+					title : '菜单名称',
+					width : 180
+				}, {
+					field : 'cdpx',
+					title : '菜单排序',
+					width : 150
+				}, {
+					field : 'cdlj',
+					title : '签名',
+					width : 150
+				} ] ],
+				skin : 'row' // 表格风格
+				,
+
+				even : true,
+				page : true // 是否显示分页
+				,
+				limits : [ 5, 7, 10, 20, 100 ],
+				limit : 50
+			// 每页默认显示的数量
+			});
+		},
+		error : function() {
+			alert("error");
+		}
+	});
+}
+
+var setting = {
+	async : {
+		enable : true,
+		url : $$pageContextPath + "/template/xt/cdTree",
+		autoParam : [ "id", "name=n", "level=lv" ],
+		otherParam : {
+			"otherParam" : "zTreeAsyncTest"
+		},
+		dataFilter : filter
+	},
+	data : {
+		key : {
+			name : "cdmc",
+			children : "childrenCDList"
+		},
+	},
+	callback : {
+		onClick : zTreeOnClick
+	}
+};
+
+function filter(treeId, parentNode, childNodes) {
+	if (!childNodes)
+		return null;
+	for (var i = 0, l = childNodes.length; i < l; i++) {
+		childNodes[i].cdmc = childNodes[i].cdmc.replace(/\.n/g, '.');
+	}
+	return childNodes;
+}
+function zTreeOnClick(event, treeId, treeNode) {
+	var cd={};
+	cd.cdbs=treeNode.cdbs;
+	$.ajax({
+		url : $$pageContextPath + "/template/xt/cdDataList",
+		type : "POST",
+		contentType:'application/json;charset=UTF-8',
+		dataType : "json",
+		data : JSON.stringify(cd),
+		async : false,
+		success : function(data) {
+			tableLayui.render({
+				elem : '#demo',
+				data : data,
+				// height : 'auto',
+				// height : '400',
+				// height : $("#demo").parent().height(),
+				height : $(window).height() - 40,
+				// height :
+				// $(window).height()-$("#demo").parent().find("layui-btn-group").height(),
 				cols : [ [ // 标题栏
 				{
 					checkbox : true,
@@ -110,7 +210,10 @@ function setData(){
 		error : function() {
 			alert("error");
 		}
-	}); 
-	
-	
-}
+	});
+
+//	alert(treeNode.cdmc + ", " + treeNode.cdbs);
+};
+$(document).ready(function() {
+	$.fn.zTree.init($("#treeDemo"), setting);
+});

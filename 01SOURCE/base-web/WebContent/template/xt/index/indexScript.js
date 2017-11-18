@@ -54,11 +54,7 @@ $.ajax({
 	url : $$pageContextPath + "/template/xt/cdDataList",
 	type : "POST",
 	dataType : "json",
-	data : {
-		"a" : 1,
-		"b" : 2,
-		"c" : 3
-	},
+	contentType:'application/json;charset=UTF-8',
 	async : false,
 	success : function(data) {
 		menu.setData(data);

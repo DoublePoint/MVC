@@ -29,20 +29,23 @@ layui.use([ 'form', 'layedit', 'laydate', 'tree' ],
 	form.on('submit(demo1)', function(data) {
 		$.ajax({
 			type : 'post',
-			//dataType : "JSON",
+//			dataType : "JSON",
 			contentType:'application/json;charset=UTF-8',//关键是要加上这行
 			url : $$pageContextPath + "/template/xt/cd/add",
 			//data : data.field,
-			data : JSON.stringify(data.field),
+			data : JSON.stringify(data.field)+"",
 			success : function(data1) {
 				//提示层
 				parent.layer.msg('保存成功');
 			},
 			error:function(ecx){
-				parent.layer.msg('保存失败');
-//				alert(ecx.responseText);
+				//parent.layer.msg('保存失败');
+				alert(ecx.responseText);
+				return false;
 			}
 	
 			});
+		return false;
 		});
+	
 	});

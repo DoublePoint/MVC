@@ -52,7 +52,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">上级菜单</label>
 				<div class="layui-input-block">
-					<input type="text" name="sjcd" lay-verify="required"  
+					<input type="text" name="sjcdbs" lay-verify="required"  
 						autocomplete="off" class="layui-input">
 				</div>
 			</div>

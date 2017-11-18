@@ -36,37 +36,7 @@
 <!--  <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
 	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
 <SCRIPT type="text/javascript">
-	var setting = {
-		async : {
-			enable : true,
-			url : $$pageContextPath + "/template/xt/cdTree",
-			autoParam : [ "id", "name=n", "level=lv" ],
-			otherParam : {
-				"otherParam" : "zTreeAsyncTest"
-			},
-			dataFilter : filter
-		},
-		data : {
-			key : {
-				name : "cdmc",
-				children : "childrenCDList"
-			},
-
-		}
-	};
-
-	function filter(treeId, parentNode, childNodes) {
-		if (!childNodes)
-			return null;
-		for (var i = 0, l = childNodes.length; i < l; i++) {
-			childNodes[i].cdmc = childNodes[i].cdmc.replace(/\.n/g, '.');
-		}
-		return childNodes;
-	}
-
-	$(document).ready(function() {
-		$.fn.zTree.init($("#treeDemo"), setting);
-	});
+	
 </SCRIPT>
 </head>
 <body>
@@ -75,23 +45,14 @@
 			<ul id="treeDemo" class="ztree"></ul>
 		</div>
 		<div class="layui-col-md10" style="padding-left: 3px;">
-			<div class="layui-btn-group" style="height:39px;padding-top:1px;">
-				<button class="layui-btn layui-btn-sm" onclick="showAddDialog()">
-					<i class="layui-icon"></i>
-				</button>
-				<button class="layui-btn layui-btn-sm">
-					<i class="layui-icon"></i>
-				</button>
-				<button class="layui-btn layui-btn-sm">
-					<i class="layui-icon"></i>
-				</button>
-				<button class="layui-btn layui-btn-sm">
-					<i class="layui-icon"></i>
-				</button>
+			<div class="layui-btn-group" style="height: 39px; padding-top: 1px;">
+				<button class="layui-btn" onclick="onClickAdd()">增加</button>
+				<button class="layui-btn ">编辑</button>
+				<button class="layui-btn" onclick="onClickDelete()">删除</button>
 			</div>
-			<div style="height:100%">
+			<div style="height: 100%">
 				<table id="demo"></table>
-				<input type="hidden"/>
+				<input type="hidden" />
 			</div>
 
 		</div>

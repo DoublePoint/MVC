@@ -10,6 +10,7 @@
 package cn.doublepoint.domain.model.entity.xt;  
                                                                   
                                                                   
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ import cn.doublepoint.domain.model.entity.BaseEntity;
     
 @Entity                                                           
 @Table(name="XT_CD")                                                   
-public class T_XT_CD  extends BaseEntity{                                              
+public class T_XT_CD  extends BaseEntity implements Serializable{                                              
 	/**                                                                  
 	 *                                                                    
 	 */                                                                  
@@ -30,13 +31,13 @@ public class T_XT_CD  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "cdbs")                                  
-	private Long cdbs; //菜单标识                                                
+	private String cdbs; //菜单标识                                                
 	                                                                 
-	public Long getCdbs() {                                            
+	public String getCdbs() {                                            
 		return cdbs;                                                     
 	}                                                                
                                                                   
-	public void setCdbs(Long cdbs) {                                     
+	public void setCdbs(String cdbs) {                                     
 		this.cdbs = cdbs;                                                  
 	}                                                                
 	@Column (name = "cdmc")                                  
@@ -60,13 +61,13 @@ public class T_XT_CD  extends BaseEntity{
 		this.cdlj = cdlj;                                                  
 	}                                                                
 	@Column (name = "sjcdbs")                                  
-	private Long sjcdbs; //上级菜单标识                                                
+	private String sjcdbs; //上级菜单标识                                                
 	                                                                 
-	public Long getSjcdbs() {                                            
+	public String getSjcdbs() {                                            
 		return sjcdbs;                                                     
 	}                                                                
                                                                   
-	public void setSjcdbs(Long sjcdbs) {                                     
+	public void setSjcdbs(String sjcdbs) {                                     
 		this.sjcdbs = sjcdbs;                                                  
 	}                                                                
 	@Column (name = "cdcj")                                  
@@ -108,5 +109,10 @@ public class T_XT_CD  extends BaseEntity{
                                                                   
 	public void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
-	}                                                                
+	}
+
+	public T_XT_CD() {
+		super();
+	}             
+	
 }

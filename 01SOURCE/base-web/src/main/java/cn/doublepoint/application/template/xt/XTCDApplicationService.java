@@ -10,10 +10,12 @@
 package cn.doublepoint.application.template.xt;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.common.util.SnowflakeIdWorker;
 import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
@@ -35,6 +37,14 @@ public class XTCDApplicationService {
 		} catch (Exception e) {
 			return false;
 		}
+		return true;
+	}
+	
+	public boolean removeXTCD(List<T_XT_CD> cdList){
+		for (T_XT_CD t_XT_CD : cdList) {
+			xtcdRepository.delete(t_XT_CD.getCdbs());
+		}
+		
 		return true;
 	}
 }
