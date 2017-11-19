@@ -2,6 +2,7 @@ Vue.component('ll:datagrid', {
 	props: ['id','datasource'],
 	template : '<table id="{{id}}"></table>',
 	data : function() {
+		var returndata=null;
 		$.ajax({
 			url : datasource,
 			type : "POST",
@@ -58,5 +59,16 @@ Vue.component('ll:datagrid', {
 				alert("error");
 			}
 		});
+		return returndata;
 	}
+})
+
+new Vue({
+  data: {
+    a: 1
+  },
+  created: function () {
+    // `this` 指向 vm 实例
+    console.log('a is: ' + this.a)
+  }
 })

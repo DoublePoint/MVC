@@ -22,7 +22,6 @@
 	charset="utf-8"></script>
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
-	
 	var $element;
 	var $layer;
 	var $form;
@@ -30,8 +29,6 @@
 	var $laydate;
 	var $tree;
 	var $table;
-	
-
 	$element = layui.element; // 导航的hover效果、二级菜单等功能，需要依赖element模块
 	$layer = layui.layer;
 	$form = layui.form;
