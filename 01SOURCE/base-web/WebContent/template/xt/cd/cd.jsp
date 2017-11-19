@@ -22,8 +22,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/base.jsp"%>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/zTree_v3/css/demo.css"
@@ -35,9 +33,6 @@
 	src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>
 <!--  <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
 	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
-<SCRIPT type="text/javascript">
-	
-</SCRIPT>
 </head>
 <body>
 	<div class="layui-row ">
@@ -62,4 +57,7 @@
 	margin: 0px;
 }
 </style>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
+
 </body>

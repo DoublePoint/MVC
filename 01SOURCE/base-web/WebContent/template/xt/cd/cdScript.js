@@ -1,35 +1,33 @@
 function onClickAdd() {
-	layui.use([ 'element', 'layer' ], function() {
-		var element = layui.element; // 导航的hover效果、二级菜单等功能，需要依赖element模块
-		// var layer = layui.layer;
-		var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-		var nodes=treeObj.getSelectedNodes();
-		if(nodes.length==0){
-			alert("请选择父节点");
-			return;
-		}
-		else{
-			cdbs=nodes[0].cdbs;
-		}
-		parent.layer.open({
-			type : 2,
-			title : "添加菜单",
-			area : [ '630px', '360px' ],
-			shade : 0.4,
-			closeBtn : 1,
-			shadeClose : true,
-			maxmin : true,
-			content : $$pageContextPath + '/template/xt/cdDialog'
-		});
+	// var layer = layui.layer;
+	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+	var nodes=treeObj.getSelectedNodes();
+	if(nodes.length==0){
+		alert("请选择父节点");
+		return;
+	}
+	else{
+		cdbs=nodes[0].cdbs;
+	}
+	parent.$layer.open({
+		type : 2,
+		title : "添加菜单",
+		area : [ '630px', '360px' ],
+		shade : 0.4,
+		closeBtn : 1,
+		shadeClose : true,
+		maxmin : true,
+		content : $$pageContextPath + '/template/xt/cdDialog'
 	});
+
 }
 function onClickDelete(){
-	layer.confirm('您是如何看待前端开发？', {
+	$layer.confirm('确定要删除吗？', {
 		  btn: ['确定','取消'] //按钮
 		}, function(){
-			var checkStatus = tableLayui.checkStatus('demo')
+			var checkStatus = $table.checkStatus('demo')
 		     ,data = checkStatus.data;
-		     layer.alert(JSON.stringify(data));
+		     $layer.alert(JSON.stringify(data));
 		     $.ajax({
 		 		url : $$pageContextPath + "/template/xt/cd/cdDelete",
 		 		type : "POST",
@@ -45,7 +43,7 @@ function onClickDelete(){
 		 		}
 		 	});
 		}, function(){
-		  layer.msg('也可以这样', {
+		  $layer.msg('也可以这样', {
 		    time: 20000, //20s后自动关闭
 		    btn: ['明白了', '知道了']
 		  });
@@ -53,15 +51,9 @@ function onClickDelete(){
 	 
 }
 var tabldHeight;
-var tableLayui;
-layui.use([ 'table', 'jquery' ], function() {
-	tableLayui = layui.table;
-	$ = layui.jquery;
-	$(window).on('resize', function() {
-		setData();
-	}).resize();
-
-});
+$(window).on('resize', function() {
+	setData();
+}).resize();
 
 function setData() {
 	var cd = {};
@@ -74,7 +66,7 @@ function setData() {
 		data : JSON.stringify(cd),
 		async : false,
 		success : function(data) {
-			tableLayui.render({
+			$table.render({
 				elem : '#demo',
 				data : data,
 				// height : 'auto',
@@ -164,7 +156,7 @@ function zTreeOnClick(event, treeId, treeNode) {
 		data : JSON.stringify(cd),
 		async : false,
 		success : function(data) {
-			tableLayui.render({
+			$table.render({
 				elem : '#demo',
 				data : data,
 				// height : 'auto',
