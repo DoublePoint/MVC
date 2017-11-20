@@ -39,3 +39,7 @@
 	
 </script>
 <script src="https://unpkg.com/vue"></script>
+<script
+	src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js"
+	charset="utf-8"></script>
+	

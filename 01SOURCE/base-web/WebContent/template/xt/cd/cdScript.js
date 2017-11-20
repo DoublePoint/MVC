@@ -1,13 +1,12 @@
 function onClickAdd() {
 	// var layer = layui.layer;
 	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-	var nodes=treeObj.getSelectedNodes();
-	if(nodes.length==0){
+	var nodes = treeObj.getSelectedNodes();
+	if (nodes.length == 0) {
 		alert("请选择父节点");
 		return;
-	}
-	else{
-		cdbs=nodes[0].cdbs;
+	} else {
+		cdbs = nodes[0].cdbs;
 	}
 	parent.$layer.open({
 		type : 2,
@@ -21,34 +20,34 @@ function onClickAdd() {
 	});
 
 }
-function onClickDelete(){
+function onClickDelete() {
 	$layer.confirm('确定要删除吗？', {
-		  btn: ['确定','取消'] //按钮
-		}, function(){
-			var checkStatus = $table.checkStatus('demo')
-		     ,data = checkStatus.data;
-		     $layer.alert(JSON.stringify(data));
-		     $.ajax({
-		 		url : $$pageContextPath + "/template/xt/cd/cdDelete",
-		 		type : "POST",
-		 		contentType:'application/json;charset=UTF-8',
-		 		dataType : "json",
-		 		data : JSON.stringify(data),
-		 		async : false,
-		 		success : function(data) {
-		 			layer.msg('删除成功');
-		 		},
-		 		error : function() {
-		 			alert("error");
-		 		}
-		 	});
-		}, function(){
-		  $layer.msg('也可以这样', {
-		    time: 20000, //20s后自动关闭
-		    btn: ['明白了', '知道了']
-		  });
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function() {
+		var checkStatus = $table.checkStatus('demo'), data = checkStatus.data;
+		$layer.alert(JSON.stringify(data));
+		$.ajax({
+			url : $$pageContextPath + "/template/xt/cd/cdDelete",
+			type : "POST",
+			contentType : 'application/json;charset=UTF-8',
+			dataType : "json",
+			data : JSON.stringify(data),
+			async : false,
+			success : function(data) {
+				layer.msg('删除成功');
+			},
+			error : function() {
+				alert("error");
+			}
 		});
-	 
+	}, function() {
+		$layer.msg('也可以这样', {
+			time : 20000, // 20s后自动关闭
+			btn : [ '明白了', '知道了' ]
+		});
+	});
+
 }
 var tabldHeight;
 $(window).on('resize', function() {
@@ -73,7 +72,7 @@ function setData() {
 				// height : '400',
 				// height : $("#demo").parent().height(),
 				height : $(window).height() - 40,
-				id:"demo",
+				id : "demo",
 				// height :
 				// $(window).height()-$("#demo").parent().find("layui-btn-group").height(),
 				cols : [ [ // 标题栏
@@ -146,12 +145,12 @@ function filter(treeId, parentNode, childNodes) {
 	return childNodes;
 }
 function zTreeOnClick(event, treeId, treeNode) {
-	var cd={};
-	cd.cdbs=treeNode.cdbs;
+	var cd = {};
+	cd.cdbs = treeNode.cdbs;
 	$.ajax({
 		url : $$pageContextPath + "/template/xt/cdDataList",
 		type : "POST",
-		contentType:'application/json;charset=UTF-8',
+		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
 		data : JSON.stringify(cd),
 		async : false,
@@ -204,8 +203,20 @@ function zTreeOnClick(event, treeId, treeNode) {
 		}
 	});
 
-//	alert(treeNode.cdmc + ", " + treeNode.cdbs);
+	// alert(treeNode.cdmc + ", " + treeNode.cdbs);
 };
 $(document).ready(function() {
 	$.fn.zTree.init($("#treeDemo"), setting);
 });
+
+var datagird22 = new Vue({
+	el : "#lltestdiv",
+	data : {
+		total : 0
+	},
+	methods : {
+		incrementTotal : function() {
+			this.total += 1
+		}
+	}
+})
