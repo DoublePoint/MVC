@@ -35,14 +35,16 @@
 	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
 </head>
 <body>
-	
+
 	<form>
-	
+
 		<div id="lltestdiv">
 			<span>{{total}}</span><br>
-			<ll-datagrid v-on:increment="incrementTotal"
-				datasource="/template/xt/cdDataList" v-bind:cols="todo"></ll-datagrid>
+			<ll-datagrid id="lltestdatagrid" datasource="/template/xt/cdDataList"
+				v-bind:columns="columns"></ll-datagrid>
 		</div>
+
+		<input type="button" value="测试" onclick="clicktest()" />
 	</form>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>

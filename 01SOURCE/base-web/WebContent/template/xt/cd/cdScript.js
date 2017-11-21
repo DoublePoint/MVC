@@ -208,7 +208,41 @@ function zTreeOnClick(event, treeId, treeNode) {
 $(document).ready(function() {
 	$.fn.zTree.init($("#treeDemo"), setting);
 });
-function init(){
-//	alert("执行了init");
+function init() {
+	// alert("执行了init");
 }
 
+function clicktest() {
+	var data = [ {
+		"cdbs" : "381933362605981696",
+		"cdmc" : "菜单管理",
+		"sjcdbs" : "1",
+		"cdcj" : 1,
+		"cdpx" : 1,
+		"gxsj" : null,
+		"cjsj" : null,
+		"childrenCDList" : null,
+		"LAY_TABLE_INDEX" : 0
+	},{
+		"cdbs" : "381933362605981696",
+		"cdmc" : "菜单管理",
+		"sjcdbs" : "1",
+		"cdcj" : 1,
+		"cdpx" : 1,
+		"gxsj" : null,
+		"cjsj" : null,
+		"childrenCDList" : null,
+		"LAY_TABLE_INDEX" : 0
+	} ,{
+		"cdbs" : "381933362605981696",
+		"cdmc" : "菜单管理",
+		"sjcdbs" : "1",
+		"cdcj" : 1,
+		"cdpx" : 1,
+		"gxsj" : null,
+		"cjsj" : null,
+		"childrenCDList" : null,
+		"LAY_TABLE_INDEX" : 0
+	}  ];
+	lltestdatagrid.setData(data,columnsVar);
+}
