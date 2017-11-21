@@ -208,15 +208,7 @@ function zTreeOnClick(event, treeId, treeNode) {
 $(document).ready(function() {
 	$.fn.zTree.init($("#treeDemo"), setting);
 });
+function init(){
+//	alert("执行了init");
+}
 
-var datagird22 = new Vue({
-	el : "#lltestdiv",
-	data : {
-		total : 0
-	},
-	methods : {
-		incrementTotal : function() {
-			this.total += 1
-		}
-	}
-})

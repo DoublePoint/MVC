@@ -35,11 +35,15 @@
 	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
 </head>
 <body>
-	<div id="lltestdiv">
-		<span>{{total}}</span><br>
-		<ll-datagrid  v-on:increment="incrementTotal" datasource="/template/xt/cdDataList"></ll-datagrid>
-	</div>
+	
+	<form>
+	
+		<div id="lltestdiv">
+			<span>{{total}}</span><br>
+			<ll-datagrid v-on:increment="incrementTotal"
+				datasource="/template/xt/cdDataList" v-bind:cols="todo"></ll-datagrid>
+		</div>
+	</form>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
-
 </body>
