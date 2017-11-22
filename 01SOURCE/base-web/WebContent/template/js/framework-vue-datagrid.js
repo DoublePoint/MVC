@@ -1,17 +1,10 @@
-var documentWriteHtml="";
+var documentWriteHtml = "";
 Vue.component('ll-datagrid', {
 	props : [ 'id', 'datasource', 'columns' ],
-	// template : '<table id="tableid"
-	// v-on:click="incrementCounter"><tr><td>{{cdmc}}</td></tr></table>',
-	template : '<span  :id="id+guid"  v-on:click="incrementCounter">{{cdmc}}</span>',
+	template : '<table  :id="id+guid" v-on:click="incrementCounter"></table>',
 	data : function() {
 		var dataList;
 		return {
-			cdbs : "111111111111",
-			cdmc : "菜单管理111111",
-			sjcdbs : "1",
-			cdcj : 1,
-			cdpx : 1,
 			guid : Date.now()
 		}
 	},
@@ -19,8 +12,11 @@ Vue.component('ll-datagrid', {
 		var cd = {};
 		var cols = this.columns;
 		var domId = this.id + this.guid;
-		documentWriteHtml='<script type="text/javascript">var '+this.id+'=new AjaxDataGrid("'+domId+'");</script>';
-		
+		var $script=$('<script type="text/javascript"></script>');
+		$script.append('var '+this.id+'=new AjaxDataGrid("'+ domId + '");');
+		$script.append(this.id+'.datasource="'+this.datasource+'";');
+//		documentWriteHtml = '<script type="text/javascript">var ' + this.id + '=new AjaxDataGrid("' + domId + '");</script>';
+		documentWriteHtml=$script.prop("outerHTML");
 		$.ajax({
 			url : $$pageContextPath + this.datasource,
 			type : "POST",
@@ -35,8 +31,6 @@ Vue.component('ll-datagrid', {
 				alert("error");
 			}
 		});
-		// this.cdmc = this.cdmc + "123";
-		// this.$emit('increment');
 	},
 	methods : {
 		incrementCounter : function() {
@@ -80,30 +74,28 @@ $(document).ready(function() {
 			}
 		}
 	})
-	if(documentWriteHtml!="")
+	if (documentWriteHtml != "")
 		$("body").append(documentWriteHtml);
 	if (init != null)
 		init();
 });
 
-function setAjaxData(id, data, cols) {
-	
-}
-
-var AjaxDataGrid = function(domId) {
-	this.id=domId;
+var AjaxDataGrid = function(domId,cols) {
+	this.id = domId;
+	this.cols = cols;
+	this.datasource="";
 }
 AjaxDataGrid.prototype = {
 	constructor : AjaxDataGrid,
 	init : function(msg) {
 		this.setData();
 	},
-	setData:function(data,cols){
-		setAjaxData(this.id,data,cols);
+	setData : function(data, cols) {
+		setAjaxData(this.id, data, cols);
 	}
 };
 
-function setAjaxData(id,data,cols){
+function setAjaxData(id, data, cols) {
 	$table.render({
 		elem : '#' + id + '',
 		data : data,
@@ -117,3 +109,4 @@ function setAjaxData(id,data,cols){
 	// 每页默认显示的数量
 	});
 }
+
