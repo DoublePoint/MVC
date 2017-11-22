@@ -109,4 +109,3 @@ function setAjaxData(id, data, cols) {
 	// 每页默认显示的数量
 	});
 }
-
