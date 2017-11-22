@@ -10,13 +10,11 @@ Vue.component('ll-datagrid', {
 	},
 	mounted : function() {
 		var cd = {};
-//		var cols = this.columns;
 		var cols = [[]];
 		var domId = this.id + this.guid;
 		var $script=$('<script type="text/javascript"></script>');
 		$script.append('var '+this.id+'=new AjaxDataGrid("'+ domId + '");');
 		$script.append(this.id+'.datasource="'+this.datasource+'";');
-//		documentWriteHtml = '<script type="text/javascript">var ' + this.id + '=new AjaxDataGrid("' + domId + '");</script>';
 		documentWriteHtml=$script.prop("outerHTML");
 		$.ajax({
 			url : $$pageContextPath + this.datasource,
