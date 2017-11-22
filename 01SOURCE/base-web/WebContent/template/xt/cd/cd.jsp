@@ -39,9 +39,7 @@
 	<form>
 
 		<div id="lltestdiv">
-			<span>{{total}}</span><br>
-			<ll-datagrid id="lltestdatagrid" datasource="/template/xt/cdDataList"
-				v-bind:columns="columns"></ll-datagrid>
+			<ll-datagrid id="lltestdatagrid" datasource="/template/xt/cdDataList" v-bind:columns="columns"></ll-datagrid>
 		</div>
 
 		<input type="button" value="测试" onclick="clicktest()" />
