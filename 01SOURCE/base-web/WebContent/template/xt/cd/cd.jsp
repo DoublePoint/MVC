@@ -39,7 +39,7 @@
 	<form>
 
 		<div id="lltestdiv">
-			<ll-datagrid id="lltestdatagrid" datasource="/template/xt/cdDataList" :columns="columns"></ll-datagrid>
+			<ll-datagrid id="lltestdatagrid" datasource="/template/xt/cdDataList"></ll-datagrid>
 		</div>
 
 		<input type="button" value="测试" onclick="clicktest()" />

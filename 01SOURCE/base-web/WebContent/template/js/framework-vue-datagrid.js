@@ -10,7 +10,8 @@ Vue.component('ll-datagrid', {
 	},
 	mounted : function() {
 		var cd = {};
-		var cols = this.columns;
+//		var cols = this.columns;
+		var cols = [[]];
 		var domId = this.id + this.guid;
 		var $script=$('<script type="text/javascript"></script>');
 		$script.append('var '+this.id+'=new AjaxDataGrid("'+ domId + '");');
@@ -37,7 +38,7 @@ Vue.component('ll-datagrid', {
 		}
 	},
 })
-var columnsVar = [ [ // 标题栏
+var columnsVar2 = [ [ // 标题栏
 {
 	checkbox : true,
 	LAY_CHECKED : false
@@ -66,7 +67,7 @@ $(document).ready(function() {
 		el : "form",
 		data : {
 			total : 0,
-			columns : columnsVar
+			columns : columnsVar2
 		},
 		methods : {
 			incrementTotal : function() {
@@ -80,9 +81,9 @@ $(document).ready(function() {
 		init();
 });
 
-var AjaxDataGrid = function(domId,cols) {
+var AjaxDataGrid = function(domId) {
 	this.id = domId;
-	this.cols = cols;
+	this.cols = [[]];
 	this.datasource="";
 }
 AjaxDataGrid.prototype = {
@@ -90,8 +91,11 @@ AjaxDataGrid.prototype = {
 	init : function(msg) {
 		this.setData();
 	},
-	setData : function(data, cols) {
-		setAjaxData(this.id, data, cols);
+	setData : function(data) {
+		setAjaxData(this.id, data, this.cols);
+	},
+	setCols:function(cols){
+		this.cols=cols;
 	}
 };
 

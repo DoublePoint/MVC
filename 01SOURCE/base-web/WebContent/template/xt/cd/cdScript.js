@@ -244,5 +244,6 @@ function clicktest() {
 		"childrenCDList" : null,
 		"LAY_TABLE_INDEX" : 0
 	}  ];
-	lltestdatagrid.setData(data,columnsVar);
+	lltestdatagrid.setCols(columnsVar2);
+	lltestdatagrid.setData(data);
 }
