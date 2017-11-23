@@ -307,10 +307,256 @@
 			</tbody>
 		</table>
 	</div>
-	
+
 	<div class="h2">
-		<span class="property">事件</span> <br />
-		<table class="table"><thead><tr><th>方法名</th> <th>方法说明</th> <th>参数</th> <th>参数说明</th></tr></thead> <tbody><tr><td>addRecord</td> <td>向表格添加数据</td> <td>HyRecord,index</td> <td>HyRecord,index参数可以同时有，也可以都没有，或只有其中的一个)</td></tr> <tr><td>collectData</td> <td>收集数据</td> <td>baseFlag ,dataFlag</td> <td></td></tr> <tr><td>cancelRowChecked</td> <td>取消行选中状态</td> <td>arg,val</td> <td>arg :可以是行号，行对象，列的name；val :当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td></tr> <tr><td>delRecord</td> <td>删除表格中的数据</td> <td>参数可以为HyRecord或index</td> <td></td></tr> <tr><td>exportExcel</td> <td>导出当前页的excel</td> <td></td> <td></td></tr> <tr><td>exportAllExcel</td> <td>导出全部excel</td> <td></td> <td></td></tr> <tr><td>exportPdf</td> <td>导出当前页的pdf</td> <td></td> <td></td></tr> <tr><td>exportAllPdf</td> <td>导出全部的pdf</td> <td></td> <td></td></tr> <tr><td>delCheckedRecords</td> <td>删除表格中的checked数据</td> <td></td> <td></td></tr> <tr><td>getColumnLabel</td> <td>获取表格单元格的显示值</td> <td>arg1：行号或HyRecord   arg2：列的name</td> <td></td></tr> <tr><td>getRecordCount</td> <td>获取表格的记录数</td> <td></td> <td></td></tr> <tr><td>getAllRecords</td> <td>获取表格的所有记录</td> <td></td> <td></td></tr> <tr><td>getAddRecords</td> <td>获取表格添加的数据</td> <td></td> <td></td></tr> <tr><td>getDelRecords</td> <td>获取表格删除的数据</td> <td></td> <td></td></tr> <tr><td>getUpdateRecords</td> <td>获取表格更新的数据</td> <td></td> <td></td></tr> <tr><td>getSelectedRecord</td> <td>获取表格当前选中的记录</td> <td></td> <td></td></tr> <tr><td>getRecordByRowNum</td> <td>根据行号获取record</td> <td>rowIndex</td> <td></td></tr> <tr><td>getIndexOfRecord</td> <td>根据HrRecord获取record在表格中的行号</td> <td></td> <td></td></tr> <tr><td>getRecordType</td> <td>获取HyRecord的类型</td> <td>HyRecord</td> <td>返回值为normal  add update</td></tr> <tr><td>getCheckedRecords</td> <td>获取checked选中的记录，返回HyRecords数组</td> <td></td> <td></td></tr> <tr><td>hiddenColumn</td> <td>显示与隐藏列</td> <td>columnIndex (一开始始列在表格中的索引号) ,hidden(取值为true与false)</td> <td></td></tr> <tr><td>isModified</td> <td>判断当前表格是否已经修改</td> <td>baseFlag ,dataFlag</td> <td></td></tr> <tr><td>isRowChecked</td> <td>判断表格行是否checked选中</td> <td>arg,val</td> <td>arg :可以是行号，行对象，列的name；val :当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td></tr> <tr><td>isValid</td> <td>判断检验是否通过</td> <td>showAlerInfo</td> <td>是否通过alert形式显示检验信息，返回true与false</td></tr> <tr><td>moveRowUp</td> <td>将记录向上移动</td> <td>HyRecord ,interval(间隔)</td> <td></td></tr> <tr><td>moveRowDown</td> <td>将记录向下移动</td> <td>HyRecord ,interval(间隔)</td> <td></td></tr> <tr><td>reset</td> <td>页面提交后台后，将表格重置</td> <td></td> <td></td></tr> <tr><td>setRowDataByRowIndex</td> <td>设置表格一行数据</td> <td>rowIndex   HyRecord</td> <td>rowIndex：行号  ; HyRecord：修改的行记录 ( 如var record = new HyRecord() )</td></tr> <tr><td>setColumnReadonly</td> <td>设置表格一列是否可编辑</td> <td>columnName   flag</td> <td>columnName: 列的name  ;   flag: 是否可编辑，true与false</td></tr> <tr><td>setCellReadonly</td> <td>设置表格一列是否可编辑</td> <td>record   name</td> <td>record： HyRecord记录 ;    name：字段名称 ; flag： true 不可编辑　　false可以编辑</td></tr> <tr><td>setRowReadonly</td> <td>设置表格一列是否可编辑</td> <td>row  flag</td> <td>row  为数组类型，数组元素为行号或record  ; flag　 true或false</td></tr> <tr><td>setClientSort</td> <td>客户端排序</td> <td>columnName,order(ASC、DESC)</td> <td></td></tr> <tr><td>setDynaRowStyle</td> <td>动态设置一行的样式</td> <td>arr  style</td> <td>arr:[行号，行号]或[record，record] ； style: 如 {"background":"#ACC3A7","color":"white"}</td></tr> <tr><td>setDynaCellStyle</td> <td>动态设置一个单元格的样式</td> <td>arr  style</td> <td>arr： 三种格式第一种:[行号，列号]，第二种:[列名称，列值]，第三种:[[行号，列号],[列名称，列值]]；style</td></tr> <tr><td>selectRow</td> <td>动态选中某行</td> <td>arr  val</td> <td>arg :可以是行号，行对象，列的name ；val :当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td></tr> <tr><td>setRowChecked</td> <td>设置行为选中状态</td> <td>arg,val</td> <td>arg :可以是行号，行对象，列的name；val :当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td></tr> <tr><td>setData</td> <td>设置表格的数据</td> <td>后台返回的response.getAjaxDataWrap()</td> <td></td></tr> <tr><td>setTableData</td> <td>客户端设置表格的数据</td> <td>为一数组，数组元素为数据对象</td> <td></td></tr></tbody></table>
+		<span class="property">函数</span> <br />
+		<table class="dataintable">
+			<thead>
+				<tr>
+					<th>方法名</th>
+					<th>方法说明</th>
+					<th>参数</th>
+					<th>参数说明</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>addRecord</td>
+					<td>向表格添加数据</td>
+					<td>HyRecord,index</td>
+					<td>HyRecord,index参数可以同时有，也可以都没有，或只有其中的一个)</td>
+				</tr>
+				<tr>
+					<td>collectData</td>
+					<td>收集数据</td>
+					<td>baseFlag ,dataFlag</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>cancelRowChecked</td>
+					<td>取消行选中状态</td>
+					<td>arg,val</td>
+					<td>arg :可以是行号，行对象，列的name；val
+						:当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td>
+				</tr>
+				<tr>
+					<td>delRecord</td>
+					<td>删除表格中的数据</td>
+					<td>参数可以为HyRecord或index</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>exportExcel</td>
+					<td>导出当前页的excel</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>exportAllExcel</td>
+					<td>导出全部excel</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>exportPdf</td>
+					<td>导出当前页的pdf</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>exportAllPdf</td>
+					<td>导出全部的pdf</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>delCheckedRecords</td>
+					<td>删除表格中的checked数据</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getColumnLabel</td>
+					<td>获取表格单元格的显示值</td>
+					<td>arg1：行号或HyRecord arg2：列的name</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getRecordCount</td>
+					<td>获取表格的记录数</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getAllRecords</td>
+					<td>获取表格的所有记录</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getAddRecords</td>
+					<td>获取表格添加的数据</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getDelRecords</td>
+					<td>获取表格删除的数据</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getUpdateRecords</td>
+					<td>获取表格更新的数据</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getSelectedRecord</td>
+					<td>获取表格当前选中的记录</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getRecordByRowNum</td>
+					<td>根据行号获取record</td>
+					<td>rowIndex</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getIndexOfRecord</td>
+					<td>根据HrRecord获取record在表格中的行号</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>getRecordType</td>
+					<td>获取HyRecord的类型</td>
+					<td>HyRecord</td>
+					<td>返回值为normal add update</td>
+				</tr>
+				<tr>
+					<td>getCheckedRecords</td>
+					<td>获取checked选中的记录，返回HyRecords数组</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>hiddenColumn</td>
+					<td>显示与隐藏列</td>
+					<td>columnIndex (一开始始列在表格中的索引号) ,hidden(取值为true与false)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>isModified</td>
+					<td>判断当前表格是否已经修改</td>
+					<td>baseFlag ,dataFlag</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>isRowChecked</td>
+					<td>判断表格行是否checked选中</td>
+					<td>arg,val</td>
+					<td>arg :可以是行号，行对象，列的name；val
+						:当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td>
+				</tr>
+				<tr>
+					<td>isValid</td>
+					<td>判断检验是否通过</td>
+					<td>showAlerInfo</td>
+					<td>是否通过alert形式显示检验信息，返回true与false</td>
+				</tr>
+				<tr>
+					<td>moveRowUp</td>
+					<td>将记录向上移动</td>
+					<td>HyRecord ,interval(间隔)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>moveRowDown</td>
+					<td>将记录向下移动</td>
+					<td>HyRecord ,interval(间隔)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>reset</td>
+					<td>页面提交后台后，将表格重置</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>setRowDataByRowIndex</td>
+					<td>设置表格一行数据</td>
+					<td>rowIndex HyRecord</td>
+					<td>rowIndex：行号 ; HyRecord：修改的行记录 ( 如var record = new
+						HyRecord() )</td>
+				</tr>
+				<tr>
+					<td>setColumnReadonly</td>
+					<td>设置表格一列是否可编辑</td>
+					<td>columnName flag</td>
+					<td>columnName: 列的name ; flag: 是否可编辑，true与false</td>
+				</tr>
+				<tr>
+					<td>setCellReadonly</td>
+					<td>设置表格一列是否可编辑</td>
+					<td>record name</td>
+					<td>record： HyRecord记录 ; name：字段名称 ; flag： true 不可编辑 false可以编辑</td>
+				</tr>
+				<tr>
+					<td>setRowReadonly</td>
+					<td>设置表格一列是否可编辑</td>
+					<td>row flag</td>
+					<td>row 为数组类型，数组元素为行号或record ; flag true或false</td>
+				</tr>
+				<tr>
+					<td>setClientSort</td>
+					<td>客户端排序</td>
+					<td>columnName,order(ASC、DESC)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>setDynaRowStyle</td>
+					<td>动态设置一行的样式</td>
+					<td>arr style</td>
+					<td>arr:[行号，行号]或[record，record] ； style: 如
+						{"background":"#ACC3A7","color":"white"}</td>
+				</tr>
+				<tr>
+					<td>setDynaCellStyle</td>
+					<td>动态设置一个单元格的样式</td>
+					<td>arr style</td>
+					<td>arr：
+						三种格式第一种:[行号，列号]，第二种:[列名称，列值]，第三种:[[行号，列号],[列名称，列值]]；style</td>
+				</tr>
+				<tr>
+					<td>selectRow</td>
+					<td>动态选中某行</td>
+					<td>arr val</td>
+					<td>arg :可以是行号，行对象，列的name ；val
+						:当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td>
+				</tr>
+				<tr>
+					<td>setRowChecked</td>
+					<td>设置行为选中状态</td>
+					<td>arg,val</td>
+					<td>arg :可以是行号，行对象，列的name；val
+						:当第一个参数为行号或record记录时，该值为空(就是没有该参数)，当第一个参数为列的name,则该参数为一列在某一行中的值</td>
+				</tr>
+				<tr>
+					<td>setData</td>
+					<td>设置表格的数据</td>
+					<td>后台返回的response.getAjaxDataWrap()</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>setTableData</td>
+					<td>客户端设置表格的数据</td>
+					<td>为一数组，数组元素为数据对象</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 
