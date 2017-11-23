@@ -54,6 +54,7 @@ table.dataintable {
     border-collapse: collapse;
     border: 1px solid #aaa;
     min-width: 600px;
+    margin-left:20px;
     width:90%;
 }
 tbody {
