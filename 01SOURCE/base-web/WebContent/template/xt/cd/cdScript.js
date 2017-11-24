@@ -209,7 +209,6 @@ $(document).ready(function() {
 	$.fn.zTree.init($("#treeDemo"), setting);
 });
 function init() {
-	// alert("执行了init");
 }
 
 function clicktest() {
@@ -244,6 +243,6 @@ function clicktest() {
 		"childrenCDList" : null,
 		"LAY_TABLE_INDEX" : 0
 	}  ];
-	lltestdatagrid.setCols(columnsVar2);
+//	lltestdatagrid.setCols(columnsVar2);
 	lltestdatagrid.setData(data);
 }

@@ -12,14 +12,9 @@
 	src="${pageContext.request.contextPath}/template/js/jquery-1.9.1.js"
 	charset="utf-8"></script>
 <script
-	src="${pageContext.request.contextPath}/template/js/framework.js"
-	charset="utf-8"></script>
-<script
 	src="${pageContext.request.contextPath}/template/ftls/ajaxdatagrid/ajaxdatagridtag.js"
 	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/ftls/menu/menutag.js"
-	charset="utf-8"></script>
+
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
 	var $element;
@@ -36,10 +31,28 @@
 	$laydate = layui.laydate;
 	$tree = layui.tree;
 	$table = layui.table;
-	
 </script>
 <script src="https://unpkg.com/vue"></script>
+
 <script
 	src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js"
 	charset="utf-8"></script>
-	
+<script
+	src="${pageContext.request.contextPath}/template/js/framework-vue-datagridrow.js"
+	charset="utf-8"></script>
+<script
+	src="${pageContext.request.contextPath}/template/js/framework-jquery.js"
+	charset="utf-8"></script>
+<script
+	src="${pageContext.request.contextPath}/template/js/framework-model.js"
+	charset="utf-8"></script>
+<script
+	src="${pageContext.request.contextPath}/template/js/framework-constant.js"
+	charset="utf-8"></script>
+<script
+	src="${pageContext.request.contextPath}/template/js/framework-vue-init.js"
+	charset="utf-8"></script>
+<script
+	src="${pageContext.request.contextPath}/template/ftls/menu/menutag.js"
+	charset="utf-8"></script>
+

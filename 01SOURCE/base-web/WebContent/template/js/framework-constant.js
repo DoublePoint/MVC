@@ -1,0 +1,5 @@
+var AjaxDataGridConstant={
+		DEFAULT_COLUMN_WIDTH:180,
+		DEFAULT_COLUMN_SORT:false,
+		DEFAULT_COLUMN_FIXED:false,
+};
