@@ -1,28 +1,17 @@
-blockquote,body,button,dd,div,dl,dt,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,td,textarea,th,ul
-{
-	margin:0;
-	padding:0;
-	-webkit-tap-highlight-color:rgba(0,0,0,0);
-	font-family: PingFangSC-Regular, Verdana, Arial, 'Î¢ÈíÑÅºÚ','ËÎÌå';
-	font-size:12px;
-}
-body{
-	background-color:#F9F9F9;
-	padding:10px;
-	}
-	a:hover {
+
+.span9 a:hover {
     text-decoration: none;
     color: #ff0000;
     background: transparent;
     border-bottom: 1px solid #ff0000;
 }
-a:link, a:visited {
+.span9 a:link, .span9 a:visited {
     text-decoration: none;
     color: #900b09;
     background: transparent;
     border-bottom: 1px solid #900b09;
 }
-.h1{
+.span9 .h1{
 	border:0px solid #00F;
 	border-left:5px solid #009688;
 	height:50px;
@@ -30,26 +19,26 @@ a:link, a:visited {
 	padding-left:5px;
 	font-size:30px;
 	font-weight:bold;
-	background-color:#F2F2F2;
+	background-color:#F9FAFC;
 	margin-top:20px;
 }
-.h2{
+.span9 .h2{
 	border:0px solid #00F;
 	line-height:30px;
 	padding-left:15px;
-	background-color:#F2F2F2;
+	background-color:#F9FAFC;
 	margin-top:20px;
 	padding-bottom:15px;
 }
-.property{
+.span9 .property{
 	line-height:30px;
 	font-size:16px;
 	font-weight:bold;
 }
-.content{
+.span9 .content{
 	margin-left:20px;
 }
-table.dataintable {
+.span9 table.dataintable {
     margin-top: 15px;
     border-collapse: collapse;
     border: 1px solid #aaa;
@@ -57,20 +46,20 @@ table.dataintable {
     margin-left:20px;
     width:90%;
 }
-tbody {
+.span9 tbody {
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
 }
-table.dataintable tr:nth-child(odd) {
-    background-color: #F5F5F5;
+.span9 table.dataintable tr:nth-child(odd) {
+    background-color: #F9FAFC;
 }
-table.dataintable td {
+.span9 table.dataintable td {
     vertical-align: text-top;
     padding: 6px 15px 6px 6px;
     border: 1px solid #aaa;
 }
-table.dataintable th {
+.span9 table.dataintable th {
     vertical-align: baseline;
     padding: 5px 15px 5px 6px;
     background-color: #3F3F3F;
@@ -78,7 +67,18 @@ table.dataintable th {
     text-align: left;
     color: #fff;
 }
-
 .nav-list li a{
 	padding-left:5px;
+}
+ iframe {
+    width: 100%;
+    border: 0;
+    height: 100%;
+}
+
+.ahover{
+	color: #20a0ff;
+}
+.row{
+	width:1200px;
 }

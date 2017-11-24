@@ -1,11 +1,6 @@
 $(document).ready(function(){
-	var strFullPath = window.document.location.href;
-	var indexStart=strFullPath.lastIndexOf("/");
-	var indexEnd=strFullPath.lastIndexOf(".");
-	//var documentName=strFullPath.substr(indexStart+1,indexEnd-indexStart-1);
-	var documentName=strFullPath.substr(indexStart+1,indexEnd);
-	var id=documentName.substr(2,documentName.length-2);
-	$("[href='"+documentName+"']").css("color","#20a0ff");
+	writeNavList();
+	setMenuActive();
 });
 
 function writeNavList(){
@@ -19,8 +14,18 @@ function writeNavList(){
 								'	<li><a href="l-AjaxForm.html">&nbsp;&nbsp;AjaxForm</a></li>'+
 								'	<li><a href="l-AjaxTree.html">&nbsp;&nbsp;AjaxTree</a></li>'+
 								'	<li><a href="l-Menu.html">&nbsp;&nbsp;Menu</a></li>'+
-								'</ul>
+								'</ul>'+
 					'</div>';
 	
 	$("#navid").append(html);	
 }
+
+function setMenuActive(){
+	var strFullPath = window.document.location.href;
+	var indexStart=strFullPath.lastIndexOf("/");
+	var indexEnd=strFullPath.lastIndexOf(".");
+	//var documentName=strFullPath.substr(indexStart+1,indexEnd-indexStart-1);
+	var documentName=strFullPath.substr(indexStart+1,indexEnd);
+	var id=documentName.substr(2,documentName.length-2);
+	$("[href='"+documentName+"']").css("color","#20a0ff");
+	}
