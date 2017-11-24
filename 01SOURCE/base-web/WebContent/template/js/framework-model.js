@@ -60,7 +60,7 @@ function AjaxDataGrid(domId) {
 		this.setData();
 	};
 	this.setData = function(data) {
-		setAjaxData(this.id, data, this.cols);
+		$.setLayuiTableData(this.id, data, this.cols);
 	};
 	this.setCols = function(cols) {
 		this.cols = cols;
@@ -83,17 +83,3 @@ function AjaxDataGridColumns(field,title,width,sort,fixed){
 	return this;
 }
 
-function setAjaxData(id, data, cols) {
-	$table.render({
-		elem : '#' + id + '',
-		data : data,
-		height : '400',
-		cols : cols,
-		skin : 'row', // 表格风格
-		even : true,
-		page : true, // 是否显示分页
-		limits : [ 5, 7, 10, 20, 100 ],
-		limit : 50
-	// 每页默认显示的数量
-	});
-}
