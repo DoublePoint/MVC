@@ -11,9 +11,10 @@ Vue.component('ll-ajaxdatagrid', {
 	},
 	mounted:function(){
 		this._initAjaxDataGridData();
+		this._addDefineAjaxDataGridObjectScript();
 	},
 	created : function() {
-		this._addDefineAjaxDataGridObjectScript();
+		
 		this._addAjaxDataGridToMap();
 		
 	},
@@ -32,7 +33,7 @@ Vue.component('ll-ajaxdatagrid', {
 			$script.append('var ' + this.id + '=$.getAjaxDataGrid("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
-//			$("body").append(documentWriteHtml);
+			$("body").append(documentWriteHtml);
 		},
 		_getAjaxDataGridDomId:function(){
 			var _domId = this.id + this.guid;

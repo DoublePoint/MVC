@@ -8,8 +8,8 @@ $(document).ready(function() {
 			}
 		}
 	})
-	if (documentWriteHtml != "")
-		$("body").append(documentWriteHtml);
+//	if (documentWriteHtml != "")
+//		$("body").append(documentWriteHtml);
 	
 	if (init != null)
 		init();

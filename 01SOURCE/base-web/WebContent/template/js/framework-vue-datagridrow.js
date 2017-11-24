@@ -1,4 +1,4 @@
-var documentWriteHtml = "";
+
 Vue.component('ll-gridrow', {
 	props : [ 'field', 'title', 'width', 'sort', 'fixed' ],
 	template : '<th type="hidden" :id="baseId+guid" :field="field" :width="width" :sort="sort" :fixed="fixed"/></th>',
