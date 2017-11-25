@@ -26,7 +26,10 @@
  	.layui-side-scroll{
  		width:200px;
  	}
- 	
+ 	.ztree li span.button.switch{
+ 		width:0px;
+ 		height:0px;
+ 	}
  	
  
  </style>

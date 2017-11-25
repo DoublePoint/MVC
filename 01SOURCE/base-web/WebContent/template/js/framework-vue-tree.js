@@ -42,7 +42,8 @@ Vue.component(ConstantComponentMap._Tree, {
 				view: {
 					showLine: false,
 					fontCss : {"font-size":"30",},
-			showIcon: false
+			showIcon: false,
+			dblClickExpand: true
 				},
 				async : {
 					enable : true,
