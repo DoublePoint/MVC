@@ -40,7 +40,7 @@ Vue.component(ConstantComponentMap._Tree, {
 		_initTreeData : function() {
 			var setting = {
 				view: {
-					showLine: false,
+					showLine: true,
 					fontCss : {"font-size":"30",},
 			showIcon: false,
 			dblClickExpand: true

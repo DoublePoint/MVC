@@ -20,6 +20,13 @@ import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
 public interface XTCDRepository extends JpaRepository<T_XT_CD,String>{
 
 	/**
+	 * 获取子菜单
+	 * @param 上级菜单标识
+	 * @return
+	 */
+	@Query("select cd from T_XT_CD cd order by cd.cdbs,cd.cdpx")
+	public List<T_XT_CD> findAllXTCD(); 
+	/**
 	 * 获取最底层菜单
 	 * @return
 	 */

@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.application.template.xt.XTCDQueryService;
@@ -27,15 +28,18 @@ public class XTCDTreeController extends BaseTree {
 	//树根名称
 	private final String rooTreeName="菜单树";
 	//是否显示根
-	private final boolean isHasRoot=true;
+	private boolean isHasRoot=true;
 	
 	@Resource
 	XTCDQueryService xTCDQueryService;
 	
 	@RequestMapping("cdTree")
 	@ResponseBody
-	public List<VT_XT_CD> getCDTree(){
+	public List<VT_XT_CD> getCDTree(@RequestParam(value="isHasRoot",required=false) Boolean aIsHasRoot){
 		List<VT_XT_CD> returnXTCDList;
+		if(aIsHasRoot!=null){
+			isHasRoot=aIsHasRoot;
+		}
 		if(isHasRoot){
 			VT_XT_CD rootCd=new VT_XT_CD();
 			rootCd.setCdmc(rooTreeName);

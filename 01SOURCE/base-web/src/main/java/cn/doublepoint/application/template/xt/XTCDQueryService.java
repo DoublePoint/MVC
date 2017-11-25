@@ -60,4 +60,13 @@ public class XTCDQueryService {
 		List<VT_XT_CD> resultCdList=CommonBeanUtils.copyTo(xtcdList, VT_XT_CD.class);
 		return resultCdList;
 	}
+	/**
+	 * 查询所有菜单
+	 * @return 最底层菜单列表
+	 */
+	public List<VT_XT_CD> findAllXTCD(){
+		List<T_XT_CD> xtcdList=xtcdRepository.findAll();
+		List<VT_XT_CD> resultCdList=CommonBeanUtils.copyTo(xtcdList, VT_XT_CD.class);
+		return resultCdList;
+	}
 }

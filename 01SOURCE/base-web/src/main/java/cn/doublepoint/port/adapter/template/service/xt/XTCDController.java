@@ -45,7 +45,7 @@ public class XTCDController {
 	public List<VT_XT_CD> cdDataList(@RequestBody(required=false) T_XT_CD cd) {
 		List<VT_XT_CD> xtcdLists;
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			xtcdLists= xTCDQueryService.loadXTCD();
+			xtcdLists= xTCDQueryService.findAllXTCD();
 		}
 		else{
 			VT_XT_CD cdQuery=new VT_XT_CD();

@@ -6,7 +6,7 @@
 * 类   说   明 ：系统菜单仓库测试类
 * 
 * 修   改   人：          修   改   日   期：
-*/ 
+*/
 package cn.doublepoint.infrastruture.xt;
 
 import java.sql.Timestamp;
@@ -19,22 +19,27 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.doublepoint.common.util.SnowflakeIdWorker;
 import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.port.adapter.template.persistence.xt.XTCDRepository;
 
-@RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations={"classpath:spring-context.xml"})  
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:spring-context.xml" })
 public class XTCDRepositoryTest {
-	
+
 	@Resource
 	XTCDRepository repository;
-	
+	@Resource
+	SnowflakeIdWorker idworker;
+
 	@Test
-	public void testSaveXTCD(){
-		T_XT_CD cd=new T_XT_CD();
-//		cd.setCdbs(Long.valueOf(2));
-		cd.setCjsj(new Timestamp(100000));
-		cd.setGxsj(new Date());
-		repository.save(cd);
+	public void testSaveXTCD() {
+		for (int i = 0; i < 9; i++) {
+			T_XT_CD cd = new T_XT_CD();
+			cd.setCdbs(idworker.nextId());
+			cd.setCjsj(new Timestamp(100000));
+			cd.setGxsj(new Date());
+			repository.save(cd);
+		}
 	}
 }
