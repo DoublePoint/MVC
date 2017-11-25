@@ -1,20 +1,12 @@
 <%@ taglib prefix="ll" uri="http://ll.taglib/menu"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/template/layui/css/layui.css"
-	media="all">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 
-<script
-	src="${pageContext.request.contextPath}/template/layui/layui.all.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/jquery-1.9.1.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/ftls/ajaxdatagrid/ajaxdatagridtag.js"
-	charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/jquery-1.9.1.js" charset="utf-8"></script>
 
+<script src="${pageContext.request.contextPath}/template/js/framework-constant.js" charset="utf-8"></script>
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
 	var $element;
@@ -34,25 +26,12 @@
 </script>
 <script src="https://unpkg.com/vue"></script>
 
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-vue-datagridrow.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-jquery.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-model.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-constant.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-vue-init.js"
-	charset="utf-8"></script>
-<script
-	src="${pageContext.request.contextPath}/template/ftls/menu/menutag.js"
-	charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-datagridrow.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-tree.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/ftls/menu/menutag.js" charset="utf-8"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>

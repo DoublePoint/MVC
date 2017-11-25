@@ -53,7 +53,7 @@ $.ajax({
 	contentType : 'application/json;charset=UTF-8',
 	async : false,
 	success : function(data) {
-		menu.setData(data);
+//		menu.setData(data);
 	},
 	error : function() {
 		alert("error");

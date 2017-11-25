@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._AjaxDataGrid, {
-	props : [ 'id', 'datasource', 'columns','onrowclick' ],
-	template : '<table  :lay-filter="id+guid"  :id="id+guid" v-on:click="incrementCounter"><slot></slot></table>',
+Vue.component(ConstantComponentMap._AjaxMenu, {
+	props : [ 'id', 'datasource', 'columns' ],
+	template : '<table type="hidden" style="display:none;"   :id="id+guid" v-on:click="incrementCounter"><slot></slot></table>',
 
 	data : function() {
 		var dataList;
@@ -14,7 +14,9 @@ Vue.component(ConstantComponentMap._AjaxDataGrid, {
 		this._addDefineAjaxDataGridObjectScript();
 	},
 	created : function() {
+		
 		this._addAjaxDataGridToMap();
+		
 	},
 	methods : {
 		incrementCounter : function() {
@@ -56,14 +58,6 @@ Vue.component(ConstantComponentMap._AjaxDataGrid, {
 					alert("error");
 				}
 			});
-			var str=this.onrowclick
-			$table.on('tool('+this._getAjaxDataGridDomId()+')', function(obj){
-				if(str==null)
-					return;
-			    var data = obj.data;
-			    $._Eval(str);
-//			    alert(123123123);
-			 });
 		}
 		
 	},

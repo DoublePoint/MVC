@@ -31,33 +31,22 @@
 	type="text/css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>
+<!--  <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
+	  <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>-->
 </head>
 <body>
-	<div class="layui-row ">
-		<div class="layui-col-md2">
-			<ul id="treeDemo" class="ztree"></ul>
-		</div>
-		<div class="layui-col-md10" style="padding-left: 3px;">
-			<div class="layui-btn-group" style="height: 39px; padding-top: 1px;">
-				<button class="layui-btn" onclick="onClickAdd()">增加</button>
-				<button class="layui-btn ">编辑</button>
-				<button class="layui-btn" onclick="onClickDelete()">删除</button>
-			</div>
-			<div style="height: 100%">
-				<table id="demo"></table>
-				<input type="hidden" />
-			</div>
 
+	<form>
+		<div id="lltestdiv">
+			<ll-ajaxdatagrid id="lltestdatagrid" datasource="/template/xt/cdDataList">
+				<ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow>
+				<ll-gridrow field="cdmc" title="菜单名称" ></ll-gridrow>
+				<ll-gridrow field="cdpx" title="菜单排序" ></ll-gridrow>
+				<ll-gridrow field="cdlj" title="菜单链接" ></ll-gridrow>
+			</ll-datagrid>
 		</div>
-	</div>
-	<style>
-.layui-table-view {
-	margin: 0px;
-}
-</style>
+		<input type="button" value="测试" onclick="clicktest()" />
+	</form>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
-<script
-	src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js"
-	charset="utf-8"></script>
 </body>

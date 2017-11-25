@@ -60,7 +60,7 @@ function AjaxDataGrid(domId) {
 		this.setData();
 	};
 	this.setData = function(data) {
-		$.setLayuiTableData(this.id, data, this.cols);
+		$._SetLayuiTableData(this.id, data, this.cols);
 	};
 	this.setCols = function(cols) {
 		this.cols = cols;
@@ -73,12 +73,17 @@ function AjaxDataGrid(domId) {
 	}
 	return	this;
 }
-function AjaxDataGridColumns(field,title,width,sort,fixed){
+function AjaxTree(domId){
+	this.id=domId;
+	return this;
+}
+function AjaxDataGridColumns(field,title,width,sort,fixed,event){
 	this.field = field;
 	this.title = title;
-	this.width = width==null?AjaxDataGridConstant.DEFAULT_COLUMN_WIDTH:width;
-	this.sort  = sort==null?AjaxDataGridConstant.DEFAULT_COLUMN_SORT:sort;
-	this.fixed = fixed==null?AjaxDataGridConstant.DEFAULT_COLUMN_FIXED:fixed;
+	this.event = "CLICK";
+	this.width = width==null?ConstantAjaxDataGrid.DEFAULT_COLUMN_WIDTH:width;
+	this.sort  = sort==null?ConstantAjaxDataGrid.DEFAULT_COLUMN_SORT:sort;
+	this.fixed = fixed==null?ConstantAjaxDataGrid.DEFAULT_COLUMN_FIXED:fixed;
 	
 	return this;
 }

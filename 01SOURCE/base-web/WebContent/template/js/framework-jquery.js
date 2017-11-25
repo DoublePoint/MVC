@@ -1,19 +1,31 @@
 var DoublePoint = {};// 全局对象
 (function($) {
-	var _ajaxDataGridHashTab;
+	var _LayuiObjectHashMap;
 	$.extend({
-		addAjaxDataGrid : function(id, ajaxDataGridObject) {
-			if (_ajaxDataGridHashTab == null)
-				_ajaxDataGridHashTab = new HashTable();
-			if (!_ajaxDataGridHashTab.containsKey(id)) {
-				_ajaxDataGridHashTab.add(id, ajaxDataGridObject);
+		_AddToLayuiObjectHashMap : function(id, obj) {
+			if (_LayuiObjectHashMap == null)
+				_LayuiObjectHashMap = new HashTable();
+			if (!_LayuiObjectHashMap.containsKey(id)) {
+				_LayuiObjectHashMap.add(id, obj);
 			}
 		},
-		getAjaxDataGrid : function(id) {
-			return _ajaxDataGridHashTab == null ? null : _ajaxDataGridHashTab.getValue(id);
+		_Eval:function(fuc){
+			eval(fuc);
 		},
-		setLayuiTableData : function(id, data, cols) {
-			$table.render({
+		_GenerateUUID:function () {
+			var d = new Date().getTime();
+			var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			  var r = (d + Math.random()*16)%16 | 0;
+			  d = Math.floor(d/16);
+			  return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+			});
+			return uuid;
+		},
+		_GetFromLayuiObjectHashMap : function(id) {
+			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
+		},
+		_SetLayuiTableData : function(id, data, cols) {
+			var ss=$table.render({
 				elem : '#' + id + '',
 				data : data,
 				height : '400',
@@ -25,6 +37,7 @@ var DoublePoint = {};// 全局对象
 				limit : 50
 			// 每页默认显示的数量
 			});
+			return ss;
 		}
 	});
 

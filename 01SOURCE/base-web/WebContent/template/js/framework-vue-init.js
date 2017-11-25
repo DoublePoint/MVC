@@ -7,10 +7,13 @@ $(document).ready(function() {
 				this.total += 1
 			}
 		}
-	})
+	});
+	
+
+	
 //	if (documentWriteHtml != "")
 //		$("body").append(documentWriteHtml);
 	
-	if (init != null)
-		init();
+//	if (init != null)
+//		init();
 });
