@@ -182,7 +182,7 @@ a {
 							href="http://beginner.zhengjinfan.cn/demo/beginner_admin/"> <span
 							style="font-size: 22px;">基础设施系统</span>
 						</a>
-						<div class="admin-side-toggle">
+						<div id="admin-side-toggle" class="admin-side-toggle">
 							<i class="fa fa-bars" aria-hidden="true" style="margin-top: 7px;"></i>
 						</div>
 					</div>

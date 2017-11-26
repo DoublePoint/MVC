@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
 Vue.component(ConstantComponentMap._AjaxMenu, {
-	props : [ 'id', 'datasource', 'columns' ],
-	template : ' <ul :id="id+guid" class="navMenu"></ul>',
+	props : [ 'id', 'datasource', 'columns','onmenuclick' ],
+	template : ' <ul :id="id+guid" lay-filter="side" class="navMenu"></ul>',
 
 	data : function() {
 		return {
@@ -11,6 +11,7 @@ Vue.component(ConstantComponentMap._AjaxMenu, {
 	mounted : function() {
 		this._initAjaxMenuData();
 		this._addDefineAjaxMenuObjectScript();
+		this._initMenuClick();
 	},
 	created : function() {
 		this._addAjaxMenuToMap();
@@ -36,6 +37,40 @@ Vue.component(ConstantComponentMap._AjaxMenu, {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
+		_initMenuClick:function(){
+			$('.navMenu li a').on('click', function() {
+				var parent = $(this).parent().parent();// 获取当前页签的父级的父级
+				var labeul = $(this).parent("li").find(">ul")
+				if ($(this).parent().hasClass('open') == false) {
+					// 展开未展开
+					parent.find('ul').slideUp(300);
+					parent.find("li").removeClass("open")
+					parent.find('li a').removeClass("active").find(".arrow").removeClass("open")
+					$(this).parent("li").addClass("open").find(labeul).slideDown(300);
+					$(this).addClass("active").find(".arrow").addClass("open")
+				} else {
+					$(this).parent("li").removeClass("open").find(labeul).slideUp(300);
+					if ($(this).parent().find("ul").length > 0) {
+						$(this).removeClass("active").find(".arrow").removeClass("open")
+					} else {
+						$(this).addClass("active")
+					}
+				}
+				var href=$(this).attr("menuhref");
+				
+				$layer.msg($(this).text());
+				// 新增一个Tab项
+				$element.tabAdd('admin-tab', {
+					title : $(this).text(), // 用于演示
+					content : '<iframe src="'+href+'"></iframe>',
+					id : $(this).text()
+				// 实际使用一般是规定好的id，这里以时间戳模拟下
+				});
+				// 切换到指定Tab项
+				$element.tabChange('admin-tab', $(this).text()); // 切换到：用户管理
+				
+			});
+		},
 		_initAjaxMenuData : function() {
 			var cd = {};
 			var domId = this._getAjaxMenuDomId();
@@ -51,26 +86,7 @@ Vue.component(ConstantComponentMap._AjaxMenu, {
 					var _AjaxMenu = $._GetFromLayuiObjectHashMap(domId);
 					_AjaxMenu.setData(data);
 					// $._SetLayuiTableData(domId, data, cols);
-					$('.navMenu li a').on('click', function() {
-						var parent = $(this).parent().parent();// 获取当前页签的父级的父级
-						var labeul = $(this).parent("li").find(">ul")
-						if ($(this).parent().hasClass('open') == false) {
-							// 展开未展开
-							parent.find('ul').slideUp(300);
-							parent.find("li").removeClass("open")
-							parent.find('li a').removeClass("active").find(".arrow").removeClass("open")
-							$(this).parent("li").addClass("open").find(labeul).slideDown(300);
-							$(this).addClass("active").find(".arrow").addClass("open")
-						} else {
-							$(this).parent("li").removeClass("open").find(labeul).slideUp(300);
-							if ($(this).parent().find("ul").length > 0) {
-								$(this).removeClass("active").find(".arrow").removeClass("open")
-							} else {
-								$(this).addClass("active")
-							}
-						}
-
-					});
+					
 				},
 				error : function() {
 					alert("error");

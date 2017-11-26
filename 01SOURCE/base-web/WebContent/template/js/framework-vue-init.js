@@ -14,6 +14,6 @@ $(document).ready(function() {
 //	if (documentWriteHtml != "")
 //		$("body").append(documentWriteHtml);
 	
-//	if (init != null)
-//		init();
+	if (init != null)
+		init();
 });

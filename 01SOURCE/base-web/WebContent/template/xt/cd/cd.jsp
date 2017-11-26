@@ -30,9 +30,9 @@
 			</div>
 			<div class="layui-col-md10" style="padding-left: 3px;">
 				<div class="layui-btn-group" style="height: 39px; padding-top: 1px;">
-					<button class="layui-btn" onclick="onClickAdd()">增加</button>
-					<button class="layui-btn ">编辑</button>
-					<button class="layui-btn" onclick="onClickDelete()">删除</button>
+					<input type="button" class="layui-btn" onclick="onClickAdd()" value="增加"/>
+					<input type="button" class="layui-btn " value="编辑"/>
+					<input type="button" class="layui-btn" onclick="onClickDelete()" value="删除"/>
 				</div>
 				<div style="height: 100%">
 					<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" datasource="/template/xt/cdDataList"> 

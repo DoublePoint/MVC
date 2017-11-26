@@ -83,7 +83,15 @@ public class VT_XT_CD extends BaseEntity {
 	public void setCdpx(Integer cdpx) {
 		this.cdpx = cdpx;
 	}
-
+	private Integer cdlj; //菜单链接                                                
+    
+	public Integer getCdlj() {                                            
+		return cdlj;                                                     
+	}                                                                
+                                                                  
+	public void setCdlj(Integer cdlj) {                                     
+		this.cdlj = cdlj;                                                  
+	}       
 	private Date gxsj; // 更新时间
 
 	public Date getGxsj() {

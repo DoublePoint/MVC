@@ -1,7 +1,7 @@
 function onClickAdd() {
 	// var layer = layui.layer;
 	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-	var nodes = treeObj.getSelectedNodes();
+	var nodes = treeDemo.getSelectedNodes();
 	if (nodes.length == 0) {
 		alert("请选择父节点");
 		return;
@@ -18,7 +18,7 @@ function onClickAdd() {
 		maxmin : true,
 		content : $$pageContextPath + '/template/xt/cdDialog'
 	});
-
+	return false;
 }
 function onClickDelete() {
 	$layer.confirm('确定要删除吗？', {

@@ -75,6 +75,15 @@ function AjaxDataGrid(domId) {
 }
 function AjaxTree(domId) {
 	this.id = domId;
+	this.treeObject=null;
+	this.getTreeObject=function(){
+		if(this.treeObject==null)
+			treeObject=$.fn.zTree.getZTreeObj(this.id);
+		return treeObject;
+	}
+	this.getSelectedNodes=function(){
+		return this.getTreeObject().getSelectedNodes();
+	}
 	return this;
 }
 function AjaxDataGridColumns(field, title, width, sort, fixed, event) {
@@ -96,6 +105,7 @@ function AjaxMenu(id) {
 	this.setData = function(data) {
 		$("#"+id).empty();
 		$("#"+id).append(this.getHtml(data));
+		
 	};
 
 	this.getChildrenMenuHtml = function(menu) {
@@ -103,10 +113,11 @@ function AjaxMenu(id) {
 		if (menu.childrenCDList == null || menu.childrenCDList.length <= 0) {
 			var $a = $("<a></a>");
 			$a.attr("class", "afinve");
+			$a.attr("onclick", "javascript:return false;");
 			if (menu.cdlj == null || menu.cdlj == "")
-				$a.attr("href", "#");
+				$a.attr("menuhref", "#");
 			else
-				$a.attr("href", menu.cdlj);
+				$a.attr("menuhref", menu.cdlj);
 			if (menu.cdtb != null && menu.cdtb != "") {
 				var $i = $("<i></i>");
 				$i.attr("class", "");
@@ -125,9 +136,9 @@ function AjaxMenu(id) {
 			var $a = $("<a></a>");
 			$a.attr("class", "afinve");
 			if (menu.cdlj == null || menu.cdlj == "")
-				$a.attr("href", "#");
+				$a.attr("menuhref", "#");
 			else
-				$a.attr("href", menu.cdlj);
+				$a.attr("menuhref", menu.cdlj);
 			if (menu.cdtb != null && menu.cdtb != "") {
 				var $i = $("<i></i>");
 				$i.attr("class", "");
@@ -160,14 +171,10 @@ function AjaxMenu(id) {
 		if (data == null || data.length <= 0)
 			return;
 
-//		var $ul = $("<ul></ul>");
-//		$ul.attr("class", navMenu);
-
 		var str = "";
 		for (var i = 0; i < data.length; i++) {
 			str = str + this.getChildrenMenuHtml(data[i]);
 		}
-//		$ul.append(str);
 		return str;
 	}
 	return this;
