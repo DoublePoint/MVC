@@ -9,4 +9,7 @@ var ConstantComponentMap={
 		_AjaxMenu:"ll-menu",
 		_AjaxForm:"ll-ajaxform",
 		_Tree:"ll-tree",
+		_LayOut:"ll-layout",
+		_LayOutFieldH:"ll-layoutfieldh",
+		_LayOutFieldV:"ll-layoutfieldv"
 };

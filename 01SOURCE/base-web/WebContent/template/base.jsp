@@ -25,7 +25,9 @@
 	$table = layui.table;
 </script>
 <script src="https://unpkg.com/vue"></script>
-
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-layout.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutfield-h.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutfield-v.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-datagridrow.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tree.js" charset="utf-8"></script>
