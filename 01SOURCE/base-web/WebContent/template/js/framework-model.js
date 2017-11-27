@@ -60,7 +60,17 @@ function AjaxDataGrid(domId) {
 		this.setData();
 	};
 	this.setData = function(data) {
-		$._SetLayuiTableData(this.id, data, this.cols);
+		var parentHeight=$("#"+this.id).parent().height();
+		var allChildFixHeight=0;
+		var brother=$("#"+this.id).parent().parent().children();
+		var parentId=$("#"+this.id).parent()[0].id;
+		for(var i=0;i<brother.length;i++){
+			if(brother[i].id!=parentId){
+				allChildFixHeight+=brother[i].scrollHeight;
+			}
+		}
+		var thisResultHeight=$("#"+this.id).parent().parent().height()-allChildFixHeight;
+		$._SetLayuiTableData(this.id, data, this.cols,thisResultHeight);
 	};
 	this.setCols = function(cols) {
 		this.cols = cols;

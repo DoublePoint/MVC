@@ -24,11 +24,11 @@ var DoublePoint = {};// 全局对象
 		_GetFromLayuiObjectHashMap : function(id) {
 			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
 		},
-		_SetLayuiTableData : function(id, data, cols) {
+		_SetLayuiTableData : function(id, data, cols,height) {
 			var ss=$table.render({
 				elem : '#' + id + '',
 				data : data,
-				height : '400',
+				height : height,
 				cols : cols,
 				skin : 'row', // 表格风格
 				even : true,

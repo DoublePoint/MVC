@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/css/framework.css" type="text/css">
 <script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/jquery-1.9.1.js" charset="utf-8"></script>
 

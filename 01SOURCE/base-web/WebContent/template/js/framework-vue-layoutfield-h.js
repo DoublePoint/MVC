@@ -17,23 +17,25 @@ Vue.component(ConstantComponentMap._LayOutFieldH, {
 		var children = $("#" + id).parent().children();
 		if (children.length <= 0)
 			return;
-		this.layOutHeight=100/ (children.length)+"%";
-		this.layOutWidth='100%';
-//		var id = this._getAjaxDataGridDomId();
-//		var parentWidth = $("#" + id).parent().width();
-//		var parentheight = $("#" + id).parent().height();
-
-//		$("#" + id).width(parentWidth);
-//
+		if(this.layOutHeight.toString().indexOf("px")!=-1)
+			this.layOutHeight=this.layOutHeight;
+		else if(this.layOutHeight.toString().indexOf("%")!=-1){
+			this.layOutHeight=this.layOutHeight;
+		}
+		else if(this.layOutHeight.toString().indexOf("*")!=-1){
+			var allChildFixHeight=0;
+			for(var i=0;i<children.length;i++){
+				if(children[i].id!=id){
+					allChildFixHeight+=children[i].scrollHeight;
+				}
+			}
+			this.layOutHeight=(parentheight-allChildFixHeight).toString()+"px";
+		}
+		
+		$("#" + id).width("100%");
 
 	},
 	created : function() {
-//		var id = this._getAjaxDataGridDomId();
-//		var parentWidth = $("#" + id).parent().width();
-//		var parentheight = $("#" + id).parent().height();
-//		
-//		this.height=parentheight;
-//		this.width=parentWidth;
 	},
 	methods : {
 		incrementCounter : function() {

@@ -30,6 +30,7 @@ function init(){
 		$content.find('iframe').each(function() {
 			bodyHeight = $content.height();
 			$(this).height($content.height());
+			$(this).contents().find("form").height($content.height());
 		});
 	}).resize();
 }

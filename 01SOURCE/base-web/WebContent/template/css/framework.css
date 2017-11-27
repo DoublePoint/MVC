@@ -1,0 +1,14 @@
+html,body,form {
+	height: 100%;
+	width: 100%;
+}
+
+.layui-col-md0, .layui-col-md1, .layui-col-md2, .layui-col-md3,
+	.layui-col-md4, .layui-col-md5, .layui-col-md6, .layui-col-md7,
+	.layui-col-md8, .layui-col-md9, .layui-col-md10, .layui-col-md11,
+	.layui-col-md12 {
+	height: 100%;
+}
+.lllayout{
+	clear:both;
+}

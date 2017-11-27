@@ -110,8 +110,8 @@ a {
 
 .navMenu>li>a.active, .navMenu>li>a:hover {
 	color: #FFF;
-	border-left: 2px solid blue;
-	
+	border-left: 2px solid #1AA094;
+	cursor:pointer;
 }
 
 .navMenu>li>ul.sub-menu, .navMenu>li>ul.sub-menu>li>ul.sub-menu {
@@ -149,12 +149,14 @@ a {
 .navMenu>li>ul.sub-menu li>a:hover, .navMenu>li>ul.sub-menu>li.active>a
 	{
 	color: #FFF;
-	border-left: 2px solid blue;
+	border-left: 2px solid #1AA094;
+	cursor:pointer;
 }
 
 .navMenu>li>ul.sub-menu li>a.active {
-	border-left: 2px solid blue;
-	/* background: blue; */
+	border-left: 2px solid #1AA094;
+	cursor:pointer;
+	/* background: #1AA094; */
 }
 
 .icon_1:before {

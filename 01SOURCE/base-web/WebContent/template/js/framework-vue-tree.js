@@ -48,7 +48,7 @@ Vue.component(ConstantComponentMap._Tree, {
 				async : {
 					enable : true,
 					showLine:false,
-					url : $$pageContextPath + "/template/xt/cdTree",
+					url : $$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
 					autoParam : [ "id", "name=n", "level=lv" ],
 					otherParam : {
 						"otherParam" : "zTreeAsyncTest"

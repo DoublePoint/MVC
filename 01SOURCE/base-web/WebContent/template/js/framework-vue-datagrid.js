@@ -62,7 +62,6 @@ Vue.component(ConstantComponentMap._AjaxDataGrid, {
 					return;
 			    var data = obj.data;
 			    $._Eval(str);
-//			    alert(123123123);
 			 });
 		}
 		

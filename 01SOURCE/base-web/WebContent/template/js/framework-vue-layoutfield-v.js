@@ -9,16 +9,16 @@ Vue.component(ConstantComponentMap._LayOutFieldV, {
 		}
 	},
 	mounted : function() {
-		var id = this._getAjaxDataGridDomId();
-		var parentWidth = $("#" + id).parent().width();
-		var parentheight = $("#" + id).parent().height();
-
-		$("#" + id).height(parentheight);
-
-		var children = $("#" + id).parent().children();
-		if (children.length <= 0)
-			return;
-		$("#" + id).width(parentWidth / (children.length));
+//		var id = this._getAjaxDataGridDomId();
+//		var parentWidth = $("#" + id).parent().width();
+//		var parentheight = $("#" + id).parent().height();
+//
+//		$("#" + id).height(parentheight);
+//
+//		var children = $("#" + id).parent().children();
+//		if (children.length <= 0)
+//			return;
+//		$("#" + id).width(parentWidth / (children.length));
 	},
 	created : function() {
 	},

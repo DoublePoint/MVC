@@ -27,20 +27,15 @@ import cn.doublepoint.domain.model.viewmodel.xt.VT_XT_CD;
 public class XTCDTreeController extends BaseTree {
 	//树根名称
 	private final String rooTreeName="菜单树";
-	//是否显示根
-	private boolean isHasRoot=true;
-	
+
 	@Resource
 	XTCDQueryService xTCDQueryService;
 	
 	@RequestMapping("cdTree")
 	@ResponseBody
-	public List<VT_XT_CD> getCDTree(@RequestParam(value="isHasRoot",required=false) Boolean aIsHasRoot){
+	public List<VT_XT_CD> getCDTree(@RequestParam(required=false) Boolean isHasRoot){
 		List<VT_XT_CD> returnXTCDList;
-		if(aIsHasRoot!=null){
-			isHasRoot=aIsHasRoot;
-		}
-		if(isHasRoot){
+		if(isHasRoot!=null&&isHasRoot.booleanValue()){
 			VT_XT_CD rootCd=new VT_XT_CD();
 			rootCd.setCdmc(rooTreeName);
 			returnXTCDList=new ArrayList<VT_XT_CD>();
