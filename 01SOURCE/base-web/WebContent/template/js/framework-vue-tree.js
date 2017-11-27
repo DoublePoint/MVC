@@ -70,3 +70,18 @@ Vue.component(ConstantComponentMap._Tree, {
 
 	},
 })
+
+
+function AjaxTree(domId) {
+	this.id = domId;
+	this.treeObject=null;
+	this.getTreeObject=function(){
+		if(this.treeObject==null)
+			treeObject=$.fn.zTree.getZTreeObj(this.id);
+		return treeObject;
+	}
+	this.getSelectedNodes=function(){
+		return this.getTreeObject().getSelectedNodes();
+	}
+	return this;
+}

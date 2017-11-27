@@ -1,6 +1,9 @@
 var DoublePoint = {};// 全局对象
 (function($) {
+	//html标签Id对应Model键值对
 	var _LayuiObjectHashMap;
+	//浏览器窗口变化时需要重设大小的标签
+	var _RegisteredModel;
 	$.extend({
 		_AddToLayuiObjectHashMap : function(id, obj) {
 			if (_LayuiObjectHashMap == null)
@@ -24,6 +27,14 @@ var DoublePoint = {};// 全局对象
 		_GetFromLayuiObjectHashMap : function(id) {
 			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
 		},
+		_RegisterResizeModel:function(model){
+			if(_RegisteredModel==null)
+				_RegisteredModel=new Array();
+			_RegisteredModel.push(model);
+		},
+		_GetRegisteredResizeModel:function(){
+			return _RegisteredModel;
+		},
 		_SetLayuiTableData : function(id, data, cols,height) {
 			var ss=$table.render({
 				elem : '#' + id + '',
@@ -38,7 +49,7 @@ var DoublePoint = {};// 全局对象
 			// 每页默认显示的数量
 			});
 			return ss;
-		}
+		},
 	});
 
 })(jQuery)

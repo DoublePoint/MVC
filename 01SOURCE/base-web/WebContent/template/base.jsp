@@ -35,6 +35,5 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/ftls/menu/menutag.js" charset="utf-8"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>

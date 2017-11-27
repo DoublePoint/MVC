@@ -13,9 +13,10 @@ Vue.component(ConstantComponentMap._LayOut, {
 		}
 	},
 	created : function() {
-	
+		this._addFillLayoutToMap();
 	},
 	mounted:function(){
+		this._addDefineFillLayoutObjectScript();
 	},
 	methods : {
 		incrementCounter : function() {
@@ -23,7 +24,27 @@ Vue.component(ConstantComponentMap._LayOut, {
 		_getDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
+		},
+		_addFillLayoutToMap : function() {
+			var domId = this._getDomId();
+			var _FillLayout = new FillLayout(domId);
+			$._AddToLayuiObjectHashMap(domId, _FillLayout);
+		},
+		// 添加生命FillLayout对象脚本
+		_addDefineFillLayoutObjectScript : function() {
+			var domId = this._getDomId();
+			var $script = $('<script type="text/javascript"></script>');
+			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
+			documentWriteHtml = $script.prop("outerHTML");
+			$("body").append(documentWriteHtml);
 		}
-
 	},
 })
+
+
+function FillLayout(id){
+	this.id=id;
+	this.resize=function(){
+		
+	}
+}
