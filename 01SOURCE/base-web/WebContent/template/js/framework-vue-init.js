@@ -12,11 +12,18 @@ $(document).ready(function() {
 	// iframe自适应
 	$(window).on('resize', function() {
 		var $content = $('.admin-nav-card .layui-tab-content');
-		$content.height($(this).height() - 142);
+		$content.height($(this).height() - 145);
 		$content.find('iframe').each(function() {
-			bodyHeight = $content.height();
-			$(this).height($content.height());
-			$(this).contents().find("form").height($content.height());
+//			$(this).contents().find("body").scrollLeft(10);// 控制滚动条下移10px
+//			if ($(this).contents().find("body").scrollLeft() > 0) {
+//				bodyHeight = $content.height()-17;
+//			} else {
+//				bodyHeight = $content.height();
+//			}  
+//			    
+//			
+//			$(this).height(bodyHeight);
+//			$(this).contents().find("form").height(bodyHeight);
 		});
 
 		var registeredModelList = $._GetRegisteredResizeModel();
@@ -25,6 +32,9 @@ $(document).ready(function() {
 				var domObj=registeredModelList[i];
 				domObj.resize();
 			}
+		}
+		if(window.windowResize){
+			windowResize();
 		}
 	}).resize();
 

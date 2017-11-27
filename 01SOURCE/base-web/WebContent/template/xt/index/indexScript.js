@@ -24,7 +24,14 @@ function init(){
 		}
 	});
 }
-var bodyHeight;
+
+function windowResize(){
+	if($('#admin-body').css("left")=='0px')
+		$('#admin-footer').css("left","0");
+	else
+		if($('#admin-body').css("left")=='200px')
+			$('#admin-footer').css("left","200px");
+}
 
 
 

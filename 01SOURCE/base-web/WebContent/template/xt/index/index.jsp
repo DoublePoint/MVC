@@ -111,7 +111,7 @@ a {
 .navMenu>li>a.active, .navMenu>li>a:hover {
 	color: #FFF;
 	border-left: 2px solid #1AA094;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .navMenu>li>ul.sub-menu, .navMenu>li>ul.sub-menu>li>ul.sub-menu {
@@ -137,6 +137,7 @@ a {
 	border-left: 2px solid #1c2229;
 	clear: both;
 }
+
 .navMenu>li>ul>li>ul.sub-menu li>a {
 	display: block;
 	font-size: 16px;
@@ -146,16 +147,17 @@ a {
 	border-left: 2px solid #1c2229;
 	clear: both;
 }
+
 .navMenu>li>ul.sub-menu li>a:hover, .navMenu>li>ul.sub-menu>li.active>a
 	{
 	color: #FFF;
 	border-left: 2px solid #1AA094;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .navMenu>li>ul.sub-menu li>a.active {
 	border-left: 2px solid #1AA094;
-	cursor:pointer;
+	cursor: pointer;
 	/* background: #1AA094; */
 }
 
@@ -173,53 +175,28 @@ a {
 /*---------------------*/
 </style>
 </head>
-<body>
+<body class="layui-layout-body">
 	<form>
-		<div class="layui-layout layui-layout-admin"
-			style="border-bottom: solid 5px #1aa094;">
-			<div class="layui-header header header-demo">
-				<div class="layui-main">
-					<div class="admin-login-box">
-						<a class="logo" style="left: 0;"
-							href="http://beginner.zhengjinfan.cn/demo/beginner_admin/"> <span
-							style="font-size: 22px;">基础设施系统</span>
-						</a>
-						<div id="admin-side-toggle" class="admin-side-toggle">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">基础设施系统</div>
+				<div id="admin-side-toggle" class="admin-side-toggle">
 							<i class="fa fa-bars" aria-hidden="true" style="margin-top: 7px;"></i>
-						</div>
-					</div>
-					<ul class="layui-nav">
-						<li class="layui-nav-item"><a href="">控制台<span
-								class="layui-badge">9</span></a></li>
-						<li class="layui-nav-item"><a href="">个人中心<span
-								class="layui-badge-dot"></span></a></li>
-						<li class="layui-nav-item"><a href="javascript:;"><img
-								src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;">修改信息</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">安全管理</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">退了</a>
-								</dd>
-							</dl></li>
-					</ul>
 				</div>
 			</div>
-			<div class="layui-side layui-bg-white" id="admin-side">
-				<div class="layui-side-scroll" id="admin-navbar-side"
-					lay-filter="side">
-					<ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=false"></ll-menu>
+
+			<div class="layui-side layui-bg-black" id="admin-side" >
+				<div class="layui-side-scroll">
+					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=false"></ll-menu>
 				</div>
 			</div>
-			<div class="layui-body"
-				style="bottom: 0; border-left: solid 2px #1AA094;" id="admin-body">
-				<div class="layui-tab admin-nav-card layui-tab-brief"
+
+			<div class="layui-body" id="admin-body">
+				<!-- 内容主体区域 -->
+				<div class="layui-tab admin-nav-card layui-tab-brief" style="margin:0;"
 					lay-allowclose="true" lay-filter="admin-tab">
-					<ul class="layui-tab-title">
+					<ul class="layui-tab-title" >
 						<li class="layui-this"><i class="fa fa-dashboard"
 							aria-hidden="true"></i> <cite>控制面板</cite><span
 							class="layui-badge">未保存</span></li>
@@ -234,7 +211,8 @@ a {
 					</div>
 				</div>
 			</div>
-			<div class="layui-footer footer footer-demo" id="admin-footer">
+
+			<div class="layui-footer" id="admin-footer">
 				<div class="layui-main">
 					<p>
 						2017 &copy; <a href="http://m.zhengjinfan.cn/">997820126@qq.com/</a>
