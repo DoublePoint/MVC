@@ -48,6 +48,8 @@ Vue.component(ConstantComponentMap._AjaxMenu, {
 					parent.find('li a').removeClass("active").find(".arrow").removeClass("open")
 					$(this).parent("li").addClass("open").find(labeul).slideDown(300);
 					$(this).addClass("active").find(".arrow").addClass("open")
+//					parent.prev("a").css("border-left","5px solid #1c2229");
+					parent.prev("a").removeClass("active")
 				} else {
 					$(this).parent("li").removeClass("open").find(labeul).slideUp(300);
 					if ($(this).parent().find("ul").length > 0) {

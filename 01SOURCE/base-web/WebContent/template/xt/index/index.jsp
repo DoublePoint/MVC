@@ -60,14 +60,14 @@ a {
 	transition: all .3s;
 	position: relative;
 	text-decoration: none;
-	font-size: 17px;
-	border-top: 1px solid #222932;
-	border-bottom: 2px solid #191e24;
-	border-left: 2px solid black;
+	font-size: 15px;
+	/* border-top: 1px solid #222932;
+	border-bottom: 2px solid #191e24; */
+	border-left: 5px solid black;
 }
 
 .navMenu>li:nth-of-type(1)>a {
-	border-top: 1px solid transparent;
+	/* border-top: 1px solid transparent; */
 }
 
 .navMenu>li:last-child>a {
@@ -87,7 +87,7 @@ a {
 	margin-top: 1px;
 	margin-right: 15px;
 	display: inline;
-	font-size: 16px;
+	font-size: 15px;
 	font-family: FontAwesome;
 	height: auto;
 	content: "\f105";
@@ -102,7 +102,7 @@ a {
 	display: inline;
 	font-family: FontAwesome;
 	height: auto;
-	font-size: 16px;
+	font-size: 15px;
 	content: "\f107";
 	font-weight: 300;
 	text-shadow: none;
@@ -110,7 +110,7 @@ a {
 
 .navMenu>li>a.active, .navMenu>li>a:hover {
 	color: #FFF;
-	border-left: 2px solid #1AA094;
+	border-left: 5px solid #1AA094;
 	cursor: pointer;
 }
 
@@ -130,49 +130,37 @@ a {
 
 .navMenu>li>ul.sub-menu li>a {
 	display: block;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 36px;
 	padding-left: 20px;
 	color: #FFF;
-	border-left: 2px solid #1c2229;
+	border-left: 5px solid #1c2229;
 	clear: both;
 }
 
 .navMenu>li>ul>li>ul.sub-menu li>a {
 	display: block;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 36px;
 	padding-left: 30px;
 	color: #FFF;
-	border-left: 2px solid #1c2229;
+	border-left: 5px solid #1c2229;
 	clear: both;
 }
 
 .navMenu>li>ul.sub-menu li>a:hover, .navMenu>li>ul.sub-menu>li.active>a
 	{
 	color: #FFF;
-	border-left: 2px solid #1AA094;
+	border-left: 5px solid #1AA094;
 	cursor: pointer;
 }
 
 .navMenu>li>ul.sub-menu li>a.active {
-	border-left: 2px solid #1AA094;
+	border-left: 5px solid #1AA094;
 	cursor: pointer;
 	/* background: #1AA094; */
 }
 
-.icon_1:before {
-	content: "\f0ac";
-}
-
-.icon_2:before {
-	content: "\f0ac";
-}
-
-.icon_3:before {
-	content: "\f0ac";
-}
-/*---------------------*/
 </style>
 </head>
 <body class="layui-layout-body">
@@ -188,7 +176,7 @@ a {
 			<div class="layui-side layui-bg-black" id="admin-side" >
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=false"></ll-menu>
+					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=true"></ll-menu>
 				</div>
 			</div>
 
