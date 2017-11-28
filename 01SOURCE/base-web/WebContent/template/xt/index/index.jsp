@@ -25,143 +25,7 @@
 	href="${pageContext.request.contextPath}/template/layui/css/global.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
-<style>
-.layui-side-scroll {
-	width: 200px;
-	font-family: "Microsoft YaHei", SimSun, '\5b8b\4f53', sans-serif;
-}
 
-li {
-	list-style: none
-}
-
-a {
-	text-decoration: none;
-}
-/* navMenu */
-.layui-side-scroll {
-	padding: 0px 0;
-	background: #1c2229;
-}
-
-.navMenu>li {
-	display: block;
-	margin: 0;
-	padding: 0;
-	border: 0px;
-}
-
-.navMenu>li>a {
-	display: block;
-	overflow: hidden;
-	padding-left: 10px;
-	line-height: 40px;
-	color: #FFF;
-	transition: all .3s;
-	position: relative;
-	text-decoration: none;
-	font-size: 15px;
-	/* border-top: 1px solid #222932;
-	border-bottom: 2px solid #191e24; */
-	border-left: 5px solid black;
-}
-
-.navMenu>li:nth-of-type(1)>a {
-	/* border-top: 1px solid transparent; */
-}
-
-.navMenu>li:last-child>a {
-	border-bottom: 1px solid transparent;
-}
-
-.navMenu>li>a>i {
-	font-size: 20px;
-	float: left;
-	font-style: normal;
-	margin: 0 5px;
-}
-
-.navMenu li a .arrow:before {
-	display: block;
-	float: right;
-	margin-top: 1px;
-	margin-right: 15px;
-	display: inline;
-	font-size: 15px;
-	font-family: FontAwesome;
-	height: auto;
-	content: "\f105";
-	font-weight: 300;
-	text-shadow: none;
-}
-
-.navMenu li a .arrow.open:before {
-	float: right;
-	margin-top: 1px;
-	margin-right: 15px;
-	display: inline;
-	font-family: FontAwesome;
-	height: auto;
-	font-size: 15px;
-	content: "\f107";
-	font-weight: 300;
-	text-shadow: none;
-}
-
-.navMenu>li>a.active, .navMenu>li>a:hover {
-	color: #FFF;
-	border-left: 5px solid #1AA094;
-	cursor: pointer;
-}
-
-.navMenu>li>ul.sub-menu, .navMenu>li>ul.sub-menu>li>ul.sub-menu {
-	display: none;
-	list-style: none;
-	clear: both;
-	margin: 8px 0px 0px 10px;
-	padding-bottom: 5px;
-}
-
-.navMenu>li>ul.sub-menu li {
-	background: none;
-	margin: 0px;
-	padding: 0px;
-}
-
-.navMenu>li>ul.sub-menu li>a {
-	display: block;
-	font-size: 15px;
-	line-height: 36px;
-	padding-left: 20px;
-	color: #FFF;
-	border-left: 5px solid #1c2229;
-	clear: both;
-}
-
-.navMenu>li>ul>li>ul.sub-menu li>a {
-	display: block;
-	font-size: 15px;
-	line-height: 36px;
-	padding-left: 30px;
-	color: #FFF;
-	border-left: 5px solid #1c2229;
-	clear: both;
-}
-
-.navMenu>li>ul.sub-menu li>a:hover, .navMenu>li>ul.sub-menu>li.active>a
-	{
-	color: #FFF;
-	border-left: 5px solid #1AA094;
-	cursor: pointer;
-}
-
-.navMenu>li>ul.sub-menu li>a.active {
-	border-left: 5px solid #1AA094;
-	cursor: pointer;
-	/* background: #1AA094; */
-}
-
-</style>
 </head>
 <body class="layui-layout-body">
 	<form>
@@ -176,7 +40,7 @@ a {
 			<div class="layui-side layui-bg-black" id="admin-side" >
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=true"></ll-menu>
+					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=false"></ll-menu>
 				</div>
 			</div>
 

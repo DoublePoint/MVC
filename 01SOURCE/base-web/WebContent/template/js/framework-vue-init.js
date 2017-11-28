@@ -38,9 +38,6 @@ $(document).ready(function() {
 		}
 	}).resize();
 
-	// if (documentWriteHtml != "")
-	// $("body").append(documentWriteHtml);
-
 	if (init != null)
 		init();
 });

@@ -122,9 +122,9 @@
 						<br/><span class="llbqsxm">field=</span><span class="llbqsxz">"cdmc"</span> 
 						<br/><span class="llbqsxm">title=</span><span class="llbqsxz">"菜单名称"</span> 
 						<br/><span class="llbqsxm">width=</span><span class="llbqsxz">"120"</span> 
-						<br/><span class="llbqsxm">fix=</span><span class="llbqsxz">"false"</span> 
-						<br/><span class="llbqsxm">sort=</span><span class="llbqsxz">"false"</span> 
-						<br/><span class="llbq">&gt;&lt;/ll-gridrow&gt;</span>
+						<span class="llbqsxm">fix=</span><span class="llbqsxz">"false"</span> 
+						<span class="llbqsxm">sort=</span><span class="llbqsxz">"false"</span> 
+						<span class="llbq">&gt;&lt;/ll-gridrow&gt;</span>
 					</div>
 				</div>
 			</div>

@@ -60,7 +60,11 @@ Vue.component(ConstantComponentMap._AjaxMenu, {
 				}
 				var href = $(this).attr("menuhref");
 
-				$layer.msg($(this).text());
+//				$layer.msg($(this).text());
+				
+				if(href==null||href==""||href=="#"||href=="0"){
+					return;
+				}
 				// 新增一个Tab项
 				$element.tabAdd('admin-tab', {
 					title : $(this).text(), // 用于演示
@@ -70,7 +74,6 @@ Vue.component(ConstantComponentMap._AjaxMenu, {
 				});
 				// 切换到指定Tab项
 				$element.tabChange('admin-tab', $(this).text()); // 切换到：用户管理
-
 			});
 		},
 		_initAjaxMenuData : function() {
