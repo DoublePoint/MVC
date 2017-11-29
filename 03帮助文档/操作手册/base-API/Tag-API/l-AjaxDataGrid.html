@@ -1,564 +1,597 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="l-css/ll-bootstrap.css" rel="stylesheet">
+
 <link href="l-css/all.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-	<div class="h1">
-		<span>AjaxDataGrid</span>
+	<div  id="navbar" class="navbar" >
+			
 	</div>
-	<div class="h2">
-		<span class="property">ËµÃ÷</span> <br />
-		<div class="content">ayui
-			ÊÇÒ»¿î²ÉÓÃ×ÔÉíÄ£¿é¹æ·¶±àĞ´µÄÇé»³¼¶Ç°¶ËUI¿ò¼Ü£¬×ñÑ­Ô­ÉúHTML/CSS/JSµÄÊéĞ´Óë×éÖ¯ĞÎÊ½£¬ÃÅ¼÷¼«µÍ£¬ÄÃÀ´¼´ÓÃ¡£ÆäÍâÔÚ¼«¼ò£¬È´ÓÖ²»Ê§±¥ÂúµÄÄÚÔÚ£¬Ìå»ıÇáÓ¯£¬×é¼ş·áÓ¯£¬´ÓºËĞÄ´úÂëµ½APIµÄÃ¿Ò»´¦Ï¸½Ú¶¼¾­¹ı¾«ĞÄµñ×Á£¬·Ç³£ÊÊºÏ½çÃæµÄ¿ìËÙ¿ª·¢¡£layui
-			Ê×¸ö°æ±¾·¢²¼ÓÚ2016Äê½ğÇï£¬ËıÇø±ğÓÚÄÇĞ©»ùÓÚMVVMµ×²ãµÄUI¿ò¼Ü£¬È´²¢·ÇÄæµÀ¶øĞĞ£¬¶øÊÇĞÅ·î·µè±¹éÕæÖ®µÀ¡£</div>
-	</div>
-	<div class="h2">
-		<span class="property">ÊôĞÔ</span> <br />
-		<table class="dataintable">
-			<tr>
-				<th>²ÎÊı</th>
-				<th>ËµÃ÷</th>
-				<th>ÀàĞÍ</th>
-				<th>¿ÉÑ¡Öµ</th>
-				<th>Ä¬ÈÏÖµ</th>
-			</tr>
-			<tr>
-				<td><a href="#">cols<a></td>
-				<td>ÓĞ¹Ø±í¸ñµÄÁĞÊôĞÔ£¬°üº¬ÁĞ¿í£¬ÁĞ°ó¶¨µÄ×Ö¶Î¡£ÁĞµÄtitle</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><a href="#">datasource<a></td>
-				<td>°ó¶¨µÄºóÌ¨ÇëÇóµØÖ·</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><a href="#">id</a></td>
-				<td>×é¼şid</td>
-				<td></td>
-				<td></td>
-				<td></td>
+	<div class="container">
+		<div class="row">
+			<div id="navid" class="span3">
+				
+			</div>
+			<div class="span9">
+				<div class="h1">
+					<span>AjaxDataGrid</span>
+				</div>
+				<div class="h2">
+					<span class="property">è¯´æ˜</span> <br />
+					<div class="content">ayui
+						æ˜¯ä¸€æ¬¾é‡‡ç”¨è‡ªèº«æ¨¡å—è§„èŒƒç¼–å†™çš„æƒ…æ€€çº§å‰ç«¯UIæ¡†æ¶ï¼Œéµå¾ªåŸç”ŸHTML/CSS/JSçš„ä¹¦å†™ä¸ç»„ç»‡å½¢å¼ï¼Œé—¨æ§›æä½ï¼Œæ‹¿æ¥å³ç”¨ã€‚å…¶å¤–åœ¨æç®€ï¼Œå´åˆä¸å¤±é¥±æ»¡çš„å†…åœ¨ï¼Œä½“ç§¯è½»ç›ˆï¼Œç»„ä»¶ä¸°ç›ˆï¼Œä»æ ¸å¿ƒä»£ç åˆ°APIçš„æ¯ä¸€å¤„ç»†èŠ‚éƒ½ç»è¿‡ç²¾å¿ƒé›•ç¢ï¼Œéå¸¸é€‚åˆç•Œé¢çš„å¿«é€Ÿå¼€å‘ã€‚layui
+						é¦–ä¸ªç‰ˆæœ¬å‘å¸ƒäº2016å¹´é‡‘ç§‹ï¼Œå¥¹åŒºåˆ«äºé‚£äº›åŸºäºMVVMåº•å±‚çš„UIæ¡†æ¶ï¼Œå´å¹¶éé€†é“è€Œè¡Œï¼Œè€Œæ˜¯ä¿¡å¥‰è¿”ç’å½’çœŸä¹‹é“ã€‚</div>
+				</div>
+				<div class="h2">
+					<span class="property">å±æ€§</span> <br />
+					<table class="dataintable">
+						<tr>
+							<th>å‚æ•°</th>
+							<th>è¯´æ˜</th>
+							<th>ç±»å‹</th>
+							<th>å¯é€‰å€¼</th>
+							<th>é»˜è®¤å€¼</th>
+						</tr>
+						<tr>
+							<td><a href="#">cols<a></td>
+							<td>æœ‰å…³è¡¨æ ¼çš„åˆ—å±æ€§ï¼ŒåŒ…å«åˆ—å®½ï¼Œåˆ—ç»‘å®šçš„å­—æ®µã€‚åˆ—çš„title</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="#">datasource<a></td>
+							<td>ç»‘å®šçš„åå°è¯·æ±‚åœ°å€</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="#">id</a></td>
+							<td>ç»„ä»¶id</td>
+							<td></td>
+							<td></td>
+							<td></td>
 
-			</tr>
-			<tr>
-				<td><a href="#">data</a></td>
-				<td>ÏÔÊ¾µÄÊı¾İ</td>
-				<td>array</td>
-				<td>¡ª</td>
-				<td>¡ª</td>
-			</tr>
-			<tr>
-				<td><a href="#">height</a></td>
-				<td>Table µÄ¸ß¶È£¬µ±Ã»ÓĞ¸ÃÊôĞÔÊ±£¬¸ß¶ÈËæ×Å±í¸ñÖĞµÄÄÚÈİ×Ô¶¯±ä»¯¡£Èç¹û height Îª number ÀàĞÍ£¬µ¥Î»
-					px£»Èç¹û height Îª string ÀàĞÍ£¬Ôò Table µÄ¸ß¶ÈÊÜ¿ØÓÚÍâ²¿ÑùÊ½¡£</td>
-				<td>string/number</td>
-				<td>¡ª</td>
-				<td>¡ª</td>
-			</tr>
-			<tr>
-				<td><a href="#">stripe</a></td>
-				<td>ÊÇ·ñÎª°ßÂíÎÆ table</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">border</a></td>
-				<td>ÊÇ·ñ´øÓĞ×İÏò±ß¿ò</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">showheader</a></td>
-				<td>ÊÇ·ñÏÔÊ¾±íÍ·</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">showtooltip</a></td>
-				<td>µ±ÄÚÈİ¹ı³¤±»Òş²ØÊ±ÏÔÊ¾ tooltip</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">showpagebar</a></td>
-				<td>ÊÇ·ñÏÔÊ¾·ÖÒ³¹¤¾ßÀ¸</td>
-				<td>boolean</td>
-				<td>-</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">fixedheight</a></td>
-				<td>ÊÇ·ñ¹Ì¶¨ĞĞ¸ß£¨µ±ÄÚÈİ³¬¹ıµ¥Ôª¸ñÊ±£¬ÊÇ·ñ»»ĞĞ£©</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">titlealign</a></td>
-				<td>±êÌâÀ¸¶ÔÆë·½Ê½</td>
-				<td>String</td>
-				<td>left/center/right</td>
-				<td>left</td>
-			</tr>
-			<tr>
-				<td><a href="#">name</a></td>
-				<td>Ö¸¶¨dataWrapÃû³Æ String</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><a href="#">pagelayout</a></td>
-				<td>×é¼ş²¼¾Ö£¬×Ó×é¼şÃûÓÃ¶ººÅ·Ö¸ô¡£</td>
-				<td>String</td>
-				<td><code>total</code>, <code>sizes</code>, <code>prev</code>,
-					<code>pager</code>, <code>next</code>, <code>jumper</code>,</td>
-				<td>' total¡¢prev, pager, next, jumper'</td>
-			</tr>
-			<tr>
-				<td><a href="#">highlightcurrentrow</a></td>
-				<td>ÊÇ·ñÒª¸ßÁÁµ±Ç°ĞĞ</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td><a href="#">rowclassname</a></td>
-				<td>ĞĞµÄ className µÄ»Øµ÷·½·¨£¬Ò²¿ÉÒÔÊ¹ÓÃ×Ö·û´®ÎªËùÓĞĞĞÉèÖÃÒ»¸ö¹Ì¶¨µÄ className¡£</td>
-				<td>Function(row, index)/String</td>
-				<td>¡ª</td>
-				<td>¡ª</td>
-			</tr>
-			<tr>
-				<td><a href="#">rowstyle</a></td>
-				<td>ĞĞµÄ style µÄ»Øµ÷·½·¨£¬Ò²¿ÉÒÔÊ¹ÓÃÒ»¸ö¹Ì¶¨µÄ Object ÎªËùÓĞĞĞÉèÖÃÒ»ÑùµÄ Style¡£</td>
-				<td>Function(row, index)/Object</td>
-				<td>¡ª</td>
-				<td>¡ª</td>
-			</tr>
-			<tr>
-				<td><a href="#">cellclassname</a></td>
-				<td>µ¥Ôª¸ñµÄ className µÄ»Øµ÷·½·¨£¬Ò²¿ÉÒÔÊ¹ÓÃ×Ö·û´®ÎªËùÓĞµ¥Ôª¸ñÉèÖÃÒ»¸ö¹Ì¶¨µÄ className¡£</td>
-				<td>Function(row, rowIndex,cellIndex)/String</td>
-				<td>¡ª</td>
-				<td>¡ª</td>
-			</tr>
-			<tr>
-				<td><a href="#">cellstyle</a></td>
-				<td>µ¥Ôª¸ñµÄ style µÄ»Øµ÷·½·¨£¬Ò²¿ÉÒÔÊ¹ÓÃÒ»¸ö¹Ì¶¨µÄ Object ÎªËùÓĞµ¥Ôª¸ñÉèÖÃÒ»ÑùµÄ Style¡£</td>
-				<td>Function(row, rowIndex,cellIndex)/Object</td>
-				<td>¡ª</td>
-				<td>¡ª</td>
-			</tr>
-			<tr>
-				<td><a href="#">emptytext</a></td>
-				<td>¿ÕÊı¾İÊ±ÏÔÊ¾µÄÎÄ±¾ÄÚÈİ</td>
-				<td>String</td>
-				<td>¡ª</td>
-				<td>ÔİÎŞÊı¾İ</td>
-			</tr>
-			<tr>
-				<td><a href="#">defaultexpandall</a></td>
-				<td>ÊÇ·ñÄ¬ÈÏÕ¹¿ªËùÓĞĞĞ£¬µ± Table ÖĞ´æÔÚ type="expand" µÄ Column µÄÊ±ºòÓĞĞ§</td>
-				<td>boolean</td>
-				<td>¡ª</td>
-				<td>false</td>
-			</tr>
-			<tr>
-				<td><a href="#">defaultsort</a></td>
-				<td>Ä¬ÈÏµÄÅÅĞòÁĞµÄpropºÍË³Ğò¡£ËüµÄ<code>prop</code>ÊôĞÔÖ¸¶¨Ä¬ÈÏµÄÅÅĞòµÄÁĞ£¬<code>order</code>Ö¸¶¨Ä¬ÈÏÅÅĞòµÄË³Ğò
-				</td>
-				<td>Object</td>
-				<td><code>order</code>: ascending, descending</td>
-				<td>Èç¹ûÖ»Ö¸¶¨ÁË<code>prop</code>, Ã»ÓĞÖ¸¶¨<code>order</code>,
-					ÔòÄ¬ÈÏË³ĞòÊÇascending
-				</td>
-			</tr>
-			<tr>
-				<td><a href="#">supporttoexcel</a></td>
-				<td>ÊÇ·ñµ¼³öexcel</td>
-				<td>boolean</td>
-				<td>-</td>
-				<td>false</td>
-			</tr>
-			<tr>
-				<td><a href="#">supporttoexcelfull</a></td>
-				<td>ÊÇ·ñÈ«²¿µ¼³öexcel</td>
-				<td>boolean</td>
-				<td>-</td>
-				<td>false</td>
-			</tr>
-			<tr>
-				<td><a href="#">supporttopdf</a></td>
-				<td>ÊÇ·ñµ¼³öpdf</td>
-				<td>boolean</td>
-				<td>-</td>
-				<td>false</td>
-			</tr>
-			<tr>
-				<td><a href="#">supporttopdffull</a></td>
-				<td>ÊÇ·ñÈ«²¿µ¼³öpdf</td>
-				<td>boolean</td>
-				<td>-</td>
-				<td>false</td>
-			</tr>
-		</table>
-	</div>
-	<div class="h2">
-		<span class="property">ÊÂ¼ş</span> <br />
-		<table class="dataintable">
-			<thead>
-				<tr>
-					<th>ÊÂ¼şÃû</th>
-					<th>ËµÃ÷</th>
-					<th>²ÎÊı</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>select</td>
-					<td>µ±ÓÃ»§ÊÖ¶¯¹´Ñ¡Êı¾İĞĞµÄ Checkbox Ê±´¥·¢µÄÊÂ¼ş</td>
-					<td>selection(µ±Ç°Ñ¡ÖĞµÄ¼ÇÂ¼£¬ÎªÒ»Êı×é£¬Êı×éµÄÔªËØÎªÒ»¶ÔÏó£¬¶ÔÏóµÄÖµÍ¨¹ı
-						¶ÔÏó.[hy-columnÖĞµÄnameÊôĞÔ] »ñÈ¡), row</td>
-				</tr>
-				<tr>
-					<td>selectall</td>
-					<td>µ±ÓÃ»§ÊÖ¶¯¹´Ñ¡È«Ñ¡ Checkbox Ê±´¥·¢µÄÊÂ¼ş</td>
-					<td>selection</td>
-				</tr>
-				<tr>
-					<td>selectionchange</td>
-					<td>µ±Ñ¡ÔñÏî·¢Éú±ä»¯Ê±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>selection</td>
-				</tr>
-				<tr>
-					<td>cellmouseenter</td>
-					<td>µ±µ¥Ôª¸ñ hover ½øÈëÊ±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>row(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]),<br>
-						column(hy-columnÖĞ¶¨ÒåµÄÊôĞÔ,°üº¬columnIndex) , <br>rowIndex, <br>event
-					</td>
-				</tr>
-				<tr>
-					<td>cellmouseleave</td>
-					<td>µ±µ¥Ôª¸ñ hover ÍË³öÊ±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>row(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]), <br>column(hy-columnÖĞ¶¨ÒåµÄÊôĞÔ,°üº¬columnIndex),<br>
-						event , <br>rowIndex, <br>event
-					</td>
-				</tr>
-				<tr>
-					<td>rowclick</td>
-					<td>µ±Ä³Ò»ĞĞ±»µã»÷Ê±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>row(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]), <br>rowIndex , <br>event
-					</td>
-				</tr>
-				<tr>
-					<td>rowcontextmenu</td>
-					<td>µ±Ä³Ò»ĞĞ±»Êó±êÓÒ¼üµã»÷Ê±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>row(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]), <br>rowIndex , <br>event
-					</td>
-				</tr>
-				<tr>
-					<td>rowdblclick</td>
-					<td>µ±Ä³Ò»ĞĞ±»Ë«»÷Ê±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>row(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]), <br>rowIndex , <br>event
-					</td>
-				</tr>
-				<tr>
-					<td>queryfunc</td>
-					<td>µ¥»÷·ÖÒ³°´Å¥Ê±´¥·¢</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>headerclick</td>
-					<td>µ±Ä³Ò»ÁĞµÄ±íÍ·±»µã»÷Ê±»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>column(hy-columnÖĞ¶¨ÒåµÄÊôĞÔ,°üº¬columnIndex) , <br>event
-					</td>
-				</tr>
-				<tr>
-					<td>currentchange</td>
-					<td>µ±±í¸ñµÄµ±Ç°ĞĞ·¢Éú±ä»¯µÄÊ±ºò»á´¥·¢¸ÃÊÂ¼ş£¬Èç¹ûÒª¸ßÁÁµ±Ç°ĞĞ£¬Çë´ò¿ª±í¸ñµÄ highlightcurrentrow
-						ÊôĞÔ</td>
-					<td>currentRow(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]),<br>
-						oldCurrentRow
-					</td>
-				</tr>
-				<tr>
-					<td>expand</td>
-					<td>µ±ÓÃ»§¶ÔÄ³Ò»ĞĞÕ¹¿ª»òÕß¹Ø±ÕµÄÉÏ»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>row(ĞĞ¶ÔÏó£¬row.[hy-columnÖĞµÄnameÊôĞÔ]), expanded</td>
-				</tr>
-				<tr>
-					<td>sortchange</td>
-					<td>µ±±í¸ñµÄÅÅĞòÌõ¼ş·¢Éú±ä»¯µÄÊ±ºò»á´¥·¢¸ÃÊÂ¼ş</td>
-					<td>column(hy-columnÖĞ¶¨ÒåµÄÊôĞÔ,°üº¬columnIndex),<br> name,
-						order(descending¡¢ascending)
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+						</tr>
+						<tr>
+							<td><a href="#">data</a></td>
+							<td>æ˜¾ç¤ºçš„æ•°æ®</td>
+							<td>array</td>
+							<td>â€”</td>
+							<td>â€”</td>
+						</tr>
+						<tr>
+							<td><a href="#">height</a></td>
+							<td>Table çš„é«˜åº¦ï¼Œå½“æ²¡æœ‰è¯¥å±æ€§æ—¶ï¼Œé«˜åº¦éšç€è¡¨æ ¼ä¸­çš„å†…å®¹è‡ªåŠ¨å˜åŒ–ã€‚å¦‚æœ height ä¸º number
+								ç±»å‹ï¼Œå•ä½ pxï¼›å¦‚æœ height ä¸º string ç±»å‹ï¼Œåˆ™ Table çš„é«˜åº¦å—æ§äºå¤–éƒ¨æ ·å¼ã€‚</td>
+							<td>string/number</td>
+							<td>â€”</td>
+							<td>â€”</td>
+						</tr>
+						<tr>
+							<td><a href="#">stripe</a></td>
+							<td>æ˜¯å¦ä¸ºæ–‘é©¬çº¹ table</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">border</a></td>
+							<td>æ˜¯å¦å¸¦æœ‰çºµå‘è¾¹æ¡†</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">showheader</a></td>
+							<td>æ˜¯å¦æ˜¾ç¤ºè¡¨å¤´</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">showtooltip</a></td>
+							<td>å½“å†…å®¹è¿‡é•¿è¢«éšè—æ—¶æ˜¾ç¤º tooltip</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">showpagebar</a></td>
+							<td>æ˜¯å¦æ˜¾ç¤ºåˆ†é¡µå·¥å…·æ </td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">fixedheight</a></td>
+							<td>æ˜¯å¦å›ºå®šè¡Œé«˜ï¼ˆå½“å†…å®¹è¶…è¿‡å•å…ƒæ ¼æ—¶ï¼Œæ˜¯å¦æ¢è¡Œï¼‰</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">titlealign</a></td>
+							<td>æ ‡é¢˜æ å¯¹é½æ–¹å¼</td>
+							<td>String</td>
+							<td>left/center/right</td>
+							<td>left</td>
+						</tr>
+						<tr>
+							<td><a href="#">name</a></td>
+							<td>æŒ‡å®šdataWrapåç§° String</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="#">pagelayout</a></td>
+							<td>ç»„ä»¶å¸ƒå±€ï¼Œå­ç»„ä»¶åç”¨é€—å·åˆ†éš”ã€‚</td>
+							<td>String</td>
+							<td><code>total</code>, <code>sizes</code>, <code>prev</code>,
+								<code>pager</code>, <code>next</code>, <code>jumper</code>,</td>
+							<td>' totalã€prev, pager, next, jumper'</td>
+						</tr>
+						<tr>
+							<td><a href="#">highlightcurrentrow</a></td>
+							<td>æ˜¯å¦è¦é«˜äº®å½“å‰è¡Œ</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td><a href="#">rowclassname</a></td>
+							<td>è¡Œçš„ className çš„å›è°ƒæ–¹æ³•ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨å­—ç¬¦ä¸²ä¸ºæ‰€æœ‰è¡Œè®¾ç½®ä¸€ä¸ªå›ºå®šçš„ classNameã€‚</td>
+							<td>Function(row, index)/String</td>
+							<td>â€”</td>
+							<td>â€”</td>
+						</tr>
+						<tr>
+							<td><a href="#">rowstyle</a></td>
+							<td>è¡Œçš„ style çš„å›è°ƒæ–¹æ³•ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨ä¸€ä¸ªå›ºå®šçš„ Object ä¸ºæ‰€æœ‰è¡Œè®¾ç½®ä¸€æ ·çš„ Styleã€‚</td>
+							<td>Function(row, index)/Object</td>
+							<td>â€”</td>
+							<td>â€”</td>
+						</tr>
+						<tr>
+							<td><a href="#">cellclassname</a></td>
+							<td>å•å…ƒæ ¼çš„ className çš„å›è°ƒæ–¹æ³•ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨å­—ç¬¦ä¸²ä¸ºæ‰€æœ‰å•å…ƒæ ¼è®¾ç½®ä¸€ä¸ªå›ºå®šçš„ classNameã€‚</td>
+							<td>Function(row, rowIndex,cellIndex)/String</td>
+							<td>â€”</td>
+							<td>â€”</td>
+						</tr>
+						<tr>
+							<td><a href="#">cellstyle</a></td>
+							<td>å•å…ƒæ ¼çš„ style çš„å›è°ƒæ–¹æ³•ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨ä¸€ä¸ªå›ºå®šçš„ Object ä¸ºæ‰€æœ‰å•å…ƒæ ¼è®¾ç½®ä¸€æ ·çš„ Styleã€‚</td>
+							<td>Function(row, rowIndex,cellIndex)/Object</td>
+							<td>â€”</td>
+							<td>â€”</td>
+						</tr>
+						<tr>
+							<td><a href="#">emptytext</a></td>
+							<td>ç©ºæ•°æ®æ—¶æ˜¾ç¤ºçš„æ–‡æœ¬å†…å®¹</td>
+							<td>String</td>
+							<td>â€”</td>
+							<td>æš‚æ— æ•°æ®</td>
+						</tr>
+						<tr>
+							<td><a href="#">defaultexpandall</a></td>
+							<td>æ˜¯å¦é»˜è®¤å±•å¼€æ‰€æœ‰è¡Œï¼Œå½“ Table ä¸­å­˜åœ¨ type="expand" çš„ Column çš„æ—¶å€™æœ‰æ•ˆ</td>
+							<td>boolean</td>
+							<td>â€”</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td><a href="#">defaultsort</a></td>
+							<td>é»˜è®¤çš„æ’åºåˆ—çš„propå’Œé¡ºåºã€‚å®ƒçš„<code>prop</code>å±æ€§æŒ‡å®šé»˜è®¤çš„æ’åºçš„åˆ—ï¼Œ<code>order</code>æŒ‡å®šé»˜è®¤æ’åºçš„é¡ºåº
+							</td>
+							<td>Object</td>
+							<td><code>order</code>: ascending, descending</td>
+							<td>å¦‚æœåªæŒ‡å®šäº†<code>prop</code>, æ²¡æœ‰æŒ‡å®š<code>order</code>,
+								åˆ™é»˜è®¤é¡ºåºæ˜¯ascending
+							</td>
+						</tr>
+						<tr>
+							<td><a href="#">supporttoexcel</a></td>
+							<td>æ˜¯å¦å¯¼å‡ºexcel</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td><a href="#">supporttoexcelfull</a></td>
+							<td>æ˜¯å¦å…¨éƒ¨å¯¼å‡ºexcel</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td><a href="#">supporttopdf</a></td>
+							<td>æ˜¯å¦å¯¼å‡ºpdf</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td><a href="#">supporttopdffull</a></td>
+							<td>æ˜¯å¦å…¨éƒ¨å¯¼å‡ºpdf</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>false</td>
+						</tr>
+					</table>
+				</div>
+				<div class="h2">
+					<span class="property">äº‹ä»¶</span> <br />
+					<table class="dataintable">
+						<thead>
+							<tr>
+								<th>äº‹ä»¶å</th>
+								<th>è¯´æ˜</th>
+								<th>å‚æ•°</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>select</td>
+								<td>å½“ç”¨æˆ·æ‰‹åŠ¨å‹¾é€‰æ•°æ®è¡Œçš„ Checkbox æ—¶è§¦å‘çš„äº‹ä»¶</td>
+								<td>selection(å½“å‰é€‰ä¸­çš„è®°å½•ï¼Œä¸ºä¸€æ•°ç»„ï¼Œæ•°ç»„çš„å…ƒç´ ä¸ºä¸€å¯¹è±¡ï¼Œå¯¹è±¡çš„å€¼é€šè¿‡
+									å¯¹è±¡.[hy-columnä¸­çš„nameå±æ€§] è·å–), row</td>
+							</tr>
+							<tr>
+								<td>selectall</td>
+								<td>å½“ç”¨æˆ·æ‰‹åŠ¨å‹¾é€‰å…¨é€‰ Checkbox æ—¶è§¦å‘çš„äº‹ä»¶</td>
+								<td>selection</td>
+							</tr>
+							<tr>
+								<td>selectionchange</td>
+								<td>å½“é€‰æ‹©é¡¹å‘ç”Ÿå˜åŒ–æ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>selection</td>
+							</tr>
+							<tr>
+								<td>cellmouseenter</td>
+								<td>å½“å•å…ƒæ ¼ hover è¿›å…¥æ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>row(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]),<br>
+									column(hy-columnä¸­å®šä¹‰çš„å±æ€§,åŒ…å«columnIndex) , <br>rowIndex, <br>event
+								</td>
+							</tr>
+							<tr>
+								<td>cellmouseleave</td>
+								<td>å½“å•å…ƒæ ¼ hover é€€å‡ºæ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>row(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]), <br>column(hy-columnä¸­å®šä¹‰çš„å±æ€§,åŒ…å«columnIndex),<br>
+									event , <br>rowIndex, <br>event
+								</td>
+							</tr>
+							<tr>
+								<td>rowclick</td>
+								<td>å½“æŸä¸€è¡Œè¢«ç‚¹å‡»æ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>row(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]), <br>rowIndex , <br>event
+								</td>
+							</tr>
+							<tr>
+								<td>rowcontextmenu</td>
+								<td>å½“æŸä¸€è¡Œè¢«é¼ æ ‡å³é”®ç‚¹å‡»æ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>row(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]), <br>rowIndex , <br>event
+								</td>
+							</tr>
+							<tr>
+								<td>rowdblclick</td>
+								<td>å½“æŸä¸€è¡Œè¢«åŒå‡»æ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>row(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]), <br>rowIndex , <br>event
+								</td>
+							</tr>
+							<tr>
+								<td>queryfunc</td>
+								<td>å•å‡»åˆ†é¡µæŒ‰é’®æ—¶è§¦å‘</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>headerclick</td>
+								<td>å½“æŸä¸€åˆ—çš„è¡¨å¤´è¢«ç‚¹å‡»æ—¶ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>column(hy-columnä¸­å®šä¹‰çš„å±æ€§,åŒ…å«columnIndex) , <br>event
+								</td>
+							</tr>
+							<tr>
+								<td>currentchange</td>
+								<td>å½“è¡¨æ ¼çš„å½“å‰è¡Œå‘ç”Ÿå˜åŒ–çš„æ—¶å€™ä¼šè§¦å‘è¯¥äº‹ä»¶ï¼Œå¦‚æœè¦é«˜äº®å½“å‰è¡Œï¼Œè¯·æ‰“å¼€è¡¨æ ¼çš„
+									highlightcurrentrow å±æ€§</td>
+								<td>currentRow(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]),<br>
+									oldCurrentRow
+								</td>
+							</tr>
+							<tr>
+								<td>expand</td>
+								<td>å½“ç”¨æˆ·å¯¹æŸä¸€è¡Œå±•å¼€æˆ–è€…å…³é—­çš„ä¸Šä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>row(è¡Œå¯¹è±¡ï¼Œrow.[hy-columnä¸­çš„nameå±æ€§]), expanded</td>
+							</tr>
+							<tr>
+								<td>sortchange</td>
+								<td>å½“è¡¨æ ¼çš„æ’åºæ¡ä»¶å‘ç”Ÿå˜åŒ–çš„æ—¶å€™ä¼šè§¦å‘è¯¥äº‹ä»¶</td>
+								<td>column(hy-columnä¸­å®šä¹‰çš„å±æ€§,åŒ…å«columnIndex),<br> name,
+									order(descendingã€ascending)
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-	<div class="h2">
-		<span class="property">º¯Êı</span> <br />
-		<table class="dataintable">
-			<thead>
-				<tr>
-					<th>·½·¨Ãû</th>
-					<th>·½·¨ËµÃ÷</th>
-					<th>²ÎÊı</th>
-					<th>²ÎÊıËµÃ÷</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>addRecord</td>
-					<td>Ïò±í¸ñÌí¼ÓÊı¾İ</td>
-					<td>HyRecord,index</td>
-					<td>HyRecord,index²ÎÊı¿ÉÒÔÍ¬Ê±ÓĞ£¬Ò²¿ÉÒÔ¶¼Ã»ÓĞ£¬»òÖ»ÓĞÆäÖĞµÄÒ»¸ö)</td>
-				</tr>
-				<tr>
-					<td>collectData</td>
-					<td>ÊÕ¼¯Êı¾İ</td>
-					<td>baseFlag ,dataFlag</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>cancelRowChecked</td>
-					<td>È¡ÏûĞĞÑ¡ÖĞ×´Ì¬</td>
-					<td>arg,val</td>
-					<td>arg :¿ÉÒÔÊÇĞĞºÅ£¬ĞĞ¶ÔÏó£¬ÁĞµÄname£»val
-						:µ±µÚÒ»¸ö²ÎÊıÎªĞĞºÅ»òrecord¼ÇÂ¼Ê±£¬¸ÃÖµÎª¿Õ(¾ÍÊÇÃ»ÓĞ¸Ã²ÎÊı)£¬µ±µÚÒ»¸ö²ÎÊıÎªÁĞµÄname,Ôò¸Ã²ÎÊıÎªÒ»ÁĞÔÚÄ³Ò»ĞĞÖĞµÄÖµ</td>
-				</tr>
-				<tr>
-					<td>delRecord</td>
-					<td>É¾³ı±í¸ñÖĞµÄÊı¾İ</td>
-					<td>²ÎÊı¿ÉÒÔÎªHyRecord»òindex</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>exportExcel</td>
-					<td>µ¼³öµ±Ç°Ò³µÄexcel</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>exportAllExcel</td>
-					<td>µ¼³öÈ«²¿excel</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>exportPdf</td>
-					<td>µ¼³öµ±Ç°Ò³µÄpdf</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>exportAllPdf</td>
-					<td>µ¼³öÈ«²¿µÄpdf</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>delCheckedRecords</td>
-					<td>É¾³ı±í¸ñÖĞµÄcheckedÊı¾İ</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getColumnLabel</td>
-					<td>»ñÈ¡±í¸ñµ¥Ôª¸ñµÄÏÔÊ¾Öµ</td>
-					<td>arg1£ºĞĞºÅ»òHyRecord arg2£ºÁĞµÄname</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getRecordCount</td>
-					<td>»ñÈ¡±í¸ñµÄ¼ÇÂ¼Êı</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getAllRecords</td>
-					<td>»ñÈ¡±í¸ñµÄËùÓĞ¼ÇÂ¼</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getAddRecords</td>
-					<td>»ñÈ¡±í¸ñÌí¼ÓµÄÊı¾İ</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getDelRecords</td>
-					<td>»ñÈ¡±í¸ñÉ¾³ıµÄÊı¾İ</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getUpdateRecords</td>
-					<td>»ñÈ¡±í¸ñ¸üĞÂµÄÊı¾İ</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getSelectedRecord</td>
-					<td>»ñÈ¡±í¸ñµ±Ç°Ñ¡ÖĞµÄ¼ÇÂ¼</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getRecordByRowNum</td>
-					<td>¸ù¾İĞĞºÅ»ñÈ¡record</td>
-					<td>rowIndex</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getIndexOfRecord</td>
-					<td>¸ù¾İHrRecord»ñÈ¡recordÔÚ±í¸ñÖĞµÄĞĞºÅ</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>getRecordType</td>
-					<td>»ñÈ¡HyRecordµÄÀàĞÍ</td>
-					<td>HyRecord</td>
-					<td>·µ»ØÖµÎªnormal add update</td>
-				</tr>
-				<tr>
-					<td>getCheckedRecords</td>
-					<td>»ñÈ¡checkedÑ¡ÖĞµÄ¼ÇÂ¼£¬·µ»ØHyRecordsÊı×é</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>hiddenColumn</td>
-					<td>ÏÔÊ¾ÓëÒş²ØÁĞ</td>
-					<td>columnIndex (Ò»¿ªÊ¼Ê¼ÁĞÔÚ±í¸ñÖĞµÄË÷ÒıºÅ) ,hidden(È¡ÖµÎªtrueÓëfalse)</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>isModified</td>
-					<td>ÅĞ¶Ïµ±Ç°±í¸ñÊÇ·ñÒÑ¾­ĞŞ¸Ä</td>
-					<td>baseFlag ,dataFlag</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>isRowChecked</td>
-					<td>ÅĞ¶Ï±í¸ñĞĞÊÇ·ñcheckedÑ¡ÖĞ</td>
-					<td>arg,val</td>
-					<td>arg :¿ÉÒÔÊÇĞĞºÅ£¬ĞĞ¶ÔÏó£¬ÁĞµÄname£»val
-						:µ±µÚÒ»¸ö²ÎÊıÎªĞĞºÅ»òrecord¼ÇÂ¼Ê±£¬¸ÃÖµÎª¿Õ(¾ÍÊÇÃ»ÓĞ¸Ã²ÎÊı)£¬µ±µÚÒ»¸ö²ÎÊıÎªÁĞµÄname,Ôò¸Ã²ÎÊıÎªÒ»ÁĞÔÚÄ³Ò»ĞĞÖĞµÄÖµ</td>
-				</tr>
-				<tr>
-					<td>isValid</td>
-					<td>ÅĞ¶Ï¼ìÑéÊÇ·ñÍ¨¹ı</td>
-					<td>showAlerInfo</td>
-					<td>ÊÇ·ñÍ¨¹ıalertĞÎÊ½ÏÔÊ¾¼ìÑéĞÅÏ¢£¬·µ»ØtrueÓëfalse</td>
-				</tr>
-				<tr>
-					<td>moveRowUp</td>
-					<td>½«¼ÇÂ¼ÏòÉÏÒÆ¶¯</td>
-					<td>HyRecord ,interval(¼ä¸ô)</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>moveRowDown</td>
-					<td>½«¼ÇÂ¼ÏòÏÂÒÆ¶¯</td>
-					<td>HyRecord ,interval(¼ä¸ô)</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>reset</td>
-					<td>Ò³ÃæÌá½»ºóÌ¨ºó£¬½«±í¸ñÖØÖÃ</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>setRowDataByRowIndex</td>
-					<td>ÉèÖÃ±í¸ñÒ»ĞĞÊı¾İ</td>
-					<td>rowIndex HyRecord</td>
-					<td>rowIndex£ºĞĞºÅ ; HyRecord£ºĞŞ¸ÄµÄĞĞ¼ÇÂ¼ ( Èçvar record = new
-						HyRecord() )</td>
-				</tr>
-				<tr>
-					<td>setColumnReadonly</td>
-					<td>ÉèÖÃ±í¸ñÒ»ÁĞÊÇ·ñ¿É±à¼­</td>
-					<td>columnName flag</td>
-					<td>columnName: ÁĞµÄname ; flag: ÊÇ·ñ¿É±à¼­£¬trueÓëfalse</td>
-				</tr>
-				<tr>
-					<td>setCellReadonly</td>
-					<td>ÉèÖÃ±í¸ñÒ»ÁĞÊÇ·ñ¿É±à¼­</td>
-					<td>record name</td>
-					<td>record£º HyRecord¼ÇÂ¼ ; name£º×Ö¶ÎÃû³Æ ; flag£º true ²»¿É±à¼­ false¿ÉÒÔ±à¼­</td>
-				</tr>
-				<tr>
-					<td>setRowReadonly</td>
-					<td>ÉèÖÃ±í¸ñÒ»ÁĞÊÇ·ñ¿É±à¼­</td>
-					<td>row flag</td>
-					<td>row ÎªÊı×éÀàĞÍ£¬Êı×éÔªËØÎªĞĞºÅ»òrecord ; flag true»òfalse</td>
-				</tr>
-				<tr>
-					<td>setClientSort</td>
-					<td>¿Í»§¶ËÅÅĞò</td>
-					<td>columnName,order(ASC¡¢DESC)</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>setDynaRowStyle</td>
-					<td>¶¯Ì¬ÉèÖÃÒ»ĞĞµÄÑùÊ½</td>
-					<td>arr style</td>
-					<td>arr:[ĞĞºÅ£¬ĞĞºÅ]»ò[record£¬record] £» style: Èç
-						{"background":"#ACC3A7","color":"white"}</td>
-				</tr>
-				<tr>
-					<td>setDynaCellStyle</td>
-					<td>¶¯Ì¬ÉèÖÃÒ»¸öµ¥Ôª¸ñµÄÑùÊ½</td>
-					<td>arr style</td>
-					<td>arr£º
-						ÈıÖÖ¸ñÊ½µÚÒ»ÖÖ:[ĞĞºÅ£¬ÁĞºÅ]£¬µÚ¶şÖÖ:[ÁĞÃû³Æ£¬ÁĞÖµ]£¬µÚÈıÖÖ:[[ĞĞºÅ£¬ÁĞºÅ],[ÁĞÃû³Æ£¬ÁĞÖµ]]£»style</td>
-				</tr>
-				<tr>
-					<td>selectRow</td>
-					<td>¶¯Ì¬Ñ¡ÖĞÄ³ĞĞ</td>
-					<td>arr val</td>
-					<td>arg :¿ÉÒÔÊÇĞĞºÅ£¬ĞĞ¶ÔÏó£¬ÁĞµÄname £»val
-						:µ±µÚÒ»¸ö²ÎÊıÎªĞĞºÅ»òrecord¼ÇÂ¼Ê±£¬¸ÃÖµÎª¿Õ(¾ÍÊÇÃ»ÓĞ¸Ã²ÎÊı)£¬µ±µÚÒ»¸ö²ÎÊıÎªÁĞµÄname,Ôò¸Ã²ÎÊıÎªÒ»ÁĞÔÚÄ³Ò»ĞĞÖĞµÄÖµ</td>
-				</tr>
-				<tr>
-					<td>setRowChecked</td>
-					<td>ÉèÖÃĞĞÎªÑ¡ÖĞ×´Ì¬</td>
-					<td>arg,val</td>
-					<td>arg :¿ÉÒÔÊÇĞĞºÅ£¬ĞĞ¶ÔÏó£¬ÁĞµÄname£»val
-						:µ±µÚÒ»¸ö²ÎÊıÎªĞĞºÅ»òrecord¼ÇÂ¼Ê±£¬¸ÃÖµÎª¿Õ(¾ÍÊÇÃ»ÓĞ¸Ã²ÎÊı)£¬µ±µÚÒ»¸ö²ÎÊıÎªÁĞµÄname,Ôò¸Ã²ÎÊıÎªÒ»ÁĞÔÚÄ³Ò»ĞĞÖĞµÄÖµ</td>
-				</tr>
-				<tr>
-					<td>setData</td>
-					<td>ÉèÖÃ±í¸ñµÄÊı¾İ</td>
-					<td>ºóÌ¨·µ»ØµÄresponse.getAjaxDataWrap()</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>setTableData</td>
-					<td>¿Í»§¶ËÉèÖÃ±í¸ñµÄÊı¾İ</td>
-					<td>ÎªÒ»Êı×é£¬Êı×éÔªËØÎªÊı¾İ¶ÔÏó</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+				<div class="h2">
+					<span class="property">å‡½æ•°</span> <br />
+					<table class="dataintable">
+						<thead>
+							<tr>
+								<th>æ–¹æ³•å</th>
+								<th>æ–¹æ³•è¯´æ˜</th>
+								<th>å‚æ•°</th>
+								<th>å‚æ•°è¯´æ˜</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>addRecord</td>
+								<td>å‘è¡¨æ ¼æ·»åŠ æ•°æ®</td>
+								<td>HyRecord,index</td>
+								<td>HyRecord,indexå‚æ•°å¯ä»¥åŒæ—¶æœ‰ï¼Œä¹Ÿå¯ä»¥éƒ½æ²¡æœ‰ï¼Œæˆ–åªæœ‰å…¶ä¸­çš„ä¸€ä¸ª)</td>
+							</tr>
+							<tr>
+								<td>collectData</td>
+								<td>æ”¶é›†æ•°æ®</td>
+								<td>baseFlag ,dataFlag</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>cancelRowChecked</td>
+								<td>å–æ¶ˆè¡Œé€‰ä¸­çŠ¶æ€</td>
+								<td>arg,val</td>
+								<td>arg :å¯ä»¥æ˜¯è¡Œå·ï¼Œè¡Œå¯¹è±¡ï¼Œåˆ—çš„nameï¼›val
+									:å½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºè¡Œå·æˆ–recordè®°å½•æ—¶ï¼Œè¯¥å€¼ä¸ºç©º(å°±æ˜¯æ²¡æœ‰è¯¥å‚æ•°)ï¼Œå½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºåˆ—çš„name,åˆ™è¯¥å‚æ•°ä¸ºä¸€åˆ—åœ¨æŸä¸€è¡Œä¸­çš„å€¼</td>
+							</tr>
+							<tr>
+								<td>delRecord</td>
+								<td>åˆ é™¤è¡¨æ ¼ä¸­çš„æ•°æ®</td>
+								<td>å‚æ•°å¯ä»¥ä¸ºHyRecordæˆ–index</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>exportExcel</td>
+								<td>å¯¼å‡ºå½“å‰é¡µçš„excel</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>exportAllExcel</td>
+								<td>å¯¼å‡ºå…¨éƒ¨excel</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>exportPdf</td>
+								<td>å¯¼å‡ºå½“å‰é¡µçš„pdf</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>exportAllPdf</td>
+								<td>å¯¼å‡ºå…¨éƒ¨çš„pdf</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>delCheckedRecords</td>
+								<td>åˆ é™¤è¡¨æ ¼ä¸­çš„checkedæ•°æ®</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getColumnLabel</td>
+								<td>è·å–è¡¨æ ¼å•å…ƒæ ¼çš„æ˜¾ç¤ºå€¼</td>
+								<td>arg1ï¼šè¡Œå·æˆ–HyRecord arg2ï¼šåˆ—çš„name</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getRecordCount</td>
+								<td>è·å–è¡¨æ ¼çš„è®°å½•æ•°</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getAllRecords</td>
+								<td>è·å–è¡¨æ ¼çš„æ‰€æœ‰è®°å½•</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getAddRecords</td>
+								<td>è·å–è¡¨æ ¼æ·»åŠ çš„æ•°æ®</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getDelRecords</td>
+								<td>è·å–è¡¨æ ¼åˆ é™¤çš„æ•°æ®</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getUpdateRecords</td>
+								<td>è·å–è¡¨æ ¼æ›´æ–°çš„æ•°æ®</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getSelectedRecord</td>
+								<td>è·å–è¡¨æ ¼å½“å‰é€‰ä¸­çš„è®°å½•</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getRecordByRowNum</td>
+								<td>æ ¹æ®è¡Œå·è·å–record</td>
+								<td>rowIndex</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getIndexOfRecord</td>
+								<td>æ ¹æ®HrRecordè·å–recordåœ¨è¡¨æ ¼ä¸­çš„è¡Œå·</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>getRecordType</td>
+								<td>è·å–HyRecordçš„ç±»å‹</td>
+								<td>HyRecord</td>
+								<td>è¿”å›å€¼ä¸ºnormal add update</td>
+							</tr>
+							<tr>
+								<td>getCheckedRecords</td>
+								<td>è·å–checkedé€‰ä¸­çš„è®°å½•ï¼Œè¿”å›HyRecordsæ•°ç»„</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>hiddenColumn</td>
+								<td>æ˜¾ç¤ºä¸éšè—åˆ—</td>
+								<td>columnIndex (ä¸€å¼€å§‹å§‹åˆ—åœ¨è¡¨æ ¼ä¸­çš„ç´¢å¼•å·) ,hidden(å–å€¼ä¸ºtrueä¸false)</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>isModified</td>
+								<td>åˆ¤æ–­å½“å‰è¡¨æ ¼æ˜¯å¦å·²ç»ä¿®æ”¹</td>
+								<td>baseFlag ,dataFlag</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>isRowChecked</td>
+								<td>åˆ¤æ–­è¡¨æ ¼è¡Œæ˜¯å¦checkedé€‰ä¸­</td>
+								<td>arg,val</td>
+								<td>arg :å¯ä»¥æ˜¯è¡Œå·ï¼Œè¡Œå¯¹è±¡ï¼Œåˆ—çš„nameï¼›val
+									:å½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºè¡Œå·æˆ–recordè®°å½•æ—¶ï¼Œè¯¥å€¼ä¸ºç©º(å°±æ˜¯æ²¡æœ‰è¯¥å‚æ•°)ï¼Œå½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºåˆ—çš„name,åˆ™è¯¥å‚æ•°ä¸ºä¸€åˆ—åœ¨æŸä¸€è¡Œä¸­çš„å€¼</td>
+							</tr>
+							<tr>
+								<td>isValid</td>
+								<td>åˆ¤æ–­æ£€éªŒæ˜¯å¦é€šè¿‡</td>
+								<td>showAlerInfo</td>
+								<td>æ˜¯å¦é€šè¿‡alertå½¢å¼æ˜¾ç¤ºæ£€éªŒä¿¡æ¯ï¼Œè¿”å›trueä¸false</td>
+							</tr>
+							<tr>
+								<td>moveRowUp</td>
+								<td>å°†è®°å½•å‘ä¸Šç§»åŠ¨</td>
+								<td>HyRecord ,interval(é—´éš”)</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>moveRowDown</td>
+								<td>å°†è®°å½•å‘ä¸‹ç§»åŠ¨</td>
+								<td>HyRecord ,interval(é—´éš”)</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>reset</td>
+								<td>é¡µé¢æäº¤åå°åï¼Œå°†è¡¨æ ¼é‡ç½®</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>setRowDataByRowIndex</td>
+								<td>è®¾ç½®è¡¨æ ¼ä¸€è¡Œæ•°æ®</td>
+								<td>rowIndex HyRecord</td>
+								<td>rowIndexï¼šè¡Œå· ; HyRecordï¼šä¿®æ”¹çš„è¡Œè®°å½• ( å¦‚var record = new
+									HyRecord() )</td>
+							</tr>
+							<tr>
+								<td>setColumnReadonly</td>
+								<td>è®¾ç½®è¡¨æ ¼ä¸€åˆ—æ˜¯å¦å¯ç¼–è¾‘</td>
+								<td>columnName flag</td>
+								<td>columnName: åˆ—çš„name ; flag: æ˜¯å¦å¯ç¼–è¾‘ï¼Œtrueä¸false</td>
+							</tr>
+							<tr>
+								<td>setCellReadonly</td>
+								<td>è®¾ç½®è¡¨æ ¼ä¸€åˆ—æ˜¯å¦å¯ç¼–è¾‘</td>
+								<td>record name</td>
+								<td>recordï¼š HyRecordè®°å½• ; nameï¼šå­—æ®µåç§° ; flagï¼š true ä¸å¯ç¼–è¾‘
+									falseå¯ä»¥ç¼–è¾‘</td>
+							</tr>
+							<tr>
+								<td>setRowReadonly</td>
+								<td>è®¾ç½®è¡¨æ ¼ä¸€åˆ—æ˜¯å¦å¯ç¼–è¾‘</td>
+								<td>row flag</td>
+								<td>row ä¸ºæ•°ç»„ç±»å‹ï¼Œæ•°ç»„å…ƒç´ ä¸ºè¡Œå·æˆ–record ; flag trueæˆ–false</td>
+							</tr>
+							<tr>
+								<td>setClientSort</td>
+								<td>å®¢æˆ·ç«¯æ’åº</td>
+								<td>columnName,order(ASCã€DESC)</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>setDynaRowStyle</td>
+								<td>åŠ¨æ€è®¾ç½®ä¸€è¡Œçš„æ ·å¼</td>
+								<td>arr style</td>
+								<td>arr:[è¡Œå·ï¼Œè¡Œå·]æˆ–[recordï¼Œrecord] ï¼› style: å¦‚
+									{"background":"#ACC3A7","color":"white"}</td>
+							</tr>
+							<tr>
+								<td>setDynaCellStyle</td>
+								<td>åŠ¨æ€è®¾ç½®ä¸€ä¸ªå•å…ƒæ ¼çš„æ ·å¼</td>
+								<td>arr style</td>
+								<td>arrï¼š
+									ä¸‰ç§æ ¼å¼ç¬¬ä¸€ç§:[è¡Œå·ï¼Œåˆ—å·]ï¼Œç¬¬äºŒç§:[åˆ—åç§°ï¼Œåˆ—å€¼]ï¼Œç¬¬ä¸‰ç§:[[è¡Œå·ï¼Œåˆ—å·],[åˆ—åç§°ï¼Œåˆ—å€¼]]ï¼›style</td>
+							</tr>
+							<tr>
+								<td>selectRow</td>
+								<td>åŠ¨æ€é€‰ä¸­æŸè¡Œ</td>
+								<td>arr val</td>
+								<td>arg :å¯ä»¥æ˜¯è¡Œå·ï¼Œè¡Œå¯¹è±¡ï¼Œåˆ—çš„name ï¼›val
+									:å½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºè¡Œå·æˆ–recordè®°å½•æ—¶ï¼Œè¯¥å€¼ä¸ºç©º(å°±æ˜¯æ²¡æœ‰è¯¥å‚æ•°)ï¼Œå½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºåˆ—çš„name,åˆ™è¯¥å‚æ•°ä¸ºä¸€åˆ—åœ¨æŸä¸€è¡Œä¸­çš„å€¼</td>
+							</tr>
+							<tr>
+								<td>setRowChecked</td>
+								<td>è®¾ç½®è¡Œä¸ºé€‰ä¸­çŠ¶æ€</td>
+								<td>arg,val</td>
+								<td>arg :å¯ä»¥æ˜¯è¡Œå·ï¼Œè¡Œå¯¹è±¡ï¼Œåˆ—çš„nameï¼›val
+									:å½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºè¡Œå·æˆ–recordè®°å½•æ—¶ï¼Œè¯¥å€¼ä¸ºç©º(å°±æ˜¯æ²¡æœ‰è¯¥å‚æ•°)ï¼Œå½“ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºåˆ—çš„name,åˆ™è¯¥å‚æ•°ä¸ºä¸€åˆ—åœ¨æŸä¸€è¡Œä¸­çš„å€¼</td>
+							</tr>
+							<tr>
+								<td>setData</td>
+								<td>è®¾ç½®è¡¨æ ¼çš„æ•°æ®</td>
+								<td>åå°è¿”å›çš„response.getAjaxDataWrap()</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>setTableData</td>
+								<td>å®¢æˆ·ç«¯è®¾ç½®è¡¨æ ¼çš„æ•°æ®</td>
+								<td>ä¸ºä¸€æ•°ç»„ï¼Œæ•°ç»„å…ƒç´ ä¸ºæ•°æ®å¯¹è±¡</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="span9">
+
+				<ul class="pager">
+					<li class="next"><a href="activity.htm">More &rarr;</a></li>
+				</ul>
+				<ul class="pager">
+					<li class="next">More Templates <a
+						href="http://www.cssmoban.com/" target="_blank" title="æ¨¡æ¿ä¹‹å®¶">æ¨¡æ¿ä¹‹å®¶</a>
+						- Collect from <a href="http://www.cssmoban.com/" title="ç½‘é¡µæ¨¡æ¿"
+						target="_blank">ç½‘é¡µæ¨¡æ¿</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
+<script src="l-js/jquery.min.js"></script>
+<script src="l-js/ll-bootstrap.js"></script>
 </body>
 
 </html>
