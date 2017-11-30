@@ -1,0 +1,29 @@
+package Chap3;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.concurrent.Callable;
+
+import org.junit.Test;
+
+public class Chap3Test {
+
+	@Test
+	public void test42() throws Exception{
+		processFile((BufferedReader reader)->reader.readLine()+reader.readLine());
+	}
+	
+	public static String processFile(IFileProcessor p) throws FileNotFoundException{
+		BufferedReader reader=new BufferedReader(new FileReader("D:\\1.txt"));
+		return p.process(reader);
+	}
+	/**
+	 * ²âÊÔº¯ÊýÊ½½è¿ÚCallable
+	 * @return
+	 */
+	public Callable<String> fetch() {
+		return () -> "Tricky example ;-)";
+	}
+	
+}

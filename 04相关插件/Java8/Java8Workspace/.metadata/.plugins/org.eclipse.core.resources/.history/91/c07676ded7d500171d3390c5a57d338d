@@ -1,0 +1,5 @@
+package Chap3;
+
+public interface IFileProcessor {
+
+}

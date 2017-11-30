@@ -1,0 +1,51 @@
+package Chap3;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.function.Predicate;
+
+import org.junit.Test;
+
+public class Chap3Test {
+
+	@Test
+	public void test42() throws Exception {
+		System.out.println(processFile((BufferedReader reader) -> reader.readLine() + reader.readLine()));
+	}
+	
+	@Test
+	public void test44(){
+		List<Integer> list=new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		
+		testPredicate(list, (Integer i)->i.intValue()>0);
+	}
+
+	public static <T> void testPredicate(List<T> list,Predicate<T> p) {
+		for (T t : list) {
+			if(p.test(t)){
+				System.out.println(t);
+			}
+		}
+	}
+	
+	public static String processFile(IFileProcessor p) throws Exception {
+		BufferedReader reader = new BufferedReader(new FileReader("F:\\AllProject\\04相关插件\\Java8\\Java8Workspace\\test.txt"));
+		return p.process(reader);
+	}
+
+	/**
+	 * 测试函数式借口Callable
+	 * 
+	 * @return
+	 */
+	public Callable<String> fetch() {
+		return () -> "Tricky example ;-)";
+	}
+
+}

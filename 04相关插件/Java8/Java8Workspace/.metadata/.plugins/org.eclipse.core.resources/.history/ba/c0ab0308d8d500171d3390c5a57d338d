@@ -1,0 +1,25 @@
+package Chap3;
+
+import java.util.concurrent.Callable;
+
+import org.junit.Test;
+
+public class Chap3Test {
+
+	@Test
+	public void test42(){
+		processFile((BufferedReader reader)->reader.readLine());
+	}
+	
+	public static String processFile(IFileProcessor p){
+		
+	}
+	/**
+	 * ²âÊÔº¯ÊıÊ½½è¿ÚCallable
+	 * @return
+	 */
+	public Callable<String> fetch() {
+		return () -> "Tricky example ;-)";
+	}
+	
+}

@@ -1,0 +1,17 @@
+package Chap3;
+
+import java.util.concurrent.Callable;
+
+public class Chap3Test {
+
+	
+	
+	/**
+	 * ²âÊÔº¯ÊıÊ½½è¿ÚCallable
+	 * @return
+	 */
+	public Callable<String> fetch() {
+		return () -> "Tricky example ;-)";
+	}
+	
+}
