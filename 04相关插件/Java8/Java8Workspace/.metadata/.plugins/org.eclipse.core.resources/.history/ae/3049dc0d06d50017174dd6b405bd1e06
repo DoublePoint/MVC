@@ -1,0 +1,11 @@
+package Test;
+
+public class UserFilter {
+	public static boolean isAdult(User user){
+		return user.getAge()>18;
+	}
+	
+	public static boolean addressContain1(User user){
+		return user.getAddress().contains("1");
+	}
+}

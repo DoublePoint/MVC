@@ -1,0 +1,26 @@
+package Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class UserFilter {
+	public static boolean isAdult(User user){
+		return user.getAge()>18;
+	}
+	
+	public static boolean addressContain1(User user){
+		return user.getAddress().contains("1");
+	}
+	
+	public static List<User2> filUser(List<User2> list,Predicate<User2> p){
+		
+		List<User2> resultList=new ArrayList<User2>();
+		for (User2 user : list) {
+			if(p.test(user)){
+				resultList.add(user);
+			}
+		}
+		return resultList;
+	}
+}

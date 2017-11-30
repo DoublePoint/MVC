@@ -1,0 +1,5 @@
+package PridicatePackage;
+
+public class AppliColorPredicate implements IPredicate<T> {
+
+}

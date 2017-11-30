@@ -1,0 +1,51 @@
+package Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class MainTest {
+	private List<User> userList;
+
+	/**
+	 * ŒΩ¥ 
+	 */
+	@Test
+	public void test1() {
+		List<User> resultList1 = UserFilter.filUser(userList, UserFilter::isAdult);
+		for (User user2 : resultList1) {
+			System.out.println(user2);
+		}
+	}
+
+	/**
+	 * Lambda
+	 */
+	@Test
+	public void test2() {
+		List<User> resultList2 = UserFilter.filUser(userList, (User user) -> user.getAddress().contains("address"));
+		
+		for (User user2 : resultList2) {
+			System.out.println(user2);
+		}
+		
+	}
+
+	/**
+	 * ∑∫–ÕFilter≤‚ ‘
+	 */
+	public void  test3(){
+		TemplateFilter<User>.filter(userList,(User user) -> user.getAddress().contains("address"));
+	}
+	
+	@Before
+	public void initUserList() {
+		userList = new ArrayList<User>();
+		for (int i = 0; i < 10; i++) {
+			userList.add(new User("–°" + i, i + 15, "address" + i));
+		}
+	}
+
+}

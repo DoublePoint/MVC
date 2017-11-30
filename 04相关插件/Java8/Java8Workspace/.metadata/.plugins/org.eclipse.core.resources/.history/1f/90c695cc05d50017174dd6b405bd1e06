@@ -1,0 +1,9 @@
+package Test;
+
+import java.util.List;
+
+public class UserFilter {
+	public static boolean isAdult(User user){
+		return user.getAge()>18;
+	}
+}

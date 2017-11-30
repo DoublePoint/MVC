@@ -1,0 +1,29 @@
+package Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainTest {
+	public static void main(String[] args) {
+		List<User> list = new ArrayList<User>();
+		for (int i = 0; i < 10; i++) {
+			list.add(new User("Ð¡" + i, i + 15, "address" + i));
+		}
+
+		/**
+		 * Î½´Ê
+		 */
+		List<User> resultList1= UserFilter.filUser(list, UserFilter::isAdult);
+		for (User user2 : resultList1) {
+			System.out.println(user2);
+		}
+		
+		/**
+		 * Lambda
+		 */
+		List<User> resultList2 = UserFilter.filUser(list, (User user) -> user.getAddress().contains("1"));
+		for (User user2 : resultList2) {
+			System.out.println(user2);
+		}
+	}
+}

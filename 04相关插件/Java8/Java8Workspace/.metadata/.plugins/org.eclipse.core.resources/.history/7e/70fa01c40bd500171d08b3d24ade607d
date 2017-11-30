@@ -1,0 +1,28 @@
+package Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainTest {
+	public static void main(String[] args) {
+		List<User> list = new ArrayList<User>();
+		for (int i = 0; i < 10; i++) {
+			list.add(new User("小" + i, i + 15, "address" + i));
+		}
+
+		/**
+		 * 谓词
+		 */
+		List<User> resultList= UserFilter.filUser(list, UserFilter::isAdult);
+		for (User user2 : resultList) {
+			System.out.println(user2);
+		}
+		
+		/**
+		 * Lambda
+		 */
+		List<User> resultList = UserFilter.filUser(list, (User user) -> user.getAddress().contains("1"));
+		// new Thread(() ->
+		// System.out.println("这是一个java8的小例子,可以使用lambda表达式")).start();
+	}
+}

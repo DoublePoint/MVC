@@ -1,0 +1,7 @@
+package PridicatePackage;
+
+import Test.User;
+
+public interface IPredicate {
+	public boolean test(User user);
+}

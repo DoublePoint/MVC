@@ -1,0 +1,10 @@
+package PridicatePackage;
+
+public class AppliColorPredicate<User> implements IPredicate<User> {
+
+	@Override
+	public boolean test(User user) {
+		return false;
+	}
+
+}
