@@ -1,0 +1,8 @@
+package Chap1;
+
+public class MainTest {
+	
+	/**
+	 * 测试Java8之前的比较数据
+	 */
+}
