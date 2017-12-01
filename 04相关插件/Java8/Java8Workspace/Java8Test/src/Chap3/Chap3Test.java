@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.junit.Test;
@@ -15,27 +17,65 @@ public class Chap3Test {
 	public void test42() throws Exception {
 		System.out.println(processFile((BufferedReader reader) -> reader.readLine() + reader.readLine()));
 	}
-	
+
 	@Test
-	public void test44(){
-		List<Integer> list=new ArrayList<Integer>();
+	public void test44() {
+		List<Integer> list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);
 		list.add(3);
+
+		testPredicate(list, (Integer i) -> i.intValue() > 0);
 		
-		testPredicate(list, (Integer i)->i.intValue()>0);
+//		list.stream().filter(i->i.intValue()>2).sorted(comparing()).collect();
 	}
 
-	public static <T> void testPredicate(List<T> list,Predicate<T> p) {
+	/**
+	 * 测试参数类型相同的lambada
+	 */
+	@Test
+	public void test57() {
+		// Supplier<List<String>> supplier=ArrayList::new;
+		List<String> s1 = new ArrayList<String>();
+		s1.add("1");
+		s1.add("2");
+		s1.add("3");
+		s1.add("4");
+		
+		String str1="1";
+
+		String welcome="welcome";
+		System.out.println(str1.startsWith(welcome));
+		List<String> result = combaine(str1,s1, (String s) -> s1);
+	}
+	static List<String> combaine(String string1, List<String> list2, Function<String, List<String>> f) {
+		list2 = f.apply(string1);
+		return list2;
+	}
+	
+	@Test
+	public void test58() {
+		BiFunction<String, String, String> f=(String str1,String str2)->str2.concat(str1);
+		BiFunction<String, String, String> f2=String::concat;
+		
+		System.out.println(concat("1","2",f));
+	}
+
+	static String concat(String str1,String str2, BiFunction<String, String, String> f) {
+		return str1+f.apply(str1, str2);
+	}
+
+	public static <T> void testPredicate(List<T> list, Predicate<T> p) {
 		for (T t : list) {
-			if(p.test(t)){
+			if (p.test(t)) {
 				System.out.println(t);
 			}
 		}
 	}
-	
+
 	public static String processFile(IFileProcessor p) throws Exception {
-		BufferedReader reader = new BufferedReader(new FileReader("F:\\AllProject\\04相关插件\\Java8\\Java8Workspace\\test.txt"));
+		BufferedReader reader = new BufferedReader(
+				new FileReader("F:\\AllProject\\04相关插件\\Java8\\Java8Workspace\\test.txt"));
 		return p.process(reader);
 	}
 
