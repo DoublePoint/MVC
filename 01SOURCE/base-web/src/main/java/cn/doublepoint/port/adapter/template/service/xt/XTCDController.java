@@ -8,9 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import cn.doublepoint.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.application.template.xt.XTCDQueryService;
 import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
