@@ -1,0 +1,28 @@
+package Chap7;
+
+import java.util.stream.Stream;
+
+import org.junit.Test;
+
+public class MainTest {
+	@Test
+	public void test142(){
+		long startTime =System.currentTimeMillis();
+		System.out.println(parallelSum1(1000));
+		long endTime =System.currentTimeMillis();
+		System.out.println("非并行："+(endTime-startTime));
+		
+		long startTime2 =System.currentTimeMillis();
+		System.out.println(parallelSum2(1000));
+		long endTime2 =System.currentTimeMillis();
+		
+		System.out.println("并行："+(endTime2-startTime2));
+	}
+
+	public static long parallelSum1(long n) {
+		return Stream.iterate(1L, i -> i + 1).limit(n).parallel().reduce(0L, Long::sum);
+	}
+	public static long parallelSum2(long n) {
+		return Stream.iterate(1L, i -> i + 1).limit(n).reduce(0L, Long::sum);
+	}
+}

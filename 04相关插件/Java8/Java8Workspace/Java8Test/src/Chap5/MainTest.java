@@ -47,4 +47,5 @@ public class MainTest {
 	public void test107() {
 		Stream.iterate(0, n -> n + 2).limit(10000000).forEach(System.out::println);
 	}
+	
 }
