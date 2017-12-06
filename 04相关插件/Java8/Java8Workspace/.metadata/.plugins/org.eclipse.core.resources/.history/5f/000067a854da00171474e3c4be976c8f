@@ -1,0 +1,7 @@
+package PPT;
+
+public interface B {
+	void hello() {
+		System.out.println("Hello from B");
+		}
+}

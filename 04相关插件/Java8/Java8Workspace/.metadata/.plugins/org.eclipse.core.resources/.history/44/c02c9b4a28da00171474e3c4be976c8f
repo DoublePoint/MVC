@@ -1,0 +1,5 @@
+package TestFunctionRef;
+
+public interface Test2<T> {
+	public T replace(T t1,T t2,T t3);
+}

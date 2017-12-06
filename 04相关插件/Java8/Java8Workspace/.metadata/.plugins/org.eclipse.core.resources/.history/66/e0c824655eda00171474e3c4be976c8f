@@ -1,0 +1,20 @@
+package PPT;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDateFormatThread extends Thread {
+
+	@Override
+	public void run() {
+		SimpleDateFormat dFormat=new SimpleDateFormat("yyyyMMdd");
+		System.out.println(dFormat.format(new Date("20171206")));
+	}
+	
+	public static void main(String[] args) {
+//		for(int i=0;i<1;i++){
+			TestDateFormatThread dateFormatThread=new TestDateFormatThread();
+			dateFormatThread.start();
+//		}
+	}
+}

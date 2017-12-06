@@ -1,0 +1,11 @@
+package TestFunctionRef;
+
+public class CombineHelper {
+	public static String combine(String s1, String s2, String s3) {
+		return s1 + s2 + s3;
+	}
+	
+	public static String combineIntString(String s1,int i1){
+		return i1+s1;
+	}
+}

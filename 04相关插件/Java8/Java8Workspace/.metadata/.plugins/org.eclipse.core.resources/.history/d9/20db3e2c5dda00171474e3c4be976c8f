@@ -1,0 +1,15 @@
+package PPT;
+
+import java.text.DateFormat;
+
+import javax.swing.text.DateFormatter;
+
+public class TestDateFormatThread extends Thread {
+
+	@Override
+	public void run() {
+		DateFormat dFormat=new DateFormat("");
+		
+	}
+	
+}

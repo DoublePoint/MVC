@@ -1,0 +1,5 @@
+package TestFunctionRef;
+
+public interface Test1<T,R > {
+	public T combine(T t1,R t2);
+}

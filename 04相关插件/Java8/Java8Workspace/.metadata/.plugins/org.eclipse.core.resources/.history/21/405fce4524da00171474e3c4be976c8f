@@ -1,0 +1,14 @@
+package TestFunctionRef;
+
+public class Maintest {
+	public static void main(String[] args) {
+		String s1="1";
+		String s2="2";
+		String s3="3";
+		
+	}
+	
+	public static String combine(String s1,String s2,String s3,Test1<String> t1){
+		return t1.combine(s1, s2, s3);
+	}
+}
