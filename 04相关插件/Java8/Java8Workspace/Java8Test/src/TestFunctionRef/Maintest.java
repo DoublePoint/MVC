@@ -10,7 +10,7 @@ public class Maintest {
 		System.out.println(combine(s1, s2, s3, CombineHelper::combine));
 		
 		int i1=0;
-		System.out.println(combine2(s1, i1, CombineHelper::combineIntString));
+//		System.out.println(combine2(s1, i1, CombineHelper::combineIntString));
 		System.out.println(combine2(s1, i1, (i,s)->s.substring(i)));
 //		System.out.println(combine2(s1, i1, String::substring));
 		
@@ -23,7 +23,7 @@ public class Maintest {
 	}
 
 	public static String combine2(String s1, int i1, Test2<Integer,String> t2) {
-		return t2.combine(i1, s1);
+		return t2.combine(i1,s1);
 	}
 	public static String combine3(String s1, int i1, Test3<String,Integer> t3) {
 		return t3.combine(s1, i1);

@@ -9,17 +9,19 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import static java.util.Comparator.comparing;
 import java.util.List;
+import java.util.Optional;
 
 import Chap1.Apple;
-
+import java.util.Comparator;
 public class MainTest {
 
 	public static void main(String[] args) {
 		// /**
 		// * try1
 		// */
-		// List<Apple> inventory = new ArrayList<>();
+		List<Apple> inventory = new ArrayList<>();
 		//
 		// List<Apple> greenApples0 = filterApplesByColor(inventory, "green");
 		// List<Apple> redApples0 = filterApplesByColor(inventory, "red");
@@ -231,6 +233,31 @@ public class MainTest {
 		System.out.println(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		LocalDate date1 = LocalDate.parse("20171206", DateTimeFormatter.BASIC_ISO_DATE);
 		LocalDate date2 = LocalDate.parse("2017-12-06", DateTimeFormatter.ISO_LOCAL_DATE);
+
+		Optional<Car> optCar = Optional.empty();
+
+		Car car = new Car();
+
+		Optional<Car> optCar2 = Optional.of(car);
+
+		Optional<Car> optCar3 = Optional.ofNullable(car);
+
+		Person person = new Person();
+		// Optional<String> name =
+		// optPerson.map(Person::getCar).map(Car::getInsurance).map(Insurance::getName);
+
+		Optional<Person> optPerson = Optional.of(person);
+		Optional<String> name = optPerson.flatMap(Person::getCar).flatMap(Car::getInsurance).map(Insurance::getName);
+
+		person.getCar().flatMap(Car::getInsurance).map(Insurance::getName);
+
+		inventory.sort(new Comparator<Apple>() {
+			public int compare(Apple a1, Apple a2) {
+				return a1.getWeight().compareTo(a2.getWeight());
+			}
+		});
+		
+		inventory.sort(comparing((a) -> a.getWeight()));
 	}
 
 	public static List<Apple> filterGreenApples(List<Apple> inventory) {
