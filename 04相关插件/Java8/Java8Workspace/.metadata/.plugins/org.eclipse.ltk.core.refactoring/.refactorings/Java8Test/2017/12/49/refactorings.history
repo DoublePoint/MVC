@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;PPT.AT.java&apos; to &apos;TemplateInterface.java&apos;&#x0D;&#x0A;- Original project: &apos;Java8Test&apos;&#x0D;&#x0A;- Original element: &apos;PPT.AT.java&apos;&#x0D;&#x0A;- Renamed element: &apos;PPT.TemplateInterface.java&apos;" description="Rename compilation unit &apos;AT.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;PPT{AT.java" name="TemplateInterface.java" references="false" stamp="1512643385252" version="1.0"/>
+</session>

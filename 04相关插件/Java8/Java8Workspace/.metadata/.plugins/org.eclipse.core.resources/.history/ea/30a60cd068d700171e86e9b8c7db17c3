@@ -1,7 +1,0 @@
-package Chap7;
-
-public class MainTest {
-	public void test142(){
-		long startTime System.currentTimeMillis();
-	}
-}

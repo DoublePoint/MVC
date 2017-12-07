@@ -1,7 +1,0 @@
-package Chap3;
-
-import java.io.BufferedReader;
-
-public interface IFileProcessor {
-	public String process(BufferedReader reader);
-}
