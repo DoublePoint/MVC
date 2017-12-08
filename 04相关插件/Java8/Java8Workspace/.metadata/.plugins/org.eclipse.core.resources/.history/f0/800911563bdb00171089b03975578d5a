@@ -1,5 +1,0 @@
-package PPT;
-
-public interface AT<T> {
-	
-}

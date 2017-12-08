@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.groupingBy;
 
 import Chap1.Apple;
 public class MainTest {
@@ -92,7 +95,7 @@ public class MainTest {
 		// inventory.sort(comparing(Apple::getWeight));
 		//
 		 List<Dish> menu = Arrays.asList(new Dish("pork", false, 800,
-		 Dish.Type.MEAT),
+		 Dish.Type.MEAT));
 		// new Dish("beef", false, 700, Dish.Type.MEAT), new Dish("chicken",
 		// false, 400, Dish.Type.MEAT),
 		// new Dish("french fries", true, 530, Dish.Type.OTHER), new
@@ -190,65 +193,66 @@ public class MainTest {
 		// LocalDate today = LocalDate.now();
 		//
 
-		LocalDateTime localDateTime = LocalDateTime.of(2017, 12, 6, 17, 15, 0);
-		LocalDateTime localDateTime2 = localDateTime.withDayOfMonth(2);
-		LocalDateTime localDateTime4 = localDateTime.withYear(2019);
-		LocalDateTime localDateTime1 = localDateTime.plusSeconds(1);
-		LocalTime localTime1 = localDateTime.toLocalTime();
-		LocalTime localTime2 = localDateTime.toLocalTime().minusSeconds(1);
-		boolean isLeapYear = localDateTime.withYear(2012).toLocalDate().isLeapYear();
-
-		LocalDate localDate = localDateTime.toLocalDate();
-
-		localDateTime.get(ChronoField.YEAR);
-		localDateTime.get(ChronoField.MONTH_OF_YEAR);
-		localDateTime.get(ChronoField.DAY_OF_MONTH);
-
-		localDate.get(ChronoField.YEAR);
-		localDate.get(ChronoField.MONTH_OF_YEAR);
-		localDate.get(ChronoField.DAY_OF_MONTH);
-
-		Instant instant1 = Instant.ofEpochSecond(3);
-		Instant instant2 = Instant.ofEpochSecond(3, 0);
-		Instant.ofEpochSecond(2, 1_000_000_000);
-		Instant.ofEpochSecond(4, -1_000_000_000);
-
-		Duration d1 = Duration.between(localTime1, localTime2);
-		Duration d2 = Duration.between(localDateTime1, localDateTime2);
-		Duration d3 = Duration.between(instant1, instant2);
-
-		// System.out.println(d1.getNano());
-		// System.out.println(d1.getSeconds());
-		// System.out.println(d1.toMillis());
-
-		Period tenDays = Period.between(LocalDate.of(2017, 12, 6), LocalDate.of(2017, 12, 8));
-
-		System.out.println(tenDays.getDays());
-		System.out.println(tenDays.getMonths());
-		System.out.println(tenDays.getYears());
-
-		LocalDate date = LocalDate.of(2017, 12, 6);
-		System.out.println(date.format(DateTimeFormatter.BASIC_ISO_DATE));
-		System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
-		System.out.println(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		LocalDate date1 = LocalDate.parse("20171206", DateTimeFormatter.BASIC_ISO_DATE);
-		LocalDate date2 = LocalDate.parse("2017-12-06", DateTimeFormatter.ISO_LOCAL_DATE);
-
-		Optional<Car> optCar = Optional.empty();
-
-		Car car = new Car();
-
-		Optional<Car> optCar2 = Optional.of(car);
-
-		Optional<Car> optCar3 = Optional.ofNullable(car);
+//		LocalDateTime localDateTime = LocalDateTime.of(2017, 12, 6, 17, 15, 0);
+//		LocalDateTime localDateTime2 = localDateTime.withDayOfMonth(2);
+//		LocalDateTime localDateTime4 = localDateTime.withYear(2019);
+//		LocalDateTime localDateTime1 = localDateTime.plusSeconds(1);
+//		LocalTime localTime1 = localDateTime.toLocalTime();
+//		LocalTime localTime2 = localDateTime.toLocalTime().minusSeconds(1);
+//		boolean isLeapYear = localDateTime.withYear(2012).toLocalDate().isLeapYear();
+//
+//		LocalDate localDate = localDateTime.toLocalDate();
+//
+//		localDateTime.get(ChronoField.YEAR);
+//		localDateTime.get(ChronoField.MONTH_OF_YEAR);
+//		localDateTime.get(ChronoField.DAY_OF_MONTH);
+//
+//		localDate.get(ChronoField.YEAR);
+//		localDate.get(ChronoField.MONTH_OF_YEAR);
+//		localDate.get(ChronoField.DAY_OF_MONTH);
+//
+//		Instant instant1 = Instant.ofEpochSecond(3);
+//		Instant instant2 = Instant.ofEpochSecond(3, 0);
+//		Instant.ofEpochSecond(2, 1_000_000_000);
+//		Instant.ofEpochSecond(4, -1_000_000_000);
+//
+//		Duration d1 = Duration.between(localTime1, localTime2);
+//		Duration d2 = Duration.between(localDateTime1, localDateTime2);
+//		Duration d3 = Duration.between(instant1, instant2);
+//
+//		// System.out.println(d1.getNano());
+//		// System.out.println(d1.getSeconds());
+//		// System.out.println(d1.toMillis());
+//
+//		Period tenDays = Period.between(LocalDate.of(2017, 12, 6), LocalDate.of(2017, 12, 8));
+//
+//		System.out.println(tenDays.getDays());
+//		System.out.println(tenDays.getMonths());
+//		System.out.println(tenDays.getYears());
+//
+//		LocalDate date = LocalDate.of(2017, 12, 6);
+//		System.out.println(date.format(DateTimeFormatter.BASIC_ISO_DATE));
+//		System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
+//		System.out.println(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//		LocalDate date1 = LocalDate.parse("20171206", DateTimeFormatter.BASIC_ISO_DATE);
+//		LocalDate date2 = LocalDate.parse("2017-12-06", DateTimeFormatter.ISO_LOCAL_DATE);
+//
+//		Optional<Car> optCar = Optional.empty();
+//
+//		Car car = new Car();
+//
+//		Optional<Car> optCar2 = Optional.of(car);
+//
+//		Optional<Car> optCar3 = Optional.ofNullable(car);
 
 		Person person = new Person();
 		// Optional<String> name =
 		// optPerson.map(Person::getCar).map(Car::getInsurance).map(Insurance::getName);
 
 		Optional<Person> optPerson = Optional.of(person);
-		Optional<String> name = optPerson.flatMap(Person::getCar).flatMap(Car::getInsurance).map(Insurance::getName);
-
+//		Optional<Car> car=optPerson.flatMap(Person::getCar);
+		String name = optPerson.flatMap(Person::getCar).flatMap(Car::getInsurance).map(Insurance::getName).orElse("Unknown");
+		System.out.println(name);
 		person.getCar().flatMap(Car::getInsurance).map(Insurance::getName);
 
 		inventory.sort(new Comparator<Apple>() {
@@ -261,6 +265,12 @@ public class MainTest {
 		
 		Map<Dish.Type, List<Dish>> dishesByType =
 				menu.stream().collect(groupingBy(Dish::getType));
+		
+		
+		Optional<Car> carOpt=Optional.empty();
+		String ss=carOpt.flatMap(Car::getInsurance).map(Insurance::getName).orElse("");;
+//		Optional<Insurance> insuranceOpt=carOpt.flatMap(Car::getInsurance);
+//		System.out.println(insuranceOpt.toString());
 	}
 
 	public static List<Apple> filterGreenApples(List<Apple> inventory) {

@@ -1,6 +1,0 @@
-package PPT;
-
-@FunctionalInterface
-public interface AT<T> {
-	public T getValue(T t);
-}

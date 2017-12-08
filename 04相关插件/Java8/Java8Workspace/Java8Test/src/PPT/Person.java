@@ -4,5 +4,10 @@ import java.util.Optional;
 
 public class Person {
 	private Optional<Car> car;
-	public Optional<Car> getCar() { return car; }
+
+	public Optional<Car> getCar() {
+		if (car == null)
+			return Optional.empty();
+		return car;
+	}
 }
