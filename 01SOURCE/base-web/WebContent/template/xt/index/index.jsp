@@ -53,9 +53,9 @@
 							aria-hidden="true"></i> <cite>控制面板</cite><span
 							class="layui-badge">未保存</span></li>
 					</ul>
-					<div class="layui-tab-content"
+					<div id="layui-tab-content" class="layui-tab-content"
 						style="min-height: 150px; padding: 0px 0 0 0;">
-						<div class="layui-tab-item layui-show">
+						<div class="layui-tab-item layui-show" style="height:100%;">
 							<%-- <iframe
 							src="${pageContext.request.contextPath}/template/xt/ajaxdatagrid.jsp"></iframe> --%>
 							<iframe src="${pageContext.request.contextPath}/template/xt/cd"></iframe>
