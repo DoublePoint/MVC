@@ -2,7 +2,7 @@ html,body,form {
 	height: 100%;
 	width: 100%;
 }
-form{
+.layui-layout-body form{
 	min-width:1000px;
 }
 .layui-col-md0, .layui-col-md1, .layui-col-md2, .layui-col-md3,

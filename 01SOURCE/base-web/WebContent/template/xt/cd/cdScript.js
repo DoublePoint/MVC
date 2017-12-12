@@ -8,7 +8,7 @@ function onClickAdd() {
 	} else {
 		cdbs = nodes[0].cdbs;
 	}
-	parent.$layer.open({
+	$._OpenDialog({
 		type : 2,
 		title : "添加菜单",
 		area : [ '630px', '360px' ],
@@ -16,7 +16,8 @@ function onClickAdd() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/xt/cdDialog'
+		content : $$pageContextPath + '/template/xt/cdDialog',
+		data:nodes[0]
 	});
 	return false;
 }
