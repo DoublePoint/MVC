@@ -17,3 +17,10 @@ var ConstantComponentMap={
 		_LayOutFieldH:"ll-fillarea",
 		_LayOutFieldV:"ll-fillarea2"
 };
+var ConstantPageDefaultParam={
+	_IS_DO_INIT_FUNTION:"_is_do_init_function",
+};
+var ConstantState={
+	_YES_NO_STATE_Y:"Y"	,
+	_YES_NO_STATE_N:"N"	
+};

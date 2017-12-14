@@ -1,3 +1,7 @@
+function init(response){
+	var data=response;
+}
+
 // 日期
 $laydate.render({
 	elem : '#date'

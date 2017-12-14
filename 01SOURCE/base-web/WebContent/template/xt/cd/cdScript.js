@@ -21,9 +21,8 @@ function onClickAdd() {
 		maxmin : true,
 		content : $$pageContextPath + '/template/xt/cdDialog',
 		data:ajaxDataWrap,
-		success: function(layero, index){
-			var iframeWin = parent.window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-			iframeWin.testAlert(123);
+		succeed: function(){
+			alert(111);
 		}
 	});
 	return false;
@@ -58,72 +57,6 @@ function onClickDelete() {
 
 }
 var tabldHeight;
-$(window).on('resize', function() {
-//	setData();
-}).resize();
-
-//function setData() {
-//	var cd = {};
-//	cd.cdbs = "";
-//	$.ajax({
-//		url : $$pageContextPath + "/template/xt/cdDataList",
-//		type : "POST",
-//		contentType : 'application/json;charset=UTF-8',
-//		dataType : "json",
-//		data : JSON.stringify(cd),
-//		async : false,
-//		success : function(data) {
-//			$table.render({
-//				elem : '#demo',
-//				data : data,
-//				// height : 'auto',
-//				// height : '400',
-//				// height : $("#demo").parent().height(),
-//				height : $(window).height() - 40,
-//				id : "demo",
-//				// height :
-//				// $(window).height()-$("#demo").parent().find("layui-btn-group").height(),
-//				cols : [ [ // 标题栏
-//				{
-//					checkbox : true,
-//					LAY_CHECKED : false
-//				} // 默认全选
-//				, {
-//					field : 'cdbs',
-//					title : '菜单标识',
-//					width : 230,
-//					sort : true
-//				}, {
-//					field : 'cdmc',
-//					title : '菜单名称',
-//					width : 180
-//				}, {
-//					field : 'cdpx',
-//					title : '菜单排序',
-//					width : 150
-//				}, {
-//					field : 'cdlj',
-//					title : '签名',
-//					width : 150
-//				} ] ],
-//				skin : 'row' // 表格风格
-//				,
-//
-//				even : true,
-//				page : true // 是否显示分页
-//				,
-//				limits : [ 5, 7, 10, 20, 100 ],
-//				limit : 50
-//			// 每页默认显示的数量
-//			});
-//		},
-//		error : function() {
-//			alert("error");
-//		}
-//	});
-//}
-
-
 
 function filter(treeId, parentNode, childNodes) {
 	if (!childNodes)
@@ -194,9 +127,7 @@ function zTreeOnClick(event, treeId, treeNode) {
 
 	// alert(treeNode.cdmc + ", " + treeNode.cdbs);
 };
-/*$(document).ready(function() {
-	$.fn.zTree.init($("#treeDemo"), setting);
-});*/
+
 function init() {
 }
 
