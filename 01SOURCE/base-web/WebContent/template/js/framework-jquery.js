@@ -4,8 +4,7 @@ var DoublePoint = {};// 全局对象
 	var _LayuiObjectHashMap;
 	//浏览器窗口变化时需要重设大小的标签
 	var _RegisteredModel;
-	//存储弹出窗口的传递值
-	var _DialogData;
+	
 	$.extend({
 		_AddToLayuiObjectHashMap : function(id, obj) {
 			if (_LayuiObjectHashMap == null)
@@ -53,8 +52,11 @@ var DoublePoint = {};// 全局对象
 			return ss;
 		},
 		_OpenDialog:function(obj){
-			_DialogData=obj.data;
-			parent.$layer.open(obj);
+			//存储弹出窗口的传递值
+//			var _DialogData=obj.data;
+//			var iframeWin = parent.window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+//			iframeWin.setAjaxResponse(_DialogData);
+//			parent.$layer.open(obj);
 		}
 	});
 

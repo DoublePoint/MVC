@@ -8,6 +8,9 @@ function onClickAdd() {
 	} else {
 		cdbs = nodes[0].cdbs;
 	}
+	var ajaxDataWrap=new AjaxDataWrap("test");
+	ajaxDataWrap.setData(nodes[0]);
+	
 	$._OpenDialog({
 		type : 2,
 		title : "添加菜单",
@@ -17,7 +20,11 @@ function onClickAdd() {
 		shadeClose : true,
 		maxmin : true,
 		content : $$pageContextPath + '/template/xt/cdDialog',
-		data:nodes[0]
+		data:ajaxDataWrap,
+		success: function(layero, index){
+			var iframeWin = parent.window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+			iframeWin.testAlert(123);
+		}
 	});
 	return false;
 }

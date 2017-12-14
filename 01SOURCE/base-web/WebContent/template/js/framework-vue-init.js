@@ -1,4 +1,8 @@
 var $lform;
+var ajaxResponse=null;
+function setAjaxResponse(resp){
+	ajaxResponse=resp;
+}
 $(document).ready(function() {
 	$lform = new Vue({
 		el : "form",
@@ -79,7 +83,8 @@ $(document).ready(function() {
 ////			windowResize();
 ////		}
 //	}).resize();
-
+	
+	
 	if (init != null)
-		init();
+		init(ajaxResponse);
 });

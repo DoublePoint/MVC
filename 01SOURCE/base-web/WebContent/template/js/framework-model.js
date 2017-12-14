@@ -50,5 +50,17 @@ function HashTable() {
 	return this;
 }
 
-
+function AjaxDataWrap(name){
+	this.name=name;
+	this.setData=function(data){
+		this.data=data;
+	}
+	this.setDataList=function(dataList){
+		this.dataList=dataList;
+	}
+	this.setPageContext=function(pageContext){
+		this.pageContext=pageContext;
+	}
+	return this;
+}
 
