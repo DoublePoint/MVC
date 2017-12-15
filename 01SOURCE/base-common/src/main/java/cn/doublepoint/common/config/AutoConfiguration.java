@@ -35,7 +35,7 @@ public class AutoConfiguration {
 	DataSource dataSource;
 	
 	public AutoConfiguration() {
-		System.out.println("-----测试运行到了AutoConfiguration----");
+		System.out.println("run base-commont AutoConfiguration");
 	}
 
 	@Bean
