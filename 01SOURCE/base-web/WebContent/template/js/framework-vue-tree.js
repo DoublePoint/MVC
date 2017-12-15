@@ -1,6 +1,6 @@
 var documentWriteHtml = "";
 Vue.component(ConstantComponentMap._Tree, {
-	props : [ 'id', 'datasource', 'columns','showLine' ],
+	props : [ 'id', 'datasource', 'columns', 'showLine' ],
 	template : '<ul type="hidden"  :id="id+guid" class="ztree" v-on:click="incrementCounter"></ul>',
 
 	data : function() {
@@ -39,15 +39,17 @@ Vue.component(ConstantComponentMap._Tree, {
 		},
 		_initTreeData : function() {
 			var setting = {
-				view: {
-					showLine: true,
-					fontCss : {"font-size":"30",},
-			showIcon: false,
-			dblClickExpand: true
+				view : {
+					showLine : true,
+					fontCss : {
+						"font-size" : "30",
+					},
+					showIcon : false,
+					dblClickExpand : true
 				},
 				async : {
 					enable : true,
-					showLine:false,
+					showLine : false,
 					url : $$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
 					autoParam : [ "id", "name=n", "level=lv" ],
 					otherParam : {
@@ -61,27 +63,57 @@ Vue.component(ConstantComponentMap._Tree, {
 						children : "childrenCDList"
 					},
 				},
-//				callback : {
-//					onClick : zTreeOnClick
-//				}
 			};
-			$.fn.zTree.init($("#"+this._getTreeDomId()+""), setting);
+			$.fn.zTree.init($("#" + this._getTreeDomId() + ""), setting);
 		}
 
 	},
 })
 
-
 function AjaxTree(domId) {
 	this.id = domId;
-	this.treeObject=null;
-	this.getTreeObject=function(){
-		if(this.treeObject==null)
-			treeObject=$.fn.zTree.getZTreeObj(this.id);
+	this.treeObject = null;
+	this.setting = {
+		view : {
+			showLine : true,
+			fontCss : {
+				"font-size" : "30",
+			},
+			showIcon : false,
+			dblClickExpand : true
+		},
+		async : {
+			enable : true,
+			showLine : false,
+			url : $$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
+			autoParam : [ "id", "name=n", "level=lv" ],
+			otherParam : {
+				"otherParam" : "zTreeAsyncTest"
+			},
+			dataFilter : this.filter
+		},
+		data : {
+			key : {
+				name : "cdmc",
+				title : "cdmc",
+				url : "cdbs",
+				children : "childrenCDList"
+			},
+		},
+	};
+	this.getTreeObject = function() {
+		if (this.treeObject == null)
+			treeObject = $.fn.zTree.getZTreeObj(this.id);
 		return treeObject;
 	}
-	this.getSelectedNodes=function(){
+	this.getSelectedNodes = function() {
 		return this.getTreeObject().getSelectedNodes();
+	}
+	this.setData = function(data) {
+		$.fn.zTree.init($("#" + this.id() + ""), this.setting);
+	}
+	this.setSetting = function(setting) {
+		this.setting = setting;
 	}
 	return this;
 }

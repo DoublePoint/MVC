@@ -40,7 +40,7 @@
 			<div class="layui-side layui-bg-black" id="admin-side" >
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=false"></ll-menu>
+					 <ll-menu id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=false"></ll:menu>
 				</div>
 			</div>
 

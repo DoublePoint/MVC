@@ -51,12 +51,18 @@ function HashTable() {
 }
 
 function AjaxDataWrap(name) {
-	this.name = name;
+//	this.name = name;
 	this.setData = function(data) {
 		this.data = data;
 	}
+	this.getData=function(){
+		return this.data;
+	}
 	this.setDataList = function(dataList) {
 		this.dataList = dataList;
+	}
+	this.getDataList=function(){
+		return this.dataList;
 	}
 	this.setPageContext = function(pageContext) {
 		this.pageContext = pageContext;

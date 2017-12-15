@@ -1,5 +1,11 @@
 function init(response){
-	var data=response;
+	var treeNode=response.getData("clickNode");
+	var cdbs=treeNode.cdbs;
+	var cdmc=treeNode.cdmc;
+//	if(cdbs==null||cdbs==""){
+//		cdmc==null;
+//	}
+	$("#sjcdbs").val(cdbs);
 }
 
 // 日期
@@ -33,7 +39,6 @@ $form.on('submit(demo1)', function(data) {
 		// dataType : "JSON",
 		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
 		url : $$pageContextPath + "/template/xt/cd/add",
-		// data : data.field,
 		data : JSON.stringify(data.field) + "",
 		success : function(data1) {
 			// 提示层

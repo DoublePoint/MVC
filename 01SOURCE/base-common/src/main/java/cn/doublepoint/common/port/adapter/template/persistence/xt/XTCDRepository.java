@@ -40,4 +40,6 @@ public interface XTCDRepository extends JpaRepository<T_XT_CD,String>{
 	 */
 	@Query("select cd from T_XT_CD cd where cd.sjcdbs=:sjcdbs  order by cd.cdpx")
 	public List<T_XT_CD> findChildrenXTCD(@Param("sjcdbs") String sjcdbs); 
+	
+	public T_XT_CD findByCdbs(String cdbs);
 }

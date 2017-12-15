@@ -8,9 +8,8 @@ function onClickAdd() {
 	} else {
 		cdbs = nodes[0].cdbs;
 	}
-	var ajaxDataWrap=new AjaxDataWrap("test");
+	var ajaxDataWrap=new AjaxDataWrap();
 	ajaxDataWrap.setData(nodes[0]);
-	
 	$._OpenDialog({
 		type : 2,
 		title : "添加菜单",
