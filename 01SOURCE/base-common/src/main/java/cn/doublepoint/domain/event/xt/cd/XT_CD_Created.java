@@ -1,14 +1,14 @@
 /** 
 * 创   建   人： 刘磊
 * 
-* 创   建   时   间 ： 2017年11月18日
+* 创   建   时   间 ： 2017年12月15日
 * 
 * 类   说   明 ：
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.port.adapter.template.service.xt;
+package cn.doublepoint.domain.event.xt.cd;
 
-public class BaseTree {
+public class XT_CD_Created {
 
 }

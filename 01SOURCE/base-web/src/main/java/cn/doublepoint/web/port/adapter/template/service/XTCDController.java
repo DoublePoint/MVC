@@ -1,4 +1,4 @@
-package cn.doublepoint.port.adapter.template.service.xt;
+package cn.doublepoint.web.port.adapter.template.service;
 
 import java.util.ArrayList;
 import java.util.List;
