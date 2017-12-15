@@ -24,7 +24,9 @@
 		<property name="prefix" value="/template" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	
+	<bean id="autoConfig" class="cn.doublepoint.common.config.AutoConfiguration"></bean>
+	
 	<mvc:resources location="/images/" mapping="/images/**" />
 	<mvc:resources location="/script/" mapping="/script/**" />
 	<!--处理静态资源 -->

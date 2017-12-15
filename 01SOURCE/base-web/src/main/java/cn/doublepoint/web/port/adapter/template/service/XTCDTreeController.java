@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.application.template.xt.XTCDQueryService;
-import cn.doublepoint.domain.model.viewmodel.xt.VT_XT_CD;
+import cn.doublepoint.common.application.template.xt.XTCDQueryService;
+import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 
 @Controller
 @RequestMapping("/template/xt")

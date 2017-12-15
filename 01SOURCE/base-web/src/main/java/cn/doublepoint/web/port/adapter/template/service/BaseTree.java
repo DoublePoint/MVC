@@ -9,6 +9,8 @@
 */ 
 package cn.doublepoint.web.port.adapter.template.service;
 
-public class BaseTree {
+import cn.doublepoint.common.BaseController;
+
+public class BaseTree  implements BaseController{
 
 }

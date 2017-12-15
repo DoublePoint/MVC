@@ -16,8 +16,10 @@ package cn.doublepoint.web.port.adapter.template.service;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cn.doublepoint.common.BaseController;
+
 @Controller
-public class MainPageController {
+public class MainPageController implements BaseController {
 
 	@RequestMapping(value="/index")
 	public String hello(){

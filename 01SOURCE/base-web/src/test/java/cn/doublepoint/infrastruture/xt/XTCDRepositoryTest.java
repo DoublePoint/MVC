@@ -19,9 +19,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
-import cn.doublepoint.domain.model.entity.xt.T_XT_CD;
-import cn.doublepoint.port.adapter.template.persistence.xt.XTCDRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-context.xml" })
