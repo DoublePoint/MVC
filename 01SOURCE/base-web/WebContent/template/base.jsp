@@ -23,6 +23,10 @@
 	$laydate = layui.laydate;
 	$tree = layui.tree;
 	$table = layui.table;
+	$layer.config({
+		  extend: 'frameworkskin/dialogStyle.css', //加载您的扩展样式
+		  skin: 'layui-layer-iframe'
+	}); 
 </script>
 <script src="https://unpkg.com/vue"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layout.js" charset="utf-8"></script>
@@ -32,6 +36,8 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-datagridrow.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tree.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-menu.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxform.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-formfield.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>

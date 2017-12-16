@@ -15,7 +15,12 @@ var ConstantComponentMap={
 		_Tree:"ll-tree",
 		_LayOut:"ll-filllayout",
 		_LayOutFieldH:"ll-fillarea",
-		_LayOutFieldV:"ll-fillarea2"
+		_LayOutFieldV:"ll-fillarea2",
+		_AjaxForm:"ll-ajaxform",
+		_FormField:"ll-formfield",
+		_FormCheck:"ll-formcheck",
+		_FormDate:"ll-formdate",
+		_FormInputButton:"ll-forminputbutton"
 };
 var ConstantPageDefaultParam={
 	_IS_DO_INIT_FUNTION:"_is_do_init_function",

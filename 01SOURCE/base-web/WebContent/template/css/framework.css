@@ -2,6 +2,10 @@ html,body,form {
 	height: 100%;
 	width: 100%;
 }
+form form {
+	height: 0;
+	width: 100%;
+}
 .layui-layout-body form{
 	min-width:1000px;
 }
@@ -151,9 +155,13 @@ a {
 	/* background: #1AA094; */
 }
 .navMenu>li>ul.sub-menu>li>ul.sub-menu>li>ul.sub-menu {
-	display: none;
+	disp lay: none;
 	list-style: none;
 	clear: both;
 	margin: 8px 0px 0px 10px;
 	padding-bottom: 5px;
 }
+/* µ¯´°µÄajaxform */
+.layui-layer-title{
+	margin-bottom:15px;
+} 
