@@ -13,6 +13,9 @@ var DoublePoint = {};// 全局对象
 				_LayuiObjectHashMap.add(id, obj);
 			}
 		},
+		_GetFromLayuiObjectHashMap : function(id) {
+			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
+		},
 		//根据函数名进行方法调用
 		_Eval:function(fuc){
 			eval(fuc);
@@ -26,9 +29,7 @@ var DoublePoint = {};// 全局对象
 			});
 			return uuid;
 		},
-		_GetFromLayuiObjectHashMap : function(id) {
-			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
-		},
+		
 		_RegisterResizeModel:function(model){
 			if(_RegisteredModel==null)
 				_RegisteredModel=new Array();

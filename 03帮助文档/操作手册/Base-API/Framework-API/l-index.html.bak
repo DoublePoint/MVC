@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="l-css/ll-bootstrap.css" rel="stylesheet">
+
+<link href="l-css/all.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div  id="navbar" class="navbar" >
+			
+		</div>
+	<div class="container">
+		
+		<div class="row">
+			<div id="navid" class="layui-col-xs3">
+				
+			</div>
+			<div class="layui-col-xs9">
+				<div class="h1">
+					<span>该API是什么</span>
+				</div>
+				<div class="h2">
+					<span class="property">说明</span> <br />
+					<div class="content">该文档面向的是框架开发人猿，并非使用本框架的项目开发人猿，为了方便后续的框架工作，特编写本API，简以之描述框架中定义的各个文件的意义，建议之描述各个文件中定义的或函数、或对象、或控件的使用方式、使用场景。</div>
+				</div>
+				<div class="h2">
+					<span class="property">文件描述</span> <br />
+					<table class="dataintable">
+						<tr>
+							<th>文件名</th>
+							<th>位置</th>
+							<th>说明</th>
+						</tr>
+						<tr>
+							<td><a href="#">cols<a></td>
+							<td>有关表格的列属性，包含列宽，列绑定的字段。列的title</td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				
+
+				
+			</div>
+			<div class="span9">
+
+				<ul class="pager">
+					<li class="next"><a href="activity.htm">More &rarr;</a></li>
+				</ul>
+				<ul class="pager">
+					<li class="next">More Templates <a
+						href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+						- Collect from <a href="http://www.cssmoban.com/" title="网页模板"
+						target="_blank">网页模板</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<script src="l-js/jquery.min.js"></script>
+<script src="l-js/ll-bootstrap.js"></script>
+</body>
+
+</html>

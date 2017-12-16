@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="l-css/ll-bootstrap.css" rel="stylesheet">
+
+<link href="l-css/all.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+	.tdConstantName{
+		font-weight:bold;
+		color:black;	
+		vertical-align: middle;
+		background-color:#FFFF00;
+		text-align:left;
+	}
+</style>
+</head>
+
+<body>
+	<div  id="navbar" class="navbar" >
+			
+	</div>
+	<div class="container" >
+		<div class="row" >
+			<div id="navid" class="span3">
+				
+			</div>
+			<div class="span9">
+				<div class="h1">
+					<span>framework-jquery.js</span>
+				</div>
+				<div class="h2">
+					<span class="property">说明</span> <br />
+					<div class="content">对jqeury的函数进行了扩展</div>
+				</div>
+				<div class="h2">
+					<span class="property">属性</span> <br />
+					
+					<table class="dataintable" >
+						<tr >
+							<th >名称</th>
+							<th >参数</th>
+							<th >说明</th>
+							<th >返回类型</th>
+						</tr>
+						<tr>
+							<td>_AddToLayuiObjectHashMap</td>
+							<td>id, obj</td>
+							<td>以键值对的方式向HashMap中添加一条数据，如果不存在则添加，否则更新，操作的作用用于将自定义标签中的id与该对象进行绑定，例如自定义标签ll-AjaxDataGrid标签的id为grid1,则id为grid1,obj为AjaxDataGrid对象</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>_GetFromLayuiObjectHashMap</td>
+							<td>id, obj</td>
+							<td>获取_AddToLayuiObjectHashMap方法添加的数据</td>
+							<td>对象实例，例如AjaxDataGrid,AjaxMenu等</td>
+						</tr>
+						<tr>
+							<td>_Eval</td>
+							<td>fuc</td>
+							<td>获取fuc这个方法名对方法进行调用，相当于java的invoke</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>_GenerateUUID</td>
+							<td></td>
+							<td>自动生成UUID</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>_RegisterResizeModel</td>
+							<td>model</td>
+							<td>向上下文中注册该对象，以便在浏览器大小发生改变时重新对该对象进行调整</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>_GetRegisteredResizeModel</td>
+							<td></td>
+							<td>获取上下文中注册的对象，以便在浏览器大小发生改变时重新对该对象进行调整</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>_SetLayuiTableData</td>
+							<td></td>
+							<td>设置ajaxDataGrid的数据</td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td>_OpenDialog</td>
+							<td></td>
+							<td>打开弹窗</td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td>_GetRequestParam</td>
+							<td>paramName</td>
+							<td>根据参数名获取URL中的请求参数</td>
+							<td>参数值</td>
+						</tr>
+						
+					</table>
+				</div>
+			</div>
+			<div class="span9">
+
+				<ul class="pager">
+					<li class="next"><a href="activity.htm">More &rarr;</a></li>
+				</ul>
+				<ul class="pager">
+					<li class="next">More Templates <a
+						href="http：//www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+						- Collect from <a href="http：//www.cssmoban.com/" title="网页模板"
+						target="_blank">网页模板</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<script src="l-js/jquery.min.js"></script>
+<script src="l-js/ll-bootstrap.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="l-css/ll-bootstrap.css" rel="stylesheet">
+
+<link href="l-css/all.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	table,tbody{
+		display:inline-block;
+		over-flow：hidden;
+	}	
+	td{
+		word-wrap：break-word;
+	}
+	td:nth-child(1){
+		min-width：100px;
+	}
+	td:nth-child(3){
+		min-width：60px;
+	}
+	td:nth-child(4){
+		min-width：60px;
+	}
+	td:nth-child(5){
+		min-width：60px;
+		word-wrap：break-word;
+		word-break：break-all;
+	}
+	.tdConstantName{
+		font-weight：bold;
+		color：black;	
+		vertical-align： middle;
+		background-color：#FFFF00;
+		text-align：left;
+	}
+</style>
+</head>
+
+<body>
+	<div  id="navbar" class="navbar" >
+			
+	</div>
+	<div class="container" >
+		<div class="row" >
+			<div id="navid" class="span3">
+				
+			</div>
+			<div class="span9">
+				<div class="h1">
+					<span>framework-constant.js</span>
+				</div>
+				<div class="h2">
+					<span class="property">说明</span> <br />
+					<div class="content">定义了框架所用到的一些常量，例如表格的列默认宽度常量、树结构是否显示连接线等</div>
+				</div>
+				<div class="h2">
+					<span class="property">属性</span> <br />
+					
+					<table class="dataintable" >
+						<tr >
+							
+							<th >常量名</th>
+							<th >说明</th>
+							<th >类型</th>
+							<th >可选值</th>
+							<th> 默认值 </th>
+						</tr>
+						<!-----------------------------ConstantAjaxDataGrid------------------------>
+						<tr><td class="tdConstantName" colspan="5">ConstantAjaxDataGrid：关于AjaxDataGrid的一些常量</td></tr>
+						<tr>
+							<td>DEFAULT_COLUMN_WIDTH</td>
+							<td>AjaxDataGrid默认列宽</td>
+							<td>int</td>
+							<td></td>
+							<td>180</td>
+						</tr>
+						
+						<tr>
+							<td>DEFAULT_COLUMN_SORT</td>
+							<td>AjaxDataGrid默认列是否排序</td>
+							<td>boolean</td>
+							<td>true、false</td>
+							<td>false</td>
+						</tr>
+						
+						<tr>
+							<td>DEFAULT_COLUMN_FIXED</td>
+							<td>AjaxDataGrid默认列是否固定</td>
+							<td>boolean</td>
+							<td>true、false</td>
+							<td>false</td>
+						</tr>
+						
+						<tr>
+							<td>DEFAULT_MIN_HEIGHT</td>
+							<td>AjaxDataGrid默认行的最小高度</td>
+							<td>int</td>
+							<td></td>
+							<td>100</td>
+						</tr>
+						<!-----------------------------ConstantLayoutArea------------------------>
+						<tr><td class="tdConstantName" colspan="5">ConstantLayoutArea：关于栅栏LayoutArea的一些常量</td></tr>
+						<tr>
+							
+							<td>DEFAULT_MIN_HEIGHT</td>
+							<td>LayoutArea的默认最小高度</td>
+							<td>int</td>
+							<td></td>
+							<td>ConstantAjaxDataGrid.DEFAULT_MIN_HEIGHT,默认取值为表格的默认最小高度</td>
+						</tr>
+						<!-----------------------------ConstantComponentMap------------------------>
+						<tr><td class="tdConstantName" colspan="5">ConstantComponentMap：关于自定义标签的一些常量</td></tr>
+						<tr>
+							
+							<td>_AjaxDataGrid</td>
+							<td>自定义标签（AjaxDataGrid）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-ajaxdatagrid</td>
+						</tr>
+						
+						<tr>
+							<td>_AjaxDataGridRow</td>
+							<td>自定义标签（AjaxDataGridRow）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-gridrow</td>
+						</tr>
+						
+						<tr>
+							<td>_AjaxMenu</td>
+							<td>自定义标签（AjaxMenu）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-menu</td>
+						</tr>
+						
+						<tr>
+							<td>_AjaxForm</td>
+							<td>自定义标签（AjaxForm）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-ajaxform</td>
+						</tr>
+						
+						<tr>
+							<td>_Tree</td>
+							<td>自定义标签（Tree）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-tree</td>
+						</tr>
+						
+						<tr>
+							<td>_LayOut</td>
+							<td>自定义标签（LayOut）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-filllayout</td>
+						</tr>
+						
+						<tr>
+							<td>_LayOutFieldH</td>
+							<td>自定义标签（LayOutFieldH）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-fillarea</td>
+						</tr>
+						
+						<tr>
+							<td>_AjaxMenu</td>
+							<td>自定义标签（AjaxMenu）的默认标签名称</td>
+							<td>string</td>
+							<td></td>
+							<td>ll-menu</td>
+						</tr>
+						<!-----------------------------ConstantPageDefaultParam------------------------>
+						<tr><td class="tdConstantName" colspan="5">ConstantPageDefaultParam：关于页面请求参数的一些常量</td></tr>
+						<tr>
+							
+							<td>_IS_DO_INIT_FUNTION</td>
+							<td>请求地址的参数名，是否调用页面中的init方法</td>
+							<td>int</td>
+							<td></td>
+							<td>_is_do_init_function</td>
+						</tr>
+						<!-----------------------------ConstantState------------------------>
+						<tr><td class="tdConstantName" colspan="5">ConstantState：关于常用状态的一些常量</td></tr>
+						<tr>
+							<td>_YES_NO_STATE_Y</td>
+							<td>请求地址的参数名，是否调用页面中的init方法</td>
+							<td>string</td>
+							<td></td>
+							<td>Y</td>
+						</tr>
+						<tr>
+							<td>_YES_NO_STATE_N</td>
+							<td>请求地址的参数名，是否调用页面中的init方法</td>
+							<td>string</td>
+							<td></td>
+							<td>N</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="span9">
+
+				<ul class="pager">
+					<li class="next"><a href="activity.htm">More &rarr;</a></li>
+				</ul>
+				<ul class="pager">
+					<li class="next">More Templates <a
+						href="http：//www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+						- Collect from <a href="http：//www.cssmoban.com/" title="网页模板"
+						target="_blank">网页模板</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<script src="l-js/jquery.min.js"></script>
+<script src="l-js/ll-bootstrap.js"></script>
+</body>
+
+</html>

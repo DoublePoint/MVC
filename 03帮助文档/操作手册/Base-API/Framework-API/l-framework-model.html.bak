@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="l-css/ll-bootstrap.css" rel="stylesheet">
+
+<link href="l-css/all.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+	.tdConstantName{
+		font-weight:bold;
+		color:black;	
+		vertical-align: middle;
+		background-color:#FFFF00;
+		text-align:left;
+	}
+</style>
+</head>
+
+<body>
+	<div  id="navbar" class="navbar" >
+			
+	</div>
+	<div class="container" >
+		<div class="row" >
+			<div id="navid" class="span3">
+				
+			</div>
+			<div class="span9">
+				<div class="h1">
+					<span>framework-model.js</span>
+				</div>
+				<div class="h2">
+					<span class="property">说明</span> <br />
+					<div class="content">定义了js中一些常用类，例如HashTable、AjaxDataWrap等</div>
+				</div>
+				<div class="h2">
+					<span class="property">属性</span> <br />
+					
+					<table class="dataintable" >
+						<tr >
+							
+							<th >名称</th>
+							<th >参数</th>
+							<th >说明</th>
+							<th >返回类型</th>
+						</tr>
+						<!-----------------------------HashTable------------------------>
+						<tr><td class="tdConstantName" colspan="5">HashTable：类似Java中的HashTable</td></tr>
+						<tr>
+							<td>add</td>
+							<td>key, value</td>
+							<td>以键值对的方式向对象中添加一条数据，如果不存在则添加，否则更新</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>getValue</td>
+							<td>key</td>
+							<td>根据键返回值，如果不存在返回null</td>
+							<td>value</td>
+						</tr>
+						<tr>
+							<td>remove</td>
+							<td>key</td>
+							<td>根据键删除该条数据</td>
+							<td></td>
+						</tr>
+							<tr>
+							<td>containsKey</td>
+							<td>key</td>
+							<td>判断是否包含该键</td>
+							<td>存在返回true,否则返回false</td>
+						</tr>
+							<tr>
+							<td>containsValue</td>
+							<td>value</td>
+							<td>判断是否包含该值</td>
+							<td>存在返回true,否则返回false</td>
+						</tr>
+						<tr>
+							<td>getValues</td>
+							<td></td>
+							<td>获取所有的value值</td>
+							<td>Array类型的value值</td>
+						</tr>
+						<tr>
+							<td>getKeys</td>
+							<td></td>
+							<td>获取所有的key值</td>
+							<td>Array类型的key值</td>
+						</tr>
+						<tr>
+							<td>getSize</td>
+							<td></td>
+							<td>获取键值对的个数</td>
+							<td>键值对的个数</td>
+						</tr>
+						<tr>
+							<td>clear</td>
+							<td></td>
+							<td>清空所有的键值对</td>
+							<td></td>
+						</tr>
+						<!-----------------------------AjaxDataWrap------------------------>
+						<tr><td class="tdConstantName" colspan="5">AjaxDataWrap：页面之间、前后台使用该对象进行数据传递</td></tr>
+						<tr>
+							<td>setData</td>
+							<td>data</td>
+							<td>设置该对象的data</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>getData</td>
+							<td></td>
+							<td>获取该键值对的data</td>
+							<td>data</td>
+						</tr>
+							<tr>
+							<td>setDataList</td>
+							<td>dataList</td>
+							<td>设置该对象的datalist</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>getDataList</td>
+							<td></td>
+							<td>获取该键值对的dataList</td>
+							<td>dataList</td>
+						</tr>
+						<tr>
+							<td>setPageContext</td>
+							<td>pageContext</td>
+							<td>设置该对象的页面属性</td>
+							<td>dataList</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="span9">
+
+				<ul class="pager">
+					<li class="next"><a href="activity.htm">More &rarr;</a></li>
+				</ul>
+				<ul class="pager">
+					<li class="next">More Templates <a
+						href="http：//www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+						- Collect from <a href="http：//www.cssmoban.com/" title="网页模板"
+						target="_blank">网页模板</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<script src="l-js/jquery.min.js"></script>
+<script src="l-js/ll-bootstrap.js"></script>
+</body>
+
+</html>
