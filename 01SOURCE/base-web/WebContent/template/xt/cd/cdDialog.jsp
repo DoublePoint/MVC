@@ -25,8 +25,16 @@
 </head>
 <body>
 	<form style="width:98%;">
-		<ll-ajaxform id="ajaxform1"> 
-			<ll-formfield title="菜单名称" field="cdmc" ></ll-formfield>
+		<ll-ajaxform id="ajaxform1" style="padding-top:15px;"> 
+			<ll-formfield title="菜单名称" field="cdmc"  ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
+			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
 			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
 			<ll-formfield title="菜单序号" field="cdxh" ></ll-formfield>
 			<ll-formfield title="上级菜单" field="sjcd" ></ll-formfield>

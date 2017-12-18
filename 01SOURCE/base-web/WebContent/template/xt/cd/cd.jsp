@@ -27,6 +27,8 @@
 		<div class="layui-row " style="height:100%;">
 			<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
 				<ll-tree  id="treeDemo" showLine="true"></ll-tree>
+				<input type="text" id="treeselecttest" placeholder="模块" autocomplete="off" class="layui-input">
+							
 			</div>
 			<div class="layui-col-xs10 layui-col-sm10 layui-col-md10" >
 				<ll-filllayout > 
@@ -34,11 +36,13 @@
 						<div class="layui-btn-group" style="height: 39px; padding-top: 1px;">
 							<input type="button" class="layui-btn" onclick="onClickAdd()" value="增加"/>
 							<input type="button" class="layui-btn " value="编辑"/>
+							
 							<input type="button" class="layui-btn" onclick="onClickDelete()" value="删除"/>
 						</div>
 					</ll-fillarea>
 					<ll-fillarea height="*" >
 						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" datasource="/template/xt/cdDataList"> 
+					
 							<ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow>
 							<ll-gridrow field="cdmc" title="菜单名称"></ll-gridrow> 
 							<ll-gridrow field="cdpx" title="菜单排序"></ll-gridrow> 

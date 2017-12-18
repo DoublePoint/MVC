@@ -1,27 +1,25 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-12-18 17:30:962                      
+* 创   建   时   间 ：2017-12-18 17:30:914                      
 *                                                                 
-* 类   说   明 ：     系统权限    
+* 类   说   明 ：     系统管理员    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package cn.doublepoint.common.domain.model.entity.xt;  
+package cn.doublepoint.domain.model.entity.xt;  
                                                                   
                                                                   
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import cn.doublepoint.common.domain.model.entity.BaseEntity;
+import javax.persistence.Column;                                  
+import javax.persistence.Entity;                                  
+import javax.persistence.Id;                                      
+import javax.persistence.Table;                                      
+import java.math.BigDecimal;
+import java.sql.Timestamp;
     
 @Entity                                                           
-@Table(name="XT_QX")                                                   
-public class T_XT_QX  extends BaseEntity{                                              
+@Table(name="XT_GLY")                                                   
+public class T_XT_GLY  extends BaseEntity{                                              
 	/**                                                                  
 	 *                                                                    
 	 */                                                                  
@@ -29,35 +27,35 @@ public class T_XT_QX  extends BaseEntity{
                                                                   
                                                                   
 	@Id                                                              
-	@Column (name = "qxbs")                                  
-	private String qxbs; //权限标识                                                
+	@Column (name = "glybs")                                  
+	private String glybs; //管理员标识                                                
 	                                                                 
-	public String getQxbs() {                                            
-		return qxbs;                                                     
+	public String getGlybs() {                                            
+		return glybs;                                                     
 	}                                                                
                                                                   
-	public void setQxbs(String qxbs) {                                     
-		this.qxbs = qxbs;                                                  
+	public void setGlybs(String glybs) {                                     
+		this.glybs = glybs;                                                  
 	}                                                                
-	@Column (name = "qxmc")                                  
-	private String qxmc; //权限名称                                                
+	@Column (name = "dlzh")                                  
+	private String dlzh; //登录账号                                                
 	                                                                 
-	public String getQxmc() {                                            
-		return qxmc;                                                     
+	public String getDlzh() {                                            
+		return dlzh;                                                     
 	}                                                                
                                                                   
-	public void setQxmc(String qxmc) {                                     
-		this.qxmc = qxmc;                                                  
+	public void setDlzh(String dlzh) {                                     
+		this.dlzh = dlzh;                                                  
 	}                                                                
-	@Column (name = "qxz")                                  
-	private Long qxz; //权限值                                                
+	@Column (name = "dlmm")                                  
+	private String dlmm; //登录密码                                                
 	                                                                 
-	public Long getQxz() {                                            
-		return qxz;                                                     
+	public String getDlmm() {                                            
+		return dlmm;                                                     
 	}                                                                
                                                                   
-	public void setQxz(Long qxz) {                                     
-		this.qxz = qxz;                                                  
+	public void setDlmm(String dlmm) {                                     
+		this.dlmm = dlmm;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
 	private Date cjsj; //创建时间                                                

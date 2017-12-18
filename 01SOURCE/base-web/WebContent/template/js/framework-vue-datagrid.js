@@ -44,22 +44,22 @@ Vue.component(ConstantComponentMap._AjaxDataGrid, {
 		_initAjaxDataGridData:function(){
 			var cd = {};
 			var domId=this._getAjaxDataGridDomId();
+			var _ajaxdatagrid=$._GetFromLayuiObjectHashMap(domId);
 			$.ajax({
-				url : $$pageContextPath + this.datasource,
+			url : $$pageContextPath + this.datasource,
 				type : "POST",
 				contentType : 'application/json;charset=UTF-8',
 				dataType : "json",
 				data : JSON.stringify(cd),
 				async : false,
 				success : function(data) {
-					var _ajaxdatagrid=$._GetFromLayuiObjectHashMap(domId);
 					_ajaxdatagrid.setData(data);
-//					$._SetLayuiTableData(domId, data, cols);
 				},
 				error : function() {
 					alert("error");
 				}
 			});
+			
 			var str=this.onrowclick
 			$table.on('tool('+this._getAjaxDataGridDomId()+')', function(obj){
 				if(str==null)
@@ -75,12 +75,16 @@ Vue.component(ConstantComponentMap._AjaxDataGrid, {
 
 function AjaxDataGrid(domId) {
 	this.id = domId;
-	this.cols = [ [] ];
+	this.cols = [ [{type:'numbers'},{type:'checkbox'}] ];
 	this.datasource = "";
 	this.data=null;
+	this.height=300;
 	this.init = function(msg) {
 		this.setData();
 	};
+	this.setDataSource=function(ds){
+		this.datasource=ds;
+	}
 	this.setData = function(data) {
 		this.data=data;
 		var parentHeight=$("#"+this.id).parent().height();
@@ -93,7 +97,8 @@ function AjaxDataGrid(domId) {
 			}
 		}
 		var thisResultHeight=$("#"+this.id).parent().parent().height()-allChildFixHeight;
-		$._SetLayuiTableData(this.id, data, this.cols,thisResultHeight);
+		this.height=thisResultHeight;
+		$._SetLayuiTableData(this);
 	};
 	this.resize = function(){
 		var parentHeight=$("#"+this.id).parent().height();
@@ -108,7 +113,8 @@ function AjaxDataGrid(domId) {
 		var thisResultHeight=$("#"+this.id).parent().parent().height()-allChildFixHeight;
 		if(thisResultHeight<=ConstantAjaxDataGrid.DEFAULT_MIN_HEIGHT)
 			thisResultHeight=ConstantAjaxDataGrid.DEFAULT_MIN_HEIGHT;
-		$._SetLayuiTableData(this.id, this.data, this.cols,parentHeight);
+		this.height=thisResultHeight;
+		$._SetLayuiTableData(this);
 	}
 	this.setCols = function(cols) {
 		this.cols = cols;

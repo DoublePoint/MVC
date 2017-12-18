@@ -1,63 +1,54 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-12-18 17:30:962                      
+* 创   建   时   间 ：2017-12-18 17:30:966                      
 *                                                                 
-* 类   说   明 ：     系统权限    
+* 类   说   明 ：     系统公告    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package cn.doublepoint.common.domain.model.entity.xt;  
+package cn.doublepoint.domain.model.valueobject.xt;  
                                                                   
                                                                   
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import cn.doublepoint.common.domain.model.entity.BaseEntity;
-    
-@Entity                                                           
-@Table(name="XT_QX")                                                   
-public class T_XT_QX  extends BaseEntity{                                              
-	/**                                                                  
-	 *                                                                    
-	 */                                                                  
-     private static final long serialVersionUID = 1L;                                                             
-                                                                  
+import javax.persistence.Embeddable;                                  
+import javax.persistence.EnumType;                                  
+import javax.persistence.Enumerated;                                      
+import javax.persistence.Temporal;                                      
+import javax.persistence.TemporalType;                                      
+import com.haiyisoft.billing.common.CalcType;                                      
+@Embeddable                                                           
+public class XT_GG extends BaseValueObject {                                              
                                                                   
 	@Id                                                              
-	@Column (name = "qxbs")                                  
-	private String qxbs; //权限标识                                                
+	@Column (name = "ggbs")                                  
+	private String ggbs; //公告标识                                                
 	                                                                 
-	public String getQxbs() {                                            
-		return qxbs;                                                     
+	public String getGgbs() {                                            
+		return ggbs;                                                     
 	}                                                                
                                                                   
-	public void setQxbs(String qxbs) {                                     
-		this.qxbs = qxbs;                                                  
+	public void setGgbs(String ggbs) {                                     
+		this.ggbs = ggbs;                                                  
 	}                                                                
-	@Column (name = "qxmc")                                  
-	private String qxmc; //权限名称                                                
+	@Column (name = "gglb")                                  
+	private String gglb; //公告类别                                                
 	                                                                 
-	public String getQxmc() {                                            
-		return qxmc;                                                     
+	public String getGglb() {                                            
+		return gglb;                                                     
 	}                                                                
                                                                   
-	public void setQxmc(String qxmc) {                                     
-		this.qxmc = qxmc;                                                  
+	public void setGglb(String gglb) {                                     
+		this.gglb = gglb;                                                  
 	}                                                                
-	@Column (name = "qxz")                                  
-	private Long qxz; //权限值                                                
+	@Column (name = "ggnr")                                  
+	private String ggnr; //公告内容                                                
 	                                                                 
-	public Long getQxz() {                                            
-		return qxz;                                                     
+	public String getGgnr() {                                            
+		return ggnr;                                                     
 	}                                                                
                                                                   
-	public void setQxz(Long qxz) {                                     
-		this.qxz = qxz;                                                  
+	public void setGgnr(String ggnr) {                                     
+		this.ggnr = ggnr;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
 	private Date cjsj; //创建时间                                                

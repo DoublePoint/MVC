@@ -38,12 +38,17 @@ var DoublePoint = {};// 全局对象
 		_GetRegisteredResizeModel:function(){
 			return _RegisteredModel;
 		},
-		_SetLayuiTableData : function(id, data, cols,height) {
+		_SetLayuiTableData : function(ajaxgrid) {
+			var id=ajaxgrid.id;
+			var data=ajaxgrid.data;
+			var datasource=ajaxgrid.datasource;
+			var cols=ajaxgrid.cols;
+			var height=ajaxgrid.height;
 			var ss=$table.render({
 				elem : '#' + id + '',
 				data : data,
 				height : height,
-				cols : cols,
+				cols :cols ,
 				skin : 'row', // 表格风格
 				even : true,
 				page : true, // 是否显示分页
@@ -51,7 +56,7 @@ var DoublePoint = {};// 全局对象
 				limit : 50
 			// 每页默认显示的数量
 			});
-			return ss;
+			return ss; 
 		},
 		_OpenDialog:function(obj){
 			var url=obj.content;

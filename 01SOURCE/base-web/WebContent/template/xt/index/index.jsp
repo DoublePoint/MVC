@@ -68,6 +68,7 @@
 				<div class="layui-main">
 					<p>
 						2017 &copy; <a href="http://m.zhengjinfan.cn/">997820126@qq.com/</a>
+						<input type="text" id="treeselecttest" placeholder="模块" autocomplete="off" class="layui-input">
 					</p>
 				</div>
 			</div>
