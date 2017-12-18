@@ -42,9 +42,9 @@ Vue.component(ConstantComponentMap._Tree, {
 				view : {
 					showLine : true,
 					fontCss : {
-						"font-size" : "30",
+						"font" : "14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif",
 					},
-					showIcon : false,
+					showIcon : true,
 					dblClickExpand : true
 				},
 				async : {

@@ -27,8 +27,6 @@
 		<div class="layui-row " style="height:100%;">
 			<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
 				<ll-tree  id="treeDemo" showLine="true"></ll-tree>
-				<input type="text" id="treeselecttest" placeholder="模块" autocomplete="off" class="layui-input">
-							
 			</div>
 			<div class="layui-col-xs10 layui-col-sm10 layui-col-md10" >
 				<ll-filllayout > 
