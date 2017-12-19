@@ -1,5 +1,5 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._AjaxDataGrid, {
+Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	props : [ 'id', 'datasource', 'columns','onrowclick' ],
 	template : '<table  :lay-filter="id+guid"  :id="id+guid" v-on:click="incrementCounter"><slot></slot></table>',
 
@@ -111,8 +111,8 @@ function AjaxDataGrid(domId) {
 			}
 		}
 		var thisResultHeight=$("#"+this.id).parent().parent().height()-allChildFixHeight;
-		if(thisResultHeight<=ConstantAjaxDataGrid.DEFAULT_MIN_HEIGHT)
-			thisResultHeight=ConstantAjaxDataGrid.DEFAULT_MIN_HEIGHT;
+		if(thisResultHeight<=_ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
+			thisResultHeight=_ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height=thisResultHeight;
 		$._SetLayuiTableData(this);
 	}
@@ -133,9 +133,9 @@ function AjaxDataGridColumns(field, title, width, sort, fixed, event) {
 	this.field = field;
 	this.title = title;
 	this.event = "CLICK";
-	this.width = width == null ? ConstantAjaxDataGrid.DEFAULT_COLUMN_WIDTH : width;
-	this.sort = sort == null ? ConstantAjaxDataGrid.DEFAULT_COLUMN_SORT : sort;
-	this.fixed = fixed == null ? ConstantAjaxDataGrid.DEFAULT_COLUMN_FIXED : fixed;
+	this.width = width == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_WIDTH : width;
+	this.sort = sort == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_SORT : sort;
+	this.fixed = fixed == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_FIXED : fixed;
 
 	return this;
 }

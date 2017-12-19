@@ -2,35 +2,14 @@ function init(response){
 	var treeNode=response.getData("clickNode");
 	var cdbs=treeNode.cdbs;
 	var cdmc=treeNode.cdmc;
-//	if(cdbs==null||cdbs==""){
-//		cdmc==null;
-//	}
 	$("#sjcdbs").val(cdbs);
+	cdmcId.setData(cdmc);
+	alert(1);
+	ajaxform1.setFieldValue("cdxh","ajaxform");
 }
 
-// 日期
-$laydate.render({
-	elem : '#date'
-});
-$laydate.render({
-	elem : '#date1'
-});
 
-// 创建一个编辑器
-var editIndex = $layedit.build('LAY_demo_editor');
 
-// 自定义验证规则
-$form.verify({
-	title : function(value) {
-		if (value.length < 5) {
-			return '标题至少得5个字符啊';
-		}
-	},
-	pass : [ /(.+){6,12}$/, '密码必须6到12位' ],
-	content : function(value) {
-		$layedit.sync(editIndex);
-	}
-});
 
 // 监听提交
 $form.on('submit(demo1)', function(data) {

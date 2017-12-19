@@ -1,5 +1,5 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._LayOutFieldH, {
+Vue.component(_ConstantComponentMap._LayOutFieldH, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
 	template : '<div  :id="id+guid" :style="\'width:\'+layOutWidth+\';height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
 
@@ -85,8 +85,8 @@ function FillArea(id) {
 		}
 //		this.layOutHeight = (parentheight - allChildFixHeight).toString() + "px";
 		var thisRuleHright=parentheight - allChildFixHeight;
-		if(thisRuleHright<ConstantLayoutArea.DEFAULT_MIN_HEIGHT)
-			thisRuleHright=ConstantLayoutArea.DEFAULT_MIN_HEIGHT;
+		if(thisRuleHright<_ConstantLayoutArea._DEFAULT_MIN_HEIGHT)
+			thisRuleHright=_ConstantLayoutArea._DEFAULT_MIN_HEIGHT;
 		$("#" + this.id).height(thisRuleHright);
 		$("#" + id).width("100%");
 	}

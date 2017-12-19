@@ -1,4 +1,4 @@
-Vue.component(ConstantComponentMap._AjaxDataGridRow, {
+Vue.component(_ConstantComponentMap._AjaxDataGridRow, {
 	props : [ 'field', 'title', 'width', 'sort', 'fixed','onclick' ],
 	template : '<th type="hidden" :id="baseId+guid" :field="field" :width="width" :sort="sort" :fixed="fixed"/></th>',
 	data : function() {

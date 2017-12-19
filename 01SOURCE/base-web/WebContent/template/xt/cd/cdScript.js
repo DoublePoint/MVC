@@ -3,12 +3,12 @@ function onClickAdd() {
 	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
 	var nodes = treeDemo.getSelectedNodes();
 	if (nodes.length == 0) {
-		alert("请选择父节点");
+		$._ShakeTips("请选择父节点");
 		return;
 	} else {
 		cdbs = nodes[0].cdbs;
 	}
-	var ajaxDataWrap=new AjaxDataWrap();
+	var ajaxDataWrap = new AjaxDataWrap();
 	ajaxDataWrap.setData(nodes[0]);
 	$._OpenDialog({
 		type : 2,
@@ -19,15 +19,16 @@ function onClickAdd() {
 		shadeClose : true,
 		maxmin : true,
 		content : $$pageContextPath + '/template/xt/cdDialog',
-		data:ajaxDataWrap,
-		succeed: function(){
+		data : ajaxDataWrap,
+		succeed : function() {
 			alert(111);
 		}
 	});
+
 	return false;
 }
 function onClickDelete() {
-	$layer.confirm('确定要删除吗？', {
+	parent.$layer.confirm('确定要删除吗？', {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
@@ -128,45 +129,5 @@ function zTreeOnClick(event, treeId, treeNode) {
 };
 
 function init() {
-}
-
-function clicktest() {
-	var data = [ {
-		"cdbs" : "381933362605981696",
-		"cdmc" : "菜单管理",
-		"sjcdbs" : "1",
-		"cdcj" : 1,
-		"cdpx" : 1,
-		"gxsj" : null,
-		"cjsj" : null,
-		"childrenCDList" : null,
-		"LAY_TABLE_INDEX" : 0
-	},{
-		"cdbs" : "381933362605981696",
-		"cdmc" : "菜单管理",
-		"sjcdbs" : "1",
-		"cdcj" : 1,
-		"cdpx" : 1,
-		"gxsj" : null,
-		"cjsj" : null,
-		"childrenCDList" : null,
-		"LAY_TABLE_INDEX" : 0
-	} ,{
-		"cdbs" : "381933362605981696",
-		"cdmc" : "菜单管理",
-		"sjcdbs" : "1",
-		"cdcj" : 1,
-		"cdpx" : 1,
-		"gxsj" : null,
-		"cjsj" : null,
-		"childrenCDList" : null,
-		"LAY_TABLE_INDEX" : 0
-	}  ];
-//	lltestdatagrid.setCols(columnsVar2);
-	lltestdatagrid.setData(data);
-}
-
-
-function rowClickTest(){
-	alert("rowClickTest");
+	
 }

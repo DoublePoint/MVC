@@ -1,5 +1,5 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._Tree, {
+Vue.component(_ConstantComponentMap._Tree, {
 	props : [ 'id', 'datasource', 'columns', 'showLine' ],
 	template : '<ul type="hidden"  :id="id+guid" class="ztree" v-on:click="incrementCounter"></ul>',
 
@@ -22,6 +22,7 @@ Vue.component(ConstantComponentMap._Tree, {
 		_addTreeToMap : function() {
 			var domId = this._getTreeDomId();
 			var tree = new AjaxTree(domId);
+			tree.setDataSource($$pageContextPath+this.datasource);
 			$._AddToLayuiObjectHashMap(domId, tree);
 		},
 		// 添加生命Tree对象脚本
@@ -38,54 +39,30 @@ Vue.component(ConstantComponentMap._Tree, {
 			return _domId;
 		},
 		_initTreeData : function() {
-			var setting = {
-				view : {
-					showLine : true,
-					fontCss : {
-						"font" : "14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif",
-					},
-					showIcon : true,
-					dblClickExpand : true
-				},
-				async : {
-					enable : true,
-					showLine : false,
-					url : $$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
-					autoParam : [ "id", "name=n", "level=lv" ],
-					otherParam : {
-						"otherParam" : "zTreeAsyncTest"
-					},
-					dataFilter : this.filter
-				},
-				data : {
-					key : {
-						name : "cdmc",
-						children : "childrenCDList"
-					},
-				},
-			};
-			$.fn.zTree.init($("#" + this._getTreeDomId() + ""), setting);
+			var domid=this._getTreeDomId();
+			var tree=$._GetFromLayuiObjectHashMap(domid);
+			tree.render();
 		}
-
 	},
 })
 
 function AjaxTree(domId) {
 	this.id = domId;
 	this.treeObject = null;
+	this.datasource=null;
 	this.setting = {
 		view : {
 			showLine : true,
 			fontCss : {
 				"font-size" : "30",
 			},
-			showIcon : false,
+			showIcon : true,
 			dblClickExpand : true
 		},
 		async : {
 			enable : true,
-			showLine : false,
-			url : $$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
+			showLine : true,
+			url : this.datasource,//$$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
 			autoParam : [ "id", "name=n", "level=lv" ],
 			otherParam : {
 				"otherParam" : "zTreeAsyncTest"
@@ -100,6 +77,15 @@ function AjaxTree(domId) {
 				children : "childrenCDList"
 			},
 		},
+		callback: {
+			onAsyncSuccess: function(){
+				var treeObj = $.fn.zTree.getZTreeObj(domId);
+				var nodes = treeObj.getNodes();
+				for (var i = 0; i < nodes.length; i++) { // 设置节点展开
+					treeObj.expandNode(nodes[i], true, false, true);
+				}
+			}
+		}
 	};
 	this.getTreeObject = function() {
 		if (this.treeObject == null)
@@ -109,8 +95,14 @@ function AjaxTree(domId) {
 	this.getSelectedNodes = function() {
 		return this.getTreeObject().getSelectedNodes();
 	}
+	this.setDataSource=function(datasource){
+		this.setting.async.url=datasource;
+	}
 	this.setData = function(data) {
-		$.fn.zTree.init($("#" + this.id() + ""), this.setting);
+		$.fn.zTree.init($("#" + this.id + ""), this.setting);
+	}
+	this.render = function() {
+		$.fn.zTree.init($("#" + this.id + ""), this.setting);
 	}
 	this.setSetting = function(setting) {
 		this.setting = setting;

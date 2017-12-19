@@ -1,5 +1,5 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._AjaxForm, {
+Vue.component(_ConstantComponentMap._AjaxForm, {
 	props : [ 'id', 'onrowclick' ],
 	template : '<form class="layui-form " :id="id+guid"  action=""><slot></slot></form>',
 
@@ -44,8 +44,20 @@ Vue.component(ConstantComponentMap._AjaxForm, {
 
 function AjaxForm(domId) {
 	this.id = domId;
+	this.formItem=new Array();
 	this.setData=function(data){
 		
+	}
+	this.addFormItem=function(item){
+		this.formItem.push(item);
+	}
+	this.setFieldValue=function(name,value){
+		var items=this.formItem;
+		for(var i=0;i<items.length;i++){
+			if(items[i].field==name){
+				items[i].setData(value);
+			}
+		}
 	}
 	return this;
 }

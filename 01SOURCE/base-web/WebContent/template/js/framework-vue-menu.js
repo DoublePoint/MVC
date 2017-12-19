@@ -1,5 +1,5 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._AjaxMenu, {
+Vue.component(_ConstantComponentMap._AjaxMenu, {
 	props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 	template : ' <ul :id="id+guid" lay-filter="side" class="navMenu"></ul>',
 

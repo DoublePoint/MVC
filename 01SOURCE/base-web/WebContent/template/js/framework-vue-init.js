@@ -1,28 +1,21 @@
 var $lform;
 var treeselect = null;
 $(document).ready(function() {
-	// layui.extend({
-	// treeselect :
-	// $$pageContextPath+'/template/js/layui-extend/layui-tree-select' //
-	// {/}的意思即代表采用自有路径，即不跟随
-	// })
-	// var data={ //节点
-	// name: '父节点1'
-	// ,children: [{
-	// name: '子节点11'
-	// },{
-	// name: '子节点12'
-	// }]
-	// };
-	// layui.use([ 'treeselect' ], function() {
-	// treeselect = layui.treeselect
-	// layui.treeselect({
-	// elem: "#treeselecttest",
-	// data: data,//可以是treedata，也可以是 获取treedata的URL地址
-	// method: "GET"
-	// });
-	//	});
+	/*-----------创建最底层vue对象---------------*/
+	_InitBaseVueComponent();
 
+	/*-----------浏览器最小化事件---------------*/
+	_InitExplorerResizeListener();
+
+	/*-----------根据参数判断是否执行init方法---------------*/
+	_InvokeTheInitFunction();
+
+	/*-----------添加事件监听---------------*/
+	_InitFormFieldListener();
+});
+
+/*-----------创建最底层vue对象---------------*/
+function _InitBaseVueComponent() {
 	$lform = new Vue({
 		el : "form",
 		methods : {
@@ -31,13 +24,19 @@ $(document).ready(function() {
 			}
 		}
 	});
+}
+/*-----------浏览器最小化事件---------------*/
+function _InitExplorerResizeListener() {
 	$(window).resize(function() {
+		// 设置iframe的高度
 		var explorerHeight = $(this).height()
 		var $content = $('#layui-tab-content');
 		var trueHeight = explorerHeight - 145
 		$content.height(trueHeight);
-		$("#testSpan").text($("#testSpan").text() + explorerHeight + " ");
 
+		// $("#testSpan").text($("#testSpan").text() + explorerHeight + " ");
+
+		// 设置各个vue组件的高度
 		var registeredModelList = $._GetRegisteredResizeModel();
 		if (registeredModelList != null) {
 			for (var i = 0; i < registeredModelList.length; i++) {
@@ -47,17 +46,28 @@ $(document).ready(function() {
 		}
 
 	}).resize();
-
+}
+/*-----------根据参数判断是否执行init方法---------------*/
+function _InvokeTheInitFunction() {
 	// 当参数为N时才不执行，否则执行
-	if (!($._GetRequestParam(ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
+	if (!($._GetRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
 		init();
 	}
+}
+/*-----------添加FormField事件监听---------------*/
+function _InitFormFieldListener() {
+	$form.verify({
+		title : function(value, dom) {
+			var domid = dom.id;
+			if (domid != null) {
+				var formfield = $._GetFromLayuiObjectHashMap(domid);
+				if (formfield.maxlen != null) {
+					if (value.length > formfield.maxlen) {
+						return formfield.errmsg;
+					}
+				}
+			}
 
-	// 一些事件监听
-	$element.on('tab(demo)', function(data) {
-		console.log(data);
+		}
 	});
-});
-function init() {
-	alert("init")
 }

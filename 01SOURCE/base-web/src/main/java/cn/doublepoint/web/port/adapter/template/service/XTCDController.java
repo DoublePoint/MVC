@@ -98,6 +98,15 @@ public class XTCDController   implements BaseController{
 	public String cdDialog() {
 		return "/xt/cd/cdDialog";
 	}
+	/**
+	 * 菜单管理
+	 * 
+	 * @return 返回系统菜单
+	 */
+	@RequestMapping("/cdTreeController")
+	public String cdTree() {
+		return "/xt/cd/cdtree";
+	}
 
 	@RequestMapping("/cd/add")
 	@ResponseBody

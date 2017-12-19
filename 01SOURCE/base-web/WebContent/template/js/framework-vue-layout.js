@@ -1,5 +1,5 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._LayOut, {
+Vue.component(_ConstantComponentMap._LayOut, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
 	template : '<div :id="id+guid" class="lllayout" :style="\'width:\'+layOutWidth+\';height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
 	data : function() {

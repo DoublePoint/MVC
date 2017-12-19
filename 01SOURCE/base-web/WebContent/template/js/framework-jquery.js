@@ -64,9 +64,9 @@ var DoublePoint = {};// 全局对象
 			if(url!=null){
 				//有参数
 				if(url.indexOf("?")>0)
-					obj.content=obj.content+"&"+ConstantPageDefaultParam._IS_DO_INIT_FUNTION+"="+ConstantState._YES_NO_STATE_N;
+					obj.content=obj.content+"&"+_ConstantPageDefaultParam._IS_DO_INIT_FUNTION+"="+ConstantState._YES_NO_STATE_N;
 				else
-					obj.content=obj.content+"?"+ConstantPageDefaultParam._IS_DO_INIT_FUNTION+"="+ConstantState._YES_NO_STATE_N;
+					obj.content=obj.content+"?"+_ConstantPageDefaultParam._IS_DO_INIT_FUNTION+"="+ConstantState._YES_NO_STATE_N;
 			}
 			
 			//存储弹出窗口的传递值
@@ -80,6 +80,11 @@ var DoublePoint = {};// 全局对象
 				}
 			}
 			parent.$layer.open(obj);
+		},
+		_ShakeTips:function(msg){
+			parent.layer.msg(msg, {anim:6},function(){
+				//关闭后的操作
+			});
 		},
 		_GetRequestParam:function (paramName) {
 			if(paramName==null)
