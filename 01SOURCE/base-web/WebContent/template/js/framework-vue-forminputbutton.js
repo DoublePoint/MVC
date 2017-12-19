@@ -1,11 +1,12 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._FormField, {
+Vue.component(ConstantComponentMap._FormInputButton, {
 	props : [ 'id', 'onrowclick','field','title'],
 	template : 
 	'<div class="layui-form-item">'+
 		'<label class="layui-form-label">{{title}}</label>'+
 		'<div class="layui-input-block">'+
 			'<input type="text" :name="field" autocomplete="off" class="layui-input" style="padding-right:45px;">'+
+			'<a href="#" class="layui-btn inputbutton">...</a>'+
 		'</div>'+
 	'</div>',
 

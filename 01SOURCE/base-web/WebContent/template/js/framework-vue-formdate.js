@@ -1,13 +1,13 @@
 var documentWriteHtml = "";
-Vue.component(ConstantComponentMap._FormField, {
-	props : [ 'id', 'onrowclick','field','title'],
+Vue.component(ConstantComponentMap._FormDate, {
+	props : [ 'id', 'onrowclick','field','title','placeholder'],
 	template : 
 	'<div class="layui-form-item">'+
-		'<label class="layui-form-label">{{title}}</label>'+
-		'<div class="layui-input-block">'+
-			'<input type="text" :name="field" autocomplete="off" class="layui-input" style="padding-right:45px;">'+
-		'</div>'+
-	'</div>',
+    	'<label class="layui-form-label">{{title}}</label>'+
+    	'<div class="layui-input-inline">'+
+    		'<input type="text" class="layui-input" :name="field" :id="id+guid" :placeholder="placeholder">'+
+    	' </div>'+
+    '</div>',
 
 	data : function() {
 		return {
@@ -16,7 +16,10 @@ Vue.component(ConstantComponentMap._FormField, {
 	},
 	mounted:function(){
 		this._addDefineFormFieldObjectScript();
-		
+		$laydate.render({
+		    elem: "#"+this._getFormFieldDomId()
+		    ,theme: 'molv'
+		});
 	},
 	created : function() {
 		this._addFormFieldToMap();

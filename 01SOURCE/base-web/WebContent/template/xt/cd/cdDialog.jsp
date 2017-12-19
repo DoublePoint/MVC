@@ -29,7 +29,8 @@
 			<ll-formfield title="菜单名称" field="cdmc"  ></ll-formfield>
 			<ll-formfield title="菜单链接" field="cdlj" ></ll-formfield>
 			<ll-formfield title="菜单序号" field="cdxh" ></ll-formfield>
-			<ll-formfield title="上级菜单" field="sjcd" ></ll-formfield>
+			<ll-forminputbutton title="上级菜单" field="sjcd" ></ll-forminputbutton>
+			<ll-formdate title="创建时间" field="sjcd" ></ll-formdate>
 			<div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
