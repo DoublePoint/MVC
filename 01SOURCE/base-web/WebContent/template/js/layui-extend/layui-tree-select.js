@@ -132,7 +132,7 @@ layui.define(['layer', 'tree'], function (exports) {
                 		async : {
                 			enable : true,
                 			showLine : false,
-                			url : $$pageContextPath + "/template/xt/cdTree?isHasRoot=true",
+                			url : $$pageContextPath + "/template/xt/cd-tree?isHasRoot=true",
                 			autoParam : [ "id", "name=n", "level=lv" ],
                 			otherParam : {
                 				"otherParam" : "zTreeAsyncTest"

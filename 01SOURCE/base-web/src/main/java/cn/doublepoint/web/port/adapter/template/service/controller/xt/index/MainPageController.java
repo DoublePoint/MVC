@@ -21,6 +21,7 @@ import cn.doublepoint.base.common.port.adapter.controller.request.BaseRequestCon
 @Controller
 public class MainPageController implements BaseRequestController {
 
+	//索引页
 	@RequestMapping(value="/index")
 	public String hello(){
 		return "/xt/index/index";

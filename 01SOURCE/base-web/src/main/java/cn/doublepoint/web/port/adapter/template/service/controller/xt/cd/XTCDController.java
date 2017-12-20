@@ -24,44 +24,27 @@ public class XTCDController   implements BaseRequestController{
 	@Resource
 	XTCDApplicationService xTCDApplicationService;
 
-	/**
-	 * 菜单添加修改弹窗
-	 * 
-	 * @return 返回系统菜单
-	 */
+	//菜单页面
 	@RequestMapping("/cd")
 	public String cdSave() {
 		return "/xt/cd/cd";
 	}
 
-
-	/**
-	 * 菜单管理
-	 * 
-	 * @return 返回系统菜单
-	 */
+	//菜单管理页面
 	@RequestMapping("/cd-management")
 	public String cdManagement() {
 		return "/xt/cd/cdManagement";
 	}
 
-	/**
-	 * 菜单管理
-	 * 
-	 * @return 返回系统菜单
-	 */
-	@RequestMapping("/cdDialog")
+	//菜单弹窗
+	@RequestMapping("/cd-dialog")
 	public String cdDialog() {
 		return "/xt/cd/cdDialog";
 	}
-	/**
-	 * 菜单管理
-	 * 
-	 * @return 返回系统菜单
-	 */
-	@RequestMapping("/cdTreeController")
-	public String cdTree() {
-		return "/xt/cd/cdtree";
-	}
+	
+//	@RequestMapping("/cdTreeController")
+//	public String cdTree() {
+//		return "/xt/cd/cdtree";
+//	}
 	
 }

@@ -25,14 +25,14 @@ import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 
 @Controller
 @RequestMapping("/template/xt")
-public class XTCDTreeController extends BaseTreeController {
+public class XTCDTreeController implements BaseTreeController {
 	//树根名称
 	private final String rooTreeName="菜单树";
 
 	@Resource
 	XTCDQueryService xTCDQueryService;
 	
-	@RequestMapping("cdTree")
+	@RequestMapping("cd-tree")
 	@ResponseBody
 	public List<VT_XT_CD> getCDTree(@RequestParam(required=false) Boolean isHasRoot){
 		List<VT_XT_CD> returnXTCDList;

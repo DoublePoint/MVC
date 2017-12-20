@@ -24,7 +24,7 @@
 </head>
 <body>
 	<form>
-		<ll-tree  id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=true" showLine="true"></ll-tree>
+		<ll-tree  id="treeDemo" datasource="/template/xt/cdT-tree?isHasRoot=true" showLine="true"></ll-tree>
 	</form>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
 	<style>

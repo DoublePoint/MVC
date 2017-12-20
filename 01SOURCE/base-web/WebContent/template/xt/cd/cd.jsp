@@ -26,7 +26,7 @@
 	<form>
 		<div class="layui-row " style="height:100%;">
 			<div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
-				<ll-tree  id="treeDemo" datasource="/template/xt/cdTree?isHasRoot=true" showLine="true"></ll-tree>
+				<ll-tree  id="treeDemo" datasource="/template/xt/cd-tree?isHasRoot=true" showLine="true"></ll-tree>
 			</div>
 			<div class="layui-col-xs10 layui-col-sm10 layui-col-md10" >
 				<ll-filllayout > 

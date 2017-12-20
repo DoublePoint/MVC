@@ -4,7 +4,6 @@ function init(response){
 	var cdmc=treeNode.cdmc;
 	$("#sjcdbs").val(cdbs);
 	cdmcId.setData(cdmc);
-	alert(1);
 	ajaxform1.setFieldValue("cdxh","ajaxform");
 }
 
