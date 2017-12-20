@@ -44,7 +44,14 @@ function _InitExplorerResizeListener() {
 				domObj.resize();
 			}
 		}
-
+		try{
+			if(windowResize)
+				windowResize();
+		}
+		catch(e){
+			
+		}
+		
 	}).resize();
 }
 /*-----------根据参数判断是否执行init方法---------------*/
