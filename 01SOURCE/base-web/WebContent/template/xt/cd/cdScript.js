@@ -86,7 +86,9 @@ function zTreeOnClick(event, treeId, treeNode) {
 	return false;
 	// alert(treeNode.cdmc + ", " + treeNode.cdbs);
 };
-
+function rowClickTest(data){
+	var dd=data;
+}
 function init() {
 	
 }

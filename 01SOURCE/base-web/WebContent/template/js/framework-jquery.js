@@ -4,6 +4,10 @@ var DoublePoint = {};// 全局对象
 	var _LayuiObjectHashMap;
 	//浏览器窗口变化时需要重设大小的标签
 	var _RegisteredModel;
+	String.prototype.endWith=function(endStr){
+	      var d=this.length-endStr.length;
+	      return (d>=0&&this.lastIndexOf(endStr)==d)
+	}
 	
 	$.extend({
 		_AddToLayuiObjectHashMap : function(id, obj) {
@@ -18,18 +22,27 @@ var DoublePoint = {};// 全局对象
 		},
 		//根据函数名进行方法调用
 		_Eval:function(func,paramArr){
+			if(func.endWith("()")){
+				func=func.substr(0,func.length-2)
+			}
+			
 //			param==null?eval(fuc):eval(fuc+param);
 			if(func==null) return;
 			var invokeString=func+"(";
-			if(paramArr!=null&&paramArr.length>0){
-				for(var i=0;i<paramArr.length;i++){
-					if(i!=paramArr.length-1){
-						invokeString+="paramArr["+i+"],";
-					}else{
-						invokeString+="paramArr["+i+"]";
+			
+			if(paramArr!=null){
+				if(Array.isArray(paramArr)){
+					for(var i=0;i<paramArr.length;i++){
+						if(i!=paramArr.length-1){
+							invokeString+="paramArr["+i+"],";
+						}else{
+							invokeString+="paramArr["+i+"]";
+						}
 					}
 				}
-				
+				else{
+					invokeString+="paramArr";
+				}
 			}
 			invokeString+=")";
 			eval(invokeString);
@@ -66,7 +79,7 @@ var DoublePoint = {};// 全局对象
 				cols :cols ,
 				skin : 'row', // 表格风格
 				even : true,
-				page : true, // 是否显示分页
+				page : false, // 是否显示分页
 				limits : [ 5, 7, 10, 20, 100 ],
 				limit : 50
 			// 每页默认显示的数量

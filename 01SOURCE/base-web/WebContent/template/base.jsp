@@ -21,6 +21,7 @@
 	$form = layui.form;
 	$layedit = layui.layedit;
 	$laydate = layui.laydate;
+	$laypage = layui.laypage;
 	$tree = layui.tree;
 	$table = layui.table;
 	$layer.config({

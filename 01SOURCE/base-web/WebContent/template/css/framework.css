@@ -208,3 +208,11 @@ a {
 	border-top-left-radius:0;
 	border-bottom-left-radius:0;
 }
+/*分页*/
+.layui-laypage{
+	 margin:0px; 
+	 margin-top:1px; 
+}
+.layui-laypage a,.layui-laypage span{
+	margin: 0 -1px 0px 0;
+}
