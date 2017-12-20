@@ -3,8 +3,9 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="base-common-type.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-common-type/base-common-type">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="base-common.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-common/base-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
