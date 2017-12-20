@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.web.port.adapter.template.service;
+package cn.doublepoint.web.port.adapter.template.service.controller.xt.cd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.doublepoint.base.common.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 
 @Controller
 @RequestMapping("/template/xt")
-public class XTCDTreeController extends BaseTree {
+public class XTCDTreeController extends BaseTreeController {
 	//树根名称
 	private final String rooTreeName="菜单树";
 

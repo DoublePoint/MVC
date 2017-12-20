@@ -11,15 +11,15 @@
  * 
  * 修改人： 修改日期： 修改内容：
 */ 
-package cn.doublepoint.web.port.adapter.template.service;
+package cn.doublepoint.web.port.adapter.template.service.controller.xt.index;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.doublepoint.common.BaseController;
+import cn.doublepoint.base.common.port.adapter.controller.request.BaseRequestController;
 
 @Controller
-public class MainPageController implements BaseController {
+public class MainPageController implements BaseRequestController {
 
 	@RequestMapping(value="/index")
 	public String hello(){

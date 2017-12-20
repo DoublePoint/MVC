@@ -3,6 +3,7 @@
 	<name>base-common</name>
 	<comment></comment>
 	<projects>
+		<project>base-common-type</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

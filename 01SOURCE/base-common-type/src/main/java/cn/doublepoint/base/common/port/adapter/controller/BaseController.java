@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.common;
+package cn.doublepoint.base.common.port.adapter.controller;
 
 public interface BaseController {
 

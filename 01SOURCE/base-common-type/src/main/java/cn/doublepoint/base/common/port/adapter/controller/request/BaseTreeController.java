@@ -7,10 +7,8 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.web.port.adapter.template.service;
+package cn.doublepoint.base.common.port.adapter.controller.request;
 
-import cn.doublepoint.common.BaseController;
-
-public class BaseTree  implements BaseController{
+public class BaseTreeController  implements BaseRequestController{
 
 }
