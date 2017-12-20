@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._Tree, {
-	props : [ 'id', 'datasource', 'columns', 'showLine' ],
-	template : '<ul type="hidden"  :id="id+guid" class="ztree" v-on:click="incrementCounter"></ul>',
+	props : [ 'id', 'datasource','onclick', 'columns', 'showLine' ],
+	template : '<ul type="hidden"  :id="id+guid" class="ztree" :onclick="onclick"></ul>',
 
 	data : function() {
 		var dataList;
@@ -17,12 +17,11 @@ Vue.component(_ConstantComponentMap._Tree, {
 		this._addTreeToMap();
 	},
 	methods : {
-		incrementCounter : function() {
-		},
 		_addTreeToMap : function() {
 			var domId = this._getTreeDomId();
 			var tree = new AjaxTree(domId);
 			tree.setDataSource($$pageContextPath+this.datasource);
+			tree.setOnclick(this.onclick);
 			$._AddToLayuiObjectHashMap(domId, tree);
 		},
 		// 添加生命Tree对象脚本
@@ -50,6 +49,7 @@ function AjaxTree(domId) {
 	this.id = domId;
 	this.treeObject = null;
 	this.datasource=null;
+	this.onclick=null;
 	this.setting = {
 		view : {
 			showLine : true,
@@ -73,11 +73,12 @@ function AjaxTree(domId) {
 			key : {
 				name : "cdmc",
 				title : "cdmc",
-				url : "cdbs",
+				url : "null",
 				children : "childrenCDList"
 			},
 		},
 		callback: {
+			//回调成功时展开第一层节点
 			onAsyncSuccess: function(){
 				var treeObj = $.fn.zTree.getZTreeObj(domId);
 				var nodes = treeObj.getNodes();
@@ -106,6 +107,15 @@ function AjaxTree(domId) {
 	}
 	this.setSetting = function(setting) {
 		this.setting = setting;
+	}
+	
+	this.setOnclick=function(evt){
+		var funcitonname=evt;
+		this.setting.callback.onClick=function(event, treeId, treeNode){
+			$._Eval(funcitonname,[event, treeId, treeNode]);
+			return false;
+//			$._Eval(funcitonname,event, treeId, treeNode);
+		};
 	}
 	return this;
 }

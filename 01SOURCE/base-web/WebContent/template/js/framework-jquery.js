@@ -17,8 +17,23 @@ var DoublePoint = {};// 全局对象
 			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
 		},
 		//根据函数名进行方法调用
-		_Eval:function(fuc){
-			eval(fuc);
+		_Eval:function(func,paramArr){
+//			param==null?eval(fuc):eval(fuc+param);
+			if(func==null) return;
+			var invokeString=func+"(";
+			if(paramArr!=null&&paramArr.length>0){
+				for(var i=0;i<paramArr.length;i++){
+					if(i!=paramArr.length-1){
+						invokeString+="paramArr["+i+"],";
+					}else{
+						invokeString+="paramArr["+i+"]";
+					}
+				}
+				
+			}
+			invokeString+=")";
+			eval(invokeString);
+//			param==null?func.apply(this):func.apply(this,param);
 		},
 		_GenerateUUID:function () {
 			var d = new Date().getTime();
