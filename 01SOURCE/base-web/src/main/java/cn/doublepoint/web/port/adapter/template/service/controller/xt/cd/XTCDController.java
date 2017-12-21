@@ -13,7 +13,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository
 
 @Controller
 @RequestMapping("/template/xt")
-public class XTCDController   implements BaseRequestController{
+public class XTCDController implements BaseRequestController{
 
 	@Resource
 	XTCDRepository xTCDRepository;

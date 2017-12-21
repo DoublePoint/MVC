@@ -5,7 +5,7 @@ Vue.component(_ConstantComponentMap._FormField, {
 		'<div class="layui-form-item">' 
 		+ 	'<label class="layui-form-label">{{title}}</label>'
 		+ 	'<div class="layui-input-block">'
-		+ 		'<input :id="id+guid" type="text" lay-verify="title" :field="field" autocomplete="off" class="layui-input" style="padding-right:45px;">' 
+		+ 		'<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" style="padding-right:45px;">' 
 		+ 	'</div>' 
 		+ '</div>',
 
@@ -32,6 +32,8 @@ Vue.component(_ConstantComponentMap._FormField, {
 			var formField = new FormField(domId);
 			formField.maxlen = this.maxlen;
 			formField.field=this.field;
+			if(this.validtype!=null)
+				formField.setValidType(this.validtype);
 			if(this.errmsg!=null){
 				formField.errmsg = this.errmsg;
 			};
@@ -68,12 +70,16 @@ function FormField(domId) {
 	this.readonly = false;
 	this.contentalign = "left";
 	this.visible = true;
+	this.validtype="text";//验证方式
 	// this.onclick=function(){};
 	this.field = null;
 	this.title = null;
 	this.type = "text";// 文本框的显示格式,取值为text和password，默认为text
 	this.errmsg = "表达式有误";
 	this.data="";
+	this.setValidType=function(vatype){
+		this.validtype=vatype;
+	}
 	this.setData = function(aData) {
 		this.data=aData;
 		$("#"+this.id).val(this.data);

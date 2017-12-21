@@ -41,5 +41,5 @@ public class XTCDConstant {
 //	public String remark() {
 //		return this.remark;
 //	}
-	public static final int TREE_ROOT_NODE_CJ=0;//树根层级（有实际数据的节点）
+	public static final int TREE_ROOT_NODE_CJ=1;//树根层级（有实际数据的节点）
 }

@@ -29,7 +29,7 @@ import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 
 @Controller
-@RequestMapping("/template/xt")
+@RequestMapping("/template/xt/cd")
 public class XTCDHandleController implements BaseHandleController {
 	@Resource
 	XTCDRepository xTCDRepository;
@@ -40,7 +40,7 @@ public class XTCDHandleController implements BaseHandleController {
 	@Resource
 	XTCDApplicationService xTCDApplicationService;
 	
-	@RequestMapping("/cdDataList")
+	@RequestMapping("/datalist")
 	@ResponseBody
 	public List<VT_XT_CD> cdDataList(@RequestBody(required=false) T_XT_CD cd) {
 		List<VT_XT_CD> xtcdLists;
@@ -76,7 +76,7 @@ public class XTCDHandleController implements BaseHandleController {
 		ajaxDataWrap.setCode(200);
 		return ajaxDataWrap;
 	}
-	@RequestMapping("/cd/add")
+	@RequestMapping("/add")
 	@ResponseBody
 	public T_XT_CD add(@RequestBody T_XT_CD cd) {
 
@@ -85,7 +85,7 @@ public class XTCDHandleController implements BaseHandleController {
 		return cd2;
 	}
 
-	@RequestMapping("/cd/cdDelete")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public boolean delete(@RequestBody List<T_XT_CD> cdList) {
 		xTCDApplicationService.removeXTCD(cdList);

@@ -5,7 +5,7 @@ Vue.component(_ConstantComponentMap._FormInputButton, {
 	'<div class="layui-form-item">'+
 		'<label class="layui-form-label">{{title}}</label>'+
 		'<div class="layui-input-block">'+
-			'<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:45px;">'+
+			'<input :id="id+guid" type="text" :field="field" :name="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:45px;">'+
 			'<a href="#" class="layui-btn inputbutton">...</a>'+
 		'</div>'+
 	'</div>',

@@ -99,19 +99,19 @@ public class ModelModel {
 
 		switch (modelType) {
 		case CONSTANT.CLASS_TYPE_ENTITY:
-			sbBuffer.append("package cn.doublepoint.domain.model.entity.xt;  \r\n");
+			sbBuffer.append("package cn.doublepoint.common.domain.model.entity.xt;   \r\n");
 			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildEntityClassBody());
 			break;
 		case CONSTANT.CLASS_TYPE_ENUM:
-			sbBuffer.append("package cn.doublepoint.domain.model.enum.xt;  \r\n");
+			sbBuffer.append("\r\n");
 			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildEnumClassBody());
 			break;
 		case CONSTANT.CLASS_TYPE_VALUEOBJECT:
-			sbBuffer.append("package cn.doublepoint.domain.model.valueobject.xt;  \r\n");
+			sbBuffer.append("package cn.doublepoint.common.domain.model.valueobject.xt;   \r\n");
 			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append("                                                                  \r\n");
 			sbBuffer.append(buildValueObjectClassBody());
@@ -151,7 +151,13 @@ public class ModelModel {
 			if (i == 0) {
 				sbBuffer.append("	@Id                                                              \r\n");
 			}
-			sbBuffer.append(fields.get(i).getEntityFieldContent());
+			sbBuffer.append(fields.get(i).getFieldContent());
+		}
+		for (int i = 0; i < fields.size(); i++) {
+			sbBuffer.append(fields.get(i).getSetFunctionContent());
+		}
+		for (int i = 0; i < fields.size(); i++) {
+			sbBuffer.append(fields.get(i).getGetFunctionContent());
 		}
 		return sbBuffer;
 	}

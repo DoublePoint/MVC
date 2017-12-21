@@ -1,13 +1,13 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-12-18 17:30:962                      
+* 创   建   时   间 ：2017-12-21 17:51:704                      
 *                                                                 
 * 类   说   明 ：     系统权限    
 *                                                                 
 * 修   改   人：          修   改   日   期：                     
 */                                                                
-package cn.doublepoint.domain.model.entity.xt;  
+package cn.doublepoint.common.domain.model.entity.xt;   
                                                                   
                                                                   
 import javax.persistence.Column;                                  
@@ -28,53 +28,54 @@ public class T_XT_QX  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "qxbs")                                  
-	private String qxbs; //权限标识                                                
-	                                                                 
-	public String getQxbs() {                                            
-		return qxbs;                                                     
-	}                                                                
+	private String qxbs; //权限标识       
+	@Column (name = "qxmc")                                  
+	private String qxmc; //权限名称       
+	@Column (name = "qxz")                                  
+	private Long qxz; //权限值       
+	@Column (name = "cjsj")                                  
+	private Date cjsj; //创建时间       
+	@Column (name = "gxsj")                                  
+	private Date gxsj; //更新时间       
                                                                   
-	public void setQxbs(String qxbs) {                                     
+	protected void setQxbs(String qxbs) {                                     
 		this.qxbs = qxbs;                                                  
 	}                                                                
-	@Column (name = "qxmc")                                  
-	private String qxmc; //权限名称                                                
-	                                                                 
-	public String getQxmc() {                                            
-		return qxmc;                                                     
-	}                                                                
                                                                   
-	public void setQxmc(String qxmc) {                                     
+	protected void setQxmc(String qxmc) {                                     
 		this.qxmc = qxmc;                                                  
 	}                                                                
-	@Column (name = "qxz")                                  
-	private Long qxz; //权限值                                                
-	                                                                 
-	public Long getQxz() {                                            
-		return qxz;                                                     
-	}                                                                
                                                                   
-	public void setQxz(Long qxz) {                                     
+	protected void setQxz(Long qxz) {                                     
 		this.qxz = qxz;                                                  
 	}                                                                
-	@Column (name = "cjsj")                                  
-	private Date cjsj; //创建时间                                                
-	                                                                 
-	public Date getCjsj() {                                            
-		return cjsj;                                                     
-	}                                                                
                                                                   
-	public void setCjsj(Date cjsj) {                                     
+	protected void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
-	@Column (name = "gxsj")                                  
-	private Date gxsj; //更新时间                                                
-	                                                                 
-	public Date getGxsj() {                                            
-		return gxsj;                                                     
-	}                                                                
                                                                   
-	public void setGxsj(Date gxsj) {                                     
+	protected void setGxsj(Date gxsj) {                                     
 		this.gxsj = gxsj;                                                  
+	}                                                                
+	@Id                                                              
+	                                                                 
+	public String getQxbs() {                                           
+		return qxbs;                                                     
+	}                                                                
+	                                                                 
+	public String getQxmc() {                                           
+		return qxmc;                                                     
+	}                                                                
+	                                                                 
+	public Long getQxz() {                                           
+		return qxz;                                                     
+	}                                                                
+	                                                                 
+	public Date getCjsj() {                                           
+		return cjsj;                                                     
+	}                                                                
+	                                                                 
+	public Date getGxsj() {                                           
+		return gxsj;                                                     
 	}                                                                
 }

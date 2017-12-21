@@ -80,7 +80,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 			var cd = {};
 			var domId = this._getAjaxMenuDomId();
 			$.ajax({
-				// /template/xt/cdDataList
+				// /template/xt/cd/datalist
 				url : $$pageContextPath + this.datasource,
 				type : "POST",
 				contentType : 'application/json;charset=UTF-8',
@@ -92,9 +92,6 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 					_AjaxMenu.setData(data);
 					// $._SetLayuiTableData(domId, data, cols);
 
-				},
-				error : function() {
-					alert("error");
 				}
 			});
 		}

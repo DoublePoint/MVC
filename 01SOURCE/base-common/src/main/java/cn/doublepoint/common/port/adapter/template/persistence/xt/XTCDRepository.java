@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import cn.doublepoint.base.common.domain.model.commontype.XTCDConstant;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 
 public interface XTCDRepository extends JpaRepository<T_XT_CD,String>{
@@ -30,7 +31,7 @@ public interface XTCDRepository extends JpaRepository<T_XT_CD,String>{
 	 * 获取最底层菜单
 	 * @return
 	 */
-	@Query("select cd from T_XT_CD cd where cd.cdcj=1 order by cd.cdpx")
+	@Query("select cd from T_XT_CD cd where cd.cdcj="+XTCDConstant.TREE_ROOT_NODE_CJ+" order by cd.cdpx")
 	public List<T_XT_CD> findRootXTCD();
 	
 	/**

@@ -2,13 +2,9 @@ function init(response){
 	var treeNode=response.getData("clickNode");
 	var cdbs=treeNode.cdbs;
 	var cdmc=treeNode.cdmc;
-	$("#sjcdbs").val(cdbs);
-	cdmcId.setData(cdmc);
-	ajaxform1.setFieldValue("cdxh","ajaxform");
+	
+	ajaxform.setFieldValue("sjcd",cdbs);
 }
-
-
-
 
 // 监听提交
 $form.on('submit(demo1)', function(data) {
@@ -20,11 +16,11 @@ $form.on('submit(demo1)', function(data) {
 		data : JSON.stringify(data.field) + "",
 		success : function(data1) {
 			// 提示层
-			parent.$layer.msg('保存成功');
+			$._Alert('保存成功');
 		},
 		error : function(ecx) {
-			// parent.layer.msg('保存失败');
-			alert(ecx.responseText);
+			parent.layer.msg('保存失败');
+			//$._Alert(ecx.responseText);
 			return false;
 		}
 

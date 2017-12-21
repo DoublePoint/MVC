@@ -32,7 +32,7 @@ public class XTCDApplicationService {
 	public boolean createXTCD(T_XT_CD t_XT_CD){
 		try {
 			if(StringUtils.isNullOrEmpty(t_XT_CD.getCdbs())){
-				t_XT_CD.setCdcj(XTCDConstant.TREE_ROOT_NODE_CJ);
+				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
 				T_XT_CD parentCd=xtcdRepository.findByCdbs(t_XT_CD.getSjcdbs());

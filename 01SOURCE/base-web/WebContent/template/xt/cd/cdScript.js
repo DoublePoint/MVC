@@ -1,3 +1,18 @@
+function retrieveAjaxDataGrid(){
+	$.ajax({
+		url : $$pageContextPath + "/template/xt/cd/datalist",
+		type : "POST",
+		contentType : 'application/json;charset=UTF-8',
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			lltestdatagrid.setData(data);
+		}
+	});
+}
+function retrieveTree(){
+	treeDemo.render();
+}
 function onClickAdd() {
 	// var layer = layui.layer;
 	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
@@ -20,9 +35,6 @@ function onClickAdd() {
 		maxmin : true,
 		content : $$pageContextPath + '/template/xt/cd-dialog',
 		data : ajaxDataWrap,
-		succeed : function() {
-			alert(111);
-		}
 	});
 
 	return false;
@@ -32,27 +44,30 @@ function onClickDelete() {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
-		var checkStatus = $table.checkStatus('demo'), data = checkStatus.data;
-		$layer.alert(JSON.stringify(data));
+		var checkedDatas=lltestdatagrid.getCheckedDataList();
+//		var checkStatus = $table.checkStatus('demo'), data = checkStatus.data;
+//		$layer.alert(JSON.stringify(checkedDatas));
 		$.ajax({
-			url : $$pageContextPath + "/template/xt/cd/cdDelete",
+			url : $$pageContextPath + "/template/xt/cd/delete",
 			type : "POST",
 			contentType : 'application/json;charset=UTF-8',
 			dataType : "json",
-			data : JSON.stringify(data),
+			data : JSON.stringify(checkedDatas),
 			async : false,
 			success : function(data) {
-				layer.msg('删除成功');
+				$._Alert('删除成功');
+				retrieveAjaxDataGrid();
+				retrieveTree();
 			},
 			error : function() {
-				alert("error");
+				$._Alert('删除失败');
 			}
 		});
 	}, function() {
-		$layer.msg('也可以这样', {
-			time : 20000, // 20s后自动关闭
-			btn : [ '明白了', '知道了' ]
-		});
+//		$layer.msg('也可以这样', {
+//			time : 20000, // 20s后自动关闭
+//			btn : [ '明白了', '知道了' ]
+//		});
 	});
 
 }
@@ -70,7 +85,7 @@ function zTreeOnClick(event, treeId, treeNode) {
 	var cd = {};
 	cd.cdbs = treeNode.cdbs;
 	$.ajax({
-		url : $$pageContextPath + "/template/xt/cdDataList",
+		url : $$pageContextPath + "/template/xt/cd/datalist",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -78,9 +93,6 @@ function zTreeOnClick(event, treeId, treeNode) {
 		async : false,
 		success : function(data) {
 			lltestdatagrid.setData(data);
-		},
-		error : function() {
-			alert("error");
 		}
 	});
 	return false;

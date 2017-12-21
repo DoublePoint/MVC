@@ -44,14 +44,13 @@ function _InitExplorerResizeListener() {
 				domObj.resize();
 			}
 		}
-		try{
-			if(windowResize)
+		try {
+			if (windowResize)
 				windowResize();
+		} catch (e) {
+
 		}
-		catch(e){
-			
-		}
-		
+
 	}).resize();
 }
 /*-----------根据参数判断是否执行init方法---------------*/
@@ -68,13 +67,26 @@ function _InitFormFieldListener() {
 			var domid = dom.id;
 			if (domid != null) {
 				var formfield = $._GetFromLayuiObjectHashMap(domid);
-				if (formfield.maxlen != null) {
-					if (value.length > formfield.maxlen) {
+				if (formfield == null)
+					return;
+				var validtype = formfield.validtype;
+				if (validtype == null)
+					validtype = "";
+				switch (validtype) {
+				case "int":
+					if (!$._IsInt(value)) {
 						return formfield.errmsg;
 					}
+					break;
+				default:
+					if (formfield.maxlen != null) {
+						if (value.length > formfield.maxlen) {
+							return formfield.errmsg;
+						}
+					}
+					return;
 				}
 			}
-
 		}
 	});
 }

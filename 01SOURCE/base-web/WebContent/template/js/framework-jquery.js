@@ -22,6 +22,8 @@ var DoublePoint = {};// 全局对象
 		},
 		//根据函数名进行方法调用
 		_Eval:function(func,paramArr){
+			if(func==null) return;
+			func=func+"";
 			if(func.endWith("()")){
 				func=func.substr(0,func.length-2)
 			}
@@ -109,6 +111,9 @@ var DoublePoint = {};// 全局对象
 			}
 			parent.$layer.open(obj);
 		},
+		_Alert:function(msg){
+			parent.$layer.msg(msg);
+		},
 		_ShakeTips:function(msg){
 			parent.layer.msg(msg, {anim:6},function(){
 				//关闭后的操作
@@ -129,6 +134,11 @@ var DoublePoint = {};// 全局对象
 				}
 			}
 			return null;
+		},
+		//是否是int类型的数值
+		_IsInt:function(str){
+			var r =/^-?\d+$/;
+			return r.test(str);
 		}
 	});
 

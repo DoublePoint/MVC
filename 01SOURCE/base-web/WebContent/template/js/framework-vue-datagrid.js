@@ -55,9 +55,6 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 				async : false,
 				success : function(data) {
 					_ajaxdatagrid.setData(data);
-				},
-				error : function() {
-					alert("error");
 				}
 			});
 
@@ -148,6 +145,13 @@ function AjaxDataGrid(domId) {
 	}
 	this.test = function() {
 		alert("测试成功");
+	}
+	
+	this.getCheckedDataList=function(){
+		var checkStatus = $table.checkStatus(this.id)
+	     ,checkedData = checkStatus.data;
+		
+		return checkedData;
 	}
 	return this;
 }
