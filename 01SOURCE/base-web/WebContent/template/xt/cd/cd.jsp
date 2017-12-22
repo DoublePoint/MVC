@@ -38,7 +38,7 @@
 						</div>
 					</ll-fillarea>
 					<ll-fillarea height="*" >
-						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" datasource="/template/xt/cd/datalist"> 
+						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" datasource="/template/xt/cd/datalistajaxdatawrap"> 
 							<ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow>
 							<ll-gridrow field="cdmc" title="菜单名称"></ll-gridrow> 
 							<ll-gridrow field="cdpx" title="菜单排序"></ll-gridrow> 

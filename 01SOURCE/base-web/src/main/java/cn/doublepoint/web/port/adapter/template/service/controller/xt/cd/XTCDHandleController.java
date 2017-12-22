@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import cn.doublepoint.base.common.port.adapter.controller.handle.BaseHandleContr
 import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.domain.model.AjaxDataWrap;
+import cn.doublepoint.common.domain.model.Pager;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
@@ -57,7 +59,7 @@ public class XTCDHandleController implements BaseHandleController {
 		return xtcdLists;
 	}
 	
-	@RequestMapping("/cddatalistajaxdataWrap")
+	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
 		List<VT_XT_CD> xtcdLists;
@@ -73,6 +75,12 @@ public class XTCDHandleController implements BaseHandleController {
 			xtcdLists = new ArrayList<VT_XT_CD>();
 		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
 		ajaxDataWrap.setData(xtcdLists);
+		Pager pager=new Pager();
+		pager.setCurrentPageNum(1);
+		pager.setPageCount(4);
+		pager.setPageSize(2);
+		pager.setTotalCount(5000);
+		ajaxDataWrap.setPager(pager);
 		ajaxDataWrap.setCode(200);
 		return ajaxDataWrap;
 	}

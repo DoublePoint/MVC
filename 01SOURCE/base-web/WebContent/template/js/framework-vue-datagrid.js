@@ -24,6 +24,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 		_addAjaxDataGridToMap : function() {
 			var domId = this._getAjaxDataGridDomId();
 			var ajaxDataGrid = new AjaxDataGrid(domId);
+			ajaxDataGrid.pageId=this.laypage+this.guid;
 			$._AddToLayuiObjectHashMap(domId, ajaxDataGrid);
 
 			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
@@ -53,8 +54,8 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 				dataType : "json",
 				data : JSON.stringify(cd),
 				async : false,
-				success : function(data) {
-					_ajaxdatagrid.setData(data);
+				success : function(ajaxDataWrap) {
+					_ajaxdatagrid.setData(ajaxDataWrap);
 				}
 			});
 
@@ -67,23 +68,6 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 				$._Eval(str, data);
 			});
 
-			$laypage.render({
-				elem : this.laypage+this.guid,
-				count : 1000,
-				curr : 2,
-				limit : 100,
-				layout : [ 'prev', 'page', 'next', 'skip', 'count', 'limit' ],
-				jump : function(obj, first) {
-					if (!first) {
-						curnum = obj.curr;
-						limitcount = obj.limit;
-						// console.log("curnum"+curnum);
-						// console.log("limitcount"+limitcount);
-						// layer.msg(curnum+"-"+limitcount);
-						productsearch(productGroupId, curnum, limitcount);
-					}
-				}
-			});
 		}
 
 	},
@@ -91,6 +75,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 
 function AjaxDataGrid(domId) {
 	this.id = domId;
+	this.pageId=0;
 	this.pageHeight=32;
 	this.cols = [ [ {
 		type : 'numbers'
@@ -105,7 +90,7 @@ function AjaxDataGrid(domId) {
 	};
 	this.setDataSource = function(ds) {
 		this.datasource = ds;
-	}
+	};
 	this.setData = function(data) {
 		this.data = data;
 		var parentHeight = $("#" + this.id).parent().height();
@@ -120,7 +105,27 @@ function AjaxDataGrid(domId) {
 		var thisResultHeight = $("#" + this.id).parent().parent().height() - allChildFixHeight;
 		this.height = thisResultHeight-this.pageHeight;
 		$._SetLayuiTableData(this);
+		this.setPager(data.pager);
 	};
+	this.setPager=function(page){
+		$laypage.render({
+			elem : this.pageId,
+			count : page.totalCount,
+			curr : page.currentPageNum,
+			limit : page.pageSize,
+			layout : [ 'prev', 'page', 'next', 'skip', 'count', 'limit' ],
+			jump : function(obj, first) {
+				if (!first) {
+					curnum = obj.curr;
+					limitcount = obj.limit;
+					// console.log("curnum"+curnum);
+					// console.log("limitcount"+limitcount);
+					// layer.msg(curnum+"-"+limitcount);
+					productsearch(productGroupId, curnum, limitcount);
+				}
+			}
+		});
+	}
 	this.resize = function() {
 		var parentHeight = $("#" + this.id).parent().height();
 		var allChildFixHeight = 0;

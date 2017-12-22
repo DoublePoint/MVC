@@ -12,7 +12,7 @@ var DoublePoint = {};// 全局对象
 	$.extend({
 		_AddToLayuiObjectHashMap : function(id, obj) {
 			if (_LayuiObjectHashMap == null)
-				_LayuiObjectHashMap = new HashTable();
+				_LayuiObjectHashMap = new $._HashTable();
 			if (!_LayuiObjectHashMap.containsKey(id)) {
 				_LayuiObjectHashMap.add(id, obj);
 			}
@@ -70,13 +70,14 @@ var DoublePoint = {};// 全局对象
 		},
 		_SetLayuiTableData : function(ajaxgrid) {
 			var id=ajaxgrid.id;
-			var data=ajaxgrid.data;
+			var ajaxDataWrap=ajaxgrid.data;
+//			var data=ajaxDataWrap.getData();
 			var datasource=ajaxgrid.datasource;
 			var cols=ajaxgrid.cols;
 			var height=ajaxgrid.height;
 			var ss=$table.render({
 				elem : '#' + id + '',
-				data : data,
+				data : ajaxDataWrap,
 				height : height,
 				cols :cols ,
 				skin : 'row', // 表格风格
@@ -90,7 +91,6 @@ var DoublePoint = {};// 全局对象
 		},
 		_OpenDialog:function(obj){
 			var url=obj.content;
-			
 			if(url!=null){
 				//有参数
 				if(url.indexOf("?")>0)
@@ -102,17 +102,63 @@ var DoublePoint = {};// 全局对象
 			//存储弹出窗口的传递值
 			var _DialogData=obj.data;
 			var _Client_Success_Funtion=obj.succeed;
-			if(_Client_Success_Funtion!=null){
-				obj.success=function(layero, index){
-					var iframeWin = parent.window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-					iframeWin.init(_DialogData);
+			
+			//重新封装success方法
+			obj.success=function(layero, index){
+				//执行该方法的是子页面
+				//手动调用页面的init方法
+				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+				iframeWin.init(_DialogData);
+				
+				var ajaxPage=new $._AjaxPage();
+				if(obj.yes!=null){
+					if(typeof obj.yes === "function")
+						ajaxPage.YesFunction=obj.yes;
+					else
+						ajaxPage.setYesFunctionName(obj.yes);
+				}
+				parent.initAjaxPage(ajaxPage);
+				
+				//添加用户定义success方法
+				if(_Client_Success_Funtion!=null){
 					$._Eval(_Client_Success_Funtion);
 				}
 			}
+			
 			parent.$layer.open(obj);
+		},
+		_Close:function(data){
+			//弹出窗口的确定的点击
+			var index = parent.$layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			parent.$._CloseDialog(index,data);
+		},
+		_Cancel:function(){
+			//弹出窗口的取消点击+关闭按钮的点击
+		},
+		//父页面使用
+		_CloseDialog:function(index,data){
+			$layer.close(index); //再执行关闭
+			
+			if(_AjaxPage.YesFunction!=null){
+				_AjaxPage.YesFunction(data);
+			}
+			else{
+				var yesFunction=_AjaxPage._YesFunctionName;
+				$._Eval(yesFunction,data);
+			}
 		},
 		_Alert:function(msg){
 			parent.$layer.msg(msg);
+		},
+		_Confirm:function(msg,yes,cancel){
+			parent.$layer.confirm(msg, {
+				btn : [ '确定', '取消' ]
+			// 按钮
+			}, function() {
+				yes.apply();
+			}, function() {
+				cancel.apply();
+			});
 		},
 		_ShakeTips:function(msg){
 			parent.layer.msg(msg, {anim:6},function(){
@@ -139,7 +185,102 @@ var DoublePoint = {};// 全局对象
 		_IsInt:function(str){
 			var r =/^-?\d+$/;
 			return r.test(str);
+		},
+		
+		
+		_HashTable:function () {
+			var size = 0;
+			var entry = new Object();
+			this.add = function(key, value) {
+				if (!this.containsKey(key)) {
+					size++;
+				}
+				entry[key] = value;
+			};
+			this.getValue = function(key) {
+				return this.containsKey(key) ? entry[key] : null;
+			};
+			this.remove = function(key) {
+				if (this.containsKey(key) && (delete entry[key])) {
+					size--;
+				}
+			};
+			this.containsKey = function(key) {
+				return (key in entry);
+			};
+			this.containsValue = function(value) {
+				for ( var prop in entry) {
+					if (entry[prop] == value) {
+						return true;
+					}
+				}
+				return false;
+			};
+			this.getValues = function() {
+				var values = new Array();
+				for ( var prop in entry) {
+					values.push(entry[prop]);
+				}
+				return values;
+			};
+			this.getKeys = function() {
+				var keys = new Array();
+				for ( var prop in entry) {
+					keys.push(prop);
+				}
+				return keys;
+			};
+			this.getSize = function() {
+				return size;
+			};
+			this.clear = function() {
+				size = 0;
+				entry = new Object();
+			};
+			return this;
+		},
+
+		_AjaxDataWrap:function (name) {
+//			this.name = name;
+			this.setData = function(data) {
+				this.data = data;
+			};
+			this.getData=function(){
+				return this.data;
+			};
+			this.setDataList = function(dataList) {
+				this.dataList = dataList;
+			};
+			this.getDataList=function(){
+				return this.dataList;
+			};
+			this.setPageContext = function(pageContext) {
+				this.pageContext = pageContext;
+			};
+			return this;
+		},
+		
+		
+		_Pager:function (){
+			this.currentPageNum=0;
+			this.pageSize=0;
+			this.totalCount=0;
+			this.pageCount=0;
+			this.pageNumSize=5;
+		},
+		_AjaxPage:function(){
+			this._YesFunctionName=null;
+			this._CancelFunctionName=null;
+			this.YesFunction=null;
+			this.CancelFunction=null;
+			this.setYesFunctionName=function(funcName){
+				this._YesFunctionName=funcName;
+			}
+			this.setCancelFunctionName=function(cancName){
+				this._CancelFunctionName=cancName;
+			}
 		}
+		
 	});
 
 })(jQuery);

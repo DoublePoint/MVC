@@ -1,4 +1,4 @@
-function retrieveAjaxDataGrid(){
+function retrieveAjaxDataGrid() {
 	$.ajax({
 		url : $$pageContextPath + "/template/xt/cd/datalist",
 		type : "POST",
@@ -10,7 +10,7 @@ function retrieveAjaxDataGrid(){
 		}
 	});
 }
-function retrieveTree(){
+function retrieveTree() {
 	treeDemo.render();
 }
 function onClickAdd() {
@@ -23,7 +23,7 @@ function onClickAdd() {
 	} else {
 		cdbs = nodes[0].cdbs;
 	}
-	var ajaxDataWrap = new AjaxDataWrap();
+	var ajaxDataWrap = new $._AjaxDataWrap();
 	ajaxDataWrap.setData(nodes[0]);
 	$._OpenDialog({
 		type : 2,
@@ -35,18 +35,18 @@ function onClickAdd() {
 		maxmin : true,
 		content : $$pageContextPath + '/template/xt/cd-dialog',
 		data : ajaxDataWrap,
+		yes : function(){
+			retrieveAjaxDataGrid();
+			retrieveTree();
+		}
 	});
 
 	return false;
 }
+
 function onClickDelete() {
-	parent.$layer.confirm('确定要删除吗？', {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var checkedDatas=lltestdatagrid.getCheckedDataList();
-//		var checkStatus = $table.checkStatus('demo'), data = checkStatus.data;
-//		$layer.alert(JSON.stringify(checkedDatas));
+	$._Confirm('确定要删除吗？', function() {
+		var checkedDatas = lltestdatagrid.getCheckedDataList();
 		$.ajax({
 			url : $$pageContextPath + "/template/xt/cd/delete",
 			type : "POST",
@@ -60,27 +60,15 @@ function onClickDelete() {
 				retrieveTree();
 			},
 			error : function() {
-				$._Alert('删除失败');
+				$._ShakeTips('删除失败');
+				return false;
 			}
 		});
 	}, function() {
-//		$layer.msg('也可以这样', {
-//			time : 20000, // 20s后自动关闭
-//			btn : [ '明白了', '知道了' ]
-//		});
 	});
-
+	
 }
-var tabldHeight;
 
-function filter(treeId, parentNode, childNodes) {
-	if (!childNodes)
-		return null;
-	for (var i = 0, l = childNodes.length; i < l; i++) {
-		childNodes[i].cdmc = childNodes[i].cdmc.replace(/\.n/g, '.');
-	}
-	return childNodes;
-}
 function zTreeOnClick(event, treeId, treeNode) {
 	var cd = {};
 	cd.cdbs = treeNode.cdbs;
@@ -96,11 +84,7 @@ function zTreeOnClick(event, treeId, treeNode) {
 		}
 	});
 	return false;
-	// alert(treeNode.cdmc + ", " + treeNode.cdbs);
 };
-function rowClickTest(data){
-	var dd=data;
-}
-function init() {
-	
+function rowClickTest(data) {
+	var dd = data;
 }

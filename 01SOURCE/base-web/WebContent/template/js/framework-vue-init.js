@@ -90,3 +90,12 @@ function _InitFormFieldListener() {
 		}
 	});
 }
+
+//定义页面的默认Init方法
+function init(){
+	
+}
+var _AjaxPage=null;
+function initAjaxPage(anAjaxPage){
+	_AjaxPage=anAjaxPage;
+}

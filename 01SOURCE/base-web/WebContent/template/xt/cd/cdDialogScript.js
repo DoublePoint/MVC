@@ -3,7 +3,7 @@ function init(response){
 	var cdbs=treeNode.cdbs;
 	var cdmc=treeNode.cdmc;
 	
-	ajaxform.setFieldValue("sjcd",cdbs);
+	ajaxform.setFieldValue("sjcdbs",cdbs);
 }
 
 // 监听提交
@@ -15,16 +15,16 @@ $form.on('submit(demo1)', function(data) {
 		url : $$pageContextPath + "/template/xt/cd/add",
 		data : JSON.stringify(data.field) + "",
 		success : function(data1) {
-			// 提示层
 			$._Alert('保存成功');
+			$._Close();
 		},
 		error : function(ecx) {
-			parent.layer.msg('保存失败');
-			//$._Alert(ecx.responseText);
+			$._ShakeTips('保存失败');
 			return false;
 		}
 
 	});
+	
 	return false;
 });
 
