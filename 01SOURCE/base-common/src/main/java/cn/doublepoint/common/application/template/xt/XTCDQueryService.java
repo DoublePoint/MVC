@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.common.domain.model.viewmodel.xt.I_VT_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.CommonBeanUtils;
@@ -66,6 +67,16 @@ public class XTCDQueryService {
 	 */
 	public List<VT_XT_CD> findAllXTCD(){
 		List<T_XT_CD> xtcdList=xtcdRepository.findAll();
+		List<VT_XT_CD> resultCdList=CommonBeanUtils.copyTo(xtcdList, VT_XT_CD.class);
+		return resultCdList;
+	}
+	
+	/**
+	 * 查询所有菜单
+	 * @return 最底层菜单列表
+	 */
+	public List<VT_XT_CD> findAllXTCD2(){
+		List<I_VT_XT_CD> xtcdList=xtcdRepository.findAllXTCD2();
 		List<VT_XT_CD> resultCdList=CommonBeanUtils.copyTo(xtcdList, VT_XT_CD.class);
 		return resultCdList;
 	}

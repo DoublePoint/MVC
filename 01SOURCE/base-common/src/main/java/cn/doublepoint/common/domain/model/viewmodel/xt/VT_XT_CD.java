@@ -23,13 +23,9 @@ import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 
 @Component
-public class VT_XT_CD extends BaseEntity {
+public class VT_XT_CD extends BaseEntity implements I_VT_XT_CD{
 	
 
-	/**                                                                  
-	 *                                                                    
-	 */
-	private static final Long serialVersionUID = 1L;
 	
 	@Resource
 	XTCDRepository repository;
@@ -83,13 +79,13 @@ public class VT_XT_CD extends BaseEntity {
 	public void setCdpx(Integer cdpx) {
 		this.cdpx = cdpx;
 	}
-	private Integer cdlj; //菜单链接                                                
+	private String cdlj; //菜单链接                                                
     
-	public Integer getCdlj() {                                            
+	public String getCdlj() {                                            
 		return cdlj;                                                     
 	}                                                                
                                                                   
-	public void setCdlj(Integer cdlj) {                                     
+	public void setCdlj(String cdlj) {                                     
 		this.cdlj = cdlj;                                                  
 	}       
 	private Date gxsj; // 更新时间
@@ -129,5 +125,14 @@ public class VT_XT_CD extends BaseEntity {
 		super();
 		BeanUtils.copyProperties(cd, this);
 	}
-	
+	private String zcdmc; // 菜单名称
+
+	public String getZcdmc() {
+		return zcdmc;
+	}
+
+	public void setZcdmc(String zcdmc) {
+		this.zcdmc = zcdmc;
+	}
+
 }
