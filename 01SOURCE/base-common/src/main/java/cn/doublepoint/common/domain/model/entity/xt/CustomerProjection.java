@@ -10,13 +10,7 @@
 package cn.doublepoint.common.domain.model.entity.xt;
 
 public interface CustomerProjection {
-	public String getA();
-
-	public String getB();
-
-	public String getC();
-
-	public String getD();
-
-	public String getE();
+	public String getCdmc();
+	
+	public String getCdbs();
 }

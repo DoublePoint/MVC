@@ -18,10 +18,12 @@ import javax.annotation.Resource;
 import org.junit.Test;
 
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
+import cn.doublepoint.common.domain.model.entity.xt.CustomerProjectionClass;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
+import cn.doublepoint.common.util.CommonBeanUtils;
+import cn.doublepoint.common.util.CommonUtils;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
-import config.RepositoryTest;
 
 
 public class XTCDRepositoryTest extends RepositoryTest{
@@ -45,6 +47,7 @@ public class XTCDRepositoryTest extends RepositoryTest{
 	@Test
 	public void testProjection(){
 		List<CustomerProjection> list=repository.findReturnProjection();
+//		List<CustomerProjectionClass> list2=CommonBeanUtils.copyTo(list, CustomerProjectionClass.class);
 		System.out.println("123");
 	}
 }

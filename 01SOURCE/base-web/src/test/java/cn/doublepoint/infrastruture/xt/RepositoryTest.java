@@ -3,11 +3,11 @@
 * 
 * 创   建   时   间 ： 2017年12月15日
 * 
-* 类   说   明 ：配置文件
+* 类   说   明 ：测试聚合根
 * 
 * 修   改   人：          修   改   日   期：
 */
-package config;
+package cn.doublepoint.infrastruture.xt;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

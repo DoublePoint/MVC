@@ -30,6 +30,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class AutoConfiguration {
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+	private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
 
 	@Autowired
 	DataSource dataSource;
@@ -59,6 +60,7 @@ public class AutoConfiguration {
 		Properties properties = new Properties();
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
 		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, true);
+		properties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, false);
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
