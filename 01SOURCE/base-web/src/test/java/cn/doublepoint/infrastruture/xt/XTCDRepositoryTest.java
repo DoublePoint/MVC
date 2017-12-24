@@ -11,6 +11,7 @@ package cn.doublepoint.infrastruture.xt;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -19,12 +20,14 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
+import config.ConfigurationTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-context.xml" })
+@ContextConfiguration(locations={"classpath:spring-context.xml"})  
 public class XTCDRepositoryTest {
 
 	@Resource
@@ -41,5 +44,11 @@ public class XTCDRepositoryTest {
 			cd.setGxsj(new Date());
 			repository.save(cd);
 		}
+	}
+	
+	@Test
+	public void testProjection(){
+		List<CustomerProjection> list=repository.findReturnProjection();
+		System.out.println("123");
 	}
 }

@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-12-21 17:51:696                      
+* 创   建   时   间 ：2017-12-23 22:20:257                      
 *                                                                 
 * 类   说   明 ：     系统管理员    
 *                                                                 
@@ -38,26 +38,25 @@ public class T_XT_GLY  extends BaseEntity{
 	@Column (name = "gxsj")                                  
 	private Date gxsj; //更新时间       
                                                                   
-	protected void setGlybs(String glybs) {                                     
+	public void setGlybs(String glybs) {                                     
 		this.glybs = glybs;                                                  
 	}                                                                
                                                                   
-	protected void setDlzh(String dlzh) {                                     
+	public void setDlzh(String dlzh) {                                     
 		this.dlzh = dlzh;                                                  
 	}                                                                
                                                                   
-	protected void setDlmm(String dlmm) {                                     
+	public void setDlmm(String dlmm) {                                     
 		this.dlmm = dlmm;                                                  
 	}                                                                
                                                                   
-	protected void setCjsj(Date cjsj) {                                     
+	public void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
                                                                   
-	protected void setGxsj(Date gxsj) {                                     
+	public void setGxsj(Date gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
-	@Id                                                              
 	                                                                 
 	public String getGlybs() {                                           
 		return glybs;                                                     

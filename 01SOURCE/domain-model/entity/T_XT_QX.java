@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-12-21 17:51:704                      
+* 创   建   时   间 ：2017-12-23 22:20:266                      
 *                                                                 
 * 类   说   明 ：     系统权限    
 *                                                                 
@@ -38,26 +38,25 @@ public class T_XT_QX  extends BaseEntity{
 	@Column (name = "gxsj")                                  
 	private Date gxsj; //更新时间       
                                                                   
-	protected void setQxbs(String qxbs) {                                     
+	public void setQxbs(String qxbs) {                                     
 		this.qxbs = qxbs;                                                  
 	}                                                                
                                                                   
-	protected void setQxmc(String qxmc) {                                     
+	public void setQxmc(String qxmc) {                                     
 		this.qxmc = qxmc;                                                  
 	}                                                                
                                                                   
-	protected void setQxz(Long qxz) {                                     
+	public void setQxz(Long qxz) {                                     
 		this.qxz = qxz;                                                  
 	}                                                                
                                                                   
-	protected void setCjsj(Date cjsj) {                                     
+	public void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
                                                                   
-	protected void setGxsj(Date gxsj) {                                     
+	public void setGxsj(Date gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
-	@Id                                                              
 	                                                                 
 	public String getQxbs() {                                           
 		return qxbs;                                                     

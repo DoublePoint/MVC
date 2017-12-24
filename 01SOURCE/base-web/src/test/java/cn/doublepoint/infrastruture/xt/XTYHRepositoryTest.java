@@ -18,7 +18,7 @@ import cn.doublepoint.common.domain.model.entity.xt.T_XT_YH;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTYHRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations={"classpath:spring-context.xml"},classes=AutoConfiguration.class)  
+@ContextConfiguration(locations={"classpath:spring-context.xml"})  
 public class XTYHRepositoryTest {
 	
 	@Resource

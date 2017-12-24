@@ -1,7 +1,7 @@
 /**                                                               
 * 创   建   人： 刘磊                                             
 *                                                                 
-* 创   建   时   间 ：2017-12-21 17:51:703                      
+* 创   建   时   间 ：2017-12-23 22:20:265                      
 *                                                                 
 * 类   说   明 ：     系统菜单    
 *                                                                 
@@ -44,38 +44,37 @@ public class T_XT_CD  extends BaseEntity{
 	@Column (name = "cjsj")                                  
 	private Date cjsj; //创建时间       
                                                                   
-	protected void setCdbs(String cdbs) {                                     
+	public void setCdbs(String cdbs) {                                     
 		this.cdbs = cdbs;                                                  
 	}                                                                
                                                                   
-	protected void setCdmc(String cdmc) {                                     
+	public void setCdmc(String cdmc) {                                     
 		this.cdmc = cdmc;                                                  
 	}                                                                
                                                                   
-	protected void setCdlj(String cdlj) {                                     
+	public void setCdlj(String cdlj) {                                     
 		this.cdlj = cdlj;                                                  
 	}                                                                
                                                                   
-	protected void setSjcdbs(String sjcdbs) {                                     
+	public void setSjcdbs(String sjcdbs) {                                     
 		this.sjcdbs = sjcdbs;                                                  
 	}                                                                
                                                                   
-	protected void setCdcj(Integer cdcj) {                                     
+	public void setCdcj(Integer cdcj) {                                     
 		this.cdcj = cdcj;                                                  
 	}                                                                
                                                                   
-	protected void setCdpx(Integer cdpx) {                                     
+	public void setCdpx(Integer cdpx) {                                     
 		this.cdpx = cdpx;                                                  
 	}                                                                
                                                                   
-	protected void setGxsj(Date gxsj) {                                     
+	public void setGxsj(Date gxsj) {                                     
 		this.gxsj = gxsj;                                                  
 	}                                                                
                                                                   
-	protected void setCjsj(Date cjsj) {                                     
+	public void setCjsj(Date cjsj) {                                     
 		this.cjsj = cjsj;                                                  
 	}                                                                
-	@Id                                                              
 	                                                                 
 	public String getCdbs() {                                           
 		return cdbs;                                                     

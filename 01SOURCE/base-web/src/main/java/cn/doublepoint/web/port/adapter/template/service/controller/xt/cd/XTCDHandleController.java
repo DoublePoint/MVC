@@ -59,35 +59,10 @@ public class XTCDHandleController implements BaseHandleController {
 		return xtcdLists;
 	}
 	
+	
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
-		List<VT_XT_CD> xtcdLists;
-		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			xtcdLists= xTCDQueryService.findAllXTCD2();
-		}
-		else{
-			VT_XT_CD cdQuery=new VT_XT_CD();
-			cdQuery.setCdbs(cd.getCdbs());
-			xtcdLists=xTCDQueryService.findChildrenXTCD(cdQuery);
-		}
-		if (xtcdLists == null)
-			xtcdLists = new ArrayList<VT_XT_CD>();
-		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
-		ajaxDataWrap.setData(xtcdLists);
-		Pager pager=new Pager();
-		pager.setCurrentPageNum(1);
-		pager.setPageCount(4);
-		pager.setPageSize(2);
-		pager.setTotalCount(5000);
-		ajaxDataWrap.setPager(pager);
-		ajaxDataWrap.setCode(200);
-		return ajaxDataWrap;
-	}
-	
-	@RequestMapping("/datalistajaxdatawrap2")
-	@ResponseBody
-	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap2(@RequestBody(required=false) T_XT_CD cd) {
 		List<VT_XT_CD> xtcdLists;
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
 			xtcdLists= xTCDQueryService.findAllXTCD();

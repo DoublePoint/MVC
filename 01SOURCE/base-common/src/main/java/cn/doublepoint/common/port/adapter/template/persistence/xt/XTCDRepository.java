@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import cn.doublepoint.base.common.domain.model.commontype.XTCDConstant;
+import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.I_VT_XT_CD;
 
@@ -36,8 +37,8 @@ public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,JpaSpecifi
 	 * @param 上级菜单标识
 	 * @return
 	 */
-	@Query("select cd,cd2.cdmc as zcdmc from T_XT_CD cd,T_XT_CD cd2 where cd.cdbs=cd2.sjcdbs order by cd.cdbs,cd.cdpx")
-	public List<I_VT_XT_CD> findAllXTCD2(); 
+	@Query("select cd.cdmc as a,cd.cdbs as b,cd.cdlj as c,cd.cdpx as d,cd2.cdmc as e from T_XT_CD cd,T_XT_CD cd2 where cd.cdbs=cd2.cdbs order by cd.cdbs,cd.cdpx")
+	public List<CustomerProjection> findReturnProjection(); 
 	
 	/**
 	 * 获取最底层菜单
@@ -55,4 +56,6 @@ public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,JpaSpecifi
 	public List<T_XT_CD> findChildrenXTCD(@Param("sjcdbs") String sjcdbs); 
 	
 	public T_XT_CD findByCdbs(String cdbs);
+	
+	
 }
