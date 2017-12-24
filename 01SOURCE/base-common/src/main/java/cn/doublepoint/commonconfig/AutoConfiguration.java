@@ -1,13 +1,13 @@
 /** 
 * 创   建   人： 刘磊
 * 
-* 创   建   时   间 ： 2017年12月15日
+* 创   建   时   间 ： 2017年10月14日
 * 
 * 类   说   明 ：配置文件
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.common.config;
+package cn.doublepoint.commonconfig;
 
 import java.util.Properties;
 
@@ -25,8 +25,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"cn.doublepoint.common"})
-@EnableJpaRepositories({"cn.doublepoint.common.port.adapter.template.persistence"})
+@ComponentScan(basePackages = { "cn.doublepoint.common" })
+@EnableJpaRepositories({ "cn.doublepoint.common.port.adapter.template.persistence" })
 public class AutoConfiguration {
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
@@ -34,7 +34,7 @@ public class AutoConfiguration {
 
 	@Autowired
 	DataSource dataSource;
-	
+
 	public AutoConfiguration() {
 		System.out.println("run base-common AutoConfiguration");
 	}

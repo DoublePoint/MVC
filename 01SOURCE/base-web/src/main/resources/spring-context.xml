@@ -30,7 +30,6 @@
 
   
     <context:component-scan base-package="cn.doublepoint">
-   		 
-    </context:component-scan>   
+   		    </context:component-scan>    
 
 </beans>
