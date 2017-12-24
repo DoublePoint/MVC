@@ -14,7 +14,6 @@ import java.util.List;
 public class AjaxDataWrap<T> {
 	private int code;
 	private String msg;
-	private int count;
 	private List<T> data;
 	private Pager pager;
 	
@@ -30,17 +29,10 @@ public class AjaxDataWrap<T> {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
 	public List<T> getData() {
 		return data;
 	}
 	public void setData(List<T> data) {
-		this.count=data.size();
 		this.data = data;
 	}
 	public Pager getPager() {
@@ -50,5 +42,8 @@ public class AjaxDataWrap<T> {
 		this.pager = pager;
 	}
 	
-	
+	public AjaxDataWrap() {
+		super();
+		this.pager=new Pager();
+	}
 }

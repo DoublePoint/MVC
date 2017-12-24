@@ -16,6 +16,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjectionClass;
@@ -25,8 +27,7 @@ import cn.doublepoint.common.util.CommonBeanUtils;
 import cn.doublepoint.common.util.CommonUtils;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
 
-
-public class XTCDRepositoryTest extends RepositoryTest{
+public class XTCDRepositoryTest extends RepositoryTest {
 
 	@Resource
 	XTCDRepository repository;
@@ -43,11 +44,24 @@ public class XTCDRepositoryTest extends RepositoryTest{
 			repository.save(cd);
 		}
 	}
-	
+
 	@Test
-	public void testProjection(){
-		List<CustomerProjection> list=repository.findReturnProjection();
-//		List<CustomerProjectionClass> list2=CommonBeanUtils.copyTo(list, CustomerProjectionClass.class);
+	public void testPage() {
+		PageRequest request = this.buildPageRequest(1, 2);
+		Page<T_XT_CD> page=repository.findAllXTCD(request);
+		System.out.println(111);
+	}
+
+	// 构建PageRequest
+	private PageRequest buildPageRequest(int pageNumber, int pagzSize) {
+		return new PageRequest(pageNumber - 1, pagzSize, null);
+	}
+
+	@Test
+	public void testProjection() {
+		List<CustomerProjection> list = repository.findReturnProjection();
+		// List<CustomerProjectionClass> list2=CommonBeanUtils.copyTo(list,
+		// CustomerProjectionClass.class);
 		System.out.println("123");
 	}
 }

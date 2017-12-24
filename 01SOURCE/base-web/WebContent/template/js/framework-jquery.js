@@ -77,7 +77,7 @@ var DoublePoint = {};// 全局对象
 			var height=ajaxgrid.height;
 			var ss=$table.render({
 				elem : '#' + id + '',
-				data : ajaxDataWrap,
+				data : ajaxDataWrap.data,
 				height : height,
 				cols :cols ,
 				skin : 'row', // 表格风格

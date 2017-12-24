@@ -79,8 +79,8 @@ function zTreeOnClick(event, treeId, treeNode) {
 		dataType : "json",
 		data : JSON.stringify(cd),
 		async : false,
-		success : function(data) {
-			lltestdatagrid.setData(data);
+		success : function(datawrap) {
+			lltestdatagrid.setData(datawrap);
 		}
 	});
 	return false;

@@ -10,16 +10,28 @@
 package cn.doublepoint.common.domain.model;
 
 public class Pager {
-	private int currentPageNum=0;
-	private int pageSize=0;
-	private int totalCount=0;
-	private int pageCount=0;
-	private int pageNumSize=5;
+	private int currentPageNum=1;
+	private int currentPageCount=0;
+	private long totalElementCount=0;
+	private int totalPageCount=1;
+	private int pageSize=100;
 	public int getCurrentPageNum() {
 		return currentPageNum;
 	}
 	public void setCurrentPageNum(int currentPageNum) {
 		this.currentPageNum = currentPageNum;
+	}
+	public long getTotalElementCount() {
+		return totalElementCount;
+	}
+	public void setTotalElementCount(long totalElementCount) {
+		this.totalElementCount = totalElementCount;
+	}
+	public int getTotalPageCount() {
+		return totalPageCount;
+	}
+	public void setTotalPageCount(int totalPageCount) {
+		this.totalPageCount = totalPageCount;
 	}
 	public int getPageSize() {
 		return pageSize;
@@ -27,23 +39,11 @@ public class Pager {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	public int getTotalCount() {
-		return totalCount;
+	public int getCurrentPageCount() {
+		return currentPageCount;
 	}
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
-	public int getPageCount() {
-		return pageCount;
-	}
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
-	}
-	public int getPageNumSize() {
-		return pageNumSize;
-	}
-	public void setPageNumSize(int pageNumSize) {
-		this.pageNumSize = pageNumSize;
+	public void setCurrentPageCount(int currentPageCount) {
+		this.currentPageCount = currentPageCount;
 	}
 	
 	

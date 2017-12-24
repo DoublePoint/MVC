@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+
+import cn.doublepoint.common.domain.model.AjaxDataWrap;
+import cn.doublepoint.common.domain.model.Pager;
+import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 
 public class CommonBeanUtils extends BeanUtils {
 
@@ -44,5 +49,27 @@ public class CommonBeanUtils extends BeanUtils {
 			e.printStackTrace();
 		}
 		return res;
+	}
+	
+	/**
+	 * Spring Data Jpa Page转换成AjaxDataWrap
+	 * @param page
+	 * @param cla
+	 * @return
+	 */
+	public static <T> AjaxDataWrap<T> copyPageToAjaxDataWrap(Page page,Class<T> cla){
+		AjaxDataWrap<T> ajaxDataWrap=new AjaxDataWrap<T>();
+		Pager pager=new Pager();
+		if(page!=null){
+			pager.setCurrentPageCount(page.getNumberOfElements());//本页条数
+			pager.setCurrentPageNum(page.getNumber());//当前是第几页
+			pager.setTotalPageCount(page.getTotalPages());//总页数
+			pager.setTotalElementCount(page.getTotalElements());//总条数
+			pager.setPageSize(page.getSize());//每页条数
+		}
+		List<T> resList=copyTo(page.getContent(),cla);
+		ajaxDataWrap.setData(resList);
+		ajaxDataWrap.setPager(pager);
+		return ajaxDataWrap;
 	}
 }

@@ -108,9 +108,10 @@ function AjaxDataGrid(domId) {
 		this.setPager(data.pager);
 	};
 	this.setPager=function(page){
+		if(page==null) return;
 		$laypage.render({
 			elem : this.pageId,
-			count : page.totalCount,
+			count : page.totalElementCount,
 			curr : page.currentPageNum,
 			limit : page.pageSize,
 			layout : [ 'prev', 'page', 'next', 'skip', 'count', 'limit' ],

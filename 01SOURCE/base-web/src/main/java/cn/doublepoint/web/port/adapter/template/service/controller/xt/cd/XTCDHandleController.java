@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,45 +45,46 @@ public class XTCDHandleController implements BaseHandleController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public List<VT_XT_CD> cdDataList(@RequestBody(required=false) T_XT_CD cd) {
-		List<VT_XT_CD> xtcdLists;
+	public AjaxDataWrap<VT_XT_CD> cdDataList(@RequestBody(required=false) T_XT_CD cd) {
+		AjaxDataWrap<VT_XT_CD> dataWrap;
+		PageRequest pageRequest=new PageRequest(0, 2);
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			xtcdLists= xTCDQueryService.findAllXTCD();
+			dataWrap= xTCDQueryService.findAllXTCD(pageRequest);
 		}
 		else{
 			VT_XT_CD cdQuery=new VT_XT_CD();
 			cdQuery.setCdbs(cd.getCdbs());
-			xtcdLists=xTCDQueryService.findChildrenXTCD(cdQuery);
+			dataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageRequest);
 		}
-		if (xtcdLists == null)
-			xtcdLists = new ArrayList<VT_XT_CD>();
-		return xtcdLists;
+		if (dataWrap == null)
+			dataWrap = new AjaxDataWrap<VT_XT_CD>();
+		return dataWrap;
 	}
 	
 	
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
-		List<VT_XT_CD> xtcdLists;
+		PageRequest pageRequest=new PageRequest(2, 1);
+		
+		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			xtcdLists= xTCDQueryService.findAllXTCD();
+			ajaxDataWrap= xTCDQueryService.findAllXTCD(pageRequest);
 		}
 		else{
 			VT_XT_CD cdQuery=new VT_XT_CD();
 			cdQuery.setCdbs(cd.getCdbs());
-			xtcdLists=xTCDQueryService.findChildrenXTCD(cdQuery);
+			ajaxDataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageRequest);
 		}
-		if (xtcdLists == null)
-			xtcdLists = new ArrayList<VT_XT_CD>();
-		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
-		ajaxDataWrap.setData(xtcdLists);
-		Pager pager=new Pager();
-		pager.setCurrentPageNum(1);
-		pager.setPageCount(4);
-		pager.setPageSize(2);
-		pager.setTotalCount(5000);
-		ajaxDataWrap.setPager(pager);
-		ajaxDataWrap.setCode(200);
+//		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
+//		ajaxDataWrap.setData(xtcdLists);
+//		Pager pager=new Pager();
+//		pager.setCurrentPageNum(1);
+//		pager.setPageCount(4);
+//		pager.setPageSize(2);
+//		pager.setTotalCount(5000);
+//		ajaxDataWrap.setPager(pager);
+//		ajaxDataWrap.setCode(200);
 		return ajaxDataWrap;
 	}
 	
