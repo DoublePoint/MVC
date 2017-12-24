@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.doublepoint.common.config.AutoConfiguration;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_YH;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTYHRepository;
 
