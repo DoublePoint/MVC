@@ -37,6 +37,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/base-common"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/base-common-type"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/base-common-util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/base-jdbc"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

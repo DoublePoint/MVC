@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.doublepoint.base.common.port.adapter.controller.request.BaseRequestController;
+import cn.doublepoint.base.commonutil.port.adapter.controller.request.BaseRequestController;
 import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;

@@ -12,19 +12,25 @@ package cn.doublepoint.common.port.adapter.template.persistence.xt;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import cn.doublepoint.base.common.domain.model.commontype.XTCDConstant;
+import cn.doublepoint.base.commonutil.domain.model.XTCDConstant;
+import cn.doublepoint.base.commonutil.persistence.BaseRepository;
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 
-public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,JpaSpecificationExecutor<T_XT_CD>{
-
+public interface XTCDRepository extends JpaRepository<T_XT_CD,Long>,JpaSpecificationExecutor<T_XT_CD>{
+//	@Resource
+//	JdbcTemplate template;
+//	
+//	public default <T extends BaseModel> List<T> executeQuery(String sql,final Class<T> clas){
+//		return template.query(sql, new BeanPropertyRowMapper<T>(clas));
+//	}
+	
 	/**
 	 * 获取子菜单
 	 * @param 上级菜单标识
@@ -57,4 +63,6 @@ public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,JpaSpecifi
 	 */
 	@Query(value="select new map(cd.cdmc,cd.cdbs) from T_XT_CD cd order by cd.cdbs,cd.cdpx")
 	public  List<CustomerProjection> findReturnProjection(); 
+	
+	
 }

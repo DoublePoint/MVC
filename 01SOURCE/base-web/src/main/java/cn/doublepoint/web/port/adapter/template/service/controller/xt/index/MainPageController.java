@@ -16,7 +16,7 @@ package cn.doublepoint.web.port.adapter.template.service.controller.xt.index;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.doublepoint.base.common.port.adapter.controller.request.BaseRequestController;
+import cn.doublepoint.base.commonutil.port.adapter.controller.request.BaseRequestController;
 
 @Controller
 public class MainPageController implements BaseRequestController {

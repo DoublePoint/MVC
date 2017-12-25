@@ -15,9 +15,8 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 
-import cn.doublepoint.common.domain.model.AjaxDataWrap;
-import cn.doublepoint.common.domain.model.Pager;
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.base.commonutil.domain.model.Pager;
 
 public class CommonBeanUtils extends BeanUtils {
 

@@ -33,12 +33,15 @@ public class XTCDRepositoryTest extends RepositoryTest {
 	XTCDRepository repository;
 	@Resource
 	SnowflakeIdWorker idworker;
+	
+	
 
 	@Test
 	public void testSaveXTCD() {
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 1000000; i++) {
 			T_XT_CD cd = new T_XT_CD();
 			cd.setCdbs(idworker.nextId());
+			cd.setCdmc("菜单名称"+i);
 			cd.setCjsj(new Timestamp(100000));
 			cd.setGxsj(new Date());
 			repository.save(cd);

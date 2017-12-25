@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.base.common.domain.model.commontype.XTCDConstant;
+import cn.doublepoint.base.commonutil.domain.model.XTCDConstant;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
@@ -48,7 +48,7 @@ public class XTCDApplicationService {
 	
 	public boolean removeXTCD(List<T_XT_CD> cdList){
 		for (T_XT_CD t_XT_CD : cdList) {
-			xtcdRepository.delete(t_XT_CD.getCdbs());
+			xtcdRepository.delete(Long.valueOf(t_XT_CD.getCdbs()));
 		}
 		
 		return true;

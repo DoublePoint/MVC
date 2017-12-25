@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.common.domain.model.AjaxDataWrap;
+import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.I_VT_XT_CD;

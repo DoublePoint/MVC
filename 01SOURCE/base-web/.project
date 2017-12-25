@@ -3,8 +3,8 @@
 	<name>base-web</name>
 	<comment></comment>
 	<projects>
-		<project>base-common-type</project>
 		<project>base-common</project>
+		<project>base-common-util</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

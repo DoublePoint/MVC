@@ -2,7 +2,13 @@
     <wb-module deploy-name="base-common">
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/resources"/>
-        <dependent-module archiveName="base-common-type.jar" deploy-path="/" handle="module:/resource/base-common-type/base-common-type">
+        <dependent-module deploy-path="/" handle="module:/resource/base-common-util/base-common-util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="base-datajpa.jar" deploy-path="/" handle="module:/resource/base-datajpa/base-datajpa">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="base-jdbc.jar" deploy-path="/" handle="module:/resource/base-jdbc/base-jdbc">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

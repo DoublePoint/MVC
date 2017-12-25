@@ -19,9 +19,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import dao.JPAUtil;
 
 @Configuration
 @EnableTransactionManagement
@@ -55,6 +58,13 @@ public class AutoConfiguration {
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		return transactionManager;
 	}
+	
+	@Bean
+	public JdbcTemplate jdbcTemplate(DataSource dataSource){
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		jdbcTemplate.setDataSource(dataSource);
+		return jdbcTemplate;
+	}
 
 	private Properties hibProperties() {
 		Properties properties = new Properties();
@@ -64,5 +74,9 @@ public class AutoConfiguration {
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
-
+	
+	@Bean
+	public JPAUtil jpaUtil(){
+		return new JPAUtil();
+	}
 }

@@ -3,7 +3,9 @@
 	<name>base-common</name>
 	<comment></comment>
 	<projects>
-		<project>base-common-type</project>
+		<project>base-common-util</project>
+		<project>base-datajpa</project>
+		<project>base-jdbc</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

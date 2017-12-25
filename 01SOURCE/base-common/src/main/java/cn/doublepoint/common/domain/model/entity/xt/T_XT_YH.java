@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import cn.doublepoint.common.domain.model.entity.BaseEntity;
+import cn.doublepoint.common.util.domain.model.entity.BaseEntity;
     
 @Entity                                                           
 @Table(name="XT_YH")                                                   
