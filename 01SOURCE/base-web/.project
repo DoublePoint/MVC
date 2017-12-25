@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>base-common</project>
-		<project>base-common-util</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
