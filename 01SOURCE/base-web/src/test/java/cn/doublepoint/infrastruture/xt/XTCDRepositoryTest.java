@@ -10,6 +10,7 @@
 package cn.doublepoint.infrastruture.xt;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +21,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
-import cn.doublepoint.common.domain.model.entity.xt.CustomerProjectionClass;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
-import cn.doublepoint.common.util.CommonBeanUtils;
-import cn.doublepoint.common.util.CommonUtils;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
 
 public class XTCDRepositoryTest extends RepositoryTest {
@@ -38,13 +36,18 @@ public class XTCDRepositoryTest extends RepositoryTest {
 
 	@Test
 	public void testSaveXTCD() {
+		List<T_XT_CD> list=new ArrayList<T_XT_CD>();
 		for (int i = 0; i < 1000000; i++) {
 			T_XT_CD cd = new T_XT_CD();
 			cd.setCdbs(idworker.nextId());
 			cd.setCdmc("菜单名称"+i);
 			cd.setCjsj(new Timestamp(100000));
 			cd.setGxsj(new Date());
-			repository.save(cd);
+			list.add(cd);
+			if(i%20000==0){
+				repository.save(list);
+				list=new ArrayList<T_XT_CD>();
+			}
 		}
 	}
 

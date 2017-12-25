@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import cn.doublepoint.base.commonutil.domain.model.XTCDConstant;
-import cn.doublepoint.base.commonutil.persistence.BaseRepository;
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 

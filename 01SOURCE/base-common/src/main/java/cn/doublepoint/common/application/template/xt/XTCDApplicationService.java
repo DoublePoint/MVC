@@ -9,6 +9,7 @@
 */
 package cn.doublepoint.common.application.template.xt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -40,6 +41,7 @@ public class XTCDApplicationService {
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
 			xtcdRepository.save(t_XT_CD);
+			xtcdRepository.save(new ArrayList<>());
 		} catch (Exception e) {
 			return false;
 		}
