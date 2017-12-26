@@ -11,6 +11,8 @@ package cn.doublepoint.base.commonutil.domain.model;
 
 import java.util.List;
 
+import cn.doublepoint.common.util.CommonBeanUtils;
+
 public class AjaxDataWrap<T> {
 	private int code;
 	private String msg;
@@ -45,5 +47,12 @@ public class AjaxDataWrap<T> {
 	public AjaxDataWrap() {
 		super();
 		this.pager=new PageInfo();
+	}
+	
+	public <R> AjaxDataWrap<R> copy(Class<R> targetClass){
+		AjaxDataWrap<R> ajaxDataWrap=new AjaxDataWrap<>();
+		ajaxDataWrap.setPager(this.pager);
+		ajaxDataWrap.setData(CommonBeanUtils.copyTo(this.data, targetClass));
+		return ajaxDataWrap;
 	}
 }

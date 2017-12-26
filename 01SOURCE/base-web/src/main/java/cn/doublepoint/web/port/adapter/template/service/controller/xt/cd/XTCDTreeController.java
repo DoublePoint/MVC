@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.doublepoint.base.commonutil.domain.model.PageInfo;
 import cn.doublepoint.base.commonutil.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
@@ -51,7 +52,7 @@ public class XTCDTreeController implements BaseTreeController {
 	}
 
 	private List<VT_XT_CD> getChildrenXTCDList(VT_XT_CD cd) {
-		PageRequest pageRequest = new PageRequest(0, 999999);
+		PageInfo pageRequest = new PageInfo(0, 999999);
 		List<VT_XT_CD> xTCDList;
 		if (cd == null)
 			xTCDList = xTCDQueryService.findRootXTCD(pageRequest).getData();

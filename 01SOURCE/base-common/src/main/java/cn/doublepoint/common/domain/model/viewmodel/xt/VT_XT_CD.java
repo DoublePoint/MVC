@@ -14,17 +14,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.persistence.Table;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.domain.model.entity.BaseEntity;
 
-@Table(name="XT_CD")  
-@Component
 public class VT_XT_CD extends BaseEntity implements I_VT_XT_CD{
 	
 

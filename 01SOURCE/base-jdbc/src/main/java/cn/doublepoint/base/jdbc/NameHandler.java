@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package dao;
+package cn.doublepoint.base.jdbc;
 
 public interface NameHandler {
 

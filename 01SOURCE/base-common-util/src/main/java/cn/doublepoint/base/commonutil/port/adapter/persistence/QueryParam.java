@@ -9,6 +9,8 @@
 */
 package cn.doublepoint.base.commonutil.port.adapter.persistence;
 
+import cn.doublepoint.common.util.StringUtils;
+
 public class QueryParam {
 	public static final String RELATION_EQUAL = "=";
 	public static final String RELATION_GT = ">";
@@ -54,6 +56,24 @@ public class QueryParam {
 
 	public void setValue(Object value) {
 		this.value = value;
+	}
+	
+	public QueryParam() {
+		super();
+	}
+
+	public QueryParam(String name, Object value) {
+		super();
+		this.name = name;
+		this.value = value;
+	}
+
+	public QueryParam(String name, Object value, String relation) {
+		super();
+		this.name = name;
+		this.value = value;
+		if(StringUtils.isNullOrEmpty(relation))
+			this.relation=relation;
 	}
 
 	public boolean equals(Object obj) {

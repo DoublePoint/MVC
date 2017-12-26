@@ -18,18 +18,19 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
+import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.base.commonutil.domain.model.PageInfo;
 import cn.doublepoint.base.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.base.commonutil.port.adapter.persistence.QueryParamList;
+import cn.doublepoint.base.jdbc.JDBCUtil;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.common.util.CommonBeanUtils;
-import dao.JPAUtil;
 
 public class JPAUtilTest extends RepositoryTest {
 
 	@Resource
-	JPAUtil jpaUtil;
+	JDBCUtil jpaUtil;
 
 	@Test
 	public void testquery() throws Exception {
@@ -67,8 +68,8 @@ public class JPAUtilTest extends RepositoryTest {
 		pageInfo.setCurrentPageNum(1);
 		pageInfo.setPageSize(100);
 		
-		List<T_XT_CD> list2=jpaUtil.load(T_XT_CD.class, list, pageInfo);
-		System.out.println(list2.size());
+		AjaxDataWrap<T_XT_CD> list2=jpaUtil.load(T_XT_CD.class, list, pageInfo);
+//		System.out.println(list2.size());
 	}
 	
 }

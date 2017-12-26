@@ -46,6 +46,15 @@ public class PageInfo {
 		this.currentPageCount = currentPageCount;
 	}
 	
+	
+	public PageInfo() {
+		super();
+	}
+	public PageInfo(int currentPageNum, int pageSize) {
+		super();
+		this.currentPageNum = currentPageNum;
+		this.pageSize = pageSize;
+	}
 	//获取其实位置
 	public long getStart(){
 		return (this.currentPageNum-1)*this.pageSize;

@@ -1,3 +1,4 @@
+package cn.doublepoint.base.jdbc;
 ///** 
 //* 创   建   人： 刘磊
 //* 

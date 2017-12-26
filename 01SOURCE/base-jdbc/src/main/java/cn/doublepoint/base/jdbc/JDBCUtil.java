@@ -7,7 +7,9 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package dao;
+package cn.doublepoint.base.jdbc;
+
+import static java.util.stream.Collectors.toList;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -19,173 +21,100 @@ import javax.persistence.Table;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.base.commonutil.domain.model.PageInfo;
+import cn.doublepoint.base.commonutil.port.adapter.persistence.BaseRepositoryUtil;
 import cn.doublepoint.base.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.base.commonutil.port.adapter.persistence.SortParamList;
 import cn.doublepoint.common.util.domain.model.BaseModel;
 
-import static java.util.stream.Collectors.toList;
-
-public class JPAUtil {
+public class JDBCUtil implements BaseRepositoryUtil {
 	@Resource
 	JdbcTemplate commonTemplate;
 
+	@Override
 	public <T extends BaseModel> List<T> executeQuery(String sql, final Class<T> clas) {
 		return commonTemplate.query(sql, new BeanPropertyRowMapper<T>(clas));
 	}
 
-	/**
-	 * 带参数的实体检索
-	 *
-	 * @param <T>
-	 *            泛型标识
-	 * @param clazz
-	 *            实体类，必须是继承BaseModel的实体
-	 * @param params
-	 *            参数
-	 * @return 检索后得到的实体列表 @ 出错抛出异常
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params) throws InstantiationException, IllegalAccessException {
-		return load(clazz, params, null, null);
+	@Override
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params) {
+		return load(clazz, params, null, null).getData();
 	}
 
-	/**
-	 * 带分页的实体检索
-	 *
-	 * @param <T>
-	 *            泛型标识
-	 * @param clazz
-	 *            实体类，必须是继承BaseModel的实体
-	 * @param pageInfo
-	 *            分页信息
-	 * @return 检索后得到的实体列表 @ 出错抛出异常
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz, PageInfo pageInfo) throws InstantiationException, IllegalAccessException {
+	@Override
+	public <T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, PageInfo pageInfo) {
 		return load(clazz, null, null, pageInfo);
+
 	}
 
-	/**
-	 * 带参数的实体检索
-	 *
-	 * @param <T>
-	 *            泛型标识
-	 * @param clazz
-	 *            实体类，必须是继承BaseModel的实体
-	 * @param params
-	 *            参数
-	 * @param sortParams
-	 *            排序参数
-	 * @return 检索后得到的实体列表 @ 出错抛出异常
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams) throws InstantiationException, IllegalAccessException {
-		return load(clazz, params, sortParams, null);
+	@Override
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams) {
+		return load(clazz, params, sortParams, null).getData();
 	}
 
-	/**
-	 * 带参数、分页的实体检索
-	 *
-	 * @param <T>
-	 *            泛型标识
-	 * @param clazz
-	 *            实体类，必须是继承BaseModel的实体
-	 * @param sortParams
-	 *            排序参数
-	 * @param pageInfo
-	 *            分页信息
-	 * @return 检索后得到的实体列表 @ 出错抛出异常
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz, SortParamList sortParams, PageInfo pageInfo) throws InstantiationException, IllegalAccessException {
+	@Override
+	public <T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, SortParamList sortParams, PageInfo pageInfo) {
 		return load(clazz, null, sortParams, pageInfo);
 	}
 
 	/**
-	 * 带参数、分页的实体检索
-	 *
-	 * @param <T>
-	 *            泛型标识
+	 * 加载全部
+	 * 
 	 * @param clazz
-	 *            实体类，必须是继承BaseModel的实体
-	 * @param params
-	 *            参数
-	 * @param pageInfo
-	 *            分页信息
-	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 * @return
 	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, PageInfo pageInfo) {
+	public <T extends BaseModel> List<T> loadAll(Class<T> clazz) {
+		return load(clazz, null, null, null).getData();
+	}
+
+	@Override
+	public <T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, QueryParamList params, PageInfo pageInfo) {
+		return load(clazz, params, null, pageInfo);
+	}
+
+	@Override
+	public <T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams,
+			PageInfo pageInfo) {
+		BaseModel model;
 		try {
-			return load(clazz, params, null,pageInfo);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+			model = clazz.newInstance();
+
+			Object[] paramArr = params.getParams().stream().map(param -> param.getValue()).collect(toList()).toArray();
+			StringBuilder sb = new StringBuilder(model.getSelectSql());
+			if (params != null)
+				sb.append(params.getParamAndSql().getSqlString());
+			if (sortParams != null)
+				sb.append(sortParams.getSortSql());
+
+			int totalElementCount = queryCount(sb.toString(), paramArr);
+			pageInfo.setTotalElementCount(totalElementCount);
+			if (pageInfo != null)
+				sb.append(pageInfo.getLimitSql());
+			List<T> dataList = commonTemplate.query(sb.toString(), paramArr, new BeanPropertyRowMapper<T>(clazz));
+			AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<T>();
+			ajaxDataWrap.setData(dataList);
+			ajaxDataWrap.setPager(pageInfo);
+			return ajaxDataWrap;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ArrayList<T>();
-		
+		return new AjaxDataWrap<T>();
+
 	}
 
-	/**
-	 * 带参数、分页的实体检索
-	 *
-	 * @param <T>
-	 *            泛型标识
-	 * @param clazz
-	 *            实体类，必须是继承BaseModel的实体
-	 * @param params
-	 *            参数
-	 * @param sortParams
-	 *            排序参数
-	 * @param pageInfo
-	 *            分页信息
-	 * @return 检索后得到的实体列表 @ 出错抛出异常
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams,
-			PageInfo pageInfo) throws InstantiationException, IllegalAccessException{
-		BaseModel model = clazz.newInstance();
-		StringBuilder sb = new StringBuilder(model.getSelectSql());
-		if(params!=null)
-			sb.append(params.getParamAndSql().getSqlString());
-		if(sortParams!=null)
-			sb.append(sortParams.getSortSql());
-		if(pageInfo!=null)
-			sb.append(pageInfo.getLimitSql());
-		
-		Object[] paramArr = params.getParams().stream().map(param -> param.getValue()).collect(toList()).toArray();
-		
-		return commonTemplate.query(sb.toString(), paramArr, new BeanPropertyRowMapper<T>(clazz));
-	}
-
-	/**
-	 * 批量更新
-	 * 
-	 * @param queryModelList
-	 */
+	@Override
 	public <T extends BaseModel> void batchUpdate(List<T> updateList) {
 		if (updateList == null || updateList.size() == 0)
 			return;
 		T model = updateList.get(0);
-		// CommonBeanUtils.
 		String querySql = model.getUpdateSql();
 		List<Object[]> paramsList = model.getQueryParamList(updateList);
 		commonTemplate.batchUpdate(querySql, paramsList);
-		
-		
+
 	}
 
-	/**
-	 * 批量插入
-	 * 
-	 * @param queryModelList
-	 */
+	@Override
 	public <T extends BaseModel> void batchInsert(List<T> insertList) {
 		if (insertList == null || insertList.size() == 0)
 			return;
@@ -195,6 +124,7 @@ public class JPAUtil {
 		commonTemplate.batchUpdate(querySql, paramsList);
 	}
 
+	@Override
 	public <T extends BaseModel> void save2(List<T> objectList) throws Exception {
 		if (objectList == null || objectList.size() == 0)
 			return;
@@ -247,6 +177,11 @@ public class JPAUtil {
 		String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + zhanweifu.toString();
 		System.out.println(sql);
 		System.out.println(valuesList);
+	}
+
+	@Override
+	public int queryCount(String sql, Object[] params) {
+		return commonTemplate.queryForObject(sql, params, Integer.class);
 	}
 
 	// /**

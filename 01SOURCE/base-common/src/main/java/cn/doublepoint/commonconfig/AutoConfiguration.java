@@ -24,11 +24,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import dao.JPAUtil;
+import cn.doublepoint.base.commonutil.port.adapter.persistence.BaseRepositoryUtil;
+import cn.doublepoint.base.jdbc.JDBCUtil;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "cn.doublepoint.common" })
+@ComponentScan(basePackages = { "cn.doublepoint.common" ,"cn.doublepoint.base.jdbc" })
 @EnableJpaRepositories({ "cn.doublepoint.common.port.adapter.template.persistence" })
 public class AutoConfiguration {
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
@@ -76,7 +77,7 @@ public class AutoConfiguration {
 	}
 	
 	@Bean
-	public JPAUtil jpaUtil(){
-		return new JPAUtil();
+	public BaseRepositoryUtil jpaUtil(){
+		return new JDBCUtil();
 	}
 }

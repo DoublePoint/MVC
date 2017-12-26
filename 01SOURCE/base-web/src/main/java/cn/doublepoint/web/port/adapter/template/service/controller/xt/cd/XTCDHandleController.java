@@ -47,14 +47,14 @@ public class XTCDHandleController implements BaseHandleController {
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataList(@RequestBody(required=false) T_XT_CD cd) {
 		AjaxDataWrap<VT_XT_CD> dataWrap;
-		PageRequest pageRequest=new PageRequest(0, 2);
+		PageInfo pageInfo=new PageInfo(0, 2);
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			dataWrap= xTCDQueryService.findAllXTCD(pageRequest);
+			dataWrap= xTCDQueryService.findAllXTCD(pageInfo);
 		}
 		else{
 			VT_XT_CD cdQuery=new VT_XT_CD();
 			cdQuery.setCdbs(cd.getCdbs());
-			dataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageRequest);
+			dataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageInfo);
 		}
 		if (dataWrap == null)
 			dataWrap = new AjaxDataWrap<VT_XT_CD>();
@@ -65,8 +65,7 @@ public class XTCDHandleController implements BaseHandleController {
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
-		PageRequest pageRequest=new PageRequest(2, 1);
-		
+		PageInfo pageRequest=new PageInfo(2, 1);
 		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
 			ajaxDataWrap= xTCDQueryService.findAllXTCD(pageRequest);
