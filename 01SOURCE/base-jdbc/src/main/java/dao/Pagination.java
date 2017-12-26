@@ -44,7 +44,7 @@
 //		long totalElementCount=getTotalElementCount(sql);
 //		pager.setTotalElementCount(totalElementCount);
 //		
-//		StringBuffer paginationSQL = new StringBuffer(" ");
+//		StringBuilder paginationSQL = new StringBuilder(" ");
 //		paginationSQL.append(sql);
 //		paginationSQL.append(" limit( " + pager.getStart() + "," + pager.getEnd() + ")");
 //		// 装入结果集
@@ -138,7 +138,7 @@
 //	 * @return
 //	 */
 //	private long getTotalElementCount(String sql) {
-//		StringBuffer totalSQL = new StringBuffer(" SELECT count(*) FROM ( ");
+//		StringBuilder totalSQL = new StringBuilder(" SELECT count(*) FROM ( ");
 //		totalSQL.append(sql);
 //		totalSQL.append(" ) totalTable ");
 //		// 总记录数

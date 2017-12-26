@@ -23,12 +23,6 @@ import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 
 public interface XTCDRepository extends JpaRepository<T_XT_CD,Long>,JpaSpecificationExecutor<T_XT_CD>{
-//	@Resource
-//	JdbcTemplate template;
-//	
-//	public default <T extends BaseModel> List<T> executeQuery(String sql,final Class<T> clas){
-//		return template.query(sql, new BeanPropertyRowMapper<T>(clas));
-//	}
 	
 	/**
 	 * 获取子菜单

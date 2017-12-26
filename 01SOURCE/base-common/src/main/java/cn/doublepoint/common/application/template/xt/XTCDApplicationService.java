@@ -21,6 +21,7 @@ import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
 import cn.doublepoint.common.util.StringUtils;
+import dao.JPAUtil;
 
 @Service("xtcdApplicationService")
 public class XTCDApplicationService {
@@ -30,7 +31,30 @@ public class XTCDApplicationService {
 	@Resource
 	SnowflakeIdWorker idWorker;
 	
+	@Resource
+	JPAUtil jpaUtil;	
+	public boolean createXTCD0(T_XT_CD t_XT_CD){
+		try {
+			if(StringUtils.isNullOrEmpty(t_XT_CD.getCdbs())){
+				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
+			}
+			else{
+				T_XT_CD parentCd=xtcdRepository.findByCdbs(t_XT_CD.getSjcdbs());
+				t_XT_CD.setCdcj(parentCd.getCdcj()+1);
+			}
+			t_XT_CD.setCdbs(idWorker.nextId());
+			xtcdRepository.save(t_XT_CD);
+			xtcdRepository.save(new ArrayList<>());
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean createXTCD(T_XT_CD t_XT_CD){
+		
+		
+		
 		try {
 			if(StringUtils.isNullOrEmpty(t_XT_CD.getCdbs())){
 				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));

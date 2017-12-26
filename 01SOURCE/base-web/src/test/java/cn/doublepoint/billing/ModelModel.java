@@ -77,7 +77,7 @@ public class ModelModel {
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 
-		StringBuffer sbBuffer = new StringBuffer();
+		StringBuilder sbBuffer = new StringBuilder();
 		sbBuffer.append("/** \r\n");
 		sbBuffer.append("* 创   建   人： 刘磊 \r\n");
 
@@ -117,8 +117,8 @@ public class ModelModel {
 		return sbBuffer.toString();
 	}
 
-	private StringBuffer buildEntityClassBody() {
-		StringBuffer sbBuffer = new StringBuffer();
+	private StringBuilder buildEntityClassBody() {
+		StringBuilder sbBuffer = new StringBuilder();
 		sbBuffer.append("import javax.persistence.Column;\r\n");
 		sbBuffer.append("import javax.persistence.Entity;\r\n");
 		sbBuffer.append("import javax.persistence.Id;\r\n");
@@ -174,8 +174,8 @@ public class ModelModel {
 		return sbBuffer;
 	}
 
-	private StringBuffer buildEnumClassBody() {
-		StringBuffer sbBuffer = new StringBuffer();
+	private StringBuilder buildEnumClassBody() {
+		StringBuilder sbBuffer = new StringBuilder();
 		sbBuffer.append("import java.util.HashMap;\r\n");
 		sbBuffer.append("import java.util.Map;\r\n");
 
@@ -211,8 +211,8 @@ public class ModelModel {
 		return sbBuffer;
 	}
 
-	private StringBuffer buildValueObjectClassBody() {
-		StringBuffer sbBuffer = new StringBuffer();
+	private StringBuilder buildValueObjectClassBody() {
+		StringBuilder sbBuffer = new StringBuilder();
 		sbBuffer.append("import javax.persistence.Embeddable;\r\n");
 		sbBuffer.append("import javax.persistence.EnumType;\r\n");
 		sbBuffer.append("import javax.persistence.Enumerated;\r\n");
@@ -242,7 +242,7 @@ public class ModelModel {
 	// Date date = new Date();
 	// SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 	//
-	// StringBuffer sbBuffer = new StringBuffer();
+	// StringBuilder sbBuffer = new StringBuilder();
 	// sbBuffer.append("/** \r\n");
 	// sbBuffer.append("* 创 建 人： 刘磊 \r\n");
 	//

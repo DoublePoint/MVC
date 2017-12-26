@@ -16,7 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 
 import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.base.commonutil.domain.model.Pager;
+import cn.doublepoint.base.commonutil.domain.model.PageInfo;
 
 public class CommonBeanUtils extends BeanUtils {
 
@@ -58,7 +58,7 @@ public class CommonBeanUtils extends BeanUtils {
 	 */
 	public static <T> AjaxDataWrap<T> copyPageToAjaxDataWrap(Page page,Class<T> cla){
 		AjaxDataWrap<T> ajaxDataWrap=new AjaxDataWrap<T>();
-		Pager pager=new Pager();
+		PageInfo pager=new PageInfo();
 		if(page!=null){
 			pager.setCurrentPageCount(page.getNumberOfElements());//本页条数
 			pager.setCurrentPageNum(page.getNumber());//当前是第几页

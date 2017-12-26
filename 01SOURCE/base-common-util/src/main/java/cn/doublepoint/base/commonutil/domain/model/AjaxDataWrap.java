@@ -15,7 +15,7 @@ public class AjaxDataWrap<T> {
 	private int code;
 	private String msg;
 	private List<T> data;
-	private Pager pager;
+	private PageInfo pager;
 	
 	public int getCode() {
 		return code;
@@ -35,15 +35,15 @@ public class AjaxDataWrap<T> {
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-	public Pager getPager() {
+	public PageInfo getPager() {
 		return pager;
 	}
-	public void setPager(Pager pager) {
+	public void setPager(PageInfo pager) {
 		this.pager = pager;
 	}
 	
 	public AjaxDataWrap() {
 		super();
-		this.pager=new Pager();
+		this.pager=new PageInfo();
 	}
 }

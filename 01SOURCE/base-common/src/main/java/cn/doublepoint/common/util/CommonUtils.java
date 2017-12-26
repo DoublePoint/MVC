@@ -161,7 +161,7 @@ public class CommonUtils {
 			return null;
 		}
 		charValue = rtrim(charValue);
-		StringBuffer buffer = new StringBuffer(charValue);
+		StringBuilder buffer = new StringBuilder(charValue);
 		int charLen = charValue.length();
 		for (int i = 0; i < len - charLen; i++) {
 			buffer.append(" ");
@@ -173,7 +173,7 @@ public class CommonUtils {
 		if (charValue == null) {
 			return null;
 		}
-		StringBuffer buffer = new StringBuffer("");
+		StringBuilder buffer = new StringBuilder("");
 		int charLen = charValue.length();
 		for (int i = 0; i < len - charLen; i++) {
 			buffer.append("0");

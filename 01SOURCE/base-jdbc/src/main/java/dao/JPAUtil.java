@@ -9,22 +9,23 @@
 */
 package dao;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.persistence.Table;
-import javax.swing.tree.VariableHeightLayoutCache;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import cn.doublepoint.base.commonutil.domain.model.PageInfo;
+import cn.doublepoint.base.commonutil.port.adapter.persistence.QueryParamList;
+import cn.doublepoint.base.commonutil.port.adapter.persistence.SortParamList;
 import cn.doublepoint.common.util.domain.model.BaseModel;
 
-@Table
+import static java.util.stream.Collectors.toList;
+
 public class JPAUtil {
 	@Resource
 	JdbcTemplate commonTemplate;
@@ -32,44 +33,182 @@ public class JPAUtil {
 	public <T extends BaseModel> List<T> executeQuery(String sql, final Class<T> clas) {
 		return commonTemplate.query(sql, new BeanPropertyRowMapper<T>(clas));
 	}
-	public <T extends BaseModel> void batchUpdate(List<T> objectList){
-		if (objectList == null || objectList.size() == 0)
-			return;
-		Class<? extends BaseModel> clazz = objectList.get(0).getClass();
-		String tableName=((Table)clazz.getAnnotation(Table.class)).name();
-		StringBuilder sqlStringBuilder = new StringBuilder("update ");
-		sqlStringBuilder.append(tableName);
-		sqlStringBuilder.append(" set ");
-		
-		Field[] fields = clazz.getDeclaredFields();
-		Arrays.stream(fields).limit(fields.length-1).forEach(field->sqlStringBuilder.append(field.toString()).append("=?,"));
-		sqlStringBuilder.append(fields[fields.length-1]).append("=? ");
-		
-		commonTemplate.batchUpdate(sqlStringBuilder.toString(), pss)
-//		for (Field field : fields) {
-//			field.setAccessible(true);
-////				columnNum++;
-//			if(field.)
-//				columns.append(field.getName()).append("=?, ");
-//				valuesList.add(field.get(object));
-//		}
-//		commonTemplate.batchUpdate(sql, batchArgs)
+
+	/**
+	 * 带参数的实体检索
+	 *
+	 * @param <T>
+	 *            泛型标识
+	 * @param clazz
+	 *            实体类，必须是继承BaseModel的实体
+	 * @param params
+	 *            参数
+	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params) throws InstantiationException, IllegalAccessException {
+		return load(clazz, params, null, null);
 	}
+
+	/**
+	 * 带分页的实体检索
+	 *
+	 * @param <T>
+	 *            泛型标识
+	 * @param clazz
+	 *            实体类，必须是继承BaseModel的实体
+	 * @param pageInfo
+	 *            分页信息
+	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, PageInfo pageInfo) throws InstantiationException, IllegalAccessException {
+		return load(clazz, null, null, pageInfo);
+	}
+
+	/**
+	 * 带参数的实体检索
+	 *
+	 * @param <T>
+	 *            泛型标识
+	 * @param clazz
+	 *            实体类，必须是继承BaseModel的实体
+	 * @param params
+	 *            参数
+	 * @param sortParams
+	 *            排序参数
+	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams) throws InstantiationException, IllegalAccessException {
+		return load(clazz, params, sortParams, null);
+	}
+
+	/**
+	 * 带参数、分页的实体检索
+	 *
+	 * @param <T>
+	 *            泛型标识
+	 * @param clazz
+	 *            实体类，必须是继承BaseModel的实体
+	 * @param sortParams
+	 *            排序参数
+	 * @param pageInfo
+	 *            分页信息
+	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, SortParamList sortParams, PageInfo pageInfo) throws InstantiationException, IllegalAccessException {
+		return load(clazz, null, sortParams, pageInfo);
+	}
+
+	/**
+	 * 带参数、分页的实体检索
+	 *
+	 * @param <T>
+	 *            泛型标识
+	 * @param clazz
+	 *            实体类，必须是继承BaseModel的实体
+	 * @param params
+	 *            参数
+	 * @param pageInfo
+	 *            分页信息
+	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, PageInfo pageInfo) {
+		try {
+			return load(clazz, params, null,pageInfo);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<T>();
+		
+	}
+
+	/**
+	 * 带参数、分页的实体检索
+	 *
+	 * @param <T>
+	 *            泛型标识
+	 * @param clazz
+	 *            实体类，必须是继承BaseModel的实体
+	 * @param params
+	 *            参数
+	 * @param sortParams
+	 *            排序参数
+	 * @param pageInfo
+	 *            分页信息
+	 * @return 检索后得到的实体列表 @ 出错抛出异常
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams,
+			PageInfo pageInfo) throws InstantiationException, IllegalAccessException{
+		BaseModel model = clazz.newInstance();
+		StringBuilder sb = new StringBuilder(model.getSelectSql());
+		if(params!=null)
+			sb.append(params.getParamAndSql().getSqlString());
+		if(sortParams!=null)
+			sb.append(sortParams.getSortSql());
+		if(pageInfo!=null)
+			sb.append(pageInfo.getLimitSql());
+		
+		Object[] paramArr = params.getParams().stream().map(param -> param.getValue()).collect(toList()).toArray();
+		
+		return commonTemplate.query(sb.toString(), paramArr, new BeanPropertyRowMapper<T>(clazz));
+	}
+
+	/**
+	 * 批量更新
+	 * 
+	 * @param queryModelList
+	 */
+	public <T extends BaseModel> void batchUpdate(List<T> updateList) {
+		if (updateList == null || updateList.size() == 0)
+			return;
+		T model = updateList.get(0);
+		// CommonBeanUtils.
+		String querySql = model.getUpdateSql();
+		List<Object[]> paramsList = model.getQueryParamList(updateList);
+		commonTemplate.batchUpdate(querySql, paramsList);
+		
+		
+	}
+
+	/**
+	 * 批量插入
+	 * 
+	 * @param queryModelList
+	 */
+	public <T extends BaseModel> void batchInsert(List<T> insertList) {
+		if (insertList == null || insertList.size() == 0)
+			return;
+		BaseModel model = insertList.get(0);
+		String querySql = model.getInsertSql();
+		List<Object[]> paramsList = model.getQueryParamList(insertList);
+		commonTemplate.batchUpdate(querySql, paramsList);
+	}
+
 	public <T extends BaseModel> void save2(List<T> objectList) throws Exception {
 		if (objectList == null || objectList.size() == 0)
 			return;
 		Class clazz = objectList.get(0).getClass();
 		Object object = objectList.get(0);
-		Table table=(Table)clazz.getAnnotation(Table.class);
-		String tableName=table.name();
+		Table table = (Table) clazz.getAnnotation(Table.class);
+		String tableName = table.name();
 		// 插入数据的列名
 		StringBuilder columns = new StringBuilder("(");
 		// 确定占位符的个数（即对象中不为 null 的字段个数）
 		int columnNum = 0;
 		// 填充占位符的值（即对象中不为null的字段的值）
 		List<Object> valuesList = new ArrayList<Object>();
-		
-		
+
 		Field[] fields = clazz.getDeclaredFields();
 		for (Field field : fields) {
 			field.setAccessible(true);
@@ -105,8 +244,7 @@ public class JPAUtil {
 		zhanweifu.replace(zhanweifu.lastIndexOf(", "), zhanweifu.length(), "");
 
 		// 生成最终 SQL
-		String sql = "INSERT INTO " + tableName + " " + columns + " VALUES "
-				+ zhanweifu.toString();
+		String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + zhanweifu.toString();
 		System.out.println(sql);
 		System.out.println(valuesList);
 	}
@@ -348,162 +486,7 @@ public class JPAUtil {
 	// return dao.loadAll(clazz, sortParams);
 	// }
 	//
-	// /**
-	// * 带参数的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param params
-	// * 参数
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// QueryParamList params) {
-	// return load(clazz, params, null, null, null);
-	// }
-	//
-	// /**
-	// * 带参数的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param params
-	// * 参数
-	// * @param sortParams
-	// * 排序参数
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// QueryParamList params,SortParamList sortParams) {
-	// return load(clazz, params, null, null, sortParams, null);
-	// }
-	//
-	// /**
-	// * 带分页的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param pageInfo
-	// * 分页信息
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// PageInfo pageInfo) {
-	// return load(clazz, null, null, null, pageInfo);
-	// }
-	//
-	// /**
-	// * 带参数、分页的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param sortParams
-	// * 排序参数
-	// * @param pageInfo
-	// * 分页信息
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// SortParamList sortParams, PageInfo pageInfo) {
-	// return load(clazz, null, null, null, sortParams, pageInfo);
-	// }
-	//
-	// /**
-	// * 带参数、分页的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param params
-	// * 参数
-	// * @param pageInfo
-	// * 分页信息
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// QueryParamList params, PageInfo pageInfo) {
-	// return load(clazz, params, null, null, pageInfo);
-	// }
-	//
-	//
-	// /**
-	// * 带参数、分页的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param params
-	// * 参数
-	// * @param sortParams
-	// * 排序参数
-	// * @param pageInfo
-	// * 分页信息
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// QueryParamList params, SortParamList sortParams, PageInfo pageInfo) {
-	// return load(clazz, params, null, null, sortParams, pageInfo);
-	// }
-	//
-	// /**
-	// * 带扩展jpql的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param params
-	// * 参数
-	// * @param extJpql
-	// * 扩展jpql
-	// * @param extParams
-	// * 扩展参数
-	// * @param pageInfo
-	// * 分页信息
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// QueryParamList params, String extJpql, QueryParamList extParams,
-	// PageInfo pageInfo) {
-	// IDAO dao = getBaseDAO();
-	// return dao.load(clazz, params, extJpql, extParams,null, pageInfo);
-	// }
-	//
-	// /**
-	// * 带扩展jpql的实体检索
-	// *
-	// * @param <T>
-	// * 泛型标识
-	// * @param clazz 实体类，必须是继承BaseModel的实体
-	// * @param params
-	// * 参数
-	// * @param extJpql
-	// * 扩展jpql
-	// * @param extParams
-	// * 扩展参数
-	// * @param sortParams
-	// * 排序参数
-	// * @param pageInfo
-	// * 分页信息
-	// * @return 检索后得到的实体列表
-	// * @ 出错抛出异常
-	// */
-	// public static <T extends BaseModel> List<T> load(Class<T> clazz,
-	// QueryParamList params, String extJpql, QueryParamList extParams,
-	// SortParamList sortParams, PageInfo pageInfo) {
-	// IDAO dao = getBaseDAO();
-	// return dao.load(clazz, params, extJpql, extParams, sortParams, pageInfo);
-	// }
+
 	// /**
 	// * 根据jpql进行检索
 	// *
@@ -529,7 +512,7 @@ public class JPAUtil {
 	// */
 	// public static List<Object> find(String jpql, SortParamList sortParams)
 	// {
-	// return find(jpql, null, null, null, sortParams, null);
+	// return find(jpql, null, sortParams, null);
 	// }
 	//
 	//
@@ -545,7 +528,7 @@ public class JPAUtil {
 	// */
 	// public static List<Object> find(String jpql, QueryParamList params)
 	// {
-	// return find(jpql, params, null, null, null);
+	// return find(jpql, params, null);
 	// }
 	//
 	// /**
@@ -563,7 +546,7 @@ public class JPAUtil {
 	// public static List<Object> find(String jpql, QueryParamList params,
 	// SortParamList sortParams)
 	// {
-	// return find(jpql, params, null, null,sortParams, null);
+	// return find(jpql, params,sortParams, null);
 	// }
 	//
 	// /**
@@ -578,7 +561,7 @@ public class JPAUtil {
 	// */
 	// public static List<Object> find(String jpql, PageInfo pageInfo)
 	// {
-	// return find(jpql, null, null, null, pageInfo);
+	// return find(jpql, null, pageInfo);
 	// }
 	//
 	// /**
@@ -595,7 +578,7 @@ public class JPAUtil {
 	// */
 	// public static List<Object> find(String jpql, SortParamList sortParams,
 	// PageInfo pageInfo) {
-	// return find(jpql, null, null, null, sortParams, pageInfo);
+	// return find(jpql, null, sortParams, pageInfo);
 	// }
 	//
 	// /**
@@ -612,7 +595,7 @@ public class JPAUtil {
 	// */
 	// public static List<Object> find(String jpql, QueryParamList params,
 	// PageInfo pageInfo) {
-	// return find(jpql, params, null, null, pageInfo);
+	// return find(jpql, params, pageInfo);
 	// }
 	//
 	//
@@ -632,7 +615,7 @@ public class JPAUtil {
 	// */
 	// public static List<Object> find(String jpql, QueryParamList params,
 	// SortParamList sortParams, PageInfo pageInfo) {
-	// return find(jpql, params, null, null, sortParams, pageInfo);
+	// return find(jpql, params, sortParams, pageInfo);
 	// }
 	//
 	// /**
@@ -642,7 +625,7 @@ public class JPAUtil {
 	// * jpql语句
 	// * @param params
 	// * 参数
-	// * @param extJpql
+	// * @param sql
 	// * 扩展jpql
 	// * @param extParams
 	// * 扩展参数
@@ -652,10 +635,10 @@ public class JPAUtil {
 	// * @ 出错抛出异常
 	// */
 	// public static List<Object> find(String jpql, QueryParamList params,
-	// String extJpql, QueryParamList extParams, PageInfo pageInfo)
+	// String sql, QueryParamList extParams, PageInfo pageInfo)
 	// {
 	// IDAO dao = getBaseDAO();
-	// return dao.find(jpql, params, extJpql, extParams, null, pageInfo);
+	// return dao.find(jpql, params, sql, extParams, null, pageInfo);
 	// }
 	//
 	// /**
@@ -665,7 +648,7 @@ public class JPAUtil {
 	// * jpql语句
 	// * @param params
 	// * 参数
-	// * @param extJpql
+	// * @param sql
 	// * 扩展jpql
 	// * @param extParams
 	// * 扩展参数
@@ -677,11 +660,11 @@ public class JPAUtil {
 	// * @ 出错抛出异常
 	// */
 	// public static List<Object> find(String jpql, QueryParamList params,
-	// String extJpql, QueryParamList extParams, SortParamList sortParams,
+	// String sql, QueryParamList extParams, SortParamList sortParams,
 	// PageInfo pageInfo)
 	// {
 	// IDAO dao = getBaseDAO();
-	// return dao.find(jpql, params, extJpql, extParams, sortParams, pageInfo);
+	// return dao.find(jpql, params, sql, extParams, sortParams, pageInfo);
 	// }
 	//
 	//
@@ -832,7 +815,7 @@ public class JPAUtil {
 	// */
 	// public static <T extends BaseModel> long getTotalCount(Class<T> clazz)
 	// {
-	// return getTotalCount(clazz, null, null, null);
+	// return getTotalCount(clazz, null);
 	// }
 	//
 	// /**
@@ -859,7 +842,7 @@ public class JPAUtil {
 	// * @param clazz 实体类，必须是继承BaseModel的实体
 	// * @param params
 	// * 参数
-	// * @param extJpql
+	// * @param sql
 	// * 扩展jpql
 	// * @param extParams
 	// * 扩展参数
@@ -867,10 +850,10 @@ public class JPAUtil {
 	// * @ 出错抛出异常
 	// */
 	// public static <T extends BaseModel> long getTotalCount(Class<T> clazz,
-	// QueryParamList params, String extJpql, QueryParamList extParams)
+	// QueryParamList params, String sql, QueryParamList extParams)
 	// {
 	// IDAO dao = getBaseDAO();
-	// return dao.getTotalCount(clazz, params, extJpql, extParams);
+	// return dao.getTotalCount(clazz, params, sql, extParams);
 	// }
 	//
 	// /**
@@ -882,7 +865,7 @@ public class JPAUtil {
 	// * @ 出错抛出异常
 	// */
 	// public static long getTotalCount(String jpql) {
-	// return getTotalCount(jpql, null, null, null);
+	// return getTotalCount(jpql, null);
 	// }
 	//
 	// /**
@@ -907,7 +890,7 @@ public class JPAUtil {
 	// * jpql语句
 	// * @param params
 	// * 参数
-	// * @param extJpql
+	// * @param sql
 	// * 扩展jpql
 	// * @param extParams
 	// * 扩展参数
@@ -915,9 +898,9 @@ public class JPAUtil {
 	// * @ 出错抛出异常
 	// */
 	// public static long getTotalCount(String jpql, QueryParamList params,
-	// String extJpql, QueryParamList extParams) {
+	// String sql, QueryParamList extParams) {
 	// IDAO dao = getBaseDAO();
-	// return dao.getTotalCount(jpql, params, extJpql, extParams);
+	// return dao.getTotalCount(jpql, params, sql, extParams);
 	// }
 	//
 	// /**
@@ -1032,5 +1015,7 @@ public class JPAUtil {
 	// IDAO dao = getBaseDAO();
 	// dao.flush() ;
 	// }
-	
+	// Class FieldUtil{
+	//
+	// }
 }

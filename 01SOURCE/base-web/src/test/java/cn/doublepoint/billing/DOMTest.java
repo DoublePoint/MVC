@@ -136,7 +136,7 @@
 //				}
 //				FileOutputStream outputStream = new FileOutputStream(file);
 //				PrintWriter writer = new PrintWriter(outputStream);
-//				writer.write(new StringBuffer(modelModel.getCotent()).toString().toCharArray());
+//				writer.write(new StringBuilder(modelModel.getCotent()).toString().toCharArray());
 //				writer.flush();
 //				// try {
 //				// outputStream.write(Byte.valueOf(modelModel.getCotent()));

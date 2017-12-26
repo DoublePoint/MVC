@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.base.commonutil.domain.model.Pager;
+import cn.doublepoint.base.commonutil.domain.model.PageInfo;
 import cn.doublepoint.base.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;

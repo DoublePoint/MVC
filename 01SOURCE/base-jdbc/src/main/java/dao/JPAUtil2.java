@@ -89,7 +89,7 @@ public class JPAUtil2<T> {
 
 	    // 组装SQL
 	    private String makeSql(String sqlFlag) {
-	        StringBuffer sql = new StringBuffer();
+	        StringBuilder sql = new StringBuilder();
 	        Field[] fields = entityClass.getDeclaredFields();
 	        if (sqlFlag.equals(SQL_INSERT)) {
 	            sql.append(" INSERT INTO " + entityClass.getSimpleName());
@@ -235,7 +235,7 @@ public class JPAUtil2<T> {
 	    private List<T> find(int pageNo, int pageSize, Map<String, String> where, LinkedHashMap<String, String> orderby) {
 	        // where 与 order by 要写在select * from table 的后面，而不是where rownum<=? )
 	        // where rn>=?的后面
-	        StringBuffer sql = new StringBuffer(
+	        StringBuilder sql = new StringBuilder(
 	                " SELECT * FROM (SELECT t.*,ROWNUM rn FROM (SELECT * FROM " + entityClass.getSimpleName());
 	        if (where != null && where.size() > 0) {
 	            sql.append(" WHERE "); // 注意不是where
@@ -246,7 +246,7 @@ public class JPAUtil2<T> {
 	            }
 	            int endIndex = sql.lastIndexOf("AND");
 	            if (endIndex > 0) {
-	                sql = new StringBuffer(sql.substring(0, endIndex));
+	                sql = new StringBuilder(sql.substring(0, endIndex));
 	            }
 	        }
 	        if (orderby != null && orderby.size() > 0) {
@@ -266,7 +266,7 @@ public class JPAUtil2<T> {
 	    }
 
 	    private int count(Map<String, String> where) {
-	        StringBuffer sql = new StringBuffer(" SELECT COUNT(*) FROM " + entityClass.getSimpleName());
+	        StringBuilder sql = new StringBuilder(" SELECT COUNT(*) FROM " + entityClass.getSimpleName());
 	        if (where != null && where.size() > 0) {
 	            sql.append(" WHERE ");
 	            for (Map.Entry<String, String> me : where.entrySet()) {
@@ -276,7 +276,7 @@ public class JPAUtil2<T> {
 	            }
 	            int endIndex = sql.lastIndexOf("AND");
 	            if (endIndex > 0) {
-	                sql = new StringBuffer(sql.substring(0, endIndex));
+	                sql = new StringBuilder(sql.substring(0, endIndex));
 	            }
 	        }
 	        System.out.println("SQL=" + sql);

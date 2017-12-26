@@ -9,7 +9,7 @@
 */ 
 package cn.doublepoint.base.commonutil.domain.model;
 
-public class Pager {
+public class PageInfo {
 	private int currentPageNum=1;
 	private int currentPageCount=0;
 	private long totalElementCount=0;
@@ -53,5 +53,9 @@ public class Pager {
 	//获取结束位置
 	public long getEnd(){
 		return this.currentPageCount*this.pageSize;
+	}
+	
+	public String getLimitSql(){
+		return " limit 100,100";
 	}
 }
