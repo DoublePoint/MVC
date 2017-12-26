@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import cn.doublepoint.base.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.base.commonutil.domain.model.PageInfo;
 import cn.doublepoint.base.commonutil.port.adapter.controller.handle.BaseHandleController;
@@ -47,7 +50,7 @@ public class XTCDHandleController implements BaseHandleController {
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataList(@RequestBody(required=false) T_XT_CD cd) {
 		AjaxDataWrap<VT_XT_CD> dataWrap;
-		PageInfo pageInfo=new PageInfo(0, 2);
+		PageInfo pageInfo=new PageInfo(0, 100);
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
 			dataWrap= xTCDQueryService.findAllXTCD(pageInfo);
 		}
@@ -65,7 +68,7 @@ public class XTCDHandleController implements BaseHandleController {
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
-		PageInfo pageRequest=new PageInfo(2, 1);
+		PageInfo pageRequest=new PageInfo(0, 100);
 		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
 			ajaxDataWrap= xTCDQueryService.findAllXTCD(pageRequest);
@@ -84,6 +87,12 @@ public class XTCDHandleController implements BaseHandleController {
 //		pager.setTotalCount(5000);
 //		ajaxDataWrap.setPager(pager);
 //		ajaxDataWrap.setCode(200);
+		ObjectMapper mapper = new ObjectMapper();  
+		 try {
+			String jsonStr = mapper.writeValueAsString(ajaxDataWrap);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}  
 		return ajaxDataWrap;
 	}
 	

@@ -22,11 +22,6 @@ import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository
 import cn.doublepoint.common.util.domain.model.entity.BaseEntity;
 
 public class VT_XT_CD extends BaseEntity implements I_VT_XT_CD{
-	
-
-	
-	@Resource
-	XTCDRepository repository;
 
 	private String cdbs; // 菜单标识
 

@@ -9,11 +9,16 @@
 */ 
 package cn.doublepoint.base.commonutil.domain.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.doublepoint.common.util.CommonBeanUtils;
 
-public class AjaxDataWrap<T> {
+public class AjaxDataWrap<T> implements Serializable{
+	/**                                                                  
+	 *                                                                    
+	 */
+	private static final long serialVersionUID = 1L;
 	private int code;
 	private String msg;
 	private List<T> data;

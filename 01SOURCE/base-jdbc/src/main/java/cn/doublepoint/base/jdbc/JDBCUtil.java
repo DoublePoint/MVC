@@ -79,15 +79,18 @@ public class JDBCUtil implements BaseRepositoryUtil {
 		BaseModel model;
 		try {
 			model = clazz.newInstance();
-
-			Object[] paramArr = params.getParams().stream().map(param -> param.getValue()).collect(toList()).toArray();
+			
+			Object[] paramArr = null;
+			if (params!=null) {
+				paramArr=params.getParams().stream().map(param -> param.getValue()).collect(toList()).toArray();
+			}
 			StringBuilder sb = new StringBuilder(model.getSelectSql());
 			if (params != null)
 				sb.append(params.getParamAndSql().getSqlString());
+			int totalElementCount = queryCount(new StringBuilder("SELECT COUNT(*) FROM(").append(sb).append(") _VIRTUAL").toString(), paramArr);
 			if (sortParams != null)
 				sb.append(sortParams.getSortSql());
 
-			int totalElementCount = queryCount(sb.toString(), paramArr);
 			pageInfo.setTotalElementCount(totalElementCount);
 			if (pageInfo != null)
 				sb.append(pageInfo.getLimitSql());

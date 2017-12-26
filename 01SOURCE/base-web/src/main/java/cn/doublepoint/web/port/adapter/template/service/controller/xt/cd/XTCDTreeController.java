@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import cn.doublepoint.base.commonutil.domain.model.PageInfo;
 import cn.doublepoint.base.commonutil.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
@@ -48,6 +51,12 @@ public class XTCDTreeController implements BaseTreeController {
 		} else {
 			returnXTCDList = getChildrenXTCDList(null);
 		}
+//		 try {
+//			 ObjectMapper mapper = new ObjectMapper();  
+//				String jsonStr = mapper.writeValueAsString(returnXTCDList);
+//			} catch (JsonProcessingException e) {
+//				e.printStackTrace();
+//			}  
 		return returnXTCDList;
 	}
 

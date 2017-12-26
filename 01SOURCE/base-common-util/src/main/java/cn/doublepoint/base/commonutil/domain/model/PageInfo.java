@@ -65,6 +65,6 @@ public class PageInfo {
 	}
 	
 	public String getLimitSql(){
-		return " limit 100,100";
+		return " limit "+this.currentPageNum*pageSize+","+pageSize+"";
 	}
 }

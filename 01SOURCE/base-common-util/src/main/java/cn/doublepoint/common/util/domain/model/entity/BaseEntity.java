@@ -8,6 +8,7 @@ package cn.doublepoint.common.util.domain.model.entity;
 
 import static java.util.stream.Collectors.toList;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +155,10 @@ public class BaseEntity extends BaseModel {
 	}
 
 	private String getTableName() {
-		String tableName = ((Table) this.getClass().getAnnotation(Table.class)).name();
+		Annotation annotation = this.getClass().getAnnotation(Table.class);
+		String tableName = "";
+		if (annotation != null)
+			tableName = ((Table) annotation).name();
 		return tableName;
 	}
 
