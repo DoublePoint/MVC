@@ -45,7 +45,7 @@ public class XTCDRepositoryTest extends RepositoryTest {
 			cd.setGxsj(new Date());
 			list.add(cd);
 			if(i%20000==0){
-				repository.save(list);
+//				repository.save(list);
 				list=new ArrayList<T_XT_CD>();
 			}
 		}

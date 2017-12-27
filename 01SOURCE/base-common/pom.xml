@@ -5,19 +5,23 @@
 	<artifactId>base-common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<!-- <properties>
-		spring版本号
+	<parent>
+		<groupId>cn.doublepoint.base</groupId>
+		<artifactId>base-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<properties>
+		<!--spring版本号 -->
 		<spring.version>4.3.5.RELEASE</spring.version>
-		<project.build.sourceEncoding>
-			UTF-8
-		</project.build.sourceEncoding>
-	</properties> -->
+		<project.build.sourceEncoding> UTF-8 </project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<!--spring data jpa -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.8.0.RELEASE</version>
+			<version>${spring.data.jpa.version}</version>
 		</dependency>
 
 		<dependency>
@@ -25,13 +29,52 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.6.Final</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
 			<version>1.0</version>
 		</dependency>
-		
-		
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.3.5.RELEASE</version>
+		</dependency>
+
+
+		<!-- 本地项目 -->
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-datajpa</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-jdbc</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<!-- <finalName>open</finalName> -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

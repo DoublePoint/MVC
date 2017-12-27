@@ -5,14 +5,23 @@
 	<artifactId>base-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Spring MVC基础项目</description>
+	
+	<parent>
+		<groupId>cn.doublepoint.base</groupId>
+		<artifactId>base-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
 	<properties>
 		<!-- spring版本号 -->
-		<spring.version>4.1.0.RELEASE</spring.version>
+		<spring.version>4.3.5.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<!-- 避免出现错误：编码GBK的不可映射字符 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<!--MySQL Driver -->
@@ -39,7 +48,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<!-- web容器需用 -->
 		<dependency>
@@ -52,22 +61,44 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
+        		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.1.0.RELEASE</version>
+        </dependency>
+		
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.8.0.RELEASE</version>
+			<version>${spring.data.jpa.version}</version>
 		</dependency>
+		
+		
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.6.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>javax.annotation</groupId>
@@ -89,7 +120,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.12-beta-3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -97,6 +128,25 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!-- 本地项目 -->
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-common-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-jdbc</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		
 	</dependencies>
 
 	<build>

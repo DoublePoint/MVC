@@ -5,15 +5,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <dependent-module archiveName="base-common.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-common/base-common">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="base-common-util.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-common-util/base-common-util">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="base-jdbc.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-jdbc/base-jdbc">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="baseweb"/>
         <property name="java-output-path" value="/base-web/target/classes"/>
     </wb-module>

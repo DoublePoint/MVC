@@ -45,7 +45,7 @@ public class XTCDApplicationService {
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
 			xtcdRepository.save(t_XT_CD);
-			xtcdRepository.save(new ArrayList<>());
+//			xtcdRepository.save(new ArrayList<>());
 		} catch (Exception e) {
 			return false;
 		}
@@ -66,7 +66,7 @@ public class XTCDApplicationService {
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
 			xtcdRepository.save(t_XT_CD);
-			xtcdRepository.save(new ArrayList<>());
+//			xtcdRepository.saveAll(new ArrayList<>());
 		} catch (Exception e) {
 			return false;
 		}
@@ -75,7 +75,7 @@ public class XTCDApplicationService {
 	
 	public boolean removeXTCD(List<T_XT_CD> cdList){
 		for (T_XT_CD t_XT_CD : cdList) {
-			xtcdRepository.delete(Long.valueOf(t_XT_CD.getCdbs()));
+			xtcdRepository.deleteById(Long.valueOf(t_XT_CD.getCdbs()));
 		}
 		
 		return true;
