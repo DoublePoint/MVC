@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
 import cn.doublepoint.billing.CONSTANT;
 
 /**
- * DOM方式解析xml
+ * DOMéç°ç´¡çï½ç½xml
  */
 public class DOMTest {
 
@@ -32,7 +32,7 @@ public class DOMTest {
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse(
-					"file:/F://AllProject//00参考文件//BaseInfrastructure//系统支撑.oom");// 传入文件名可以是相对路径也可以是绝对路径
+					"file:/F://AllProject//00éåï¿½å©ææµ ï¿½//BaseInfrastructure//ç»¯è¤ç²ºéîæº.oom");// æµ¼ç²åéå¦æ¬¢éå¶å½²æµ ã¦æ§¸é©ç¨¿î®çºîç·æ¶ç·å½²æµ ã¦æ§¸ç¼æ¿î®çºîç·
 			NodeList classesList = document.getElementsByTagName("c:Classes");
 			Node classesElementNode = classesList.item(0);
 			NodeList classElementNodeList = classesElementNode.getChildNodes();
@@ -45,7 +45,7 @@ public class DOMTest {
 
 					Node item = classChildrenList.item(j);
 					String nodeName = item.getNodeName();
-					String nodeValue = item.getTextContent();
+					String nodeValue = item.getNodeValue();
 					if (nodeValue == null || nodeValue == "")
 						break;
 					switch (nodeName) {
@@ -72,7 +72,7 @@ public class DOMTest {
 							for (int l = 0; l < attributeNode.getChildNodes().getLength(); l++) {
 								Node attributeChildNode = attributeNode.getChildNodes().item(l);
 								String attributeChildNodeNameString = attributeChildNode.getNodeName();
-								String attributeChildNodeValueString = attributeChildNode.getTextContent();
+								String attributeChildNodeValueString = attributeChildNode.getNodeValue();
 								if (attributeChildNodeValueString == null || attributeChildNodeValueString == "")
 									break;
 								switch (attributeChildNodeNameString) {

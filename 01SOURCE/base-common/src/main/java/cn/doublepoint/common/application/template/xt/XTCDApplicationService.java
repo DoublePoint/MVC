@@ -75,7 +75,7 @@ public class XTCDApplicationService {
 	
 	public boolean removeXTCD(List<T_XT_CD> cdList){
 		for (T_XT_CD t_XT_CD : cdList) {
-			xtcdRepository.deleteById(Long.valueOf(t_XT_CD.getCdbs()));
+//			xtcdRepository.deleteById(Long.valueOf(t_XT_CD.getCdbs()));
 		}
 		
 		return true;

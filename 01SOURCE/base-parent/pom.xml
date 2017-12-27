@@ -7,9 +7,12 @@
 	<packaging>pom</packaging>
 
 	<properties>
+		<mybatis.version>3.2.6</mybatis.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- spring版本号 -->
 		<spring.version>4.3.5.RELEASE</spring.version>
 		<spring.data.jpa.version>1.8.0.RELEASE</spring.data.jpa.version>
+		<junit.version>4.12-beta-3</junit.version>
 	</properties>
 
 </project>

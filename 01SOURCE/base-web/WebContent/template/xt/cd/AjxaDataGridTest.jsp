@@ -38,12 +38,11 @@
 
 	<form>
 		<div id="lltestdiv">
-			<ll-ajaxdatagrid id="lltestdatagrid" datasource="/template/xt/cd/datalist">
-				<ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow>
-				<ll-gridrow field="cdmc" title="菜单名称" ></ll-gridrow>
-				<ll-gridrow field="cdpx" title="菜单排序" ></ll-gridrow>
-				<ll-gridrow field="cdlj" title="菜单链接" ></ll-gridrow>
-			</ll-datagrid>
+			<ll-ajaxdatagrid id="lltestdatagrid"
+				datasource="/template/xt/cd/datalist"> <ll-gridrow
+				field="cdbs" title="菜单标识"></ll-gridrow> <ll-gridrow field="cdmc"
+				title="菜单名称"></ll-gridrow> <ll-gridrow field="cdpx" title="菜单排序"></ll-gridrow>
+			<ll-gridrow field="cdlj" title="菜单链接"></ll-gridrow> </ll-datagrid>
 		</div>
 		<input type="button" value="测试" onclick="clicktest()" />
 	</form>
