@@ -1,11 +1,11 @@
 /**                                                               
-* Âàõ   Âª∫   ‰∫∫Ôºö ÂàòÁ£ä                                             
+* ¥¥   Ω®   »À£∫ ¡ı¿⁄                                             
 *                                                                 
-* Âàõ   Âª∫   Êó∂   Èó¥ Ôºö2017-12-23 22:20:267                      
+* ¥¥   Ω®    ±   º‰ £∫2017-12-27 19:11:977                      
 *                                                                 
-* Á±ª   ËØ¥   Êòé Ôºö     Á≥ªÁªüËèúÂçïËÆøÈóÆÊó•Âøó    
+* ¿‡   Àµ   √˜ £∫     œµÕ≥≤Àµ•∑√Œ »’÷æ    
 *                                                                 
-* ‰øÆ   Êîπ   ‰∫∫Ôºö          ‰øÆ   Êîπ   Êó•   ÊúüÔºö                     
+* –ﬁ   ∏ƒ   »À£∫          –ﬁ   ∏ƒ   »’   ∆⁄£∫                     
 */                                                                
 package cn.doublepoint.common.domain.model.valueobject.xt;   
                                                                   
@@ -21,7 +21,7 @@ public class XT_CDFWRZ extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "cdfwrzbs")                                  
-	private String cdfwrzbs; //ËèúÂçïËÆøÈóÆÊó•ÂøóÊ†áËØÜ                                                
+	private String cdfwrzbs; //≤Àµ•∑√Œ »’÷æ±Í ∂                                                
 	                                                                 
 	public String getCdfwrzbs() {                                            
 		return cdfwrzbs;                                                     
@@ -31,7 +31,7 @@ public class XT_CDFWRZ extends BaseValueObject {
 		this.cdfwrzbs = cdfwrzbs;                                                  
 	}                                                                
 	@Column (name = "cdbs")                                  
-	private String cdbs; //ËèúÂçïÊ†áËØÜ                                                
+	private String cdbs; //≤Àµ•±Í ∂                                                
 	                                                                 
 	public String getCdbs() {                                            
 		return cdbs;                                                     
@@ -41,7 +41,7 @@ public class XT_CDFWRZ extends BaseValueObject {
 		this.cdbs = cdbs;                                                  
 	}                                                                
 	@Column (name = "fwsj")                                  
-	private Date fwsj; //ËÆøÈóÆÊó∂Èó¥                                                
+	private Date fwsj; //∑√Œ  ±º‰                                                
 	                                                                 
 	public Date getFwsj() {                                            
 		return fwsj;                                                     
@@ -51,7 +51,7 @@ public class XT_CDFWRZ extends BaseValueObject {
 		this.fwsj = fwsj;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
-	private Date cjsj; //ÂàõÂª∫Êó∂Èó¥                                                
+	private Date cjsj; //¥¥Ω® ±º‰                                                
 	                                                                 
 	public Date getCjsj() {                                            
 		return cjsj;                                                     

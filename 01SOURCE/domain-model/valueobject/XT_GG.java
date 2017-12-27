@@ -1,11 +1,11 @@
 /**                                                               
-* åˆ›   å»º   äººï¼š åˆ˜ç£Š                                             
+* ´´   ½¨   ÈË£º ÁõÀÚ                                             
 *                                                                 
-* åˆ›   å»º   æ—¶   é—´ ï¼š2017-12-23 22:20:269                      
+* ´´   ½¨   Ê±   ¼ä £º2017-12-27 19:11:980                      
 *                                                                 
-* ç±»   è¯´   æ˜Ž ï¼š     ç³»ç»Ÿå…¬å‘Š    
+* Àà   Ëµ   Ã÷ £º     ÏµÍ³¹«¸æ    
 *                                                                 
-* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š                     
+* ÐÞ   ¸Ä   ÈË£º          ÐÞ   ¸Ä   ÈÕ   ÆÚ£º                     
 */                                                                
 package cn.doublepoint.common.domain.model.valueobject.xt;   
                                                                   
@@ -21,7 +21,7 @@ public class XT_GG extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "ggbs")                                  
-	private String ggbs; //å…¬å‘Šæ ‡è¯†                                                
+	private String ggbs; //¹«¸æ±êÊ¶                                                
 	                                                                 
 	public String getGgbs() {                                            
 		return ggbs;                                                     
@@ -31,7 +31,7 @@ public class XT_GG extends BaseValueObject {
 		this.ggbs = ggbs;                                                  
 	}                                                                
 	@Column (name = "gglb")                                  
-	private String gglb; //å…¬å‘Šç±»åˆ«                                                
+	private String gglb; //¹«¸æÀà±ð                                                
 	                                                                 
 	public String getGglb() {                                            
 		return gglb;                                                     
@@ -41,7 +41,7 @@ public class XT_GG extends BaseValueObject {
 		this.gglb = gglb;                                                  
 	}                                                                
 	@Column (name = "ggnr")                                  
-	private String ggnr; //å…¬å‘Šå†…å®¹                                                
+	private String ggnr; //¹«¸æÄÚÈÝ                                                
 	                                                                 
 	public String getGgnr() {                                            
 		return ggnr;                                                     
@@ -51,7 +51,7 @@ public class XT_GG extends BaseValueObject {
 		this.ggnr = ggnr;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
-	private Date cjsj; //åˆ›å»ºæ—¶é—´                                                
+	private Date cjsj; //´´½¨Ê±¼ä                                                
 	                                                                 
 	public Date getCjsj() {                                            
 		return cjsj;                                                     
@@ -61,7 +61,7 @@ public class XT_GG extends BaseValueObject {
 		this.cjsj = cjsj;                                                  
 	}                                                                
 	@Column (name = "gxsj")                                  
-	private Date gxsj; //æ›´æ–°æ—¶é—´                                                
+	private Date gxsj; //¸üÐÂÊ±¼ä                                                
 	                                                                 
 	public Date getGxsj() {                                            
 		return gxsj;                                                     

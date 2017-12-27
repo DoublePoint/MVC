@@ -1,11 +1,11 @@
 /**                                                               
-* Âàõ   Âª∫   ‰∫∫Ôºö ÂàòÁ£ä                                             
+* ¥¥   Ω®   »À£∫ ¡ı¿⁄                                             
 *                                                                 
-* Âàõ   Âª∫   Êó∂   Èó¥ Ôºö2017-12-23 22:20:268                      
+* ¥¥   Ω®    ±   º‰ £∫2017-12-27 19:11:978                      
 *                                                                 
-* Á±ª   ËØ¥   Êòé Ôºö     Á≥ªÁªüËßíËâ≤    
+* ¿‡   Àµ   √˜ £∫     œµÕ≥Ω«…´    
 *                                                                 
-* ‰øÆ   Êîπ   ‰∫∫Ôºö          ‰øÆ   Êîπ   Êó•   ÊúüÔºö                     
+* –ﬁ   ∏ƒ   »À£∫          –ﬁ   ∏ƒ   »’   ∆⁄£∫                     
 */                                                                
 package cn.doublepoint.common.domain.model.valueobject.xt;   
                                                                   
@@ -21,7 +21,7 @@ public class XT_JS extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "jsbs")                                  
-	private String jsbs; //ËßíËâ≤Ê†áËØÜ                                                
+	private String jsbs; //Ω«…´±Í ∂                                                
 	                                                                 
 	public String getJsbs() {                                            
 		return jsbs;                                                     
@@ -31,7 +31,7 @@ public class XT_JS extends BaseValueObject {
 		this.jsbs = jsbs;                                                  
 	}                                                                
 	@Column (name = "jsmc")                                  
-	private String jsmc; //ËßíËâ≤ÂêçÁß∞                                                
+	private String jsmc; //Ω«…´√˚≥∆                                                
 	                                                                 
 	public String getJsmc() {                                            
 		return jsmc;                                                     
@@ -41,7 +41,7 @@ public class XT_JS extends BaseValueObject {
 		this.jsmc = jsmc;                                                  
 	}                                                                
 	@Column (name = "cjsj")                                  
-	private Date cjsj; //ÂàõÂª∫Êó∂Èó¥                                                
+	private Date cjsj; //¥¥Ω® ±º‰                                                
 	                                                                 
 	public Date getCjsj() {                                            
 		return cjsj;                                                     
@@ -51,7 +51,7 @@ public class XT_JS extends BaseValueObject {
 		this.cjsj = cjsj;                                                  
 	}                                                                
 	@Column (name = "gxsj")                                  
-	private Date gxsj; //Êõ¥Êñ∞Êó∂Èó¥                                                
+	private Date gxsj; //∏¸–¬ ±º‰                                                
 	                                                                 
 	public Date getGxsj() {                                            
 		return gxsj;                                                     

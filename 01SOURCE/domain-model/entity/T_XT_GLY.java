@@ -1,11 +1,11 @@
 /**                                                               
-* åˆ›   å»º   äººï¼š åˆ˜ç£Š                                             
+* ´´   ½¨   ÈË£º ÁõÀÚ                                             
 *                                                                 
-* åˆ›   å»º   æ—¶   é—´ ï¼š2017-12-23 22:20:257                      
+* ´´   ½¨   Ê±   ¼ä £º2017-12-27 19:11:967                      
 *                                                                 
-* ç±»   è¯´   æ˜ ï¼š     ç³»ç»Ÿç®¡ç†å‘˜    
+* Àà   Ëµ   Ã÷ £º     ÏµÍ³¹ÜÀíÔ±    
 *                                                                 
-* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š                     
+* ĞŞ   ¸Ä   ÈË£º          ĞŞ   ¸Ä   ÈÕ   ÆÚ£º                     
 */                                                                
 package cn.doublepoint.common.domain.model.entity.xt;   
                                                                   
@@ -28,15 +28,15 @@ public class T_XT_GLY  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "glybs")                                  
-	private String glybs; //ç®¡ç†å‘˜æ ‡è¯†       
+	private String glybs; //¹ÜÀíÔ±±êÊ¶       
 	@Column (name = "dlzh")                                  
-	private String dlzh; //ç™»å½•è´¦å·       
+	private String dlzh; //µÇÂ¼ÕËºÅ       
 	@Column (name = "dlmm")                                  
-	private String dlmm; //ç™»å½•å¯†ç        
+	private String dlmm; //µÇÂ¼ÃÜÂë       
 	@Column (name = "cjsj")                                  
-	private Date cjsj; //åˆ›å»ºæ—¶é—´       
+	private Date cjsj; //´´½¨Ê±¼ä       
 	@Column (name = "gxsj")                                  
-	private Date gxsj; //æ›´æ–°æ—¶é—´       
+	private Date gxsj; //¸üĞÂÊ±¼ä       
                                                                   
 	public void setGlybs(String glybs) {                                     
 		this.glybs = glybs;                                                  

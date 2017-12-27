@@ -1,11 +1,11 @@
 /**                                                               
-* åˆ›   å»º   äººï¼š åˆ˜ç£Š                                             
+* ´´   ½¨   ÈË£º ÁõÀÚ                                             
 *                                                                 
-* åˆ›   å»º   æ—¶   é—´ ï¼š2017-12-23 22:20:265                      
+* ´´   ½¨   Ê±   ¼ä £º2017-12-27 19:11:975                      
 *                                                                 
-* ç±»   è¯´   æ˜ ï¼š     ç³»ç»Ÿèœå•    
+* Àà   Ëµ   Ã÷ £º     ÏµÍ³²Ëµ¥    
 *                                                                 
-* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š                     
+* ĞŞ   ¸Ä   ÈË£º          ĞŞ   ¸Ä   ÈÕ   ÆÚ£º                     
 */                                                                
 package cn.doublepoint.common.domain.model.entity.xt;   
                                                                   
@@ -28,21 +28,21 @@ public class T_XT_CD  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "cdbs")                                  
-	private String cdbs; //èœå•æ ‡è¯†       
+	private String cdbs; //²Ëµ¥±êÊ¶       
 	@Column (name = "cdmc")                                  
-	private String cdmc; //èœå•åç§°       
+	private String cdmc; //²Ëµ¥Ãû³Æ       
 	@Column (name = "cdlj")                                  
-	private String cdlj; //èœå•é“¾æ¥       
+	private String cdlj; //²Ëµ¥Á´½Ó       
 	@Column (name = "sjcdbs")                                  
-	private String sjcdbs; //ä¸Šçº§èœå•æ ‡è¯†       
+	private String sjcdbs; //ÉÏ¼¶²Ëµ¥±êÊ¶       
 	@Column (name = "cdcj")                                  
-	private Integer cdcj; //èœå•å±‚çº§       
+	private Integer cdcj; //²Ëµ¥²ã¼¶       
 	@Column (name = "cdpx")                                  
-	private Integer cdpx; //èœå•æ’åº       
+	private Integer cdpx; //²Ëµ¥ÅÅĞò       
 	@Column (name = "gxsj")                                  
-	private Date gxsj; //æ›´æ–°æ—¶é—´       
+	private Date gxsj; //¸üĞÂÊ±¼ä       
 	@Column (name = "cjsj")                                  
-	private Date cjsj; //åˆ›å»ºæ—¶é—´       
+	private Date cjsj; //´´½¨Ê±¼ä       
                                                                   
 	public void setCdbs(String cdbs) {                                     
 		this.cdbs = cdbs;                                                  

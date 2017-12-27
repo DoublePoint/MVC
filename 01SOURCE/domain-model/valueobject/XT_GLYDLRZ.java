@@ -1,11 +1,11 @@
 /**                                                               
-* åˆ›   å»º   äººï¼š åˆ˜ç£Š                                             
+* ´´   ½¨   ÈË£º ÁõÀÚ                                             
 *                                                                 
-* åˆ›   å»º   æ—¶   é—´ ï¼š2017-12-23 22:20:268                      
+* ´´   ½¨   Ê±   ¼ä £º2017-12-27 19:11:979                      
 *                                                                 
-* ç±»   è¯´   æ˜ ï¼š     ç³»ç»Ÿç®¡ç†å‘˜ç™»å½•æ—¥å¿—    
+* Àà   Ëµ   Ã÷ £º     ÏµÍ³¹ÜÀíÔ±µÇÂ¼ÈÕÖ¾    
 *                                                                 
-* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š                     
+* ĞŞ   ¸Ä   ÈË£º          ĞŞ   ¸Ä   ÈÕ   ÆÚ£º                     
 */                                                                
 package cn.doublepoint.common.domain.model.valueobject.xt;   
                                                                   
@@ -21,7 +21,7 @@ public class XT_GLYDLRZ extends BaseValueObject {
                                                                   
 	@Id                                                              
 	@Column (name = "glydlrzbs")                                  
-	private String glydlrzbs; //ç®¡ç†å‘˜ç™»å½•æ—¥å¿—æ ‡è¯†                                                
+	private String glydlrzbs; //¹ÜÀíÔ±µÇÂ¼ÈÕÖ¾±êÊ¶                                                
 	                                                                 
 	public String getGlydlrzbs() {                                            
 		return glydlrzbs;                                                     
@@ -31,7 +31,7 @@ public class XT_GLYDLRZ extends BaseValueObject {
 		this.glydlrzbs = glydlrzbs;                                                  
 	}                                                                
 	@Column (name = "glybs")                                  
-	private String glybs; //ç®¡ç†å‘˜æ ‡è¯†                                                
+	private String glybs; //¹ÜÀíÔ±±êÊ¶                                                
 	                                                                 
 	public String getGlybs() {                                            
 		return glybs;                                                     
@@ -41,7 +41,7 @@ public class XT_GLYDLRZ extends BaseValueObject {
 		this.glybs = glybs;                                                  
 	}                                                                
 	@Column (name = "glydlsj")                                  
-	private Date glydlsj; //ç®¡ç†å‘˜ç™»å½•æ—¶é—´                                                
+	private Date glydlsj; //¹ÜÀíÔ±µÇÂ¼Ê±¼ä                                                
 	                                                                 
 	public Date getGlydlsj() {                                            
 		return glydlsj;                                                     
@@ -51,7 +51,7 @@ public class XT_GLYDLRZ extends BaseValueObject {
 		this.glydlsj = glydlsj;                                                  
 	}                                                                
 	@Column (name = "mmsrsfyw")                                  
-	private String mmsrsfyw; //å¯†ç è¾“å…¥æ˜¯å¦æœ‰è¯¯                                                
+	private String mmsrsfyw; //ÃÜÂëÊäÈëÊÇ·ñÓĞÎó                                                
 	                                                                 
 	public String getMmsrsfyw() {                                            
 		return mmsrsfyw;                                                     

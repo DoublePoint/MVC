@@ -1,11 +1,11 @@
 /**                                                               
-* åˆ›   å»º   äººï¼š åˆ˜ç£Š                                             
+* ´´   ½¨   ÈË£º ÁõÀÚ                                             
 *                                                                 
-* åˆ›   å»º   æ—¶   é—´ ï¼š2017-12-23 22:20:266                      
+* ´´   ½¨   Ê±   ¼ä £º2017-12-27 19:11:976                      
 *                                                                 
-* ç±»   è¯´   æ˜ ï¼š     ç³»ç»Ÿæƒé™    
+* Àà   Ëµ   Ã÷ £º     ÏµÍ³È¨ÏŞ    
 *                                                                 
-* ä¿®   æ”¹   äººï¼š          ä¿®   æ”¹   æ—¥   æœŸï¼š                     
+* ĞŞ   ¸Ä   ÈË£º          ĞŞ   ¸Ä   ÈÕ   ÆÚ£º                     
 */                                                                
 package cn.doublepoint.common.domain.model.entity.xt;   
                                                                   
@@ -28,15 +28,15 @@ public class T_XT_QX  extends BaseEntity{
                                                                   
 	@Id                                                              
 	@Column (name = "qxbs")                                  
-	private String qxbs; //æƒé™æ ‡è¯†       
+	private String qxbs; //È¨ÏŞ±êÊ¶       
 	@Column (name = "qxmc")                                  
-	private String qxmc; //æƒé™åç§°       
+	private String qxmc; //È¨ÏŞÃû³Æ       
 	@Column (name = "qxz")                                  
-	private Long qxz; //æƒé™å€¼       
+	private Long qxz; //È¨ÏŞÖµ       
 	@Column (name = "cjsj")                                  
-	private Date cjsj; //åˆ›å»ºæ—¶é—´       
+	private Date cjsj; //´´½¨Ê±¼ä       
 	@Column (name = "gxsj")                                  
-	private Date gxsj; //æ›´æ–°æ—¶é—´       
+	private Date gxsj; //¸üĞÂÊ±¼ä       
                                                                   
 	public void setQxbs(String qxbs) {                                     
 		this.qxbs = qxbs;                                                  
