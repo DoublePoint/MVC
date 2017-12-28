@@ -11,11 +11,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<properties>
-		<!--spring版本号 -->
+	<!-- <properties>
+		spring版本号
 		<spring.version>4.3.5.RELEASE</spring.version>
 		<project.build.sourceEncoding> UTF-8 </project.build.sourceEncoding>
-	</properties>
+	</properties> -->
 	<dependencies>
 		<!--spring data jpa -->
 		<dependency>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.6.Final</version>
+			<version>${hibernate.entitymanager.version}</version>
 		</dependency>
 
 		<dependency>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.3.5.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 

@@ -13,6 +13,8 @@
 		<spring.version>4.3.5.RELEASE</spring.version>
 		<spring.data.jpa.version>1.8.0.RELEASE</spring.data.jpa.version>
 		<junit.version>4.12-beta-3</junit.version>
+		<jackson.core.version>2.9.2</jackson.core.version>
+		<hibernate.entitymanager.version>4.3.6.Final</hibernate.entitymanager.version>
 	</properties>
 
 </project>
