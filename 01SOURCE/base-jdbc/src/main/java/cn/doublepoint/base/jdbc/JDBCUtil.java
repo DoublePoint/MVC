@@ -97,7 +97,7 @@ public class JDBCUtil implements BaseRepositoryUtil {
 			List<T> dataList = commonTemplate.query(sb.toString(), paramArr, new BeanPropertyRowMapper<T>(clazz));
 			AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<T>();
 			ajaxDataWrap.setData(dataList);
-			ajaxDataWrap.setPager(pageInfo);
+			ajaxDataWrap.setPageInfo(pageInfo);
 			return ajaxDataWrap;
 		} catch (Exception e) {
 			e.printStackTrace();

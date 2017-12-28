@@ -216,3 +216,7 @@ a {
 .layui-laypage a,.layui-laypage span{
 	margin: 0 -1px 0px 0;
 }
+
+.layui-table-click,.layui-table-hover{
+	/* background-color:#DCF8A8; */
+}

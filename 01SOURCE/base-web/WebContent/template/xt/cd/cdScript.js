@@ -1,12 +1,18 @@
 function retrieveAjaxDataGrid() {
+	var ajaxDataWrap = lltestdatagrid.getData();
+	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+	var nodes = treeDemo.getSelectedNodes();
+	if(nodes.length>=0)
+		ajaxDataWrap.setData(nodes);
 	$.ajax({
 		url : $$pageContextPath + "/template/xt/cd/datalist",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
 		async : false,
-		success : function(data) {
-			lltestdatagrid.setData(data);
+		data : ajaxDataWrap,
+		success : function(ajaxDataWrap) {
+			lltestdatagrid.setData(ajaxDataWrap);
 		}
 	});
 }
@@ -70,14 +76,16 @@ function onClickDelete() {
 }
 
 function zTreeOnClick(event, treeId, treeNode) {
-	var cd = {};
-	cd.cdbs = treeNode.cdbs;
+	var ajaxDataWrap=new AjaxDataWrap("treeNode");
+	ajaxDataWrap.setData(treeNode);
+//	var cd = {};
+//	cd.cdbs = treeNode.cdbs;
 	$.ajax({
 		url : $$pageContextPath + "/template/xt/cd/datalist",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
-		data : JSON.stringify(cd),
+		data : JSON.stringify(ajaxDataWrap),
 		async : false,
 		success : function(datawrap) {
 			lltestdatagrid.setData(datawrap);

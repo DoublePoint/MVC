@@ -22,7 +22,7 @@ public class AjaxDataWrap<T> implements Serializable{
 	private int code;
 	private String msg;
 	private List<T> data;
-	private PageInfo pager;
+	private PageInfo pageInfo;
 	
 	public int getCode() {
 		return code;
@@ -42,21 +42,21 @@ public class AjaxDataWrap<T> implements Serializable{
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-	public PageInfo getPager() {
-		return pager;
-	}
-	public void setPager(PageInfo pager) {
-		this.pager = pager;
-	}
 	
+	public PageInfo getPageInfo() {
+		return pageInfo;
+	}
+	public void setPageInfo(PageInfo pageInfo) {
+		this.pageInfo = pageInfo;
+	}
 	public AjaxDataWrap() {
 		super();
-		this.pager=new PageInfo();
+		this.pageInfo=new PageInfo();
 	}
 	
 	public <R> AjaxDataWrap<R> copy(Class<R> targetClass){
 		AjaxDataWrap<R> ajaxDataWrap=new AjaxDataWrap<>();
-		ajaxDataWrap.setPager(this.pager);
+		ajaxDataWrap.setPageInfo(this.pageInfo);
 		ajaxDataWrap.setData(CommonBeanUtils.copyTo(this.data, targetClass));
 		return ajaxDataWrap;
 	}

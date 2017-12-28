@@ -83,7 +83,7 @@ function AjaxDataGrid(domId) {
 		type : 'checkbox'
 	} ] ];
 	this.datasource = "";
-	this.data = null;
+	this.data = new $._AjaxDataWrap();
 	this.height = 300;
 	this.init = function(msg) {
 		this.setData();
@@ -91,8 +91,15 @@ function AjaxDataGrid(domId) {
 	this.setDataSource = function(ds) {
 		this.datasource = ds;
 	};
-	this.setData = function(data) {
-		this.data = data;
+	this.getData=function(){
+		return this.data;
+	}
+	this.setData = function(ajaxDataWrap) {
+		this.data.parse(ajaxDataWrap);
+		this.render();
+		
+	};
+	this.render=function(){
 		var parentHeight = $("#" + this.id).parent().height();
 		var allChildFixHeight = 0;
 		var brother = $("#" + this.id).parent().parent().children();
@@ -105,9 +112,9 @@ function AjaxDataGrid(domId) {
 		var thisResultHeight = $("#" + this.id).parent().parent().height() - allChildFixHeight;
 		this.height = thisResultHeight-this.pageHeight;
 		$._SetLayuiTableData(this);
-		this.setPager(data.pager);
+		this.setPager(this.data.getPageInfo(),this.id);
 	};
-	this.setPager=function(page){
+	this.setPager=function(page,ajaxDataGridId){
 		if(page==null) return;
 		$laypage.render({
 			elem : this.pageId,
@@ -117,12 +124,17 @@ function AjaxDataGrid(domId) {
 			layout : [ 'prev', 'page', 'next', 'skip', 'count', 'limit' ],
 			jump : function(obj, first) {
 				if (!first) {
-					curnum = obj.curr;
-					limitcount = obj.limit;
+					var currentPageNum = obj.curr;
+					var pageSize = obj.limit;
+					pageSize=2;
+					var ajaxDataGrid=$._GetFromLayuiObjectHashMap(ajaxDataGridId);
+					ajaxDataGrid.getData().pageInfo.pageSize=pageSize;
+					ajaxDataGrid.getData().pageInfo.currentPageNum=currentPageNum;
 					// console.log("curnum"+curnum);
 					// console.log("limitcount"+limitcount);
 					// layer.msg(curnum+"-"+limitcount);
-					productsearch(productGroupId, curnum, limitcount);
+//					productsearch(productGroupId, curnum, limitcount);
+					retrieveAjaxDataGrid();
 				}
 			}
 		});

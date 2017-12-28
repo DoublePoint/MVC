@@ -49,6 +49,11 @@ public class PageInfo {
 	
 	public PageInfo() {
 		super();
+		currentPageNum=1;
+		currentPageCount=0;
+		totalElementCount=0;
+		totalPageCount=1;
+		pageSize=100;
 	}
 	public PageInfo(int currentPageNum, int pageSize) {
 		super();

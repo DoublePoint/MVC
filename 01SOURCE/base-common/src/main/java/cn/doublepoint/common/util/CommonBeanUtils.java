@@ -68,7 +68,7 @@ public class CommonBeanUtils extends BeanUtils {
 		}
 		List<T> resList=copyTo(page.getContent(),cla);
 		ajaxDataWrap.setData(resList);
-		ajaxDataWrap.setPager(pager);
+		ajaxDataWrap.setPageInfo(pager);
 		return ajaxDataWrap;
 	}
 }

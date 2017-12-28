@@ -80,7 +80,6 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 			var cd = {};
 			var domId = this._getAjaxMenuDomId();
 			$.ajax({
-				// /template/xt/cd/datalist
 				url : $$pageContextPath + this.datasource,
 				type : "POST",
 				contentType : 'application/json;charset=UTF-8',
