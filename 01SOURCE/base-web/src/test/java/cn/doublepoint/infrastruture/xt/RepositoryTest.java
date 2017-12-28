@@ -9,6 +9,7 @@
 */
 package cn.doublepoint.infrastruture.xt;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,4 +22,8 @@ import cn.doublepoint.commonconfig.AutoConfiguration;
 @ContextConfiguration(locations={"classpath:spring-context.xml"})
 public class RepositoryTest {
 	
+	@Test
+	public void defaultTest(){
+		
+	}
 }

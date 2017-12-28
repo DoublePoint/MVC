@@ -128,61 +128,6 @@ public class JDBCUtil implements BaseRepositoryUtil {
 	}
 
 	@Override
-	public <T extends BaseModel> void save2(List<T> objectList) throws Exception {
-		if (objectList == null || objectList.size() == 0)
-			return;
-		Class clazz = objectList.get(0).getClass();
-		Object object = objectList.get(0);
-		Table table = (Table) clazz.getAnnotation(Table.class);
-		String tableName = table.name();
-		// 插入数据的列名
-		StringBuilder columns = new StringBuilder("(");
-		// 确定占位符的个数（即对象中不为 null 的字段个数）
-		int columnNum = 0;
-		// 填充占位符的值（即对象中不为null的字段的值）
-		List<Object> valuesList = new ArrayList<Object>();
-
-		Field[] fields = clazz.getDeclaredFields();
-		for (Field field : fields) {
-			field.setAccessible(true);
-			if (field.get(object) != null) {
-				columnNum++;
-				columns.append(field.getName()).append(", ");
-				valuesList.add(field.get(object));
-			}
-		}
-		columns.replace(columns.lastIndexOf(", "), columns.length(), ")");
-		// 获取所有的值
-		for (int i = 1; i < objectList.size(); i++) {
-			for (Field field : fields) {
-				field.setAccessible(true);
-				if (field.get(objectList.get(i)) != null) {
-					valuesList.add(field.get(objectList.get(i)));
-				}
-			}
-		}
-		// 确定一个 Object 的占位符 '?'
-		StringBuilder zhanweifuColumn = new StringBuilder("(");
-		for (int i = 0; i < columnNum; i++) {
-			zhanweifuColumn.append("?, ");
-		}
-		zhanweifuColumn.replace(zhanweifuColumn.lastIndexOf(", "), zhanweifuColumn.length(), ")");
-
-		// 确定所有的占位符
-		int objectNum = objectList.size();
-		StringBuilder zhanweifu = new StringBuilder();
-		for (int j = 0; j < objectNum; j++) {
-			zhanweifu.append(zhanweifuColumn.toString()).append(", ");
-		}
-		zhanweifu.replace(zhanweifu.lastIndexOf(", "), zhanweifu.length(), "");
-
-		// 生成最终 SQL
-		String sql = "INSERT INTO " + tableName + " " + columns + " VALUES " + zhanweifu.toString();
-		System.out.println(sql);
-		System.out.println(valuesList);
-	}
-
-	@Override
 	public int queryCount(String sql, Object[] params) {
 		return commonTemplate.queryForObject(sql, params, Integer.class);
 	}

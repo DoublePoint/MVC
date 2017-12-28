@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>base-web</artifactId>
 	<description>Spring MVC基础项目</description>
+	<packaging>war</packaging>
 
 	<parent>
 		<groupId>cn.doublepoint.base</groupId>
@@ -144,6 +145,26 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- 打包插件 -->
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- 指定jsp页面保存位置 -->
+					<webappDirectory>WebContent</webappDirectory>
+					<version>2.5</version>
+					<!-- 指定web.xml文件位置 <webXml>WebContent\WEB-INF\web.xml</webXml>-->
+					<argLine>-Dfile.encoding=UTF-8</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7.2</version>
+				<configuration>
+					<forkMode>once</forkMode>
+					<argLine>-Dfile.encoding=UTF-8</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -135,8 +135,6 @@ public interface BaseRepositoryUtil {
 	 */
 	<T extends BaseModel> void batchInsert(List<T> insertList);
 
-	<T extends BaseModel> void save2(List<T> objectList) throws Exception;
-
 	/**
 	 * 查询条数
 	 * 
