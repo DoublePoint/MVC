@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.base.commonutil.port.adapter.persistence;
 
-import cn.doublepoint.common.util.StringUtils;
+import cn.doublepoint.common.util.StringUtil;
 
 public class QueryParam {
 	public static final String RELATION_EQUAL = "=";
@@ -72,7 +72,7 @@ public class QueryParam {
 		super();
 		this.name = name;
 		this.value = value;
-		if(StringUtils.isNullOrEmpty(relation))
+		if(StringUtil.isNullOrEmpty(relation))
 			this.relation=relation;
 	}
 

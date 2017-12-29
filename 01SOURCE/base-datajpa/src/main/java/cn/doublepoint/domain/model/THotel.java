@@ -1,23 +1,17 @@
-/** 
-* 创   建   人： 刘磊
-* 
-* 创   建   时   间 ： 2017年12月25日
-* 
-* 类   说   明 ：
-* 
-* 修   改   人：          修   改   日   期：
-*/ 
-package cn.doublepoint.base.commonutil.persistence.entity;
+package cn.doublepoint.domain.model; 
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
+/**
+ * @author Niu Li 
+ * @date 2017/1/7
+ */
 @Entity
 @javax.persistence.Table(name = "t_hotel", schema = "test", catalog = "")
 public class THotel {
-    private int id;
+    private int id; 
 
     @Id
     @javax.persistence.Column(name = "id", nullable = false)

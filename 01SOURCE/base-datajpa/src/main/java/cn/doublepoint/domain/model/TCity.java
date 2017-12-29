@@ -1,13 +1,4 @@
-/** 
-* 创   建   人： 刘磊
-* 
-* 创   建   时   间 ： 2017年12月25日
-* 
-* 类   说   明 ：
-* 
-* 修   改   人：          修   改   日   期：
-*/ 
-package cn.doublepoint.base.commonutil.persistence.entity;
+package cn.doublepoint.domain.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,9 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_city", schema = "test", catalog = "")
+@Table(name = "t_xt_cd", schema = "test", catalog = "")  
 public class TCity {
-    private int id;
+    private int id;   
 
     @Id
     @Column(name = "id", nullable = false)
@@ -94,7 +85,7 @@ public class TCity {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() { 
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);

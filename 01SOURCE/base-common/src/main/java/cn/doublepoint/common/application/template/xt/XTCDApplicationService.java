@@ -13,16 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
 import cn.doublepoint.base.commonutil.domain.model.XTCDConstant;
 import cn.doublepoint.base.commonutil.port.adapter.persistence.BaseRepositoryUtil;
 import cn.doublepoint.base.jdbc.JDBCUtil;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.common.util.SnowflakeIdWorker;
-import cn.doublepoint.common.util.StringUtils;
+import cn.doublepoint.common.util.StringUtil;
 
 @Service("xtcdApplicationService")
 public class XTCDApplicationService {
@@ -36,7 +34,7 @@ public class XTCDApplicationService {
 	BaseRepositoryUtil jpaUtil;	
 	public boolean createXTCD0(T_XT_CD t_XT_CD){
 		try {
-			if(StringUtils.isNullOrEmpty(t_XT_CD.getCdbs())){
+			if(StringUtil.isNullOrEmpty(t_XT_CD.getCdbs())){
 				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
@@ -57,7 +55,7 @@ public class XTCDApplicationService {
 		
 		
 		try {
-			if(StringUtils.isNullOrEmpty(t_XT_CD.getCdbs())){
+			if(StringUtil.isNullOrEmpty(t_XT_CD.getCdbs())){
 				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{

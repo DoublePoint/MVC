@@ -1,7 +1,5 @@
 package cn.doublepoint.base.datajpa;
-import com.querydsl.core.QueryResults;
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Predicate;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +10,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
+import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Predicate;
 
-import cn.mrdear.entity.QTCity;
-import cn.mrdear.entity.QTHotel;
-import cn.mrdear.entity.TCity;
-import cn.mrdear.repository.TCityRepository;
+import cn.doublepoint.domain.model.QTCity;
+import cn.doublepoint.domain.model.QTHotel;
+import cn.doublepoint.domain.model.TCity;
+import cn.doublepoint.domain.model.repository.TCityRepository;
 
 /**
  * @author Niu Li
@@ -55,7 +55,7 @@ public class TCityTest {
     public void findByLeftJoin(){
         QTCity qtCity = QTCity.tCity;
         QTHotel qtHotel = QTHotel.tHotel;
-        Predicate predicate = qtCity.name.like("shanghai");
+        Predicate predicate = (Predicate) qtCity.name.like("shanghai");
         List<Tuple> result = tCityRepository.findCityAndHotel(predicate);
         for (Tuple row : result) {
             System.out.println("qtCity:"+row.get(qtCity));

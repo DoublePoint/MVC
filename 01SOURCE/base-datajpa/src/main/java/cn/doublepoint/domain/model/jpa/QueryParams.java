@@ -1,18 +1,4 @@
-/** 
-* 创   建   人： 刘磊
-* 
-* 创   建   时   间 ： 2017年12月25日
-* 
-* 类   说   明 ：
-* 
-* 修   改   人：          修   改   日   期：
-*/ 
-
-package cn.doublepoint.base.commonutil.persistence.jpa;
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.util.CollectionUtils;
+package cn.doublepoint.domain.model.jpa;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +9,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.CollectionUtils;
 
 /**
  * 封装查询条件的实体
@@ -36,15 +27,15 @@ public class QueryParams<T> implements Specification<T> {
     /**
      * and条件
      */
-    private List<Filter> andFilters = new ArrayList<>();
+    private List<Filter> andFilters = new ArrayList<Filter>();
     /**
      * or条件
      */
-    private List<Filter> orFilters = new ArrayList<>();
+    private List<Filter> orFilters = new ArrayList<Filter>();
     /**
      * 排序属性
      */
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<Order>();
 
     /**
      * 添加一个and条件
@@ -168,7 +159,6 @@ public class QueryParams<T> implements Specification<T> {
      * @param cb 构建器
      * @return 条件集合
      */
-    @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         Predicate restrictions = cb.and(toAndPredicate(root,cb));
         //如果无or条件,toOrPredicate会自带一个 or 1=1,前面用and的话则变为and 1=1造成错误,所以这里判断下

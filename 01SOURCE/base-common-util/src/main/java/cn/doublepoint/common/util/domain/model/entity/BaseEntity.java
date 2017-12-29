@@ -17,7 +17,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import cn.doublepoint.common.util.StringUtils;
+import cn.doublepoint.common.util.StringUtil;
 import cn.doublepoint.common.util.domain.model.BaseModel;
 
 public class BaseEntity extends BaseModel {
@@ -39,7 +39,7 @@ public class BaseEntity extends BaseModel {
 			Column columnAnnotation = field.getAnnotation(Column.class);
 			if (columnAnnotation != null) {
 				String fieldName = columnAnnotation.name();
-				if (StringUtils.isNullOrEmpty(fieldName))
+				if (StringUtil.isNullOrEmpty(fieldName))
 					fieldName = field.getName();
 				sb.append(fieldName).append(",");
 				realFieldList.add(field);
@@ -75,7 +75,7 @@ public class BaseEntity extends BaseModel {
 			Column columnAnnotation = field.getAnnotation(Column.class);
 			if (columnAnnotation != null) {
 				String fieldName = columnAnnotation.name();
-				if (StringUtils.isNullOrEmpty(fieldName))
+				if (StringUtil.isNullOrEmpty(fieldName))
 					fieldName = field.getName();
 				if (idAnnotation != null) {
 					idFieldName = fieldName;
@@ -114,7 +114,7 @@ public class BaseEntity extends BaseModel {
 			Column columnAnnotation = field.getAnnotation(Column.class);
 			if (columnAnnotation != null) {
 				String fieldName = columnAnnotation.name();
-				if (StringUtils.isNullOrEmpty(fieldName))
+				if (StringUtil.isNullOrEmpty(fieldName))
 					fieldName = field.getName();
 				sb.append(fieldName).append(",");
 				sbVal.append("?,");

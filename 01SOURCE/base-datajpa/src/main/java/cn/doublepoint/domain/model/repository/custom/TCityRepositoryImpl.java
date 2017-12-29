@@ -1,18 +1,25 @@
-package cn.doublepoint.base.commonutil.persistence.repository.custom;
+package cn.doublepoint.domain.model.repository.custom;
 
 import java.util.List;
 
-import javax.persistence.Tuple;
-import javax.persistence.criteria.Predicate;
-
 import org.springframework.data.domain.Pageable;
 
-import cn.doublepoint.base.commonutil.persistence.repository.BaseRepository;
+import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
+import cn.doublepoint.domain.model.QTCity;
+import cn.doublepoint.domain.model.QTHotel;
+import cn.doublepoint.domain.model.repository.BaseRepository;
 
+/**
+ * @author Niu Li
+ * @date 2017/1/7
+ */
 public class TCityRepositoryImpl extends BaseRepository implements TCityRepositoryCustom {
 
-    @Override
     public List<Tuple> findCityAndHotel(Predicate predicate) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         JPAQuery<Tuple> jpaQuery = queryFactory.select(QTCity.tCity,QTHotel.tHotel)
@@ -23,7 +30,6 @@ public class TCityRepositoryImpl extends BaseRepository implements TCityReposito
         return jpaQuery.fetch();
     }
 
-    @Override
     public QueryResults<Tuple> findCityAndHotelPage(Predicate predicate,Pageable pageable) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         JPAQuery<Tuple> jpaQuery = queryFactory.select(QTCity.tCity.id,QTHotel.tHotel)

@@ -1,13 +1,17 @@
-package cn.doublepoint.base.commonutil.persistence.repository.custom;
+package cn.doublepoint.domain.model.repository.custom;
 
-import java.util.List;
-
-import javax.persistence.Tuple;
-import javax.persistence.criteria.Predicate;
+import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Predicate;
 
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 
+/**
+ * @author Niu Li
+ * @date 2017/1/7
+ */
 public interface TCityRepositoryCustom {
     /**
      * 关联查询示例,查询出城市和对应的旅店

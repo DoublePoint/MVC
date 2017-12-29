@@ -1,4 +1,4 @@
-package cn.mrdear.repository;
+package cn.doublepoint.domain.model.repository;
 
 import org.springframework.data.repository.NoRepositoryBean;
 

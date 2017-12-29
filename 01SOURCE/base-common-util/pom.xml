@@ -37,8 +37,15 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.entitymanager.version}</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<!-- <finalName>open</finalName> -->
 		<plugins>
