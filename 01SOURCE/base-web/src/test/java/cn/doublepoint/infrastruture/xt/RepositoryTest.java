@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.doublepoint.base.jdbc.JDBCUtil;
 import cn.doublepoint.commonconfig.AutoConfiguration;
+import cn.doublepoint.jdbc.util.JDBCUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-context.xml"})

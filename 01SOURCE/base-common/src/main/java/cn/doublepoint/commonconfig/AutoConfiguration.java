@@ -24,8 +24,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import cn.doublepoint.base.commonutil.port.adapter.persistence.BaseRepositoryUtil;
-import cn.doublepoint.base.jdbc.JDBCUtil;
+import cn.doublepoint.commonutil.port.adapter.persistence.BaseRepositoryUtil;
+import cn.doublepoint.jdbc.util.JDBCUtil;
 
 @Configuration
 @EnableTransactionManagement

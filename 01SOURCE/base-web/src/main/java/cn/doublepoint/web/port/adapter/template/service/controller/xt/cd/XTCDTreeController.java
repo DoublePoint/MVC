@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cn.doublepoint.base.commonutil.domain.model.PageInfo;
-import cn.doublepoint.base.commonutil.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
+import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
 @Controller
 @RequestMapping("/template/xt")

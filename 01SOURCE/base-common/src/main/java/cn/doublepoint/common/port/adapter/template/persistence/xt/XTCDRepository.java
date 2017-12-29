@@ -18,9 +18,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import cn.doublepoint.base.commonutil.domain.model.XTCDConstant;
 import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.commonutil.domain.model.XTCDConstant;
 
 public interface XTCDRepository extends JpaRepository<T_XT_CD,Long>,JpaSpecificationExecutor<T_XT_CD>{
 	
