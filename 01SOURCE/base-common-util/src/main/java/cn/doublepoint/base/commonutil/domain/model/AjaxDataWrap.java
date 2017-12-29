@@ -10,6 +10,7 @@
 package cn.doublepoint.base.commonutil.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.doublepoint.common.util.CommonBeanUtils;

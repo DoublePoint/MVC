@@ -244,7 +244,12 @@ var DoublePoint = {};// 全局对象
 
 		_AjaxDataWrap : function(name) {
 			// this.name = name;
+			this.code="";
+			this.msg="";
+			this.data=[];
+			this.pageInfo = new $._PageInfo();
 			this.parse = function(jsonObjectDataWrap) {
+				if(jsonObjectDataWrap==null) return;
 				this.data = jsonObjectDataWrap.data;
 				this.pageInfo.parse(jsonObjectDataWrap.pageInfo);
 			};
@@ -260,7 +265,7 @@ var DoublePoint = {};// 全局对象
 			this.getDataList = function() {
 				return this.dataList;
 			};
-			this.pageInfo = new $._PageInfo();
+			
 			this.getPageInfo = function() {
 				return this.pageInfo;
 			}
@@ -274,6 +279,7 @@ var DoublePoint = {};// 全局对象
 			this.totalPageCount = 1;
 			this.pageSize = 100;
 			this.parse = function(jsonObjectPageInfo) {
+				if(jsonObjectPageInfo==null) return;
 				this.currentPageNum = jsonObjectPageInfo.currentPageNum;
 				this.currentPageCount = jsonObjectPageInfo.currentPageCount;
 				this.totalElementCount = jsonObjectPageInfo.totalElementCount;

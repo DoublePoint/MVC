@@ -97,7 +97,6 @@ function AjaxDataGrid(domId) {
 	this.setData = function(ajaxDataWrap) {
 		this.data.parse(ajaxDataWrap);
 		this.render();
-		
 	};
 	this.render=function(){
 		var parentHeight = $("#" + this.id).parent().height();

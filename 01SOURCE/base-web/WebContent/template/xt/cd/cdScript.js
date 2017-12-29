@@ -10,7 +10,7 @@ function retrieveAjaxDataGrid() {
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
 		async : false,
-		data : ajaxDataWrap,
+		data : JSON.stringify(ajaxDataWrap),
 		success : function(ajaxDataWrap) {
 			lltestdatagrid.setData(ajaxDataWrap);
 		}

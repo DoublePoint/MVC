@@ -49,10 +49,13 @@ public class XTCDHandleController implements BaseHandleController {
 	@RequestMapping("/datalist")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataList(@RequestBody(required=false) AjaxDataWrap<VT_XT_CD> dataWrap) {
+		
 		VT_XT_CD cd=null;
 		if(dataWrap!=null){
-			cd=dataWrap.getData().get(0);
-			dataWrap.getPageInfo().setPageSize(2);
+			if(dataWrap.getData()!=null&&dataWrap.getData().size()>0){
+				cd=dataWrap.getData().get(0);
+				dataWrap.getPageInfo().setPageSize(2);
+			}
 		}
 		else{
 			dataWrap=new AjaxDataWrap<VT_XT_CD>();
