@@ -15,6 +15,7 @@
 		<junit.version>4.12-beta-3</junit.version>
 		<jackson.core.version>2.9.2</jackson.core.version>
 		<hibernate.entitymanager.version>4.3.6.Final</hibernate.entitymanager.version>
+		<cn.doublepoint.base.version>0.0.1-SNAPSHOT</cn.doublepoint.base.version>
 	</properties>
 
 </project>

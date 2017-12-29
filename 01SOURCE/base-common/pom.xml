@@ -11,11 +11,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<!-- <properties>
-		spring版本号
-		<spring.version>4.3.5.RELEASE</spring.version>
-		<project.build.sourceEncoding> UTF-8 </project.build.sourceEncoding>
-	</properties> -->
 	<dependencies>
 		<!--spring data jpa -->
 		<dependency>
@@ -53,13 +48,13 @@
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-datajpa</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-jdbc</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 	</dependencies>
 

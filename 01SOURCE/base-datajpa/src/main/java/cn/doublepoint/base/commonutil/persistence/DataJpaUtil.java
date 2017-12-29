@@ -9,7 +9,9 @@
 */ 
 package cn.doublepoint.base.commonutil.persistence;
 
-public interface BaseRepository{
+import cn.doublepoint.base.commonutil.port.adapter.persistence.BaseRepositoryUtil;
+
+public class DataJpaUtil implements BaseRepositoryUtil{
 	
 	
 }

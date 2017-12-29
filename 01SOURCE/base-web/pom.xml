@@ -111,18 +111,12 @@
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-common-util</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-jdbc</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 
 	</dependencies>

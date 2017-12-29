@@ -33,7 +33,7 @@ public class XTCDApplicationService {
 	SnowflakeIdWorker idWorker;
 	
 	@Resource
-	JDBCUtil jpaUtil;	
+	BaseRepositoryUtil jpaUtil;	
 	public boolean createXTCD0(T_XT_CD t_XT_CD){
 		try {
 			if(StringUtils.isNullOrEmpty(t_XT_CD.getCdbs())){

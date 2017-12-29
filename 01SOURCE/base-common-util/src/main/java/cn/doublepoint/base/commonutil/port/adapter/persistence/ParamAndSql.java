@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ParamAndSql {
 	private String sqlString = "";
-	  private List<Object> params = new ArrayList();
+	  private List<Object> params = new ArrayList<Object>();
 	  
 	  public String getSqlString()
 	  {
