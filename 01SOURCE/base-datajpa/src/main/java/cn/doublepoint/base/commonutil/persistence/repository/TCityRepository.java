@@ -8,10 +8,7 @@ import cn.doublepoint.base.commonutil.persistence.repository.custom.TCityReposit
 
 
 
-/**
- * @author Niu Li
- * @date 2017/1/7
- */
+
 public interface TCityRepository extends JpaRepository<TCity,Long>,QueryDslPredicateExecutor<TCity>, TCityRepositoryCustom {
 
 }
