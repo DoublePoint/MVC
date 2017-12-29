@@ -206,7 +206,6 @@ public class ModelModel {
 		sbBuffer.append("import javax.persistence.Enumerated;                                      \r\n");
 		sbBuffer.append("import javax.persistence.Temporal;                                      \r\n");
 		sbBuffer.append("import javax.persistence.TemporalType;                                      \r\n");
-		sbBuffer.append("import com.haiyisoft.billing.common.CalcType;                                      \r\n");
 
 		sbBuffer.append("@Embeddable                                                           \r\n");
 		sbBuffer.append("public class " + modelCode
@@ -244,7 +243,6 @@ public class ModelModel {
 	// sbBuffer.append("*/ \r\n");
 	//// sbBuffer.append("package cn.doublepoint.domain.model.entity.xt; \r\n");
 	// sbBuffer.append("package
-	// com.haiyisoft.billing.domain.model.entity.corePrice; \r\n");
 	// sbBuffer.append(" \r\n");
 	// sbBuffer.append(" \r\n");
 	//
