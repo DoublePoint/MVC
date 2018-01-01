@@ -15,6 +15,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.core.types.Predicate;
+
+import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.commonutil.domain.model.SnowflakeIdWorker;
@@ -39,12 +42,13 @@ public class XTCDApplicationService {
 				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
-				T_XT_CD parentCd=xtcdRepository.findByCdbs(t_XT_CD.getSjcdbs());
+				QT_XT_CD query = QT_XT_CD.t_XT_CD;
+				Predicate predicate=query.cdbs.eq(t_XT_CD.getSjcdbs());
+				T_XT_CD parentCd=xtcdRepository.findOne(predicate);
 				t_XT_CD.setCdcj(parentCd.getCdcj()+1);
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
 			xtcdRepository.save(t_XT_CD);
-//			xtcdRepository.save(new ArrayList<>());
 		} catch (Exception e) {
 			return false;
 		}
@@ -60,12 +64,11 @@ public class XTCDApplicationService {
 				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
-				T_XT_CD parentCd=xtcdRepository.findByCdbs(t_XT_CD.getSjcdbs());
+				T_XT_CD parentCd=xtcdRepository.findOne(t_XT_CD.getSjcdbs());
 				t_XT_CD.setCdcj(parentCd.getCdcj()+1);
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
 			xtcdRepository.save(t_XT_CD);
-//			xtcdRepository.saveAll(new ArrayList<>());
 		} catch (Exception e) {
 			return false;
 		}
@@ -73,10 +76,7 @@ public class XTCDApplicationService {
 	}
 	
 	public boolean removeXTCD(List<T_XT_CD> cdList){
-		for (T_XT_CD t_XT_CD : cdList) {
-//			xtcdRepository.deleteById(Long.valueOf(t_XT_CD.getCdbs()));
-		}
-		
+		xtcdRepository.delete(cdList);
 		return true;
 	}
 }

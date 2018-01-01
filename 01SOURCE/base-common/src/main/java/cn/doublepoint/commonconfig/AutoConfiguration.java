@@ -29,8 +29,9 @@ import cn.doublepoint.jdbc.util.JDBCUtil;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "cn.doublepoint.common" ,"cn.doublepoint.base.jdbc" })
-@EnableJpaRepositories({ "cn.doublepoint.common.port.adapter.template.persistence" })
+@ComponentScan(basePackages = { "cn.doublepoint.common", "cn.doublepoint.base.jdbc" })
+@EnableJpaRepositories(basePackages = {
+		"cn.doublepoint.common.port.adapter.template.persistence" }, repositoryImplementationPostfix = "Impl")
 public class AutoConfiguration {
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
@@ -59,9 +60,9 @@ public class AutoConfiguration {
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		return transactionManager;
 	}
-	
+
 	@Bean
-	public JdbcTemplate jdbcTemplate(DataSource dataSource){
+	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		jdbcTemplate.setDataSource(dataSource);
 		return jdbcTemplate;
@@ -75,9 +76,9 @@ public class AutoConfiguration {
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
-	
+
 	@Bean
-	public BaseRepositoryUtil jpaUtil(){
+	public BaseRepositoryUtil jpaUtil() {
 		return new JDBCUtil();
 	}
 }

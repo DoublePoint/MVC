@@ -30,7 +30,8 @@ public class DataJPAUtil implements BaseRepositoryUtil{
 	public <T extends BaseModel> List<T> executeQuery(String sql, Class<T> clas) {
 		QT_XT_CD cd = QT_XT_CD.t_XT_CD;
 		Predicate predicate = cd.cdbs.eq("393822756359110656");
-		repository.findCDDetail(predicate);
+//		repository.findCDDetail(predicate);
+
 		return null;
 	}
 	
@@ -43,7 +44,7 @@ public class DataJPAUtil implements BaseRepositoryUtil{
 		QT_XT_CD cd = QT_XT_CD.t_XT_CD;
 		
 		Predicate predicate = cd.cdbs.eq("393822756359110656");
-		repository.findCDDetail(predicate);
+//		repository.findCDDetail(predicate);
 		return null;
 	}
 

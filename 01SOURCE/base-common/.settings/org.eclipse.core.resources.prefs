@@ -5,4 +5,5 @@ encoding//src/main/java/cn/doublepoint/common/port/adapter/template/persistence/
 encoding//src/main/java/cn/doublepoint/commonconfig/AutoConfiguration.java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/test/java=UTF-8
+encoding//target/generated-sources/java=UTF-8
 encoding/<project>=UTF-8

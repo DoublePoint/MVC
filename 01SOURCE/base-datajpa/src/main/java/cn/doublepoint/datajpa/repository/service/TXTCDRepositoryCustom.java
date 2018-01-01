@@ -12,10 +12,4 @@ import cn.doublepoint.datajpa.domain.model.TCity;
 
 
 public interface TXTCDRepositoryCustom {
-	/**
-     * 查询菜单的详细信息 包含父菜单名称
-     * @param predicate 查询条件
-     * @return 查询实体
-     */
-    public List<Tuple> findCDDetail(Predicate predicate); 
 }
