@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.commonconfig;
+package cn.doublepoint.common.config;
 
 import java.util.Properties;
 
@@ -23,9 +23,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import cn.doublepoint.commonutil.port.adapter.persistence.BaseRepositoryUtil;
-import cn.doublepoint.jdbc.util.JDBCUtil;
 
 @Configuration
 @EnableTransactionManagement
@@ -50,6 +47,7 @@ public class AutoConfiguration {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
+//		entityManagerFactoryBean.setPersistenceUnitName("doublepoint");
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		entityManagerFactoryBean.setPackagesToScan("cn.doublepoint");
 		entityManagerFactoryBean.setJpaProperties(hibProperties());
@@ -79,8 +77,8 @@ public class AutoConfiguration {
 		return properties;
 	}
 
-	@Bean
-	public BaseRepositoryUtil jpaUtil() {
-		return new JDBCUtil();
-	}
+//	@Bean
+//	public BaseRepositoryUtil jpaUtil() {
+//		return new JDBCUtil();
+//	}
 }

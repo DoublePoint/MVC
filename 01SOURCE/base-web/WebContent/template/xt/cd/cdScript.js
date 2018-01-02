@@ -76,7 +76,7 @@ function onClickDelete() {
 }
 
 function zTreeOnClick(event, treeId, treeNode) {
-	var ajaxDataWrap=new AjaxDataWrap("treeNode");
+	var ajaxDataWrap= new $._AjaxDataWrap("treeNode");
 	ajaxDataWrap.setData(treeNode);
 //	var cd = {};
 //	cd.cdbs = treeNode.cdbs;

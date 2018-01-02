@@ -9,12 +9,15 @@
 */ 
 package cn.doublepoint.commonutil.domain.model;
 
+import org.springframework.data.domain.Sort;
+
 public class PageInfo {
 	private int currentPageNum=1;
 	private int currentPageCount=0;
 	private long totalElementCount=0;
 	private int totalPageCount=1;
 	private int pageSize=100;
+	private Sort sort;
 	public int getCurrentPageNum() {
 		return currentPageNum;
 	}
@@ -45,8 +48,12 @@ public class PageInfo {
 	public void setCurrentPageCount(int currentPageCount) {
 		this.currentPageCount = currentPageCount;
 	}
-	
-	
+	public Sort getSort() {
+		return sort;
+	}
+	public void setSort(Sort sort) {
+		this.sort = sort;
+	}
 	public PageInfo() {
 		super();
 		currentPageNum=1;

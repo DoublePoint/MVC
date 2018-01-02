@@ -222,7 +222,7 @@ a {
 }
 /*树*/
 .ztree {
-    overflow: scroll;
+    overflow: auto;
     height: 100%;
     padding:0;
 }

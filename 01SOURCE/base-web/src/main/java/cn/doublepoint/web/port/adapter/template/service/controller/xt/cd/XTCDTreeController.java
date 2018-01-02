@@ -61,7 +61,7 @@ public class XTCDTreeController implements BaseTreeController {
 	}
 
 	private List<VT_XT_CD> getChildrenXTCDList(VT_XT_CD cd) {
-		PageInfo pageRequest = new PageInfo(0, 999999);
+		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VT_XT_CD> xTCDList;
 		if (cd == null)
 			xTCDList = xTCDQueryService.findRootXTCD(pageRequest).getData();

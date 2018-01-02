@@ -1,7 +1,8 @@
-package cn.doublepoint.common.port.adapter.template.persistence.xt;
+package cn.doublepoint.common.port.adapter.template.persistence.xt.cd;
 
 import javax.annotation.PostConstruct;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 public class XTCDRepositoryImpl  extends BaseRepository implements XTCDRepositoryCustom {
@@ -13,7 +14,4 @@ public class XTCDRepositoryImpl  extends BaseRepository implements XTCDRepositor
         queryFactory = new JPAQueryFactory(entityManager);  
     }  
     
-    public void selectTest(){
-//    	queryFactory.select(QT_XT_CD.)
-    }
 }

@@ -2,14 +2,21 @@ package cn.doublepoint.common.application.template.xt;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.core.types.Predicate;
+
+import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
+import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDRepository;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.domain.model.XTCDConstant;
-import cn.doublepoint.commonutil.port.adapter.persistence.BaseRepositoryUtil;
+import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 
@@ -25,24 +32,12 @@ import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 @Service
 public class XTCDQueryService {
 
+	// @Resource
+	// BaseRepositoryUtil jpaUtil;
+
 	@Resource
-	BaseRepositoryUtil jpaUtil;
-	// /**
-	// * 加载系统菜单
-	// * @return 返回系统菜单
-	// */
-	// public List<VT_XT_CD> loadXTCD(){
-	// List<VT_XT_CD> rootCdList=findRootXTCD();
-	// if(rootCdList==null||rootCdList.size()<=0)
-	// return null;
-	// for(int i=0;i<rootCdList.size();i++){
-	// List<T_XT_CD>
-	// childrenList=xtcdRepository.findChildrenXTCD(rootCdList.get(i).getCdbs());
-	// rootCdList.get(i).setChildrenCDList(CommonBeanUtils.copyTo(childrenList,
-	// VT_XT_CD.class));
-	// }
-	// return rootCdList;
-	// }
+	XTCDRepository xtcdRepository;
+
 
 	/**
 	 * 查询最底层菜单
@@ -50,29 +45,41 @@ public class XTCDQueryService {
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VT_XT_CD> findRootXTCD(PageInfo pageInfo) {
-		QueryParamList params=new QueryParamList();
-		params.addParam(new QueryParam("cdcj",XTCDConstant.TREE_ROOT_NODE_CJ));
-		return jpaUtil.load(T_XT_CD.class, params,pageInfo).copy(VT_XT_CD.class);
+		QT_XT_CD query = QT_XT_CD.t_XT_CD;
+		Predicate predicate = query.cdcj.eq(XTCDConstant.TREE_ROOT_NODE_CJ);
+		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, predicate, pageInfo, xtcdRepository);
+		AjaxDataWrap<VT_XT_CD> ajaxDataWrap = dataWrap.copy(VT_XT_CD.class);
+		return ajaxDataWrap;
 	}
-	
+
 	/**
 	 * 查询最底层菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VT_XT_CD> findChildrenXTCD(VT_XT_CD cd, PageInfo pageInfo) {
-		QueryParamList queryParamList=new QueryParamList();
-		
-		queryParamList.addParam(new QueryParam("sjcdbs",cd.getCdbs()));
-		return jpaUtil.load(T_XT_CD.class, queryParamList,pageInfo).copy(VT_XT_CD.class);
+		QueryParamList queryParamList = new QueryParamList();
+		queryParamList.addParam(new QueryParam("sjcdbs", cd.getCdbs()));
+		QT_XT_CD query = QT_XT_CD.t_XT_CD;
+		Predicate predicate = query.sjcdbs.eq(cd.getCdbs());
+		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, predicate, pageInfo, xtcdRepository);
+		return dataWrap.copy(VT_XT_CD.class);
 	}
+
 	/**
 	 * 查询所有菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VT_XT_CD> findAllXTCD(PageInfo pageInfo) {
-		AjaxDataWrap<T_XT_CD> ajaxDataWrap=jpaUtil.load(T_XT_CD.class, pageInfo);
+		AjaxDataWrap<T_XT_CD> ajaxDataWrap = findAll(T_XT_CD.class, null, pageInfo, xtcdRepository);
 		return ajaxDataWrap.copy(VT_XT_CD.class);
+	}
+
+	private <T extends BaseEntity> AjaxDataWrap<T> findAll(Class<T> clazz, Predicate predicate, PageInfo pageInfo,
+			 QueryDslPredicateExecutor<T> repository) {
+		Page<T> page = repository.findAll(predicate, CommonBeanUtils.copyPageInfoToPageable(pageInfo));
+		AjaxDataWrap<T> ajaxDataWrap = CommonBeanUtils.copyPageToAjaxDataWrap(page, clazz);
+		return ajaxDataWrap;
 	}
 }

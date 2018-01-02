@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.jpa.version}</version> 
+			<version>${spring.data.jpa.version}</version>
 		</dependency>
 
 		<dependency>
@@ -45,19 +45,19 @@
 
 
 		<!-- 本地项目 -->
-<!-- 		<dependency>
-			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-datajpa</artifactId>
-			<version>${cn.doublepoint.base.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>cn.doublepoint.base</groupId> <artifactId>base-datajpa</artifactId> 
+			<version>${cn.doublepoint.base.version}</version> </dependency> -->
+
+		<!-- <dependency> <groupId>cn.doublepoint.base</groupId> <artifactId>base-jdbc</artifactId> 
+			<version>${cn.doublepoint.base.version}</version> </dependency> -->
 
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-jdbc</artifactId>
+			<artifactId>base-common-util</artifactId>
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 
- 		<dependency>
+		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
 			<version>${com.querydsl.version}</version>
@@ -66,7 +66,7 @@
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
 			<version>${com.querydsl.version}</version>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 	</dependencies>
 

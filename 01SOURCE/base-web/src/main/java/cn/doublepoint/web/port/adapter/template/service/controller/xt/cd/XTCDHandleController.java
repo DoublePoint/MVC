@@ -72,7 +72,7 @@ public class XTCDHandleController implements BaseHandleController {
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
 	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
-		PageInfo pageRequest=new PageInfo(0, 100);
+		PageInfo pageRequest=new PageInfo(1, 100);
 		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
 			ajaxDataWrap= xTCDQueryService.findAllXTCD(pageRequest);

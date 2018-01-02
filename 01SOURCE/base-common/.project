@@ -3,7 +3,7 @@
 	<name>base-common</name>
 	<comment></comment>
 	<projects>
-		<project>base-jdbc</project>
+		<project>base-common-util</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

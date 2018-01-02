@@ -278,6 +278,7 @@ var DoublePoint = {};// 全局对象
 			this.totalElementCount = 0;
 			this.totalPageCount = 1;
 			this.pageSize = 100;
+			this.sort = null;
 			this.parse = function(jsonObjectPageInfo) {
 				if(jsonObjectPageInfo==null) return;
 				this.currentPageNum = jsonObjectPageInfo.currentPageNum;
@@ -285,6 +286,7 @@ var DoublePoint = {};// 全局对象
 				this.totalElementCount = jsonObjectPageInfo.totalElementCount;
 				this.totalPageCount = jsonObjectPageInfo.totalPageCount;
 				this.pageSize = jsonObjectPageInfo.pageSize;
+				this.sort = jsonObjectPageInfo.sort;
 			};
 			this.getCurrentPageNum = function() {
 				return this.currentPageNum;

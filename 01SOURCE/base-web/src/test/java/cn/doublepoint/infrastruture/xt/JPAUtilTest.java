@@ -25,14 +25,14 @@ import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
-import cn.doublepoint.jdbc.util.JDBCUtil;
+//import cn.doublepoint.jdbc.util.JDBCUtil;
 
 public class JPAUtilTest extends RepositoryTest {
 
-	@Resource
-	JDBCUtil jpaUtil;
+	/*@Resource
+	JDBCUtil jpaUtil;*/
 
-	@Test
+	/*@Test
 	public void testquery() throws Exception {
 		String insertSql = "insert into XT_CD (cdcj, cdlj, cdmc, cdpx, cjsj, gxsj, sjcdbs, cdbs) values (?, ?, ?, ?, ?, ?, ?, ?)";
 		List<VT_XT_CD> list = jpaUtil.executeQuery("select * from xt_cd limit 100,100", VT_XT_CD.class);
@@ -52,7 +52,7 @@ public class JPAUtilTest extends RepositoryTest {
 			t_XT_CD.setCdmc("------");
 			return t_XT_CD;
 		}).collect(toList()));
-	}
+	}*/
 	
 	@Test
 	public void testQueryList(){
@@ -67,7 +67,7 @@ public class JPAUtilTest extends RepositoryTest {
 		pageInfo.setCurrentPageNum(1);
 		pageInfo.setPageSize(100);
 		
-		AjaxDataWrap<T_XT_CD> list2=jpaUtil.load(T_XT_CD.class, list, pageInfo);
+//		AjaxDataWrap<T_XT_CD> list2=jpaUtil.load(T_XT_CD.class, list, pageInfo);
 //		System.out.println(list2.size());
 	}
 	

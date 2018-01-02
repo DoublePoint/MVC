@@ -18,7 +18,7 @@ import org.springframework.beans.BeanUtils;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
-public class VT_XT_CD extends BaseEntity{
+public class VT_XT_CD extends BaseEntity {
 
 	private String cdbs; // 菜单标识
 
@@ -69,15 +69,17 @@ public class VT_XT_CD extends BaseEntity{
 	public void setCdpx(Integer cdpx) {
 		this.cdpx = cdpx;
 	}
-	private String cdlj; //菜单链接                                                
-    
-	public String getCdlj() {                                            
-		return cdlj;                                                     
-	}                                                                
-                                                                  
-	public void setCdlj(String cdlj) {                                     
-		this.cdlj = cdlj;                                                  
-	}       
+
+	private String cdlj; // 菜单链接
+
+	public String getCdlj() {
+		return cdlj;
+	}
+
+	public void setCdlj(String cdlj) {
+		this.cdlj = cdlj;
+	}
+
 	private Date gxsj; // 更新时间
 
 	public Date getGxsj() {
@@ -111,10 +113,12 @@ public class VT_XT_CD extends BaseEntity{
 	public void setChildrenCDList(List<VT_XT_CD> childrenCDList) {
 		this.childrenCDList = childrenCDList;
 	}
+
 	public VT_XT_CD(T_XT_CD cd) {
 		super();
 		BeanUtils.copyProperties(cd, this);
 	}
+
 	private String zcdmc; // 菜单名称
 
 	public String getZcdmc() {

@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/generated-sources/java"/>
-        <dependent-module archiveName="base-jdbc.jar" deploy-path="/" handle="module:/resource/base-jdbc/base-jdbc">
+        <dependent-module archiveName="base-common-util.jar" deploy-path="/" handle="module:/resource/base-common-util/base-common-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

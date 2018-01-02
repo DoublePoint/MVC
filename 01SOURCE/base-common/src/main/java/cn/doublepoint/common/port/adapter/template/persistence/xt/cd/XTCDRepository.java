@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.common.port.adapter.template.persistence.xt;
+package cn.doublepoint.common.port.adapter.template.persistence.xt.cd;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;

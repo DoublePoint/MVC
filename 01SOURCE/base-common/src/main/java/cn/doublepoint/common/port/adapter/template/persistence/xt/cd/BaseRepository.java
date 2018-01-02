@@ -7,18 +7,18 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.common.port.adapter.template.persistence.xt;
+package cn.doublepoint.common.port.adapter.template.persistence.xt.cd;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public class BaseRepository {
 
-//    @PersistenceContext(unitName = "TestJPA")
+//	@PersistenceContext(unitName="doublepoint")
+	@PersistenceContext
     protected EntityManager entityManager;
-
-
 }
 

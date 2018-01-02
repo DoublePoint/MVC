@@ -8,13 +8,10 @@
         <dependent-module archiveName="base-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-common/base-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="base-jdbc-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-jdbc/base-jdbc">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="base-common-util-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/base-common-util/base-common-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/base-web/target/classes"/>
-        <property name="context-root" value="baseweb"/>
+        <property name="context-root" value="base-web"/>
     </wb-module>
 </project-modules>
