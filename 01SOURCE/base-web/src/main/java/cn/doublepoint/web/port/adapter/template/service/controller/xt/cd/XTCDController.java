@@ -8,15 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 
 @Controller
 @RequestMapping("/template/xt")
 public class XTCDController implements BaseRequestController{
-
-	@Resource
-	XTCDRepository xTCDRepository;
 
 	@Autowired
 	XTCDQueryService xTCDQueryService;

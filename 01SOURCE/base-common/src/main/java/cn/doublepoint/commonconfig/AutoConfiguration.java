@@ -29,9 +29,11 @@ import cn.doublepoint.jdbc.util.JDBCUtil;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "cn.doublepoint.common", "cn.doublepoint.base.jdbc" })
-@EnableJpaRepositories(basePackages = {
-		"cn.doublepoint.common.port.adapter.template.persistence" }, repositoryImplementationPostfix = "Impl")
+//@ComponentScan(basePackages = { "cn.doublepoint.common", "cn.doublepoint.base.jdbc" })
+@ComponentScan("cn.doublepoint")
+/*@EnableJpaRepositories(basePackages = {
+		"cn.doublepoint.common.port.adapter.template.persistence" }, repositoryImplementationPostfix = "Impl")*/
+@EnableJpaRepositories("cn.doublepoint")
 public class AutoConfiguration {
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";

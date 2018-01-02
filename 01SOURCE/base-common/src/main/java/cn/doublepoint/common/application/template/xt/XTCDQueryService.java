@@ -2,14 +2,11 @@ package cn.doublepoint.common.application.template.xt;
 
 import javax.annotation.Resource;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.domain.model.XTCDConstant;
 import cn.doublepoint.commonutil.port.adapter.persistence.BaseRepositoryUtil;
@@ -65,6 +62,7 @@ public class XTCDQueryService {
 	 */
 	public AjaxDataWrap<VT_XT_CD> findChildrenXTCD(VT_XT_CD cd, PageInfo pageInfo) {
 		QueryParamList queryParamList=new QueryParamList();
+		
 		queryParamList.addParam(new QueryParam("sjcdbs",cd.getCdbs()));
 		return jpaUtil.load(T_XT_CD.class, queryParamList,pageInfo).copy(VT_XT_CD.class);
 	}

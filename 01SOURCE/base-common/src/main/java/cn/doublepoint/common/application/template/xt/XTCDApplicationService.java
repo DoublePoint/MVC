@@ -9,22 +9,21 @@
 */
 package cn.doublepoint.common.application.template.xt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.types.Predicate;
 
-import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.common.domain.model.query.QT_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.commonutil.domain.model.SnowflakeIdWorker;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.XTCDConstant;
 import cn.doublepoint.commonutil.port.adapter.persistence.BaseRepositoryUtil;
-import cn.doublepoint.jdbc.util.JDBCUtil;
 
 @Service("xtcdApplicationService")
 public class XTCDApplicationService {

@@ -13,15 +13,12 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.BeanUtils;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
-public class VT_XT_CD extends BaseEntity implements I_VT_XT_CD{
+public class VT_XT_CD extends BaseEntity{
 
 	private String cdbs; // 菜单标识
 

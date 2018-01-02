@@ -9,14 +9,11 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.xt.cd;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +26,6 @@ import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
@@ -37,8 +33,6 @@ import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleContro
 @Controller
 @RequestMapping("/template/xt/cd")
 public class XTCDHandleController implements BaseHandleController {
-	@Resource
-	XTCDRepository xTCDRepository;
 
 	@Autowired
 	XTCDQueryService xTCDQueryService;

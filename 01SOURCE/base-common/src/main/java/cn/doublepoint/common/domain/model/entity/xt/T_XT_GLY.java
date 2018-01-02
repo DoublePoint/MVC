@@ -21,7 +21,7 @@ import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
     
 @Entity                                                           
 @Table(name="XT_GLY")                                                   
-public class T_XT_GLY  extends BaseEntity{                                              
+public class T_XT_GLY  extends BaseEntity{                                           
 	/**                                                                  
 	 *                                                                    
 	 */                                                                  
