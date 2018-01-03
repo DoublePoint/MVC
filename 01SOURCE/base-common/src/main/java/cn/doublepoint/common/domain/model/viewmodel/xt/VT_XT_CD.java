@@ -9,7 +9,6 @@
 */
 package cn.doublepoint.common.domain.model.viewmodel.xt;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class VT_XT_CD extends BaseEntity {
 	public void setCdlj(String cdlj) {
 		this.cdlj = cdlj;
 	}
-
+	
 	private Date gxsj; // 更新时间
 
 	public Date getGxsj() {
@@ -90,13 +89,13 @@ public class VT_XT_CD extends BaseEntity {
 		this.gxsj = gxsj;
 	}
 
-	private Timestamp cjsj; // 创建时间
+	private Date cjsj; // 创建时间
 
-	public Timestamp getCjsj() {
+	public Date getCjsj() {
 		return cjsj;
 	}
 
-	public void setCjsj(Timestamp cjsj) {
+	public void setCjsj(Date cjsj) {
 		this.cjsj = cjsj;
 	}
 

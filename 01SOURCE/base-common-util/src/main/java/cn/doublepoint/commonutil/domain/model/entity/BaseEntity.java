@@ -22,13 +22,13 @@ import cn.doublepoint.commonutil.domain.model.StringUtil;
 
 public class BaseEntity extends BaseModel {
 
-	private List<Field> realFieldList;
+	/*private List<Field> realFieldList;
 
-	/**
+	*//**
 	 * 获取批量更新sql
 	 * 
 	 * @return
-	 */
+	 *//*
 	@Override
 	public String getSelectSql() {
 		realFieldList = new ArrayList<Field>();
@@ -54,11 +54,11 @@ public class BaseEntity extends BaseModel {
 		return sb.toString();
 	}
 
-	/**
+	*//**
 	 * 获取批量更新sql
 	 * 
 	 * @return
-	 */
+	 *//*
 	@Override
 	public String getUpdateSql() {
 		realFieldList = new ArrayList<Field>();
@@ -98,11 +98,11 @@ public class BaseEntity extends BaseModel {
 		return sb.toString();
 	}
 
-	/**
+	*//**
 	 * 获取批量插入Sql
 	 * 
 	 * @return
-	 */
+	 *//*
 	public String getInsertSql() {
 		realFieldList = new ArrayList<Field>();
 		final StringBuilder sb = new StringBuilder("INSERT INTO  ");
@@ -133,12 +133,12 @@ public class BaseEntity extends BaseModel {
 		return sb.toString();
 	}
 
-	/**
+	*//**
 	 * 获取参数
 	 * 
 	 * @param queryModelList
 	 * @return
-	 */
+	 *//*
 	public <T> List<Object[]> getQueryParamList(List<T> queryModelList) {
 		List<Object[]> queryParamsList = queryModelList.stream().map(queryModel -> {
 			return realFieldList.stream().map(fieldItem -> {
@@ -165,5 +165,5 @@ public class BaseEntity extends BaseModel {
 	private Field[] getAllField() {
 		Field[] allFields = this.getClass().getDeclaredFields();
 		return allFields;
-	}
+	}*/
 }

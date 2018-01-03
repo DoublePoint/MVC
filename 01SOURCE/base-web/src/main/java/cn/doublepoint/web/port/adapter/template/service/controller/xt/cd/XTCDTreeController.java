@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
+import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
 @Controller
@@ -60,13 +63,35 @@ public class XTCDTreeController implements BaseTreeController {
 		return returnXTCDList;
 	}
 
+//	@RequestMapping("cd-children-tree")
+//	@ResponseBody
+//	private AjaxDataWrap<VT_XT_CD> getChildrenXTCD(VT_XT_CD cd) {
+//		List<VT_XT_CD> list=getChildrenXTCDList(cd);
+//		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<>();
+//		ajaxDataWrap.setData(list);
+//		PageInfo pageRequest = new PageInfo(1, 999999);
+//		List<VT_XT_CD> xTCDList;
+//		if (cd == null||StringUtil.isNullOrEmpty(cd.getCdbs()))
+//			xTCDList = xTCDQueryService.findRootXTCD(pageRequest).getDataList();
+//		else
+//			xTCDList = xTCDQueryService.findChildrenXTCD(cd, pageRequest).getDataList();
+//		if (xTCDList == null) {
+//			return null;
+//		} else {
+//			for (int i = 0; i < xTCDList.size(); i++) {
+//				xTCDList.get(i).setChildrenCDList(getChildrenXTCDList(xTCDList.get(i)));
+//			}
+//		}
+//		return xTCDList;
+//	}
+	
 	private List<VT_XT_CD> getChildrenXTCDList(VT_XT_CD cd) {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VT_XT_CD> xTCDList;
-		if (cd == null)
-			xTCDList = xTCDQueryService.findRootXTCD(pageRequest).getData();
+		if (cd == null||StringUtil.isNullOrEmpty(cd.getCdbs()))
+			xTCDList = xTCDQueryService.findRootXTCD(pageRequest).getDataList();
 		else
-			xTCDList = xTCDQueryService.findChildrenXTCD(cd, pageRequest).getData();
+			xTCDList = xTCDQueryService.findChildrenXTCD(cd, pageRequest).getDataList();
 		if (xTCDList == null) {
 			return null;
 		} else {

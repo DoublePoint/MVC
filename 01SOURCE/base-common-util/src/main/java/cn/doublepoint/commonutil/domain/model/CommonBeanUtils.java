@@ -111,7 +111,7 @@ public class CommonBeanUtils extends BeanUtils {
 			pageInfo.setSort(page.getSort());
 		}
 		List<E> resList = copyTo(page.getContent(), cla);
-		ajaxDataWrap.setData(resList);
+		ajaxDataWrap.setDataList(resList);
 		ajaxDataWrap.setPageInfo(pageInfo);
 		return ajaxDataWrap;
 	}
@@ -126,7 +126,7 @@ public class CommonBeanUtils extends BeanUtils {
 		pageInfo.setPageSize(page.getSize());
 		pageInfo.setSort(page.getSort());
 		AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<>();
-		ajaxDataWrap.setData(list);
+		ajaxDataWrap.setDataList(list);
 		ajaxDataWrap.setPageInfo(pageInfo);
 		return ajaxDataWrap;
 	}

@@ -114,8 +114,8 @@ function AjaxTree(domId) {
 		this.setting.callback.onClick=function(event, treeId, treeNode){
 			$._Eval(funcitonname,[event, treeId, treeNode]);
 			return false;
-//			$._Eval(funcitonname,event, treeId, treeNode);
 		};
 	}
+	
 	return this;
 }

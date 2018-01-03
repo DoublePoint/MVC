@@ -9,6 +9,7 @@
 */
 package cn.doublepoint.common.application.template.xt;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,7 +53,7 @@ public class XTCDApplicationService {
 	
 	public boolean createXTCD(T_XT_CD t_XT_CD){
 		try {
-			if(StringUtil.isNullOrEmpty(t_XT_CD.getCdbs())){
+			if(StringUtil.isNullOrEmpty(t_XT_CD.getSjcdbs())){
 				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
@@ -60,6 +61,7 @@ public class XTCDApplicationService {
 				t_XT_CD.setCdcj(parentCd.getCdcj()+1);
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
+			t_XT_CD.setCjsj(new Date());
 			xtcdRepository.save(t_XT_CD);
 		} catch (Exception e) {
 			return false;

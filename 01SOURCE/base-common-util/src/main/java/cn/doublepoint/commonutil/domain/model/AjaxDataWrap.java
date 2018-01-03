@@ -20,7 +20,7 @@ public class AjaxDataWrap<T> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int code;
 	private String msg;
-	private List<T> data;
+	private List<T> dataList;
 	private PageInfo pageInfo;
 	
 	public int getCode() {
@@ -35,13 +35,13 @@ public class AjaxDataWrap<T> implements Serializable{
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public List<T> getData() {
-		return data;
-	}
-	public void setData(List<T> data) {
-		this.data = data;
-	}
 	
+	public List<T> getDataList() {
+		return dataList;
+	}
+	public void setDataList(List<T> dataList) {
+		this.dataList = dataList;
+	}
 	public PageInfo getPageInfo() {
 		return pageInfo;
 	}
@@ -56,7 +56,7 @@ public class AjaxDataWrap<T> implements Serializable{
 	public <R> AjaxDataWrap<R> copy(Class<R> targetClass){
 		AjaxDataWrap<R> ajaxDataWrap=new AjaxDataWrap<>();
 		ajaxDataWrap.setPageInfo(this.pageInfo);
-		ajaxDataWrap.setData(CommonBeanUtils.copyTo(this.data, targetClass));
+		ajaxDataWrap.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));
 		return ajaxDataWrap;
 	}
 }

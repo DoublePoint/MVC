@@ -16,7 +16,7 @@ public class PageInfo {
 	private int currentPageCount=0;
 	private long totalElementCount=0;
 	private int totalPageCount=1;
-	private int pageSize=100;
+	private int pageSize=20;
 	private Sort sort;
 	public int getCurrentPageNum() {
 		return currentPageNum;
@@ -60,7 +60,7 @@ public class PageInfo {
 		currentPageCount=0;
 		totalElementCount=0;
 		totalPageCount=1;
-		pageSize=100;
+		pageSize=20;
 	}
 	public PageInfo(int currentPageNum, int pageSize) {
 		super();

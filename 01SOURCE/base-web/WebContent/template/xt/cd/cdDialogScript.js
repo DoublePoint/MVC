@@ -1,9 +1,10 @@
 function init(response){
-	var treeNode=response.getData("clickNode");
+	var treeNode=response.getDataList("clickNode");
 	var cdbs=treeNode.cdbs;
 	var cdmc=treeNode.cdmc;
 	
 	ajaxform.setFieldValue("sjcdbs",cdbs);
+	inpbtn_sjcdbs.setData(cdbs,cdmc);
 }
 
 // 监听提交

@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._AjaxDataGridRow, {
-	props : [ 'field', 'title', 'width', 'sort', 'fixed','onclick' ],
-	template : '<th type="hidden" :id="baseId+guid" :field="field" :width="width" :sort="sort" :fixed="fixed"/></th>',
+	props : [ 'field', 'title', 'width', 'sort', 'fixed','onclick','template' ],
+	template : '<th type="hidden" :id="baseId+guid" :field="field" :width="width" :sort="sort" :fixed="fixed" :template="template"/></th>',
 	data : function() {
 		return {
 			guid : $._GenerateUUID(),
@@ -23,6 +23,11 @@ Vue.component(_ConstantComponentMap._AjaxDataGridRow, {
 				this.fixed,
 				this.onclick
 			);
+			if(this.template!=null&&this.template=="datetime")
+				_col.setTemplet(function(d){
+					var datetime=d.cjsj;
+					return "<span>"+$._FormatToDate(datetime)+"</span>"}
+				);
 			var _AjaxDatagrid=$._GetFromLayuiObjectHashMap(_ajaxDataGridId);
 			_AjaxDatagrid.addCol(_col);
 		}

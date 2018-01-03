@@ -5,13 +5,15 @@ Vue.component(_ConstantComponentMap._FormInputButton, {
 	'<div class="layui-form-item">'+
 		'<label class="layui-form-label">{{title}}</label>'+
 		'<div class="layui-input-block">'+
-			'<input :id="id+guid" type="text" :field="field" :name="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:45px;">'+
+			'<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:45px;"/>'+
+			'<input :id="id+guid+hidden" type="hidden" value="" :name="field" />'+
 			'<a href="#" class="layui-btn inputbutton">...</a>'+
 		'</div>'+
 	'</div>',
 
 	data : function() {
 		return {
+			hidden:"hidden",
 			guid : $._GenerateUUID()
 		}
 	},
@@ -70,9 +72,12 @@ function FormInputbutton(domId) {
 	this.type = "text";// 文本框的显示格式,取值为text和password，默认为text
 	this.errmsg = "表达式有误";
 	this.data="";
-	this.setData = function(aData) {
-		this.data=aData;
+	this.key="";
+	this.setData = function(aKey,aValue) {
+		this.key=aKey;
+		this.data=aValue;
 		$("#"+this.id).val(this.data);
+		$("#"+this.id+"hidden").val(this.key);
 	};
 	this.setReadonly= function(aReadonly){
 		this.readonly=aReadonly;

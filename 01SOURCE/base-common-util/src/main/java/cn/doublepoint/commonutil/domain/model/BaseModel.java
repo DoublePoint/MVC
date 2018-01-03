@@ -9,10 +9,8 @@
 */
 package cn.doublepoint.commonutil.domain.model;
 
-import java.util.List;
-
 public class BaseModel {
-	public String getUpdateSql() {
+	/*public String getUpdateSql() {
 		return null;
 	}
 	public String getInsertSql() {
@@ -23,5 +21,5 @@ public class BaseModel {
 	}
 	public <T> List<Object[]> getQueryParamList(List<T> queryModelList) {
 		return null;
-	}
+	}*/
 }

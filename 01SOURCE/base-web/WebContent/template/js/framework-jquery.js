@@ -71,14 +71,14 @@ var DoublePoint = {};// 全局对象
 		},
 		_SetLayuiTableData : function(ajaxgrid) {
 			var id = ajaxgrid.id;
-			var ajaxDataWrap = ajaxgrid.data;
-			// var data=ajaxDataWrap.getData();
+			var ajaxDataWrap = ajaxgrid.datawrap;
+			// var data=ajaxDataWrap.getDataList();
 			var datasource = ajaxgrid.datasource;
 			var cols = ajaxgrid.cols;
 			var height = ajaxgrid.height;
 			var ss = $table.render({
 				elem : '#' + id + '',
-				data : ajaxDataWrap.data,
+				data : $._Clone(ajaxDataWrap.dataList),
 				height : height,
 				cols : cols,
 				// skin : 'row', // 表格风格
@@ -246,18 +246,12 @@ var DoublePoint = {};// 全局对象
 			// this.name = name;
 			this.code="";
 			this.msg="";
-			this.data=[];
+			this.dataList=[];
 			this.pageInfo = new $._PageInfo();
 			this.parse = function(jsonObjectDataWrap) {
 				if(jsonObjectDataWrap==null) return;
-				this.data = jsonObjectDataWrap.data;
+				this.dataList = jsonObjectDataWrap.dataList;
 				this.pageInfo.parse(jsonObjectDataWrap.pageInfo);
-			};
-			this.setData = function(data) {
-				this.data = data;
-			};
-			this.getData = function() {
-				return this.data;
 			};
 			this.setDataList = function(dataList) {
 				this.dataList = dataList;
@@ -269,9 +263,42 @@ var DoublePoint = {};// 全局对象
 			this.getPageInfo = function() {
 				return this.pageInfo;
 			}
+			this.clearPageInfo = function() {
+				this.pageInfo=null;
+			}
 			return this;
 		},
-
+		_Clone:function clone(obj) {
+			  // Handle the 3 simple types, and null or undefined
+			  if (null == obj || "object" != typeof obj) return obj;
+			 
+			  // Handle Date
+			  if (obj instanceof Date) {
+			    var copy = new Date();
+			    copy.setTime(obj.getTime());
+			    return copy;
+			  }
+			 
+			  // Handle Array
+			  if (obj instanceof Array) {
+			    var copy = [];
+			    for (var i = 0, len = obj.length; i < len; ++i) {
+			      copy[i] = clone(obj[i]);
+			    }
+			    return copy;
+			  }
+			 
+			  // Handle Object
+			  if (obj instanceof Object) {
+			    var copy = {};
+			    for (var attr in obj) {
+			      if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+			    }
+			    return copy;
+			  }
+			 
+			  throw new Error("Unable to copy obj! Its type isn't supported.");
+			},
 		_PageInfo : function() {
 			this.currentPageNum = 1;
 			this.currentPageCount = 0;
@@ -318,6 +345,14 @@ var DoublePoint = {};// 全局对象
 			this.setPageSize = function(aPageSize) {
 				this.pageSize = aPageSize;
 			};
+			this.clear=function(){
+				this.currentPageNum = 1;
+				this.currentPageCount = 0;
+				this.totalElementCount = 0;
+				this.totalPageCount = 1;
+				this.pageSize = 100;
+				this.sort = null;
+			}
 			return this;
 		},
 		_AjaxPage : function() {
@@ -327,12 +362,44 @@ var DoublePoint = {};// 全局对象
 			this.CancelFunction = null;
 			this.setYesFunctionName = function(funcName) {
 				this._YesFunctionName = funcName;
-			}
+			};
 			this.setCancelFunctionName = function(cancName) {
 				this._CancelFunctionName = cancName;
 			}
+		},
+		_ParseTreeNodeToCd:function(treeNode){
+			var arr=new Array();
+			var obj={};
+			obj.cdbs=treeNode.cdbs;
+			obj.cdcj=treeNode.cdcj;
+			obj.cdlj=treeNode.cdlj;
+			obj.cdmc=treeNode.cdmc;
+			obj.cdpx=treeNode.cdpx;
+			obj.cjsj=treeNode.cjsj;
+			arr.push(obj);
+			return arr;
+		},
+		_FormatToDate:function(datetime){
+			return null;
+			var year=datetime.year;
+			var monthValue=datetime.monthValue;
+			if(monthValue<=9)
+				monthValue="0"+monthValue;
+			var dayOfMonth=datetime.dayOfMonth;
+			if(dayOfMonth<=9)
+				dayOfMonth="0"+dayOfMonth;
+			var hour=datetime.hour;
+			if(hour<=9&&hour!="00")
+				hour="0"+hour;
+			var minute=datetime.minute;
+			if(minute<=9&&minute!="00")
+				minute="0"+minute;
+			var second=datetime.second;
+			if(second<=9&&second!="00")
+				second="0"+second;
+			return "<span>"+year+"-"+monthValue+"-"+dayOfMonth+" "+hour+":"+minute+":"+second+"</span>"
 		}
-
+		
 	});
 
 })(jQuery);

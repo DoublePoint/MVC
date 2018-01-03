@@ -44,7 +44,7 @@ public class JDBCUtil implements BaseRepositoryUtil {
 
 	@Override
 	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params) {
-		return load(clazz, params, null, null).getData();
+		return load(clazz, params, null, null).getDataList();
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class JDBCUtil implements BaseRepositoryUtil {
 
 	@Override
 	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams) {
-		return load(clazz, params, sortParams, null).getData();
+		return load(clazz, params, sortParams, null).getDataList();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class JDBCUtil implements BaseRepositoryUtil {
 	 * @return
 	 */
 	public <T extends BaseModel> List<T> loadAll(Class<T> clazz) {
-		return load(clazz, null, null, null).getData();
+		return load(clazz, null, null, null).getDataList();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class JDBCUtil implements BaseRepositoryUtil {
 				sb.append(pageInfo.getLimitSql());
 			List<T> dataList = commonTemplate.query(sb.toString(), paramArr, new BeanPropertyRowMapper<T>(clazz));
 			AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<T>();
-			ajaxDataWrap.setData(dataList);
+			ajaxDataWrap.setDataList(dataList);
 			ajaxDataWrap.setPageInfo(pageInfo);
 			return ajaxDataWrap;
 		} catch (Exception e) {
