@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 
 @Controller
-public class MainPageController implements BaseRequestController {
+public class MainPageController extends BaseRequestController {
 
 	//索引页
 	@RequestMapping(value="/index")

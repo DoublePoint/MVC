@@ -9,8 +9,10 @@
 */ 
 package cn.doublepoint.commonutil.port.adapter.controller.handle;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
-public interface BaseHandleController extends BaseController{
-
+public class BaseHandleController implements BaseController{
+	
 }

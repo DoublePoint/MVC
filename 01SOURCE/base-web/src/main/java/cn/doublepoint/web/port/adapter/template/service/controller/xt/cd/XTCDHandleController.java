@@ -32,7 +32,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleContro
 
 @Controller
 @RequestMapping("/template/xt/cd")
-public class XTCDHandleController implements BaseHandleController {
+public class XTCDHandleController extends BaseHandleController {
 
 	@Autowired
 	XTCDQueryService xTCDQueryService;

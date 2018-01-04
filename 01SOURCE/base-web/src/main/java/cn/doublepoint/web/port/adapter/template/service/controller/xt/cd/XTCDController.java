@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
@@ -12,7 +13,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestCont
 
 @Controller
 @RequestMapping("/template/xt")
-public class XTCDController implements BaseRequestController{
+public class XTCDController extends BaseRequestController{
 
 	@Autowired
 	XTCDQueryService xTCDQueryService;
@@ -24,6 +25,7 @@ public class XTCDController implements BaseRequestController{
 	@RequestMapping("/cd")
 	public String cdSave() {
 		return "/xt/cd/cd";
+		
 	}
 
 	//菜单管理页面
@@ -38,9 +40,9 @@ public class XTCDController implements BaseRequestController{
 		return "/xt/cd/cdDialog";
 	}
 	
-//	@RequestMapping("/cdTreeController")
-//	public String cdTree() {
-//		return "/xt/cd/cdtree";
-//	}
+	@RequestMapping("/cd/tree")
+	public String cdTree() {
+		return "/xt/cd/cdtree";
+	}
 	
 }

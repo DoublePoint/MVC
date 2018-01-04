@@ -125,6 +125,19 @@ var DoublePoint = {};// 全局对象
 					$._Eval(_Client_Success_Funtion);
 				}
 			}
+			var width = obj.width;
+			var height = obj.height;
+			if (width == null)
+				width = "100px";
+			else if ((""+width).indexOf("px") == -1) {
+				width = obj.width + "px";
+			}
+			if (height == null)
+				height = "100px";
+			else if ((""+height).indexOf("px") == -1) {
+				height = obj.height + "px";
+			}
+			obj.area = [ width, height ];
 
 			parent.$layer.open(obj);
 		},
@@ -151,13 +164,17 @@ var DoublePoint = {};// 全局对象
 			parent.$layer.msg(msg);
 		},
 		_Confirm : function(msg, yes, cancel) {
+			var yesF = yes;
+			var cancelF = cancel;
 			parent.$layer.confirm(msg, {
 				btn : [ '确定', '取消' ]
 			// 按钮
 			}, function() {
-				yes.apply();
+				if (yesF != null)
+					yesF.apply();
 			}, function() {
-				cancel.apply();
+				if (cancelF != null)
+					cancelF.apply();
 			});
 		},
 		_ShakeTips : function(msg) {
@@ -244,12 +261,13 @@ var DoublePoint = {};// 全局对象
 
 		_AjaxDataWrap : function(name) {
 			// this.name = name;
-			this.code="";
-			this.msg="";
-			this.dataList=[];
+			this.code = "";
+			this.msg = "";
+			this.dataList = [];
 			this.pageInfo = new $._PageInfo();
 			this.parse = function(jsonObjectDataWrap) {
-				if(jsonObjectDataWrap==null) return;
+				if (jsonObjectDataWrap == null)
+					return;
 				this.dataList = jsonObjectDataWrap.dataList;
 				this.pageInfo.parse(jsonObjectDataWrap.pageInfo);
 			};
@@ -259,46 +277,48 @@ var DoublePoint = {};// 全局对象
 			this.getDataList = function() {
 				return this.dataList;
 			};
-			
+
 			this.getPageInfo = function() {
 				return this.pageInfo;
 			}
 			this.clearPageInfo = function() {
-				this.pageInfo=null;
+				this.pageInfo = null;
 			}
 			return this;
 		},
-		_Clone:function clone(obj) {
-			  // Handle the 3 simple types, and null or undefined
-			  if (null == obj || "object" != typeof obj) return obj;
-			 
-			  // Handle Date
-			  if (obj instanceof Date) {
-			    var copy = new Date();
-			    copy.setTime(obj.getTime());
-			    return copy;
-			  }
-			 
-			  // Handle Array
-			  if (obj instanceof Array) {
-			    var copy = [];
-			    for (var i = 0, len = obj.length; i < len; ++i) {
-			      copy[i] = clone(obj[i]);
-			    }
-			    return copy;
-			  }
-			 
-			  // Handle Object
-			  if (obj instanceof Object) {
-			    var copy = {};
-			    for (var attr in obj) {
-			      if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
-			    }
-			    return copy;
-			  }
-			 
-			  throw new Error("Unable to copy obj! Its type isn't supported.");
-			},
+		_Clone : function clone(obj) {
+			// Handle the 3 simple types, and null or undefined
+			if (null == obj || "object" != typeof obj)
+				return obj;
+
+			// Handle Date
+			if (obj instanceof Date) {
+				var copy = new Date();
+				copy.setTime(obj.getTime());
+				return copy;
+			}
+
+			// Handle Array
+			if (obj instanceof Array) {
+				var copy = [];
+				for (var i = 0, len = obj.length; i < len; ++i) {
+					copy[i] = clone(obj[i]);
+				}
+				return copy;
+			}
+
+			// Handle Object
+			if (obj instanceof Object) {
+				var copy = {};
+				for ( var attr in obj) {
+					if (obj.hasOwnProperty(attr))
+						copy[attr] = clone(obj[attr]);
+				}
+				return copy;
+			}
+
+			throw new Error("Unable to copy obj! Its type isn't supported.");
+		},
 		_PageInfo : function() {
 			this.currentPageNum = 1;
 			this.currentPageCount = 0;
@@ -307,7 +327,8 @@ var DoublePoint = {};// 全局对象
 			this.pageSize = 100;
 			this.sort = null;
 			this.parse = function(jsonObjectPageInfo) {
-				if(jsonObjectPageInfo==null) return;
+				if (jsonObjectPageInfo == null)
+					return;
 				this.currentPageNum = jsonObjectPageInfo.currentPageNum;
 				this.currentPageCount = jsonObjectPageInfo.currentPageCount;
 				this.totalElementCount = jsonObjectPageInfo.totalElementCount;
@@ -345,12 +366,12 @@ var DoublePoint = {};// 全局对象
 			this.setPageSize = function(aPageSize) {
 				this.pageSize = aPageSize;
 			};
-			this.clear=function(){
+			this.clear = function() {
 				this.currentPageNum = 1;
 				this.currentPageCount = 0;
 				this.totalElementCount = 0;
 				this.totalPageCount = 1;
-				this.pageSize = 100;
+				this.pageSize = _ConstantAjaxDataGrid._DEFAULT_PAGE_SIZE;
 				this.sort = null;
 			}
 			return this;
@@ -367,39 +388,39 @@ var DoublePoint = {};// 全局对象
 				this._CancelFunctionName = cancName;
 			}
 		},
-		_ParseTreeNodeToCd:function(treeNode){
-			var arr=new Array();
-			var obj={};
-			obj.cdbs=treeNode.cdbs;
-			obj.cdcj=treeNode.cdcj;
-			obj.cdlj=treeNode.cdlj;
-			obj.cdmc=treeNode.cdmc;
-			obj.cdpx=treeNode.cdpx;
-			obj.cjsj=treeNode.cjsj;
+		_ParseTreeNodeToCd : function(treeNode) {
+			var arr = new Array();
+			var obj = {};
+			obj.cdbs = treeNode.cdbs;
+			obj.cdcj = treeNode.cdcj;
+			obj.cdlj = treeNode.cdlj;
+			obj.cdmc = treeNode.cdmc;
+			obj.cdpx = treeNode.cdpx;
+			obj.cjsj = treeNode.cjsj;
 			arr.push(obj);
 			return arr;
 		},
-		_FormatToDate:function(datetime){
+		_FormatToDate : function(datetime) {
 			return null;
-			var year=datetime.year;
-			var monthValue=datetime.monthValue;
-			if(monthValue<=9)
-				monthValue="0"+monthValue;
-			var dayOfMonth=datetime.dayOfMonth;
-			if(dayOfMonth<=9)
-				dayOfMonth="0"+dayOfMonth;
-			var hour=datetime.hour;
-			if(hour<=9&&hour!="00")
-				hour="0"+hour;
-			var minute=datetime.minute;
-			if(minute<=9&&minute!="00")
-				minute="0"+minute;
-			var second=datetime.second;
-			if(second<=9&&second!="00")
-				second="0"+second;
-			return "<span>"+year+"-"+monthValue+"-"+dayOfMonth+" "+hour+":"+minute+":"+second+"</span>"
+			var year = datetime.year;
+			var monthValue = datetime.monthValue;
+			if (monthValue <= 9)
+				monthValue = "0" + monthValue;
+			var dayOfMonth = datetime.dayOfMonth;
+			if (dayOfMonth <= 9)
+				dayOfMonth = "0" + dayOfMonth;
+			var hour = datetime.hour;
+			if (hour <= 9 && hour != "00")
+				hour = "0" + hour;
+			var minute = datetime.minute;
+			if (minute <= 9 && minute != "00")
+				minute = "0" + minute;
+			var second = datetime.second;
+			if (second <= 9 && second != "00")
+				second = "0" + second;
+			return "<span>" + year + "-" + monthValue + "-" + dayOfMonth + " " + hour + ":" + minute + ":" + second + "</span>"
 		}
-		
+
 	});
 
 })(jQuery);
