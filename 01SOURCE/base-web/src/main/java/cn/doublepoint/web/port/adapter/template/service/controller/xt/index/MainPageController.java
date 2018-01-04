@@ -24,7 +24,6 @@ public class MainPageController extends BaseRequestController {
 	//索引页
 	@RequestMapping(value="/index")
 	public String hello(){
-		return "/xt/index/index";
+		return "/template/xt/index/index";
 	}
-
 }

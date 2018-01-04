@@ -44,7 +44,7 @@ function InputButtonClick() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/xt/cd/tree',
+		content : $$pageContextPath + '/template/xt/cd/cd-tree',
 		data : ajaxDataWrap,
 		yes : function() {
 			alert("关闭");

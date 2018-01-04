@@ -40,7 +40,7 @@ public class XTCDTreeController extends BaseTreeController {
 	@Resource
 	XTCDQueryService xTCDQueryService;
 
-	@RequestMapping("cd/tree/datalist")
+	@RequestMapping("cd/cd-tree/datalist")
 	@ResponseBody
 	public List<VT_XT_CD> getCDTree(@RequestParam(required = false) Boolean isHasRoot) {
 		List<VT_XT_CD> returnXTCDList;

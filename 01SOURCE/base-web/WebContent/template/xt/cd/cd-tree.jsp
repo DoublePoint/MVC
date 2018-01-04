@@ -26,7 +26,7 @@
 	<form>
 		<ll-filllayout> 
 			<ll-fillarea height="*" > 
-				<ll-tree id="treeDemo" datasource="/template/xt/cd/tree/datalist?isHasRoot=true" showLine="true"></ll-tree> 
+				<ll-tree id="treeDemo" datasource="/template/xt/cd/cd-tree/datalist?isHasRoot=true" showLine="true"></ll-tree> 
 			</ll-fillarea> 
 			<ll-fillarea height="45px">
 				<ll-toolbar>

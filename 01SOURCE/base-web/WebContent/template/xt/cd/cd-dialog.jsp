@@ -38,5 +38,5 @@
 		</ll-ajaxform>
 	</form>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/template/xt/cd/cdDialogScript.js"></script>
+		src="${pageContext.request.contextPath}/template/xt/cd/cd-dialogScript.js"></script>
 </body>

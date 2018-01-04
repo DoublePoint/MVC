@@ -47,7 +47,7 @@ function onClickAdd() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/xt/cd-dialog',
+		content : $$pageContextPath + '/template/xt/cd/cd-dialog',
 		data : ajaxDataWrap,
 		yes : function() {
 			retrieveAjaxDataGrid();

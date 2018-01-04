@@ -40,7 +40,7 @@
 			<div class="layui-side layui-bg-black" id="admin-side" >
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					 <ll-menu id="treeDemo" datasource="/template/xt/cd/tree/datalist?isHasRoot=false"></ll:menu>
+					 <ll-menu id="treeDemo" datasource="/template/xt/cd/cd-tree/datalist?isHasRoot=false"></ll:menu>
 				</div>
 			</div>
 
@@ -58,7 +58,7 @@
 						<div class="layui-tab-item layui-show" style="height:100%;">
 							<%-- <iframe
 							src="${pageContext.request.contextPath}/template/xt/ajaxdatagrid.jsp"></iframe> --%>
-							<iframe src="${pageContext.request.contextPath}/template/xt/cd"></iframe>
+							<iframe src="${pageContext.request.contextPath}/template/xt/cd/cd"></iframe>
 						</div>
 					</div>
 				</div>
