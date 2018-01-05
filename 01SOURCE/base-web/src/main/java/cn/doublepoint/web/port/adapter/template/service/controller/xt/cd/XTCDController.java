@@ -12,7 +12,7 @@ import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
 import cn.doublepoint.common.application.template.xt.XTCDQueryService;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 
-@Controller
+@Controller 
 @RequestMapping("")
 public class XTCDController extends BaseRequestController{
 
