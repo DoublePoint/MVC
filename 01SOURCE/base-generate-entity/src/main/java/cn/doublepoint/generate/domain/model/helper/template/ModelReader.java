@@ -163,7 +163,9 @@ public class ModelReader {
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("entityModel", entityModel);
 			File f = new File("F:/AllProject/01SOURCE/domain-model/test"+entityModel.getModelName() + ".java");
-			tpl = converString("F:/AllProject/01SOURCE/domain-model/test") + SPT + entity_tpl;
+			tpl = converString("cn.doublepoint.generate.domain.model.helper.template" + SPT + entity_tpl);
+			
+//			tpl = entity_tpl;
 			try {
 				index(tpl, f,data);
 			} catch (Exception e) {
@@ -268,6 +270,6 @@ public class ModelReader {
 	 * @return
 	 */
 	private String converString(String s) {
-		return s.replaceAll("\\.", "/");
+		return s.replaceAll("\\.", "/").replace("\\", "/");
 	}
 }
