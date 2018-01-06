@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.doublepoint.common.application.template.xt.XTCDApplicationService;
-import cn.doublepoint.common.application.template.xt.XTCDQueryService;
+import cn.doublepoint.common.application.template.xt.cd.XTCDApplicationService;
+import cn.doublepoint.common.application.template.xt.cd.XTCDQueryService;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 
 @Controller 

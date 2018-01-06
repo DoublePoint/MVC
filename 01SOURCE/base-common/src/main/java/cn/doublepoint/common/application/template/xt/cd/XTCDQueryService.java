@@ -1,4 +1,4 @@
-package cn.doublepoint.common.application.template.xt;
+package cn.doublepoint.common.application.template.xt.cd;
 
 import javax.annotation.Resource;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.querydsl.core.types.Predicate;
 
+import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
@@ -15,7 +16,6 @@ import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDReposit
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
-import cn.doublepoint.commonutil.domain.model.XTCDConstant;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
@@ -46,7 +46,7 @@ public class XTCDQueryService {
 	 */
 	public AjaxDataWrap<VT_XT_CD> findRootXTCD(PageInfo pageInfo) {
 		QT_XT_CD query = QT_XT_CD.t_XT_CD;
-		Predicate predicate = query.cdcj.eq(XTCDConstant.TREE_ROOT_NODE_CJ);
+		Predicate predicate = query.cdcj.eq(XTConstant.TREE_ROOT_NODE_CJ);
 		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, predicate, pageInfo, xtcdRepository);
 		AjaxDataWrap<VT_XT_CD> ajaxDataWrap = dataWrap.copy(VT_XT_CD.class);
 		return ajaxDataWrap;

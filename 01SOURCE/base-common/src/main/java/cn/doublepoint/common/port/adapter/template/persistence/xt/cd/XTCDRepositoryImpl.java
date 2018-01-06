@@ -7,11 +7,4 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 public class XTCDRepositoryImpl  extends BaseRepository implements XTCDRepositoryCustom {
 
-	private JPAQueryFactory queryFactory;  
-    
-    @PostConstruct  
-    public void init() {  
-        queryFactory = new JPAQueryFactory(entityManager);  
-    }  
-    
 }

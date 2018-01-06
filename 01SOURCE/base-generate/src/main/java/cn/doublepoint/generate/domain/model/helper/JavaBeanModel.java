@@ -15,13 +15,13 @@ import java.util.List;
 
 import cn.doublepoint.generate.domain.model.billing.CONSTANT;
 
-public class ModelModel {
+public class JavaBeanModel {
 
 	private String modelComment;
 	private String modelType;
 	private String modelExtend;
 	private String modelName;
-	private String modelCode;
+	private String modelClassCode;
 
 	public String getModelComment() {
 		return modelComment;
@@ -55,12 +55,12 @@ public class ModelModel {
 		this.modelName = modelName;
 	}
 
-	public String getModelCode() {
-		return modelCode;
+	public String getModelClassCode() {
+		return modelClassCode;
 	}
 
-	public void setModelCode(String modelCode) {
-		this.modelCode = modelCode;
+	public void setModelClassCode(String modelCode) {
+		this.modelClassCode = modelCode;
 	}
 
 	public List<ModelField> getFields() {
@@ -87,8 +87,6 @@ public class ModelModel {
 		sbBuffer.append("* 创   建   时   间 ：" + formatter.format(date) + "                      \r\n");
 
 		sbBuffer.append("*                                                                 \r\n");
-		// sbBuffer.append("* 类 说 明 ：
-		// "+modelName+"："+modelComment==null?"":modelComment+" \r\n");
 		sbBuffer.append("* 类   说   明 ：     " + modelName + "    \r\n");
 		sbBuffer.append("*                                                                 \r\n");
 		sbBuffer.append("* 修   改   人：          修   改   日   期：                     \r\n");
@@ -136,8 +134,8 @@ public class ModelModel {
 		sbBuffer.append("import java.sql.Timestamp;\r\n");
 		sbBuffer.append("    \r\n");
 		sbBuffer.append("@Entity                                                           \r\n");
-		sbBuffer.append("@Table(name=\"" + modelCode + "\")                                                   \r\n");
-		sbBuffer.append("public class " + "T_"+modelCode
+		sbBuffer.append("@Table(name=\"" + modelClassCode + "\")                                                   \r\n");
+		sbBuffer.append("public class " + "T_"+modelClassCode
 				+ "  extends BaseEntity{                                              \r\n");
 		sbBuffer.append("	/**                                                                  \r\n");
 		sbBuffer.append("	 *                                                                    \r\n");
@@ -167,7 +165,7 @@ public class ModelModel {
 		sbBuffer.append("import java.util.HashMap;                                  \r\n");
 		sbBuffer.append("import java.util.Map;                                  \r\n");
 
-		sbBuffer.append("public enum " + modelCode + " {                                              \r\n");
+		sbBuffer.append("public enum " + modelClassCode + " {                                              \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		// ===================================
 		for (int i = 0; i < fields.size(); i++) {
@@ -179,17 +177,17 @@ public class ModelModel {
 		if (fields.size() <= 0)
 			return sbBuffer;
 		sbBuffer.append("	private String code;\r\n");
-		sbBuffer.append("	private " + modelCode + "(String aCode){\r\n");
+		sbBuffer.append("	private " + modelClassCode + "(String aCode){\r\n");
 		sbBuffer.append("		this.code = aCode;\r\n");
 		sbBuffer.append("	}\r\n");
-		sbBuffer.append("	private static final Map<String, " + modelCode + "> stringToEnum = new HashMap<String, "
-				+ modelCode + ">();\r\n");
+		sbBuffer.append("	private static final Map<String, " + modelClassCode + "> stringToEnum = new HashMap<String, "
+				+ modelClassCode + ">();\r\n");
 		sbBuffer.append("	static {");
-		sbBuffer.append("	    for(" + modelCode + " t : values()) {\r\n");
+		sbBuffer.append("	    for(" + modelClassCode + " t : values()) {\r\n");
 		sbBuffer.append("	        stringToEnum.put(t.toString(), t);\r\n");
 		sbBuffer.append("	    }\r\n");
 		sbBuffer.append("	 }\r\n");
-		sbBuffer.append("	public static " + modelCode + " fromString(String symbol) {\r\n");
+		sbBuffer.append("	public static " + modelClassCode + " fromString(String symbol) {\r\n");
 		sbBuffer.append("	    return stringToEnum.get(symbol);\r\n");
 		sbBuffer.append("	}\r\n");
 
@@ -208,7 +206,7 @@ public class ModelModel {
 		sbBuffer.append("import javax.persistence.TemporalType;                                      \r\n");
 
 		sbBuffer.append("@Embeddable                                                           \r\n");
-		sbBuffer.append("public class " + modelCode
+		sbBuffer.append("public class " + modelClassCode
 				+ " extends BaseValueObject {                                              \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		// ===================================

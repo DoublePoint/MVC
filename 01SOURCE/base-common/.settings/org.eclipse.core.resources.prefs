@@ -3,6 +3,7 @@ encoding//src/main/java=UTF-8
 encoding//src/main/java/cn/doublepoint/common=UTF-8
 encoding//src/main/java/cn/doublepoint/common/config/AutoConfiguration.java=UTF-8
 encoding//src/main/java/cn/doublepoint/common/port/adapter/template/persistence/xt/cd/XTCDRepository.java=UTF-8
+encoding//src/main/java/cn/doublepoint/common/port/adapter/template/persistence/xt/gly/XTGLYRepository.java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/test/java=UTF-8
 encoding//target/generated-sources/java=UTF-8

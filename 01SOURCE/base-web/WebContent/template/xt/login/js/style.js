@@ -7,7 +7,11 @@ $(".qiehuan").click(function (){
 });
 
 
-$(".login-tab li").click(function () {$(this).addClass("login-on").siblings().removeClass("login-on");$(".login-style").eq($(this).index()).show().siblings().hide();$(".tishi").hide();})
+$(".login-tab li").click(function() {
+	$(this).addClass("login-on").siblings().removeClass("login-on");
+	$(".login-style").eq($(this).index()).show().siblings().hide();
+//	$(".tishi").hide();
+	})
 var wait =60;document.getElementById("btn").disabled =false;function time(o) {if (wait ==0) {o.removeAttribute("disabled");o.value ="获取动态密码";wait =60;} else {o.setAttribute("disabled",true);o.value ="重新发送(" + wait + ")";wait--;setTimeout(function () {time(o);},1000)
 }
 }

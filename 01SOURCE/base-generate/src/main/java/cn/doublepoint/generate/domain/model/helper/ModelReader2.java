@@ -47,7 +47,7 @@ public class ModelReader2 {
 	public static final String service_tpl = "service.txt";
 	public static final String service_impl_tpl = "service_impl.txt";
 	public static final String action_tpl = "action.txt";
-	public static final String entity_tpl = "entity.txt";
+	public static final String entity_tpl = "Entity.txt";
 	public static final String query_tpl = "query.txt";
 	public static final String entity_xml_tpl = "entity-sqlmap.txt";
 	public static final String sqlmap_config_tpl = "sqlmap-config.txt";
@@ -68,8 +68,8 @@ public class ModelReader2 {
 	
 	Map<String, Object> data = new HashMap<String, Object>();
 
-	public static List<ModelModel> getEntityModelList() throws IOException {
-		List<ModelModel> entityModelList = new ArrayList<ModelModel>();
+	public static List<JavaBeanModel> getEntityModelList() throws IOException {
+		List<JavaBeanModel> entityModelList = new ArrayList<JavaBeanModel>();
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -80,7 +80,7 @@ public class ModelReader2 {
 			NodeList classElementNodeList = classesElementNode.getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
 				List<ModelField> fieldList = new ArrayList<ModelField>();
-				ModelModel entityModel = new ModelModel();
+				JavaBeanModel entityModel = new JavaBeanModel();
 				Node classElementNode = classElementNodeList.item(i);
 				NodeList classChildrenList = classElementNode.getChildNodes();
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
@@ -95,7 +95,7 @@ public class ModelReader2 {
 						entityModel.setModelName(nodeValue);
 						break;
 					case "a:Code":
-						entityModel.setModelCode(nodeValue);
+						entityModel.setModelClassCode(nodeValue);
 						break;
 					case "a:Comment":
 						entityModel.setModelComment(nodeValue);
@@ -197,21 +197,21 @@ public class ModelReader2 {
 			FreeMarkerConfigurer freeMarkerConfigurer) {
 		this.conf = freeMarkerConfigurer.getConfiguration();
 	}
-	private void writeModel(List<ModelModel> entityModelList) {
-		for (ModelModel modelModel : entityModelList) {
+	private void writeModel(List<JavaBeanModel> entityModelList) {
+		for (JavaBeanModel modelModel : entityModelList) {
 			if (modelModel.getModelType() != null) {
 				File file;
 				switch (modelModel.getModelType()) {
 				case CONSTANT.CLASS_TYPE_ENTITY:
 					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/entity/" + "T_" + modelModel.getModelCode() + ".java");
+							"F:/AllProject/01SOURCE/domain-model/entity/" + "T_" + modelModel.getModelClassCode() + ".java");
 					break;
 				case CONSTANT.CLASS_TYPE_ENUM:
-					file = new File("F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getModelCode() + ".java");
+					file = new File("F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getModelClassCode() + ".java");
 					break;
 				default:
 					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getModelCode() + ".java");
+							"F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getModelClassCode() + ".java");
 					break;
 				}
 				if (!file.exists()) {

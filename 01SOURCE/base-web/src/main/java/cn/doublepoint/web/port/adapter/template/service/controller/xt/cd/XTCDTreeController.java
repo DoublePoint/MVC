@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cn.doublepoint.common.application.template.xt.XTCDQueryService;
+import cn.doublepoint.common.application.template.xt.cd.XTCDQueryService;
 import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.PageInfo;

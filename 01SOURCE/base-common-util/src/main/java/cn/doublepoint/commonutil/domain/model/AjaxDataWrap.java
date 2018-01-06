@@ -18,7 +18,7 @@ public class AjaxDataWrap<T> implements Serializable{
 	 *                                                                    
 	 */
 	private static final long serialVersionUID = 1L;
-	private int code;
+	private int code=200;
 	private String msg;
 	private List<T> dataList;
 	private PageInfo pageInfo;

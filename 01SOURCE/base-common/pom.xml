@@ -93,6 +93,9 @@
 							<goal>process</goal>
 						</goals>
 						<configuration>
+							<includes>
+								<include>cn.doublepoint.common.domain.model.entity.*</include>
+							</includes>
 							<outputDirectory>target/generated-sources/java</outputDirectory>
 							<!-- <outputDirectory>src/main/java/query</outputDirectory> -->
 							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>

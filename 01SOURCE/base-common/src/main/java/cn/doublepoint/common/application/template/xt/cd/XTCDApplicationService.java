@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.common.application.template.xt;
+package cn.doublepoint.common.application.template.xt.cd;
 
 import java.util.Date;
 import java.util.List;
@@ -16,11 +16,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDRepository;
 import cn.doublepoint.commonutil.domain.model.SnowflakeIdWorker;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
-import cn.doublepoint.commonutil.domain.model.XTCDConstant;
 
 @Service("xtcdApplicationService")
 public class XTCDApplicationService {
@@ -54,7 +54,7 @@ public class XTCDApplicationService {
 	public boolean createXTCD(T_XT_CD t_XT_CD){
 		try {
 			if(StringUtil.isNullOrEmpty(t_XT_CD.getSjcdbs())){
-				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
+				t_XT_CD.setCdcj(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
 				T_XT_CD parentCd=xtcdRepository.findOne(t_XT_CD.getSjcdbs());

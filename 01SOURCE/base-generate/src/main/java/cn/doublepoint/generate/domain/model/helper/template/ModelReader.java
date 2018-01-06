@@ -33,84 +33,168 @@ import org.w3c.dom.NodeList;
 
 import cn.doublepoint.generate.domain.model.billing.CONSTANT;
 import cn.doublepoint.generate.domain.model.helper.ModelField;
-import cn.doublepoint.generate.domain.model.helper.ModelModel;
+import cn.doublepoint.generate.domain.model.helper.JavaBeanModel;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:servlet-front.xml"})
+@ContextConfiguration(locations = { "classpath:servlet-front.xml" })
 public class ModelReader {
-	public  final String entity_p = "com.caland.core.bean";
-	public  final String query_p = "com.caland.core.query";
-	public  final String entity_xml_p = "ibatis";
-	public  final String sqlmap_config_xml = "";
+	public final String ENTITY_P = "com.caland.core.bean";
+	public final String QUERY_P = "com.caland.core.query";
+	public final String ENTITY_XML_P = "ibatis";
+	public final String SQLMAP_CONFIG_XML = "";
 
-	public  final String action_p = "com.caland.core.action";
-	public  final String dao_p = "com.caland.core.dao";
-	public  final String dao_impl_p = "com.caland.core.dao.impl";
-	public  final String service_p = "com.caland.core.service";
-	public  final String service_impl_p = "com.caland.core.service.impl";
+	public final String ACTION_P = "com.caland.core.action";
+	public final String DAO_P = "com.caland.core.dao";
+	public final String DAO_IMPL_P = "com.caland.core.dao.impl";
+	public final String SERVICE_P = "com.caland.core.service";
+	public final String SERVICE_IMPL_P = "com.caland.core.service.impl";
 
-	public  final String template_dir = "com.caland.common.template";
-	public  final String dao_tpl = "dao.txt";
-	public  final String dao_impl_tpl = "dao_impl.txt";
-	public  final String service_tpl = "service.txt";
-	public  final String service_impl_tpl = "service_impl.txt";
-	public  final String action_tpl = "action.txt";
-	public  final String entity_tpl = "entity.txt";
-	public  final String query_tpl = "query.txt";
-	public  final String entity_xml_tpl = "entity-sqlmap.txt";
-	public  final String sqlmap_config_tpl = "sqlmap-config.txt";
+	public final String DAO_TPL = "dao.txt";
+	public final String DAO_IMPL_TPL = "dao_impl.txt";
+	public final String SERVICE_TPL = "service.txt";
+	public final String SERVICE_IMPL_TPL = "service_impl.txt";
+	public final String ACTION_TPL = "action.txt";
+	public final String ENTITY_TPL = "Entity_JAVA.txt";
+	public final String QUERY_TPL = "query.txt";
+	public final String ENTITY_XML_TPL = "entity-sqlmap.txt";
+	public final String SQLMAP_CONFIG_TPL = "sqlmap-config.txt";
 	// 分库
-	public  final String sharding_rules_on_namespace_p = "dbRule";
-	public  final String hash_function_p = "com.caland.core.dao.router";
-	public  final String sharding_rules_on_namespace_tpl = "sharding-rules-on-namespace.txt";
-	public  final String hash_function_tpl = "hash-function.txt";
+	public final String SHARDING_RULES_ON_NAMESPACE_P = "dbRule";
+	public final String HASH_FUNCTION_P = "com.caland.core.dao.router";
+	public final String SHARDING_RULES_ON_NAMESPACE_TPL = "sharding-rules-on-namespace.txt";
+	public final String HASH_FUNCTION_TPL = "hash-function.txt";
 
-	public  final boolean is_action = true;
-	public  final boolean is_service = true;
-	public  final boolean is_dao = true;
-	public  final boolean is_page = false;
+	public final boolean IS_ACTION = true;
+	public final boolean IS_SERVICE = true;
+	public final boolean IS_DAO = true;
+	public final boolean IS_PAGE = false;
 
-	public  final String SPT = File.separator;
+	public final String SPT = File.separator;
 
-	public  final String ENCODING = "UTF-8";
+	public final String ENCODING = "UTF-8";
 
-	String tpl = null;
+	String templateFileName = null;
+
+	private final String ext_type_java = ".java";
+
+	private final String GENERATE_FILE_ENTITY_DIR = "F:/AllProject/01SOURCE/domain-model/test/T_";
+	private final String GENERATE_FILE_ENTITY_EXT_TYPE_ = ext_type_java;
+
+	private final String TEMPLATE_DIR = "cn.doublepoint.generate.domain.model.helper.template/";
+
+	List<JavaBeanModel> entityModelList = new ArrayList<JavaBeanModel>();
+	Map<String, Object> data = new HashMap<String, Object>();
+	private final String TEMPLATE_ENTITY_KEY_NAME = "entityModel";
 
 	@Test
-	public void test1() {
+	public void buildEntity() {
 
-		List<ModelModel> entityModelList = new ArrayList<ModelModel>();
+		entityModelList.stream().forEach(entityModel -> {
+			if (data.containsKey(TEMPLATE_ENTITY_KEY_NAME)) {
+				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			} else
+				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			File f = new File(
+					GENERATE_FILE_ENTITY_DIR + entityModel.getModelClassCode() + GENERATE_FILE_ENTITY_EXT_TYPE_);
+			templateFileName = converString(TEMPLATE_DIR) + "" + ENTITY_TPL;
+
+			try {
+				index(templateFileName, f, data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	@Test
+	public void buildEntityQuery() {
+
+		entityModelList.stream().forEach(entityModel -> {
+			if (data.containsKey(TEMPLATE_ENTITY_KEY_NAME)) {
+				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			} else
+				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			File f = new File(
+					GENERATE_FILE_ENTITY_DIR + entityModel.getModelClassCode() + GENERATE_FILE_ENTITY_EXT_TYPE_);
+			templateFileName = converString(TEMPLATE_DIR) + "" + ENTITY_TPL;
+
+			try {
+				index(templateFileName, f, data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	/**
+	 * 生成
+	 * 
+	 * @param tpl
+	 * @param f
+	 * @throws TemplateException
+	 * @throws IOException
+	 */
+	public void index(String tpl, File f, Map<String, Object> data) throws TemplateException, IOException {
+		File parent = f.getParentFile();
+		if (!parent.exists()) {
+			parent.mkdirs();
+		}
+		Writer out = null;
+		try {
+			// FileWriter不能指定编码确实是个问题，只能用这个代替了。
+			out = new OutputStreamWriter(new FileOutputStream(f), ENCODING);
+			tpl = "/target/classes/" + tpl;
+			Template template = conf.getTemplate(tpl);
+			template.process(data, out);
+		} finally {
+			if (out != null) {
+				out.flush();
+				out.close();
+			}
+		}
+
+	}
+
+	@SuppressWarnings("resource")
+	@Before
+	@Autowired
+	public void setFreeMarkerConfigurer() {
+		ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:servlet-front.xml");
+		FreeMarkerConfigurer freemarkerConfig = (FreeMarkerConfigurer) ac.getBean("freemarkerConfig");
+		this.conf = freemarkerConfig.getConfiguration();
+		buildEntityModelList();
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+		data.put("datetime", formatter.format(date));
+	}
+
+	private void buildEntityModelList() {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document document = db.parse("file:/F://AllProject//00参考文件//BaseInfrastructure//系统支撑.oom");
-			NodeList classesList = document.getElementsByTagName("c:Classes");
-			Node classesElementNode = classesList.item(0);
-			NodeList classElementNodeList = classesElementNode.getChildNodes();
+			NodeList classElementNodeList = db.parse("file:/F://AllProject//00参考文件//BaseInfrastructure//系统支撑.oom")
+					.getElementsByTagName("c:Classes").item(0).getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
 				List<ModelField> fieldList = new ArrayList<ModelField>();
-				ModelModel entityModel = new ModelModel();
-				Node classElementNode = classElementNodeList.item(i);
-				NodeList classChildrenList = classElementNode.getChildNodes();
-				boolean isadd=false;
+				JavaBeanModel entityModel = new JavaBeanModel();
+				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
+				boolean isadd = false;
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
-					if(!(classChildrenList.item(j) instanceof Element))
+					if (!(classChildrenList.item(j) instanceof Element))
 						continue;
-					Element item = (Element)classChildrenList.item(j);
+					Element item = (Element) classChildrenList.item(j);
 					String nodeName = item.getNodeName();
 					String nodeValue = item.getTextContent();
 					if (nodeValue == null || nodeValue == "")
 						break;
-					isadd=true;
+					isadd = true;
 					switch (nodeName) {
 					case "a:Name":
 						entityModel.setModelName(nodeValue);
 						break;
 					case "a:Code":
-						entityModel.setModelCode(nodeValue);
+						entityModel.setModelClassCode(nodeValue);
 						break;
 					case "a:Comment":
 						entityModel.setModelComment(nodeValue);
@@ -158,7 +242,7 @@ public class ModelReader {
 						break;
 					}
 				}
-				if(isadd){
+				if (isadd) {
 					entityModel.setFields(fieldList);
 					entityModelList.add(entityModel);
 				}
@@ -166,82 +250,27 @@ public class ModelReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-
-		entityModelList.stream().forEach(entityModel -> {
-			Date date = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("datetime",formatter.format(date));
-			data.put("entityModel", entityModel);
-			File f = new File("F:/AllProject/01SOURCE/domain-model/test/T_"+entityModel.getModelCode() + ".java");
-			tpl = converString("cn.doublepoint.generate.domain.model.helper.template/") + "" + entity_tpl;
-			
-//			tpl = entity_tpl;
-			try {
-				index(tpl, f,data);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-
-	
-	}
-
-	/**
-	 * 生成
-	 * 
-	 * @param tpl
-	 * @param f
-	 * @throws TemplateException
-	 * @throws IOException
-	 */
-	public void index(String tpl, File f, Map<String, Object> data) throws TemplateException, IOException {
-		File parent = f.getParentFile();
-		if (!parent.exists()) {
-			parent.mkdirs();
-		}
-		Writer out = null;
-		try {
-			// FileWriter不能指定编码确实是个问题，只能用这个代替了。
-			out = new OutputStreamWriter(new FileOutputStream(f), ENCODING);
-			tpl="/target/classes/"+tpl;
-			Template template = conf.getTemplate(tpl);
-			template.process(data, out);
-		} finally {
-			if (out != null) {
-				out.flush();
-				out.close();
-			}
-		}
-
 	}
 
 	private Configuration conf;
 
-	@Before
-	@Autowired
-	public void setFreeMarkerConfigurer() {
-		ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:servlet-front.xml");
-		FreeMarkerConfigurer freemarkerConfig=(FreeMarkerConfigurer)ac.getBean("freemarkerConfig");
-		this.conf = freemarkerConfig.getConfiguration();
-	}
-
-	private void writeModel(List<ModelModel> entityModelList) {
-		for (ModelModel modelModel : entityModelList) {
+	@SuppressWarnings({ "unused", "resource" })
+	private void writeModel(List<JavaBeanModel> entityModelList) {
+		for (JavaBeanModel modelModel : entityModelList) {
 			if (modelModel.getModelType() != null) {
 				File file;
 				switch (modelModel.getModelType()) {
 				case CONSTANT.CLASS_TYPE_ENTITY:
-					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/entity/" + "T_" + modelModel.getModelCode() + ".java");
+					file = new File("F:/AllProject/01SOURCE/domain-model/entity/" + "T_"
+							+ modelModel.getModelClassCode() + ".java");
 					break;
 				case CONSTANT.CLASS_TYPE_ENUM:
-					file = new File("F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getModelCode() + ".java");
+					file = new File(
+							"F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getModelClassCode() + ".java");
 					break;
 				default:
-					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getModelCode() + ".java");
+					file = new File("F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getModelClassCode()
+							+ ".java");
 					break;
 				}
 				if (!file.exists()) {
@@ -271,6 +300,7 @@ public class ModelReader {
 	 * @param name
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String getFilePath(String packageName, String name) {
 		String path = converString(packageName);
 		return "src/" + path + "/" + name;
@@ -285,4 +315,5 @@ public class ModelReader {
 	private String converString(String s) {
 		return s.replaceAll("\\.", "/").replace("\\", "/");
 	}
+
 }

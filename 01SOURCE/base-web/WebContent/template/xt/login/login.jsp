@@ -40,7 +40,7 @@
 				</div>
 				<ul class="login-tab">
 					<li class="login-on">普通登录</li>
-					<li>手机登录</li>
+					<!-- <li>手机登录</li> -->
 				</ul>
 				<div class="login-body">
 					<div class="login-style" style="display: block;">
