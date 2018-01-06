@@ -5,7 +5,7 @@ Vue.component(_ConstantComponentMap._FormField, {
 		'<div class="layui-form-item">' 
 		+ 	'<label class="layui-form-label">{{title}}</label>'
 		+ 	'<div class="layui-input-block">'
-		+ 		'<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" style="padding-right:45px;">' 
+		+ 		'<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >' 
 		+ 	'</div>' 
 		+ '</div>',
 

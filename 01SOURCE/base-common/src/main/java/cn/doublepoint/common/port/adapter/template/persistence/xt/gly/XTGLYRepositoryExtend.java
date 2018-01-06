@@ -11,5 +11,5 @@ package cn.doublepoint.common.port.adapter.template.persistence.xt.gly;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_GLY;
 
-public interface XTGLYRepositoryCustom {
+public interface XTGLYRepositoryExtend {
 }

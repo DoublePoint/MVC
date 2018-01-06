@@ -31,6 +31,11 @@
 			<div class="layui-col-xs10 layui-col-sm10 layui-col-md10" >
 				<ll-filllayout > 
 					<ll-fillarea height="40px" >
+							<ll-ajaxform id="ajaxform" > 
+							<ll-formfield id="cdmcId" title="菜单名称" style="width:200px;" field="cdmc" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+							</ll-ajaxform>
+					</ll-fillarea>
+					<ll-fillarea height="40px" >
 						<div class="layui-btn-group" style="height: 39px; padding-top: 1px;">
 							<input type="button" class="layui-btn" onclick="onClickAdd()" value="增加"/>
 							<input type="button" class="layui-btn " value="编辑"/>

@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._AjaxForm, {
 	props : [ 'id', 'onrowclick' ],
-	template : '<form class="layui-form " :id="id+guid"  action=""><slot></slot></form>',
+	template : '<form class="layui-form " :id="id+guid" action=""><slot></slot></form>',
 
 	data : function() {
 		return {

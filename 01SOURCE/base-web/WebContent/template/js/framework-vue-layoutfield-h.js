@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._LayOutFieldH, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div  :id="id+guid" :style="\'width:\'+layOutWidth+\';height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
+	template : '<div  :id="id+guid" :style="\'width:\'+layOutWidth+\';overflow:auto;height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
 
 	data : function() {
 		return {
@@ -27,7 +27,8 @@ Vue.component(_ConstantComponentMap._LayOutFieldH, {
 			var allChildFixHeight = 0;
 			for (var i = 0; i < children.length; i++) {
 				if (children[i].id != id) {
-					allChildFixHeight += children[i].scrollHeight;
+//					allChildFixHeight += children[i].scrollHeight;
+					allChildFixHeight += children[i].offsetHeight;
 				}
 			}
 			this.layOutHeight = (parentheight - allChildFixHeight).toString() + "px";
@@ -80,7 +81,8 @@ function FillArea(id) {
 		var allChildFixHeight = 0;
 		for (var i = 0; i < children.length; i++) {
 			if (children[i].id != this.id) {
-				allChildFixHeight += children[i].scrollHeight;
+//				allChildFixHeight += children[i].scrollHeight;
+				allChildFixHeight += children[i].offsetHeight;
 			}
 		}
 //		this.layOutHeight = (parentheight - allChildFixHeight).toString() + "px";

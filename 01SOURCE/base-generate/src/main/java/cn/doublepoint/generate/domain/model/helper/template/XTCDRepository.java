@@ -7,14 +7,14 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.common.port.adapter.template.persistence.xt.gly;
+package cn.doublepoint.generate.domain.model.helper.template;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_GLY;
+import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 
-public interface XTGLYRepository extends JpaRepository<T_XT_GLY,String>,QueryDslPredicateExecutor<T_XT_GLY>, XTGLYRepositoryExtend{
+public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,QueryDslPredicateExecutor<T_XT_CD>, XTCDRepositoryService{
 	
 	
 }

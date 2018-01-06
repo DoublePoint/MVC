@@ -22,6 +22,16 @@ public class JavaBeanModel {
 	private String modelExtend;
 	private String modelName;
 	private String modelClassCode;
+	private String idField;
+	
+
+	public String getIdField() {
+		return idField;
+	}
+
+	public void setIdField(String idField) {
+		this.idField = idField;
+	}
 
 	public String getModelComment() {
 		return modelComment;

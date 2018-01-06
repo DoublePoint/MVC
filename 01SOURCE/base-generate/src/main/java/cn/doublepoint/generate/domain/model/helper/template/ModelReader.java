@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,9 +34,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import cn.doublepoint.common.constant.XTConstant;
+import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.generate.domain.model.billing.CONSTANT;
 import cn.doublepoint.generate.domain.model.helper.ModelField;
 import cn.doublepoint.generate.domain.model.helper.JavaBeanModel;
+import cn.doublepoint.generate.domain.model.helper.ModelConstantJS;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -57,7 +63,7 @@ public class ModelReader {
 	public final String SERVICE_TPL = "service.txt";
 	public final String SERVICE_IMPL_TPL = "service_impl.txt";
 	public final String ACTION_TPL = "action.txt";
-	public final String ENTITY_TPL = "Entity_JAVA.txt";
+
 	public final String QUERY_TPL = "query.txt";
 	public final String ENTITY_XML_TPL = "entity-sqlmap.txt";
 	public final String SQLMAP_CONFIG_TPL = "sqlmap-config.txt";
@@ -78,10 +84,30 @@ public class ModelReader {
 
 	String templateFileName = null;
 
-	private final String ext_type_java = ".java";
+	private final String EXT_TYPE_JAVA = ".java";
+	private final String EXT_TYPE_JS = ".js";
 
 	private final String GENERATE_FILE_ENTITY_DIR = "F:/AllProject/01SOURCE/domain-model/test/T_";
-	private final String GENERATE_FILE_ENTITY_EXT_TYPE_ = ext_type_java;
+	private final String GENERATE_FILE_ENTITY_TPL_NAME = "Entity.java.ftl";
+	private final String GENERATE_FILE_ENTITY_EXT_TYPE_ = EXT_TYPE_JAVA;
+
+	private final String GENERATE_FILE_CONSTANT_JS_DIR = "F:/AllProject/01SOURCE/domain-model/test/js/";
+	private final String GENERATE_FILE_CONSTANT_JS_EXT_TYPE_ = EXT_TYPE_JS;
+	private final String GENERATE_FILE_CONSTANT_JS_TPL_NAME = "Constant.js.ftl";
+	private final String GENERATE_FILE_CONSTANT_JS_FILE_NAME_ = GENERATE_FILE_CONSTANT_JS_DIR + "framework-xt-constant"
+			+ GENERATE_FILE_CONSTANT_JS_EXT_TYPE_;
+	
+	private final String GENERATE_FILE_REPOSITORY_DIR = "F:/AllProject/01SOURCE/domain-model/test/repository/";
+	private final String GENERATE_FILE_REPOSITORY_EXT_TYPE_ = EXT_TYPE_JAVA;
+	private final String GENERATE_FILE_REPOSITORY_TPL_NAME = "Repository.java.ftl";
+	
+	private final String GENERATE_FILE_REPOSITORY_EXTEND_DIR = "F:/AllProject/01SOURCE/domain-model/test/repository/";
+	private final String GENERATE_FILE_REPOSITORY_EXTEND_EXT_TYPE_ = EXT_TYPE_JAVA;
+	private final String GENERATE_FILE_REPOSITORY_EXTEND_TPL_NAME = "RepositoryExtend.java.ftl";
+	
+	private final String GENERATE_FILE_REPOSITORY_EXTEND_IMPL_DIR = "F:/AllProject/01SOURCE/domain-model/test/repository/";
+	private final String GENERATE_FILE_REPOSITORY_EXTEND_IMPL_EXT_TYPE_ = EXT_TYPE_JAVA;
+	private final String GENERATE_FILE_REPOSITORY_EXTEND_IMPL_TPL_NAME = "RepositoryExtendImpl.java.ftl";
 
 	private final String TEMPLATE_DIR = "cn.doublepoint.generate.domain.model.helper.template/";
 
@@ -91,18 +117,63 @@ public class ModelReader {
 
 	@Test
 	public void buildEntity() {
-
+		buildEntityModelList();
 		entityModelList.stream().forEach(entityModel -> {
-			if (data.containsKey(TEMPLATE_ENTITY_KEY_NAME)) {
-				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-			} else
-				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+//			if (data.containsKey(TEMPLATE_ENTITY_KEY_NAME)) {
+//				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+//			} else
+			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
 			File f = new File(
 					GENERATE_FILE_ENTITY_DIR + entityModel.getModelClassCode() + GENERATE_FILE_ENTITY_EXT_TYPE_);
-			templateFileName = converString(TEMPLATE_DIR) + "" + ENTITY_TPL;
+			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_ENTITY_TPL_NAME;
 
 			try {
-				index(templateFileName, f, data);
+				createFileByTemplate(templateFileName, f, data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	@Test
+	public void buildEntityRepository() {
+		buildEntityModelList();
+		entityModelList.stream().forEach(entityModel -> {
+			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			File f = new File(GENERATE_FILE_REPOSITORY_DIR + StringUtil.join(entityModel.getModelClassCode().split("_")).toUpperCase()+"Repository" + GENERATE_FILE_REPOSITORY_EXT_TYPE_);
+			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_REPOSITORY_TPL_NAME;
+
+			try {
+				createFileByTemplate(templateFileName, f, data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	@Test
+	public void buildEntityRepositoryExtend() {
+		buildEntityModelList();
+		entityModelList.stream().forEach(entityModel -> {
+			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			File f = new File(GENERATE_FILE_REPOSITORY_EXTEND_DIR + StringUtil.join(entityModel.getModelClassCode().split("_")).toUpperCase()+"RepositoryExtend" + GENERATE_FILE_REPOSITORY_EXTEND_EXT_TYPE_);
+			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_REPOSITORY_EXTEND_TPL_NAME;
+
+			try {
+				createFileByTemplate(templateFileName, f, data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	@Test
+	public void buildEntityRepositoryExtendImpl() {
+		buildEntityModelList();
+		entityModelList.stream().forEach(entityModel -> {
+			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			File f = new File(GENERATE_FILE_REPOSITORY_EXTEND_IMPL_DIR + StringUtil.join(entityModel.getModelClassCode().split("_")).toUpperCase()+"RepositoryExtendImpl" + GENERATE_FILE_REPOSITORY_EXTEND_IMPL_EXT_TYPE_);
+			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_REPOSITORY_EXTEND_IMPL_TPL_NAME;
+
+			try {
+				createFileByTemplate(templateFileName, f, data);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -111,42 +182,55 @@ public class ModelReader {
 	@Test
 	public void buildEntityQuery() {
 
-		entityModelList.stream().forEach(entityModel -> {
-			if (data.containsKey(TEMPLATE_ENTITY_KEY_NAME)) {
-				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-			} else
-				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-			File f = new File(
-					GENERATE_FILE_ENTITY_DIR + entityModel.getModelClassCode() + GENERATE_FILE_ENTITY_EXT_TYPE_);
-			templateFileName = converString(TEMPLATE_DIR) + "" + ENTITY_TPL;
-
-			try {
-				index(templateFileName, f, data);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
 	}
+
+	@Test
+	public void buildConstantJs() throws Exception {
+		Class<XTConstant> clazz = XTConstant.class;
+		Field[] fields = clazz.getDeclaredFields();
+
+		List<ModelConstantJS> fieldList = Arrays.stream(fields).map(field -> {
+			try {
+				return new ModelConstantJS(field.getName(), field.getType().toString().toLowerCase(),
+						field.get(clazz).toString(), "");
+			} catch (Exception e) {
+				return null;
+			}
+		}).collect(Collectors.toList());
+
+		File newFile = new File(GENERATE_FILE_CONSTANT_JS_DIR + "Constant" + GENERATE_FILE_CONSTANT_JS_EXT_TYPE_);
+		templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_CONSTANT_JS_TPL_NAME;
+		data.put("fieldList", fieldList);
+		try {
+			createFileByTemplate(templateFileName, newFile, data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	/**
-	 * 生成
+	 * 根据模板创建文件
 	 * 
-	 * @param tpl
-	 * @param f
+	 * @param sourceTemplate
+	 * @param newFile
+	 * @param templateData
 	 * @throws TemplateException
 	 * @throws IOException
 	 */
-	public void index(String tpl, File f, Map<String, Object> data) throws TemplateException, IOException {
-		File parent = f.getParentFile();
+	public void createFileByTemplate(String sourceTemplate, File newFile, Map<String, Object> templateData)
+			throws TemplateException, IOException {
+		File parent = newFile.getParentFile();
 		if (!parent.exists()) {
 			parent.mkdirs();
 		}
 		Writer out = null;
 		try {
 			// FileWriter不能指定编码确实是个问题，只能用这个代替了。
-			out = new OutputStreamWriter(new FileOutputStream(f), ENCODING);
-			tpl = "/target/classes/" + tpl;
-			Template template = conf.getTemplate(tpl);
-			template.process(data, out);
+			out = new OutputStreamWriter(new FileOutputStream(newFile), ENCODING);
+			sourceTemplate = "/target/classes/" + sourceTemplate;
+			Template template = conf.getTemplate(sourceTemplate);
+			template.process(templateData, out);
 		} finally {
 			if (out != null) {
 				out.flush();
@@ -163,7 +247,6 @@ public class ModelReader {
 		ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:servlet-front.xml");
 		FreeMarkerConfigurer freemarkerConfig = (FreeMarkerConfigurer) ac.getBean("freemarkerConfig");
 		this.conf = freemarkerConfig.getConfiguration();
-		buildEntityModelList();
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 		data.put("datetime", formatter.format(date));

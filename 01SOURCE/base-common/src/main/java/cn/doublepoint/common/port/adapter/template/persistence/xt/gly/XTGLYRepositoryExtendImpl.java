@@ -5,8 +5,8 @@ import com.querydsl.core.types.Projections;
 
 import cn.doublepoint.common.domain.model.entity.xt.QT_XT_GLY;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_GLY;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.BaseRepository;
+import cn.doublepoint.common.port.adapter.template.persistence.xt.BaseRepository;
 
-public class XTGLYRepositoryImpl extends BaseRepository implements XTGLYRepositoryCustom {
+public class XTGLYRepositoryExtendImpl extends BaseRepository implements XTGLYRepositoryExtend {
 
 }

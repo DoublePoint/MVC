@@ -226,3 +226,8 @@ a {
     height: 100%;
     padding:0;
 }
+.layui-form-item:first-child
+{
+	margin:0;
+	padding-top:10px;
+}

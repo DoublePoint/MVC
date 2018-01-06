@@ -9,6 +9,6 @@
 */
 package cn.doublepoint.common.port.adapter.template.persistence.xt.cd;
 
-public interface XTCDRepositoryCustom {
+public interface XTCDRepositoryExtend {
 
 }

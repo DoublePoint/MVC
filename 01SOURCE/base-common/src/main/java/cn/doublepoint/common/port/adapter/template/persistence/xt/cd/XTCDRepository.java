@@ -14,7 +14,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
 
-public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,QueryDslPredicateExecutor<T_XT_CD>, XTCDRepositoryCustom{
+public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,QueryDslPredicateExecutor<T_XT_CD>, XTCDRepositoryExtend{
 	
 	
 }
