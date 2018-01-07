@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._LayOut, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div :id="id+guid" class="lllayout" :style="\'width:\'+layOutWidth+\';height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
+	template : '<div :id="id+guid" class="lllayout "  :style="\'width:\'+layOutWidth+\';height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
 	data : function() {
 		var varlayOutHeight=this.height;
 		if(varlayOutHeight==null)

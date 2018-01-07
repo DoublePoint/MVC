@@ -30,9 +30,12 @@
 			</div>
 			<div class="layui-col-xs10 layui-col-sm10 layui-col-md10" >
 				<ll-filllayout > 
-					<ll-fillarea height="40px" >
+					<ll-fillarea height="45px" >
 							<ll-ajaxform id="ajaxform" > 
-							<ll-formfield id="cdmcId" title="菜单名称" style="width:200px;" field="cdmc" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+								<ll-ajaxformline>
+									<ll-formfield id="cdmcId" title="菜单名称" style="width:300px;" field="cdmc" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<input type="button" class="layui-btn" onclick="onClickAdd()" value="查询"/>
+								</ll-ajaxformline>
 							</ll-ajaxform>
 					</ll-fillarea>
 					<ll-fillarea height="40px" >

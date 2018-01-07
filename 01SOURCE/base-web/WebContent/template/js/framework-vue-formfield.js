@@ -2,15 +2,18 @@ var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._FormField, {
 	props : _ConstantFormFieldInheritParams,
 	template : 
-		'<div class="layui-form-item">' 
-		+ 	'<label class="layui-form-label">{{title}}</label>'
+		'<div class="layui-inline">'
+		+	'<label class="layui-form-label" :style="text-align:left;">{{title}}</label>'
 		+ 	'<div class="layui-input-block">'
 		+ 		'<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >' 
-		+ 	'</div>' 
-		+ '</div>',
+		+ 	'</div>'
+		+'</div>',
 
 	data : function() {
+		var clientStyle="";
+		if(this.)
 		return {
+			clientStyle:'text-align:',
 			guid:$._GenerateUUID()
 		}
 	},

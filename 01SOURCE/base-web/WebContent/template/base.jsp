@@ -38,6 +38,7 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tree.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-menu.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxform.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxformline.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formfield.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-forminputbutton.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formdate.js" charset="utf-8"></script>

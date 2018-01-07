@@ -2,10 +2,10 @@ var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._FormInputButton, {
 	props : [ 'id', 'onclick','field','title'],
 	template : 
-	'<div class="layui-form-item">'+
+	'<div class="layui-inline">'+
 		'<label class="layui-form-label">{{title}}</label>'+
 		'<div class="layui-input-block">'+
-			'<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:45px;"/>'+
+			'<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'+
 			'<input :id="id+guid+hidden" type="hidden" value="" :name="field" />'+
 			'<a :id="id+guid+a" href="#" class="layui-btn inputbutton">...</a>'+
 		'</div>'+

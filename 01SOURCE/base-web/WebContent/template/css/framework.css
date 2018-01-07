@@ -226,8 +226,17 @@ a {
     height: 100%;
     padding:0;
 }
+.layui-form-item{
+	margin:2px 0 3px 0;
+}
+.layui-form-item .layui-inline{
+ 	margin:0;
+ }
 .layui-form-item:first-child
 {
 	margin:0;
-	padding-top:10px;
+	padding:5px 0 2px 0;
+}
+.lllayout .layoutarea{
+	overflow:auto;
 }

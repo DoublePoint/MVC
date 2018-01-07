@@ -1,7 +1,7 @@
 var documentWriteHtml = "";
-Vue.component(_ConstantComponentMap._LayOutFieldH, {
+Vue.component(_ConstantComponentMap._LayOutFillArea, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div  :id="id+guid" :style="\'width:\'+layOutWidth+\';overflow:auto;height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
+	template : '<div  :id="id+guid" class="layoutarea" :style="\'width:\'+layOutWidth+\';overflow:auto;height:\'+layOutHeight+\';background-color:\'+backgroundcolor+\';\'"><slot></slot></div>',
 
 	data : function() {
 		return {
