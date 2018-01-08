@@ -55,7 +55,7 @@
 					</ul>
 					<div id="layui-tab-content" class="layui-tab-content"
 						style="min-height: 150px; padding: 0px 0 0 0;">
-						<div class="layui-tab-item layui-show" style="height:100%;">
+						<div class="layui-tab-item layui-show" style="height:100%;min-width:700px">
 							<%-- <iframe
 							src="${pageContext.request.contextPath}/template/xt/ajaxdatagrid.jsp"></iframe> --%>
 							<iframe src="${pageContext.request.contextPath}/template/xt/cd/cd"></iframe>

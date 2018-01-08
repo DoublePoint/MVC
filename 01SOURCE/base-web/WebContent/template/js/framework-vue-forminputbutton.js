@@ -1,6 +1,6 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._FormInputButton, {
-	props : [ 'id', 'onclick','field','title'],
+	props : [ 'id', 'onclick','field','title','colspan'],
 	template : 
 	'<div class="layui-inline">'+
 		'<label class="layui-form-label">{{title}}</label>'+
@@ -31,6 +31,8 @@ Vue.component(_ConstantComponentMap._FormInputButton, {
 			var domId=this._GetFormInputbuttonDomId();
 			var formInputbutton = new FormInputbutton(domId);
 			formInputbutton.field=this.field;
+			if (this.colspan != null)
+				formInputbutton.setColspan(this.colspan);
 			$._AddToLayuiObjectHashMap(domId, formInputbutton);
 			
 		},
@@ -76,6 +78,7 @@ function FormInputbutton(domId) {
 	this.maxlen = null;
 	this.readonly = false;
 	this.contentalign = "left";
+	this.colspan=1;
 	this.visible = true;
 	// this.onclick=function(){};
 	this.field = null;
@@ -87,22 +90,43 @@ function FormInputbutton(domId) {
 	this.setData = function(aKey,aValue) {
 		this.key=aKey;
 		this.data=aValue;
-		$("#"+this.id).val(this.data);
+		this.getInputDom().val(this.data);
 		$("#"+this.id+"hidden").val(this.key);
 	};
 	this.setReadonly= function(aReadonly){
 		this.readonly=aReadonly;
-		$("#"+this.id).attr("readonly",this.readonly);
+		this.getInputDom().attr("readonly",this.readonly);
 	};
 	this.setVisible= function(aVisible){
 		this.visible=aVisible;
 		if(aVisible){
-			$("#"+this.id).show();
+			this.getInputDom().show();
 		}
 		else{
-			$("#"+this.id).hide();
+			this.getInputDom().hide();
 		}
 	};
+	this.setColspan=function(colspan){
+		this.colspan=colspan;
+	}
+	this.getColspan=function(){
+		return this.colspan;
+	}
+	this.getInputDom = function() {
+		return $("#" + this.id);
+	}
+	this.getRoot=function(){
+		return this.getInputDom().parents(".layui-inline");
+	}
+	this.getLabel = function() {
+		return this.getRoot().children("label");
+	}
+	this.addLineStart=function(){
+		this.getRoot().before('<div class="layui-form-item">' );
+	}
+	this.addLineEnd=function(){
+		this.getRoot().after('</div>' );
+	}
 	return this;
 }
 

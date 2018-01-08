@@ -1,8 +1,9 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._AjaxFormLine, {
-	props : [ 'id', 'onrowclick' ],
+	props : [ 'id', 'onrowclick','colproportion' ],
 	template : '<div class="layui-form-item">' 
-		+ 	' <div class="layui-inline"><slot></slot></div>'
+//		+ 	' <div class="layui-inline"><slot></slot></div>'
+		+ 	' <slot></slot>'
 		+ 	'</div>' ,
 
 	data : function() {
@@ -40,4 +41,53 @@ Vue.component(_ConstantComponentMap._AjaxFormLine, {
 		
 	},
 })
+
+
+
+function AjaxLine(domId) {
+	this.id = domId;
+	this.formItems=new Array();
+	this.colproportion;
+	//是否包含该字段名称
+	this.containsFieldName=function(name){
+		var iscontain=false;
+		for(var i=0;i<this.formItems.length;i++){
+			if(formItems[i].field==name){
+				iscontain=true;
+			}
+		}
+		return iscontain;
+	}
+	this.setData=function(data){
+		
+	}
+	this.addFormItem=function(item){
+		this.formItems.push(item);
+	}
+	this.setFieldValue=function(name,value){
+		var items=this.formItems;
+		for(var i=0;i<items.length;i++){
+			if(items[i].field==name){
+				items[i].setData(value);
+			}
+		}
+	}
+	this.showField=function(name){
+		var items=this.formItems;
+		for(var i=0;i<items.length;i++){
+			if(items[i].field==name){
+				items[i].show();
+			}
+		}
+	}
+	this.hideField=function(name,isLeaveLocation){
+		var items=this.formItems;
+		for(var i=0;i<items.length;i++){
+			if(items[i].field==name){
+				items[i].hide(isLeaveLocation);
+			}
+		}
+	}
+	return this;
+}
 
