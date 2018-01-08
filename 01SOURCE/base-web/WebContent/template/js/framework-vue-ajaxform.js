@@ -9,35 +9,31 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		}
 	},
 	mounted:function(){
-		this._addDefineAjaxFormObjectScript();
+		this._AddDefineAjaxFormObjectScript();
 		
 	},
 	created : function() {
-		this._addAjaxFormToMap();
+		this._AddAjaxFormToMap();
 	},
 	methods : {
-		incrementCounter : function() {
-		},
-		_addAjaxFormToMap:function(){
-			var domId=this._getAjaxFormDomId();
+		_AddAjaxFormToMap:function(){
+			var domId=this._GetAjaxFormDomId();
 			var ajaxForm = new AjaxForm(domId);
 			$._AddToLayuiObjectHashMap(domId, ajaxForm);
 			
 		},
 		//添加生命ajaxDataGrid对象脚本
-		_addDefineAjaxFormObjectScript:function(){
-			var domId=this._getAjaxFormDomId();
+		_AddDefineAjaxFormObjectScript:function(){
+			var domId=this._GetAjaxFormDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_getAjaxFormDomId:function(){
+		_GetAjaxFormDomId:function(){
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		
-		
 	},
 })
 

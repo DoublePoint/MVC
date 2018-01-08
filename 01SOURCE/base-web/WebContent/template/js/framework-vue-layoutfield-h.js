@@ -11,9 +11,9 @@ Vue.component(_ConstantComponentMap._LayOutFillArea, {
 		}
 	},
 	mounted : function() {
-		this._addDefineObjectScript();
+		this._AddDefineObjectScript();
 		
-		var id = this._getDomId();
+		var id = this._GetDomId();
 		var parentWidth = $("#" + id).parent().width();
 		var parentheight = $("#" + id).parent().height();
 		var children = $("#" + id).parent().children();
@@ -38,18 +38,18 @@ Vue.component(_ConstantComponentMap._LayOutFillArea, {
 
 	},
 	created : function() {
-		this._addFillAreaToMap();
+		this._AddFillAreaToMap();
 
 	},
 	methods : {
 		incrementCounter : function() {
 		},
-		_getDomId : function() {
+		_GetDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_addFillAreaToMap : function() {
-			var domId = this._getDomId();
+		_AddFillAreaToMap : function() {
+			var domId = this._GetDomId();
 			var _FillArea = new FillArea(domId);
 			$._AddToLayuiObjectHashMap(domId, _FillArea);
 			
@@ -59,8 +59,8 @@ Vue.component(_ConstantComponentMap._LayOutFillArea, {
 			}
 		},
 		// 添加生命FillArea对象脚本
-		_addDefineObjectScript : function() {
-			var domId = this._getDomId();
+		_AddDefineObjectScript : function() {
+			var domId = this._GetDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");

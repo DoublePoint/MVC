@@ -9,7 +9,7 @@ Vue.component(_ConstantComponentMap._LayOutFieldV, {
 		}
 	},
 	mounted : function() {
-//		var id = this._getAjaxDataGridDomId();
+//		var id = this._GetAjaxDataGridDomId();
 //		var parentWidth = $("#" + id).parent().width();
 //		var parentheight = $("#" + id).parent().height();
 //
@@ -25,7 +25,7 @@ Vue.component(_ConstantComponentMap._LayOutFieldV, {
 	methods : {
 		incrementCounter : function() {
 		},
-		_getAjaxDataGridDomId : function() {
+		_GetAjaxDataGridDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		}

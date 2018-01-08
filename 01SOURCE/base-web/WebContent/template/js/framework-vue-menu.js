@@ -9,35 +9,35 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 		}
 	},
 	mounted : function() {
-		this._initAjaxMenuData();
-		this._addDefineAjaxMenuObjectScript();
-		this._initMenuClick();
+		this._InitAjaxMenuData();
+		this._AddDefineAjaxMenuObjectScript();
+		this._InitMenuClick();
 	},
 	created : function() {
-		this._addAjaxMenuToMap();
+		this._AddAjaxMenuToMap();
 	},
 	methods : {
 		incrementCounter : function() {
 		},
-		_addAjaxMenuToMap : function() {
-			var domId = this._getAjaxMenuDomId();
+		_AddAjaxMenuToMap : function() {
+			var domId = this._GetAjaxMenuDomId();
 			var _AjaxMenu = new AjaxMenu(domId);
 			$._AddToLayuiObjectHashMap(domId, _AjaxMenu);
 		},
 		// 添加生命AjaxMenu对象脚本
-		_addDefineAjaxMenuObjectScript : function() {
-			var domId = this._getAjaxMenuDomId();
+		_AddDefineAjaxMenuObjectScript : function() {
+			var domId = this._GetAjaxMenuDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_getAjaxMenuDomId : function() {
+		_GetAjaxMenuDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_initMenuClick : function() {
+		_InitMenuClick : function() {
 			$('.navMenu li a').on('click', function() {
 				var parent = $(this).parent().parent();// 获取当前页签的父级的父级
 				var labeul = $(this).parent("li").find(">ul")
@@ -76,9 +76,9 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 				$element.tabChange('admin-tab', $(this).text()); // 切换到：用户管理
 			});
 		},
-		_initAjaxMenuData : function() {
+		_InitAjaxMenuData : function() {
 			var cd = {};
-			var domId = this._getAjaxMenuDomId();
+			var domId = this._GetAjaxMenuDomId();
 			$.ajax({
 				url : $$pageContextPath + this.datasource,
 				type : "POST",

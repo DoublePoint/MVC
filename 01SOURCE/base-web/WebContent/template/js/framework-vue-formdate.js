@@ -15,41 +15,41 @@ Vue.component(_ConstantComponentMap._FormDate, {
 		}
 	},
 	mounted:function(){
-		this._addDefineFormDateObjectScript();
+		this._AddDefineFormDateObjectScript();
 		$laydate.render({
-		    elem: "#"+this._getFormDateDomId()
+		    elem: "#"+this._GetFormDateDomId()
 		    ,theme: 'molv'
 		});
-		this._addFormFieldToAjaxForm();
+		this._AddFormFieldToAjaxForm();
 	},
 	created : function() {
-		this._addFormDateToMap();
+		this._AddFormDateToMap();
 	},
 	methods : {
 		incrementCounter : function() {
 		},
-		_addFormDateToMap:function(){
-			var domId=this._getFormDateDomId();
+		_AddFormDateToMap:function(){
+			var domId=this._GetFormDateDomId();
 			var formDate = new FormDate(domId);
 			formDate.field=this.field;
 			$._AddToLayuiObjectHashMap(domId, formDate);
 			
 		},
 		//添加生命ajaxDataGrid对象脚本
-		_addDefineFormDateObjectScript:function(){
-			var domId=this._getFormDateDomId();
+		_AddDefineFormDateObjectScript:function(){
+			var domId=this._GetFormDateDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_getFormDateDomId:function(){
+		_GetFormDateDomId:function(){
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
 		//将本标签作为ajaxform的一个属性
-		_addFormFieldToAjaxForm:function(){
-			var domId = this._getFormDateDomId();
+		_AddFormFieldToAjaxForm:function(){
+			var domId = this._GetFormDateDomId();
 			var formElement=$._GetFromLayuiObjectHashMap(domId);
 			
 			var ajaxformdom=$("#"+domId).parents(".layui-form");

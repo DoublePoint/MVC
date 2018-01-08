@@ -14,7 +14,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGridRow, {
 	methods : {
 		_AddToLayuiObjectHashMapColumnsDefine:function(){
 			var _rowId=this.baseId+this.guid;
-			var _ajaxDataGridId=$("#"+_rowId).parent().attr("id");
+			var _AjaxDataGridId=$("#"+_rowId).parent().attr("id");
 			var _col = new AjaxDataGridColumns(
 				this.field,
 				this.title,
@@ -28,7 +28,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGridRow, {
 					var datetime=d.cjsj;
 					return "<span>"+$._FormatToDate(datetime)+"</span>"}
 				);
-			var _AjaxDatagrid=$._GetFromLayuiObjectHashMap(_ajaxDataGridId);
+			var _AjaxDatagrid=$._GetFromLayuiObjectHashMap(_AjaxDataGridId);
 			_AjaxDatagrid.addCol(_col);
 		}
 	},

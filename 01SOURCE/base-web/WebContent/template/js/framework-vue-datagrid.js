@@ -11,18 +11,18 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 		}
 	},
 	mounted : function() {
-		this._initAjaxDataGridData();
-		this._addDefineAjaxDataGridObjectScript();
+		this._InitAjaxDataGridData();
+		this._AddDefineAjaxDataGridObjectScript();
 
 	},
 	created : function() {
-		this._addAjaxDataGridToMap();
+		this._AddAjaxDataGridToMap();
 	},
 	methods : {
 		incrementCounter : function() {
 		},
-		_addAjaxDataGridToMap : function() {
-			var domId = this._getAjaxDataGridDomId();
+		_AddAjaxDataGridToMap : function() {
+			var domId = this._GetAjaxDataGridDomId();
 			var ajaxDataGrid = new AjaxDataGrid(domId);
 			ajaxDataGrid.pageId = this.laypage + this.guid;
 			$._AddToLayuiObjectHashMap(domId, ajaxDataGrid);
@@ -31,22 +31,22 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 			$._RegisterResizeModel(ajaxDataGrid);
 		},
 		// 添加生命ajaxDataGrid对象脚本
-		_addDefineAjaxDataGridObjectScript : function() {
-			var domId = this._getAjaxDataGridDomId();
+		_AddDefineAjaxDataGridObjectScript : function() {
+			var domId = this._GetAjaxDataGridDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_getAjaxDataGridDomId : function() {
+		_GetAjaxDataGridDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_initAjaxDataGridData : function() {
+		_InitAjaxDataGridData : function() {
 			var cd = {};
-			var domId = this._getAjaxDataGridDomId();
-			var _ajaxdatagrid = $._GetFromLayuiObjectHashMap(domId);
+			var domId = this._GetAjaxDataGridDomId();
+			var _Ajaxdatagrid = $._GetFromLayuiObjectHashMap(domId);
 			$.ajax({
 				url : $$pageContextPath + this.datasource,
 				type : "POST",
@@ -55,15 +55,15 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 				data : JSON.stringify(cd),
 				async : false,
 				success : function(ajaxDataWrap) {
-					_ajaxdatagrid.setDataWrap(ajaxDataWrap);
+					_Ajaxdatagrid.setDataWrap(ajaxDataWrap);
 				}
 			});
 
 			// 定义rowClick
 			var onrowclickFunction = this.onrowclick;
 			if (onrowclickFunction != null) {
-				_ajaxdatagrid.setRowClickFunctionName(onrowclickFunction);
-				$table.on('tool(' + this._getAjaxDataGridDomId() + ')', function(obj) {
+				_Ajaxdatagrid.setRowClickFunctionName(onrowclickFunction);
+				$table.on('tool(' + this._GetAjaxDataGridDomId() + ')', function(obj) {
 					if (onrowclickFunction == null)
 						return;
 					var data = obj.datawrap;
@@ -73,7 +73,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 
 			var pageclickFunction = this.onpageclick;
 			if (pageclickFunction != null) {
-				_ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
+				_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
 			}
 		}
 

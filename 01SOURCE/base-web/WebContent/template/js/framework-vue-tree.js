@@ -10,35 +10,35 @@ Vue.component(_ConstantComponentMap._Tree, {
 		}
 	},
 	mounted : function() {
-		this._initTreeData();
-		this._addDefineTreeObjectScript();
+		this._InitTreeData();
+		this._AddDefineTreeObjectScript();
 	},
 	created : function() {
-		this._addTreeToMap();
+		this._AddTreeToMap();
 	},
 	methods : {
-		_addTreeToMap : function() {
-			var domId = this._getTreeDomId();
+		_AddTreeToMap : function() {
+			var domId = this._GetTreeDomId();
 			var tree = new AjaxTree(domId);
 			tree.setDataSource($$pageContextPath+this.datasource);
 			tree.setOnclick(this.onclick);
 			$._AddToLayuiObjectHashMap(domId, tree);
 		},
 		// 添加生命Tree对象脚本
-		_addDefineTreeObjectScript : function() {
-			var domId = this._getTreeDomId();
+		_AddDefineTreeObjectScript : function() {
+			var domId = this._GetTreeDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_getTreeDomId : function() {
+		_GetTreeDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_initTreeData : function() {
-			var domid=this._getTreeDomId();
+		_InitTreeData : function() {
+			var domid=this._GetTreeDomId();
 			var tree=$._GetFromLayuiObjectHashMap(domid);
 			tree.render();
 		}

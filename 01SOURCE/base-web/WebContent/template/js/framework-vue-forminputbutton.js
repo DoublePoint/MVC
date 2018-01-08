@@ -19,50 +19,48 @@ Vue.component(_ConstantComponentMap._FormInputButton, {
 		}
 	},
 	mounted:function(){
-		this._addDefineFormInputbuttonObjectScript();
-		this._addFormFieldToAjaxForm();
-		this._initOnClick();//初始化鼠标单击事件
+		this._AddDefineFormInputbuttonObjectScript();
+		this._AddFormFieldToAjaxForm();
+		this._InitOnClick();//初始化鼠标单击事件
 	},
 	created : function() {
-		this._addFormInputbuttonToMap();
+		this._AddFormInputbuttonToMap();
 	},
 	methods : {
-		incrementCounter : function() {
-		},
-		_addFormInputbuttonToMap:function(){
-			var domId=this._getFormInputbuttonDomId();
+		_AddFormInputbuttonToMap:function(){
+			var domId=this._GetFormInputbuttonDomId();
 			var formInputbutton = new FormInputbutton(domId);
 			formInputbutton.field=this.field;
 			$._AddToLayuiObjectHashMap(domId, formInputbutton);
 			
 		},
 		//添加生命ajaxDataGrid对象脚本
-		_addDefineFormInputbuttonObjectScript:function(){
-			var domId=this._getFormInputbuttonDomId();
+		_AddDefineFormInputbuttonObjectScript:function(){
+			var domId=this._GetFormInputbuttonDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_getFormInputbuttonDomId:function(){
+		_GetFormInputbuttonDomId:function(){
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_getFormInputbuttonADomId:function(){
+		_GetFormInputbuttonADomId:function(){
 			var _domId = this.id + this.guid + this.a;
 			return _domId;
 		},
 		//将本标签作为ajaxform的一个属性
-		_addFormFieldToAjaxForm:function(){
-			var domId = this._getFormInputbuttonDomId();
+		_AddFormFieldToAjaxForm:function(){
+			var domId = this._GetFormInputbuttonDomId();
 			var formElement=$._GetFromLayuiObjectHashMap(domId);
 			
 			var ajaxformdom=$("#"+domId).parents(".layui-form");
 			var ajaxform=$._GetFromLayuiObjectHashMap(ajaxformdom.attr("id"));
 			ajaxform.addFormItem(formElement);
 		},
-		_initOnClick:function(){
-			var aClickId=this._getFormInputbuttonADomId();
+		_InitOnClick:function(){
+			var aClickId=this._GetFormInputbuttonADomId();
 			var onclick=this.onclick;
 			$("#"+aClickId).click(function(){
 				if(onclick==null) return;

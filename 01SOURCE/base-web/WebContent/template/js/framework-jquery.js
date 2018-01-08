@@ -419,6 +419,26 @@ var DoublePoint = {};// 全局对象
 			if (second <= 9 && second != "00")
 				second = "0" + second;
 			return "<span>" + year + "-" + monthValue + "-" + dayOfMonth + " " + hour + ":" + minute + ":" + second + "</span>"
+		},
+		_CreateStringBuffer:function(str){
+			function StringBuffer(st) {
+			    this.__strings__ = new Array();
+			    if(st!=null)
+			    	this.__strings__.push(st);
+			}
+			StringBuffer.prototype.append = function (str) {
+			    this.__strings__.push(str);
+			    return this;    //方便链式操作
+			}
+			StringBuffer.prototype.toString = function () {
+			    return this.__strings__.join("");
+			}
+			return new StringBuffer(str);
+		},
+		_CreateStyleBuffer:function(akey,avalue){
+			var styleBuffer=$._CreateStringBuffer(akey);
+			styleBuffer.append(":").append(avalue).append(";");
+			return styleBuffer
 		}
 
 	});

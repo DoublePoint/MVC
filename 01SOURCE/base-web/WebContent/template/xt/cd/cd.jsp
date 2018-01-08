@@ -33,7 +33,7 @@
 					<ll-fillarea height="45px" >
 							<ll-ajaxform id="ajaxform" > 
 								<ll-ajaxformline>
-									<ll-formfield id="cdmcId" title="菜单名称" style="width:300px;" field="cdmc" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="cdmcId" title="菜单名称" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<input type="button" class="layui-btn" onclick="onClickAdd()" value="查询"/>
 								</ll-ajaxformline>
 							</ll-ajaxform>

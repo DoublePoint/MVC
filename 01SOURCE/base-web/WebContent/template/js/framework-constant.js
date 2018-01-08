@@ -4,7 +4,7 @@ var _ConstantAjaxDataGrid = {
 	_DEFAULT_COLUMN_SORT : false,
 	_DEFAULT_COLUMN_FIXED : false,
 	_DEFAULT_MIN_HEIGHT : 100,
-	_DEFAULT_PAGE_SIZE : 20 ,
+	_DEFAULT_PAGE_SIZE : 20,
 };
 var _ConstantLayoutArea = {
 	_DEFAULT_MIN_HEIGHT : _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT
@@ -24,7 +24,7 @@ var _ConstantComponentMap = {
 	_FormCheck : "ll-formcheck",
 	_FormDate : "ll-formdate",
 	_FormInputButton : "ll-forminputbutton",
-	_FormToolBar: "ll-toolbar"
+	_FormToolBar : "ll-toolbar"
 };
 var _ConstantPageDefaultParam = {
 	_IS_DO_INIT_FUNTION : "_is_do_init_function",
@@ -44,8 +44,6 @@ var _ConstantFormFieldInheritParams = [ 'id', //
 'field', //
 'title',//
 'type',//
-'validtype',
-'placeholder',
+'validtype', 'placeholder',
 // 文本框的显示格式,取值为text和password，默认为text
 'errmsg' ];
-
