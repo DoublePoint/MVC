@@ -32,11 +32,11 @@
 				<ll-filllayout > 
 					<ll-fillarea height="88px" >
 							<ll-ajaxform id="ajaxform" cols="4" colproportion="1:2:1:2:1:2"> 
-									<ll-formfield id="cdmcId" colspan="1" title="菜单名称" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formfield id="cdmcId" title="菜单名称" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formfield id="cdmcId" title="菜单名称" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formfield id="cdmcId" title="菜单名称" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formfield id="cdmcId" title="菜单名称" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="cdmcId" colspan="1" title="菜单名称1" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="cdmcId" title="菜单名称2" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="cdmcId" title="菜单名称3" visible="false" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="cdmcId" title="菜单名称4" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="cdmcId" title="菜单名称5" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<!-- <input type="button" class="layui-btn" onclick="onClickAdd()" value="查询"/> -->
 							</ll-ajaxform>
 					</ll-fillarea>

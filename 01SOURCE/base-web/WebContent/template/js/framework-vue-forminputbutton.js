@@ -1,6 +1,6 @@
 var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._FormInputButton, {
-	props : [ 'id', 'onclick','field','title','colspan'],
+	props : [ 'id', 'onclick','field','title','colspan','visible'],
 	template : 
 	'<div class="layui-inline">'+
 		'<label class="layui-form-label">{{title}}</label>'+
@@ -105,6 +105,9 @@ function FormInputbutton(domId) {
 		else{
 			this.getInputDom().hide();
 		}
+	};
+	this.getVisible= function(){
+		return this.visible;
 	};
 	this.setColspan=function(colspan){
 		this.colspan=colspan;

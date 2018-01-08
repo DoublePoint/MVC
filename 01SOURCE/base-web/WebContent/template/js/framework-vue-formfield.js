@@ -32,13 +32,6 @@
 									labelclientStyleBuffer.append(labelalignbuffer.toString());
 								}
 							}
-							// // 设置label样式
-							// if (this.labelalign != null) {
-							// var labelalignbuffer =
-							// $._CreateStyleBuffer("text-align",
-							// this.labelalign);
-							// labelclientStyleBuffer.append(labelalignbuffer.toString());
-							// }
 							return {
 								labelclientStyle : labelclientStyleBuffer.toString(),
 								guid : $._GenerateUUID(),
@@ -48,8 +41,10 @@
 							this._AddDefineFormFieldObjectScript();
 							var errMsg = this.errmsg;
 							var maxlen = this.maxlen;
-							//将formfield添加到form中
+							// 将formfield添加到form中
 							this._AddFormFieldToAjaxForm();
+
+							this._SetStyle();
 						},
 						created : function() {
 							this._AddFormFieldToMap();
@@ -67,6 +62,10 @@
 								if (this.errmsg != null) {
 									formField.errmsg = this.errmsg;
 								}
+								if (this.visible != null) {
+									formField.setVisible(this.visible);
+								}
+
 								$._AddToLayuiObjectHashMap(domId, formField);
 							},
 							// 添加生命ajaxDataGrid对象脚本
@@ -90,7 +89,20 @@
 								var ajaxformdom = $("#" + domId).parents(".layui-form");
 								var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformdom.attr("id"));
 								ajaxform.addFormItem(formElement);
+							},
+							_SetStyle : function() {
+								if (this.visible != null) {
+									var domId = this._GetFormFieldDomId();
+									var formElement = $._GetFromLayuiObjectHashMap(domId);
+									if ((this.visible + "").toLowerCase() == "true") {
+										formElement.show();
+									}
+									else{
+										formElement.hide();
+									}
+								}
 							}
+
 						},
 					})
 
@@ -99,7 +111,7 @@
 		this.maxlen = null;
 		this.readonly = false;
 		this.contentalign = "left";
-		this.colspan=1;
+		this.colspan = 1;
 		this.visible = true;
 		this.validtype = "text";// 验证方式
 		// this.onclick=function(){};
@@ -111,7 +123,7 @@
 		this.getInputDom = function() {
 			return $("#" + this.id);
 		}
-		this.getRoot=function(){
+		this.getRoot = function() {
 			return $("#" + this.id).parents(".layui-inline");
 		}
 		this.getLabel = function() {
@@ -130,11 +142,9 @@
 		};
 		this.setVisible = function(aVisible) {
 			this.visible = aVisible;
-			if (aVisible) {
-				this.getInputDom().show();
-			} else {
-				this.getInputDom().hide();
-			}
+		};
+		this.getVisible = function() {
+			return this.visible;
 		};
 		this.setLabelText = function(labeltext) {
 			this.getLabel().html(labeltext);
@@ -142,17 +152,23 @@
 		this.setLabelStyle = function(cssKey, cssValue) {
 			this.getLabel().css(cssKey, cssValue);
 		}
-		this.setColspan=function(colspan){
-			this.colspan=colspan;
+		this.setColspan = function(colspan) {
+			this.colspan = colspan;
 		}
-		this.getColspan=function(){
+		this.getColspan = function() {
 			return this.colspan;
 		}
-		this.addLineStart=function(){
-			this.getRoot().before('<div class="layui-form-item">' );
+		this.addLineStart = function() {
+			this.getRoot().before('<div class="layui-form-item">');
 		}
-		this.addLineEnd=function(){
-			this.getRoot().after('</div>' );
+		this.addLineEnd = function() {
+			this.getRoot().after('</div>');
+		}
+		this.show = function() {
+			this.getRoot().show();
+		}
+		this.hide = function() {
+			this.getRoot().hide();
 		}
 		return this;
 	}
