@@ -1,6 +1,5 @@
-var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._AjaxForm, {
-	props : [ 'id', 'onrowclick', 'cols' ],
+	props : [ 'id', 'onrowclick', 'cols', 'colproportion' ],
 	template : '<form class="layui-form " :id="id+guid" action=""><slot></slot></form>',
 
 	data : function() {
@@ -9,34 +8,39 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		}
 	},
 	mounted : function() {
-		this._AddDefineAjaxFormObjectScript();
+		this._MapComponent();
 		this._RefreshForm();
 	},
 	created : function() {
-		this._AddAjaxFormToMap();
+		this._RegisterComponent();
 	},
 	methods : {
-		_AddAjaxFormToMap : function() {
-			var domId = this._GetAjaxFormDomId();
+		_RegisterComponent : function() {
+			var domId = this._GetComponentDomId();
 			var ajaxForm = new AjaxForm(domId);
-			ajaxForm.cols = this.cols;
+			for ( var attrName in ajaxForm) {
+				if (this[attrName] != null)
+					ajaxForm[attrName] = this[attrName];
+			}
+			// ajaxForm.cols = this.cols;
 			$._AddToLayuiObjectHashMap(domId, ajaxForm);
 
 		},
 		// 添加生命ajaxDataGrid对象脚本
-		_AddDefineAjaxFormObjectScript : function() {
-			var domId = this._GetAjaxFormDomId();
+		_MapComponent : function() {
+			var documentWriteHtml = "";
+			var domId = this._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_GetAjaxFormDomId : function() {
+		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
 		_RefreshForm : function() {
-			var domId = this._GetAjaxFormDomId();
+			var domId = this._GetComponentDomId();
 			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
 			_Ajaxform.refresh();
 		}
@@ -44,7 +48,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 })
 
 function AjaxForm(domId) {
-	this.id = domId;
+	this.domId = domId;
 	this.colproportion = "";
 	this.cols = "100";
 
@@ -55,6 +59,9 @@ function AjaxForm(domId) {
 	}
 	this.getCols = function() {
 		return this.cols;
+	}
+	this.getDom = function() {
+		return $("#" + this.domId);
 	}
 	this.setData = function(data) {
 
@@ -103,8 +110,13 @@ function AjaxForm(domId) {
 	}
 	this.refresh = function() {
 		var formLines = this.formLines;
+		var colproportion = this.colproportion;
+		var cols = this.cols;
+		var parentWidth = this.getDom().width();
 		for (index in this.formLines) {
-			formLines[index].generateToOneLine();
+			var start = cols * 2 * index;
+			var end = start + cols * 2;
+			formLines[index].generateToOneLine(colproportion.replace("：", ":").split(":").slice(start, end), parentWidth);
 		}
 	}
 	this.showField = function(name) {
@@ -135,18 +147,40 @@ function AjaxFormLine() {
 		var totalColspan = 0;
 		var formItems = this.formItems;
 		for (index in formItems) {
-			if((formItems[index].getVisible()+"").toLowerCase()=="true"){
+			// 显示为true的才计算
+			if ((formItems[index].getVisible() + "").toLowerCase() == "true") {
 				totalColspan += parseInt(formItems[index].getColspan());
 			}
 		}
 		return totalColspan;
 	}
 	// 自动将该Line下的所有数据转变成一行 即添加div
-	this.generateToOneLine = function() {
+	this.generateToOneLine = function(lineColproportion, parentWidth) {
 		var formItems = this.formItems;
-		if (formItems.length > 0) {
+		if (formItems.length > 0)
 			formItems[0].addLineStart();
-			formItems[formItems.length - 1].addLineEnd();
+		if (lineColproportion == null || lineColproportion.length <= 0)
+			return;
+		var totalWidthPercent = 0;
+		for ( var index in lineColproportion) {
+			totalWidthPercent += parseInt(lineColproportion[index]);
+		}
+		var i = 0;
+		for ( var index in formItems) {
+			if ((formItems[index].getVisible() + "").toLowerCase() == "true") {
+				var start = (i++) * 2;
+				var labelwidth = null;
+				var inputwidth = null;
+				if (start <= lineColproportion.length - 1) {
+					labelwidth = lineColproportion[start] / totalWidthPercent;
+				} else
+					return;
+				if (start + 1 <= lineColproportion.length - 1) {
+					inputwidth = lineColproportion[start + 1] / totalWidthPercent;
+				} else
+					return;
+				formItems[index].setWidthByColproportion(labelwidth * parentWidth + inputwidth * parentWidth, lineColproportion.slice(start, start + 2));
+			}
 		}
 	}
 

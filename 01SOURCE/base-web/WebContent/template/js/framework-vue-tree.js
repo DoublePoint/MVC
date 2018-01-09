@@ -1,4 +1,3 @@
-var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._Tree, {
 	props : [ 'id', 'datasource','onclick', 'columns', 'showLine' ],
 	template : '<ul type="hidden"  :id="id+guid" class="ztree" :onclick="onclick"></ul>',
@@ -11,34 +10,35 @@ Vue.component(_ConstantComponentMap._Tree, {
 	},
 	mounted : function() {
 		this._InitTreeData();
-		this._AddDefineTreeObjectScript();
+		this._MapComponent();
 	},
 	created : function() {
-		this._AddTreeToMap();
+		this._RegisterComponent();
 	},
 	methods : {
-		_AddTreeToMap : function() {
-			var domId = this._GetTreeDomId();
+		_RegisterComponent : function() {
+			var domId = this._GetComponentDomId();
 			var tree = new AjaxTree(domId);
 			tree.setDataSource($$pageContextPath+this.datasource);
 			tree.setOnclick(this.onclick);
 			$._AddToLayuiObjectHashMap(domId, tree);
 		},
 		// 添加生命Tree对象脚本
-		_AddDefineTreeObjectScript : function() {
-			var domId = this._GetTreeDomId();
+		_MapComponent : function() {
+			var documentWriteHtml = "";
+			var domId = this._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_GetTreeDomId : function() {
+		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
 		_InitTreeData : function() {
-			var domid=this._GetTreeDomId();
+			var domid=this._GetComponentDomId();
 			var tree=$._GetFromLayuiObjectHashMap(domid);
 			tree.render();
 		}

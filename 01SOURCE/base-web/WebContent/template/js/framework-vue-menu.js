@@ -1,4 +1,3 @@
-var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._AjaxMenu, {
 	props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 	template : ' <ul :id="id+guid" lay-filter="side" class="navMenu"></ul>',
@@ -10,30 +9,31 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 	},
 	mounted : function() {
 		this._InitAjaxMenuData();
-		this._AddDefineAjaxMenuObjectScript();
+		this._MapComponent();
 		this._InitMenuClick();
 	},
 	created : function() {
-		this._AddAjaxMenuToMap();
+		this._RegisterComponent();
 	},
 	methods : {
 		incrementCounter : function() {
 		},
-		_AddAjaxMenuToMap : function() {
-			var domId = this._GetAjaxMenuDomId();
+		_RegisterComponent : function() {
+			var domId = this._GetComponentDomId();
 			var _AjaxMenu = new AjaxMenu(domId);
 			$._AddToLayuiObjectHashMap(domId, _AjaxMenu);
 		},
 		// 添加生命AjaxMenu对象脚本
-		_AddDefineAjaxMenuObjectScript : function() {
-			var domId = this._GetAjaxMenuDomId();
+		_MapComponent : function() {
+			var documentWriteHtml = "";
+			var domId = this._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_GetAjaxMenuDomId : function() {
+		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
@@ -78,7 +78,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 		},
 		_InitAjaxMenuData : function() {
 			var cd = {};
-			var domId = this._GetAjaxMenuDomId();
+			var domId = this._GetComponentDomId();
 			$.ajax({
 				url : $$pageContextPath + this.datasource,
 				type : "POST",

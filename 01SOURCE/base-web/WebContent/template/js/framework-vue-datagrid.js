@@ -1,4 +1,3 @@
-var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	props : [ 'id', 'datasource', 'columns', 'onrowclick', 'onpageclick' ],
 	template : '<div><table  :lay-filter="id+guid"  :id="id+guid" v-on:click="incrementCounter"><slot></slot></table><div :id="laypage+guid"></div></div>',
@@ -12,17 +11,17 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	},
 	mounted : function() {
 		this._InitAjaxDataGridData();
-		this._AddDefineAjaxDataGridObjectScript();
+		this._MapComponent();
 
 	},
 	created : function() {
-		this._AddAjaxDataGridToMap();
+		this._RegisterComponent();
 	},
 	methods : {
 		incrementCounter : function() {
 		},
-		_AddAjaxDataGridToMap : function() {
-			var domId = this._GetAjaxDataGridDomId();
+		_RegisterComponent : function() {
+			var domId = this._GetComponentDomId();
 			var ajaxDataGrid = new AjaxDataGrid(domId);
 			ajaxDataGrid.pageId = this.laypage + this.guid;
 			$._AddToLayuiObjectHashMap(domId, ajaxDataGrid);
@@ -31,21 +30,22 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 			$._RegisterResizeModel(ajaxDataGrid);
 		},
 		// 添加生命ajaxDataGrid对象脚本
-		_AddDefineAjaxDataGridObjectScript : function() {
-			var domId = this._GetAjaxDataGridDomId();
+		_MapComponent : function() {
+			var documentWriteHtml = "";
+			var domId = this._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			$script.append(this.id + '.datasource="' + this.datasource + '";');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_GetAjaxDataGridDomId : function() {
+		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
 		_InitAjaxDataGridData : function() {
 			var cd = {};
-			var domId = this._GetAjaxDataGridDomId();
+			var domId = this._GetComponentDomId();
 			var _Ajaxdatagrid = $._GetFromLayuiObjectHashMap(domId);
 			$.ajax({
 				url : $$pageContextPath + this.datasource,
@@ -63,7 +63,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 			var onrowclickFunction = this.onrowclick;
 			if (onrowclickFunction != null) {
 				_Ajaxdatagrid.setRowClickFunctionName(onrowclickFunction);
-				$table.on('tool(' + this._GetAjaxDataGridDomId() + ')', function(obj) {
+				$table.on('tool(' + this._GetComponentDomId() + ')', function(obj) {
 					if (onrowclickFunction == null)
 						return;
 					var data = obj.datawrap;

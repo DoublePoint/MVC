@@ -1,4 +1,3 @@
-var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._LayOut, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
 	template : '<div :id="id+guid" class="lllayout "  :style="clientStyle"><slot></slot></div>',
@@ -28,24 +27,25 @@ Vue.component(_ConstantComponentMap._LayOut, {
 		}
 	},
 	created : function() {
-		this._AddFillLayoutToMap();
+		this._RegisterComponent();
 	},
 	mounted:function(){
-		this._AddDefineFillLayoutObjectScript();
+		this._MapComponent();
 	},
 	methods : {
-		_GetDomId : function() {
+		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_AddFillLayoutToMap : function() {
-			var domId = this._GetDomId();
+		_RegisterComponent : function() {
+			var domId = this._GetComponentDomId();
 			var _FillLayout = new FillLayout(domId);
 			$._AddToLayuiObjectHashMap(domId, _FillLayout);
 		},
 		// 添加生命FillLayout对象脚本
-		_AddDefineFillLayoutObjectScript : function() {
-			var domId = this._GetDomId();
+		_MapComponent : function() {
+			var documentWriteHtml = "";
+			var domId = this._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");

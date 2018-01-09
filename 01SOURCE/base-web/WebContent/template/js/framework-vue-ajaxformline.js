@@ -1,4 +1,3 @@
-var documentWriteHtml = "";
 Vue.component(_ConstantComponentMap._AjaxFormLine, {
 	props : [ 'id', 'onrowclick','colproportion' ],
 	template : '<div class="layui-form-item">' 
@@ -12,28 +11,29 @@ Vue.component(_ConstantComponentMap._AjaxFormLine, {
 		}
 	},
 	mounted:function(){
-		this._AddDefineAjaxFormLineObjectScript();
+		this._MapComponent();
 		
 	},
 	created : function() {
-		this._AddAjaxFormLineToMap();
+		this._RegisterComponent();
 	},
 	methods : {
-		_AddAjaxFormLineToMap:function(){
-//			var domId=this._GetAjaxFormLineDomId();
+		_RegisterComponent:function(){
+//			var domId=this._GetComponentDomId();
 //			var ajaxForm = new AjaxForm(domId);
 //			$._AddToLayuiObjectHashMap(domId, ajaxForm);
 			
 		},
 		//添加生命ajaxDataGrid对象脚本
-		_AddDefineAjaxFormLineObjectScript:function(){
-			var domId=this._GetAjaxFormLineDomId();
+		_MapComponent:function(){
+			var documentWriteHtml = "";
+			var domId=this._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
 			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_GetAjaxFormLineDomId:function(){
+		_GetComponentDomId:function(){
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
