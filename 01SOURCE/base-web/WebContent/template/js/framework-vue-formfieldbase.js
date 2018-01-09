@@ -209,14 +209,15 @@ function FormField(domId) {
 		this.getRoot().css(cssKey, cssValue);
 	}
 	this.setWidthByColproportion = function(linewidth,itemColproportion) {
+		linewidth=linewidth-1;//减少四舍五入的误差
 		if(itemColproportion.length==2){
 			var labelPercent=null;
 			var inputPercent=null;
 			var totalWidthPercent=parseInt(itemColproportion[0])+parseInt(itemColproportion[1]);
 			/*var labelPaddingMarginWidth=30;
 			var inputPaddingMarginWidth=12;*/
-			var labelPaddingMarginWidth=30;
-			var inputPaddingMarginWidth=0;
+			var labelPaddingMarginWidth=5;//5:layui-inline的左右margin
+			var inputPaddingMarginWidth=5;
 			labelPercent=parseInt(itemColproportion[0])/totalWidthPercent*linewidth-labelPaddingMarginWidth+"px";
 			inputPercent=parseInt(itemColproportion[1])/totalWidthPercent*linewidth-inputPaddingMarginWidth+"px";
 			this.setLabelStyle("width",labelPercent);

@@ -10,6 +10,8 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 	mounted : function() {
 		this._MapComponent();
 		this._RefreshForm();
+		// 调整完成之后显示
+		// this._Show();
 	},
 	created : function() {
 		this._RegisterComponent();
@@ -43,6 +45,11 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 			var domId = this._GetComponentDomId();
 			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
 			_Ajaxform.refresh();
+		},
+		_Show : function() {
+			var domId = this._GetComponentDomId();
+			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
+			_Ajaxform.show();
 		}
 	},
 })
@@ -113,11 +120,16 @@ function AjaxForm(domId) {
 		var colproportion = this.colproportion;
 		var cols = this.cols;
 		var parentWidth = this.getDom().width();
+//		this.getDom().parent().width(this.getDom().parent().width());
 		for (index in this.formLines) {
 			var start = cols * 2 * index;
 			var end = start + cols * 2;
 			formLines[index].generateToOneLine(colproportion.replace("：", ":").split(":").slice(start, end), parentWidth);
 		}
+		this.show();
+	}
+	this.show = function() {
+		this.getDom().show();
 	}
 	this.showField = function(name) {
 		var items = this.formItems;
@@ -156,6 +168,8 @@ function AjaxFormLine() {
 	}
 	// 自动将该Line下的所有数据转变成一行 即添加div
 	this.generateToOneLine = function(lineColproportion, parentWidth) {
+		parentWidth = parentWidth - 17;// 预留出滚动条的误差
+		parentWidth = Math.floor(parentWidth * 100) / 100
 		var formItems = this.formItems;
 		if (formItems.length > 0)
 			formItems[0].addLineStart();
@@ -166,20 +180,31 @@ function AjaxFormLine() {
 			totalWidthPercent += parseInt(lineColproportion[index]);
 		}
 		var i = 0;
+		var start = 0;
+		var end = 0;
 		for ( var index in formItems) {
 			if ((formItems[index].getVisible() + "").toLowerCase() == "true") {
-				var start = (i++) * 2;
+				var colspan = formItems[index].getColspan();
+				start = end;
+				end = start + colspan * 2;
 				var labelwidth = null;
 				var inputwidth = null;
 				if (start <= lineColproportion.length - 1) {
 					labelwidth = lineColproportion[start] / totalWidthPercent;
 				} else
 					return;
-				if (start + 1 <= lineColproportion.length - 1) {
-					inputwidth = lineColproportion[start + 1] / totalWidthPercent;
+				var inputPer=0;
+				if (end <= lineColproportion.length) {
+					//例如1:1:2:2  则label:1 input: 1+2+2
+					for(var i=start+1;i<end;i++){
+						inputPer+=parseInt(lineColproportion[i]);
+					}
+					inputwidth = inputPer / totalWidthPercent;
 				} else
 					return;
-				formItems[index].setWidthByColproportion(labelwidth * parentWidth + inputwidth * parentWidth, lineColproportion.slice(start, start + 2));
+				var inputLineWidth = labelwidth * parentWidth + inputwidth * parentWidth;
+				var sliceArr=[lineColproportion[start],inputPer];
+				formItems[index].setWidthByColproportion(inputLineWidth, sliceArr);
 			}
 		}
 	}

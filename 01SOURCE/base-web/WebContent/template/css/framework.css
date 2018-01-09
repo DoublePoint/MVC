@@ -229,8 +229,8 @@ a {
 .layui-form-item{
 	margin:2px 0 3px 0;
 }
-.layui-form-item .layui-inline{
- 	margin:0;
+.layui-form  .layui-inline{
+ 	margin:0 0px;
  }
 .layui-form-item:first-child
 {
@@ -245,3 +245,16 @@ a {
 	margin-right:0px;
 	display:inline-block;
 } 
+.layui-form-label{
+	padding-left:0px;
+	padding-right:0px; 
+}
+.layui-input-block{
+	margin-left:0px; 
+}
+.layui-form{
+	font-size:0;
+}
+.layui-inline{
+	font-size:14px;
+}
