@@ -1,3 +1,4 @@
+var timeoutInterval=null;
 function component(fieldType) {
 	var fieldTemplate = "";
 	if (_ConstantComponentMap._FormField == fieldType) {
