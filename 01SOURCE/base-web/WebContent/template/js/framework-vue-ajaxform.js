@@ -1,11 +1,17 @@
 Vue.component(_ConstantComponentMap._AjaxForm, {
 	props : [ 'id', 'onrowclick', 'cols', 'colproportion' ],
-	template : '<form class="layui-form " :id="id+guid" action=""><slot></slot></form>',
+	template : '<form class="layui-form " :id="id+guid"  action=""><slot ></slot></form>',
 
 	data : function() {
 		return {
 			guid : $._GenerateUUID()
 		}
+	},
+	beforeMount : function() {
+		var domId = this._GetComponentDomId();
+		var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
+		var a = 1;
+		var b = a;
 	},
 	mounted : function() {
 		this._MapComponent();
@@ -27,6 +33,8 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 			// ajaxForm.cols = this.cols;
 			$._AddToLayuiObjectHashMap(domId, ajaxForm);
 
+			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
+//			$._RegisterResizeModel(ajaxForm);
 		},
 		// 添加生命ajaxDataGrid对象脚本
 		_MapComponent : function() {
@@ -56,7 +64,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 
 function AjaxForm(domId) {
 	this.domId = domId;
-	this.colproportion = "";
+	this.colproportion = "1:3:1:3:1:3:1:3:1:3";
 	this.cols = "100";
 
 	this.formItems = new Array();
@@ -76,18 +84,6 @@ function AjaxForm(domId) {
 
 	this.getFormItems = function(item) {
 		return this.formItems;
-	}
-	/**
-	 * 设置字段值
-	 */
-	this.setFieldValue = function(name, value) {
-		var items = this.formItems;
-		for (var i = 0; i < items.length; i++) {
-			if (items[i].field == name) {
-				items[i].setData(value);
-				return;
-			}
-		}
 	}
 	this.addFormItem = function(item) {
 		var isNextLine = false;
@@ -115,21 +111,46 @@ function AjaxForm(domId) {
 		}
 		this.formItems.push(item);
 	}
+	this.addLine = function() {
+		for (index in this.formLines) {
+			this.formLines[index].createLine();
+		}
+	}
 	this.refresh = function() {
 		var formLines = this.formLines;
 		var colproportion = this.colproportion;
 		var cols = this.cols;
-		var parentWidth = this.getDom().width();
-//		this.getDom().parent().width(this.getDom().parent().width());
+		// this.getDom().parent().width(this.getDom().parent().width());
 		for (index in this.formLines) {
-			var start = cols * 2 * index;
-			var end = start + cols * 2;
-			formLines[index].generateToOneLine(colproportion.replace("：", ":").split(":").slice(start, end), parentWidth);
+			// var start = cols * 2 * index;
+			var start = 0;
+			var end = cols * 2;//读取的是一行的colproportion
+			var formLineColproportionArr = colproportion.replace("：", ":").split(":").slice(start, end);
+
+			if (formLineColproportionArr == null || formLineColproportionArr.length == 0)
+				formLineColproportionArr = [ 1, 1 ];
+			else if (formLineColproportionArr.length == 1)
+				formLineColproportionArr.push(formLineColproportionArr[0]);
+			formLines[index].generateToOneLine(formLineColproportionArr);
 		}
-		this.show();
+	}
+	this.resize = function() {
+		this.refresh();
+	}
+	/**
+	 * 设置字段值
+	 */
+	this.setFieldValue = function(name, value) {
+		var items = this.formItems;
+		for (var i = 0; i < items.length; i++) {
+			if (items[i].field == name) {
+				items[i].setData(value);
+				return;
+			}
+		}
 	}
 	this.show = function() {
-		this.getDom().show();
+		this.getDom().css("display", "block");
 	}
 	this.showField = function(name) {
 		var items = this.formItems;
@@ -166,16 +187,19 @@ function AjaxFormLine() {
 		}
 		return totalColspan;
 	}
+	this.createLine = function() {
+		var formItems = this.formItems;
+		if (formItems.length > 0)
+			formItems[0].addLineStart();
+	}
 	// 自动将该Line下的所有数据转变成一行 即添加div
-	this.generateToOneLine = function(lineColproportion, parentWidth) {
-		parentWidth = parentWidth - 17;// 预留出滚动条的误差
-		parentWidth = Math.floor(parentWidth * 100) / 100
+	this.generateToOneLine = function(lineColproportion) {
 		var formItems = this.formItems;
 		if (formItems.length > 0)
 			formItems[0].addLineStart();
 		if (lineColproportion == null || lineColproportion.length <= 0)
 			return;
-		var totalWidthPercent = 0;
+		var totalWidthPercent = 0;//所有colporprotion比例的总和入1:3:1:3  则为8
 		for ( var index in lineColproportion) {
 			totalWidthPercent += parseInt(lineColproportion[index]);
 		}
@@ -185,26 +209,27 @@ function AjaxFormLine() {
 		for ( var index in formItems) {
 			if ((formItems[index].getVisible() + "").toLowerCase() == "true") {
 				var colspan = formItems[index].getColspan();
-				start = end;
+				start = end;//每个一个字段对应的数组的开始 也就是上一个字段的结束
 				end = start + colspan * 2;
-				var labelwidth = null;
-				var inputwidth = null;
+				var labelwidthPercent = null;
+				var inputwidthPercent = null;
 				if (start <= lineColproportion.length - 1) {
-					labelwidth = lineColproportion[start] / totalWidthPercent;
+					labelwidthPercent = lineColproportion[start] / totalWidthPercent;
 				} else
 					return;
-				var inputPer=0;
+				var inputPer = 0;
 				if (end <= lineColproportion.length) {
-					//例如1:1:2:2  则label:1 input: 1+2+2
-					for(var i=start+1;i<end;i++){
-						inputPer+=parseInt(lineColproportion[i]);
+					// 例如1:1:2:2 则label:1 input: 1+2+2
+					for (var i = start + 1; i < end; i++) {
+						inputPer += parseInt(lineColproportion[i]);
 					}
-					inputwidth = inputPer / totalWidthPercent;
+					inputwidthPercent = inputPer / totalWidthPercent;
 				} else
 					return;
-				var inputLineWidth = labelwidth * parentWidth + inputwidth * parentWidth;
-				var sliceArr=[lineColproportion[start],inputPer];
-				formItems[index].setWidthByColproportion(inputLineWidth, sliceArr);
+				var inputLineWidthPercent=labelwidthPercent+inputwidthPercent;//当前字段占总行的百分比
+				//对于同一个字段 将label:input:label:input 组装成label:(input+label+input) 如1:3:1:3-->1:(3+1+3)
+				var sliceArr = [ lineColproportion[start], inputPer ];
+				formItems[index].setWidthByColproportion(inputLineWidthPercent, sliceArr);
 			}
 		}
 	}

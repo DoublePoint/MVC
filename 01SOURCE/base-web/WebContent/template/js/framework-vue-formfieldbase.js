@@ -1,16 +1,16 @@
 function component(fieldType) {
 	var fieldTemplate = "";
 	if (_ConstantComponentMap._FormField == fieldType) {
-		fieldTemplate = '<div class="layui-inline">'
-				+ '<label class="layui-form-label" :style="labelclientStyle">{{title}}</label>'
+		fieldTemplate = '<div class="layui-inline" >'
+				+ '<label class="layui-form-label" :style="labelclientStyle">{{title+"："}}</label>'
 				+ '<div class="layui-input-block">'
 				+ '<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
 				+ '</div>' + '</div>';
 	} else if (_ConstantComponentMap._FormDate == fieldType) {
-		fieldTemplate = '<div class="layui-form-item">' + '<label class="layui-form-label">{{title}}</label>' + '<div class="layui-input-inline">'
+		fieldTemplate = '<div class="layui-form-item">' + '<label class="layui-form-label">{{title+"："}}</label>' + '<div class="layui-input-inline">'
 				+ '<input :id="id+guid" type="text" class="layui-input" lay-verify="title" :field="field" :id="id+guid" :placeholder="placeholder">' + ' </div>' + '</div>';
 	} else if (_ConstantComponentMap._FormInputButton == fieldType) {
-		fieldTemplate = '<div class="layui-inline">' + '<label class="layui-form-label" :style="labelclientStyle">{{title}}</label>' + '<div class="layui-input-block">'
+		fieldTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{title+"："}}</label>' + '<div class="layui-input-block">'
 				+ '<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'
 				+ '<input :id="id+guid+hidden" type="hidden" value="" :name="field" />' + '<a :id="id+guid+a" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
 	}
@@ -47,12 +47,16 @@ function component(fieldType) {
 				guid : $._GenerateUUID(),
 			}
 		},
-		mounted : function() {
-			this._MapComponent();
+		beforeMount:function(){
 			// 将formfield添加到form中
 			this._AddToAjaxForm();
+			var ajaxformDomId=this.$parent._GetComponentDomId();
+			var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
+			ajaxform.addLine();
+		},
+		mounted : function() {
+			this._MapComponent();
 			this._SetStyle();
-
 			if (_ConstantComponentMap._FormInputButton == fieldType) {
 				this._InitInputbuttonOnClick();// 初始化鼠标单击事件
 			}
@@ -65,8 +69,10 @@ function component(fieldType) {
 			_AddToAjaxForm : function() {
 				var domId = this._GetComponentDomId();
 				var formElement = $._GetFromLayuiObjectHashMap(domId);
-				var ajaxformdom = $("#" + domId).parents(".layui-form");
-				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformdom.attr("id"));
+//				var ajaxformdom = $("#" + domId).parents(".layui-form");
+//				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformdom.attr("id"));
+				var ajaxformDomId=this.$parent._GetComponentDomId();
+				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
 				ajaxform.addFormItem(formElement);
 			},
 			_GetComponentDomId : function() {
@@ -174,8 +180,10 @@ function FormField(domId) {
 	}
 	this.getRoot = function() {
 		return this.getInputDom().parents(".layui-inline");
+		//		return this.getInputDom().parent().parent();
 	}
 	this.getLabel = function() {
+		//		return this.getInputDom().parent().parent().children("label");
 		return this.getInputDom().parents(".layui-inline").children("label");
 	}
 	this.setColspan = function(colspan) {
@@ -208,24 +216,49 @@ function FormField(domId) {
 	this.setRootStyle=function(cssKey,cssValue){
 		this.getRoot().css(cssKey, cssValue);
 	}
-	this.setWidthByColproportion = function(linewidth,itemColproportion) {
-		linewidth=linewidth-1;//减少四舍五入的误差
-		if(itemColproportion.length==2){
+	this.setWidthByColproportion = function(linewidthPercent,itemColproportion) {
+		/*避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示*/
+		if(itemColproportion.length>=2){
 			var labelPercent=null;
 			var inputPercent=null;
 			var totalWidthPercent=parseInt(itemColproportion[0])+parseInt(itemColproportion[1]);
-			/*var labelPaddingMarginWidth=30;
-			var inputPaddingMarginWidth=12;*/
-			var labelPaddingMarginWidth=5;//5:layui-inline的左右margin
-			var inputPaddingMarginWidth=5;
-			labelPercent=parseInt(itemColproportion[0])/totalWidthPercent*linewidth-labelPaddingMarginWidth+"px";
-			inputPercent=parseInt(itemColproportion[1])/totalWidthPercent*linewidth-inputPaddingMarginWidth+"px";
-			this.setLabelStyle("width",labelPercent);
-			this.setInputStyle("width",inputPercent);
+			this.setLabelStyle("display","inline-block");
+			this.setInputStyle("padding-left","10px");
+			this.setInputStyle("display","inline-block");
+			//舍掉后面两位小数
+			labelPercent= parseInt(itemColproportion[0])/totalWidthPercent;
+			inputPercent=parseInt(itemColproportion[1])/totalWidthPercent;
+			this.setLabelStyle("width",labelPercent*100+"%");
+			this.setInputStyle("width",inputPercent*100+"%");
 		}
-		if(linewidth!=null){
-			this.setRootStyle("width",linewidth+"px");
+		if(linewidthPercent!=null){
+			this.setRootStyle("width",linewidthPercent*100+"%");
 		}
+		
+		
+//		/*避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示*/
+//		linewidth=linewidth-1;//减少四舍五入的误差
+//		if(itemColproportion.length==2){
+//			var labelPercent=null;
+//			var inputPercent=null;
+//			var totalWidthPercent=parseInt(itemColproportion[0])+parseInt(itemColproportion[1]);
+//			var labelPaddingMarginWidth=0;//5:layui-inline的左右margin padding 实际宽度等于 本处计算的宽度+margin +padding
+//			var inputPaddingMarginWidth=10;
+////			this.setLabelStyle("padding-left","10px");
+////			this.setLabelStyle("padding-right","10px");
+//			this.setLabelStyle("display","inline-block");
+//			this.setInputStyle("padding-left","10px");
+////			this.setInputStyle("padding-right","10px");
+//			this.setInputStyle("display","inline-block");
+//			//舍掉后面两位小数
+//			labelPercent= Math.floor(parseInt(itemColproportion[0])/totalWidthPercent*linewidth)-labelPaddingMarginWidth+"px";
+//			inputPercent=Math.floor(parseInt(itemColproportion[1])/totalWidthPercent*linewidth)-inputPaddingMarginWidth+"px";
+//			this.setLabelStyle("width",labelPercent);
+//			this.setInputStyle("width",inputPercent);
+//		}
+//		if(linewidth!=null){
+//			this.setRootStyle("width",linewidth+"px");
+//		}
 //		else if(labelwidth!=null){
 //			this.setRootStyle((labelwidth)*100+"%");
 //			this.setLabelStyle("width",labelwidth);

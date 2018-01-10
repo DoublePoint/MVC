@@ -47,5 +47,6 @@ var _ConstantFormFieldInheritParams = [ 'id', //
 'validtype', 
 'colspan',
 'placeholder',
+'parentId',
 // 文本框的显示格式,取值为text和password，默认为text
 'errmsg' ];

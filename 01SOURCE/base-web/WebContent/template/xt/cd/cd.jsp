@@ -31,7 +31,7 @@
 			<div class="layui-col-xs10 layui-col-sm10 layui-col-md10" >
 				<ll-filllayout > 
 					<ll-fillarea height="88px" >
-							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:8:2:8:2:8:2:8:2:8:1:9"> 
+							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:8:2:8:1:8"> 
 									<ll-formfield id="cdmcId" colspan="1" title="菜单名1" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="cdmcId" colspan="2" title="菜单名2" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="cdmcId" title="菜单名3" visible="false" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>

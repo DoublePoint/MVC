@@ -32,6 +32,8 @@ function _InitExplorerResizeListener() {
 		var explorerHeight = $(this).height()
 		var $content = $('#layui-tab-content');
 		var trueHeight = explorerHeight - 145
+		if(trueHeight<=300)
+			trueHeight=300;
 		$content.height(trueHeight);
 
 		// $("#testSpan").text($("#testSpan").text() + explorerHeight + " ");

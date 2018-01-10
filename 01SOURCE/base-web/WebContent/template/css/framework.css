@@ -4,8 +4,10 @@ html, body, form {
 }
 
 form form {
-	height: 0;
+	/* height: 0; */
+	height: 100%;
 	width: 100%;
+	overflow:hidden;
 }
 
 .layui-layout-body form {
@@ -197,7 +199,7 @@ a {
 	text-align: center;
 	line-height: 38px;
 	display: inline-block;
-	left: 100%;
+	/* left: 100%; */
 	margin-left: -38px;
 	top: 0px;
 	position: absolute;
@@ -235,19 +237,26 @@ a {
 .layui-form-item:first-child
 {
 	margin:0;
-	padding:5px 0 2px 0;
+	padding:5px 0 0px 0;
 }
 .lllayout .layoutarea{
 	overflow:auto;
 }
 .layui-input-block .layui-input{
 	padding-left:0px;
-	margin-right:0px;
+	padding-right:0px;
 	display:inline-block;
+	display:none;
+	width:0;
 } 
 .layui-form-label{
 	padding-left:0px;
 	padding-right:0px; 
+	display:none;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap; 
+	width:0;
 }
 .layui-input-block{
 	margin-left:0px; 
@@ -255,6 +264,9 @@ a {
 .layui-form{
 	font-size:0;
 }
-.layui-inline{
+.layui-inline,.layoutarea{
 	font-size:14px;
+}
+.layui-body{
+	overflow:hidden;
 }
