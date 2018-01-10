@@ -270,11 +270,21 @@ a {
 	overflow:hidden;
 }
 .layui-form-item{
-	font-size:14px;
+	font-size:16px;
 }
-.layui-form-selected dl{
+/* .layui-form-selected dl{
 	z-index:10000;
 }
 .layui-form-selected dl dd{
 	z-index:10000;
+} */
+.layui-form-select dl{
+	max-height:220px;
+	min-width:0;
+}
+.layui-select-title>input{
+	display:none;
+}
+.layui-form-select dl dd, .layui-form-select dl dt{
+	line-height: 20px;
 }

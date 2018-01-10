@@ -39,7 +39,7 @@
 									<ll-formfield id="cdmcId" title="菜单名5" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="cdmcId" title="至" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="cdmcId" title="菜单名7" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formselect id="cdmcId" colspan="1" title="菜单名8" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
+									<ll-formselect id="cdmcId" colspan="1" title="下拉框" labelalign="left" field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
 									 <!-- <input type="button" class="layui-btn" onclick="onClickAdd()" value="查询"/> -->
 							</ll-ajaxform>
 					</ll-fillarea>

@@ -18,7 +18,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		this._RefreshForm();
 		// 调整完成之后显示
 		// this._Show();
-		$form.render(); 
+//		$form.render(); 
 	},
 	created : function() {
 		this._RegisterComponent();
