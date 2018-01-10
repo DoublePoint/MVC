@@ -13,7 +13,6 @@ var _ConstantComponentMap = {
 	_AjaxDataGrid : "ll-ajaxdatagrid",
 	_AjaxDataGridRow : "ll-gridrow",
 	_AjaxMenu : "ll-menu",
-	_AjaxForm : "ll-ajaxform",
 	_AjaxFormLine : "ll-ajaxformline",
 	_Tree : "ll-tree",
 	_LayOut : "ll-filllayout",
@@ -23,6 +22,7 @@ var _ConstantComponentMap = {
 	_FormField : "ll-formfield",
 	_FormCheck : "ll-formcheck",
 	_FormDate : "ll-formdate",
+	_FormSelect : "ll-formselect",
 	_FormInputButton : "ll-forminputbutton",
 	_FormToolBar : "ll-toolbar"
 };

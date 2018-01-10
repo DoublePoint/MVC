@@ -7,7 +7,6 @@ form form {
 	/* height: 0; */
 	height: 100%;
 	width: 100%;
-	overflow:hidden;
 }
 
 .layui-layout-body form {
@@ -239,17 +238,17 @@ a {
 	margin:0;
 	padding:5px 0 0px 0;
 }
-.lllayout .layoutarea{
-	overflow:auto;
+.lllayout>.layoutarea{
+	/* overflow:auto; */
 }
-.layui-input-block .layui-input{
+.layui-input-block>.layui-input{
 	padding-left:0px;
 	padding-right:0px;
 	display:inline-block;
 	display:none;
 	width:0;
 } 
-.layui-form-label{
+.layui-inline>.layui-form-label{
 	padding-left:0px;
 	padding-right:0px; 
 	display:none;
@@ -258,7 +257,7 @@ a {
 	white-space: nowrap; 
 	width:0;
 }
-.layui-input-block{
+.layui-inline>.layui-input-block{
 	margin-left:0px; 
 }
 .layui-form{
@@ -269,4 +268,13 @@ a {
 }
 .layui-body{
 	overflow:hidden;
+}
+.layui-form-item{
+	font-size:14px;
+}
+.layui-form-selected dl{
+	z-index:10000;
+}
+.layui-form-selected dl dd{
+	z-index:10000;
 }

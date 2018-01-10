@@ -2,17 +2,32 @@ function component(fieldType) {
 	var fieldTemplate = "";
 	if (_ConstantComponentMap._FormField == fieldType) {
 		fieldTemplate = '<div class="layui-inline" >'
-				+ '<label class="layui-form-label" :style="labelclientStyle">{{title+"："}}</label>'
+				+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
 				+ '<div class="layui-input-block">'
 				+ '<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
 				+ '</div>' + '</div>';
 	} else if (_ConstantComponentMap._FormDate == fieldType) {
-		fieldTemplate = '<div class="layui-form-item">' + '<label class="layui-form-label">{{title+"："}}</label>' + '<div class="layui-input-inline">'
+		fieldTemplate = '<div class="layui-inline">' + '<label class="layui-form-label">{{"&nbsp;&nbsp;"+title+"："}}</label>' + '<div class="layui-input-block">'
 				+ '<input :id="id+guid" type="text" class="layui-input" lay-verify="title" :field="field" :id="id+guid" :placeholder="placeholder">' + ' </div>' + '</div>';
 	} else if (_ConstantComponentMap._FormInputButton == fieldType) {
-		fieldTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{title+"："}}</label>' + '<div class="layui-input-block">'
+		fieldTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
+				+ '<div class="layui-input-block">'
 				+ '<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'
 				+ '<input :id="id+guid+hidden" type="hidden" value="" :name="field" />' + '<a :id="id+guid+a" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
+	} else if (_ConstantComponentMap._FormSelect == fieldType) {
+		fieldTemplate = '<div class="layui-form-item">'
+			+ '<label class="layui-form-label">单行选择框</label>'
+			+ '<div class="layui-input-block">'
+			+ '<select name="interest" lay-filter="aihao">'
+			+ '<option value=""></option>'
+			+ '<option value="0">写作</option>'
+			+ '<option value="1" selected="">阅读</option>'
+			+ '<option value="2">游戏</option>'
+			+ '<option value="3">音乐</option>'
+			+ '<option value="4">旅行</option>'
+			+ '</select>'
+			+ '</div>'
+			+ '</div>';
 	}
 
 	// 创建style映射
@@ -47,10 +62,10 @@ function component(fieldType) {
 				guid : $._GenerateUUID(),
 			}
 		},
-		beforeMount:function(){
+		beforeMount : function() {
 			// 将formfield添加到form中
 			this._AddToAjaxForm();
-			var ajaxformDomId=this.$parent._GetComponentDomId();
+			var ajaxformDomId = this.$parent._GetComponentDomId();
 			var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
 			ajaxform.addLine();
 		},
@@ -59,6 +74,8 @@ function component(fieldType) {
 			this._SetStyle();
 			if (_ConstantComponentMap._FormInputButton == fieldType) {
 				this._InitInputbuttonOnClick();// 初始化鼠标单击事件
+			} else if (_ConstantComponentMap._FormDate == fieldType) {
+				this._InitDateOnClick();// 初始化日期控件
 			}
 		},
 		created : function() {
@@ -69,9 +86,7 @@ function component(fieldType) {
 			_AddToAjaxForm : function() {
 				var domId = this._GetComponentDomId();
 				var formElement = $._GetFromLayuiObjectHashMap(domId);
-//				var ajaxformdom = $("#" + domId).parents(".layui-form");
-//				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformdom.attr("id"));
-				var ajaxformDomId=this.$parent._GetComponentDomId();
+				var ajaxformDomId = this.$parent._GetComponentDomId();
 				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
 				ajaxform.addFormItem(formElement);
 			},
@@ -91,24 +106,6 @@ function component(fieldType) {
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
 				var formField = new FormField(domId);
-				// if (this.maxlen != null)
-				// formField.setMaxlen(this.maxlen);
-				// if (this.colspan != null)
-				// formField.setColspan(this.colspan);
-				// if (this.field != null)
-				// formField.setField(this.field);
-				// if (this.validtype != null)
-				// formField.setValidType(this.validtype);
-				// if (this.errmsg != null)
-				// formField.errmsg = this.errmsg;
-				// if (this.visible != null)
-				// formField.setVisible(this.visible);
-				// var obj=this;
-				// var arr =Object.getOwnPropertyNames(formField);
-				// for ( var attrName in arr) {
-				// if (this[arr[attrName]] != null)
-				// formField[attrName] = this[arr[attrName]];
-				// }
 
 				for ( var attrName in formField) {
 					if (this[attrName] != null)
@@ -143,6 +140,14 @@ function component(fieldType) {
 					$._Eval(onclick);
 				});
 			},
+
+			/**/
+			_InitDateOnClick : function() {
+				$laydate.render({
+					elem : "#" + this._GetComponentDomId(),
+					theme : 'molv'
+				});
+			}
 		},
 	});
 	// 获取私有Style的对应的属性名称
@@ -180,10 +185,8 @@ function FormField(domId) {
 	}
 	this.getRoot = function() {
 		return this.getInputDom().parents(".layui-inline");
-		//		return this.getInputDom().parent().parent();
 	}
 	this.getLabel = function() {
-		//		return this.getInputDom().parent().parent().children("label");
 		return this.getInputDom().parents(".layui-inline").children("label");
 	}
 	this.setColspan = function(colspan) {
@@ -200,7 +203,7 @@ function FormField(domId) {
 	this.setMaxlen = function(aMaxlen) {
 		this.maxlen = aMaxlen;
 	}
-	this.setInputStyle=function(cssKey,cssValue){
+	this.setInputStyle = function(cssKey, cssValue) {
 		this.getInputDom().css(cssKey, cssValue);
 	}
 	this.setLabelText = function(labeltext) {
@@ -213,60 +216,27 @@ function FormField(domId) {
 		this.readonly = aReadonly;
 		this.getInputDom().attr("readonly", this.readonly);
 	};
-	this.setRootStyle=function(cssKey,cssValue){
+	this.setRootStyle = function(cssKey, cssValue) {
 		this.getRoot().css(cssKey, cssValue);
 	}
-	this.setWidthByColproportion = function(linewidthPercent,itemColproportion) {
-		/*避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示*/
-		if(itemColproportion.length>=2){
-			var labelPercent=null;
-			var inputPercent=null;
-			var totalWidthPercent=parseInt(itemColproportion[0])+parseInt(itemColproportion[1]);
-			this.setLabelStyle("display","inline-block");
-			this.setInputStyle("padding-left","10px");
-			this.setInputStyle("display","inline-block");
-			//舍掉后面两位小数
-			labelPercent= parseInt(itemColproportion[0])/totalWidthPercent;
-			inputPercent=parseInt(itemColproportion[1])/totalWidthPercent;
-			this.setLabelStyle("width",labelPercent*100+"%");
-			this.setInputStyle("width",inputPercent*100+"%");
+	this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
+		/* 避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示 */
+		if (itemColproportion.length >= 2) {
+			var labelPercent = null;
+			var inputPercent = null;
+			var totalWidthPercent = parseInt(itemColproportion[0]) + parseInt(itemColproportion[1]);
+			this.setLabelStyle("display", "inline-block");
+			this.setInputStyle("padding-left", "10px");
+			this.setInputStyle("display", "inline-block");
+			// 舍掉后面两位小数
+			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
+			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
+			this.setLabelStyle("width", labelPercent * 100 + "%");
+			this.setInputStyle("width", inputPercent * 100 + "%");
 		}
-		if(linewidthPercent!=null){
-			this.setRootStyle("width",linewidthPercent*100+"%");
+		if (linewidthPercent != null) {
+			this.setRootStyle("width", linewidthPercent * 100 + "%");
 		}
-		
-		
-//		/*避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示*/
-//		linewidth=linewidth-1;//减少四舍五入的误差
-//		if(itemColproportion.length==2){
-//			var labelPercent=null;
-//			var inputPercent=null;
-//			var totalWidthPercent=parseInt(itemColproportion[0])+parseInt(itemColproportion[1]);
-//			var labelPaddingMarginWidth=0;//5:layui-inline的左右margin padding 实际宽度等于 本处计算的宽度+margin +padding
-//			var inputPaddingMarginWidth=10;
-////			this.setLabelStyle("padding-left","10px");
-////			this.setLabelStyle("padding-right","10px");
-//			this.setLabelStyle("display","inline-block");
-//			this.setInputStyle("padding-left","10px");
-////			this.setInputStyle("padding-right","10px");
-//			this.setInputStyle("display","inline-block");
-//			//舍掉后面两位小数
-//			labelPercent= Math.floor(parseInt(itemColproportion[0])/totalWidthPercent*linewidth)-labelPaddingMarginWidth+"px";
-//			inputPercent=Math.floor(parseInt(itemColproportion[1])/totalWidthPercent*linewidth)-inputPaddingMarginWidth+"px";
-//			this.setLabelStyle("width",labelPercent);
-//			this.setInputStyle("width",inputPercent);
-//		}
-//		if(linewidth!=null){
-//			this.setRootStyle("width",linewidth+"px");
-//		}
-//		else if(labelwidth!=null){
-//			this.setRootStyle((labelwidth)*100+"%");
-//			this.setLabelStyle("width",labelwidth);
-//		}
-//		if(inputwidth!=null){
-//			this.setRootStyle((inputwidth)*100+"%");
-//			this.setInputStyle("width",inputwidth);
-//		}
 	}
 	this.setValidType = function(vatype) {
 		this.validtype = vatype;

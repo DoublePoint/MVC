@@ -44,6 +44,7 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formfield.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-forminputbutton.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formdate.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-formselect.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-toolbar.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
