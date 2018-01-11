@@ -30,7 +30,7 @@
 			<ll-formfield title="菜单链接" field="cdlj" maxlen="200"></ll-formfield>
 			<ll-formfield title="菜单序号" field="cdpx" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
 			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="sjcdbs" onclick="InputButtonClick"></ll-forminputbutton>
-			<ll-formdate title="创建时间" field="sjcd" ></ll-formdate>
+			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
 			<ll-toolbar>
 				<button class="layui-btn" lay-submit="" lay-filter="demo1" >立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>

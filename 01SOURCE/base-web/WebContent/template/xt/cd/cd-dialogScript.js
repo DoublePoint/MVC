@@ -3,7 +3,7 @@ function init(response) {
 	var cdbs = treeNode.cdbs;
 	var cdmc = treeNode.cdmc;
 
-	ajaxform.setFieldValue("sjcdbs", cdbs);
+//	ajaxform.setFieldValue("sjcdbs", cdbs);
 	inpbtn_sjcdbs.setData(cdbs, cdmc);
 }
 

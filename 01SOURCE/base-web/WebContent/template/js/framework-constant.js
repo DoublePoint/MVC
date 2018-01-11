@@ -24,7 +24,8 @@ var _ConstantComponentMap = {
 	_FormDate : "ll-formdate",
 	_FormSelect : "ll-formselect",
 	_FormInputButton : "ll-forminputbutton",
-	_FormToolBar : "ll-toolbar"
+	_FormToolBar : "ll-formtoolbar",
+	_ToolBar : "ll-toolbar"
 };
 var _ConstantPageDefaultParam = {
 	_IS_DO_INIT_FUNTION : "_is_do_init_function",

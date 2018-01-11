@@ -57,12 +57,13 @@ Vue.component(_ConstantComponentMap._LayOutFillArea, {
 		},
 		// 添加生命FillArea对象脚本
 		_MapComponent : function() {
-			var documentWriteHtml = "";
-			var domId = this._GetComponentDomId();
-			var $script = $('<script type="text/javascript"></script>');
-			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
-			documentWriteHtml = $script.prop("outerHTML");
-			$("body").append(documentWriteHtml);
+			$._OutputMapCompoment(this);
+//			var documentWriteHtml = "";
+//			var domId = this._GetComponentDomId();
+//			var $script = $('<script type="text/javascript"></script>');
+//			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
+//			documentWriteHtml = $script.prop("outerHTML");
+//			$("body").append(documentWriteHtml);
 		}
 
 	},

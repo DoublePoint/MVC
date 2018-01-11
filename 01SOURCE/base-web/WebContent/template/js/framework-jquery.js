@@ -129,12 +129,12 @@ var DoublePoint = {};// 全局对象
 			var height = obj.height;
 			if (width == null)
 				width = "100px";
-			else if ((""+width).indexOf("px") == -1) {
+			else if (("" + width).indexOf("px") == -1) {
 				width = obj.width + "px";
 			}
 			if (height == null)
 				height = "100px";
-			else if ((""+height).indexOf("px") == -1) {
+			else if (("" + height).indexOf("px") == -1) {
 				height = obj.height + "px";
 			}
 			obj.area = [ width, height ];
@@ -153,6 +153,7 @@ var DoublePoint = {};// 全局对象
 		_CloseDialog : function(index, data) {
 			$layer.close(index); // 再执行关闭
 
+			//_AjaxPage 页面默认参数 每个页面都有
 			if (_AjaxPage.YesFunction != null) {
 				_AjaxPage.YesFunction(data);
 			} else {
@@ -420,27 +421,45 @@ var DoublePoint = {};// 全局对象
 				second = "0" + second;
 			return "<span>" + year + "-" + monthValue + "-" + dayOfMonth + " " + hour + ":" + minute + ":" + second + "</span>"
 		},
-		_CreateStringBuffer:function(str){
+		_CreateStringBuffer : function(str) {
 			function StringBuffer(st) {
-			    this.__strings__ = new Array();
-			    if(st!=null)
-			    	this.__strings__.push(st);
+				this.__strings__ = new Array();
+				if (st != null)
+					this.__strings__.push(st);
 			}
-			StringBuffer.prototype.append = function (str) {
-			    this.__strings__.push(str);
-			    return this;    //方便链式操作
+			StringBuffer.prototype.append = function(str) {
+				this.__strings__.push(str);
+				return this; // 方便链式操作
 			}
-			StringBuffer.prototype.toString = function () {
-			    return this.__strings__.join("");
+			StringBuffer.prototype.toString = function() {
+				return this.__strings__.join("");
 			}
 			return new StringBuffer(str);
 		},
-		_CreateStyleBuffer:function(akey,avalue){
-			var styleBuffer=$._CreateStringBuffer(akey);
+		_CreateStyleBuffer : function(akey, avalue) {
+			var styleBuffer = $._CreateStringBuffer(akey);
 			styleBuffer.append(":").append(avalue).append(";");
 			return styleBuffer
+		},
+		_OutputMapCompoment : function(aComponent){
+			if(aComponent.id==null)
+				return;
+			var documentWriteHtml = "";
+			var domId = aComponent._GetComponentDomId();
+			var $script = $('<script type="text/javascript"></script>');
+			$script.append('var ' + aComponent.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
+			documentWriteHtml = $script.prop("outerHTML");
+			$("body").append(documentWriteHtml);
 		}
-
 	});
 
+	//轮换是否显示
+	$.fn._ToggleDisplay = function() {
+		var flag = $(this).css("display");
+		if (flag == "none" || flag == null) {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	};
 })(jQuery);

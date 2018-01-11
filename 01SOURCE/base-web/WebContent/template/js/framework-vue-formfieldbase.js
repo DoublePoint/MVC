@@ -1,30 +1,17 @@
-var timeoutInterval=null;
-function component(fieldType) {
-	var fieldTemplate = "";
-	if (_ConstantComponentMap._FormField == fieldType) {
-		fieldTemplate = '<div class="layui-inline" >'
-				+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
-				+ '<div class="layui-input-block">'
-				+ '<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
-				+ '</div>' + '</div>';
-	} else if (_ConstantComponentMap._FormDate == fieldType) {
-		fieldTemplate = '<div class="layui-inline">' + '<label class="layui-form-label">{{"&nbsp;&nbsp;"+title+"："}}</label>' + '<div class="layui-input-block">'
-				+ '<input :id="id+guid" type="text" class="layui-input" lay-verify="title" :field="field" :id="id+guid" :placeholder="placeholder">' + ' </div>' + '</div>';
-	} else if (_ConstantComponentMap._FormInputButton == fieldType) {
-		fieldTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
-				+ '<div class="layui-input-block">'
-				+ '<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'
-				+ '<input :id="id+guid+hidden" type="hidden" value="" :name="field" />' + '<a :id="id+guid+a" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
-	} else if (_ConstantComponentMap._FormSelect == fieldType) {
-		fieldTemplate = '<div class="layui-inline">' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
-				+ '<div class="layui-input-block" >' + '<select :id="id+guid" :field="field"  :name="field" lay-filter="aihao">' + '</select>'
-				+ '<div class="layui-unselect layui-form-select layui-form-selected">' + '<div class="layui-select-title">'
-				+ '<input type="text" placeholder="请选择"  value="阅读" readonly=""' + 'class="layui-input layui-unselect">' + '<i class="layui-edge"></i>' + ' </div>'
-				+ ' <dl class="layui-anim layui-anim-upbit"  >' + ' <dd lay-value="" class="layui-select-tips">请选择</dd>' + ' <dd lay-value="0" class="">写作</dd>'
-				+ ' <dd lay-value="1" class="layui-this">阅读</dd>' + ' <dd lay-value="2" class="">游戏</dd>' + '</dl>' + '</div>'
-
-				+ '</div>' + '</div>';
-	}
+var timeoutInterval = null;
+function component(fieldType,fieldTemplate) {
+//	var fieldTemplate = "";
+//	if (_ConstantComponentMap._FormField == fieldType) {
+//		fieldTemplate = template;
+//	} else if (_ConstantComponentMap._FormDate == fieldType) {
+//		fieldTemplate = template;
+//	} else if (_ConstantComponentMap._FormInputButton == fieldType) {
+//		fieldTemplate =template;
+//	} else if (_ConstantComponentMap._FormSelect == fieldType) {
+//		fieldTemplate = template;
+//	} else if (_ConstantComponentMap._FormToolBar == fieldType) {
+//		fieldTemplate = ;
+//	}
 
 	// 创建style映射
 	var LABEL_ALIGN = "labelalign";
@@ -75,10 +62,11 @@ function component(fieldType) {
 			} else if (_ConstantComponentMap._FormSelect == fieldType) {
 				this._InitSelectOnClick();// 初始化select
 				this._InitSelectMouseEnter();
-				this._InitSelectMouseOut();
+				this._InitSelectMouseLeave();
 				this._InitSelectInputOnClick();
-				this._InitSelectInputMouseOut();
-				
+				this._InitSelectInputMouseLeave();
+				this._InitSelectInputMouseEnter();
+
 			}
 		},
 		created : function() {
@@ -87,29 +75,40 @@ function component(fieldType) {
 		methods : {
 			// 将本标签作为ajaxform的一个属性
 			_AddToAjaxForm : function() {
-				var domId = this._GetComponentDomId();
-				var formElement = $._GetFromLayuiObjectHashMap(domId);
+				var formField = this._GetFormFieldX();
 				var ajaxformDomId = this.$parent._GetComponentDomId();
 				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
-				ajaxform.addFormItem(formElement);
+				ajaxform.addFormItem(formField);
 			},
 			_GetComponentDomId : function() {
 				var _domId = this.id + this.guid;
 				return _domId;
 			},
+			_GetFormFieldX :function(){
+				var domId = this._GetComponentDomId();
+				var aFormFieldX = $._GetFromLayuiObjectHashMap(domId);
+				return aFormFieldX;
+			},
 			// 添加生命ajaxDataGrid对象脚本
 			_MapComponent : function() {
-				var documentWriteHtml = "";
-				var domId = this._GetComponentDomId();
-				var $script = $('<script type="text/javascript"></script>');
-				$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
-				documentWriteHtml = $script.prop("outerHTML");
-				$("body").append(documentWriteHtml);
+				$._OutputMapCompoment(this);
 			},
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
-				var formField = new FormField(domId);
-
+				var formField;
+				if (fieldType == _ConstantComponentMap._FormField) 
+					formField = new FormField(domId);
+				else if (fieldType == _ConstantComponentMap._FormSelect) 
+					formField = new FormSelect(domId);
+				else if (fieldType == _ConstantComponentMap._FormDate) 
+					formField = new FormDate(domId);
+				else if (fieldType == _ConstantComponentMap._FormInputButton) 
+					formField = new FormInputButton(domId);
+				else if (fieldType == _ConstantComponentMap._FormToolbar) 
+					formField = new FormToolbar(domId);
+				else
+					formField = new FormFieldBase(domId);
+				
 				for ( var attrName in formField) {
 					if (this[attrName] != null)
 						formField[attrName] = this[attrName];
@@ -120,12 +119,11 @@ function component(fieldType) {
 
 			_SetStyle : function() {
 				if (this.visible != null) {
-					var domId = this._GetComponentDomId();
-					var formElement = $._GetFromLayuiObjectHashMap(domId);
+					var formField = this._GetFormFieldX();
 					if ((this.visible + "").toLowerCase() == "true") {
-						formElement.show();
+						formField.show();
 					} else {
-						formElement.hide();
+						formField.hide();
 					}
 				}
 			},
@@ -145,7 +143,7 @@ function component(fieldType) {
 				});
 			},
 
-			/* date */
+			/* date start */
 			_InitDateOnClick : function() {
 				$laydate.render({
 					elem : "#" + this._GetComponentDomId(),
@@ -154,46 +152,54 @@ function component(fieldType) {
 			},
 			/* select */
 			_InitSelectOnClick : function() {
-				var domId = this._GetComponentDomId();
-				var formField = new FormField(domId);
+				var formField = this._GetFormFieldX();
 				formField.getSelectDl().children("dd").click(function() {
-					formField.getSelectDl().children().removeClass();
-					clearTimeout(timeoutInterval);
+					formField.removeSelectDdClass();
+					formField.clearTimeoutInterval();
 					$(this).addClass("layui-this");
-					$(this).parent().hide();
+					formField.hideSelectDl();
+					formField.getSelectInput().val($(this).text());
+					formField.getSelectHidden().val($(this).attr("lay-value"));
+					// formField.getSelectDl().toggleClass("layui-form-selected");
 				})
 			},
 			_InitSelectMouseEnter : function() {
-				var domId = this._GetComponentDomId();
-				var formField = new FormField(domId);
-				formField.getSelectDl().children("dd").mouseenter(function() {
-					clearTimeout(timeoutInterval);
+				var formField = this._GetFormFieldX();
+				formField.getSelectDl().mouseenter(function() {
+					formField.clearTimeoutInterval();
 				})
 			},
-			_InitSelectMouseOut : function() {
-				var domId = this._GetComponentDomId();
-				var formField = new FormField(domId);
-				formField.getSelectDl().mouseout(function() {
-					timeoutInterval=setTimeout(function() {
-						formField.getSelectDl().hide()
-					}, 1000);
+			_InitSelectMouseLeave : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectDl().mouseleave(function() {
+					formField.setTimeoutInterval(setTimeout(function() {
+						formField.hideSelectDl();
+					}, 300));
 				});
 			},
 			_InitSelectInputOnClick : function() {
-				var domId = this._GetComponentDomId();
-				var formField = new FormField(domId);
+				var formField = this._GetFormFieldX();
 				formField.getSelectInput().click(function() {
-					formField.getSelectDl().show();
+					formField.getSelectDiv().toggleClass("layui-form-selected");
+					if(formField.getSelectDiv().hasClass("layui-form-selected"))
+						formField.showSelectDl();
+					else
+						formField.hideSelectDl();
 				});
 			},
-			_InitSelectInputMouseOut : function(){
-				/*var domId = this._GetComponentDomId();
-				var formField = new FormField(domId);
-				formField.getSelectInput().mouseout(function() {
-					timeoutInterval=setTimeout(function() {
-						formField.getSelectDl().hide()
-					}, 1000);
-				});*/
+			_InitSelectInputMouseLeave : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectInput().mouseleave(function() {
+					formField.setTimeoutInterval(setTimeout(function() {
+						formField.hideSelectDl();
+					}, 300));
+				});
+			},
+			_InitSelectInputMouseEnter : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectInput().mouseenter(function() {
+					formField.clearTimeoutInterval();
+				})
 			}
 		},
 	});
@@ -210,7 +216,7 @@ function component(fieldType) {
 	}
 }
 
-function FormField(domId) {
+function FormFieldBase(domId) {
 	this.domId = domId;
 	this.maxlen = null;
 	this.readonly = false;
@@ -222,6 +228,7 @@ function FormField(domId) {
 	this.field = null;
 	this.fieldType = "";
 	this.title = null;
+	this.timeoutInterval=null;
 	this.type = "text";// 文本框的显示格式,取值为text和password，默认为text
 	this.errmsg = "表达式有误";
 	this.data = "";
@@ -234,11 +241,8 @@ function FormField(domId) {
 	this.getRoot = function() {
 		return this.getInputDom().parents(".layui-inline");
 	}
-	this.getSelectDl = function() {
-		return this.getInputDom().next().children("dl");
-	}
-	this.getSelectInput = function() {
-		return this.getInputDom().next().children("div").children("input");
+	this.getTimeoutInterval = function(){
+		return this.timeoutInterval;
 	}
 	this.getLabel = function() {
 		return this.getInputDom().parents(".layui-inline").children("label");
@@ -276,6 +280,9 @@ function FormField(domId) {
 	this.setRootStyle = function(cssKey, cssValue) {
 		this.getRoot().css(cssKey, cssValue);
 	}
+	this.setTimeoutInterval = function(aTimeoutInterval){
+		return this.timeoutInterval=aTimeoutInterval;
+	}
 	this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
 		/* 避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示 */
 		if (itemColproportion.length >= 2) {
@@ -287,14 +294,6 @@ function FormField(domId) {
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
 			this.setLabelStyle("display", "inline-block");
 			this.setInputStyle("padding-left", "10px");
-			if (this.fieldType == _ConstantComponentMap._FormSelect) {
-				this.getSelectDl().css("width", inputPercent * 100 + "%");
-				this.getSelectDl().css("left", labelPercent * 100 + "%");
-				this.getSelectInput().css("width", inputPercent * 100 + "%");
-				this.getSelectInput().show();
-			} else {
-				this.setInputStyle("display", "inline-block");
-			}
 			this.setLabelStyle("width", labelPercent * 100 + "%");
 			this.setInputStyle("width", inputPercent * 100 + "%");
 		}
