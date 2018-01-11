@@ -24,4 +24,8 @@ public class PageController {
 	public String login(@PathVariable String actionname) {
 		return "/template/xt/login/" + actionname;
 	}
+	@RequestMapping("/template/xt/test/{actionname}")
+	public String test(@PathVariable String actionname) {
+		return "/template/xt/test/" + actionname;
+	}
 }
