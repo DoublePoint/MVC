@@ -32,6 +32,8 @@ Vue.component(_ConstantComponentMap._FillLayOut, {
 	},
 	mounted:function(){
 		this._MapComponent();
+		//水平栅栏时用
+		this._AddDragDom();
 	},
 	methods : {
 		_GetComponentDomId : function() {
@@ -48,7 +50,10 @@ Vue.component(_ConstantComponentMap._FillLayOut, {
 			var _FillLayout = new FillLayout(domId);
 			$._AddToLayuiObjectHashMap(domId, _FillLayout);
 		},
-		
+		_AddDragDom : function(){
+			var dom=this._GetComponentDom();
+			dom.addDrag();
+		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
@@ -72,6 +77,15 @@ function FillLayout(domId){
 	
 	this.addLayoutAreaItem = function(item) {
 		this.layoutAreaItems.push(item);
+	}
+	this.addDrag=function(){
+		var layoutAreaItems=this.layoutAreaItems;
+		for(var index in layoutAreaItems){
+			if(index<layoutAreaItems.length-1){
+				if(layoutAreaItems[index].addDragDom!=null)
+					layoutAreaItems[index].addDragDom();
+			}
+		}
 	}
 	this.resize=function(){
 		for(index in this.layoutAreaItems){

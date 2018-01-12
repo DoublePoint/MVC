@@ -4,10 +4,12 @@ var _ConstantAjaxDataGrid = {
 	_DEFAULT_COLUMN_SORT : false,
 	_DEFAULT_COLUMN_FIXED : false,
 	_DEFAULT_MIN_HEIGHT : 100,
+	_DEFAULT_MIN_WIDTH :200,
 	_DEFAULT_PAGE_SIZE : 20,
 };
 var _ConstantLayoutArea = {
-	_DEFAULT_MIN_HEIGHT : _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT
+	_DEFAULT_MIN_HEIGHT : _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT,
+	_DEFAULT_MIN_WIDTH_LEFT : _ConstantAjaxDataGrid._DEFAULT_MIN_WIDTH
 };
 var _ConstantComponentMap = {
 	_AjaxDataGrid : "ll-ajaxdatagrid",

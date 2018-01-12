@@ -32,7 +32,8 @@ Vue.component(_ConstantComponentMap._FillAreaTB, {
 	mounted : function() {
 		this._MapComponent();
 		
-		/*var id = this._GetComponentDomId();
+		//此段代码不能删除，因为需要首先确定各个div的高度，
+		var id = this._GetComponentDomId();
 		var parentWidth = $("#" + id).parent().width();
 		var parentheight = $("#" + id).parent().height();
 		var children = $("#" + id).parent().children();
@@ -51,7 +52,7 @@ Vue.component(_ConstantComponentMap._FillAreaTB, {
 			}
 			this.layOutHeight = (parentheight - allChildFixHeight).toString() + "px";
 		}
-		$("#" + id).width("100%");*/
+		$("#" + id).width("100%");
 	},
 	methods : {
 		_GetComponentDomId : function() {
@@ -75,6 +76,7 @@ Vue.component(_ConstantComponentMap._FillAreaTB, {
 		},
 		// 将本标签作为ajaxform的一个属性
 		_AddToParent : function() {
+			if(this.$parent==null) return;
 			var _FillArea = this._GetLayoutAreaX();
 			var layoutDomId = this.$parent._GetComponentDomId();
 			var layout = $._GetFromLayuiObjectHashMap(layoutDomId);

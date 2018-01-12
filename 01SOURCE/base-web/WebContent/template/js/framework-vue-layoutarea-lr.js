@@ -1,11 +1,9 @@
 Vue.component(_ConstantComponentMap._FillAreaLR, {
 	props : [ 'id', 'width', 'backgroundcolor' ],
-	template : 
-		'<div :id="id+guid" class="ll-fill-area-lr"><slot></slot>' 
-		+ '</div>',
+	template : '<div :id="id+guid" class="ll-fill-area-lr" style="display:none;"><slot></slot>' + '</div>',
 
 	data : function() {
-		var varlayOutWidth = this.Width;
+		var varlayOutWidth = this.width;
 		if (varlayOutWidth == null)
 			varlayOutWidth = '100%';
 		var clientStyleBuffer = $._CreateStringBuffer();
@@ -22,7 +20,7 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 			guid : $._GenerateUUID(),
 			clientStyle : clientStyleBuffer.toString(),
 			layOutWidth : varlayOutWidth,
-			layareacenter:"center"
+			layareacenter : "center"
 		}
 	},
 	created : function() {
@@ -34,7 +32,6 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 	},
 	mounted : function() {
 		this._MapComponent();
-		this._InitLayoutArea();
 	},
 	methods : {
 		_GetComponentDomId : function() {
@@ -46,36 +43,24 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 			var componentDom = $._GetFromLayuiObjectHashMap(domId);
 			return componentDom;
 		},
-		_GetLayoutAreaX : function() {
-			var domId = this._GetComponentDomId();
-			var aLayoutArea = $._GetFromLayuiObjectHashMap(domId);
-			return aLayoutArea;
-		},
-		_InitLayoutArea : function() {
-			var layoutAreaDom=this._GetComponentDom();
-			layoutAreaDom.resize();
-		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
-			var fillArea = new FillAreaTB(domId);
+			var fillArea = new FillAreaLR(domId);
 			$._AddToLayuiObjectHashMap(domId, fillArea);
 
 			for ( var attrName in fillArea) {
 				if (this[attrName] != null)
 					fillArea[attrName] = this[attrName];
 			}
-//			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
-//			if (this.layOutHeight.toString().indexOf("*") != -1) {
-//				fillArea.setIsResize(true);
-//			}
 		},
 		// 将本标签作为ajaxform的一个属性
 		_AddToParent : function() {
-			var _FillArea = this._GetLayoutAreaX();
+			if (this.$parent == null)
+				return;
+			var _FillArea = this._GetComponentDom();
 			var layoutDomId = this.$parent._GetComponentDomId();
 			var layout = $._GetFromLayuiObjectHashMap(layoutDomId);
 			layout.addLayoutAreaItem(_FillArea);
-			_FillArea.addDragDom();
 		},
 		// 添加生命FillArea对象脚本
 		_MapComponent : function() {
@@ -87,25 +72,33 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 function FillAreaLR(domId) {
 	this.domId = domId;
 	this.height = 0;
-	this.isResize=true;
+	this.width = null;
+	this.isResize = true;
+	this.dragDomExtendId = "drag";
 	this.getDomId = function() {
 		return this.domId;
 	}
 	this.getDom = function() {
 		return $("#" + this.domId);
 	}
-	this.getAllPreBrotherWidth=function(){
-		var allPreBrother=this.getDom().prevAll(); 
-		var allPreBrotherWidth=0;
-		for(index in allPreBrother){
-			allPreBrotherWidth+=allPreBrother.width();
+	this.getAllPreBrotherWidth = function() {
+		var allPreBrother = this.getDom().prevAll();
+		var allPreBrotherWidth = 0;
+		for (index in allPreBrother) {
+			allPreBrotherWidth += allPreBrother.width();
 		}
 		return allPreBrotherWidth;
 	}
-	this.getParent=function(){
+	this.getDragDomExtendId = function() {
+		return this.dragDomExtendId;
+	}
+	this.getParent = function() {
 		return this.getDom().parent();
 	}
-	this.getNextBrother=function(){
+	this.getPreBrother = function() {
+		return this.getDom().prev();
+	}
+	this.getNextBrother = function() {
 		return this.getDom().next();
 	}
 	this.getLayout = function() {
@@ -117,10 +110,10 @@ function FillAreaLR(domId) {
 	this.getLayoutHeight = function() {
 		return this.getDom().parent().height();
 	}
-	this.getBrother = function() {
+	this.getBrothers = function() {
 		return this.getDom().parent().children();
 	}
-	this.getIsResize=function(){
+	this.getIsResize = function() {
 		return this.isResize;
 	}
 	this.setFillAreaHeight = function(height) {
@@ -129,75 +122,76 @@ function FillAreaLR(domId) {
 	this.setFillAreaWidth = function(width) {
 		this.getDom().width(width);
 	}
-	this.setIsResize=function(aIsResize){
-		this.isResize=aIsResize;
+	this.setIsResize = function(aIsResize) {
+		this.isResize = aIsResize;
 	}
-	/*添加拖动按钮*/
-	this.addDragDom = function(){
-		var dragId=this.domId+"layareacenter";
-		var layarea=this;
-		this.getDom().after('<div id="'+dragId+'"  class="draggable ll-fill-area-left-right-center" ></div>');
-		$("#"+dragId+"").draggable({
-			axis : "x",
-			helper : "clone",
-			containment : "parent",
-			stop : function(event, ui) {
-				var dragLeft = ui.offset.left;
-				var dragId=ui.helper.context.id;
-				var preBrotherId=$("#"+dragId).prev().attr("id");
-				var layoutarea = $._GetFromLayuiObjectHashMap(preBrotherId);
-				layarea.resize();
-//				
-////				ui.helper.context.id
-//				var allPreBrother=$("#"+dragId+"").prevAll(); 
-//				var allPreBrotherWidth=0;
-//				for(index in allPreBrother){
-//					allPreBrotherWidth+=allPreBrother.width();
-//				}
-//				
-//				var parentWidth = $("#"+dragId+"").parent().width();
-//				var centerWidth = $("#"+dragId+"").width();
-//				/* var left = $("#center_div").position().left; */
-//				var left = ui.offset.left;
-//				var right = parentWidth - allPreBrotherWidth - centerWidth;
-//
-//				$("#left_div").width(left);
-//				$("#right_div").width(right);
-//
-//				$("#right_div").offset({
-//					left : left + centerWidth
-//				});
-//				$("#center_div").offset({
-//					left : left
-//				});
-			}
-		});
+	this.show=function(){
+		this.getDom().show();
+	}
+//	this.addDrag = function() {
+//		$("#" + dragId + "").draggable({
+//			axis : "x",
+//			helper : "clone",
+//			containment : "parent",
+//			stop : function(event, ui) {
+//				var dragLeft = ui.offset.left;
+//				var dragId = ui.helper.context.id;
+//				var preBrotherId = $("#" + dragId).prev().attr("id");
+//				var layoutarea = $._GetFromLayuiObjectHashMap(preBrotherId);
+//				layoutarea.resize();
+//			}
+//		});
+//	}
+	/* 添加拖动按钮 */
+	this.addDragDom = function() {
+		var left = this.getDom().width() + this.getDom().position().left;
+		var dragId = this.domId + this.getDragDomExtendId();
+		var dragStyleStringBuffer = $._CreateStringBuffer("left", left);
+		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ></div>');
 	}
 	this.resize = function() {
-		var allPreBrotherWidth=this.getAllPreBrotherWidth();
-//		var children = this.getBrother();
+		var parentWidth = this.getParent().width();
+		//		var parentWidth = this.getParent().offsetWidth;
+		var varWidth = 0;
+		if (this.width == null)
+			varWidth = _ConstantLayoutArea._DEFAULT_MIN_WIDTH_LEFT;
+		else if (this.width.toString().indexOf("px") != -1)
+			varWidth = this.width.replace("px", "");
+		else if (this.width.toString().indexOf("%") != -1) {
+			var widthPercent = this.width.replace("%", "");
+			varWidth = parentWidth * (widthPercent / 100);
+		} else if (this.width.toString().indexOf("*") != -1) {
+			var allChildFixWidth = 0;
+			var children = this.getBrothers();
+			for (var i = 0; i < children.length; i++) {
+				if (children[i].id != this.id) {
+					allChildFixWidth += children[i].offsetWidth;
+				}
+			}
+			varWidth = parentWidth - allChildFixWidth;
+		} else {
+			var allChildFixWidth = 0;
+			var children = this.getBrothers();
+			for (var i = 0; i < children.length; i++) {
+				if (children[i].id != this.id) {
+					allChildFixWidth += children[i].offsetWidth;
+				}
+			}
+			varWidth = parentWidth - allChildFixWidth;
+		}
+		this.setFillAreaWidth(varWidth);
+		var preBrother = this.getPreBrother();
+		var left = 0;
+		// 判断是否是第一个子节点
+		if (preBrother.attr("id") != null) {
+			preBrotherWidth = preBrother.width();
+			preBrotherLeft = preBrother.position().left;
+			left = preBrotherWidth + preBrotherLeft;
+		}
+		this.getDom().css("left", left);
+		this.show();
 		var nextBrother=this.getNextBrother();
-		var nextBrotherLeft=nextBrother.position().left;
-		this.setFillAreaWidth(nextBrotherLeft-allPreBrotherWidth);
-		this.getDom().css("left",0);
+		nextBrother.css("left", left+varWidth);
+		
 	}
-//	this.resize = function() {
-//		var parentWidth = this.getLayoutWidth();
-//		var parentheight = this.getLayoutHeight();
-//		var children = this.getBrother();
-//		if (children.length <= 0)
-//			return;
-//		var allChildFixHeight = 0;
-//		for (var i = 0; i < children.length; i++) {
-//			if (children[i].id != this.domId) {
-//				allChildFixHeight += children[i].offsetHeight;
-//			}
-//		}
-//		var thisRuleHright = parentheight - allChildFixHeight;
-//		if (thisRuleHright < _ConstantLayoutArea._DEFAULT_MIN_HEIGHT)
-//			thisRuleHright = _ConstantLayoutArea._DEFAULT_MIN_HEIGHT;
-//
-//		this.setFillAreaHeight(thisRuleHright);
-//		this.setFillAreaWidth("100%");
-//	}
 }

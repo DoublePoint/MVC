@@ -21,14 +21,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/base.jsp"%>
-
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 </head>
 <body>
 	<form>
+		<ll-filllayout > 
 			<ll-fillarea-lr>
 				<ll-tree  id="treeDemo" datasource="/template/xt/cd/cd-tree/datalist?isHasRoot=true" showLine="true" onclick="zTreeOnClick"></ll-tree>
 			</ll-fillarea-lr>
-			<ll-fillarea-lr>
+			<ll-fillarea-lr width="*">
 				<ll-filllayout > 
 					<ll-fillarea-tb height="86px" >
 							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:8:3:8:2:10"> 
@@ -66,6 +67,7 @@
 					</ll-fillarea-tb>
 				</ll-filllayout>
 			</ll-fillarea-lr>
+		</ll-filllayout>
 	</form>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/template/xt/cd/cdScript.js"></script>
 </style>
