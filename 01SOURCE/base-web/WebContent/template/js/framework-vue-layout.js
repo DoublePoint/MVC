@@ -1,6 +1,6 @@
-Vue.component(_ConstantComponentMap._LayOut, {
+Vue.component(_ConstantComponentMap._FillLayOut, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div :id="id+guid" class="lllayout "  :style="clientStyle"><slot></slot></div>',
+	template : '<div :id="id+guid" class="lllayout"  :style="clientStyle"><slot></slot></div>',
 	data : function() {
 		
 		var varlayOutHeight=this.height;
@@ -28,6 +28,7 @@ Vue.component(_ConstantComponentMap._LayOut, {
 	},
 	created : function() {
 		this._RegisterComponent();
+		this._RegisterResize();
 	},
 	mounted:function(){
 		this._MapComponent();
@@ -37,28 +38,45 @@ Vue.component(_ConstantComponentMap._LayOut, {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
+		_GetComponentDom :function(){
+			var domId = this._GetComponentDomId();
+			var componentDom = $._GetFromLayuiObjectHashMap(domId);
+			return componentDom;
+		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var _FillLayout = new FillLayout(domId);
 			$._AddToLayuiObjectHashMap(domId, _FillLayout);
 		},
+		
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
-//			var documentWriteHtml = "";
-//			var domId = this._GetComponentDomId();
-//			var $script = $('<script type="text/javascript"></script>');
-//			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
-//			documentWriteHtml = $script.prop("outerHTML");
-//			$("body").append(documentWriteHtml);
+		},
+		_RegisterResize :function(){
+			$._RegisterResizeModel(this._GetComponentDom());
 		}
 	},
 })
 
 
-function FillLayout(id){
-	this.id=id;
+function FillLayout(domId){
+	this.domId=domId;
+	this.getDomId=function(){
+		return this.domId;
+	}
+	this.getDom = function() {
+		return $("#" + this.domId);
+	}
+	this.layoutAreaItems = new Array();
+	
+	this.addLayoutAreaItem = function(item) {
+		this.layoutAreaItems.push(item);
+	}
 	this.resize=function(){
-		
+		for(index in this.layoutAreaItems){
+			if(this.layoutAreaItems[index].getIsResize())
+				this.layoutAreaItems[index].resize();
+		}
 	}
 }

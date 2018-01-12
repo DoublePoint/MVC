@@ -45,6 +45,9 @@ function component(fieldType,fieldTemplate) {
 				guid : $._GenerateUUID(),
 			}
 		},
+		created : function() {
+			this._RegisterComponent();
+		},
 		beforeMount : function() {
 			// 将formfield添加到form中
 			this._AddToAjaxForm();
@@ -66,12 +69,9 @@ function component(fieldType,fieldTemplate) {
 				this._InitSelectInputOnClick();
 				this._InitSelectInputMouseLeave();
 				this._InitSelectInputMouseEnter();
-
 			}
 		},
-		created : function() {
-			this._RegisterComponent();
-		},
+		
 		methods : {
 			// 将本标签作为ajaxform的一个属性
 			_AddToAjaxForm : function() {

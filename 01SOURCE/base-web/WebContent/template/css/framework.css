@@ -41,15 +41,17 @@ a {
 	padding: 0px 0;
 	background: #1c2229;
 }
-.layui-layout-admin .layui-side{
-	border-top:5px solid #1AA094;
+
+.layui-layout-admin .layui-side {
+	border-top: 5px solid #1AA094;
 }
+
 .navMenu>li {
 	display: block;
 	margin: 0;
 	padding: 0;
 	border: 0px;
-	border-bottom:1px solid black;
+	border-bottom: 1px solid black;
 }
 
 .navMenu>li>a {
@@ -188,6 +190,10 @@ a {
 	box-sizing: border-box;
 }
 
+.layui-table-view {
+	margin: 0px;
+}
+
 .layui-form-selected .layui-tree {
 	display: block;
 }
@@ -205,83 +211,148 @@ a {
 	background-color: #1EA296;
 	font-weight: bold;
 	color: white;
-	padding:0px;
-	border-top-left-radius:0;
-	border-bottom-left-radius:0;
+	padding: 0px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
 /*分页*/
-.layui-laypage{
-	 margin:0px; 
-	 margin-top:1px; 
+.layui-laypage {
+	margin: 0px;
+	margin-top: 1px;
 }
-.layui-laypage a,.layui-laypage span{
+
+.layui-laypage a, .layui-laypage span {
 	margin: 0 -1px 0px 0;
 }
 
-.layui-table-click,.layui-table-hover{
+.layui-table-click, .layui-table-hover {
 	/* background-color:#DCF8A8; */
+	
 }
 /*树*/
 .ztree {
-    overflow: auto;
-    height: 100%;
-    padding:0;
+	overflow: auto;
+	height: 100%;
+	padding: 0;
 }
-.layui-form-item{
-	margin:2px 0 3px 0;
+
+.layui-form-item {
+	margin: 2px 0 3px 0;
 }
-.layui-form  .layui-inline{
- 	margin:0 0px;
- }
-.layui-form-item:first-child
-{
-	margin:0;
-	padding:5px 0 0px 0;
+
+.layui-form  .layui-inline {
+	margin: 0 0px;
 }
-.lllayout>.layoutarea{
+
+.layui-form-item:first-child {
+	margin: 0;
+	padding: 5px 0 0px 0;
+}
+
+.lllayout>.layoutarea {
 	/* overflow:auto; */
+	
 }
-.layui-input-block>.layui-input{
-	padding-left:0px;
-	padding-right:0px;
-	display:inline-block;
-	display:none;
-	width:0;
-} 
-.layui-inline>.layui-form-label{
-	padding-left:0px;
-	padding-right:0px; 
-	display:none;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space: nowrap; 
-	width:0;
+
+.layui-input-block>.layui-input {
+	padding-left: 0px;
+	padding-right: 0px;
+	display: inline-block;
+	display: none;
+	width: 0;
 }
-.layui-inline>.layui-input-block{
-	margin-left:0px; 
+
+.layui-inline>.layui-form-label {
+	padding-left: 0px;
+	padding-right: 0px;
+	display: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 0;
 }
-.layui-form{
-	font-size:0;
+
+.layui-inline>.layui-input-block {
+	margin-left: 0px;
 }
-.layui-inline,.layoutarea{
-	font-size:14px;
+
+.layui-form {
+	font-size: 0;
 }
-.layui-body{
-	overflow:hidden;
+
+.layui-inline, .layoutarea {
+	font-size: 14px;
 }
-.layui-form-item{
-	font-size:16px;
+
+.layui-body {
+	overflow: hidden;
 }
-.layui-form-select dl{
-	max-height:220px;
-	min-width:0;
+
+.layui-form-item {
+	font-size: 16px;
 }
-.layui-select-title>input{
-	display:none;
+
+.layui-form-select dl {
+	max-height: 220px;
+	min-width: 0;
 }
-.layui-form-select dl dd, .layui-form-select dl dt{
+
+.layui-select-title>input {
+	display: none;
+}
+
+.layui-form-select dl dd, .layui-form-select dl dt {
 	line-height: 20px;
 }
+
+.layui-form-select dl {
+	padding: 0px;
+	top: 38px;
+}
+
 .layui-form-select-dl-unselect {
-	display:none;
+	display: none;
+}
+/*原生select start*/
+.layui-form select {
+	border-color: #e6e6e6;
+}
+
+.layui-form select option {
+	background-color: white;
+}
+
+.layui-form select option:hover {
+	background-color: #EEEEEE;
+}
+
+.layui-form select:active, .layui-form select:focus {
+	border-color: -webkit-linear-gradient(left, #e6e6e6, #c9c9c9);
+	/* Safari 5.1 - 6.0 */
+	border-color: -o-linear-gradient(right, #e6e6e6, #c9c9c9);
+	/* Opera 11.1 - 12.0 */
+	border-color: -moz-linear-gradient(right, #e6e6e6, #c9c9c9);
+	/* Firefox 3.6 - 15 */
+	border-color: linear-gradient(to right, #e6e6e6, #c9c9c9); /* 标准的语法 */
+	border-color: #c9c9c9;
+}
+/*原生select end*/
+
+/* layout start */
+.ll-fill-area-lr {
+	width: 0px;
+	height: 100%;
+	display: inline-block;
+	position: absolute;
+	left:0;
+}
+
+.ll-fill-area-left-right-center {
+	height: 100%;
+	width: 5px;
+	display: inline-block;
+	z-index: 100;
+	position: absolute;
+	left: 300px;
+	background-color: #1AA094;
 }
