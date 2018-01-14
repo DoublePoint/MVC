@@ -22,6 +22,7 @@ form form {
 
 .lllayout {
 	clear: both;
+	overflow:hidden;
 }
 
 .layui-side-scroll {
@@ -355,4 +356,7 @@ a {
 	position: absolute;
 	left: 300px;
 	background-color: #1AA094;
+	cursor: col-resize;
+}
+.ll-fill-area-left-right-center {
 }

@@ -75,6 +75,7 @@ function FillAreaLR(domId) {
 	this.width = null;
 	this.isResize = true;
 	this.dragDomExtendId = "drag";
+	
 	this.getDomId = function() {
 		return this.domId;
 	}
@@ -125,46 +126,80 @@ function FillAreaLR(domId) {
 	this.setIsResize = function(aIsResize) {
 		this.isResize = aIsResize;
 	}
-	this.show=function(){
+	this.show = function() {
 		this.getDom().show();
 	}
-//	this.addDrag = function() {
-//		$("#" + dragId + "").draggable({
-//			axis : "x",
-//			helper : "clone",
-//			containment : "parent",
-//			stop : function(event, ui) {
-//				var dragLeft = ui.offset.left;
-//				var dragId = ui.helper.context.id;
-//				var preBrotherId = $("#" + dragId).prev().attr("id");
-//				var layoutarea = $._GetFromLayuiObjectHashMap(preBrotherId);
-//				layoutarea.resize();
-//			}
-//		});
-//	}
+	this.hide=function(){
+		this.getDom().hide();
+	}
+	// this.addDrag = function() {
+	// $("#" + dragId + "").draggable({
+	// axis : "x",
+	// helper : "clone",
+	// containment : "parent",
+	// stop : function(event, ui) {
+	// var dragLeft = ui.offset.left;
+	// var dragId = ui.helper.context.id;
+	// var preBrotherId = $("#" + dragId).prev().attr("id");
+	// var layoutarea = $._GetFromLayuiObjectHashMap(preBrotherId);
+	// layoutarea.resize();
+	// }
+	// });
+	// }
 	/* 添加拖动按钮 */
 	this.addDragDom = function() {
 		var left = this.getDom().width() + this.getDom().position().left;
 		var dragId = this.domId + this.getDragDomExtendId();
 		var dragStyleStringBuffer = $._CreateStringBuffer("left", left);
 		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ></div>');
+		 $("#" + dragId + "").draggable({
+		 axis : "x",
+		 cursor: "w-resize",
+		 helper : "clone",
+		 containment : "parent",
+		 stop : function(event, ui) {
+			 var dragCurrentLeft = ui.offset.left;
+			 var dragId = ui.helper.context.id;
+			 var beforeDragLeft=$("#" + dragId).position().left;
+			 var preLayoutArea=$("#" + dragId).prev();
+			 var preLayoutAreaLeft=preLayoutArea.position().left;
+			 var preLayoutWidth=dragCurrentLeft-preLayoutAreaLeft;
+			 preLayoutArea.css("width",preLayoutWidth);//前一个layoutarea的宽度等于 后一个drag的左-前一个的left
+			 
+			 $("#" + dragId).css("left",dragCurrentLeft);
+			 
+			 var nextLayoutArea=$("#" + dragId).next();
+//			 var nextLayoutAreaLeft=nextLayoutArea.position().left;
+			 var nextLayoutBeforeWidth=nextLayoutArea.width();
+			 var nextLayoutCurrentWidth=beforeDragLeft-dragCurrentLeft+nextLayoutBeforeWidth; 
+			 var nextLayoutCurrentLeft=dragCurrentLeft+$("#" + dragId).width();
+			 
+			 nextLayoutArea.css("width",nextLayoutCurrentWidth);
+			 nextLayoutArea.css("left",nextLayoutCurrentLeft);
+//			 var layoutId = $("#" + dragId).prev().parent(".lllayout").attr("id");
+//			 var layout = $._GetFromLayuiObjectHashMap(layoutId);
+//			 layout.resize();
+		 }
+		 });
 	}
 	this.resize = function() {
+		this.hide();
 		var parentWidth = this.getParent().width();
-		//		var parentWidth = this.getParent().offsetWidth;
+		// var parentWidth = this.getParent().offsetWidth;
 		var varWidth = 0;
 		if (this.width == null)
 			varWidth = _ConstantLayoutArea._DEFAULT_MIN_WIDTH_LEFT;
 		else if (this.width.toString().indexOf("px") != -1)
-			varWidth = this.width.replace("px", "");
+			varWidth = parseInt(this.width.replace("px", ""));
 		else if (this.width.toString().indexOf("%") != -1) {
 			var widthPercent = this.width.replace("%", "");
 			varWidth = parentWidth * (widthPercent / 100);
+//			varWidth=this.width;
 		} else if (this.width.toString().indexOf("*") != -1) {
 			var allChildFixWidth = 0;
 			var children = this.getBrothers();
 			for (var i = 0; i < children.length; i++) {
-				if (children[i].id != this.id) {
+				if (children[i].id != this.domId) {
 					allChildFixWidth += children[i].offsetWidth;
 				}
 			}
@@ -190,8 +225,92 @@ function FillAreaLR(domId) {
 		}
 		this.getDom().css("left", left);
 		this.show();
-		var nextBrother=this.getNextBrother();
-		nextBrother.css("left", left+varWidth);
-		
+		var nextBrother = this.getNextBrother();
+		nextBrother.css("left", left + varWidth);
+		this.show();
 	}
 }
+//
+//function LayoutDrag(domId) {
+//	this.width = 5;
+//	this.domId = domId;
+//	this.height = '100%';
+//	this.currentWidth = 0;
+//	this.isResize = true;
+//	this.getWidth = function() {
+//		return this.width;
+//	}
+//	this.setWidth = function(aWidth) {
+//		this.width = aWidth;
+//	}
+//	this.getDomId = function() {
+//		return this.domId
+//	}
+//	this.setDomId = function(aDomId) {
+//		this.domId = aDomId;
+//	}
+//	this.getCurrentWidth = function() {
+//		return this.currentWidth;
+//	}
+//	this.setCurrentWidth = function(aCurrentWidth) {
+//		this.currentWidth = aCurrentWidth;
+//	}
+//	this.getHeight = function() {
+//		return this.height;
+//	}
+//	this.setHeight = function(aHeight) {
+//		this.height = aHeight;
+//	}
+//	this.getIsResize = function() {
+//		return this.isResize;
+//	}
+//	this.setIsResize = function(aIsResize) {
+//		this.isResize = aIsResize;
+//	}
+//	this.resize = function() {
+//		if (!isResize) {
+//			var parentWidth = this.getParent().width();
+//			// var parentWidth = this.getParent().offsetWidth;
+//			var varWidth = 0;
+//			if (this.width == null)
+//				varWidth = _ConstantLayoutArea._DEFAULT_MIN_WIDTH_LEFT;
+//			else if (this.width.toString().indexOf("px") != -1)
+//				varWidth = this.width.replace("px", "");
+//			else if (this.width.toString().indexOf("%") != -1) {
+//				var widthPercent = this.width.replace("%", "");
+//				varWidth = parentWidth * (widthPercent / 100);
+//			} else if (this.width.toString().indexOf("*") != -1) {
+//				var allChildFixWidth = 0;
+//				var children = this.getBrothers();
+//				for (var i = 0; i < children.length; i++) {
+//					if (children[i].id != this.id) {
+//						allChildFixWidth += children[i].offsetWidth;
+//					}
+//				}
+//				varWidth = parentWidth - allChildFixWidth;
+//			} else {
+//				var allChildFixWidth = 0;
+//				var children = this.getBrothers();
+//				for (var i = 0; i < children.length; i++) {
+//					if (children[i].id != this.id) {
+//						allChildFixWidth += children[i].offsetWidth;
+//					}
+//				}
+//				varWidth = parentWidth - allChildFixWidth;
+//			}
+//			this.setFillAreaWidth(varWidth);
+//			var preBrother = this.getPreBrother();
+//			var left = 0;
+//			// 判断是否是第一个子节点
+//			if (preBrother.attr("id") != null) {
+//				preBrotherWidth = preBrother.width();
+//				preBrotherLeft = preBrother.position().left;
+//				left = preBrotherWidth + preBrotherLeft;
+//			}
+//			this.getDom().css("left", left);
+//			this.show();
+//			var nextBrother = this.getNextBrother();
+//			nextBrother.css("left", left + varWidth);
+//		}
+//	}
+//}

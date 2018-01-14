@@ -31,10 +31,10 @@
 <body>
 	<form>
 		<ll-filllayout>
-			<ll-fillarea-lr>
+			<ll-fillarea-lr width="220px">
 				<ll-tree id="treeDemo" datasource="/template/xt/cd/cd-tree/datalist?isHasRoot=true" showLine="true" onclick="zTreeOnClick"></ll-tree>
-			<ll-fillarea-lr>
-			<ll-fillarea-lr>
+			</ll-fillarea-lr>
+			<ll-fillarea-lr width="*">
 				<ll-filllayout> 
 					<ll-fillarea-tb height="86"> 
 						<ll-ajaxform id="ajaxform" cols="3" colproportion="2:8:3:8:2:10"> 
@@ -69,7 +69,7 @@
 				</ll-datagrid>
 			</ll-fillarea-tb> 
 		</ll-filllayout>
-		<ll-fillarea-lr>
+		</ll-fillarea-lr>
 		</ll-filllayout>
 	</form>
 </body>
