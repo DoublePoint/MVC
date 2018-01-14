@@ -358,5 +358,29 @@ a {
 	background-color: #1AA094;
 	cursor: col-resize;
 }
+.ll-fill-area-left-right-center:hover .ll-drag-to-left{
+	height:20px;
+	width:20px;
+	left:-15px;
+	top:50%;
+	margin-top:-10px;
+	position:relative;
+	cursor:pointer;
+	background-image: url(../image/togglebar.gif);
+	background-repeat: no-repeat;
+	background-position: -20px 0px;
+}
+/* .ll-drag-to-left{
+	height:20px;
+	width:20px;
+	left:-15px;
+	top:50%;
+	margin-top:-10px;
+	position:relative;
+	cursor:pointer;
+	background-image: url(../image/togglebar.gif);
+	background-repeat: no-repeat;
+	background-position: -20px 0px;
+} */
 .ll-fill-area-left-right-center {
 }

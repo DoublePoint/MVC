@@ -30,6 +30,7 @@
 				<ll-tree  id="treeDemo" datasource="/template/xt/cd/cd-tree/datalist?isHasRoot=true" showLine="true" onclick="zTreeOnClick"></ll-tree>
 			</ll-fillarea-lr>
 			<ll-fillarea-lr width="*">
+				<ll-filllayout >
 				<ll-filllayout > 
 					<ll-fillarea-tb height="86px" >
 							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:8:3:8:2:10"> 
@@ -38,11 +39,11 @@
 									<ll-formdate title="创建时间" field="sjcd" ></ll-formdate>
 									<ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
 									<ll-formtoolbar labelalign="right" colspan="2">
-										<select id="cdmcIdd016d13e-9e0b-4cd0-b46c-0428f306c9ee" style="display:inline-block;height:38px;width:347.45px;" field="cdmc" lay-filter="aihao" style="padding-left: 10px; width: 80%;">
+										<!-- <select id="cdmcIdd016d13e-9e0b-4cd0-b46c-0428f306c9ee" style="display:inline-block;height:38px;width:347.45px;" field="cdmc" lay-filter="aihao" style="padding-left: 10px; width: 80%;">
 											 <option value="state">写作</option>  
 										     <option value="state">阅读</option>  
 										     <option value="state">游戏</option>  
-										</select>
+										</select> -->
 									 	<input type="button" class="layui-btn" onclick="onClickAdd()"  value="查询"/>
 									 	&nbsp;&nbsp;
 									</ll-formtoolbar>
@@ -65,6 +66,7 @@
 							<ll-gridrow field="gxsj" title="更新时间"></ll-gridrow> 
 						</ll-datagrid>
 					</ll-fillarea-tb>
+				</ll-filllayout>
 				</ll-filllayout>
 			</ll-fillarea-lr>
 		</ll-filllayout>

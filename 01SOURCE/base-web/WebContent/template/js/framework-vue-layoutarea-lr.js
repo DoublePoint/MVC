@@ -151,7 +151,7 @@ function FillAreaLR(domId) {
 		var left = this.getDom().width() + this.getDom().position().left;
 		var dragId = this.domId + this.getDragDomExtendId();
 		var dragStyleStringBuffer = $._CreateStringBuffer("left", left);
-		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ></div>');
+		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ><div class="ll-drag-to-left"></div></div>');
 		 $("#" + dragId + "").draggable({
 		 axis : "x",
 		 cursor: "w-resize",
