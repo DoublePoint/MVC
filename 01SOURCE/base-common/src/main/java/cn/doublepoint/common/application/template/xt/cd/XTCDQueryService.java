@@ -6,8 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
@@ -60,13 +62,13 @@ public class XTCDQueryService {
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VT_XT_CD> findChildrenXTCD(VT_XT_CD cd, PageInfo pageInfo) {
-		QueryParamList queryParamList = new QueryParamList();
-		queryParamList.addParam(new QueryParam("sjcdbs", cd.getSjcdbs()));
 		QT_XT_CD query = QT_XT_CD.t_XT_CD;
-		BooleanExpression predicate = query.sjcdbs.eq(cd.getCdbs());
+		BooleanBuilder bb=new BooleanBuilder();
 		if(StringUtil.isNotEmpty(cd.getCdmc()))
-			predicate.and(query.cdmc.like(cd.getCdmc()));
-		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, predicate, pageInfo, xtcdRepository);
+			bb.and(query.cdmc.like(cd.getCdmc()));
+		if(StringUtil.isNotEmpty(cd.getSjcdbs()))
+			bb.and(query.sjcdbs.eq(cd.getSjcdbs()));
+		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, bb.getValue(), pageInfo, xtcdRepository);
 		return dataWrap.copy(VT_XT_CD.class);
 	}
 
