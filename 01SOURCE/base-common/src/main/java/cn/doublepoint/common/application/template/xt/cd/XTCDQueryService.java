@@ -7,6 +7,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
@@ -16,6 +17,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDReposit
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
@@ -59,9 +61,11 @@ public class XTCDQueryService {
 	 */
 	public AjaxDataWrap<VT_XT_CD> findChildrenXTCD(VT_XT_CD cd, PageInfo pageInfo) {
 		QueryParamList queryParamList = new QueryParamList();
-		queryParamList.addParam(new QueryParam("sjcdbs", cd.getCdbs()));
+		queryParamList.addParam(new QueryParam("sjcdbs", cd.getSjcdbs()));
 		QT_XT_CD query = QT_XT_CD.t_XT_CD;
-		Predicate predicate = query.sjcdbs.eq(cd.getCdbs());
+		BooleanExpression predicate = query.sjcdbs.eq(cd.getCdbs());
+		if(StringUtil.isNotEmpty(cd.getCdmc()))
+			predicate.and(query.cdmc.like(cd.getCdmc()));
 		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, predicate, pageInfo, xtcdRepository);
 		return dataWrap.copy(VT_XT_CD.class);
 	}
@@ -72,6 +76,15 @@ public class XTCDQueryService {
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VT_XT_CD> findAllXTCD(PageInfo pageInfo) {
+		AjaxDataWrap<T_XT_CD> ajaxDataWrap = findAll(T_XT_CD.class, null, pageInfo, xtcdRepository);
+		return ajaxDataWrap.copy(VT_XT_CD.class);
+	}
+	/**
+	 * 查询所有菜单
+	 * 
+	 * @return 最底层菜单列表
+	 */
+	public AjaxDataWrap<VT_XT_CD> findAllXTCD(VT_XT_CD cd,PageInfo pageInfo) {
 		AjaxDataWrap<T_XT_CD> ajaxDataWrap = findAll(T_XT_CD.class, null, pageInfo, xtcdRepository);
 		return ajaxDataWrap.copy(VT_XT_CD.class);
 	}

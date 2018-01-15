@@ -1,18 +1,5 @@
 var timeoutInterval = null;
 function component(fieldType,fieldTemplate) {
-//	var fieldTemplate = "";
-//	if (_ConstantComponentMap._FormField == fieldType) {
-//		fieldTemplate = template;
-//	} else if (_ConstantComponentMap._FormDate == fieldType) {
-//		fieldTemplate = template;
-//	} else if (_ConstantComponentMap._FormInputButton == fieldType) {
-//		fieldTemplate =template;
-//	} else if (_ConstantComponentMap._FormSelect == fieldType) {
-//		fieldTemplate = template;
-//	} else if (_ConstantComponentMap._FormToolBar == fieldType) {
-//		fieldTemplate = ;
-//	}
-
 	// 创建style映射
 	var LABEL_ALIGN = "labelalign";
 
@@ -234,6 +221,13 @@ function FormFieldBase(domId) {
 	this.data = "";
 	this.getColspan = function() {
 		return this.colspan;
+	}
+	this.getField = function(){
+		return this.field;
+	}
+	this.getData = function(){
+		return this.getInputDom().val();
+//		return this.data;
 	}
 	this.getInputDom = function() {
 		return $("#" + this.domId);

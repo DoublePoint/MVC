@@ -12,6 +12,9 @@ $(document).ready(function() {
 
 	/*-----------添加事件监听---------------*/
 	_InitFormFieldListener();
+	
+	/*-----添加LayoutArea合并监听*/
+	_InitLayoutAreaCombineListener();
 });
 
 /*-----------创建最底层vue对象---------------*/
@@ -92,7 +95,20 @@ function _InitFormFieldListener() {
 		}
 	});
 }
-
+function _InitLayoutAreaCombineListener(){
+	 $(".ll-fill-area-left-right-center .ll-drag-to-left").click(function(){
+		 var dragId=$(this).parent(".ll-fill-area-left-right-center").attr("id");
+		 var parentId=$(this).parent().attr("id");
+		 var drag=new LayoutDrag(dragId);
+		 drag.moveLeft();
+	 })
+	 $(".ll-fill-area-left-right-center .ll-drag-to-right").click(function(){
+		 var dragId=$(this).parent(".ll-fill-area-left-right-center").attr("id");
+		 var parentId=$(this).parent().attr("id");
+		 var drag=new LayoutDrag(dragId);
+		 drag.moveRight();
+	 })
+}
 //定义页面的默认Init方法
 function init(){
 	

@@ -16,9 +16,6 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 	mounted : function() {
 		this._MapComponent();
 		this._RefreshForm();
-		// 调整完成之后显示
-		// this._Show();
-//		$form.render(); 
 	},
 	created : function() {
 		this._RegisterComponent();
@@ -31,21 +28,12 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 				if (this[attrName] != null)
 					ajaxForm[attrName] = this[attrName];
 			}
-			// ajaxForm.cols = this.cols;
 			$._AddToLayuiObjectHashMap(domId, ajaxForm);
 
-			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
-//			$._RegisterResizeModel(ajaxForm);
 		},
 		// 添加生命ajaxDataGrid对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
-//			var documentWriteHtml = "";
-//			var domId = this._GetComponentDomId();
-//			var $script = $('<script type="text/javascript"></script>');
-//			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
-//			documentWriteHtml = $script.prop("outerHTML");
-//			$("body").append(documentWriteHtml);
 		},
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
@@ -68,7 +56,7 @@ function AjaxForm(domId) {
 	this.domId = domId;
 	this.colproportion = "1:3:1:3:1:3:1:3:1:3";
 	this.cols = "100";
-
+	this.data={};
 	this.formItems = new Array();
 	this.formLines = new Array();
 	this.setCols = function(cols) {
@@ -77,13 +65,27 @@ function AjaxForm(domId) {
 	this.getCols = function() {
 		return this.cols;
 	}
+	this.getData = function(){
+		var obj=this.data;
+		if(obj==null)
+			obj={};
+		if(this.formItems==null) return null;
+		for(index in this.formItems){
+			var field=this.formItems[index].getField();
+			var data=this.formItems[index].getData();
+			if(field!=null&&field!="")
+				obj[field]=data;
+		}
+		return obj;
+	}
 	this.getDom = function() {
 		return $("#" + this.domId);
 	}
+	
 	this.setData = function(data) {
 
 	}
-
+	
 	this.getFormItems = function(item) {
 		return this.formItems;
 	}

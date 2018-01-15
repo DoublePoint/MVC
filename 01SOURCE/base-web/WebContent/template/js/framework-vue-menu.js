@@ -1,3 +1,4 @@
+var existTabsNameArray=new Array();
 Vue.component(_ConstantComponentMap._AjaxMenu, {
 	props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 	template : ' <ul :id="id+guid" lay-filter="side" class="navMenu"></ul>',
@@ -26,12 +27,6 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 		// 添加生命AjaxMenu对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
-//			var documentWriteHtml = "";
-//			var domId = this._GetComponentDomId();
-//			var $script = $('<script type="text/javascript"></script>');
-//			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
-//			documentWriteHtml = $script.prop("outerHTML");
-//			$("body").append(documentWriteHtml);
 		},
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
@@ -48,7 +43,6 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 					parent.find('li a').removeClass("active").find(".arrow").removeClass("open")
 					$(this).parent("li").addClass("open").find(labeul).slideDown(300);
 					$(this).addClass("active").find(".arrow").addClass("open")
-//					parent.prev("a").css("border-left","5px solid #1c2229");
 					parent.prev("a").removeClass("active")
 				} else {
 					$(this).parent("li").removeClass("open").find(labeul).slideUp(300);
@@ -58,20 +52,20 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 						$(this).addClass("active")
 					}
 				}
-				var href = $(this).attr("menuhref");
-
-//				$layer.msg($(this).text());
 				
+				var href = $(this).attr("menuhref");
 				if(href==null||href==""||href=="#"||href=="0"){
 					return;
 				}
-				// 新增一个Tab项
-				$element.tabAdd('admin-tab', {
-					title : $(this).text(), // 用于演示
-					content : '<iframe src="' + href + '"></iframe>',
-					id : $(this).text()
-				// 实际使用一般是规定好的id，这里以时间戳模拟下
-				});
+				if($.inArray($(this).text(),existTabsNameArray)==-1){
+					// 新增一个Tab项
+					$element.tabAdd('admin-tab', {
+						title : $(this).text(), 
+						content : '<iframe src="' + href + '"></iframe>',
+						id : $(this).text()
+					});
+					existTabsNameArray.push($(this).text());
+				}
 				// 切换到指定Tab项
 				$element.tabChange('admin-tab', $(this).text()); // 切换到：用户管理
 			});
@@ -89,8 +83,6 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 				success : function(data) {
 					var _AjaxMenu = $._GetFromLayuiObjectHashMap(domId);
 					_AjaxMenu.setData(data);
-					// $._SetLayuiTableData(domId, data, cols);
-
 				}
 			});
 		}
@@ -98,15 +90,15 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 	},
 })
 
-function AjaxMenu(id) {
-	this.id = id;
+function AjaxMenu(domId) {
+	this.domId = domId;
 	// this.cdmc = config.cdmc;
 	// this.cdbs = config.cdbs;
 	// this.cdlj = config.cdlj;
 	// this.childrenMenuList = config.childrenMenuList;
 	this.setData = function(data) {
-		$("#" + id).empty();
-		$("#" + id).append(this.getHtml(data));
+		$("#" + domId).empty();
+		$("#" + domId).append(this.getHtml(data));
 
 	};
 

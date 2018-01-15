@@ -53,12 +53,10 @@ public class XTCDHandleController extends BaseHandleController {
 			dataWrap=new AjaxDataWrap<VT_XT_CD>();
 			dataWrap.getPageInfo().setPageSize(20);
 		}
-		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			dataWrap= xTCDQueryService.findAllXTCD(dataWrap.getPageInfo());
-		}
-		else{
+		if(cd!=null){
 			VT_XT_CD cdQuery=new VT_XT_CD();
-			cdQuery.setCdbs(cd.getCdbs());
+			cdQuery.setSjcdbs(cd.getSjcdbs());
+			cdQuery.setCdmc(cd.getCdmc());
 			dataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,dataWrap.getPageInfo());
 		}
 		if (dataWrap == null)

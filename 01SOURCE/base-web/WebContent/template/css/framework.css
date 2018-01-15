@@ -358,7 +358,7 @@ a {
 	background-color: #1AA094;
 	cursor: col-resize;
 }
-.ll-fill-area-left-right-center:hover .ll-drag-to-left{
+ .ll-drag-to-left{
 	height:20px;
 	width:20px;
 	left:-15px;
@@ -369,6 +369,18 @@ a {
 	background-image: url(../image/togglebar.gif);
 	background-repeat: no-repeat;
 	background-position: -20px 0px;
+}
+.ll-fill-area-left-right-center:hover .ll-drag-to-right{
+	height:20px;
+	width:20px;
+	left:5px;
+	top:50%;
+	margin-top:-10px;
+	position:relative;
+	cursor:pointer;
+	background-image: url(../image/togglebar.gif);
+	background-repeat: no-repeat;
+	background-position: -20px -40px;
 }
 /* .ll-drag-to-left{
 	height:20px;

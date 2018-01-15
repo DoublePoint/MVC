@@ -23,7 +23,6 @@ $form.on('submit(demo1)', function(data) {
 			$._ShakeTips('保存失败');
 			return false;
 		}
-
 	});
 
 	return false;

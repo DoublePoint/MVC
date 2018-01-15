@@ -116,7 +116,9 @@ function FillAreaTB(domId) {
 	this.getIsResize=function(){
 		return this.isResize;
 	}
-	
+	this.getWidth=function(){
+		return this.width;
+	}
 	this.setFillAreaHeight=function(height){
 		this.getDom().height(height);
 	}

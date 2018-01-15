@@ -1,15 +1,15 @@
 function retrieveAjaxDataGrid() {
 	var ajaxDataWrap = lltestdatagrid.getDataWrap(false);
-	// var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
 	var nodes = treeDemo.getSelectedNodes();
+	var selectNodeCdbs="";
 	if (nodes.length > 0) {
-		var array = new Array();
-		var obj = {};
-		obj.cdbs = nodes[0].cdbs;
-		array.push(obj);
-		ajaxDataWrap.setDataList(array);
+		selectNodeCdbs = nodes[0].cdbs;
 	}
-	// var
+	var formData=ajaxform.getData();
+	formData.sjcdbs=selectNodeCdbs;
+	var array = new Array();
+	array.push(formData);
+	ajaxDataWrap.setDataList(array);
 	// obj={"code":"","msg":"","dataList":[{"cdbs":"398121904285679616","cdmc":"菜单管理","sjcdbs":"","cdcj":1,"cdpx":1,"cdlj":"","gxsj":null,"cjsj":{"monthValue":1,"month":"JANUARY","year":2018,"dayOfMonth":3,"dayOfWeek":"WEDNESDAY","dayOfYear":3,"hour":14,"minute":34,"nano":758000000,"second":18,"chronology":{"id":"ISO","calendarType":"iso8601"}}}],"pageInfo":{"currentPageNum":1,"currentPageCount":1,"totalElementCount":3,"totalPageCount":3,"pageSize":1,"sort":null}};
 	$.ajax({
 		url : $$pageContextPath + "/template/xt/cd/datalist",
