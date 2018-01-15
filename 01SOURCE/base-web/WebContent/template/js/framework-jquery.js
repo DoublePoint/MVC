@@ -112,6 +112,7 @@ var DoublePoint = {};// 全局对象
 				iframeWin.init(_DialogData);
 
 				var ajaxPage = new $._AjaxPage();
+				ajaxPage.setParentDialogDiv(layero);
 				if (obj.yes != null) {
 					if (typeof obj.yes === "function")
 						ajaxPage.YesFunction = obj.yes;
@@ -204,6 +205,11 @@ var DoublePoint = {};// 全局对象
 				}
 			}
 			return null;
+		},
+		_SetNotSaveIcon : function(){
+			if(parent._AjaxPage==null)
+				return;
+			parent._AjaxPage.setNotSaveIcon();
 		},
 		// 是否是int类型的数值
 		_IsInt : function(str) {
@@ -381,15 +387,27 @@ var DoublePoint = {};// 全局对象
 			return this;
 		},
 		_AjaxPage : function() {
+			this._ParentDialogDiv=null;
 			this._YesFunctionName = null;
 			this._CancelFunctionName = null;
 			this.YesFunction = null;
 			this.CancelFunction = null;
+			this._TitleValue=null;
 			this.setYesFunctionName = function(funcName) {
 				this._YesFunctionName = funcName;
 			};
 			this.setCancelFunctionName = function(cancName) {
 				this._CancelFunctionName = cancName;
+			}
+			this.setParentDialogDiv = function(aParentDialogDiv){
+				this._ParentDialogDiv=aParentDialogDiv;
+			}
+			this.setNotSaveIcon = function(){
+				var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
+				this._TitleValue=titleObj.text();
+				var $span = $("<span>未保存</span>");
+				$span.attr("class", "layui-badge");
+				titleObj.append($span);
 			}
 		},
 		_ParseTreeNodeToCd : function(treeNode) {

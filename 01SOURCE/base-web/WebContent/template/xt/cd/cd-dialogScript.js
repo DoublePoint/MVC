@@ -46,3 +46,8 @@ function InputButtonClick() {
 		}
 	});
 }
+
+function clicktest(){
+	$._SetNotSaveIcon();
+	return ;
+}

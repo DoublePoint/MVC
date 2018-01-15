@@ -89,7 +89,7 @@ function AjaxForm(domId) {
 	this.setIsChanged = function(aIsChanged){
 		this.isChanged=aIsChanged;
 	}
-	return this.isChanged;
+	
 	this.getFormItems = function(item) {
 		return this.formItems;
 	}

@@ -5,7 +5,7 @@ Vue.component(_ConstantComponentMap._ToolBar, {
 	+ '</div>',
 	data : function() {
 		var labelclientStyleBuffer = $._CreateStringBuffer();
-		for (clientStyleName in _ClientStyleArr) {
+		for (clientStyleName in this._ClientStyleArr) {
 			var stylekey = _ClientStyleArr[clientStyleName];
 			if (this[stylekey] != null) {
 				var labelalignbuffer = $._CreateStyleBuffer(_ClientStyleMap[stylekey], this[stylekey]);
