@@ -305,7 +305,9 @@ a {
 .layui-form-select dl dd, .layui-form-select dl dt {
 	line-height: 20px;
 }
-
+.layui-form-select dl dd.layui-this{
+	background-color:#1AA094;
+}
 .layui-form-select dl {
 	padding: 0px;
 	top: 38px;

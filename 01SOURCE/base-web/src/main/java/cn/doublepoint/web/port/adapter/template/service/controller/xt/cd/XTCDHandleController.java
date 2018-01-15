@@ -71,15 +71,7 @@ public class XTCDHandleController extends BaseHandleController {
 			cdQuery.setCdbs(cd.getCdbs());
 			ajaxDataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageRequest);
 		}
-//		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
-//		ajaxDataWrap.setData(xtcdLists);
-//		Pager pager=new Pager();
-//		pager.setCurrentPageNum(1);
-//		pager.setPageCount(4);
-//		pager.setPageSize(2);
-//		pager.setTotalCount(5000);
-//		ajaxDataWrap.setPager(pager);
-//		ajaxDataWrap.setCode(200);
+
 		ObjectMapper mapper = new ObjectMapper();  
 		 try {
 			String jsonStr = mapper.writeValueAsString(ajaxDataWrap);

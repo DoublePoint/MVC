@@ -36,6 +36,9 @@ var ConstantState = {
 	_YES_NO_STATE_Y : "Y",
 	_YES_NO_STATE_N : "N"
 };
+var _ConstantDialog = {
+	_DEFAULT_SHOW_TIME:3000	
+};
 
 /*------AjaxForm-------*/
 var _ConstantFormFieldInheritParams = [ 'id', //

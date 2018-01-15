@@ -65,9 +65,9 @@ public class XTCDQueryService {
 		QT_XT_CD query = QT_XT_CD.t_XT_CD;
 		BooleanBuilder bb=new BooleanBuilder();
 		if(StringUtil.isNotEmpty(cd.getCdmc()))
-			bb.and(query.cdmc.like(cd.getCdmc()));
-		if(StringUtil.isNotEmpty(cd.getSjcdbs()))
-			bb.and(query.sjcdbs.eq(cd.getSjcdbs()));
+			bb.and(query.cdmc.like("%"+cd.getCdmc()+"%"));
+		if(StringUtil.isNotEmpty(cd.getCdbs()))
+			bb.and(query.sjcdbs.eq(cd.getCdbs()));
 		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, bb.getValue(), pageInfo, xtcdRepository);
 		return dataWrap.copy(VT_XT_CD.class);
 	}

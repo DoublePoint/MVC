@@ -6,7 +6,7 @@ function retrieveAjaxDataGrid() {
 		selectNodeCdbs = nodes[0].cdbs;
 	}
 	var formData=ajaxform.getData();
-	formData.sjcdbs=selectNodeCdbs;
+	formData.cdbs=selectNodeCdbs;
 	var array = new Array();
 	array.push(formData);
 	ajaxDataWrap.setDataList(array);
@@ -19,6 +19,8 @@ function retrieveAjaxDataGrid() {
 		async : false,
 		data : JSON.stringify(ajaxDataWrap),
 		success : function(ajaxDataWrap) {
+			if(ajaxDataWrap==null||ajaxDataWrap.dataList==null)
+				$._ShakeTips("未查询到任何数据!",2000);
 			lltestdatagrid.setDataWrap(ajaxDataWrap);
 		}
 	});

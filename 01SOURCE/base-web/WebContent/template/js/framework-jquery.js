@@ -161,8 +161,9 @@ var DoublePoint = {};// 全局对象
 				$._Eval(yesFunction, data);
 			}
 		},
-		_Alert : function(msg) {
-			parent.$layer.msg(msg);
+		_Alert : function(msg,time) {
+			if(time==null) time=_ConstantDialog._DEFAULT_SHOW_TIME;
+			parent.$layer.msg(msg,{time:time});
 		},
 		_Confirm : function(msg, yes, cancel) {
 			var yesF = yes;
@@ -178,9 +179,11 @@ var DoublePoint = {};// 全局对象
 					cancelF.apply();
 			});
 		},
-		_ShakeTips : function(msg) {
+		_ShakeTips : function(msg,time) {
+			if(time==null) time=_ConstantDialog._DEFAULT_SHOW_TIME;
 			parent.layer.msg(msg, {
-				anim : 6
+				anim : 6,
+				time:time
 			}, function() {
 				// 关闭后的操作
 			});

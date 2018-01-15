@@ -59,6 +59,7 @@ function AjaxForm(domId) {
 	this.data={};
 	this.formItems = new Array();
 	this.formLines = new Array();
+	this.isChanged=false;
 	this.setCols = function(cols) {
 		this.cols = cols;
 	}
@@ -85,9 +86,15 @@ function AjaxForm(domId) {
 	this.setData = function(data) {
 
 	}
-	
+	this.setIsChanged = function(aIsChanged){
+		this.isChanged=aIsChanged;
+	}
+	return this.isChanged;
 	this.getFormItems = function(item) {
 		return this.formItems;
+	}
+	this.getIsChanged = function(){
+		return this.isChanged;
 	}
 	this.addFormItem = function(item) {
 		var isNextLine = false;

@@ -28,10 +28,6 @@ $form.on('submit(demo1)', function(data) {
 	return false;
 });
 
-function testAlert(te) {
-	alert(te);
-}
-
 function InputButtonClick() {
 	var ajaxDataWrap = null;
 	$._OpenDialog({
