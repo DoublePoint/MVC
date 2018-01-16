@@ -15,6 +15,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.commonutil.annotations.domain.model.DateConvertor;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 public class VT_XT_CD extends BaseEntity {
