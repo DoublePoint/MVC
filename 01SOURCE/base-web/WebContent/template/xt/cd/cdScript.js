@@ -19,7 +19,7 @@ function retrieveAjaxDataGrid() {
 		async : false,
 		data : JSON.stringify(ajaxDataWrap),
 		success : function(ajaxDataWrap) {
-			if(ajaxDataWrap==null||ajaxDataWrap.dataList==null)
+			if(ajaxDataWrap==null||ajaxDataWrap.dataList==null||ajaxDataWrap.dataList.length==0)
 				$._ShakeTips("未查询到任何数据!",2000);
 			lltestdatagrid.setDataWrap(ajaxDataWrap);
 		}
