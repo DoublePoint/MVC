@@ -57,6 +57,9 @@ function component(fieldType,fieldTemplate) {
 				this._InitSelectInputMouseLeave();
 				this._InitSelectInputMouseEnter();
 			}
+//			$("#"+this._GetComponentDomId()).bind("blur",function(){
+//				alert(2)
+//			});
 		},
 		
 		methods : {
@@ -219,6 +222,9 @@ function FormFieldBase(domId) {
 	this.type = "text";// 文本框的显示格式,取值为text和password，默认为text
 	this.errmsg = "表达式有误";
 	this.data = "";
+	this.getDomId = function(){
+		return this.domId;
+	}
 	this.getColspan = function() {
 		return this.colspan;
 	}
@@ -226,8 +232,11 @@ function FormFieldBase(domId) {
 		return this.field;
 	}
 	this.getData = function(){
+//		return this.getInputDom().val();
+		return this.data;
+	}
+	this.getInputVal = function(){
 		return this.getInputDom().val();
-//		return this.data;
 	}
 	this.getInputDom = function() {
 		return $("#" + this.domId);

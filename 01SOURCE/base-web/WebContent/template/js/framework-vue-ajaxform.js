@@ -16,6 +16,9 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 	mounted : function() {
 		this._MapComponent();
 		this._RefreshForm();
+		
+		//初始化各个子标签的事件 例如文本改变时 设置该弹出窗口为未保存
+		this._InitChanged();
 	},
 	created : function() {
 		this._RegisterComponent();
@@ -38,6 +41,11 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
+		},
+		_InitChanged : function(){
+			var domId = this._GetComponentDomId();
+			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
+			_Ajaxform.initChanged();
 		},
 		_RefreshForm : function() {
 			var domId = this._GetComponentDomId();
@@ -82,7 +90,13 @@ function AjaxForm(domId) {
 	this.getDom = function() {
 		return $("#" + this.domId);
 	}
-	
+	this.getFieldItem= function(itemId){
+		for(index in this.formItems){
+			var field=this.formItems[index];
+			if( itemId==field.getDomId())
+				return field;
+		}
+	}
 	this.setData = function(data) {
 
 	}
@@ -180,6 +194,15 @@ function AjaxForm(domId) {
 				return;
 			}
 		}
+	}
+	this.initChanged=function(){
+		var obj=this;
+		this.getDom().find("input").bind("blur",function(){
+			var fieldId=$(this).attr("id");
+			var fieldItem=obj.getFieldItem(fieldId);
+			if(fieldItem.getData()!=fieldItem.getInputVal())
+				$._SetNotSaveIcon();
+		});
 	}
 	return this;
 }

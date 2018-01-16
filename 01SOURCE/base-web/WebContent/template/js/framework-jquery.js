@@ -207,6 +207,8 @@ var DoublePoint = {};// 全局对象
 			return null;
 		},
 		_SetNotSaveIcon : function(){
+			if(parent==null)
+				return;
 			if(parent._AjaxPage==null)
 				return;
 			parent._AjaxPage.setNotSaveIcon();
