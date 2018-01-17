@@ -113,9 +113,9 @@ function _InitLayoutAreaCombineListener(){
 function init(){
 	
 }
-var _AjaxPage=null;
-function initAjaxPage(anAjaxPage){
-	_AjaxPage=anAjaxPage;
+var _jspParams=null;
+function initJspParams(aJspParams){
+	_jspParams=aJspParams;
 }
 //如果该页面是弹窗 那么在弹窗执行完成success 以及 执行完用户自定义的init方法之前就会执行该方法
 function initBeforeJspInit(){

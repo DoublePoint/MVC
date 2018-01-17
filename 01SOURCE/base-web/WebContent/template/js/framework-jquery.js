@@ -116,15 +116,15 @@ var DoublePoint = {};// 全局对象
 
 			// 重新封装success方法
 			obj.success = function(layero, index) {
-				var ajaxPage = new $._AjaxPage();
-				ajaxPage.setParentDialogDiv(layero);
+				var jspParams = $._CreateJspParams();
+				jspParams.setParentDialogDiv(layero);
 				if (obj.yes != null) {
 					if (typeof obj.yes === "function")
-						ajaxPage.YesFunction = obj.yes;
+						jspParams.YesFunction = obj.yes;
 					else
-						ajaxPage.setYesFunctionName(obj.yes);
+						jspParams.setYesFunctionName(obj.yes);
 				}
-				parent.initAjaxPage(ajaxPage);
+				parent.initJspParams(jspParams);
 				initBeforeJspInit();
 				// 执行该方法的是子页面
 				// 手动调用页面的init方法 由用户自动定义
@@ -164,11 +164,11 @@ var DoublePoint = {};// 全局对象
 		_CloseDialog : function(index, data) {
 			$layer.close(index); // 再执行关闭
 
-			//_AjaxPage 页面默认参数 每个页面都有
-			if (_AjaxPage.YesFunction != null) {
-				_AjaxPage.YesFunction(data);
+			//_JspParams 页面默认参数 每个页面都有
+			if (_jspParams.YesFunction != null) {
+				_jspParams.YesFunction(data);
 			} else {
-				var yesFunction = _AjaxPage._YesFunctionName;
+				var yesFunction = _jspParams._YesFunctionName;
 				$._Eval(yesFunction, data);
 			}
 		},
@@ -219,16 +219,16 @@ var DoublePoint = {};// 全局对象
 		_AddNotSaveIcon : function(){
 			if(parent==null)
 				return;
-			if(parent._AjaxPage==null)
+			if(parent._jspParams==null)
 				return;
-			parent._AjaxPage.addNotSaveIcon();
+			parent._jspParams.addNotSaveIcon();
 		},
 		_RemoveNotSaveIcon : function(){
 			if(parent==null)
 				return;
-			if(parent._AjaxPage==null)
+			if(parent._jspParams==null)
 				return;
-			parent._AjaxPage.removeNotSaveIcon();
+			parent._jspParams.removeNotSaveIcon();
 		},
 		// 是否是int类型的数值
 		_IsInt : function(str) {
@@ -405,40 +405,39 @@ var DoublePoint = {};// 全局对象
 			}
 			return this;
 		},
-		_AjaxPage : function() {
-			this._ParentDialogDiv=null;
-			this._YesFunctionName = null;
-			this._CancelFunctionName = null;
-			this.YesFunction = null;
-			this.CancelFunction = null;
-			this._TitleValue=null;
-			this.setYesFunctionName = function(funcName) {
-				this._YesFunctionName = funcName;
-			};
-			this.setCancelFunctionName = function(cancName) {
-				this._CancelFunctionName = cancName;
-			}
-			this.setParentDialogDiv = function(aParentDialogDiv){
-				this._ParentDialogDiv=aParentDialogDiv;
-			}
-			this.addNotSaveIcon = function(){
-				var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
-				this._TitleValue=titleObj.text();
-				if(titleObj.children("span").length<=0){
-					var $span = $("<span> 未保存</span>");
-					$span.attr("class", "layui-badge");
-					titleObj.append("&nbsp;");
-					titleObj.append($span);
+		_CreateJspParams : function() {
+			function JspParams() {
+				this._ParentDialogDiv=null;
+				this._YesFunctionName = null;
+				this._CancelFunctionName = null;
+				this.YesFunction = null;
+				this.CancelFunction = null;
+				this._TitleValue=null;
+				this.setYesFunctionName = function(funcName) {
+					this._YesFunctionName = funcName;
+				};
+				this.setCancelFunctionName = function(cancName) {
+					this._CancelFunctionName = cancName;
 				}
-			},
-			this.removeNotSaveIcon = function(){
-				var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
-				titleObj.children("span").remove();
-				/*this._TitleValue=titleObj.text();
-				var $span = $("<span>未保存</span>");
-				$span.attr("class", "layui-badge");
-				titleObj.append($span);*/
+				this.setParentDialogDiv = function(aParentDialogDiv){
+					this._ParentDialogDiv=aParentDialogDiv;
+				}
+				this.addNotSaveIcon = function(){
+					var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
+					this._TitleValue=titleObj.text();
+					if(titleObj.children("span").length<=0){
+						var $span = $("<span> 未保存</span>");
+						$span.attr("class", "layui-badge");
+						titleObj.append("&nbsp;");
+						titleObj.append($span);
+					}
+				},
+				this.removeNotSaveIcon = function(){
+					var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
+					titleObj.children("span").remove();
+				}
 			}
+			return new JspParams();
 		},
 		_ParseTreeNodeToCd : function(treeNode) {
 			var arr = new Array();
