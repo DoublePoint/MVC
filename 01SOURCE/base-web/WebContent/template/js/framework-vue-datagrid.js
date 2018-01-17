@@ -86,7 +86,7 @@ function AjaxDataGrid(domId) {
 		type : 'checkbox'
 	} ] ];
 	this.datasource = "";
-	this.datawrap = new $._AjaxDataWrap();
+	this.datawrap = $._CreateAjaxDataWrap();
 	this.height = 300;
 	this.init = function(msg) {
 		this.setData();
@@ -98,7 +98,7 @@ function AjaxDataGrid(domId) {
 		if (isGetData == null)
 			isGetData = true;
 		if (!isGetData) {
-			var adw = new $._AjaxDataWrap();
+			var adw = new $._CreateAjaxDataWrap();
 			adw.pageInfo = this.datawrap.pageInfo;
 			return adw;
 		}

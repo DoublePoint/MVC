@@ -1,4 +1,4 @@
-var DoublePoint = {};// 全局对象
+//var DoublePoint = {};// 全局对象
 (function($) {
 	// html标签Id对应Model键值对
 	var _LayuiObjectHashMap;
@@ -9,7 +9,7 @@ var DoublePoint = {};// 全局对象
 	String.prototype.endWith = function(endStr) {
 		var d = this.length - endStr.length;
 		return (d >= 0 && this.lastIndexOf(endStr) == d)
-	}
+	};
 
 	$.extend({
 		_AddToLayuiObjectHashMap : function(id, obj) {
@@ -101,6 +101,15 @@ var DoublePoint = {};// 全局对象
 			return ss;
 		},
 		_OpenDialog : function(obj) {
+			/*title*/
+			var title = obj.title;
+			if(title==null||title=="")
+				title="弹窗 ";
+			else
+				title=title+"&nbsp;&nbsp;";
+			obj.title=title;
+			
+			/*content*/
 			var url = obj.content;
 			if (url != null) {
 				// 有参数
@@ -288,32 +297,8 @@ var DoublePoint = {};// 全局对象
 			return this;
 		},
 
-		_AjaxDataWrap : function(name) {
-			// this.name = name;
-			this.code = "";
-			this.msg = "";
-			this.dataList = [];
-			this.pageInfo = new $._PageInfo();
-			this.parse = function(jsonObjectDataWrap) {
-				if (jsonObjectDataWrap == null)
-					return;
-				this.dataList = jsonObjectDataWrap.dataList;
-				this.pageInfo.parse(jsonObjectDataWrap.pageInfo);
-			};
-			this.setDataList = function(dataList) {
-				this.dataList = dataList;
-			};
-			this.getDataList = function() {
-				return this.dataList;
-			};
-
-			this.getPageInfo = function() {
-				return this.pageInfo;
-			}
-			this.clearPageInfo = function() {
-				this.pageInfo = null;
-			}
-			return this;
+		_CreateAjaxDataWrap : function(name) {
+			return new _AjaxDataWrap();
 		},
 		_Clone : function clone(obj) {
 			// Handle the 3 simple types, and null or undefined
@@ -348,96 +333,12 @@ var DoublePoint = {};// 全局对象
 
 			throw new Error("Unable to copy obj! Its type isn't supported.");
 		},
-		_PageInfo : function() {
-			this.currentPageNum = 1;
-			this.currentPageCount = 0;
-			this.totalElementCount = 0;
-			this.totalPageCount = 1;
-			this.pageSize = 100;
-			this.sort = null;
-			this.parse = function(jsonObjectPageInfo) {
-				if (jsonObjectPageInfo == null)
-					return;
-				this.currentPageNum = jsonObjectPageInfo.currentPageNum;
-				this.currentPageCount = jsonObjectPageInfo.currentPageCount;
-				this.totalElementCount = jsonObjectPageInfo.totalElementCount;
-				this.totalPageCount = jsonObjectPageInfo.totalPageCount;
-				this.pageSize = jsonObjectPageInfo.pageSize;
-				this.sort = jsonObjectPageInfo.sort;
-			};
-			this.getCurrentPageNum = function() {
-				return this.currentPageNum;
-			};
-			this.setCurrentPageNum = function(aCurrentPageNum) {
-				this.currentPageNum = aCurrentPageNum;
-			};
-			this.getCurrentPageCount = function() {
-				return this.currentPageCount;
-			};
-			this.setCurrentPageCount = function(aCurrentPageCount) {
-				this.currentPageCount = aCurrentPageCount;
-			};
-			this.getTotalElementCount = function() {
-				return this.totalElementCount;
-			};
-			this.setTotalElementCount = function(aTotalElementCount) {
-				this.totalElementCount = aTotalElementCount;
-			};
-			this.getTotalPageCount = function() {
-				return this.totalPageCount;
-			};
-			this.setTotalPageCount = function(aTotalPageCount) {
-				this.totalPageCount = aTotalPageCount;
-			};
-			this.getPageSize = function() {
-				return this.pageSize;
-			};
-			this.setPageSize = function(aPageSize) {
-				this.pageSize = aPageSize;
-			};
-			this.clear = function() {
-				this.currentPageNum = 1;
-				this.currentPageCount = 0;
-				this.totalElementCount = 0;
-				this.totalPageCount = 1;
-				this.pageSize = _ConstantAjaxDataGrid._DEFAULT_PAGE_SIZE;
-				this.sort = null;
-			}
-			return this;
+		_CreatePageInfo : function(){
+			var pageinfo=new _PageInfo();
+			return pageinfo;
 		},
 		_CreateJspParams : function() {
-			function JspParams() {
-				this._ParentDialogDiv=null;
-				this._YesFunctionName = null;
-				this._CancelFunctionName = null;
-				this.YesFunction = null;
-				this.CancelFunction = null;
-				this._TitleValue=null;
-				this.setYesFunctionName = function(funcName) {
-					this._YesFunctionName = funcName;
-				};
-				this.setCancelFunctionName = function(cancName) {
-					this._CancelFunctionName = cancName;
-				}
-				this.setParentDialogDiv = function(aParentDialogDiv){
-					this._ParentDialogDiv=aParentDialogDiv;
-				}
-				this.addNotSaveIcon = function(){
-					var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
-					this._TitleValue=titleObj.text();
-					if(titleObj.children("span").length<=0){
-						var $span = $("<span> 未保存</span>");
-						$span.attr("class", "layui-badge");
-						titleObj.append("&nbsp;");
-						titleObj.append($span);
-					}
-				},
-				this.removeNotSaveIcon = function(){
-					var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
-					titleObj.children("span").remove();
-				}
-			}
-			return new JspParams();
+			return new _JspParams();
 		},
 		_ParseTreeNodeToCd : function(treeNode) {
 			var arr = new Array();

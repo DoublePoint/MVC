@@ -38,7 +38,7 @@ function onClickAdd() {
 	} else {
 		cdbs = nodes[0].cdbs;
 	}
-	var ajaxDataWrap = new $._AjaxDataWrap();
+	var ajaxDataWrap =  $._CreateAjaxDataWrap();
 	ajaxDataWrap.setDataList(nodes[0]);
 	$._OpenDialog({
 		type : 2,
