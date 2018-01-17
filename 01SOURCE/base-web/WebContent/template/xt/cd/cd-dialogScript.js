@@ -48,6 +48,10 @@ function InputButtonClick() {
 }
 
 function clicktest(){
-	$._SetNotSaveIcon();
+	$._AddNotSaveIcon();
+	return ;
+}
+function clickDelete(){
+	$._RemoveNotSaveIcon();
 	return ;
 }

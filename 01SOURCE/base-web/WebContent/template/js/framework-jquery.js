@@ -4,6 +4,8 @@ var DoublePoint = {};// 全局对象
 	var _LayuiObjectHashMap;
 	// 浏览器窗口变化时需要重设大小的标签
 	var _RegisteredModel;
+	// 弹出窗口弹出后  $(document).ready之后 用户自定义init之前
+	var _DialogSuccessModel;
 	String.prototype.endWith = function(endStr) {
 		var d = this.length - endStr.length;
 		return (d >= 0 && this.lastIndexOf(endStr) == d)
@@ -66,6 +68,14 @@ var DoublePoint = {};// 全局对象
 				_RegisteredModel = new Array();
 			_RegisteredModel.push(model);
 		},
+		_RegisterDialogSuccessModel : function(model) {
+			if (_DialogSuccessModel == null)
+				_DialogSuccessModel = new Array();
+			_DialogSuccessModel.push(model);
+		},
+		_GetRegisteredDialogSuccessModel : function(){
+			return _DialogSuccessModel;
+		},
 		_GetRegisteredResizeModel : function() {
 			return _RegisteredModel;
 		},
@@ -106,11 +116,6 @@ var DoublePoint = {};// 全局对象
 
 			// 重新封装success方法
 			obj.success = function(layero, index) {
-				// 执行该方法的是子页面
-				// 手动调用页面的init方法
-				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-				iframeWin.init(_DialogData);
-
 				var ajaxPage = new $._AjaxPage();
 				ajaxPage.setParentDialogDiv(layero);
 				if (obj.yes != null) {
@@ -120,7 +125,12 @@ var DoublePoint = {};// 全局对象
 						ajaxPage.setYesFunctionName(obj.yes);
 				}
 				parent.initAjaxPage(ajaxPage);
-
+				initBeforeJspInit();
+				// 执行该方法的是子页面
+				// 手动调用页面的init方法 由用户自动定义
+				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+				iframeWin.init(_DialogData);
+				
 				// 添加用户定义success方法
 				if (_Client_Success_Funtion != null) {
 					$._Eval(_Client_Success_Funtion);
@@ -206,12 +216,19 @@ var DoublePoint = {};// 全局对象
 			}
 			return null;
 		},
-		_SetNotSaveIcon : function(){
+		_AddNotSaveIcon : function(){
 			if(parent==null)
 				return;
 			if(parent._AjaxPage==null)
 				return;
-			parent._AjaxPage.setNotSaveIcon();
+			parent._AjaxPage.addNotSaveIcon();
+		},
+		_RemoveNotSaveIcon : function(){
+			if(parent==null)
+				return;
+			if(parent._AjaxPage==null)
+				return;
+			parent._AjaxPage.removeNotSaveIcon();
 		},
 		// 是否是int类型的数值
 		_IsInt : function(str) {
@@ -404,12 +421,23 @@ var DoublePoint = {};// 全局对象
 			this.setParentDialogDiv = function(aParentDialogDiv){
 				this._ParentDialogDiv=aParentDialogDiv;
 			}
-			this.setNotSaveIcon = function(){
+			this.addNotSaveIcon = function(){
 				var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
 				this._TitleValue=titleObj.text();
+				if(titleObj.children("span").length<=0){
+					var $span = $("<span> 未保存</span>");
+					$span.attr("class", "layui-badge");
+					titleObj.append("&nbsp;");
+					titleObj.append($span);
+				}
+			},
+			this.removeNotSaveIcon = function(){
+				var titleObj=this._ParentDialogDiv.children(".layui-layer-title"); 
+				titleObj.children("span").remove();
+				/*this._TitleValue=titleObj.text();
 				var $span = $("<span>未保存</span>");
 				$span.attr("class", "layui-badge");
-				titleObj.append($span);
+				titleObj.append($span);*/
 			}
 		},
 		_ParseTreeNodeToCd : function(treeNode) {
@@ -473,21 +501,6 @@ var DoublePoint = {};// 全局对象
 			$script.append('var ' + aComponent.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
-		},
-		_ParseTimestampToDate : function(timestamp){
-			var date = new Date(timestamp);  
-		    var y = date.getFullYear();    
-		    var m = date.getMonth() + 1;    
-		    m = m < 10 ? ('0' + m) : m;    
-		    var d = date.getDate();    
-		    d = d < 10 ? ('0' + d) : d;    
-		    var h = date.getHours();  
-		    h = h < 10 ? ('0' + h) : h;  
-		    var minute = date.getMinutes();  
-		    var second = date.getSeconds();  
-		    minute = minute < 10 ? ('0' + minute) : minute;    
-		    second = second < 10 ? ('0' + second) : second;   
-		    return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;   
 		}
 	});
 

@@ -11,9 +11,15 @@ function FormInputButton(domId) {
 	this.domId = domId;
 	this.fieldKey = null;
 	this.fieldValue = null;
-	this.setData = function(aKey, aValue) {
+	this.setData = function(aKey, aValue,isChanged) {
+		//如果第二个参数为nul,那么如果数据改变时 设置为改变 只要是改变一次 那么就永久改变了
+		if(isChanged==null){
+			if(this.fieldKey!=aKey||this.fieldValue!=aValue)
+				isChanged=true;
+		}
 		this.getInputDom().val(aValue);
 		this.setInputHiddenDomValue(aKey);
+		this.showParentNotSave();
 	};
 
 	this.getInputHiddenDom = function() {

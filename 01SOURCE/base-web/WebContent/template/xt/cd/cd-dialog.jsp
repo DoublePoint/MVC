@@ -25,7 +25,7 @@
 </head>
 <body>
 	<form style="width:98%;">
-		<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5"> 
+		<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
 			<ll-formfield id="cdmcId" title="菜单名称" field="cdmc" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 			<ll-formfield title="菜单链接" field="cdlj" maxlen="200"></ll-formfield>
 			<ll-formfield title="菜单序号" field="cdpx" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
@@ -33,6 +33,8 @@
 			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
 			<ll-toolbar>
 				<input type="button" value="test" onclick="clicktest()"/>
+				<input type="button" value="delete" onclick="clickDelete()"/>
+				
 				<button class="layui-btn" lay-submit="" lay-filter="demo1" >立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</ll-toolbar>

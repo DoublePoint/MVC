@@ -39,6 +39,7 @@ function component(fieldType,fieldTemplate) {
 			// 将formfield添加到form中
 			this._AddToAjaxForm();
 			var ajaxformDomId = this.$parent._GetComponentDomId();
+			
 			var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
 			ajaxform.addLine();
 		},
@@ -104,6 +105,7 @@ function component(fieldType,fieldTemplate) {
 						formField[attrName] = this[attrName];
 				}
 				formField.setFieldType(fieldType);
+				formField.setParentAjaxFormId(this.$parent._GetComponentDomId());
 				$._AddToLayuiObjectHashMap(domId, formField);
 			},
 
@@ -222,6 +224,8 @@ function FormFieldBase(domId) {
 	this.type = "text";// 文本框的显示格式,取值为text和password，默认为text
 	this.errmsg = "表达式有误";
 	this.data = "";
+	this.isChanged=false;
+	this.parentAjaxFormId="";
 	this.getDomId = function(){
 		return this.domId;
 	}
@@ -232,14 +236,29 @@ function FormFieldBase(domId) {
 		return this.field;
 	}
 	this.getData = function(){
-//		return this.getInputDom().val();
 		return this.data;
 	}
-	this.getInputVal = function(){
+	this.getDomValue = function(){
 		return this.getInputDom().val();
 	}
 	this.getInputDom = function() {
 		return $("#" + this.domId);
+	}
+	this.getIsChanged = function(){
+		if(!this.isChanged){
+			if(this.getInputDom()==null)
+				return this.isChanged;
+			if(this.getData()!=this.getDomValue()){
+				this.isChanged=true;
+			}
+		}
+		return this.isChanged;
+	}
+	this.getParentAjaxFormId = function(){
+		return this.parentAjaxFormId;
+	}
+	this.getParentAjaxForm = function(){
+		return $._GetFromLayuiObjectHashMap(this.parentAjaxFormId);
 	}
 	this.getRoot = function() {
 		return this.getInputDom().parents(".layui-inline");
@@ -253,10 +272,15 @@ function FormFieldBase(domId) {
 	this.setColspan = function(colspan) {
 		this.colspan = colspan;
 	}
-
-	this.setData = function(aData) {
+	this.setData = function(aData,isChanged) {
+		//如果第二个参数为nul,那么如果数据改变时 设置为改变 只要是改变一次 那么就永久改变了
+		if(isChanged==null){
+			if(this.data!=aData)
+				isChanged=true;
+		}
 		this.data = aData;
 		this.getInputDom().val(this.data);
+		this.showParentNotSave();
 	};
 	this.setField = function(aField) {
 		this.field = aField;
@@ -267,8 +291,14 @@ function FormFieldBase(domId) {
 	this.setMaxlen = function(aMaxlen) {
 		this.maxlen = aMaxlen;
 	}
+	this.setParentAjaxFormId = function(aParentAjaxFormId){
+		this.parentAjaxFormId = aParentAjaxFormId;
+	}
 	this.setInputStyle = function(cssKey, cssValue) {
 		this.getInputDom().css(cssKey, cssValue);
+	}
+	this.setIsChanged = function(aIsChanged){
+		this.isChanged=aIsChanged;
 	}
 	this.setLabelText = function(labeltext) {
 		this.getLabel().html(labeltext);
@@ -310,6 +340,9 @@ function FormFieldBase(domId) {
 	this.setVisible = function(aVisible) {
 		this.visible = aVisible;
 	};
+	this.showParentNotSave = function(){
+		this.getParentAjaxForm().showNotSave();
+	}
 	this.getVisible = function() {
 		return this.visible;
 	};

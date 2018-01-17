@@ -1,5 +1,5 @@
 Vue.component(_ConstantComponentMap._AjaxForm, {
-	props : [ 'id', 'onrowclick', 'cols', 'colproportion' ],
+	props : [ 'id', 'onrowclick', 'cols', 'colproportion','showchanged' ],
 	template : '<form class="layui-form " :id="id+guid"  action=""><slot ></slot></form>',
 
 	data : function() {
@@ -18,7 +18,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		this._RefreshForm();
 		
 		//初始化各个子标签的事件 例如文本改变时 设置该弹出窗口为未保存
-		this._InitChanged();
+		this._InitShowChanged();
 	},
 	created : function() {
 		this._RegisterComponent();
@@ -38,24 +38,36 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
 		},
+		_GetShowChanged : function(){
+			if(this.showchanged==null)
+				return false;
+			if(this.showchanged.toString().toLowerCase()=="true")
+				return true;
+			return false;
+		},
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_InitChanged : function(){
+		_GetAjaxForm : function(){
 			var domId = this._GetComponentDomId();
-			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
-			_Ajaxform.initChanged();
+			var ajaxform = $._GetFromLayuiObjectHashMap(domId);
+			return ajaxform;
+		},
+		_InitShowChanged : function(){
+			var ajaxform = this._GetAjaxForm();
+			if(this._GetShowChanged()){
+				$._RegisterDialogSuccessModel(ajaxform);
+				ajaxform.initNotSave()
+			}
 		},
 		_RefreshForm : function() {
-			var domId = this._GetComponentDomId();
-			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
-			_Ajaxform.refresh();
+			var ajaxform = this._GetAjaxForm();
+			ajaxform.refresh();
 		},
 		_Show : function() {
-			var domId = this._GetComponentDomId();
-			var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
-			_Ajaxform.show();
+			var ajaxform = this._GetAjaxForm();
+			ajaxform.show();
 		}
 	},
 })
@@ -65,9 +77,17 @@ function AjaxForm(domId) {
 	this.colproportion = "1:3:1:3:1:3:1:3:1:3";
 	this.cols = "100";
 	this.data={};
+	this.showchanged=false;
 	this.formItems = new Array();
 	this.formLines = new Array();
-	this.isChanged=false;
+//	this.isChanged=false;//判断form的数据是否已经改变
+	this.doSetDataTime=0;//是否已经初始化了form数据 第一次setData设置为初始化数据，那么isChanged=false,默认为0 第一次调用setData->1 ...2....3
+	this.doInDialogSuccess = function(){
+		this.initNotSave();
+	}
+	this.getDomId = function(){
+		return this.domId;
+	}
 	this.setCols = function(cols) {
 		this.cols = cols;
 	}
@@ -97,18 +117,49 @@ function AjaxForm(domId) {
 				return field;
 		}
 	}
-	this.setData = function(data) {
-
+	this.getShowchanged = function(){
+		return this.showchanged;
+	}
+	this.setData = function(data,isChanged) {
+		//如果第二个参数为nul,那么设置ajaxform为未更改
+		if(isChanged==null)
+			isChanged=false;
+		var items = this.formItems;
+		for (var i = 0; i < items.length; i++) {
+			var fieldItem=items[i];
+			
+			//遍历数据的所有字段 
+			for(fieldName in data){
+				//如果字段名称与formfield的filed相同 那么则设置数据
+				if(fieldItem.getField()==fieldName){
+					fieldItem.setData(data[fieldName],isChanged);
+				}
+			}
+		}
 	}
 	this.setIsChanged = function(aIsChanged){
-		this.isChanged=aIsChanged;
+		//设置所有的fieldItem的isChanged为true
+		var items = this.formItems;
+		for (var i = 0; i < items.length; i++) {
+			var fieldItem=items[i];
+			fieldItem.setIsChanged(aIsChanged);
+		}
 	}
 	
 	this.getFormItems = function(item) {
 		return this.formItems;
 	}
+	//如果所有的fieldItem的isChanged有一个为true 则该form即为true
 	this.getIsChanged = function(){
-		return this.isChanged;
+		var isChanged=false;
+		var items = this.formItems;
+		for (var i = 0; i < items.length; i++) {
+			var fieldItem=items[i];
+			isChanged=fieldItem.getIsChanged();
+			if(isChanged)
+				return true;
+		}
+		return isChanged;
 	}
 	this.addFormItem = function(item) {
 		var isNextLine = false;
@@ -170,19 +221,34 @@ function AjaxForm(domId) {
 		for (var i = 0; i < items.length; i++) {
 			if (items[i].field == name) {
 				items[i].setData(value);
-				return;
+				break;
 			}
 		}
+		if(this.getShowchanged().toString().toLowerCase()=="true"){
+			if(this.getIsChanged())
+				$._AddNotSaveIcon();
+		}
+	}
+	this.setShowchanged = function(aShowchanged){
+		this.showchanged=aShowchanged;
 	}
 	this.show = function() {
 		this.getDom().css("display", "block");
 	}
+	
 	this.showField = function(name) {
 		var items = this.formItems;
 		for (var i = 0; i < items.length; i++) {
 			if (items[i].field == name) {
 				items[i].show();
 				return;
+			}
+		}
+	}
+	this.showNotSave = function(){
+		if(this.getShowchanged().toString().toLowerCase()=="true"){
+			if(this.getIsChanged()){
+				$._AddNotSaveIcon();
 			}
 		}
 	}
@@ -195,15 +261,17 @@ function AjaxForm(domId) {
 			}
 		}
 	}
-	this.initChanged=function(){
+	this.initNotSave=function(){
 		var obj=this;
 		this.getDom().find("input").bind("blur",function(){
 			var fieldId=$(this).attr("id");
+			if(fieldId==null)
+				return;
 			var fieldItem=obj.getFieldItem(fieldId);
-			if(fieldItem.getData()!=fieldItem.getInputVal())
-				$._SetNotSaveIcon();
+			fieldItem.getParentAjaxForm().showNotSave();
 		});
 	}
+	
 	return this;
 }
 function AjaxFormLine() {

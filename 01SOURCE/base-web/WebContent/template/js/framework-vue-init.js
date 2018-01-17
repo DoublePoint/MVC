@@ -41,7 +41,7 @@ function _InitExplorerResizeListener() {
 
 		// $("#testSpan").text($("#testSpan").text() + explorerHeight + " ");
 
-		// 设置各个vue组件的高度
+		// 设置各个vue组件的高度 datagrid layout 
 		var registeredModelList = $._GetRegisteredResizeModel();
 		if (registeredModelList != null) {
 			for (var i = 0; i < registeredModelList.length; i++) {
@@ -116,4 +116,12 @@ function init(){
 var _AjaxPage=null;
 function initAjaxPage(anAjaxPage){
 	_AjaxPage=anAjaxPage;
+}
+//如果该页面是弹窗 那么在弹窗执行完成success 以及 执行完用户自定义的init方法之前就会执行该方法
+function initBeforeJspInit(){
+	// 设置各个vue组件的高度 datagrid layout 
+	var registeredModelList = $._GetRegisteredDialogSuccessModel();
+	for(index in registeredModelList){
+		registeredModelList[index].doInDialogSuccess();
+	}
 }
