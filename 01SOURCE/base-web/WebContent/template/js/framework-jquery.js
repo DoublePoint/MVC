@@ -6,6 +6,8 @@ var DoublePoint = {};// 全局对象
 	var _RegisteredModel;
 	// 弹出窗口弹出后  $(document).ready之后 用户自定义init之前
 	var _DialogSuccessModel;
+	//事件注册Model
+	var _ComponentCompleteListenerModel;
 	String.prototype.endWith = function(endStr) {
 		var d = this.length - endStr.length;
 		return (d >= 0 && this.lastIndexOf(endStr) == d)
@@ -68,10 +70,18 @@ var DoublePoint = {};// 全局对象
 				_RegisteredModel = new Array();
 			_RegisteredModel.push(model);
 		},
+		_RegisterComponentCompleteListenerModel : function(model) {
+			if (_ComponentCompleteListenerModel == null)
+				_ComponentCompleteListenerModel = new Array();
+			_ComponentCompleteListenerModel.push(model);
+		},
 		_RegisterDialogSuccessModel : function(model) {
 			if (_DialogSuccessModel == null)
 				_DialogSuccessModel = new Array();
 			_DialogSuccessModel.push(model);
+		},
+		_GetRegisteredComponentCompleteListenerModel : function() {
+			return _ComponentCompleteListenerModel;
 		},
 		_GetRegisteredDialogSuccessModel : function(){
 			return _DialogSuccessModel;
@@ -95,7 +105,10 @@ var DoublePoint = {};// 全局对象
 				// even : true,
 				page : false, // 是否显示分页
 				limits : [ 5, 7, 10, 20, 100 ],
-				limit : 50
+				limit : 50,
+				done:function(res,curr,count){
+					ajaxgrid.bindListener();
+				}
 			// 每页默认显示的数量
 			});
 			return ss;

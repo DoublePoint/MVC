@@ -29,8 +29,6 @@ function retrieveTree() {
 	treeDemo.render();
 }
 function onClickAdd() {
-	// var layer = layui.layer;
-	// var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
 	var nodes = treeDemo.getSelectedNodes();
 	if (nodes.length == 0) {
 		$._ShakeTips("请选择父节点");

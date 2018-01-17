@@ -15,6 +15,20 @@ $(document).ready(function() {
 	
 	/*-----添加LayoutArea合并监听*/
 	_InitLayoutAreaCombineListener();
+	
+	/*-----添加ajaxdatagrid事件监听-*/
+	_InitComponentCompleteListener();
+////	$("table").find("tr").bind("dblclick.a", function() {
+////		alert("1");
+////	});
+////	$("table").find("tr").bind("dblclick", function() {
+////		alert("11");
+////	});
+//	$("table").next().find(".layui-table-body").find("tr").bind("click.a",
+//			function(){
+//				alert(1);
+//			}
+//	);
 });
 
 /*-----------创建最底层vue对象---------------*/
@@ -124,4 +138,11 @@ function initBeforeJspInit(){
 	for(index in registeredModelList){
 		registeredModelList[index].doInDialogSuccess();
 	}
+}
+function _InitComponentCompleteListener(){
+//	// 设置各个vue组件的高度 datagrid layout 
+//	var models = $._GetRegisteredComponentCompleteListenerModel();
+//	for(index in models){
+//		models[index].bindListener();
+//	}
 }

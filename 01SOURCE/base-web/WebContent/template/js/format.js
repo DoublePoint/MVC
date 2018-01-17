@@ -1,896 +1,564 @@
-///** layui-v2.2.5 MIT License By https://www.layui.com */
-//; !
-//function(e, t) {
-//    "use strict";
-//    var i, n, a = e.layui && layui.define,
-//    o = {
-//        getPath: function() {
-//            var e = document.currentScript ? document.currentScript.src: function() {
-//                for (var e, t = document.scripts,
-//                i = t.length - 1,
-//                n = i; n > 0; n--) if ("interactive" === t[n].readyState) {
-//                    e = t[n].src;
-//                    break
-//                }
-//                return e || t[i].src
-//            } ();
-//            return e.substring(0, e.lastIndexOf("/") + 1)
-//        } (),
-//        config: {},
-//        end: {},
-//        minIndex: 0,
-//        minLeft: [],
-//        btn: ["&#x786E;&#x5B9A;", "&#x53D6;&#x6D88;"],
-//        type: ["dialog", "page", "iframe", "loading", "tips"],
-//        getStyle: function(t, i) {
-//            var n = t.currentStyle ? t.currentStyle: e.getComputedStyle(t, null);
-//            return n[n.getPropertyValue ? "getPropertyValue": "getAttribute"](i)
-//        },
-//        link: function(t, i, n) {
-//            if (r.path) {
-//                var a = document.getElementsByTagName("head")[0],
-//                s = document.createElement("link");
-//                "string" == typeof i && (n = i);
-//                var l = (n || t).replace(/\.|\//g, ""),
-//                f = "layuicss-" + l,
-//                c = 0;
-//                s.rel = "stylesheet",
-//                s.href = r.path + t,
-//                s.id = f,
-//                document.getElementById(f) || a.appendChild(s),
-//                "function" == typeof i && !
-//                function u() {
-//                    return++c > 80 ? e.console && console.error("layer.css: Invalid") : void(1989 === parseInt(o.getStyle(document.getElementById(f), "width")) ? i() : setTimeout(u, 100))
-//                } ()
-//            }
-//        }
-//    },
-//    r = {
-//        v: "3.1.1",
-//        ie: function() {
-//            var t = navigator.userAgent.toLowerCase();
-//            return !! (e.ActiveXObject || "ActiveXObject" in e) && ((t.match(/msie\s(\d+)/) || [])[1] || "11")
-//        } (),
-//        index: e.layer && e.layer.v ? 1e5: 0,
-//        path: o.getPath,
-//        config: function(e, t) {
-//            return e = e || {},
-//            r.cache = o.config = i.extend({},
-//            o.config, e),
-//            r.path = o.config.path || r.path,
-//            "string" == typeof e.extend && (e.extend = [e.extend]),
-//            o.config.path && r.ready(),
-//            e.extend ? (a ? layui.addcss("modules/layer/" + e.extend) : o.link("theme/" + e.extend), this) : this
-//        },
-//        ready: function(e) {
-//            var t = "layer",
-//            i = "",
-//            n = (a ? "modules/layer/": "theme/") + "default/layer.css?v=" + r.v + i;
-//            return a ? layui.addcss(n, e, t) : o.link(n, e, t),
-//            this
-//        },
-//        alert: function(e, t, n) {
-//            var a = "function" == typeof t;
-//            return a && (n = t),
-//            r.open(i.extend({
-//                content: e,
-//                yes: n
-//            },
-//            a ? {}: t))
-//        },
-//        confirm: function(e, t, n, a) {
-//            var s = "function" == typeof t;
-//            return s && (a = n, n = t),
-//            r.open(i.extend({
-//                content: e,
-//                btn: o.btn,
-//                yes: n,
-//                btn2: a
-//            },
-//            s ? {}: t))
-//        },
-//        msg: function(e, n, a) {
-//            var s = "function" == typeof n,
-//            f = o.config.skin,
-//            c = (f ? f + " " + f + "-msg": "") || "layui-layer-msg",
-//            u = l.anim.length - 1;
-//            return s && (a = n),
-//            r.open(i.extend({
-//                content: e,
-//                time: 3e3,
-//                shade: !1,
-//                skin: c,
-//                title: !1,
-//                closeBtn: !1,
-//                btn: !1,
-//                resize: !1,
-//                end: a
-//            },
-//            s && !o.config.skin ? {
-//                skin: c + " layui-layer-hui",
-//                anim: u
-//            }: function() {
-//                return n = n || {},
-//                (n.icon === -1 || n.icon === t && !o.config.skin) && (n.skin = c + " " + (n.skin || "layui-layer-hui")),
-//                n
-//            } ()))
-//        },
-//        load: function(e, t) {
-//            return r.open(i.extend({
-//                type: 3,
-//                icon: e || 0,
-//                resize: !1,
-//                shade: .01
-//            },
-//            t))
-//        },
-//        tips: function(e, t, n) {
-//            return r.open(i.extend({
-//                type: 4,
-//                content: [e, t],
-//                closeBtn: !1,
-//                time: 3e3,
-//                shade: !1,
-//                resize: !1,
-//                fixed: !1,
-//                maxWidth: 210
-//            },
-//            n))
-//        }
-//    },
-//    s = function(e) {
-//        var t = this;
-//        t.index = ++r.index,
-//        t.config = i.extend({},
-//        t.config, o.config, e),
-//        document.body ? t.creat() : setTimeout(function() {
-//            t.creat()
-//        },
-//        30)
-//    };
-//    s.pt = s.prototype;
-//    var l = ["layui-layer", ".layui-layer-title", ".layui-layer-main", ".layui-layer-dialog", "layui-layer-iframe", "layui-layer-content", "layui-layer-btn", "layui-layer-close"];
-//    l.anim = ["layer-anim-00", "layer-anim-01", "layer-anim-02", "layer-anim-03", "layer-anim-04", "layer-anim-05", "layer-anim-06"],
-//    s.pt.config = {
-//        type: 0,
-//        shade: .3,
-//        fixed: !0,
-//        move: l[1],
-//        title: "&#x4FE1;&#x606F;",
-//        offset: "auto",
-//        area: "auto",
-//        closeBtn: 1,
-//        time: 0,
-//        zIndex: 19891014,
-//        maxWidth: 360,
-//        anim: 0,
-//        isOutAnim: !0,
-//        icon: -1,
-//        moveType: 1,
-//        resize: !0,
-//        scrollbar: !0,
-//        tips: 2
-//    },
-//    s.pt.vessel = function(e, t) {
-//        var n = this,
-//        a = n.index,
-//        r = n.config,
-//        s = r.zIndex + a,
-//        f = "object" == typeof r.title,
-//        c = r.maxmin && (1 === r.type || 2 === r.type),
-//        u = r.title ? '<div class="layui-layer-title" style="' + (f ? r.title[1] : "") + '">' + (f ? r.title[0] : r.title) + "</div>": "";
-//        return r.zIndex = s,
-//        t([r.shade ? '<div class="layui-layer-shade" id="layui-layer-shade' + a + '" times="' + a + '" style="' + ("z-index:" + (s - 1) + "; ") + '"></div>': "", '<div class="' + l[0] + (" layui-layer-" + o.type[r.type]) + (0 != r.type && 2 != r.type || r.shade ? "": " layui-layer-border") + " " + (r.skin || "") + '" id="' + l[0] + a + '" type="' + o.type[r.type] + '" times="' + a + '" showtime="' + r.time + '" conType="' + (e ? "object": "string") + '" style="z-index: ' + s + "; width:" + r.area[0] + ";height:" + r.area[1] + (r.fixed ? "": ";position:absolute;") + '">' + (e && 2 != r.type ? "": u) + '<div id="' + (r.id || "") + '" class="layui-layer-content' + (0 == r.type && r.icon !== -1 ? " layui-layer-padding": "") + (3 == r.type ? " layui-layer-loading" + r.icon: "") + '">' + (0 == r.type && r.icon !== -1 ? '<i class="layui-layer-ico layui-layer-ico' + r.icon + '"></i>': "") + (1 == r.type && e ? "": r.content || "") + '</div><span class="layui-layer-setwin">' +
-//        function() {
-//            var e = c ? '<a class="layui-layer-min" href="javascript:;"><cite></cite></a><a class="layui-layer-ico layui-layer-max" href="javascript:;"></a>': "";
-//            return r.closeBtn && (e += '<a class="layui-layer-ico ' + l[7] + " " + l[7] + (r.title ? r.closeBtn: 4 == r.type ? "1": "2") + '" href="javascript:;"></a>'),
-//            e
-//        } () + "</span>" + (r.btn ?
-//        function() {
-//            var e = "";
-//            "string" == typeof r.btn && (r.btn = [r.btn]);
-//            for (var t = 0,
-//            i = r.btn.length; t < i; t++) e += '<a class="' + l[6] + t + '">' + r.btn[t] + "</a>";
-//            return '<div class="' + l[6] + " layui-layer-btn-" + (r.btnAlign || "") + '">' + e + "</div>"
-//        } () : "") + (r.resize ? '<span class="layui-layer-resize"></span>': "") + "</div>"], u, i('<div class="layui-layer-move"></div>')),
-//        n
-//    },
-//    s.pt.creat = function() {
-//        var e = this,
-//        t = e.config,
-//        a = e.index,
-//        s = t.content,
-//        f = "object" == typeof s,
-//        c = i("body");
-//        if (!t.id || !i("#" + t.id)[0]) {
-//            switch ("string" == typeof t.area && (t.area = "auto" === t.area ? ["", ""] : [t.area, ""]), t.shift && (t.anim = t.shift), 6 == r.ie && (t.fixed = !1), t.type) {
-//            case 0:
-//                t.btn = "btn" in t ? t.btn: o.btn[0],
-//                r.closeAll("dialog");
-//                break;
-//            case 2:
-//                var s = t.content = f ? t.content: [t.content || "http://layer.layui.com", "auto"];
-//                t.content = '<iframe scrolling="' + (t.content[1] || "auto") + '" allowtransparency="true" id="' + l[4] + a + '" name="' + l[4] + a + '" onload="this.className=\'\';" class="layui-layer-load" frameborder="0" src="' + t.content[0] + '"></iframe>';
-//                break;
-//            case 3:
-//                delete t.title,
-//                delete t.closeBtn,
-//                t.icon === -1 && 0 === t.icon,
-//                r.closeAll("loading");
-//                break;
-//            case 4:
-//                f || (t.content = [t.content, "body"]),
-//                t.follow = t.content[1],
-//                t.content = t.content[0] + '<i class="layui-layer-TipsG"></i>',
-//                delete t.title,
-//                t.tips = "object" == typeof t.tips ? t.tips: [t.tips, !0],
-//                t.tipsMore || r.closeAll("tips")
-//            }
-//            if (e.vessel(f,
-//            function(n, r, u) {
-//                c.append(n[0]),
-//                f ?
-//                function() {
-//                    2 == t.type || 4 == t.type ?
-//                    function() {
-//                        i("body").append(n[1])
-//                    } () : function() {
-//                        s.parents("." + l[0])[0] || (s.data("display", s.css("display")).show().addClass("layui-layer-wrap").wrap(n[1]), i("#" + l[0] + a).find("." + l[5]).before(r))
-//                    } ()
-//                } () : c.append(n[1]),
-//                i(".layui-layer-move")[0] || c.append(o.moveElem = u),
-//                e.layero = i("#" + l[0] + a),
-//                t.scrollbar || l.html.css("overflow", "hidden").attr("layer-full", a)
-//            }).auto(a), i("#layui-layer-shade" + e.index).css({
-//                "background-color": t.shade[1] || "#000",
-//                opacity: t.shade[0] || t.shade
-//            }), 2 == t.type && 6 == r.ie && e.layero.find("iframe").attr("src", s[0]), 4 == t.type ? e.tips() : e.offset(), t.fixed && n.on("resize",
-//            function() {
-//                e.offset(),
-//                (/^\d+%$/.test(t.area[0]) || /^\d+%$/.test(t.area[1])) && e.auto(a),
-//                4 == t.type && e.tips()
-//            }), t.time <= 0 || setTimeout(function() {
-//                r.close(e.index)
-//            },
-//            t.time), e.move().callback(), l.anim[t.anim]) {
-//                var u = "layer-anim " + l.anim[t.anim];
-//                e.layero.addClass(u).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
-//                function() {
-//                    i(this).removeClass(u)
-//                })
-//            }
-//            t.isOutAnim && e.layero.data("isOutAnim", !0)
-//        }
-//    },
-//    s.pt.auto = function(e) {
-//        var t = this,
-//        a = t.config,
-//        o = i("#" + l[0] + e);
-//        "" === a.area[0] && a.maxWidth > 0 && (r.ie && r.ie < 8 && a.btn && o.width(o.innerWidth()), o.outerWidth() > a.maxWidth && o.width(a.maxWidth));
-//        var s = [o.innerWidth(), o.innerHeight()],
-//        f = o.find(l[1]).outerHeight() || 0,
-//        c = o.find("." + l[6]).outerHeight() || 0,
-//        u = function(e) {
-//            e = o.find(e),
-//            e.height(s[1] - f - c - 2 * (0 | parseFloat(e.css("padding-top"))))
-//        };
-//        switch (a.type) {
-//        case 2:
-//            u("iframe");
-//            break;
-//        default:
-//            "" === a.area[1] ? a.maxHeight > 0 && o.outerHeight() > a.maxHeight ? (s[1] = a.maxHeight, u("." + l[5])) : a.fixed && s[1] >= n.height() && (s[1] = n.height(), u("." + l[5])) : u("." + l[5])
-//        }
-//        return t
-//    },
-//    s.pt.offset = function() {
-//        var e = this,
-//        t = e.config,
-//        i = e.layero,
-//        a = [i.outerWidth(), i.outerHeight()],
-//        o = "object" == typeof t.offset;
-//        e.offsetTop = (n.height() - a[1]) / 2,
-//        e.offsetLeft = (n.width() - a[0]) / 2,
-//        o ? (e.offsetTop = t.offset[0], e.offsetLeft = t.offset[1] || e.offsetLeft) : "auto" !== t.offset && ("t" === t.offset ? e.offsetTop = 0 : "r" === t.offset ? e.offsetLeft = n.width() - a[0] : "b" === t.offset ? e.offsetTop = n.height() - a[1] : "l" === t.offset ? e.offsetLeft = 0 : "lt" === t.offset ? (e.offsetTop = 0, e.offsetLeft = 0) : "lb" === t.offset ? (e.offsetTop = n.height() - a[1], e.offsetLeft = 0) : "rt" === t.offset ? (e.offsetTop = 0, e.offsetLeft = n.width() - a[0]) : "rb" === t.offset ? (e.offsetTop = n.height() - a[1], e.offsetLeft = n.width() - a[0]) : e.offsetTop = t.offset),
-//        t.fixed || (e.offsetTop = /%$/.test(e.offsetTop) ? n.height() * parseFloat(e.offsetTop) / 100 : parseFloat(e.offsetTop), e.offsetLeft = /%$/.test(e.offsetLeft) ? n.width() * parseFloat(e.offsetLeft) / 100 : parseFloat(e.offsetLeft), e.offsetTop += n.scrollTop(), e.offsetLeft += n.scrollLeft()),
-//        i.attr("minLeft") && (e.offsetTop = n.height() - (i.find(l[1]).outerHeight() || 0), e.offsetLeft = i.css("left")),
-//        i.css({
-//            top: e.offsetTop,
-//            left: e.offsetLeft
-//        })
-//    },
-//    s.pt.tips = function() {
-//        var e = this,
-//        t = e.config,
-//        a = e.layero,
-//        o = [a.outerWidth(), a.outerHeight()],
-//        r = i(t.follow);
-//        r[0] || (r = i("body"));
-//        var s = {
-//            width: r.outerWidth(),
-//            height: r.outerHeight(),
-//            top: r.offset().top,
-//            left: r.offset().left
-//        },
-//        f = a.find(".layui-layer-TipsG"),
-//        c = t.tips[0];
-//        t.tips[1] || f.remove(),
-//        s.autoLeft = function() {
-//            s.left + o[0] - n.width() > 0 ? (s.tipLeft = s.left + s.width - o[0], f.css({
-//                right: 12,
-//                left: "auto"
-//            })) : s.tipLeft = s.left
-//        },
-//        s.where = [function() {
-//            s.autoLeft(),
-//            s.tipTop = s.top - o[1] - 10,
-//            f.removeClass("layui-layer-TipsB").addClass("layui-layer-TipsT").css("border-right-color", t.tips[1])
-//        },
-//        function() {
-//            s.tipLeft = s.left + s.width + 10,
-//            s.tipTop = s.top,
-//            f.removeClass("layui-layer-TipsL").addClass("layui-layer-TipsR").css("border-bottom-color", t.tips[1])
-//        },
-//        function() {
-//            s.autoLeft(),
-//            s.tipTop = s.top + s.height + 10,
-//            f.removeClass("layui-layer-TipsT").addClass("layui-layer-TipsB").css("border-right-color", t.tips[1])
-//        },
-//        function() {
-//            s.tipLeft = s.left - o[0] - 10,
-//            s.tipTop = s.top,
-//            f.removeClass("layui-layer-TipsR").addClass("layui-layer-TipsL").css("border-bottom-color", t.tips[1])
-//        }],
-//        s.where[c - 1](),
-//        1 === c ? s.top - (n.scrollTop() + o[1] + 16) < 0 && s.where[2]() : 2 === c ? n.width() - (s.left + s.width + o[0] + 16) > 0 || s.where[3]() : 3 === c ? s.top - n.scrollTop() + s.height + o[1] + 16 - n.height() > 0 && s.where[0]() : 4 === c && o[0] + 16 - s.left > 0 && s.where[1](),
-//        a.find("." + l[5]).css({
-//            "background-color": t.tips[1],
-//            "padding-right": t.closeBtn ? "30px": ""
-//        }),
-//        a.css({
-//            left: s.tipLeft - (t.fixed ? n.scrollLeft() : 0),
-//            top: s.tipTop - (t.fixed ? n.scrollTop() : 0)
-//        })
-//    },
-//    s.pt.move = function() {
-//        var e = this,
-//        t = e.config,
-//        a = i(document),
-//        s = e.layero,
-//        l = s.find(t.move),
-//        f = s.find(".layui-layer-resize"),
-//        c = {};
-//        return t.move && l.css("cursor", "move"),
-//        l.on("mousedown",
-//        function(e) {
-//            e.preventDefault(),
-//            t.move && (c.moveStart = !0, c.offset = [e.clientX - parseFloat(s.css("left")), e.clientY - parseFloat(s.css("top"))], o.moveElem.css("cursor", "move").show())
-//        }),
-//        f.on("mousedown",
-//        function(e) {
-//            e.preventDefault(),
-//            c.resizeStart = !0,
-//            c.offset = [e.clientX, e.clientY],
-//            c.area = [s.outerWidth(), s.outerHeight()],
-//            o.moveElem.css("cursor", "se-resize").show()
-//        }),
-//        a.on("mousemove",
-//        function(i) {
-//            if (c.moveStart) {
-//                var a = i.clientX - c.offset[0],
-//                o = i.clientY - c.offset[1],
-//                l = "fixed" === s.css("position");
-//                if (i.preventDefault(), c.stX = l ? 0 : n.scrollLeft(), c.stY = l ? 0 : n.scrollTop(), !t.moveOut) {
-//                    var f = n.width() - s.outerWidth() + c.stX,
-//                    u = n.height() - s.outerHeight() + c.stY;
-//                    a < c.stX && (a = c.stX),
-//                    a > f && (a = f),
-//                    o < c.stY && (o = c.stY),
-//                    o > u && (o = u)
-//                }
-//                s.css({
-//                    left: a,
-//                    top: o
-//                })
-//            }
-//            if (t.resize && c.resizeStart) {
-//                var a = i.clientX - c.offset[0],
-//                o = i.clientY - c.offset[1];
-//                i.preventDefault(),
-//                r.style(e.index, {
-//                    width: c.area[0] + a,
-//                    height: c.area[1] + o
-//                }),
-//                c.isResize = !0,
-//                t.resizing && t.resizing(s)
-//            }
-//        }).on("mouseup",
-//        function(e) {
-//            c.moveStart && (delete c.moveStart, o.moveElem.hide(), t.moveEnd && t.moveEnd(s)),
-//            c.resizeStart && (delete c.resizeStart, o.moveElem.hide())
-//        }),
-//        e
-//    },
-//    s.pt.callback = function() {
-//        function e() {
-//            var e = a.cancel && a.cancel(t.index, n);
-//            e === !1 || r.close(t.index)
-//        }
-//        var t = this,
-//        n = t.layero,
-//        a = t.config;
-//        t.openLayer(),
-//        a.success && (2 == a.type ? n.find("iframe").on("load",
-//        function() {
-//            a.success(n, t.index)
-//        }) : a.success(n, t.index)),
-//        6 == r.ie && t.IE6(n),
-//        n.find("." + l[6]).children("a").on("click",
-//        function() {
-//            var e = i(this).index();
-//            if (0 === e) a.yes ? a.yes(t.index, n) : a.btn1 ? a.btn1(t.index, n) : r.close(t.index);
-//            else {
-//                var o = a["btn" + (e + 1)] && a["btn" + (e + 1)](t.index, n);
-//                o === !1 || r.close(t.index)
-//            }
-//        }),
-//        n.find("." + l[7]).on("click", e),
-//        a.shadeClose && i("#layui-layer-shade" + t.index).on("click",
-//        function() {
-//            r.close(t.index)
-//        }),
-//        n.find(".layui-layer-min").on("click",
-//        function() {
-//            var e = a.min && a.min(n);
-//            e === !1 || r.min(t.index, a)
-//        }),
-//        n.find(".layui-layer-max").on("click",
-//        function() {
-//            i(this).hasClass("layui-layer-maxmin") ? (r.restore(t.index), a.restore && a.restore(n)) : (r.full(t.index, a), setTimeout(function() {
-//                a.full && a.full(n)
-//            },
-//            100))
-//        }),
-//        a.end && (o.end[t.index] = a.end)
-//    },
-//    o.reselect = function() {
-//        i.each(i("select"),
-//        function(e, t) {
-//            var n = i(this);
-//            n.parents("." + l[0])[0] || 1 == n.attr("layer") && i("." + l[0]).length < 1 && n.removeAttr("layer").show(),
-//            n = null
-//        })
-//    },
-//    s.pt.IE6 = function(e) {
-//        i("select").each(function(e, t) {
-//            var n = i(this);
-//            n.parents("." + l[0])[0] || "none" === n.css("display") || n.attr({
-//                layer: "1"
-//            }).hide(),
-//            n = null
-//        })
-//    },
-//    s.pt.openLayer = function() {
-//        var e = this;
-//        r.zIndex = e.config.zIndex,
-//        r.setTop = function(e) {
-//            var t = function() {
-//                r.zIndex++,
-//                e.css("z-index", r.zIndex + 1)
-//            };
-//            return r.zIndex = parseInt(e[0].style.zIndex),
-//            e.on("mousedown", t),
-//            r.zIndex
-//        }
-//    },
-//    o.record = function(e) {
-//        var t = [e.width(), e.height(), e.position().top, e.position().left + parseFloat(e.css("margin-left"))];
-//        e.find(".layui-layer-max").addClass("layui-layer-maxmin"),
-//        e.attr({
-//            area: t
-//        })
-//    },
-//    o.rescollbar = function(e) {
-//        l.html.attr("layer-full") == e && (l.html[0].style.removeProperty ? l.html[0].style.removeProperty("overflow") : l.html[0].style.removeAttribute("overflow"), l.html.removeAttr("layer-full"))
-//    },
-//    e.layer = r,
-//    r.getChildFrame = function(e, t) {
-//        return t = t || i("." + l[4]).attr("times"),
-//        i("#" + l[0] + t).find("iframe").contents().find(e)
-//    },
-//    r.getFrameIndex = function(e) {
-//        return i("#" + e).parents("." + l[4]).attr("times")
-//    },
-//    r.iframeAuto = function(e) {
-//        if (e) {
-//            var t = r.getChildFrame("html", e).outerHeight(),
-//            n = i("#" + l[0] + e),
-//            a = n.find(l[1]).outerHeight() || 0,
-//            o = n.find("." + l[6]).outerHeight() || 0;
-//            n.css({
-//                height: t + a + o
-//            }),
-//            n.find("iframe").css({
-//                height: t
-//            })
-//        }
-//    },
-//    r.iframeSrc = function(e, t) {
-//        i("#" + l[0] + e).find("iframe").attr("src", t)
-//    },
-//    r.style = function(e, t, n) {
-//        var a = i("#" + l[0] + e),
-//        r = a.find(".layui-layer-content"),
-//        s = a.attr("type"),
-//        f = a.find(l[1]).outerHeight() || 0,
-//        c = a.find("." + l[6]).outerHeight() || 0;
-//        a.attr("minLeft");
-//        s !== o.type[3] && s !== o.type[4] && (n || (parseFloat(t.width) <= 260 && (t.width = 260), parseFloat(t.height) - f - c <= 64 && (t.height = 64 + f + c)), a.css(t), c = a.find("." + l[6]).outerHeight(), s === o.type[2] ? a.find("iframe").css({
-//            height: parseFloat(t.height) - f - c
-//        }) : r.css({
-//            height: parseFloat(t.height) - f - c - parseFloat(r.css("padding-top")) - parseFloat(r.css("padding-bottom"))
-//        }))
-//    },
-//    r.min = function(e, t) {
-//        var a = i("#" + l[0] + e),
-//        s = a.find(l[1]).outerHeight() || 0,
-//        f = a.attr("minLeft") || 181 * o.minIndex + "px",
-//        c = a.css("position");
-//        o.record(a),
-//        o.minLeft[0] && (f = o.minLeft[0], o.minLeft.shift()),
-//        a.attr("position", c),
-//        r.style(e, {
-//            width: 180,
-//            height: s,
-//            left: f,
-//            top: n.height() - s,
-//            position: "fixed",
-//            overflow: "hidden"
-//        },
-//        !0),
-//        a.find(".layui-layer-min").hide(),
-//        "page" === a.attr("type") && a.find(l[4]).hide(),
-//        o.rescollbar(e),
-//        a.attr("minLeft") || o.minIndex++,
-//        a.attr("minLeft", f)
-//    },
-//    r.restore = function(e) {
-//        var t = i("#" + l[0] + e),
-//        n = t.attr("area").split(",");
-//        t.attr("type");
-//        r.style(e, {
-//            width: parseFloat(n[0]),
-//            height: parseFloat(n[1]),
-//            top: parseFloat(n[2]),
-//            left: parseFloat(n[3]),
-//            position: t.attr("position"),
-//            overflow: "visible"
-//        },
-//        !0),
-//        t.find(".layui-layer-max").removeClass("layui-layer-maxmin"),
-//        t.find(".layui-layer-min").show(),
-//        "page" === t.attr("type") && t.find(l[4]).show(),
-//        o.rescollbar(e)
-//    },
-//    r.full = function(e) {
-//        var t, a = i("#" + l[0] + e);
-//        o.record(a),
-//        l.html.attr("layer-full") || l.html.css("overflow", "hidden").attr("layer-full", e),
-//        clearTimeout(t),
-//        t = setTimeout(function() {
-//            var t = "fixed" === a.css("position");
-//            r.style(e, {
-//                top: t ? 0 : n.scrollTop(),
-//                left: t ? 0 : n.scrollLeft(),
-//                width: n.width(),
-//                height: n.height()
-//            },
-//            !0),
-//            a.find(".layui-layer-min").hide()
-//        },
-//        100)
-//    },
-//    r.title = function(e, t) {
-//        var n = i("#" + l[0] + (t || r.index)).find(l[1]);
-//        n.html(e)
-//    },
-//    r.close = function(e) {
-//        var t = i("#" + l[0] + e),
-//        n = t.attr("type"),
-//        a = "layer-anim-close";
-//        if (t[0]) {
-//            var s = "layui-layer-wrap",
-//            f = function() {
-//                if (n === o.type[1] && "object" === t.attr("conType")) {
-//                    t.children(":not(." + l[5] + ")").remove();
-//                    for (var a = t.find("." + s), r = 0; r < 2; r++) a.unwrap();
-//                    a.css("display", a.data("display")).removeClass(s)
-//                } else {
-//                    if (n === o.type[2]) try {
-//                        var f = i("#" + l[4] + e)[0];
-//                        f.contentWindow.document.write(""),
-//                        f.contentWindow.close(),
-//                        t.find("." + l[5])[0].removeChild(f)
-//                    } catch(c) {}
-//                    t[0].innerHTML = "",
-//                    t.remove()
-//                }
-//                "function" == typeof o.end[e] && o.end[e](),
-//                delete o.end[e]
-//            };
-//            t.data("isOutAnim") && t.addClass("layer-anim " + a),
-//            i("#layui-layer-moves, #layui-layer-shade" + e).remove(),
-//            6 == r.ie && o.reselect(),
-//            o.rescollbar(e),
-//            t.attr("minLeft") && (o.minIndex--, o.minLeft.push(t.attr("minLeft"))),
-//            r.ie && r.ie < 10 || !t.data("isOutAnim") ? f() : setTimeout(function() {
-//                f()
-//            },
-//            200)
-//        }
-//    },
-//    r.closeAll = function(e) {
-//        i.each(i("." + l[0]),
-//        function() {
-//            var t = i(this),
-//            n = e ? t.attr("type") === e: 1;
-//            n && r.close(t.attr("times")),
-//            n = null
-//        })
-//    };
-//    var f = r.cache || {},
-//    c = function(e) {
-//        return f.skin ? " " + f.skin + " " + f.skin + "-" + e: ""
-//    };
-//    r.prompt = function(e, t) {
-//        var a = "";
-//        if (e = e || {},
-//        "function" == typeof e && (t = e), e.area) {
-//            var o = e.area;
-//            a = 'style="width: ' + o[0] + "; height: " + o[1] + ';"',
-//            delete e.area
-//        }
-//        var s, l = 2 == e.formType ? '<textarea class="layui-layer-input"' + a + "></textarea>": function() {
-//            return '<input type="' + (1 == e.formType ? "password": "text") + '" class="layui-layer-input">'
-//        } (),
-//        f = e.success;
-//        return delete e.success,
-//        r.open(i.extend({
-//            type: 1,
-//            btn: ["&#x786E;&#x5B9A;", "&#x53D6;&#x6D88;"],
-//            content: l,
-//            skin: "layui-layer-prompt" + c("prompt"),
-//            maxWidth: n.width(),
-//            success: function(t) {
-//                s = t.find(".layui-layer-input"),
-//                s.val(e.value || "").focus(),
-//                "function" == typeof f && f(t)
-//            },
-//            resize: !1,
-//            yes: function(i) {
-//                var n = s.val();
-//                "" === n ? s.focus() : n.length > (e.maxlength || 500) ? r.tips("&#x6700;&#x591A;&#x8F93;&#x5165;" + (e.maxlength || 500) + "&#x4E2A;&#x5B57;&#x6570;", s, {
-//                    tips: 1
-//                }) : t && t(n, i, s)
-//            }
-//        },
-//        e))
-//    },
-//    r.tab = function(e) {
-//        e = e || {};
-//        var t = e.tab || {},
-//        n = "layui-this",
-//        a = e.success;
-//        return delete e.success,
-//        r.open(i.extend({
-//            type: 1,
-//            skin: "layui-layer-tab" + c("tab"),
-//            resize: !1,
-//            title: function() {
-//                var e = t.length,
-//                i = 1,
-//                a = "";
-//                if (e > 0) for (a = '<span class="' + n + '">' + t[0].title + "</span>"; i < e; i++) a += "<span>" + t[i].title + "</span>";
-//                return a
-//            } (),
-//            content: '<ul class="layui-layer-tabmain">' +
-//            function() {
-//                var e = t.length,
-//                i = 1,
-//                a = "";
-//                if (e > 0) for (a = '<li class="layui-layer-tabli ' + n + '">' + (t[0].content || "no content") + "</li>"; i < e; i++) a += '<li class="layui-layer-tabli">' + (t[i].content || "no  content") + "</li>";
-//                return a
-//            } () + "</ul>",
-//            success: function(t) {
-//                var o = t.find(".layui-layer-title").children(),
-//                r = t.find(".layui-layer-tabmain").children();
-//                o.on("mousedown",
-//                function(t) {
-//                    t.stopPropagation ? t.stopPropagation() : t.cancelBubble = !0;
-//                    var a = i(this),
-//                    o = a.index();
-//                    a.addClass(n).siblings().removeClass(n),
-//                    r.eq(o).show().siblings().hide(),
-//                    "function" == typeof e.change && e.change(o)
-//                }),
-//                "function" == typeof a && a(t)
-//            }
-//        },
-//        e))
-//    },
-//    r.photos = function(t, n, a) {
-//        function o(e, t, i) {
-//            var n = new Image;
-//            return n.src = e,
-//            n.complete ? t(n) : (n.onload = function() {
-//                n.onload = null,
-//                t(n)
-//            },
-//            void(n.onerror = function(e) {
-//                n.onerror = null,
-//                i(e)
-//            }))
-//        }
-//        var s = {};
-//        if (t = t || {},
-//        t.photos) {
-//            var l = t.photos.constructor === Object,
-//            f = l ? t.photos: {},
-//            u = f.data || [],
-//            d = f.start || 0;
-//            s.imgIndex = (0 | d) + 1,
-//            t.img = t.img || "img";
-//            var y = t.success;
-//            if (delete t.success, l) {
-//                if (0 === u.length) return r.msg("&#x6CA1;&#x6709;&#x56FE;&#x7247;")
-//            } else {
-//                var p = i(t.photos),
-//                h = function() {
-//                    u = [],
-//                    p.find(t.img).each(function(e) {
-//                        var t = i(this);
-//                        t.attr("layer-index", e),
-//                        u.push({
-//                            alt: t.attr("alt"),
-//                            pid: t.attr("layer-pid"),
-//                            src: t.attr("layer-src") || t.attr("src"),
-//                            thumb: t.attr("src")
-//                        })
-//                    })
-//                };
-//                if (h(), 0 === u.length) return;
-//                if (n || p.on("click", t.img,
-//                function() {
-//                    var e = i(this),
-//                    n = e.attr("layer-index");
-//                    r.photos(i.extend(t, {
-//                        photos: {
-//                            start: n,
-//                            data: u,
-//                            tab: t.tab
-//                        },
-//                        full: t.full
-//                    }), !0),
-//                    h()
-//                }), !n) return
-//            }
-//            s.imgprev = function(e) {
-//                s.imgIndex--,
-//                s.imgIndex < 1 && (s.imgIndex = u.length),
-//                s.tabimg(e)
-//            },
-//            s.imgnext = function(e, t) {
-//                s.imgIndex++,
-//                s.imgIndex > u.length && (s.imgIndex = 1, t) || s.tabimg(e)
-//            },
-//            s.keyup = function(e) {
-//                if (!s.end) {
-//                    var t = e.keyCode;
-//                    e.preventDefault(),
-//                    37 === t ? s.imgprev(!0) : 39 === t ? s.imgnext(!0) : 27 === t && r.close(s.index)
-//                }
-//            },
-//            s.tabimg = function(e) {
-//                if (! (u.length <= 1)) return f.start = s.imgIndex - 1,
-//                r.close(s.index),
-//                r.photos(t, !0, e)
-//            },
-//            s.event = function() {
-//                s.bigimg.hover(function() {
-//                    s.imgsee.show()
-//                },
-//                function() {
-//                    s.imgsee.hide()
-//                }),
-//                s.bigimg.find(".layui-layer-imgprev").on("click",
-//                function(e) {
-//                    e.preventDefault(),
-//                    s.imgprev()
-//                }),
-//                s.bigimg.find(".layui-layer-imgnext").on("click",
-//                function(e) {
-//                    e.preventDefault(),
-//                    s.imgnext()
-//                }),
-//                i(document).on("keyup", s.keyup)
-//            },
-//            s.loadi = r.load(1, {
-//                shade: !("shade" in t) && .9,
-//                scrollbar: !1
-//            }),
-//            o(u[d].src,
-//            function(n) {
-//                r.close(s.loadi),
-//                s.index = r.open(i.extend({
-//                    type: 1,
-//                    id: "layui-layer-photos",
-//                    area: function() {
-//                        var a = [n.width, n.height],
-//                        o = [i(e).width() - 100, i(e).height() - 100];
-//                        if (!t.full && (a[0] > o[0] || a[1] > o[1])) {
-//                            var r = [a[0] / o[0], a[1] / o[1]];
-//                            r[0] > r[1] ? (a[0] = a[0] / r[0], a[1] = a[1] / r[0]) : r[0] < r[1] && (a[0] = a[0] / r[1], a[1] = a[1] / r[1])
-//                        }
-//                        return [a[0] + "px", a[1] + "px"]
-//                    } (),
-//                    title: !1,
-//                    shade: .9,
-//                    shadeClose: !0,
-//                    closeBtn: !1,
-//                    move: ".layui-layer-phimg img",
-//                    moveType: 1,
-//                    scrollbar: !1,
-//                    moveOut: !0,
-//                    isOutAnim: !1,
-//                    skin: "layui-layer-photos" + c("photos"),
-//                    content: '<div class="layui-layer-phimg"><img src="' + u[d].src + '" alt="' + (u[d].alt || "") + '" layer-pid="' + u[d].pid + '"><div class="layui-layer-imgsee">' + (u.length > 1 ? '<span class="layui-layer-imguide"><a href="javascript:;" class="layui-layer-iconext layui-layer-imgprev"></a><a href="javascript:;" class="layui-layer-iconext layui-layer-imgnext"></a></span>': "") + '<div class="layui-layer-imgbar" style="display:' + (a ? "block": "") + '"><span class="layui-layer-imgtit"><a href="javascript:;">' + (u[d].alt || "") + "</a><em>" + s.imgIndex + "/" + u.length + "</em></span></div></div></div>",
-//                    success: function(e, i) {
-//                        s.bigimg = e.find(".layui-layer-phimg"),
-//                        s.imgsee = e.find(".layui-layer-imguide,.layui-layer-imgbar"),
-//                        s.event(e),
-//                        t.tab && t.tab(u[d], e),
-//                        "function" == typeof y && y(e)
-//                    },
-//                    end: function() {
-//                        s.end = !0,
-//                        i(document).off("keyup", s.keyup)
-//                    }
-//                },
-//                t))
-//            },
-//            function() {
-//                r.close(s.loadi),
-//                r.msg("&#x5F53;&#x524D;&#x56FE;&#x7247;&#x5730;&#x5740;&#x5F02;&#x5E38;<br>&#x662F;&#x5426;&#x7EE7;&#x7EED;&#x67E5;&#x770B;&#x4E0B;&#x4E00;&#x5F20;&#xFF1F;", {
-//                    time: 3e4,
-//                    btn: ["&#x4E0B;&#x4E00;&#x5F20;", "&#x4E0D;&#x770B;&#x4E86;"],
-//                    yes: function() {
-//                        u.length > 1 && s.imgnext(!0, !0)
-//                    }
-//                })
-//            })
-//        }
-//    },
-//    o.run = function(t) {
-//        i = t,
-//        n = i(e),
-//        l.html = i("html"),
-//        r.open = function(e) {
-//            var t = new s(e);
-//            return t.index
-//        }
-//    },
-//    e.layui && layui.define ? (r.ready(), layui.define("jquery",
-//    function(t) {
-//        r.path = layui.cache.dir,
-//        o.run(layui.$),
-//        e.layer = r,
-//        t("layer", r)
-//    })) : "function" == typeof define && define.amd ? define(["jquery"],
-//    function() {
-//        return o.run(e.jQuery),
-//        r
-//    }) : function() {
-//        o.run(e.jQuery),
-//        r.ready()
-//    } ()
-//} (window);
+/** layui-v2.2.5 MIT License By https://www.layui.com */ ;
+layui.define(["laytpl", "laypage", "layer", "form"], function(e) {
+	"use strict";
+	var t = layui.$,
+		i = layui.laytpl,
+		a = layui.laypage,
+		l = layui.layer,
+		n = layui.form,
+		o = layui.hint(),
+		r = layui.device(),
+		d = {
+			config: {
+				checkName: "LAY_CHECKED",
+				indexName: "LAY_TABLE_INDEX"
+			},
+			cache: {},
+			index: layui.table ? layui.table.index + 1e4 : 0,
+			set: function(e) {
+				var i = this;
+				return i.config = t.extend({}, i.config, e), i
+			},
+			on: function(e, t) {
+				return layui.onevent.call(this, s, e, t)
+			}
+		},
+		c = function() {
+			var e = this,
+				t = e.config,
+				i = t.id;
+			return i && (c.config[i] = t), {
+				reload: function(t) {
+					e.reload.call(e, t)
+				},
+				config: t
+			}
+		},
+		s = "table",
+		u = ".layui-table",
+		h = "layui-hide",
+		f = "layui-none",
+		y = "layui-table-view",
+		p = ".layui-table-header",
+		m = ".layui-table-body",
+		v = ".layui-table-main",
+		g = ".layui-table-fixed",
+		x = ".layui-table-fixed-l",
+		b = ".layui-table-fixed-r",
+		k = ".layui-table-tool",
+		C = ".layui-table-page",
+		w = ".layui-table-sort",
+		N = "layui-table-edit",
+		F = "layui-table-hover",
+		W = function(e) {
+			var t = '{{#if(item2.colspan){}} colspan="{{item2.colspan}}"{{#} if(item2.rowspan){}} rowspan="{{item2.rowspan}}"{{#}}}';
+			return e = e || {}, ['<table cellspacing="0" cellpadding="0" border="0" class="layui-table" ', '{{# if(d.data.skin){ }}lay-skin="{{d.data.skin}}"{{# } }} {{# if(d.data.size){ }}lay-size="{{d.data.size}}"{{# } }} {{# if(d.data.even){ }}lay-even{{# } }}>', "<thead>", "{{# layui.each(d.data.cols, function(i1, item1){ }}", "<tr>", "{{# layui.each(item1, function(i2, item2){ }}", '{{# if(item2.fixed && item2.fixed !== "right"){ left = true; } }}', '{{# if(item2.fixed === "right"){ right = true; } }}', function() {
+				return e.fixed && "right" !== e.fixed ? '{{# if(item2.fixed && item2.fixed !== "right"){ }}' : "right" === e.fixed ? '{{# if(item2.fixed === "right"){ }}' : ""
+			}(), '<th data-field="{{ item2.field||i2 }}" {{# if(item2.minWidth){ }}data-minwidth="{{item2.minWidth}}"{{# } }} ' + t + ' {{# if(item2.unresize){ }}data-unresize="true"{{# } }}>', '<div class="layui-table-cell laytable-cell-', "{{# if(item2.colspan > 1){ }}", "group", "{{# } else { }}", "{{d.index}}-{{item2.field || i2}}", '{{# if(item2.type !== "normal"){ }}', " laytable-cell-{{ item2.type }}", "{{# } }}", "{{# } }}", '" {{#if(item2.align){}}align="{{item2.align}}"{{#}}}>', '{{# if(item2.type === "checkbox"){ }}', '<input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose" {{# if(item2[d.data.checkName]){ }}checked{{# }; }}>', "{{# } else { }}", '<span>{{item2.title||""}}</span>', "{{# if(!(item2.colspan > 1) && item2.sort){ }}", '<span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc"></i><i class="layui-edge layui-table-sort-desc"></i></span>', "{{# } }}", "{{# } }}", "</div>", "</th>", e.fixed ? "{{# }; }}" : "", "{{# }); }}", "</tr>", "{{# }); }}", "</thead>", "</table>"].join("")
+		},
+		z = ['<table cellspacing="0" cellpadding="0" border="0" class="layui-table" ', '{{# if(d.data.skin){ }}lay-skin="{{d.data.skin}}"{{# } }} {{# if(d.data.size){ }}lay-size="{{d.data.size}}"{{# } }} {{# if(d.data.even){ }}lay-even{{# } }}>', "<tbody></tbody>", "</table>"].join(""),
+		A = ['<div class="layui-form layui-border-box {{d.VIEW_CLASS}}" lay-filter="LAY-table-{{d.index}}" style="{{# if(d.data.width){ }}width:{{d.data.width}}px;{{# } }} {{# if(d.data.height){ }}height:{{d.data.height}}px;{{# } }}">', "{{# if(d.data.toolbar){ }}", '<div class="layui-table-tool"></div>', "{{# } }}", '<div class="layui-table-box">', "{{# var left, right; }}", '<div class="layui-table-header">', W(), "</div>", '<div class="layui-table-body layui-table-main">', z, "</div>", "{{# if(left){ }}", '<div class="layui-table-fixed layui-table-fixed-l">', '<div class="layui-table-header">', W({
+			fixed: !0
+		}), "</div>", '<div class="layui-table-body">', z, "</div>", "</div>", "{{# }; }}", "{{# if(right){ }}", '<div class="layui-table-fixed layui-table-fixed-r">', '<div class="layui-table-header">', W({
+			fixed: "right"
+		}), '<div class="layui-table-mend"></div>', "</div>", '<div class="layui-table-body">', z, "</div>", "</div>", "{{# }; }}", "</div>", "{{# if(d.data.page){ }}", '<div class="layui-table-page">', '<div id="layui-table-page{{d.index}}"></div>', "</div>", "{{# } }}", "<style>", "{{# layui.each(d.data.cols, function(i1, item1){", "layui.each(item1, function(i2, item2){ }}", ".laytable-cell-{{d.index}}-{{item2.field||i2}}{ ", "{{# if(item2.width){ }}", "width: {{item2.width}}px;", "{{# } }}", " }", "{{# });", "}); }}", "</style>", "</div>"].join(""),
+		T = t(window),
+		M = t(document),
+		S = function(e) {
+			var i = this;
+			i.index = ++d.index, i.config = t.extend({}, i.config, d.config, e), i.render()
+		};
+	S.prototype.config = {
+		limit: 10,
+		loading: !0,
+		cellMinWidth: 60,
+		text: {
+			none: "无数据"
+		}
+	}, S.prototype.render = function() {
+		var e = this,
+			a = e.config;
+		if (a.elem = t(a.elem), a.where = a.where || {}, a.id = a.id || a.elem.attr("id"), a.request = t.extend({
+				pageName: "page",
+				limitName: "limit"
+			}, a.request), a.response = t.extend({
+				statusName: "code",
+				statusCode: 0,
+				msgName: "msg",
+				dataName: "data",
+				countName: "count"
+			}, a.response), "object" == typeof a.page && (a.limit = a.page.limit || a.limit, a.limits = a.page.limits || a.limits, e.page = a.page.curr = a.page.curr || 1, delete a.page.elem, delete a.page.jump), !a.elem[0]) return e;
+		e.setArea();
+		var l = a.elem,
+			n = l.next("." + y),
+			o = e.elem = t(i(A).render({
+				VIEW_CLASS: y,
+				data: a,
+				index: e.index
+			}));
+		if (a.index = e.index, n[0] && n.remove(), l.after(o), e.layHeader = o.find(p), e.layMain = o.find(v), e.layBody = o.find(m), e.layFixed = o.find(g), e.layFixLeft = o.find(x), e.layFixRight = o.find(b), e.layTool = o.find(k), e.layPage = o.find(C), e.layTool.html(i(t(a.toolbar).html() || "").render(a)), a.height && e.fullSize(), a.cols.length > 1) {
+			var r = e.layFixed.find(p).find("th");
+			r.height(e.layHeader.height() - 1 - parseFloat(r.css("padding-top")) - parseFloat(r.css("padding-bottom")))
+		}
+		e.pullData(e.page), e.events()
+	}, S.prototype.initOpts = function(e) {
+		var t = this,
+			i = (t.config, {
+				checkbox: 48,
+				space: 15,
+				numbers: 40
+			});
+		e.checkbox && (e.type = "checkbox"), e.space && (e.type = "space"), e.type || (e.type = "normal"), "normal" !== e.type && (e.unresize = !0, e.width = e.width || i[e.type])
+	}, S.prototype.setArea = function() {
+		var e = this,
+			t = e.config,
+			i = 0,
+			a = 0,
+			l = 0,
+			n = 0,
+			o = t.width || function() {
+				var e = function(i) {
+					var a, l;
+					i = i || t.elem.parent(), a = i.width();
+					try {
+						l = "none" === i.css("display")
+					} catch (n) {}
+					return !i[0] || a && !l ? a : e(i.parent())
+				};
+				return e()
+			}();
+		e.eachCols(function() {
+			i++
+		}), o -= function() {
+			return "line" === t.skin || "nob" === t.skin ? 2 : i + 1
+		}(), layui.each(t.cols, function(t, i) {
+			layui.each(i, function(t, l) {
+				var r;
+				return l ? (e.initOpts(l), r = l.width || 0, void(l.colspan > 1 || (/\d+%$/.test(r) ? l.width = r = Math.floor(parseFloat(r) / 100 * o) : r || (l.width = r = 0, a++), n += r))) : void i.splice(t, 1)
+			})
+		}), e.autoColNums = a, o > n && a && (l = (o - n) / a), layui.each(t.cols, function(e, i) {
+			layui.each(i, function(e, i) {
+				var a = i.minWidth || t.cellMinWidth;
+				i.colspan > 1 || 0 === i.width && (i.width = Math.floor(l >= a ? l : a))
+			})
+		}), t.height && /^full-\d+$/.test(t.height) && (e.fullHeightGap = t.height.split("-")[1], t.height = T.height() - e.fullHeightGap)
+	}, S.prototype.reload = function(e) {
+		var i = this;
+		i.config.data && i.config.data.constructor === Array && delete i.config.data, i.config = t.extend({}, i.config, e), i.render()
+	}, S.prototype.page = 1, S.prototype.pullData = function(e, i) {
+		var a = this,
+			n = a.config,
+			o = n.request,
+			r = n.response,
+			d = function() {
+				"object" == typeof n.initSort && a.sort(n.initSort.field, n.initSort.type)
+			};
+		if (a.startTime = (new Date).getTime(), n.url) {
+			var c = {};
+			c[o.pageName] = e, c[o.limitName] = n.limit, t.ajax({
+				type: n.method || "get",
+				url: n.url,
+				data: t.extend(c, n.where),
+				dataType: "json",
+				success: function(t) {
+					t[r.statusName] != r.statusCode ? (a.renderForm(), a.layMain.html('<div class="' + f + '">' + (t[r.msgName] || "返回的数据状态异常") + "</div>")) : (a.renderData(t, e, t[r.countName]), d(), n.time = (new Date).getTime() - a.startTime + " ms"), i && l.close(i), "function" == typeof n.done && n.done(t, e, t[r.countName])
+				},
+				error: function(e, t) {
+					a.layMain.html('<div class="' + f + '">数据接口请求异常</div>'), a.renderForm(), i && l.close(i)
+				}
+			})
+		} else if (n.data && n.data.constructor === Array) {
+			var s = {},
+				u = e * n.limit - n.limit;
+			s[r.dataName] = n.data.concat().splice(u, n.limit), s[r.countName] = n.data.length, a.renderData(s, e, n.data.length), d(), "function" == typeof n.done && n.done(s, e, s[r.countName])
+		}
+	}, S.prototype.eachCols = function(e) {
+		var i = t.extend(!0, [], this.config.cols),
+			a = [],
+			l = 0;
+		layui.each(i, function(e, t) {
+			layui.each(t, function(t, n) {
+				if (n.colspan > 1) {
+					var o = 0;
+					l++, n.CHILD_COLS = [], layui.each(i[e + 1], function(e, t) {
+						t.PARENT_COL || o == n.colspan || (t.PARENT_COL = l, n.CHILD_COLS.push(t), o += t.colspan > 1 ? t.colspan : 1)
+					})
+				}
+				n.PARENT_COL || a.push(n)
+			})
+		});
+		var n = function(t) {
+			layui.each(t || a, function(t, i) {
+				return i.CHILD_COLS ? n(i.CHILD_COLS) : void e(t, i)
+			})
+		};
+		n()
+	}, S.prototype.renderData = function(e, n, o, r) {
+		var c = this,
+			s = c.config,
+			u = e[s.response.dataName] || [],
+			y = [],
+			p = [],
+			m = [],
+			v = function() {
+				return !r && c.sortKey ? c.sort(c.sortKey.field, c.sortKey.sort, !0) : (layui.each(u, function(e, a) {
+					var l = [],
+						o = [],
+						u = [],
+						h = e + s.limit * (n - 1) + 1;
+					0 !== a.length && (r || (a[d.config.indexName] = e), c.eachCols(function(e, n) {
+						var r = n.field || e,
+							f = a[r];
+						c.getColElem(c.layHeader, r);
+						if (void 0 !== f && null !== f || (f = ""), !(n.colspan > 1)) {
+							var y = ['<td data-field="' + r + '" ' + function() {
+								var e = [];
+								return n.edit && e.push('data-edit="' + n.edit + '"'), n.align && e.push('align="' + n.align + '"'), n.templet && e.push('data-content="' + f + '"'), n.toolbar && e.push('data-off="true"'), n.event && e.push('lay-event="' + n.event + '"'), n.style && e.push('style="' + n.style + '"'), n.minWidth && e.push('data-minwidth="' + n.minWidth + '"'), e.join(" ")
+							}() + ">", '<div class="layui-table-cell laytable-cell-' + function() {
+								var e = s.index + "-" + r;
+								return "normal" === n.type ? e : e + " laytable-cell-" + n.type
+							}() + '">' + function() {
+								var e = t.extend(!0, {
+									LAY_INDEX: h
+								}, a);
+								return "checkbox" === n.type ? '<input type="checkbox" name="layTableCheckbox" lay-skin="primary" ' + function() {
+									var t = d.config.checkName;
+									return n[t] ? (a[t] = n[t], n[t] ? "checked" : "") : e[t] ? "checked" : ""
+								}() + ">" : "numbers" === n.type ? h : n.toolbar ? i(t(n.toolbar).html() || "").render(e) : n.templet ? function() {
+									return "function" == typeof n.templet ? n.templet(e) : i(t(n.templet).html() || String(f)).render(e)
+								}() : f
+							}(), "</div></td>"].join("");
+							l.push(y), n.fixed && "right" !== n.fixed && o.push(y), "right" === n.fixed && u.push(y)
+						}
+					}), y.push('<tr data-index="' + e + '">' + l.join("") + "</tr>"), p.push('<tr data-index="' + e + '">' + o.join("") + "</tr>"), m.push('<tr data-index="' + e + '">' + u.join("") + "</tr>"))
+				}), c.layBody.scrollTop(0), c.layMain.find("." + f).remove(), c.layMain.find("tbody").html(y.join("")), c.layFixLeft.find("tbody").html(p.join("")), c.layFixRight.find("tbody").html(m.join("")), c.renderForm(), c.syncCheckAll(), c.haveInit ? c.scrollPatch() : setTimeout(function() {
+					c.scrollPatch()
+				}, 50), c.haveInit = !0, void l.close(c.tipsIndex))
+			};
+		return c.key = s.id || s.index, d.cache[c.key] = u, c.layPage[0 === u.length && 1 == n ? "addClass" : "removeClass"](h), r ? v() : 0 === u.length ? (c.renderForm(), c.layFixed.remove(), c.layMain.find("tbody").html(""), c.layMain.find("." + f).remove(), c.layMain.append('<div class="' + f + '">' + s.text.none + "</div>")) : (v(), void(s.page && (s.page = t.extend({
+			elem: "layui-table-page" + s.index,
+			count: o,
+			limit: s.limit,
+			limits: s.limits || [10, 20, 30, 40, 50, 60, 70, 80, 90],
+			groups: 3,
+			layout: ["prev", "page", "next", "skip", "count", "limit"],
+			prev: '<i class="layui-icon">&#xe603;</i>',
+			next: '<i class="layui-icon">&#xe602;</i>',
+			jump: function(e, t) {
+				t || (c.page = e.curr, s.limit = e.limit, c.pullData(e.curr, c.loading()))
+			}
+		}, s.page), s.page.count = o, a.render(s.page))))
+	}, S.prototype.getColElem = function(e, t) {
+		var i = this,
+			a = i.config;
+		return e.eq(0).find(".laytable-cell-" + (a.index + "-" + t) + ":eq(0)")
+	}, S.prototype.renderForm = function(e) {
+		n.render(e, "LAY-table-" + this.index)
+	}, S.prototype.sort = function(e, i, a, l) {
+		var n, r, c = this,
+			u = {},
+			h = c.config,
+			f = h.elem.attr("lay-filter"),
+			y = d.cache[c.key];
+		"string" == typeof e && c.layHeader.find("th").each(function(i, a) {
+			var l = t(this),
+				o = l.data("field");
+			if (o === e) return e = l, n = o, !1
+		});
+		try {
+			var n = n || e.data("field");
+			if (c.sortKey && !a && n === c.sortKey.field && i === c.sortKey.sort) return;
+			var p = c.layHeader.find("th .laytable-cell-" + h.index + "-" + n).find(w);
+			c.layHeader.find("th").find(w).removeAttr("lay-sort"), p.attr("lay-sort", i || null), c.layFixed.find("th")
+		} catch (m) {
+			return o.error("Table modules: Did not match to field")
+		}
+		c.sortKey = {
+			field: n,
+			sort: i
+		}, "asc" === i ? r = layui.sort(y, n) : "desc" === i ? r = layui.sort(y, n, !0) : (r = layui.sort(y, d.config.indexName), delete c.sortKey), u[h.response.dataName] = r, c.renderData(u, c.page, c.count, !0), l && layui.event.call(e, s, "sort(" + f + ")", {
+			field: n,
+			type: i
+		})
+	}, S.prototype.loading = function() {
+		var e = this,
+			t = e.config;
+		if (t.loading && t.url) return l.msg("数据请求中", {
+			icon: 16,
+			offset: [e.elem.offset().top + e.elem.height() / 2 - 35 - T.scrollTop() + "px", e.elem.offset().left + e.elem.width() / 2 - 90 - T.scrollLeft() + "px"],
+			time: -1,
+			anim: -1,
+			fixed: !1
+		})
+	}, S.prototype.setCheckData = function(e, t) {
+		var i = this,
+			a = i.config,
+			l = d.cache[i.key];
+		l[e] && l[e].constructor !== Array && (l[e][a.checkName] = t)
+	}, S.prototype.syncCheckAll = function() {
+		var e = this,
+			t = e.config,
+			i = e.layHeader.find('input[name="layTableCheckbox"]'),
+			a = function(i) {
+				return e.eachCols(function(e, a) {
+					"checkbox" === a.type && (a[t.checkName] = i)
+				}), i
+			};
+		i[0] && (d.checkStatus(e.key).isAll ? (i[0].checked || (i.prop("checked", !0), e.renderForm("checkbox")), a(!0)) : (i[0].checked && (i.prop("checked", !1), e.renderForm("checkbox")), a(!1)))
+	}, S.prototype.getCssRule = function(e, t) {
+		var i = this,
+			a = i.elem.find("style")[0],
+			l = a.sheet || a.styleSheet || {},
+			n = l.cssRules || l.rules;
+		layui.each(n, function(a, l) {
+			if (l.selectorText === ".laytable-cell-" + i.index + "-" + e) return t(l), !0
+		})
+	}, S.prototype.fullSize = function() {
+		var e, t = this,
+			i = t.config,
+			a = i.height;
+		t.fullHeightGap && (a = T.height() - t.fullHeightGap, a < 135 && (a = 135), t.elem.css("height", a)), e = parseFloat(a) - parseFloat(t.layHeader.height()) - 1, i.toolbar && (e -= t.layTool.outerHeight()), i.page && (e = e - t.layPage.outerHeight() - 1), t.layMain.css("height", e)
+	}, S.prototype.getScrollWidth = function(e) {
+		var t = 0;
+		return e ? t = e.offsetWidth - e.clientWidth : (e = document.createElement("div"), e.style.width = "100px", e.style.height = "100px", e.style.overflowY = "scroll", document.body.appendChild(e), t = e.offsetWidth - e.clientWidth, document.body.removeChild(e)), t
+	}, S.prototype.scrollPatch = function() {
+		var e = this,
+			i = e.layMain.children("table"),
+			a = e.layMain.width() - e.layMain.prop("clientWidth"),
+			l = e.layMain.height() - e.layMain.prop("clientHeight"),
+			n = e.getScrollWidth(e.layMain[0]),
+			o = i.outerWidth() - e.layMain.width();
+		if (e.autoColNums && o < 5 && !e.scrollPatchWStatus) {
+			var r = e.layHeader.eq(0).find("thead th:last-child"),
+				d = r.data("field");
+			e.getCssRule(d, function(t) {
+				var i = t.style.width || r.outerWidth();
+				t.style.width = parseFloat(i) - n - o + "px", e.layMain.height() - e.layMain.prop("clientHeight") > 0 && (t.style.width = parseFloat(t.style.width) - 1 + "px"), e.scrollPatchWStatus = !0
+			})
+		}
+		if (a && l) {
+			if (!e.elem.find(".layui-table-patch")[0]) {
+				var c = t('<th class="layui-table-patch"><div class="layui-table-cell"></div></th>');
+				c.find("div").css({
+					width: a
+				}), e.layHeader.eq(0).find("thead tr").append(c)
+			}
+		} else e.layHeader.eq(0).find(".layui-table-patch").remove();
+		var s = e.layMain.height(),
+			u = s - l;
+		e.layFixed.find(m).css("height", i.height() > u ? u : "auto"), e.layFixRight[o > 0 ? "removeClass" : "addClass"](h), e.layFixRight.css("right", a - 1)
+	}, S.prototype.events = function() {
+		var e, a = this,
+			n = a.config,
+			o = t("body"),
+			c = {},
+			u = a.layHeader.find("th"),
+			h = ".layui-table-cell",
+			f = n.elem.attr("lay-filter");
+		u.on("mousemove", function(e) {
+			var i = t(this),
+				a = i.offset().left,
+				l = e.clientX - a;
+			i.attr("colspan") > 1 || i.data("unresize") || c.resizeStart || (c.allowResize = i.width() - l <= 10, o.css("cursor", c.allowResize ? "col-resize" : ""))
+		}).on("mouseleave", function() {
+			t(this);
+			c.resizeStart || o.css("cursor", "")
+		}).on("mousedown", function(e) {
+			var i = t(this);
+			if (c.allowResize) {
+				var l = i.data("field");
+				e.preventDefault(), c.resizeStart = !0, c.offset = [e.clientX, e.clientY], a.getCssRule(l, function(e) {
+					var t = e.style.width || i.outerWidth();
+					c.rule = e, c.ruleWidth = parseFloat(t), c.minWidth = i.data("minwidth") || n.cellMinWidth
+				})
+			}
+		}), M.on("mousemove", function(t) {
+			if (c.resizeStart) {
+				if (t.preventDefault(), c.rule) {
+					var i = c.ruleWidth + t.clientX - c.offset[0];
+					i < c.minWidth && (i = c.minWidth), c.rule.style.width = i + "px", l.close(a.tipsIndex)
+				}
+				e = 1
+			}
+		}).on("mouseup", function(t) {
+			c.resizeStart && (c = {}, o.css("cursor", ""), a.scrollPatch()), 2 === e && (e = null)
+		}), u.on("click", function() {
+			var i, l = t(this),
+				n = l.find(w),
+				o = n.attr("lay-sort");
+			return n[0] && 1 !== e ? (i = "asc" === o ? "desc" : "desc" === o ? null : "asc", void a.sort(l, i, null, !0)) : e = 2
+		}).find(w + " .layui-edge ").on("click", function(e) {
+			var i = t(this),
+				l = i.index(),
+				n = i.parents("th").eq(0).data("field");
+			layui.stope(e), 0 === l ? a.sort(n, "asc", null, !0) : a.sort(n, "desc", null, !0)
+		}), a.elem.on("click", 'input[name="layTableCheckbox"]+', function() {
+			var e = t(this).prev(),
+				i = a.layBody.find('input[name="layTableCheckbox"]'),
+				l = e.parents("tr").eq(0).data("index"),
+				n = e[0].checked,
+				o = "layTableAllChoose" === e.attr("lay-filter");
+			o ? (i.each(function(e, t) {
+				t.checked = n, a.setCheckData(e, n)
+			}), a.syncCheckAll(), a.renderForm("checkbox")) : (a.setCheckData(l, n), a.syncCheckAll()), layui.event.call(this, s, "checkbox(" + f + ")", {
+				checked: n,
+				data: d.cache[a.key] ? d.cache[a.key][l] || {} : {},
+				type: o ? "all" : "one"
+			})
+		}), a.layBody.on("mouseenter", "tr", function() {
+			var e = t(this),
+				i = e.index();
+			a.layBody.find("tr:eq(" + i + ")").addClass(F)
+		}).on("mouseleave", "tr", function() {
+			var e = t(this),
+				i = e.index();
+			a.layBody.find("tr:eq(" + i + ")").removeClass(F)
+		}), a.layBody.on("change", "." + N, function() {
+			var e = t(this),
+				i = this.value,
+				l = e.parent().data("field"),
+				n = e.parents("tr").eq(0).data("index"),
+				o = d.cache[a.key][n];
+			o[l] = i, layui.event.call(this, s, "edit(" + f + ")", {
+				value: i,
+				data: o,
+				field: l
+			})
+		}).on("blur", "." + N, function() {
+			var e, l = t(this),
+				n = l.parent().data("field"),
+				o = l.parents("tr").eq(0).data("index"),
+				r = d.cache[a.key][o];
+			a.eachCols(function(t, i) {
+				i.field == n && i.templet && (e = i.templet)
+			}), l.siblings(h).html(e ? i(t(e).html() || this.value).render(r) : this.value), l.parent().data("content", this.value), l.remove()
+		}), a.layBody.on("click", "td", function() {
+			var e = t(this),
+				i = (e.data("field"), e.data("edit")),
+				o = e.children(h);
+			if (l.close(a.tipsIndex), !e.data("off"))
+				if (i)
+					if ("select" === i);
+					else {
+						var d = t('<input class="layui-input ' + N + '">');
+						d[0].value = e.data("content") || o.text(), e.find("." + N)[0] || e.append(d), d.focus()
+					}
+			else o.find(".layui-form-switch,.layui-form-checkbox")[0] || Math.round(o.prop("scrollWidth")) > Math.round(o.outerWidth()) && (a.tipsIndex = l.tips(['<div class="layui-table-tips-main" style="margin-top: -' + (o.height() + 16) + "px;" + function() {
+				return "sm" === n.size ? "padding: 4px 15px; font-size: 12px;" : "lg" === n.size ? "padding: 14px 15px;" : ""
+			}() + '">', o.html(), "</div>", '<i class="layui-icon layui-table-tips-c">&#x1006;</i>'].join(""), o[0], {
+				tips: [3, ""],
+				time: -1,
+				anim: -1,
+				maxWidth: r.ios || r.android ? 300 : 600,
+				isOutAnim: !1,
+				skin: "layui-table-tips",
+				success: function(e, t) {
+					e.find(".layui-table-tips-c").on("click", function() {
+						l.close(t)
+					})
+				}
+			}))
+		}), a.layBody.on("click", "*[lay-event]", function() {
+			var e = t(this),
+				l = e.parents("tr").eq(0).data("index"),
+				n = a.layBody.find('tr[data-index="' + l + '"]'),
+				o = "layui-table-click",
+				r = d.cache[a.key][l];
+			layui.event.call(this, s, "tool(" + f + ")", {
+				data: d.clearCacheKey(r),
+				event: e.attr("lay-event"),
+				tr: n,
+				del: function() {
+					d.cache[a.key][l] = [], n.remove(), a.scrollPatch()
+				},
+				update: function(e) {
+					e = e || {}, layui.each(e, function(e, l) {
+						if (e in r) {
+							var o, d = n.children('td[data-field="' + e + '"]');
+							r[e] = l, a.eachCols(function(t, i) {
+								i.field == e && i.templet && (o = i.templet)
+							}), d.children(h).html(o ? i(t(o).html() || l).render(r) : l), d.data("content", l)
+						}
+					})
+				}
+			}), n.addClass(o).siblings("tr").removeClass(o)
+		}), a.layMain.on("scroll", function() {
+			var e = t(this),
+				i = e.scrollLeft(),
+				n = e.scrollTop();
+			a.layHeader.scrollLeft(i), a.layFixed.find(m).scrollTop(n), l.close(a.tipsIndex)
+		}), T.on("resize", function() {
+			a.fullSize(), a.scrollPatch()
+		})
+	}, d.init = function(e, i) {
+		i = i || {};
+		var a = this,
+			l = t(e ? 'table[lay-filter="' + e + '"]' : u + "[lay-data]"),
+			n = "Table element property lay-data configuration item has a syntax error: ";
+		return l.each(function() {
+			var a = t(this),
+				l = a.attr("lay-data");
+			try {
+				l = new Function("return " + l)()
+			} catch (r) {
+				o.error(n + l)
+			}
+			var c = [],
+				s = t.extend({
+					elem: this,
+					cols: [],
+					data: [],
+					skin: a.attr("lay-skin"),
+					size: a.attr("lay-size"),
+					even: "string" == typeof a.attr("lay-even")
+				}, d.config, i, l);
+			e && a.hide(), a.find("thead>tr").each(function(e) {
+				s.cols[e] = [], t(this).children().each(function(i) {
+					var a = t(this),
+						l = a.attr("lay-data");
+					try {
+						l = new Function("return " + l)()
+					} catch (r) {
+						return o.error(n + l)
+					}
+					var d = t.extend({
+						title: a.text(),
+						colspan: a.attr("colspan") || 0,
+						rowspan: a.attr("rowspan") || 0
+					}, l);
+					d.colspan < 2 && c.push(d), s.cols[e].push(d)
+				})
+			}), a.find("tbody>tr").each(function(e) {
+				var i = t(this),
+					a = {};
+				i.children("td").each(function(e, i) {
+					var l = t(this),
+						n = l.data("field");
+					if (n) return a[n] = l.html()
+				}), layui.each(c, function(e, t) {
+					var l = i.children("td").eq(e);
+					a[t.field] = l.html()
+				}), s.data[e] = a
+			}), d.render(s)
+		}), a
+	}, d.checkStatus = function(e) {
+		var t = 0,
+			i = 0,
+			a = [],
+			l = d.cache[e] || [];
+		return layui.each(l, function(e, l) {
+			return l.constructor === Array ? void i++ : void(l[d.config.checkName] && (t++, a.push(d.clearCacheKey(l))))
+		}), {
+			data: a,
+			isAll: !!l.length && t === l.length - i
+		}
+	}, c.config = {}, d.reload = function(e, i) {
+		var a = c.config[e];
+		return i = i || {}, a ? (i.data && i.data.constructor === Array && delete a.data, d.render(t.extend(!0, {}, a, i))) : o.error("The ID option was not found in the table instance")
+	}, d.render = function(e) {
+		var t = new S(e);
+		return c.call(t)
+	}, d.clearCacheKey = function(e) {
+		return e = t.extend({}, e), delete e[d.config.checkName], delete e[d.config.indexName], e
+	}, d.init(), e(s, d)
+});
