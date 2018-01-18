@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	props : [ 'id', 'datasource', 'columns', 'onrowclick', 'onpageclick' ],
-	template : '<div><table  :lay-filter="id+guid"  :id="id+guid" v-on:click="incrementCounter"><slot></slot></table><div :id="laypage+guid"></div></div>',
+	template : '<div><table  :lay-filter="id+guid"  :id="id+guid" ><slot></slot></table><div :id="laypage+guid"></div></div>',
 
 	data : function() {
 		var dataList;
@@ -18,8 +18,6 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 		this._RegisterComponent();
 	},
 	methods : {
-		incrementCounter : function() {
-		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var ajaxDataGrid = new AjaxDataGrid(domId);
@@ -28,6 +26,9 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 
 			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
 			$._RegisterResizeModel(ajaxDataGrid);
+			
+			// 注册该对象 以便在页面加载结束后绑定事件
+//			$._RegisterComponentCompleteListenerModel(ajaxDataGrid);
 		},
 		// 添加生命ajaxDataGrid对象脚本
 		_MapComponent : function() {
@@ -64,7 +65,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 					$._Eval(onrowclickFunction, data);
 				});
 			}
-
+			
 			var pageclickFunction = this.onpageclick;
 			if (pageclickFunction != null) {
 				_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
@@ -88,6 +89,14 @@ function AjaxDataGrid(domId) {
 	this.datasource = "";
 	this.datawrap = $._CreateAjaxDataWrap();
 	this.height = 300;
+	this.bindListener= function(){
+		this.bindTrDblclick();
+	}
+	this.bindTrDblclick=function(){
+		$("#"+this.id).next().find(".layui-table-body").find("tr").on("dblclick",function(){
+			alert(1);
+		});
+	}
 	this.init = function(msg) {
 		this.setData();
 	};
