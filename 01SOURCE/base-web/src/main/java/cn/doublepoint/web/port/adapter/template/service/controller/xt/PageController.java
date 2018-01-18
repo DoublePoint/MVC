@@ -15,15 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
+	// 索引页
+	@RequestMapping(value = "/index")
+	public String hello() {
+		return "/template/xt/index/index";
+	}
 	// 菜单页面
 	@RequestMapping("/template/xt/cd/{actionname}")
 	public String cd(@PathVariable String actionname) {
 		return "/template/xt/cd/" + actionname;
 	}
+
 	@RequestMapping("/template/xt/login/{actionname}")
 	public String login(@PathVariable String actionname) {
 		return "/template/xt/login/" + actionname;
 	}
+
 	@RequestMapping("/template/xt/test/{actionname}")
 	public String test(@PathVariable String actionname) {
 		return "/template/xt/test/" + actionname;

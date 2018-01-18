@@ -28,15 +28,21 @@
 		_Eval : function(func, paramArr) {
 			if (func == null)
 				return;
-			func = func + "";
-			if (func.endWith("()")) {
-				func = func.substr(0, func.length - 2)
+			
+			var invokeString =""+func;
+			//1、如果是functionName()类型的 则转换成
+			if (invokeString.endWith("()")) {
+				invokeString = invokeString.substr(0, invokeString.length - 2)
+				invokeString = invokeString + "(";
 			}
-
+			//2、如果是functionName(para1,para2)类型的则 转换成functionName(para1,para2
+			else if(invokeString.endWith(")")){
+				invokeString = invokeString.substr(0, invokeString.length - 1)
+				invokeString = invokeString + ",";
+			}
+			else 
+				invokeString = invokeString + "(";
 			// param==null?eval(fuc):eval(fuc+param);
-			if (func == null)
-				return;
-			var invokeString = func + "(";
 
 			if (paramArr != null) {
 				if (Array.isArray(paramArr)) {
@@ -88,30 +94,6 @@
 		},
 		_GetRegisteredResizeModel : function() {
 			return _RegisteredModel;
-		},
-		_SetLayuiTableData : function(ajaxgrid) {
-			var id = ajaxgrid.id;
-			var ajaxDataWrap = ajaxgrid.datawrap;
-			// var data=ajaxDataWrap.getDataList();
-			var datasource = ajaxgrid.datasource;
-			var cols = ajaxgrid.cols;
-			var height = ajaxgrid.height;
-			var ss = $table.render({
-				elem : '#' + id + '',
-				data : $._Clone(ajaxDataWrap.dataList),
-				height : height,
-				cols : cols,
-				// skin : 'row', // 表格风格
-				// even : true,
-				page : false, // 是否显示分页
-				limits : [ 5, 7, 10, 20, 100 ],
-				limit : 50,
-				done:function(res,curr,count){
-					ajaxgrid.bindListener();
-				}
-			// 每页默认显示的数量
-			});
-			return ss;
 		},
 		_OpenDialog : function(obj) {
 			/*title*/

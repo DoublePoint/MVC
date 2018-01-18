@@ -106,7 +106,12 @@ function _AjaxDataWrap(name) {
 	this.getDataList = function() {
 		return this.dataList;
 	};
-
+	this.getRow = function(index){
+		if(index==null)
+			return null;
+		if(this.dataList.length-1>=index)
+			return this.dataList[index];
+	}
 	this.getPageInfo = function() {
 		return this.pageInfo;
 	}

@@ -56,7 +56,7 @@
 						</div>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*" >
-						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" datasource="/template/xt/cd/datalistajaxdatawrap"> 
+						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/xt/cd/datalistajaxdatawrap"> 
 							<ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow>
 							<ll-gridrow field="cdmc" title="菜单名称"></ll-gridrow> 
 							<ll-gridrow field="cdpx" title="菜单排序"></ll-gridrow> 

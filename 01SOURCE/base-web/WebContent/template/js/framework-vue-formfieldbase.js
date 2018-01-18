@@ -280,7 +280,8 @@ function FormFieldBase(domId) {
 		}
 		this.data = aData;
 		this.getInputDom().val(this.data);
-		this.showParentNotSave();
+		if(isChanged.toString().toLowerCase()=='true')
+			this.showParentNotSave();
 	};
 	this.setField = function(aField) {
 		this.field = aField;

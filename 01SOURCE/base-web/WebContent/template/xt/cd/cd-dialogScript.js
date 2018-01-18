@@ -1,10 +1,17 @@
 function init(response) {
-	var treeNode = response.getDataList("clickNode");
-	var cdbs = treeNode.cdbs;
-	var cdmc = treeNode.cdmc;
-
+	var type=$._GetRequestParam("type");
+	if(type==null){
+		var treeNode = response.getDataList("clickNode");
+		var cdbs = treeNode.cdbs;
+		var cdmc = treeNode.cdmc;
+		inpbtn_sjcdbs.setData(cdbs, cdmc);
+	}
+	else{
+		var data=response.getDataList()[0];
+		ajaxform.setData(data);
+	}
 //	ajaxform.setFieldValue("sjcdbs", cdbs);
-	inpbtn_sjcdbs.setData(cdbs, cdmc);
+
 }
 
 // 监听提交

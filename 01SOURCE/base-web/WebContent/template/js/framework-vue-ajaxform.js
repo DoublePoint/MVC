@@ -149,6 +149,7 @@ function AjaxForm(domId) {
 	this.getFormItems = function(item) {
 		return this.formItems;
 	}
+	
 	//如果所有的fieldItem的isChanged有一个为true 则该form即为true
 	this.getIsChanged = function(){
 		var isChanged=false;
@@ -161,6 +162,7 @@ function AjaxForm(domId) {
 		}
 		return isChanged;
 	}
+	
 	this.addFormItem = function(item) {
 		var isNextLine = false;
 		var formLinesLength = this.formLines.length;
@@ -187,11 +189,13 @@ function AjaxForm(domId) {
 		}
 		this.formItems.push(item);
 	}
+	
 	this.addLine = function() {
 		for (index in this.formLines) {
 			this.formLines[index].createLine();
 		}
 	}
+	
 	this.refresh = function() {
 		var formLines = this.formLines;
 		var colproportion = this.colproportion;
@@ -210,9 +214,11 @@ function AjaxForm(domId) {
 			formLines[index].generateToOneLine(formLineColproportionArr);
 		}
 	}
+	
 	this.resize = function() {
 		this.refresh();
 	}
+	
 	/**
 	 * 设置字段值
 	 */
@@ -229,9 +235,11 @@ function AjaxForm(domId) {
 				$._AddNotSaveIcon();
 		}
 	}
+	
 	this.setShowchanged = function(aShowchanged){
 		this.showchanged=aShowchanged;
 	}
+	
 	this.show = function() {
 		this.getDom().css("display", "block");
 	}
@@ -245,6 +253,7 @@ function AjaxForm(domId) {
 			}
 		}
 	}
+	
 	this.showNotSave = function(){
 		if(this.getShowchanged().toString().toLowerCase()=="true"){
 			if(this.getIsChanged()){
@@ -252,6 +261,7 @@ function AjaxForm(domId) {
 			}
 		}
 	}
+	
 	this.hideField = function(name, isLeaveLocation) {
 		var items = this.formItems;
 		for (var i = 0; i < items.length; i++) {
@@ -261,6 +271,7 @@ function AjaxForm(domId) {
 			}
 		}
 	}
+	
 	this.initNotSave=function(){
 		var obj=this;
 		this.getDom().find("input").bind("blur",function(){
@@ -289,11 +300,13 @@ function AjaxFormLine() {
 		}
 		return totalColspan;
 	}
+	
 	this.createLine = function() {
 		var formItems = this.formItems;
 		if (formItems.length > 0)
 			formItems[0].addLineStart();
 	}
+	
 	// 自动将该Line下的所有数据转变成一行 即添加div
 	this.generateToOneLine = function(lineColproportion) {
 		var formItems = this.formItems;

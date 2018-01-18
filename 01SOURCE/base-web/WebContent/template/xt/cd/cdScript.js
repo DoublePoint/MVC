@@ -108,3 +108,29 @@ function zTreeOnClick(event, treeId, treeNode) {
 function rowClickTest(data) {
 	var dd = data;
 }
+
+function dbclickgrid(para1,data,index){
+	var ajaxDataWrap =  $._CreateAjaxDataWrap();
+	var dataArr=new Array();
+	dataArr.push(data);
+	ajaxDataWrap.setDataList(dataArr);
+	$._OpenDialog({
+		type : 2,
+		title : "添加菜单",
+		width : 630,
+		height : 330,
+		shade : 0.4,
+		closeBtn : 1,
+		shadeClose : true,
+		maxmin : true,
+		content : $$pageContextPath + '/template/xt/cd/cd-dialog?type=edit',
+		data : ajaxDataWrap,
+		yes : function() {
+			retrieveAjaxDataGrid();
+			retrieveTree();
+		},
+		cancel : function() {
+			
+		}
+	});
+}

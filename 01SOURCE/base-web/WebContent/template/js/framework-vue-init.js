@@ -18,17 +18,7 @@ $(document).ready(function() {
 	
 	/*-----添加ajaxdatagrid事件监听-*/
 	_InitComponentCompleteListener();
-////	$("table").find("tr").bind("dblclick.a", function() {
-////		alert("1");
-////	});
-////	$("table").find("tr").bind("dblclick", function() {
-////		alert("11");
-////	});
-//	$("table").next().find(".layui-table-body").find("tr").bind("click.a",
-//			function(){
-//				alert(1);
-//			}
-//	);
+
 });
 
 /*-----------创建最底层vue对象---------------*/
