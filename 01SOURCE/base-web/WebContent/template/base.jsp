@@ -29,7 +29,6 @@
 		  skin: 'layui-layer-iframe'
 	}); 
 </script>
-<!-- <script src="https://unpkg.com/vue"></script> -->
 <script src="${pageContext.request.contextPath}/template/js/vue.min.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layout.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-lr.js" charset="utf-8"></script>

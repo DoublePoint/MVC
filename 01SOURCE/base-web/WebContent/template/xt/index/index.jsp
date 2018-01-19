@@ -49,16 +49,12 @@
 				<div class="layui-tab admin-nav-card layui-tab-brief" style="margin:0;"
 					lay-allowclose="true" lay-filter="admin-tab">
 					<ul class="layui-tab-title" >
-						<li class="layui-this"><i class="fa fa-dashboard"
-							aria-hidden="true"></i> <cite>控制面板</cite><span
-							class="layui-badge">未保存</span></li>
+						<li class="layui-this"> <cite>控制面板</cite></li>
 					</ul>
 					<div id="layui-tab-content" class="layui-tab-content"
 						style="min-height: 150px; padding: 0px 0 0 0;">
 						<div class="layui-tab-item layui-show" style="height:100%;min-width:700px">
-							<%-- <iframe
-							src="${pageContext.request.contextPath}/template/xt/ajaxdatagrid.jsp"></iframe> --%>
-							<iframe src="${pageContext.request.contextPath}/template/xt/cd/cd"></iframe>
+							<iframe src="${pageContext.request.contextPath}/template/xt/index/main"></iframe>
 						</div>
 					</div>
 				</div>
