@@ -1,16 +1,17 @@
 var timeoutInterval = null;
 function component(fieldType,fieldTemplate) {
 	// 创建style映射
-	var LABEL_ALIGN = "labelalign";
 
 	var _ClientStyleMap = {};
 	var _ClientStyleArr;
 	var _ClientPropsArr = [];// 私有attr
 	var _ClientPropsArrAll;
 
-	_InitClientStyleArr();// 私有Style属性 值为供用户使用的attr名称
-	_InitClientStyleMap();
-	_InitClientAllAttrArr();
+	// 获取私有Style的对应的属性名称
+	// 获取私有Style的对应的属性名称[key]:style样式名称[value] 例如 labelalign:text-align
+	_ClientStyleArr = [ "labelalign" ];
+	_ClientStyleMap["labelalign"] = "text-align";
+	_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _ConstantFormFieldInheritParams);
 	Vue.component(fieldType, {
 		props : _ClientPropsArrAll,
 		template : fieldTemplate,
@@ -195,17 +196,7 @@ function component(fieldType,fieldTemplate) {
 			}
 		},
 	});
-	// 获取私有Style的对应的属性名称
-	function _InitClientStyleArr() {
-		_ClientStyleArr = [ LABEL_ALIGN ];
-	}
-	// 获取私有Style的对应的属性名称[key]:style样式名称[value] 例如 labelalign:text-align
-	function _InitClientStyleMap() {
-		_ClientStyleMap[LABEL_ALIGN] = "text-align";
-	}
-	function _InitClientAllAttrArr() {
-		_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _ConstantFormFieldInheritParams);
-	}
+	
 }
 
 function FormFieldBase(domId) {
@@ -326,7 +317,7 @@ function FormFieldBase(domId) {
 			// 舍掉后面两位小数
 			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
-			this.setLabelStyle("display", "inline-block");
+//			this.setLabelStyle("display", "inline-block");
 			this.setInputStyle("padding-left", "10px");
 			this.setLabelStyle("width", labelPercent * 100 + "%");
 			this.setInputStyle("width", inputPercent * 100 + "%");

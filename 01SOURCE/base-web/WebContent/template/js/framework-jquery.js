@@ -1,13 +1,12 @@
-//var DoublePoint = {};// 全局对象
 (function($) {
 	// html标签Id对应Model键值对
 	var _LayuiObjectHashMap;
 	// 浏览器窗口变化时需要重设大小的标签
-	var _RegisteredModel;
-	// 弹出窗口弹出后  $(document).ready之后 用户自定义init之前
-	var _DialogSuccessModel;
-	//事件注册Model
-	var _ComponentCompleteListenerModel;
+	var _RegisteredModel = new Array();
+	// 弹出窗口弹出后 $(document).ready之后 用户自定义init之前
+	var _DialogSuccessModel = new Array();
+	// 事件注册Model
+	var _ComponentCompleteListenerModel = new Array();
 	String.prototype.endWith = function(endStr) {
 		var d = this.length - endStr.length;
 		return (d >= 0 && this.lastIndexOf(endStr) == d)
@@ -28,19 +27,18 @@
 		_Eval : function(func, paramArr) {
 			if (func == null)
 				return;
-			
-			var invokeString =""+func;
-			//1、如果是functionName()类型的 则转换成
+
+			var invokeString = "" + func;
+			// 1、如果是functionName()类型的 则转换成
 			if (invokeString.endWith("()")) {
 				invokeString = invokeString.substr(0, invokeString.length - 2)
 				invokeString = invokeString + "(";
 			}
-			//2、如果是functionName(para1,para2)类型的则 转换成functionName(para1,para2
-			else if(invokeString.endWith(")")){
+			// 2、如果是functionName(para1,para2)类型的则 转换成functionName(para1,para2
+			else if (invokeString.endWith(")")) {
 				invokeString = invokeString.substr(0, invokeString.length - 1)
 				invokeString = invokeString + ",";
-			}
-			else 
+			} else
 				invokeString = invokeString + "(";
 			// param==null?eval(fuc):eval(fuc+param);
 
@@ -72,39 +70,33 @@
 		},
 
 		_RegisterResizeModel : function(model) {
-			if (_RegisteredModel == null)
-				_RegisteredModel = new Array();
 			_RegisteredModel.push(model);
 		},
 		_RegisterComponentCompleteListenerModel : function(model) {
-			if (_ComponentCompleteListenerModel == null)
-				_ComponentCompleteListenerModel = new Array();
 			_ComponentCompleteListenerModel.push(model);
 		},
 		_RegisterDialogSuccessModel : function(model) {
-			if (_DialogSuccessModel == null)
-				_DialogSuccessModel = new Array();
 			_DialogSuccessModel.push(model);
 		},
 		_GetRegisteredComponentCompleteListenerModel : function() {
 			return _ComponentCompleteListenerModel;
 		},
-		_GetRegisteredDialogSuccessModel : function(){
+		_GetRegisteredDialogSuccessModel : function() {
 			return _DialogSuccessModel;
 		},
 		_GetRegisteredResizeModel : function() {
 			return _RegisteredModel;
 		},
 		_OpenDialog : function(obj) {
-			/*title*/
+			/* title */
 			var title = obj.title;
-			if(title==null||title=="")
-				title="弹窗 ";
+			if (title == null || title == "")
+				title = "弹窗 ";
 			else
-				title=title+"&nbsp;&nbsp;";
-			obj.title=title;
-			
-			/*content*/
+				title = title + "&nbsp;&nbsp;";
+			obj.title = title;
+
+			/* content */
 			var url = obj.content;
 			if (url != null) {
 				// 有参数
@@ -134,7 +126,7 @@
 				// 手动调用页面的init方法 由用户自动定义
 				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
 				iframeWin.init(_DialogData);
-				
+
 				// 添加用户定义success方法
 				if (_Client_Success_Funtion != null) {
 					$._Eval(_Client_Success_Funtion);
@@ -168,7 +160,7 @@
 		_CloseDialog : function(index, data) {
 			$layer.close(index); // 再执行关闭
 
-			//_JspParams 页面默认参数 每个页面都有
+			// _JspParams 页面默认参数 每个页面都有
 			if (_jspParams.YesFunction != null) {
 				_jspParams.YesFunction(data);
 			} else {
@@ -176,9 +168,12 @@
 				$._Eval(yesFunction, data);
 			}
 		},
-		_Alert : function(msg,time) {
-			if(time==null) time=_ConstantDialog._DEFAULT_SHOW_TIME;
-			parent.$layer.msg(msg,{time:time});
+		_Alert : function(msg, time) {
+			if (time == null)
+				time = _ConstantDialog._DEFAULT_SHOW_TIME;
+			parent.$layer.msg(msg, {
+				time : time
+			});
 		},
 		_Confirm : function(msg, yes, cancel) {
 			var yesF = yes;
@@ -194,11 +189,12 @@
 					cancelF.apply();
 			});
 		},
-		_ShakeTips : function(msg,time) {
-			if(time==null) time=_ConstantDialog._DEFAULT_SHOW_TIME;
+		_ShakeTips : function(msg, time) {
+			if (time == null)
+				time = _ConstantDialog._DEFAULT_SHOW_TIME;
 			parent.layer.msg(msg, {
 				anim : 6,
-				time:time
+				time : time
 			}, function() {
 				// 关闭后的操作
 			});
@@ -220,17 +216,17 @@
 			}
 			return null;
 		},
-		_AddNotSaveIcon : function(){
-			if(parent==null)
+		_AddNotSaveIcon : function() {
+			if (parent == null)
 				return;
-			if(parent._jspParams==null)
+			if (parent._jspParams == null)
 				return;
 			parent._jspParams.addNotSaveIcon();
 		},
-		_RemoveNotSaveIcon : function(){
-			if(parent==null)
+		_RemoveNotSaveIcon : function() {
+			if (parent == null)
 				return;
-			if(parent._jspParams==null)
+			if (parent._jspParams == null)
 				return;
 			parent._jspParams.removeNotSaveIcon();
 		},
@@ -328,8 +324,8 @@
 
 			throw new Error("Unable to copy obj! Its type isn't supported.");
 		},
-		_CreatePageInfo : function(){
-			var pageinfo=new _PageInfo();
+		_CreatePageInfo : function() {
+			var pageinfo = new _PageInfo();
 			return pageinfo;
 		},
 		_CreateJspParams : function() {
@@ -387,8 +383,8 @@
 			styleBuffer.append(":").append(avalue).append(";");
 			return styleBuffer
 		},
-		_OutputMapCompoment : function(aComponent){
-			if(aComponent.id==null)
+		_OutputMapCompoment : function(aComponent) {
+			if (aComponent.id == null)
 				return;
 			var documentWriteHtml = "";
 			var domId = aComponent._GetComponentDomId();
@@ -396,10 +392,19 @@
 			$script.append('var ' + aComponent.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
+		},
+		_RemoveArrayValue : function(arr,val){
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i] == val) {
+					arr.splice(i, 1);
+					break;
+				}
+			}
+			return arr;
 		}
 	});
 
-	//轮换是否显示
+	// 轮换是否显示
 	$.fn._ToggleDisplay = function() {
 		var flag = $(this).css("display");
 		if (flag == "none" || flag == null) {
@@ -409,3 +414,5 @@
 		}
 	};
 })(jQuery);
+
+

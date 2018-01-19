@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._FillAreaTB, {
 	props : [ 'id', 'height',  'backgroundcolor' ],
-	template : '<div  :id="id+guid" class="layoutarea" :style="clientStyle"><slot></slot></div>',
+	template : '<div  :id="id+guid" class="layoutarea" :style="clientStyle" ><slot></slot></div>',
 
 	data : function() {
 		var varlayOutHeight=this.height;

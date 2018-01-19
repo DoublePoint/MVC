@@ -261,14 +261,14 @@ a {
 	padding-left: 0px;
 	padding-right: 0px;
 	display: inline-block;
-	display: none;
+	/* display: none; */
 	width: 0;
 }
 
 .layui-inline>.layui-form-label {
 	padding-left: 0px;
 	padding-right: 0px;
-	display: none;
+	/* display: none; */
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -399,4 +399,11 @@ a {
 	background-position: -20px 0px;
 } */
 .ll-fill-area-left-right-center {
+}
+
+.layui-tab-title li:first-child i {
+	display:none;
+}
+ll-filllayout{
+	display:none;
 }

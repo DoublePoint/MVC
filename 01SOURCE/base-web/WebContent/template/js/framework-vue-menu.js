@@ -1,4 +1,4 @@
-var existTabsNameArray=new Array();
+var existTabsNameArray = new Array();
 Vue.component(_ConstantComponentMap._AjaxMenu, {
 	props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 	template : ' <ul :id="id+guid" lay-filter="side" class="navMenu"></ul>',
@@ -12,6 +12,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 		this._InitAjaxMenuData();
 		this._MapComponent();
 		this._InitMenuClick();
+		this._TabDeleteClick();
 	},
 	created : function() {
 		this._RegisterComponent();
@@ -52,22 +53,23 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 						$(this).addClass("active")
 					}
 				}
-				
+
 				var href = $(this).attr("menuhref");
-				if(href==null||href==""||href=="#"||href=="0"){
+				if (href == null || href == "" || href == "#" || href == "0") {
 					return;
 				}
-				if($.inArray($(this).text(),existTabsNameArray)==-1){
+				var textarr=$("#admin-body").find(".layui-tab-title").find("li").text();
+				if (textarr.indexOf($(this).text()) == -1) {
 					// 新增一个Tab项
 					$element.tabAdd('admin-tab', {
-						title : $(this).text(), 
-						content : '<iframe src="' + href + '"></iframe>',
+						title : $(this).text(),
+						content : '<iframe src="' + $$pageContextPath + href + '"></iframe>',
 						id : $(this).text()
 					});
 					existTabsNameArray.push($(this).text());
 				}
 				// 切换到指定Tab项
-				$element.tabChange('admin-tab', $(this).text()); // 切换到：用户管理
+				$element.tabChange('admin-tab', $(this).text());
 			});
 		},
 		_InitAjaxMenuData : function() {
@@ -85,6 +87,9 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 					_AjaxMenu.setData(data);
 				}
 			});
+		},
+		_TabDeleteClick : function() {
+			
 		}
 
 	},

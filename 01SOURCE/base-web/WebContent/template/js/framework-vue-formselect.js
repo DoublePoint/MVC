@@ -50,7 +50,7 @@ function FormSelect(domId) {
 			// 舍掉后面两位小数
 			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
-			this.setLabelStyle("display", "inline-block");
+//			this.setLabelStyle("display", "inline-block");
 			this.setInputStyle("padding-left", "10px");
 			this.getSelectDl().css("width", inputPercent * 100 + "%");
 			this.getSelectDl().css("left", labelPercent * 100 + "%");

@@ -31,7 +31,7 @@
 			<ll-formfield title="菜单序号" field="cdpx" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
 			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="sjcdbs" onclick="InputButtonClick"></ll-forminputbutton>
 			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
-			<ll-toolbar>
+			<ll-toolbar align="center">
 				<input type="button" value="test" onclick="clicktest()"/>
 				<input type="button" value="delete" onclick="clickDelete()"/>
 				

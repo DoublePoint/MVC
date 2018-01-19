@@ -48,12 +48,12 @@
 									</ll-formtoolbar>
 							</ll-ajaxform>
 					</ll-fillarea-tb>
-					<ll-fillarea-tb height="40px" >
-						<div class="layui-btn-group" style="height: 39px; padding-top: 1px;">
+					<ll-fillarea-tb height="45px" >
+						<ll-toolbar>
 							<input type="button" class="layui-btn" onclick="onClickAdd()" value="增加"/>
 							<input type="button" class="layui-btn " value="编辑"/>
 							<input type="button" class="layui-btn" onclick="onClickDelete()" value="删除"/>
-						</div>
+						</ll-toolbar>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*" >
 						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/xt/cd/datalistajaxdatawrap"> 

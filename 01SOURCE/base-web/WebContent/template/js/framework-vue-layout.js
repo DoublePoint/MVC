@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._FillLayOut, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div :id="id+guid" class="lllayout"  :style="clientStyle"><slot></slot></div>',
+	template : '<div :id="id+guid" class="lllayout"  :style="clientStyle" ><slot></slot></div>',
 	data : function() {
 		
 		var varlayOutHeight=this.height;
