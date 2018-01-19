@@ -55,7 +55,6 @@
 
 	<script type="text/javascript">
 		function init(){
-			alert(1);
 			// 基于准备好的dom，初始化echarts实例
 			var myChart1 = echarts.init(document.getElementById('main1'), "shine");
 			var myChart2 = echarts.init(document.getElementById('main2'), "shine");

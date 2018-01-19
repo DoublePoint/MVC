@@ -3,9 +3,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/css/framework.css" type="text/css">
-<script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/jquery-1.9.1.js" charset="utf-8"></script>
-
+<script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-constant.js" charset="utf-8"></script>
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
@@ -29,7 +28,10 @@
 		  skin: 'layui-layer-iframe'
 	}); 
 </script>
+<script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/vue.min.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layout.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-lr.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-tb.js" charset="utf-8"></script>
@@ -46,8 +48,4 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formselect.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formtoolbar.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-toolbar.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>

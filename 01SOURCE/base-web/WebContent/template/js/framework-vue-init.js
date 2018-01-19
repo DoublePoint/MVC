@@ -34,15 +34,16 @@ function _InitBaseVueComponent() {
 }
 /*-----------浏览器最小化事件---------------*/
 function _InitExplorerResizeListener() {
-	$(window).resize(function() {
+	$(window).on("resize",function() {
 		// 设置iframe的高度
 		var explorerHeight = $(this).height()
 		var $content = $('#layui-tab-content');
+		var $iframe = $('#layui-tab-content iframe');
 		var trueHeight = explorerHeight - 145
 		if(trueHeight<=300)
 			trueHeight=300;
 		$content.height(trueHeight);
-
+		$iframe.height(trueHeight);
 		// $("#testSpan").text($("#testSpan").text() + explorerHeight + " ");
 
 		// 设置各个vue组件的高度 datagrid layout 

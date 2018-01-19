@@ -120,3 +120,11 @@ function _AjaxDataWrap(name) {
 	}
 	return this;
 }
+
+function RegisterModel(){
+	this._ResizeModel = new Array();
+	// 弹出窗口弹出后 $(document).ready之后 用户自定义init之前
+	this._DialogSuccessModel = new Array();
+	// 事件注册Model
+	this._ComponentCompleteListenerModel = new Array();
+}

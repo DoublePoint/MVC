@@ -1,12 +1,9 @@
+var _RegisterModel=new RegisterModel();
 (function($) {
 	// html标签Id对应Model键值对
 	var _LayuiObjectHashMap;
 	// 浏览器窗口变化时需要重设大小的标签
-	var _RegisteredModel = new Array();
-	// 弹出窗口弹出后 $(document).ready之后 用户自定义init之前
-	var _DialogSuccessModel = new Array();
-	// 事件注册Model
-	var _ComponentCompleteListenerModel = new Array();
+
 	String.prototype.endWith = function(endStr) {
 		var d = this.length - endStr.length;
 		return (d >= 0 && this.lastIndexOf(endStr) == d)
@@ -70,22 +67,22 @@
 		},
 
 		_RegisterResizeModel : function(model) {
-			_RegisteredModel.push(model);
+			_RegisterModel._ResizeModel.push(model);
 		},
 		_RegisterComponentCompleteListenerModel : function(model) {
-			_ComponentCompleteListenerModel.push(model);
+			_RegisterModel._ComponentCompleteListenerModel.push(model);
 		},
 		_RegisterDialogSuccessModel : function(model) {
-			_DialogSuccessModel.push(model);
+			_RegisterModel._DialogSuccessModel.push(model);
 		},
 		_GetRegisteredComponentCompleteListenerModel : function() {
-			return _ComponentCompleteListenerModel;
+			return _RegisterModel._ComponentCompleteListenerModel;
 		},
 		_GetRegisteredDialogSuccessModel : function() {
-			return _DialogSuccessModel;
+			return _RegisterModel._DialogSuccessModel;
 		},
 		_GetRegisteredResizeModel : function() {
-			return _RegisteredModel;
+			return _RegisterModel._ResizeModel;
 		},
 		_OpenDialog : function(obj) {
 			/* title */
@@ -393,7 +390,7 @@
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_RemoveArrayValue : function(arr,val){
+		_RemoveArrayValue : function(arr, val) {
 			for (var i = 0; i < arr.length; i++) {
 				if (arr[i] == val) {
 					arr.splice(i, 1);
@@ -414,5 +411,3 @@
 		}
 	};
 })(jQuery);
-
-
