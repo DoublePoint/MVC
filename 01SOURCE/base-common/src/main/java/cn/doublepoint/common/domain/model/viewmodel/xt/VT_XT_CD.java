@@ -128,5 +128,12 @@ public class VT_XT_CD extends BaseEntity {
 	public void setZcdmc(String zcdmc) {
 		this.zcdmc = zcdmc;
 	}
+	private String cdtb;
+	public String getCdtb() {
+		return cdtb;
+	}
 
+	public void setCdtb(String cdtb) {
+		this.cdtb = cdtb;
+	}
 }

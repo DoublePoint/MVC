@@ -48,4 +48,6 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formselect.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formtoolbar.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-toolbar.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-region.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
+

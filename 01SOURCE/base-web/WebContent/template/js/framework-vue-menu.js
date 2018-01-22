@@ -58,7 +58,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 				if (href == null || href == "" || href == "#" || href == "0") {
 					return;
 				}
-				var textarr=$("#admin-body").find(".layui-tab-title").find("li").text();
+				var textarr = $("#admin-body").find(".layui-tab-title").find("li").text();
 				if (textarr.indexOf($(this).text()) == -1) {
 					// 新增一个Tab项
 					$element.tabAdd('admin-tab', {
@@ -89,7 +89,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 			});
 		},
 		_TabDeleteClick : function() {
-			
+
 		}
 
 	},
@@ -118,8 +118,13 @@ function AjaxMenu(domId) {
 			else
 				$a.attr("menuhref", menu.cdlj);
 			if (menu.cdtb != null && menu.cdtb != "") {
-				var $i = $("<i></i>");
-				$i.attr("class", "");
+				var $i = $("<i>"+menu.cdtb+"</i>");
+				$i.attr("class", "layui-icon");
+				$a.append($i);
+			}
+			else{
+				var $i = $("<i>&nbsp;&nbsp;&nbsp;</i>");
+				$i.attr("class", "layui-icon");
 				$a.append($i);
 			}
 			var $spanCdmc = $("<span></span>");
@@ -139,8 +144,13 @@ function AjaxMenu(domId) {
 			else
 				$a.attr("menuhref", menu.cdlj);
 			if (menu.cdtb != null && menu.cdtb != "") {
-				var $i = $("<i></i>");
-				$i.attr("class", "");
+				var $i = $("<i>"+menu.cdtb+"</i>");
+				$i.attr("class", "layui-icon");
+				$a.append($i);
+			}
+			else{
+				var $i = $("<i>&nbsp;&nbsp;&nbsp;</i>");
+				$i.attr("class", "layui-icon");
 				$a.append($i);
 			}
 			var $spanCdmc = $("<span></span>");

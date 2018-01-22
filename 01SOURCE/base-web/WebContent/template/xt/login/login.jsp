@@ -77,7 +77,7 @@
 					<h3>使用合作网站的账号登录：</h3>
 					<p>
 						<a href="javascript:;" onClick="showWxlog()"><i class="wx"></i>微信</a>
-						<a href="javascript:;" onClick="qqLogin()"><i class="qq"></i>QQ号</a>
+						<a href="http://wpa.qq.com/msgrd?v=3&uin=997820126&site=qq&menu=yes" onClick="qqLogin()"><i class="qq"></i>QQ号</a>
 					</p>
 				</div>
 				<div class="qiehuan"></div>

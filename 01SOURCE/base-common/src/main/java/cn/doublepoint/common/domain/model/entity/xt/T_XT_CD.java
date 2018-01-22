@@ -39,10 +39,13 @@ public class T_XT_CD extends BaseEntity {
 	private Integer cdcj; // 菜单层级
 	@Column(name = "cdpx")
 	private Integer cdpx; // 菜单排序
+	@Column(name = "cdtb")
+	private String cdtb; // 菜单图标
 	@Column(name = "gxsj")
 	private Date gxsj; // 更新时间
 	@Column(name = "cjsj")
 	private Date cjsj; // 创建时间
+	
 
 	public void setCdbs(String cdbs) {
 		this.cdbs = cdbs;
@@ -107,4 +110,13 @@ public class T_XT_CD extends BaseEntity {
 	public Date getCjsj() {
 		return cjsj;
 	}
+
+	public String getCdtb() {
+		return cdtb;
+	}
+
+	public void setCdtb(String cdtb) {
+		this.cdtb = cdtb;
+	}
+	
 }

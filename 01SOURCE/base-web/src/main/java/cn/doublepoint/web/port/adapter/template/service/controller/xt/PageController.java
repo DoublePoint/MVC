@@ -38,6 +38,11 @@ public class PageController {
 	public String login(@PathVariable String actionname) {
 		return "/template/xt/login/" + actionname;
 	}
+	
+	@RequestMapping("/template/xt/register/{actionname}")
+	public String register(@PathVariable String actionname) {
+		return "/template/xt/register/" + actionname;
+	}
 
 	@RequestMapping("/template/xt/test/{actionname}")
 	public String test(@PathVariable String actionname) {
