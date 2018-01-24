@@ -72,7 +72,7 @@
 						<div class="frm_control_group">
 							<label class="frm_label">邮箱</label>
 							<div class="frm_controls">
-								<input type="text" name=""  id="emailNameInput" class="frm_input email" maxlength="32" />
+								<input type="text" name="" id="emailNameInput" class="frm_input email" maxlength="32" />
 								<p class="frm_tips">作为登录帐号，请填写未被微信开放平台注册、未被微信公众平台注册、未被微信私人帐号绑定的邮箱</p>
 							</div>
 						</div>
@@ -92,9 +92,10 @@
 						<div class="frm_control_group">
 							<label class="frm_label">验证码</label>
 							<div class="frm_controls verifycode">
-								<input type="text" name="" class="frm_input verifyCode" maxlength="4" /> <img
-									src="pic/verifycode.jpeg" alt=""
-								/> <a class="changeVerifyCode" href="javascript:;">换一张</a>
+								<input type="text" name="" class="frm_input verifyCode" maxlength="4" /> <img id="verifyCode"
+									src="${pageContext.request.contextPath}/verify-code" onclick="flushCheckCode()" alt="点击刷新验证码"
+									style="cursor: hand"
+								/><a class="changeVerifyCode" href="javascript:;" onclick="flushCheckCode()">换一张</a>
 							</div>
 						</div>
 						<div class="toolBar">
@@ -105,7 +106,7 @@
 				<!-- // step1 end -->
 				<div id="step2" class="step hide">
 					<div class="w330">
-						<strong class="f16">感谢注册，确认邮件已发送至你的注册邮箱 : <br /><span id="emailNameSpan" ></span>
+						<strong class="f16">感谢注册，确认邮件已发送至你的注册邮箱 : <br /> <span id="emailNameSpan"></span>
 						</strong>
 						<p class="c7b">请进入邮箱查看邮件，并激活微信开放平台帐号。</p>
 						<p>
@@ -120,7 +121,7 @@
 							3. 若仍未收到确认，请尝试 <a href="#" class="c46" id="reSendBtn">重新发送</a>
 						</p>
 					</div>
-					
+
 				</div>
 				<!-- // step2 end -->
 				<div id="step3" class="step hide">
@@ -214,19 +215,23 @@
 			});
 
 		});
-		function step(index){
+		function step(index) {
 			var i = index;
 			$('.processorBox li').removeClass('current').eq(i).addClass('current');
 			$('.step').fadeOut(300).eq(i).fadeIn(500);
 			$('.step').hide();
 			$('.step').eq(i).show();
 		}
-		$("#reWriteEmailBtn").on("click",function(){
+		$("#reWriteEmailBtn").on("click", function() {
 			step(0);
 		})
-		$("#reSendBtn").on("click",function(){
+		$("#reSendBtn").on("click", function() {
 			alert("发送成功")
 		})
+		function flushCheckCode() {
+			$("#verifyCode").attr("src",$("#verifyCode").attr("src")+'?'+new Date());
+			/* obj.src = (obj.src + '?' + new Date()) */
+		}
 	</script>
 </body>
 </html>

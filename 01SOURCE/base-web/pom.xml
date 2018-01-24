@@ -55,11 +55,8 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-jdbc</artifactId> 
+			<version>${spring.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -89,7 +86,7 @@
 			<version>1.0</version>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -116,6 +113,11 @@
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -137,7 +139,7 @@
 					<!-- 指定jsp页面保存位置 -->
 					<webappDirectory>WebContent</webappDirectory>
 					<version>2.5</version>
-					<!-- 指定web.xml文件位置 <webXml>WebContent\WEB-INF\web.xml</webXml>-->
+					<!-- 指定web.xml文件位置 <webXml>WebContent\WEB-INF\web.xml</webXml> -->
 					<argLine>-Dfile.encoding=UTF-8</argLine>
 				</configuration>
 			</plugin>

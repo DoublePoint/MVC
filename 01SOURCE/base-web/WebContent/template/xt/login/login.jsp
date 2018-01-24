@@ -39,7 +39,7 @@
 					</a>
 				</div>
 				<ul class="login-tab">
-					<li class="login-on">普通登录</li>
+					<li class="login-on">登录</li>
 					<!-- <li>手机登录</li> -->
 				</ul>
 				<div class="login-body">
@@ -58,11 +58,11 @@
 						<div class="tishi"></div>
 						<button onClick="cliLogin()" id="logbtn" style="outline:none">登 录</button>
 					</div>
-					<div class="login-style">
+					<!-- <div class="login-style">
 						<dl><dd><input name="phone" type="text" id="phone" placeholder="您的手机号码" /></dd></dl>
-						<!-- <dl id="yz-code" style="display: none;">
+						<dl id="yz-code" style="display: none;">
 						<dd><input type="text" id="txtCode2" name="txtCode2" style="width: 133px; margin-right: 10px;" placeholder="验证码" /><img id="Img1" src="" width="90" height="34" title="点击换一个" style="vertical-align: middle; margin-top: -4px;" onclick="this.src='/ImgCode.aspx?t='+Math.random()*100" /></dd>
-						</dl> -->
+						</dl>
 						<dl>
 							<dd><input type="text" id="dynamicPWD" onKeyDown="enterHandler(event)" style="width: 133px;" placeholder="短信验证码" /><input type="button" id="btn" class="btn_mfyzm" value="获取动态密码" onClick="Sendpwd(this)" /></dd>
 						</dl>
@@ -71,17 +71,17 @@
 						</div>
 						<div class="tishi"></div>
 						<button type="button" id="dynamicLogon" style="outline:none">登 录</button>
-					</div>
+					</div> -->
 				</div>
-				<div class="hezuo">
+				<!-- <div class="hezuo">
 					<h3>使用合作网站的账号登录：</h3>
 					<p>
 						<a href="javascript:;" onClick="showWxlog()"><i class="wx"></i>微信</a>
 						<a href="http://wpa.qq.com/msgrd?v=3&uin=997820126&site=qq&menu=yes" onClick="qqLogin()"><i class="qq"></i>QQ号</a>
 					</p>
-				</div>
-				<div class="qiehuan"></div>
-				<div id="zhishi" style="position:absolute; right:-185px; bottom:0; cursor:pointer;"><img src="pic/zhishi2.png"  /></div>
+				</div> -->
+				<!-- <div class="qiehuan"></div>
+				<div id="zhishi" style="position:absolute; right:-185px; bottom:0; cursor:pointer;"><img src="pic/zhishi2.png"  /></div> -->
 			</div>
 			<div class="login" style="display: none;">
 				<i class="qiehuan" style="background-position:left bottom;"></i>

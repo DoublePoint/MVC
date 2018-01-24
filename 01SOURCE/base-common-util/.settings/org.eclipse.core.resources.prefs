@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/java/cn/doublepoint/commonutil/domain/model/VerifyCodeUtils.java=GBK
 encoding//src/main/java/cn/doublepoint/commonutil/domain/model/entity/BaseEntity.java=UTF-8
 encoding//src/main/java/cn/doublepoint/commonutil/port/adapter/persistence=UTF-8
 encoding//src/test/java=UTF-8

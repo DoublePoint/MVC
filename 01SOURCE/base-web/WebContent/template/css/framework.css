@@ -57,6 +57,9 @@ a {
 	border-bottom: 1px solid #515151;
 }
 
+.navMenu .sub-menu li:first-child{
+	border-top: 1px solid #515151;
+}
 .navMenu>li:last-child,.navMenu .sub-menu li:last-child {
 	border-bottom: 0px solid #515151;
 }
@@ -409,6 +412,9 @@ ll-filllayout{
 }
 
 /*页面头部*/
+.llsystitle{
+	color:#FFFFFF;
+}
 .title_value{
 	color:#ED8E1C;
 }

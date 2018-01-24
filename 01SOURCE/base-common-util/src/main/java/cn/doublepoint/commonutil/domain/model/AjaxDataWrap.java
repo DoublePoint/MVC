@@ -18,15 +18,15 @@ public class AjaxDataWrap<T> implements Serializable{
 	 *                                                                    
 	 */
 	private static final long serialVersionUID = 1L;
-	private int code=200;
+	private String code="200";
 	private String msg;
 	private List<T> dataList;
 	private PageInfo pageInfo;
 	
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getMsg() {
@@ -51,6 +51,11 @@ public class AjaxDataWrap<T> implements Serializable{
 	public AjaxDataWrap() {
 		super();
 		this.pageInfo=new PageInfo();
+	}
+	
+	public void setError(String errCode,String errMsg){
+		this.code=errCode;
+		this.msg=errMsg;
 	}
 	
 	public <R> AjaxDataWrap<R> copy(Class<R> targetClass){

@@ -29,17 +29,18 @@
 	<form>
 		<div class="layui-layout layui-layout-admin">
 			<div class="layui-header">
-				<div class="layui-logo">基础设施系统</div>
+				<div class="layui-logo"><B class="llsystitle">基础设施系统</B></div>
 				<div id="admin-side-toggle" class="admin-side-toggle">
 					<i class="fa fa-bars" aria-hidden="true" style="margin-top: 7px;"></i>
 				</div>
 				<ul class="layui-nav layui-layout-left" >
 					<li class="layui-nav-item"><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会员：</B></li>
-					<li class="layui-nav-item" ><B class="title_value">997820126</B></li>
-					<li class="layui-nav-item"><button class="layui-btn layui-btn-warm">普通会员</button></li>
+					<li class="layui-nav-item" ><B class="title_value">997820126&nbsp;&nbsp;&nbsp;</B></li>
+					<li class="layui-nav-item"><button class="layui-btn layui-btn-warm layui-btn-xs layui-btn-radius">普通会员</button></li>
 					<li class="layui-nav-item"><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;流量币：</B></li>
 					<li class="layui-nav-item"><B class="title_value">0.00</B></li>
 					<li class="layui-nav-item"><B class="title_value">点</B></li>
+					<li class="layui-nav-item"><a href="#" style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置</a></li>
 					 
 				</ul>
 			</div>

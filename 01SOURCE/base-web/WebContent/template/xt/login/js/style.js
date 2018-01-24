@@ -37,6 +37,20 @@ function cliLogin() {
 		$("#txtCode").focus();
 		return false;
 	}
+	$.ajax({
+		type : 'post',
+		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
+		url : $$pageContextPath + "/template/xt/cd/add",
+		data : "username="+txtUser+"&password="+txtPwd,
+		success : function(data1) {
+			$._Alert('保存成功');
+			$._Close();
+		},
+		error : function(ecx) {
+			$._ShakeTips('保存失败');
+			return false;
+		}
+	});
 	return false;
 }
 
@@ -53,6 +67,7 @@ function Sendpwd(sender) {
 		$("#txtCode2").focus();
 		return;
 	}
+	
 	return;
 }
 $("#dynamicLogon").click(function() {
@@ -74,6 +89,20 @@ $("#dynamicLogon").click(function() {
 		$("#dynamicPWD").focus();
 		return;
 	}
+	$.ajax({
+		type : 'post',
+		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
+		url : $$pageContextPath + "/template/xt/cd/add",
+		data : JSON.stringify(data.field) + "",
+		success : function(data1) {
+			$._Alert('保存成功');
+			$._Close();
+		},
+		error : function(ecx) {
+			$._ShakeTips('保存失败');
+			return false;
+		}
+	});
 	return;
 }); 
 function Tip(msg) {
