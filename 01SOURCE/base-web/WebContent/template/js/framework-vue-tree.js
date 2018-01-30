@@ -62,7 +62,7 @@ function AjaxTree(domId) {
 		async : {
 			enable : true,
 			showLine : true,
-			url : this.datasource,//$$pageContextPath + "/template/xt/cd-tree?isHasRoot=true",
+			url : this.datasource,
 			autoParam : [ "id", "name=n", "level=lv" ],
 			otherParam : {
 				"otherParam" : "zTreeAsyncTest"

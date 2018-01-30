@@ -21,6 +21,7 @@ var _ConstantComponentMap = {
 	_FillAreaTB : "ll-fillarea-tb",
 	_FillAreaLR : "ll-fillarea-lr",
 	_AjaxForm : "ll-ajaxform",
+	_FormDropTree:"ll-formdroptree",
 	_FormField : "ll-formfield",
 	_FormCheck : "ll-formcheck",
 	_FormDate : "ll-formdate",
@@ -55,5 +56,6 @@ var _ConstantFormFieldInheritParams = [ 'id', //
 'colspan',
 'placeholder',
 'parentId',
+'datasource',
 // 文本框的显示格式,取值为text和password，默认为text
 'errmsg' ];
