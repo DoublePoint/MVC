@@ -36,14 +36,9 @@
 									<ll-formfield id="cdmc" title="菜单名称"  field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="sjcdbs" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formdate title="创建时间" field="cjsj" ></ll-formdate>
-									<!-- <ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect> -->
+									<ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
 									<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formdroptree>
 									<ll-formtoolbar labelalign="right" colspan="1">
-										<!-- <select id="cdmcIdd016d13e-9e0b-4cd0-b46c-0428f306c9ee" style="display:inline-block;height:38px;width:347.45px;" field="cdmc" lay-filter="aihao" style="padding-left: 10px; width: 80%;">
-											 <option value="state">写作</option>  
-										     <option value="state">阅读</option>  
-										     <option value="state">游戏</option>  
-										</select> -->
 									 	<input type="button" class="layui-btn" onclick="retrieveAjaxDataGrid()"  value="查询"/>
 									 	&nbsp;&nbsp;
 									</ll-formtoolbar>

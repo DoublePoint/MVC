@@ -1,57 +1,65 @@
 (function($) {
-	var componentTemplate='<div class="layui-inline">' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
-	+ '<div class="layui-input-block" >' + '<select :id="id+guid" :field="field"  lay-filter="aihao">' + '</select>'
-	+ '<div class="layui-unselect layui-form-select ">' + '<div class="layui-select-title">' + '<input type="text" placeholder="请选择"  value="阅读" readonly=""'
-	+ 'class="layui-input layui-unselect">' + '<i class="layui-edge"></i>' + ' </div>' + ' <ul :id="id+guid+tree" class="layui-anim layui-anim-upbit" style="display:none;" >'
-	+ '</ul><input type="hidden" :name="field" />' + '</div>'
+	var componentTemplate = '<div class="layui-inline">'
+			+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
+			+ '<div class="layui-input-block" >'
+			+ '<select :id="id+guid" :field="field"  lay-filter="aihao">'
+			+ '</select>'
+			+ '<div class="layui-unselect layui-form-select  ">'
+			+ '<div class="layui-select-title">'
+			+ '<input type="text" placeholder="请选择"  value="阅读" readonly=""'
+			+ 'class="layui-input layui-unselect">'
+			+ '<i class="layui-edge"></i>'
+			+ ' </div>'
+			+ '<ul :id="id+guid+tree" style="display:none;position:absolute;height:100px;border:1px solid #d2d2d2;z-index: 999;background-color: #fff;border-radius: 2px;box-shadow: 0 2px 4px rgba(0,0,0,.12);box-sizing: border-box;" class="ztree layui-anim layui-anim-upbit"></ul>'
+			+ '<input type="hidden" :name="field" />' + '</div>'
 
-	+ '</div>' + '</div>';
-	component(_ConstantComponentMap._FormDropTree,componentTemplate);
+			+ '</div>' + '</div>';
+	component(_ConstantComponentMap._FormDropTree, componentTemplate);
 })(jQuery);
 
 function FormDropTree(domId) {
 	FormFieldBase.call(this);
 	this.domId = domId;
-	this.datasource="/baseweb/template/xt/cd/cd-tree/datalist?isHasRoot=true";
-	this.onclick=null;
+	this.datasource = "/baseweb/template/xt/cd/cd-tree/datalist?isHasRoot=true";
+	this.onclick = null;
 	this.setting = {
-			view : {
-				showLine : true,
-				fontCss : {
-					"font-size" : "30",
-				},
-				showIcon : true,
-				dblClickExpand : true
+		view : {
+			showLine : true,
+			fontCss : {
+				"font-size" : "30",
 			},
-			async : {
-				enable : true,
-				showLine : true,
-				url : this.datasource,
-				autoParam : [ "id", "name=n", "level=lv" ],
-				otherParam : {
-					"otherParam" : "zTreeAsyncTest"
-				},
-				dataFilter : this.filter
+			showIcon : true,
+			dblClickExpand : true
+		},
+		async : {
+			enable : true,
+			showLine : true,
+			url : this.datasource,
+			autoParam : [ "id", "name=n", "level=lv" ],
+			otherParam : {
+				"otherParam" : "zTreeAsyncTest"
 			},
-			data : {
-				key : {
-					name : "cdmc",
-					title : "cdmc",
-					url : "null",
-					children : "childrenCDList"
-				},
+			dataFilter : this.filter
+		},
+		data : {
+			key : {
+				name : "cdmc",
+				title : "cdmc",
+				url : "null",
+				children : "childrenCDList"
 			},
-			callback: {
-				//回调成功时展开第一层节点
-				onAsyncSuccess: function(){
-					var treeObj = $.fn.zTree.getZTreeObj(domId);
-					var nodes = treeObj.getNodes();
-					for (var i = 0; i < nodes.length; i++) { // 设置节点展开
-						treeObj.expandNode(nodes[i], true, false, true);
-					}
+		},
+		callback : {
+			// 回调成功时展开第一层节点
+			onAsyncSuccess : function() {
+				var treeObj = $.fn.zTree.getZTreeObj(domId + "tree");
+				var nodes = treeObj.getNodes();
+				for (var i = 0; i < nodes.length; i++) { // 设置节点展开
+					treeObj.expandNode(nodes[i], true, false, true);
 				}
 			}
-		};
+		}
+	};
 	this.clearTimeoutInterval = function() {
 		clearTimeout(this.getTimeoutInterval());
 	}
@@ -71,7 +79,7 @@ function FormDropTree(domId) {
 	this.getSelectInput = function() {
 		return this.getInputDom().next().children("div").children("input");
 	}
-	this.initData = function(){
+	this.initData = function() {
 		$.fn.zTree.init($("#" + this.domId + "tree"), this.setting);
 	}
 	this.removeSelectDdClass = function() {
