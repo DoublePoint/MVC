@@ -29,7 +29,7 @@ function FormDropTree(domId) {
 				"font-size" : "30",
 			},
 			showIcon : true,
-			dblClickExpand : true
+			dblClickExpand : false
 		},
 		async : {
 			enable : true,
@@ -57,6 +57,9 @@ function FormDropTree(domId) {
 				for (var i = 0; i < nodes.length; i++) { // 设置节点展开
 					treeObj.expandNode(nodes[i], true, false, true);
 				}
+			},
+			onClick : function(){
+				
 			}
 		}
 	};
