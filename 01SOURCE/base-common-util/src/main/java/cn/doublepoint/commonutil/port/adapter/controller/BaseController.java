@@ -10,5 +10,5 @@
 package cn.doublepoint.commonutil.port.adapter.controller;
 
 public interface BaseController {
-
+	
 }

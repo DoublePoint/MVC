@@ -43,7 +43,7 @@ var _ConstantDialog = {
 };
 
 /*------AjaxForm-------*/
-var _ConstantFormFieldInheritParams = [ 'id', //
+var _FormFieldCommonInheritParams = [ 'id', //
 'maxlen', //
 'readonly', //
 'contentalign', //

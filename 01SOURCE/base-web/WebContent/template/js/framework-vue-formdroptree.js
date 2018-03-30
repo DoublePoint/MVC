@@ -20,49 +20,9 @@
 function FormDropTree(domId) {
 	FormFieldBase.call(this);
 	this.domId = domId;
-	this.datasource = "/baseweb/template/xt/cd/cd-tree/datalist?isHasRoot=true";
+	this.datasource = "";
 	this.onclick = null;
-	this.setting = {
-		view : {
-			showLine : true,
-			fontCss : {
-				"font-size" : "30",
-			},
-			showIcon : true,
-			dblClickExpand : false
-		},
-		async : {
-			enable : true,
-			showLine : true,
-			url : this.datasource,
-			autoParam : [ "id", "name=n", "level=lv" ],
-			otherParam : {
-				"otherParam" : "zTreeAsyncTest"
-			},
-			dataFilter : this.filter
-		},
-		data : {
-			key : {
-				name : "cdmc",
-				title : "cdmc",
-				url : "null",
-				children : "childrenCDList"
-			},
-		},
-		callback : {
-			// 回调成功时展开第一层节点
-			onAsyncSuccess : function() {
-				var treeObj = $.fn.zTree.getZTreeObj(domId + "tree");
-				var nodes = treeObj.getNodes();
-				for (var i = 0; i < nodes.length; i++) { // 设置节点展开
-					treeObj.expandNode(nodes[i], true, false, true);
-				}
-			},
-			onClick : function(){
-				
-			}
-		}
-	};
+	this.setting = null;
 	this.clearTimeoutInterval = function() {
 		clearTimeout(this.getTimeoutInterval());
 	}
@@ -82,8 +42,51 @@ function FormDropTree(domId) {
 	this.getSelectInput = function() {
 		return this.getInputDom().next().children("div").children("input");
 	}
+	this.getSetting = function (){
+		return {
+			view : {
+				showLine : true,
+				fontCss : {
+					"font-size" : "30",
+				},
+				showIcon : true,
+				dblClickExpand : false
+			},
+			async : {
+				enable : true,
+				showLine : true,
+				url : this.datasource,
+				autoParam : [ "id", "name=n", "level=lv" ],
+				otherParam : {
+					"otherParam" : "zTreeAsyncTest"
+				},
+				dataFilter : this.filter
+			},
+			data : {
+				key : {
+					name : "cdmc",
+					title : "cdmc",
+					url : "null",
+					children : "childrenCDList"
+				},
+			},
+			callback : {
+				// 回调成功时展开第一层节点
+				onAsyncSuccess : function() {
+					var treeObj = $.fn.zTree.getZTreeObj(domId + "tree");
+					var nodes = treeObj.getNodes();
+					for (var i = 0; i < nodes.length; i++) { // 设置节点展开
+						treeObj.expandNode(nodes[i], true, false, true);
+					}
+				},
+				onClick : function(event, treeId, treeNode){
+					
+				}
+			}
+		};
+	}
 	this.initData = function() {
-		$.fn.zTree.init($("#" + this.domId + "tree"), this.setting);
+		$.fn.zTree.init($("#" + this.domId + "tree"), this.getSetting());
 	}
 	this.removeSelectDdClass = function() {
 		this.getSelectDl().children().removeClass();

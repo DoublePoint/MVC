@@ -37,7 +37,7 @@
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="sjcdbs" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formdate title="创建时间" field="cjsj" ></ll-formdate>
 									<ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
-									<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formdroptree>
+									<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="/baseweb/template/xt/cd/cd-tree/datalist?isHasRoot=true"></ll-formdroptree>
 									<ll-formtoolbar labelalign="right" colspan="1">
 									 	<input type="button" class="layui-btn" onclick="retrieveAjaxDataGrid()"  value="查询"/>
 									 	&nbsp;&nbsp;

@@ -13,6 +13,7 @@
 function FormSelect(domId) {
 	FormFieldBase.call(this);
 	this.domId = domId;
+	this.datasource=null;
 
 	this.clearTimeoutInterval = function() {
 		clearTimeout(this.getTimeoutInterval());
@@ -33,6 +34,11 @@ function FormSelect(domId) {
 	this.getSelectInput = function() {
 		return this.getInputDom().next().children("div").children("input");
 	}
+	this.initData = function(){
+		var dl=getSelectDl();
+		dl.empty();
+		var $dd=$("<dd></dd>");
+	}
 	this.removeSelectDdClass = function() {
 		this.getSelectDl().children().removeClass();
 	}
@@ -40,6 +46,7 @@ function FormSelect(domId) {
 		this.getSelectDiv().addClass("layui-form-selected");
 		this.getSelectDl().show();
 	}
+	
 
 	this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
 		/* 避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示 */

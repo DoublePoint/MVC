@@ -26,10 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@ComponentScan(basePackages = { "cn.doublepoint.common", "cn.doublepoint.base.jdbc" })
 @ComponentScan("cn.doublepoint")
-/*@EnableJpaRepositories(basePackages = {
-		"cn.doublepoint.common.port.adapter.template.persistence" }, repositoryImplementationPostfix = "Impl")*/
 @EnableJpaRepositories("cn.doublepoint")
 public class AutoConfiguration {
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
