@@ -29,7 +29,6 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -37,9 +36,9 @@ import org.w3c.dom.NodeList;
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.generate.domain.model.billing.CONSTANT;
-import cn.doublepoint.generate.domain.model.helper.ModelField;
 import cn.doublepoint.generate.domain.model.helper.JavaBeanModel;
 import cn.doublepoint.generate.domain.model.helper.ModelConstantJS;
+import cn.doublepoint.generate.domain.model.helper.ModelField;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -87,7 +86,7 @@ public class ModelReader {
 	private final String EXT_TYPE_JAVA = ".java";
 	private final String EXT_TYPE_JS = ".js";
 
-	private final String GENERATE_FILE_ENTITY_DIR = "F:/AllProject/01SOURCE/domain-model/test/T_";
+	private final String GENERATE_FILE_ENTITY_DIR = "F:/AllProject/01SOURCE/domain-model/test/";
 	private final String GENERATE_FILE_ENTITY_TPL_NAME = "Entity.java.ftl";
 	private final String GENERATE_FILE_ENTITY_EXT_TYPE_ = EXT_TYPE_JAVA;
 
@@ -116,15 +115,20 @@ public class ModelReader {
 	private final String TEMPLATE_ENTITY_KEY_NAME = "entityModel";
 
 	@Test
+	public void test(){
+		
+	}
+	
+	@Test
 	public void buildEntity() {
 		buildEntityModelList();
 		entityModelList.stream().forEach(entityModel -> {
-//			if (data.containsKey(TEMPLATE_ENTITY_KEY_NAME)) {
-//				data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-//			} else
+			String fileEntityFir=GENERATE_FILE_ENTITY_DIR;//将要生成的实体文件所在文件夹
+			String className=entityModel.getClassName();
+			
 			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
 			File f = new File(
-					GENERATE_FILE_ENTITY_DIR + entityModel.getModelClassCode() + GENERATE_FILE_ENTITY_EXT_TYPE_);
+					fileEntityFir + className + GENERATE_FILE_ENTITY_EXT_TYPE_);
 			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_ENTITY_TPL_NAME;
 
 			try {
@@ -139,7 +143,7 @@ public class ModelReader {
 		buildEntityModelList();
 		entityModelList.stream().forEach(entityModel -> {
 			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-			File f = new File(GENERATE_FILE_REPOSITORY_DIR + StringUtil.join(entityModel.getModelClassCode().split("_")).toUpperCase()+"Repository" + GENERATE_FILE_REPOSITORY_EXT_TYPE_);
+			File f = new File(GENERATE_FILE_REPOSITORY_DIR + StringUtil.join(entityModel.getTableName().split("_")).toUpperCase()+"Repository" + GENERATE_FILE_REPOSITORY_EXT_TYPE_);
 			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_REPOSITORY_TPL_NAME;
 
 			try {
@@ -154,7 +158,7 @@ public class ModelReader {
 		buildEntityModelList();
 		entityModelList.stream().forEach(entityModel -> {
 			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-			File f = new File(GENERATE_FILE_REPOSITORY_EXTEND_DIR + StringUtil.join(entityModel.getModelClassCode().split("_")).toUpperCase()+"RepositoryExtend" + GENERATE_FILE_REPOSITORY_EXTEND_EXT_TYPE_);
+			File f = new File(GENERATE_FILE_REPOSITORY_EXTEND_DIR + StringUtil.join(entityModel.getTableName().split("_")).toUpperCase()+"RepositoryExtend" + GENERATE_FILE_REPOSITORY_EXTEND_EXT_TYPE_);
 			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_REPOSITORY_EXTEND_TPL_NAME;
 
 			try {
@@ -169,7 +173,7 @@ public class ModelReader {
 		buildEntityModelList();
 		entityModelList.stream().forEach(entityModel -> {
 			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
-			File f = new File(GENERATE_FILE_REPOSITORY_EXTEND_IMPL_DIR + StringUtil.join(entityModel.getModelClassCode().split("_")).toUpperCase()+"RepositoryExtendImpl" + GENERATE_FILE_REPOSITORY_EXTEND_IMPL_EXT_TYPE_);
+			File f = new File(GENERATE_FILE_REPOSITORY_EXTEND_IMPL_DIR + StringUtil.join(entityModel.getTableName().split("_")).toUpperCase()+"RepositoryExtendImpl" + GENERATE_FILE_REPOSITORY_EXTEND_IMPL_EXT_TYPE_);
 			templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_REPOSITORY_EXTEND_IMPL_TPL_NAME;
 
 			try {
@@ -273,18 +277,19 @@ public class ModelReader {
 						break;
 					isadd = true;
 					switch (nodeName) {
-					case "a:Name":
-						entityModel.setModelName(nodeValue);
+					case "a:Name"://中文说明
+						entityModel.setChName(nodeValue);
 						break;
-					case "a:Code":
-						entityModel.setModelClassCode(nodeValue);
+					case "a:Code"://英文编码
+						entityModel.setTableName(nodeValue);
 						break;
-					case "a:Comment":
-						entityModel.setModelComment(nodeValue);
+					case "a:Comment"://中文备注
+						entityModel.setRemark(nodeValue);
 						break;
-					case "a:Stereotype":
-						entityModel.setModelType(nodeValue);
+					case "a:Stereotype"://实体 枚举 值对象类型
+						entityModel.setType(nodeValue);
 						break;
+						//属性名称
 					case "c:Attributes": {
 						NodeList attributeNodeList = item.getChildNodes();
 						for (int k = 0; k < attributeNodeList.getLength(); k++) {
@@ -340,19 +345,19 @@ public class ModelReader {
 	@SuppressWarnings({ "unused", "resource" })
 	private void writeModel(List<JavaBeanModel> entityModelList) {
 		for (JavaBeanModel modelModel : entityModelList) {
-			if (modelModel.getModelType() != null) {
+			if (modelModel.getType() != null) {
 				File file;
-				switch (modelModel.getModelType()) {
+				switch (modelModel.getType()) {
 				case CONSTANT.CLASS_TYPE_ENTITY:
 					file = new File("F:/AllProject/01SOURCE/domain-model/entity/" + "T_"
-							+ modelModel.getModelClassCode() + ".java");
+							+ modelModel.getTableName() + ".java");
 					break;
 				case CONSTANT.CLASS_TYPE_ENUM:
 					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getModelClassCode() + ".java");
+							"F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getTableName() + ".java");
 					break;
 				default:
-					file = new File("F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getModelClassCode()
+					file = new File("F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getTableName()
 							+ ".java");
 					break;
 				}

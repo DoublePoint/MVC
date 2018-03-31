@@ -17,30 +17,30 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.constant.XTConstant;
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDRepository;
+import cn.doublepoint.common.domain.model.entity.xt.Menu;
+import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.MenuRepository;
 import cn.doublepoint.commonutil.domain.model.SnowflakeIdWorker;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 
 @Service("xtcdApplicationService")
-public class XTCDApplicationService {
+public class MenuApplicationService {
 	@Resource
-	XTCDRepository xtcdRepository;
+	MenuRepository xtcdRepository;
 	
 	@Resource
 	SnowflakeIdWorker idWorker;
 	
 	/*@Resource
 	BaseRepositoryUtil jpaUtil;	*/
-/*	public boolean createXTCD0(T_XT_CD t_XT_CD){
+/*	public boolean createMenu0(Menu t_XT_CD){
 		try {
 			if(StringUtil.isNullOrEmpty(t_XT_CD.getCdbs())){
-				t_XT_CD.setCdcj(Integer.valueOf(XTCDConstant.TREE_ROOT_NODE_CJ));
+				t_XT_CD.setCdcj(Integer.valueOf(MenuConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
-				QT_XT_CD query = QT_XT_CD.t_XT_CD;
+				QMenu query = QMenu.t_XT_CD;
 				Predicate predicate=query.cdbs.eq(t_XT_CD.getSjcdbs());
-				T_XT_CD parentCd=xtcdRepository.findOne(predicate);
+				Menu parentCd=xtcdRepository.findOne(predicate);
 				t_XT_CD.setCdcj(parentCd.getCdcj()+1);
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
@@ -51,13 +51,13 @@ public class XTCDApplicationService {
 		return true;
 	}*/
 	
-	public boolean createXTCD(T_XT_CD t_XT_CD){
+	public boolean createMenu(Menu t_XT_CD){
 		try {
 			if(StringUtil.isNullOrEmpty(t_XT_CD.getSjcdbs())){
 				t_XT_CD.setCdcj(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 			}
 			else{
-				T_XT_CD parentCd=xtcdRepository.findOne(t_XT_CD.getSjcdbs());
+				Menu parentCd=xtcdRepository.findOne(t_XT_CD.getSjcdbs());
 				t_XT_CD.setCdcj(parentCd.getCdcj()+1);
 			}
 			t_XT_CD.setCdbs(idWorker.nextId());
@@ -69,7 +69,7 @@ public class XTCDApplicationService {
 		return true;
 	}
 	
-	public boolean removeXTCD(List<T_XT_CD> cdList){
+	public boolean removeMenu(List<Menu> cdList){
 		xtcdRepository.delete(cdList);
 		return true;
 	}

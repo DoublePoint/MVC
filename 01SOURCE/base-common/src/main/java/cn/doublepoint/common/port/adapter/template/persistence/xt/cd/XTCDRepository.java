@@ -12,9 +12,9 @@ package cn.doublepoint.common.port.adapter.template.persistence.xt.cd;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.common.domain.model.entity.xt.Menu;
 
-public interface XTCDRepository extends JpaRepository<T_XT_CD,String>,QueryDslPredicateExecutor<T_XT_CD>, XTCDRepositoryExtend{
+public interface MenuRepository extends JpaRepository<Menu,String>,QueryDslPredicateExecutor<Menu>, MenuRepositoryExtend{
 	
 	
 }

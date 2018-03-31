@@ -92,16 +92,16 @@ public class ModelReader2 {
 						break;
 					switch (nodeName) {
 					case "a:Name":
-						entityModel.setModelName(nodeValue);
+						entityModel.setChName(nodeValue);
 						break;
 					case "a:Code":
-						entityModel.setModelClassCode(nodeValue);
+						entityModel.setTableName(nodeValue);
 						break;
 					case "a:Comment":
-						entityModel.setModelComment(nodeValue);
+						entityModel.setRemark(nodeValue);
 						break;
 					case "a:Stereotype":
-						entityModel.setModelType(nodeValue);
+						entityModel.setType(nodeValue);
 						break;
 					case "c:Attributes": {
 						NodeList attributeNodeList = item.getChildNodes();
@@ -199,19 +199,19 @@ public class ModelReader2 {
 	}
 	private void writeModel(List<JavaBeanModel> entityModelList) {
 		for (JavaBeanModel modelModel : entityModelList) {
-			if (modelModel.getModelType() != null) {
+			if (modelModel.getType() != null) {
 				File file;
-				switch (modelModel.getModelType()) {
+				switch (modelModel.getType()) {
 				case CONSTANT.CLASS_TYPE_ENTITY:
 					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/entity/" + "T_" + modelModel.getModelClassCode() + ".java");
+							"F:/AllProject/01SOURCE/domain-model/entity/" + "T_" + modelModel.getTableName() + ".java");
 					break;
 				case CONSTANT.CLASS_TYPE_ENUM:
-					file = new File("F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getModelClassCode() + ".java");
+					file = new File("F:/AllProject/01SOURCE/domain-model/enum/" + modelModel.getTableName() + ".java");
 					break;
 				default:
 					file = new File(
-							"F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getModelClassCode() + ".java");
+							"F:/AllProject/01SOURCE/domain-model/valueobject/" + modelModel.getTableName() + ".java");
 					break;
 				}
 				if (!file.exists()) {

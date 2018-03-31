@@ -21,24 +21,24 @@
 //import org.springframework.data.domain.PageRequest;
 //
 //import cn.doublepoint.common.domain.model.entity.xt.CustomerProjection;
-//import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
-//import cn.doublepoint.common.port.adapter.template.persistence.xt.XTCDRepository;
+//import cn.doublepoint.common.domain.model.entity.xt.Menu;
+//import cn.doublepoint.common.port.adapter.template.persistence.xt.MenuRepository;
 //import cn.doublepoint.common.util.SnowflakeIdWorker;
 //
-//public class XTCDRepositoryTest extends RepositoryTest {
+//public class MenuRepositoryTest extends RepositoryTest {
 //
 //	@Resource
-//	XTCDRepository repository;
+//	MenuRepository repository;
 //	@Resource
 //	SnowflakeIdWorker idworker;
 //	
 //	
 //
 //	@Test
-//	public void testSaveXTCD() {
-//		List<T_XT_CD> list=new ArrayList<T_XT_CD>();
+//	public void testSaveMenu() {
+//		List<Menu> list=new ArrayList<Menu>();
 //		for (int i = 0; i < 1000000; i++) {
-//			T_XT_CD cd = new T_XT_CD();
+//			Menu cd = new Menu();
 //			cd.setCdbs(idworker.nextId());
 //			cd.setCdmc("菜单名称"+i);
 //			cd.setCjsj(new Timestamp(100000));
@@ -46,7 +46,7 @@
 //			list.add(cd);
 //			if(i%20000==0){
 ////				repository.save(list);
-//				list=new ArrayList<T_XT_CD>();
+//				list=new ArrayList<Menu>();
 //			}
 //		}
 //	}
@@ -54,7 +54,7 @@
 //	@Test
 //	public void testPage() {
 //		PageRequest request = this.buildPageRequest(1, 2);
-//		Page<T_XT_CD> page=repository.findAllXTCD(request);
+//		Page<Menu> page=repository.findAllMenu(request);
 //		System.out.println(111);
 //	}
 //

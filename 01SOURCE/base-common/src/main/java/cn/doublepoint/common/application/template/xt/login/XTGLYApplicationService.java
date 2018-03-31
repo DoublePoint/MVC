@@ -19,7 +19,7 @@ import com.querydsl.core.types.Projections;
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.xt.QT_XT_GLY;
 import cn.doublepoint.common.domain.model.entity.xt.T_XT_GLY;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDRepository;
+import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.MenuRepository;
 import cn.doublepoint.common.port.adapter.template.persistence.xt.gly.XTGLYRepository;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 

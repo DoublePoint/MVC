@@ -13,40 +13,37 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.generate.domain.model.billing.CONSTANT;
 
 public class JavaBeanModel {
 
-	private String modelComment;
-	private String modelType;
+	private String remark;//实体备注
+	private String type;//实体类型
 	private String modelExtend;
-	private String modelName;
-	private String modelClassCode;
-	private String idField;
+	private String chName;//实例名称
+	private String tableName;//实体表明
+	private String className;
+	private String idField;//id字段名
+	private boolean isDeleteThe_=true;//是否删除下划线
+	private boolean isUpcaseTheFirstCharSplit=true;//是否驼峰大写自定字符后的字符串
+	private boolean isFilterSomeChar=true;//是否进行某些字符串的过滤
+	private List<ModelField> fields;
 	
-
-	public String getIdField() {
-		return idField;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setIdField(String idField) {
-		this.idField = idField;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
-	public String getModelComment() {
-		return modelComment;
+	public String getType() {
+		return type;
 	}
 
-	public void setModelComment(String modelComment) {
-		this.modelComment = modelComment;
-	}
-
-	public String getModelType() {
-		return modelType;
-	}
-
-	public void setModelType(String modelType) {
-		this.modelType = modelType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getModelExtend() {
@@ -57,22 +54,37 @@ public class JavaBeanModel {
 		this.modelExtend = modelExtend;
 	}
 
-	public String getModelName() {
-		return modelName;
+	public String getChName() {
+		return chName;
 	}
 
-	public void setModelName(String modelName) {
-		this.modelName = modelName;
+	public void setChName(String chName) {
+		this.chName = chName;
 	}
 
-	public String getModelClassCode() {
-		return modelClassCode;
+	public String getTableName() {
+		return tableName;
 	}
 
-	public void setModelClassCode(String modelCode) {
-		this.modelClassCode = modelCode;
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+		
+		if(isUpcaseTheFirstCharSplit&&isDeleteThe_){
+			className=StringUtil.upcaseAfter(this.tableName,"_");
+		}
+		if(isFilterSomeChar){
+			className=className.replaceFirst("Sys", "");
+		}
 	}
 
+	public String getIdField() {
+		return idField;
+	}
+
+	public void setIdField(String idField) {
+		this.idField = idField;
+	}
+	
 	public List<ModelField> getFields() {
 		return fields;
 	}
@@ -80,11 +92,43 @@ public class JavaBeanModel {
 	public void setFields(List<ModelField> fields) {
 		this.fields = fields;
 	}
+	
+	
 
-	private List<ModelField> fields;
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public boolean isDeleteThe_() {
+		return isDeleteThe_;
+	}
+
+	public void setDeleteThe_(boolean isDeleteThe_) {
+		this.isDeleteThe_ = isDeleteThe_;
+	}
+
+	public boolean isUpcaseTheFirstCharSplit() {
+		return isUpcaseTheFirstCharSplit;
+	}
+
+	public void setUpcaseTheFirstCharSplit(boolean isUpcaseTheFirstCharSplit) {
+		this.isUpcaseTheFirstCharSplit = isUpcaseTheFirstCharSplit;
+	}
+
+	public boolean isFilterSomeChar() {
+		return isFilterSomeChar;
+	}
+
+	public void setFilterSomeChar(boolean isFilterSomeChar) {
+		this.isFilterSomeChar = isFilterSomeChar;
+	}
 
 	public String getCotent() {
-		if (modelName == null || "".equals(modelName))
+		if (chName == null || "".equals(chName))
 			return "";
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
@@ -97,7 +141,7 @@ public class JavaBeanModel {
 		sbBuffer.append("* 创   建   时   间 ：" + formatter.format(date) + "                      \r\n");
 
 		sbBuffer.append("*                                                                 \r\n");
-		sbBuffer.append("* 类   说   明 ：     " + modelName + "    \r\n");
+		sbBuffer.append("* 类   说   明 ：     " + chName + "    \r\n");
 		sbBuffer.append("*                                                                 \r\n");
 		sbBuffer.append("* 修   改   人：          修   改   日   期：                     \r\n");
 		sbBuffer.append("*/                                                                \r\n");
@@ -105,7 +149,7 @@ public class JavaBeanModel {
 		// \r\n");
 		
 
-		switch (modelType) {
+		switch (type) {
 		case CONSTANT.CLASS_TYPE_ENTITY:
 			sbBuffer.append("package cn.doublepoint.common.domain.model.entity.xt;   \r\n");
 			sbBuffer.append("                                                                  \r\n");
@@ -144,8 +188,8 @@ public class JavaBeanModel {
 		sbBuffer.append("import java.sql.Timestamp;\r\n");
 		sbBuffer.append("    \r\n");
 		sbBuffer.append("@Entity                                                           \r\n");
-		sbBuffer.append("@Table(name=\"" + modelClassCode + "\")                                                   \r\n");
-		sbBuffer.append("public class " + "T_"+modelClassCode
+		sbBuffer.append("@Table(name=\"" + tableName + "\")                                                   \r\n");
+		sbBuffer.append("public class " + "T_"+tableName
 				+ "  extends BaseEntity{                                              \r\n");
 		sbBuffer.append("	/**                                                                  \r\n");
 		sbBuffer.append("	 *                                                                    \r\n");
@@ -175,7 +219,7 @@ public class JavaBeanModel {
 		sbBuffer.append("import java.util.HashMap;                                  \r\n");
 		sbBuffer.append("import java.util.Map;                                  \r\n");
 
-		sbBuffer.append("public enum " + modelClassCode + " {                                              \r\n");
+		sbBuffer.append("public enum " + tableName + " {                                              \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		// ===================================
 		for (int i = 0; i < fields.size(); i++) {
@@ -187,17 +231,17 @@ public class JavaBeanModel {
 		if (fields.size() <= 0)
 			return sbBuffer;
 		sbBuffer.append("	private String code;\r\n");
-		sbBuffer.append("	private " + modelClassCode + "(String aCode){\r\n");
+		sbBuffer.append("	private " + tableName + "(String aCode){\r\n");
 		sbBuffer.append("		this.code = aCode;\r\n");
 		sbBuffer.append("	}\r\n");
-		sbBuffer.append("	private static final Map<String, " + modelClassCode + "> stringToEnum = new HashMap<String, "
-				+ modelClassCode + ">();\r\n");
+		sbBuffer.append("	private static final Map<String, " + tableName + "> stringToEnum = new HashMap<String, "
+				+ tableName + ">();\r\n");
 		sbBuffer.append("	static {");
-		sbBuffer.append("	    for(" + modelClassCode + " t : values()) {\r\n");
+		sbBuffer.append("	    for(" + tableName + " t : values()) {\r\n");
 		sbBuffer.append("	        stringToEnum.put(t.toString(), t);\r\n");
 		sbBuffer.append("	    }\r\n");
 		sbBuffer.append("	 }\r\n");
-		sbBuffer.append("	public static " + modelClassCode + " fromString(String symbol) {\r\n");
+		sbBuffer.append("	public static " + tableName + " fromString(String symbol) {\r\n");
 		sbBuffer.append("	    return stringToEnum.get(symbol);\r\n");
 		sbBuffer.append("	}\r\n");
 
@@ -216,7 +260,7 @@ public class JavaBeanModel {
 		sbBuffer.append("import javax.persistence.TemporalType;                                      \r\n");
 
 		sbBuffer.append("@Embeddable                                                           \r\n");
-		sbBuffer.append("public class " + modelClassCode
+		sbBuffer.append("public class " + tableName
 				+ " extends BaseValueObject {                                              \r\n");
 		sbBuffer.append("                                                                  \r\n");
 		// ===================================

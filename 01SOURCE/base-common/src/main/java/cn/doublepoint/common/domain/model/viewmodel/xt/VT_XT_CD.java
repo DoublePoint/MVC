@@ -14,11 +14,11 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
+import cn.doublepoint.common.domain.model.entity.xt.Menu;
 import cn.doublepoint.commonutil.annotations.domain.model.DateConvertor;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
-public class VT_XT_CD extends BaseEntity {
+public class VMenu extends BaseEntity {
 
 	private String cdbs; // 菜单标识
 
@@ -100,21 +100,21 @@ public class VT_XT_CD extends BaseEntity {
 		this.cjsj = cjsj;
 	}
 
-	private List<VT_XT_CD> childrenCDList;
+	private List<VMenu> childrenCDList;
 
-	public List<VT_XT_CD> getChildrenCDList() {
+	public List<VMenu> getChildrenCDList() {
 		return childrenCDList;
 	}
 
-	public VT_XT_CD() {
+	public VMenu() {
 		super();
 	}
 
-	public void setChildrenCDList(List<VT_XT_CD> childrenCDList) {
+	public void setChildrenCDList(List<VMenu> childrenCDList) {
 		this.childrenCDList = childrenCDList;
 	}
 
-	public VT_XT_CD(T_XT_CD cd) {
+	public VMenu(Menu cd) {
 		super();
 		BeanUtils.copyProperties(cd, this);
 	}

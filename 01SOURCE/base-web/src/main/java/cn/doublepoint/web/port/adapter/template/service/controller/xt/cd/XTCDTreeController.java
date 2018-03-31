@@ -19,51 +19,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.xt.cd.XTCDQueryService;
-import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
+import cn.doublepoint.common.application.template.xt.cd.MenuQueryService;
+import cn.doublepoint.common.domain.model.viewmodel.xt.VMenu;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
 @Controller
 @RequestMapping("/template/xt")
-public class XTCDTreeController extends BaseTreeController {
+public class MenuTreeController extends BaseTreeController {
 	// 树根名称
 	private final String rooTreeName = "菜单树";
 
 	@Resource
-	XTCDQueryService xTCDQueryService;
+	MenuQueryService xTCDQueryService;
 
 	@RequestMapping("cd/cd-tree/datalist")
 	@ResponseBody
-	public List<VT_XT_CD> getCDTree(@RequestParam(required = false) Boolean isHasRoot) {
-		List<VT_XT_CD> returnXTCDList;
+	public List<VMenu> getCDTree(@RequestParam(required = false) Boolean isHasRoot) {
+		List<VMenu> returnMenuList;
 		if (isHasRoot != null && isHasRoot.booleanValue()) {
-			VT_XT_CD rootCd = new VT_XT_CD();
+			VMenu rootCd = new VMenu();
 			rootCd.setCdmc(rooTreeName);
-			returnXTCDList = new ArrayList<VT_XT_CD>();
-			List<VT_XT_CD> childrenXTCDList = getChildrenXTCDList(null);
-			rootCd.setChildrenCDList(childrenXTCDList);
-			returnXTCDList.add(rootCd);
+			returnMenuList = new ArrayList<VMenu>();
+			List<VMenu> childrenMenuList = getChildrenMenuList(null);
+			rootCd.setChildrenCDList(childrenMenuList);
+			returnMenuList.add(rootCd);
 		} else {
-			returnXTCDList = getChildrenXTCDList(null);
+			returnMenuList = getChildrenMenuList(null);
 		}
-		return returnXTCDList;
+		return returnMenuList;
 	}
 
 	
-	private List<VT_XT_CD> getChildrenXTCDList(VT_XT_CD cd) {
+	private List<VMenu> getChildrenMenuList(VMenu cd) {
 		PageInfo pageRequest = new PageInfo(1, 999999);
-		List<VT_XT_CD> xTCDList;
+		List<VMenu> xTCDList;
 		if (cd == null||StringUtil.isNullOrEmpty(cd.getCdbs()))
-			xTCDList = xTCDQueryService.findRootXTCD(pageRequest).getDataList();
+			xTCDList = xTCDQueryService.findRootMenu(pageRequest).getDataList();
 		else
-			xTCDList = xTCDQueryService.findChildrenXTCD(cd, pageRequest).getDataList();
+			xTCDList = xTCDQueryService.findChildrenMenu(cd, pageRequest).getDataList();
 		if (xTCDList == null) {
 			return null;
 		} else {
 			for (int i = 0; i < xTCDList.size(); i++) {
-				xTCDList.get(i).setChildrenCDList(getChildrenXTCDList(xTCDList.get(i)));
+				xTCDList.get(i).setChildrenCDList(getChildrenMenuList(xTCDList.get(i)));
 			}
 		}
 		return xTCDList;

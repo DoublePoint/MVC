@@ -12,10 +12,10 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 
 import cn.doublepoint.common.constant.XTConstant;
-import cn.doublepoint.common.domain.model.entity.xt.QT_XT_CD;
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
-import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
-import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.XTCDRepository;
+import cn.doublepoint.common.domain.model.entity.xt.QMenu;
+import cn.doublepoint.common.domain.model.entity.xt.Menu;
+import cn.doublepoint.common.domain.model.viewmodel.xt.VMenu;
+import cn.doublepoint.common.port.adapter.template.persistence.xt.cd.MenuRepository;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
@@ -34,13 +34,13 @@ import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
  * 修 改 人： 修 改 日 期：
  */
 @Service
-public class XTCDQueryService {
+public class MenuQueryService {
 
 	// @Resource
 	// BaseRepositoryUtil jpaUtil;
 
 	@Resource
-	XTCDRepository xtcdRepository;
+	MenuRepository xtcdRepository;
 
 
 	/**
@@ -48,11 +48,11 @@ public class XTCDQueryService {
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VT_XT_CD> findRootXTCD(PageInfo pageInfo) {
-		QT_XT_CD query = QT_XT_CD.t_XT_CD;
+	public AjaxDataWrap<VMenu> findRootMenu(PageInfo pageInfo) {
+		QMenu query = QMenu.t_XT_CD;
 		Predicate predicate = query.cdcj.eq(XTConstant.TREE_ROOT_NODE_CJ);
-		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, predicate, pageInfo, xtcdRepository);
-		AjaxDataWrap<VT_XT_CD> ajaxDataWrap = dataWrap.copy(VT_XT_CD.class);
+		AjaxDataWrap<Menu> dataWrap = findAll(Menu.class, predicate, pageInfo, xtcdRepository);
+		AjaxDataWrap<VMenu> ajaxDataWrap = dataWrap.copy(VMenu.class);
 		return ajaxDataWrap;
 	}
 
@@ -61,15 +61,15 @@ public class XTCDQueryService {
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VT_XT_CD> findChildrenXTCD(VT_XT_CD cd, PageInfo pageInfo) {
-		QT_XT_CD query = QT_XT_CD.t_XT_CD;
+	public AjaxDataWrap<VMenu> findChildrenMenu(VMenu cd, PageInfo pageInfo) {
+		QMenu query = QMenu.t_XT_CD;
 		BooleanBuilder bb=new BooleanBuilder();
 //		if(StringUtil.isNotEmpty(cd.getCdmc()))
 //			bb.and(query.cdmc.like("%"+cd.getCdmc()+"%"));
 		if(StringUtil.isNotEmpty(cd.getCdbs()))
 			bb.and(query.sjcdbs.eq(cd.getCdbs()));
-		AjaxDataWrap<T_XT_CD> dataWrap = findAll(T_XT_CD.class, bb.getValue(), pageInfo, xtcdRepository);
-		return dataWrap.copy(VT_XT_CD.class);
+		AjaxDataWrap<Menu> dataWrap = findAll(Menu.class, bb.getValue(), pageInfo, xtcdRepository);
+		return dataWrap.copy(VMenu.class);
 	}
 
 	/**
@@ -77,18 +77,18 @@ public class XTCDQueryService {
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VT_XT_CD> findAllXTCD(PageInfo pageInfo) {
-		AjaxDataWrap<T_XT_CD> ajaxDataWrap = findAll(T_XT_CD.class, null, pageInfo, xtcdRepository);
-		return ajaxDataWrap.copy(VT_XT_CD.class);
+	public AjaxDataWrap<VMenu> findAllMenu(PageInfo pageInfo) {
+		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, xtcdRepository);
+		return ajaxDataWrap.copy(VMenu.class);
 	}
 	/**
 	 * 查询所有菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VT_XT_CD> findAllXTCD(VT_XT_CD cd,PageInfo pageInfo) {
-		AjaxDataWrap<T_XT_CD> ajaxDataWrap = findAll(T_XT_CD.class, null, pageInfo, xtcdRepository);
-		return ajaxDataWrap.copy(VT_XT_CD.class);
+	public AjaxDataWrap<VMenu> findAllMenu(VMenu cd,PageInfo pageInfo) {
+		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, xtcdRepository);
+		return ajaxDataWrap.copy(VMenu.class);
 	}
 
 	private <T extends BaseEntity> AjaxDataWrap<T> findAll(Class<T> clazz, Predicate predicate, PageInfo pageInfo,

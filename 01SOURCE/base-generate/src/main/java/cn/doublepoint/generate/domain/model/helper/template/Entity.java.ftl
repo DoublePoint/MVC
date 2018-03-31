@@ -14,8 +14,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="${entityModel.modelClassCode}")
-public class T_${entityModel.modelClassCode} implements Serializable {
+@Table(name="${entityModel.tableName}")
+public class ${entityModel.className} implements Serializable {
 	/**
 	 * 序列化ID
 	 */
@@ -36,7 +36,7 @@ public class T_${entityModel.modelClassCode} implements Serializable {
 	}
 </#list>
 	public String toString() {
-		return "${entityModel.modelClassCode} [<#list entityModel.fields as field><#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>=" + <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list> + "<#if field_has_next>,</#if></#list>]";
+		return "${entityModel.className} [<#list entityModel.fields as field><#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>=" + <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list> + "<#if field_has_next>,</#if></#list>]";
 	}
 }
 <#macro fieldType type>

@@ -22,37 +22,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cn.doublepoint.common.application.template.xt.cd.XTCDApplicationService;
-import cn.doublepoint.common.application.template.xt.cd.XTCDQueryService;
-import cn.doublepoint.common.domain.model.entity.xt.T_XT_CD;
-import cn.doublepoint.common.domain.model.viewmodel.xt.VT_XT_CD;
+import cn.doublepoint.common.application.template.xt.cd.MenuApplicationService;
+import cn.doublepoint.common.application.template.xt.cd.MenuQueryService;
+import cn.doublepoint.common.domain.model.entity.xt.Menu;
+import cn.doublepoint.common.domain.model.viewmodel.xt.VMenu;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 
 @Controller
 @RequestMapping("/template/xt/cd")
-public class XTCDHandleController extends BaseHandleController {
+public class MenuHandleController extends BaseHandleController {
 
 	@Autowired
-	XTCDQueryService xTCDQueryService;
+	MenuQueryService xTCDQueryService;
 
 	@Resource
-	XTCDApplicationService xTCDApplicationService;
+	MenuApplicationService xTCDApplicationService;
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public AjaxDataWrap<VT_XT_CD> cdDataList(@RequestBody(required=false) AjaxDataWrap<VT_XT_CD> dataWrap) {
+	public AjaxDataWrap<VMenu> cdDataList(@RequestBody(required=false) AjaxDataWrap<VMenu> dataWrap) {
 		if(dataWrap==null)
 			return null;
-		VT_XT_CD cdQuery=null;
+		VMenu cdQuery=null;
 		PageInfo pageInfo=dataWrap.getPageInfo();;
 		if(dataWrap.getDataList()!=null&&dataWrap.getDataList().size()>0){
 			cdQuery=dataWrap.getDataList().get(0);
 		}
 	
 		if(cdQuery!=null){
-			dataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageInfo);
+			dataWrap=xTCDQueryService.findChildrenMenu(cdQuery,pageInfo);
 		}
 		return dataWrap;
 	}
@@ -60,16 +60,16 @@ public class XTCDHandleController extends BaseHandleController {
 	
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
-	public AjaxDataWrap<VT_XT_CD> cdDataListDataWrap(@RequestBody(required=false) T_XT_CD cd) {
+	public AjaxDataWrap<VMenu> cdDataListDataWrap(@RequestBody(required=false) Menu cd) {
 		PageInfo pageRequest=new PageInfo(1, 20);
-		AjaxDataWrap<VT_XT_CD> ajaxDataWrap=new AjaxDataWrap<VT_XT_CD>();
+		AjaxDataWrap<VMenu> ajaxDataWrap=new AjaxDataWrap<VMenu>();
 		if(cd==null||cd.getCdbs()==null||"".equals(cd.getCdbs())){
-			ajaxDataWrap= xTCDQueryService.findAllXTCD(pageRequest);
+			ajaxDataWrap= xTCDQueryService.findAllMenu(pageRequest);
 		}
 		else{
-			VT_XT_CD cdQuery=new VT_XT_CD();
+			VMenu cdQuery=new VMenu();
 			cdQuery.setCdbs(cd.getCdbs());
-			ajaxDataWrap=xTCDQueryService.findChildrenXTCD(cdQuery,pageRequest);
+			ajaxDataWrap=xTCDQueryService.findChildrenMenu(cdQuery,pageRequest);
 		}
 
 		ObjectMapper mapper = new ObjectMapper();  
@@ -83,17 +83,17 @@ public class XTCDHandleController extends BaseHandleController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public T_XT_CD add(@RequestBody T_XT_CD cd) {
+	public Menu add(@RequestBody Menu cd) {
 
-		xTCDApplicationService.createXTCD(cd);
-		T_XT_CD cd2 = new T_XT_CD();
+		xTCDApplicationService.createMenu(cd);
+		Menu cd2 = new Menu();
 		return cd2;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(@RequestBody List<T_XT_CD> cdList) {
-		xTCDApplicationService.removeXTCD(cdList);
+	public boolean delete(@RequestBody List<Menu> cdList) {
+		xTCDApplicationService.removeMenu(cdList);
 		return true;
 	}
 }

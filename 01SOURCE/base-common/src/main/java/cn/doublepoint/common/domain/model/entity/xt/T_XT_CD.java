@@ -20,7 +20,7 @@ import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
 @Table(name = "XT_CD")
-public class T_XT_CD extends BaseEntity {  
+public class Menu extends BaseEntity {  
 	/**                                                                   
 	 *                                                                     
 	 */
