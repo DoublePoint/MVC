@@ -6,19 +6,7 @@
 */
 package cn.doublepoint.commonutil.domain.model.entity;
 
-import static java.util.stream.Collectors.toList;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import cn.doublepoint.commonutil.domain.model.BaseModel;
-import cn.doublepoint.commonutil.domain.model.StringUtil;
 
 public class BaseEntity extends BaseModel {
 

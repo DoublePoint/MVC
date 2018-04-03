@@ -18,8 +18,8 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
-import cn.doublepoint.common.domain.model.entity.xt.Menu;
-import cn.doublepoint.common.domain.model.viewmodel.xt.VMenu;
+import cn.doublepoint.common.domain.model.entity.sys.Menu;
+import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
@@ -34,23 +34,23 @@ public class JPAUtilTest extends RepositoryTest {
 
 	/*@Test
 	public void testquery() throws Exception {
-		String insertSql = "insert into XT_CD (cdcj, cdlj, cdmc, cdpx, cjsj, gxsj, sjcdbs, cdbs) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSql = "insert into XT_Menu (cdcj, cdlj, cdmc, cdpx, cjsj, gxsj, sjcdbs, cdbs) values (?, ?, ?, ?, ?, ?, ?, ?)";
 		List<VMenu> list = jpaUtil.executeQuery("select * from xt_cd limit 100,100", VMenu.class);
 		System.out.println(list.size());
 	}
 
 	@Test
 	public void testbatchUpdate() {
-		String insertSql = "insert into XT_CD (cdcj, cdlj, cdmc, cdpx, cjsj, gxsj, sjcdbs, cdbs) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSql = "insert into XT_Menu (cdcj, cdlj, cdmc, cdpx, cjsj, gxsj, sjcdbs, cdbs) values (?, ?, ?, ?, ?, ?, ?, ?)";
 		List<VMenu> list = jpaUtil.executeQuery("select * from xt_cd limit 100,100", VMenu.class);
 
 		List<Menu> updateList = CommonBeanUtils.copyTo(list, Menu.class);
 
 		jpaUtil.batchUpdate(updateList.stream().map(item -> {
-			Menu t_XT_CD = new Menu();
-			BeanUtils.copyProperties(item, t_XT_CD);
-			t_XT_CD.setCdmc("------");
-			return t_XT_CD;
+			Menu t_XT_Menu = new Menu();
+			BeanUtils.copyProperties(item, t_XT_Menu);
+			t_XT_Menu.setCdmc("------");
+			return t_XT_Menu;
 		}).collect(toList()));
 	}*/
 	

@@ -132,7 +132,7 @@
 //                		async : {
 //                			enable : true,
 //                			showLine : false,
-//                			url : $$pageContextPath + "/template/xt/cd/cd-tree/datalist?isHasRoot=true",
+//                			url : $$pageContextPath + "/template/sys/menu/menu-tree/datalist?isHasRoot=true",
 //                			autoParam : [ "id", "name=n", "level=lv" ],
 //                			otherParam : {
 //                				"otherParam" : "zTreeAsyncTest"

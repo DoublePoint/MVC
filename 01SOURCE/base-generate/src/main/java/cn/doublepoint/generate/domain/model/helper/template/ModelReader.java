@@ -36,7 +36,7 @@ import org.w3c.dom.NodeList;
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.generate.domain.model.billing.CONSTANT;
-import cn.doublepoint.generate.domain.model.helper.JavaBeanModel;
+import cn.doublepoint.generate.domain.model.helper.BeanModel;
 import cn.doublepoint.generate.domain.model.helper.ModelConstantJS;
 import cn.doublepoint.generate.domain.model.helper.ModelField;
 import freemarker.template.Configuration;
@@ -110,15 +110,10 @@ public class ModelReader {
 
 	private final String TEMPLATE_DIR = "cn.doublepoint.generate.domain.model.helper.template/";
 
-	List<JavaBeanModel> entityModelList = new ArrayList<JavaBeanModel>();
+	List<BeanModel> entityModelList = new ArrayList<BeanModel>();
 	Map<String, Object> data = new HashMap<String, Object>();
 	private final String TEMPLATE_ENTITY_KEY_NAME = "entityModel";
 
-	@Test
-	public void test(){
-		
-	}
-	
 	@Test
 	public void buildEntity() {
 		buildEntityModelList();
@@ -264,7 +259,7 @@ public class ModelReader {
 					.getElementsByTagName("c:Classes").item(0).getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
 				List<ModelField> fieldList = new ArrayList<ModelField>();
-				JavaBeanModel entityModel = new JavaBeanModel();
+				BeanModel entityModel = new BeanModel();
 				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
 				boolean isadd = false;
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
@@ -343,8 +338,8 @@ public class ModelReader {
 	private Configuration conf;
 
 	@SuppressWarnings({ "unused", "resource" })
-	private void writeModel(List<JavaBeanModel> entityModelList) {
-		for (JavaBeanModel modelModel : entityModelList) {
+	private void writeModel(List<BeanModel> entityModelList) {
+		for (BeanModel modelModel : entityModelList) {
 			if (modelModel.getType() != null) {
 				File file;
 				switch (modelModel.getType()) {

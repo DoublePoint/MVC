@@ -68,8 +68,8 @@ public class ModelReader2 {
 	
 	Map<String, Object> data = new HashMap<String, Object>();
 
-	public static List<JavaBeanModel> getEntityModelList() throws IOException {
-		List<JavaBeanModel> entityModelList = new ArrayList<JavaBeanModel>();
+	public static List<BeanModel> getEntityModelList() throws IOException {
+		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -80,7 +80,7 @@ public class ModelReader2 {
 			NodeList classElementNodeList = classesElementNode.getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
 				List<ModelField> fieldList = new ArrayList<ModelField>();
-				JavaBeanModel entityModel = new JavaBeanModel();
+				BeanModel entityModel = new BeanModel();
 				Node classElementNode = classElementNodeList.item(i);
 				NodeList classChildrenList = classElementNode.getChildNodes();
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
@@ -197,8 +197,8 @@ public class ModelReader2 {
 			FreeMarkerConfigurer freeMarkerConfigurer) {
 		this.conf = freeMarkerConfigurer.getConfiguration();
 	}
-	private void writeModel(List<JavaBeanModel> entityModelList) {
-		for (JavaBeanModel modelModel : entityModelList) {
+	private void writeModel(List<BeanModel> entityModelList) {
+		for (BeanModel modelModel : entityModelList) {
 			if (modelModel.getType() != null) {
 				File file;
 				switch (modelModel.getType()) {

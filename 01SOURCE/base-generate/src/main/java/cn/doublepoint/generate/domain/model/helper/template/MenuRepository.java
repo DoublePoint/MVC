@@ -12,7 +12,7 @@ package cn.doublepoint.generate.domain.model.helper.template;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import cn.doublepoint.common.domain.model.entity.xt.Menu;
+import cn.doublepoint.common.domain.model.entity.sys.Menu;
 
 public interface MenuRepository extends JpaRepository<Menu,String>,QueryDslPredicateExecutor<Menu>, MenuRepositoryService{
 	

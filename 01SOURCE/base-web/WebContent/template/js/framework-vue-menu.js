@@ -109,7 +109,7 @@ function AjaxMenu(domId) {
 
 	this.getChildrenMenuHtml = function(menu) {
 		var $li = $("<li></li>");
-		if (menu.childrenCDList == null || menu.childrenCDList.length <= 0) {
+		if (menu.childrenMenuList == null || menu.childrenMenuList.length <= 0) {
 			var $a = $("<a></a>");
 			$a.attr("class", "afinve");
 			$a.attr("onclick", "javascript:return false;");
@@ -168,8 +168,8 @@ function AjaxMenu(domId) {
 
 			var $ul = $("<ul></ul>");
 			$ul.attr("class", "sub-menu");
-			for (var i = 0; i < menu.childrenCDList.length; i++) {
-				$ul.append(this.getChildrenMenuHtml(menu.childrenCDList[i]));
+			for (var i = 0; i < menu.childrenMenuList.length; i++) {
+				$ul.append(this.getChildrenMenuHtml(menu.childrenMenuList[i]));
 			}
 			$li.append($ul);
 		}

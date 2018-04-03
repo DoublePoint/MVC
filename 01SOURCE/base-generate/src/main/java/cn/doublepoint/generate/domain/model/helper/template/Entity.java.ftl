@@ -7,15 +7,16 @@
  * 
  * 修   改   人：          修   改   日   期：
  */
-package cn.doublepoint.common.domain.model.entity.xt;;
+package cn.doublepoint.common.domain.model.entity.sys;
 
 import java.util.*;
 import java.io.Serializable;
 import javax.persistence.*;
+import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
 @Table(name="${entityModel.tableName}")
-public class ${entityModel.className} implements Serializable {
+public class ${entityModel.className} extends BaseEntity {
 	/**
 	 * 序列化ID
 	 */
@@ -28,9 +29,11 @@ public class ${entityModel.className} implements Serializable {
 </#list>
 
 <#list entityModel.fields as field>
+
 	public <@fieldType type=field.fieldType/> get<#list field.fieldName?split('_') as n>${n?cap_first}</#list>() {
 		return <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>;
 	}
+	
 	public void set<#list field.fieldName?split('_') as n>${n?cap_first}</#list>(<@fieldType type=field.fieldType/> <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>) {
 		this.<#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list> = <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>;
 	}

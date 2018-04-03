@@ -74,7 +74,7 @@ function AjaxTree(domId) {
 				name : "cdmc",
 				title : "cdmc",
 				url : "null",
-				children : "childrenCDList"
+				children : "childrenMenuList"
 			},
 		},
 		callback: {

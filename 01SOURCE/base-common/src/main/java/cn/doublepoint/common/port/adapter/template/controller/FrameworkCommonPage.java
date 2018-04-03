@@ -16,8 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.doublepoint.common.domain.model.entity.xt.DropBean;
-
+import cn.doublepoint.commonutil.domain.model.DropBean;
 
 @Controller
 public class FrameworkCommonPage {

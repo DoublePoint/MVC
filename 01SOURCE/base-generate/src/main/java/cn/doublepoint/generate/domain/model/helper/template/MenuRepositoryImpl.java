@@ -1,11 +1,6 @@
 package cn.doublepoint.generate.domain.model.helper.template;
 
-import javax.annotation.PostConstruct;
-
-import com.querydsl.core.types.Predicate;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-
-import cn.doublepoint.common.port.adapter.template.persistence.xt.BaseRepository;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.BaseRepository;
 
 public class MenuRepositoryImpl  extends BaseRepository implements MenuRepositoryService {
 

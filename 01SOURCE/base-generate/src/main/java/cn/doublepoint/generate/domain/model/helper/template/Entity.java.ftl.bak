@@ -7,7 +7,7 @@
  * 
  * 修   改   人：          修   改   日   期：
  */
-package cn.doublepoint.common.domain.model.entity.xt;;
+package cn.doublepoint.common.domain.model.entity.sys;
 
 import java.util.*;
 import java.io.Serializable;
