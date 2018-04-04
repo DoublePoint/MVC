@@ -71,8 +71,8 @@ function AjaxTree(domId) {
 		},
 		data : {
 			key : {
-				name : "cdmc",
-				title : "cdmc",
+				name : "name",
+				title : "name",
 				url : "null",
 				children : "childrenMenuList"
 			},

@@ -31,7 +31,7 @@ import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 
 @Controller
-@RequestMapping("/template/sys/cd")
+@RequestMapping("/template/sys/menu")
 public class MenuHandleController extends BaseHandleController {
 
 	@Autowired
@@ -42,17 +42,17 @@ public class MenuHandleController extends BaseHandleController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public AjaxDataWrap<VOMenu> cdDataList(@RequestBody(required=false) AjaxDataWrap<VOMenu> dataWrap) {
+	public AjaxDataWrap<VOMenu> menuDataList(@RequestBody(required=false) AjaxDataWrap<VOMenu> dataWrap) {
 		if(dataWrap==null)
 			return null;
-		VOMenu cdQuery=null;
+		VOMenu menuQuery=null;
 		PageInfo pageInfo=dataWrap.getPageInfo();
 		if(dataWrap.getDataList()!=null&&dataWrap.getDataList().size()>0){
-			cdQuery=dataWrap.getDataList().get(0);
+			menuQuery=dataWrap.getDataList().get(0);
 		}
 	
-		if(cdQuery!=null){
-			dataWrap=menuQueryService.findChildrenMenu(cdQuery,pageInfo);
+		if(menuQuery!=null){
+			dataWrap=menuQueryService.findChildrenMenu(menuQuery,pageInfo);
 		}
 		return dataWrap;
 	}
@@ -60,16 +60,16 @@ public class MenuHandleController extends BaseHandleController {
 	
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
-	public AjaxDataWrap<VOMenu> cdDataListDataWrap(@RequestBody(required=false) Menu cd) {
+	public AjaxDataWrap<VOMenu> menuDataListDataWrap(@RequestBody(required=false) Menu menu) {
 		PageInfo pageRequest=new PageInfo(1, 20);
 		AjaxDataWrap<VOMenu> ajaxDataWrap=new AjaxDataWrap<VOMenu>();
-		if(cd==null||cd.getId()==null||"".equals(cd.getId())){
+		if(menu==null||menu.getId()==null||"".equals(menu.getId())){
 			ajaxDataWrap= menuQueryService.findAllMenu(pageRequest);
 		}
 		else{
-			VOMenu cdQuery=new VOMenu();
-			cdQuery.setCdbs(cd.getId());
-			ajaxDataWrap=menuQueryService.findChildrenMenu(cdQuery,pageRequest);
+			VOMenu menuQuery=new VOMenu();
+			menuQuery.setId(menu.getId());
+			ajaxDataWrap=menuQueryService.findChildrenMenu(menuQuery,pageRequest);
 		}
 
 		ObjectMapper mapper = new ObjectMapper();  
@@ -83,17 +83,17 @@ public class MenuHandleController extends BaseHandleController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public Menu add(@RequestBody Menu cd) {
+	public Menu add(@RequestBody Menu menu) {
 
-		menuApplicationService.createMenu(cd);
-		Menu cd2 = new Menu();
-		return cd2;
+		menuApplicationService.createMenu(menu);
+		Menu menu2 = new Menu();
+		return menu2;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(@RequestBody List<Menu> cdList) {
-		menuApplicationService.removeMenu(cdList);
+	public boolean delete(@RequestBody List<Menu> menuList) {
+		menuApplicationService.removeMenu(menuList);
 		return true;
 	}
 }

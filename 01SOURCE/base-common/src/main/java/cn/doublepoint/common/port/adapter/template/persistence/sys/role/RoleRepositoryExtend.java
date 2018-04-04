@@ -7,8 +7,8 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.generate.domain.model.helper.template;
+package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 
-public interface MenuRepositoryService {
+public interface RoleRepositoryExtend {
 
 }

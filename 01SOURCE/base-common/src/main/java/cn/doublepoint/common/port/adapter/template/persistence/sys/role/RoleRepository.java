@@ -7,14 +7,14 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.generate.domain.model.helper.template;
+package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import cn.doublepoint.common.domain.model.entity.sys.Menu;
+import cn.doublepoint.common.domain.model.entity.sys.Role;
 
-public interface MenuRepository extends JpaRepository<Menu,String>,QueryDslPredicateExecutor<Menu>, MenuRepositoryService{
+public interface RoleRepository extends JpaRepository<Role,String>,QueryDslPredicateExecutor<Role>, RoleRepositoryExtend{
 	
 	
 }

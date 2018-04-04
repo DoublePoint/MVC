@@ -33,11 +33,11 @@
 				<ll-filllayout > 
 					<ll-fillarea-tb height="86px" >
 							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:8:3:8:2:10"> 
-									<ll-formfield id="name" title="菜单名称"  field="cdmc" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formfield id="fcdmc" title="父菜单名称"  field="sjcdbs" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formdate title="创建时间" field="createTime" ></ll-formdate>
 									<ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
-									<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="/baseweb/template/sys/menu/menu-tree/datalist?isHasRoot=true"></ll-formdroptree>
+									<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="${pageContext.request.contextPath}/template/sys/menu/menu-tree/datalist?isHasRoot=true"></ll-formdroptree>
 									<ll-formtoolbar labelalign="right" colspan="1">
 									 	<input type="button" class="layui-btn" onclick="retrieveAjaxDataGrid()"  value="查询"/>
 									 	&nbsp;&nbsp;
@@ -53,19 +53,19 @@
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*" >
 						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
-							<ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow>
-							<ll-gridrow field="cdmc" title="菜单名称"></ll-gridrow> 
-							<ll-gridrow field="cdpx" title="菜单排序"></ll-gridrow> 
-							<ll-gridrow field="cdlj" title="菜单链接"></ll-gridrow> 
-							<ll-gridrow field="cjsj" title="创建时间"></ll-gridrow> 
-							<ll-gridrow field="gxsj" title="更新时间"></ll-gridrow> 
+							<ll-gridrow field="id" title="菜单标识"></ll-gridrow>
+							<ll-gridrow field="name" title="菜单名称"></ll-gridrow> 
+							<ll-gridrow field="sn" title="菜单排序"></ll-gridrow> 
+							<ll-gridrow field="link" title="菜单链接"></ll-gridrow> 
+							<ll-gridrow field="createTime" title="创建时间"></ll-gridrow> 
+							<ll-gridrow field="modifyTime" title="更新时间"></ll-gridrow> 
 						</ll-datagrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>
 			</ll-fillarea-lr>
 		</ll-filllayout>
 	</form>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/menu/cdScript.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/menu/menuScript.js"></script>
 </style>
 </body>
 </html>

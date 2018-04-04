@@ -9,7 +9,5 @@
 */
 package cn.doublepoint.common.port.adapter.template.persistence.sys.admin;
 
-import cn.doublepoint.common.domain.model.entity.sys.Admin;
-
 public interface AdminRepositoryExtend {
 }

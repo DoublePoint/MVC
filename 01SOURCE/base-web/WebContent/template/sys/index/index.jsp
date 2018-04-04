@@ -41,7 +41,6 @@
 					<li class="layui-nav-item"><B class="title_value">0.00</B></li>
 					<li class="layui-nav-item"><B class="title_value">点</B></li>
 					<li class="layui-nav-item"><a href="#" style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置</a></li>
-					 
 				</ul>
 			</div>
 

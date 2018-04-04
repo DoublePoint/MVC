@@ -97,9 +97,9 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 
 function AjaxMenu(domId) {
 	this.domId = domId;
-	// this.cdmc = config.cdmc;
+	// this.name = config.name;
 	// this.cdbs = config.cdbs;
-	// this.cdlj = config.cdlj;
+	// this.link = config.link;
 	// this.childrenMenuList = config.childrenMenuList;
 	this.setData = function(data) {
 		$("#" + domId).empty();
@@ -113,10 +113,10 @@ function AjaxMenu(domId) {
 			var $a = $("<a></a>");
 			$a.attr("class", "afinve");
 			$a.attr("onclick", "javascript:return false;");
-			if (menu.cdlj == null || menu.cdlj == "")
+			if (menu.link == null || menu.link == "")
 				$a.attr("menuhref", "#");
 			else
-				$a.attr("menuhref", menu.cdlj);
+				$a.attr("menuhref", menu.link);
 			if (menu.cdtb != null && menu.cdtb != "") {
 				var $i = $("<i>"+menu.cdtb+"</i>");
 				$i.attr("class", "layui-icon");
@@ -127,22 +127,22 @@ function AjaxMenu(domId) {
 				$i.attr("class", "layui-icon");
 				$a.append($i);
 			}
-			var $spanCdmc = $("<span></span>");
-			if (menu.cdmc != null && menu.cdmc != "") {
-				$spanCdmc.append(menu.cdmc);
-				if (menu.cdcj == "1") {
-					$spanCdmc.attr("class", "nav-text");
+			var $spanname = $("<span></span>");
+			if (menu.name != null && menu.name != "") {
+				$spanname.append(menu.name);
+				if (menu.level == "1") {
+					$spanname.attr("class", "nav-text");
 				}
 			}
-			$a.append($spanCdmc);
+			$a.append($spanname);
 			$li.append($a);
 		} else {
 			var $a = $("<a></a>");
 			$a.attr("class", "afinve");
-			if (menu.cdlj == null || menu.cdlj == "")
+			if (menu.link == null || menu.link == "")
 				$a.attr("menuhref", "#");
 			else
-				$a.attr("menuhref", menu.cdlj);
+				$a.attr("menuhref", menu.link);
 			if (menu.cdtb != null && menu.cdtb != "") {
 				var $i = $("<i>"+menu.cdtb+"</i>");
 				$i.attr("class", "layui-icon");
@@ -153,14 +153,14 @@ function AjaxMenu(domId) {
 				$i.attr("class", "layui-icon");
 				$a.append($i);
 			}
-			var $spanCdmc = $("<span></span>");
-			if (menu.cdmc != null && menu.cdmc != "") {
-				$spanCdmc.append(menu.cdmc);
-				if (menu.cdcj == "1") {
-					$spanCdmc.attr("class", "nav-text");
+			var $spanname = $("<span></span>");
+			if (menu.name != null && menu.name != "") {
+				$spanname.append(menu.name);
+				if (menu.level == "1") {
+					$spanname.attr("class", "nav-text");
 				}
 			}
-			$a.append($spanCdmc);
+			$a.append($spanname);
 			var $spanIcon = $("<span></span>");
 			$spanIcon.attr("class", "arrow");
 			$a.append($spanIcon);

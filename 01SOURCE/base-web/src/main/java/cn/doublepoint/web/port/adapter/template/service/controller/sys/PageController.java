@@ -43,6 +43,11 @@ public class PageController {
 	public String register(@PathVariable String actionname) {
 		return "/template/sys/register/" + actionname;
 	}
+	
+	@RequestMapping("/template/sys/role/{actionname}")
+	public String role(@PathVariable String actionname) {
+		return "/template/sys/role/" + actionname;
+	}
 
 	@RequestMapping("/template/sys/test/{actionname}")
 	public String test(@PathVariable String actionname) {

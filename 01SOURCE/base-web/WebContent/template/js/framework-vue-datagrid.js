@@ -133,6 +133,9 @@ function AjaxDataGrid(domId) {
 		var checkStatus = $table.checkStatus(this.id), checkedData = checkStatus.data;
 		return checkedData;
 	}
+	this.getCols = function(){
+		return this.cols;
+	}
 	this.getDataWrap = function(isGetData) {
 		if (isGetData == null)
 			isGetData = true;
@@ -214,6 +217,9 @@ function AjaxDataGrid(domId) {
 		var datasource = ajaxgrid.datasource;
 		var cols = ajaxgrid.cols;
 		var height = ajaxgrid.height;
+		if(ajaxDataWrap.dataList.length<=0){
+			ajaxgrid.showEmpty();
+		}
 		var ss = $table.render({
 			elem : '#' + id + '',
 			data : $._Clone(ajaxDataWrap.dataList),
@@ -260,6 +266,13 @@ function AjaxDataGrid(domId) {
 	this.setRowClickFunctionName = function(funName) {
 		this.onRowClickFunctionName = funName;
 	};
+	
+	this.showEmpty = function(){
+		var cols=this.getCols();
+		var object={};
+		object[this.cols[0][2].field]="未查询到任何数据";
+		this.datawrap.dataList[0]=object;
+	}
 	
 	this.test = function() {
 		alert("测试成功");

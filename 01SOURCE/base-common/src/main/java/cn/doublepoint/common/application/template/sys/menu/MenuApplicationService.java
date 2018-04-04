@@ -39,12 +39,12 @@ public class MenuApplicationService {
 			}
 			else{
 				QMenu query = QMenu.t_XT_Menu;
-				Predicate predicate=query.cdbs.eq(t_XT_Menu.getSjcdbs());
-				Menu parentCd=xtcdRepository.findOne(predicate);
+				Predicate predicate=query.menubs.eq(t_XT_Menu.getSjmenubs());
+				Menu parentCd=xtmenuRepository.findOne(predicate);
 				t_XT_Menu.setCdcj(parentCd.getCdcj()+1);
 			}
 			t_XT_Menu.setCdbs(idWorker.nextId());
-			xtcdRepository.save(t_XT_Menu);
+			xtmenuRepository.save(t_XT_Menu);
 		} catch (Exception e) {
 			return false;
 		}
@@ -69,8 +69,8 @@ public class MenuApplicationService {
 		return true;
 	}
 	
-	public boolean removeMenu(List<Menu> cdList){
-		menuRepository.delete(cdList);
+	public boolean removeMenu(List<Menu> menuList){
+		menuRepository.delete(menuList);
 		return true;
 	}
 }

@@ -34,13 +34,13 @@ public class MenuTreeController extends BaseTreeController {
 	@Resource
 	MenuQueryService menuQueryService;
 
-	@RequestMapping("menu/menu-tree/datalist")
+	@RequestMapping("/menu/menu-tree/datalist")
 	@ResponseBody
 	public List<VOMenu> getMenuTree(@RequestParam(required = false) Boolean isHasRoot) {
 		List<VOMenu> returnMenuList;
 		if (isHasRoot != null && isHasRoot.booleanValue()) {
 			VOMenu rootCd = new VOMenu();
-			rootCd.setCdmc(rooTreeName);
+			rootCd.setName(rooTreeName);
 			returnMenuList = new ArrayList<VOMenu>();
 			List<VOMenu> childrenMenuList = getChildrenMenuList(null);
 			rootCd.setChildrenMenuList(childrenMenuList);
@@ -55,7 +55,7 @@ public class MenuTreeController extends BaseTreeController {
 	private List<VOMenu> getChildrenMenuList(VOMenu cd) {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
-		if (cd == null||StringUtil.isNullOrEmpty(cd.getCdbs()))
+		if (cd == null||StringUtil.isNullOrEmpty(cd.getId()))
 			menuList = menuQueryService.findRootMenu(pageRequest).getDataList();
 		else
 			menuList = menuQueryService.findChildrenMenu(cd, pageRequest).getDataList();

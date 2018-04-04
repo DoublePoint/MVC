@@ -57,13 +57,11 @@ public class MenuQueryService {
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VOMenu> findChildrenMenu(VOMenu cd, PageInfo pageInfo) {
+	public AjaxDataWrap<VOMenu> findChildrenMenu(VOMenu menu, PageInfo pageInfo) {
 		QMenu query = QMenu.menu;
 		BooleanBuilder bb=new BooleanBuilder();
-//		if(StringUtil.isNotEmpty(cd.getCdmc()))
-//			bb.and(query.cdmc.like("%"+cd.getCdmc()+"%"));
-		if(StringUtil.isNotEmpty(cd.getCdbs()))
-			bb.and(query.parentId.eq(cd.getCdbs()));
+		if(StringUtil.isNotEmpty(menu.getId()))
+			bb.and(query.parentId.eq(menu.getId()));
 		AjaxDataWrap<Menu> dataWrap = findAll(Menu.class, bb.getValue(), pageInfo, menuRepository);
 		return dataWrap.copy(VOMenu.class);
 	}
@@ -82,7 +80,7 @@ public class MenuQueryService {
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VOMenu> findAllMenu(VOMenu cd,PageInfo pageInfo) {
+	public AjaxDataWrap<VOMenu> findAllMenu(VOMenu menu,PageInfo pageInfo) {
 		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, menuRepository);
 		return ajaxDataWrap.copy(VOMenu.class);
 	}
