@@ -53,11 +53,9 @@ public class RoleHandleController extends BaseHandleController {
 		return dataWrap;
 	}
 	
-	
 	@RequestMapping("/add")
 	@ResponseBody
 	public Role add(@RequestBody Role role) {
-
 		roleApplicationService.createRole(role);
 		Role role2 = new Role();
 		return role2;
