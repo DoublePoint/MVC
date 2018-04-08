@@ -57,7 +57,7 @@
 				<div class="layui-tab admin-nav-card layui-tab-brief" style="margin: 0;" lay-allowclose="true"
 					lay-filter="admin-tab"
 				>
-					<ul class="layui-tab-title">
+					<ul class="layui-tab-title" style="margin-bottom:0rem;">
 						<li class="layui-this"><cite>控制面板</cite></li>
 					</ul>
 					<div id="layui-tab-content" class="layui-tab-content"

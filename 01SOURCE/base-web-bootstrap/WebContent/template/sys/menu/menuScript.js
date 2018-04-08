@@ -105,7 +105,7 @@ function zTreeOnClick(event, treeId, treeNode) {
 	// });
 	return false;
 };
-function rowClickTest(data) {
+function rowClickTest(data,a,b,c) {
 	var dd = data;
 }
 

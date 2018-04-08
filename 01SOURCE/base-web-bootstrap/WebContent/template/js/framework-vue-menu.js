@@ -1,7 +1,7 @@
 var existTabsNameArray = new Array();
 Vue.component(_ConstantComponentMap._AjaxMenu, {
 	props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
-	template : ' <ul :id="id+guid" lay-filter="side" class="navMenu"></ul>',
+	template : ' <div class="sidebar-collapse"><ul :id="id+guid" lay-filter="side" class="nav"></ul></div>',
 
 	data : function() {
 		return {
@@ -13,6 +13,8 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 		this._MapComponent();
 		this._InitMenuClick();
 		this._TabDeleteClick();
+		
+		$('#'+this._GetComponentDomId()+'').metisMenu();
 	},
 	created : function() {
 		this._RegisterComponent();
@@ -34,26 +36,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 			return _domId;
 		},
 		_InitMenuClick : function() {
-			$('.navMenu li a').on('click', function() {
-				var parent = $(this).parent().parent();// 获取当前页签的父级的父级
-				var labeul = $(this).parent("li").find(">ul")
-				if ($(this).parent().hasClass('open') == false) {
-					// 展开未展开
-					parent.find('ul').slideUp(300);
-					parent.find("li").removeClass("open")
-					parent.find('li a').removeClass("active").find(".arrow").removeClass("open")
-					$(this).parent("li").addClass("open").find(labeul).slideDown(300);
-					$(this).addClass("active").find(".arrow").addClass("open")
-					parent.prev("a").removeClass("active")
-				} else {
-					$(this).parent("li").removeClass("open").find(labeul).slideUp(300);
-					if ($(this).parent().find("ul").length > 0) {
-						$(this).removeClass("active").find(".arrow").removeClass("open")
-					} else {
-						$(this).addClass("active")
-					}
-				}
-
+			$('.nav li a').on('click', function() {
 				var href = $(this).attr("menuhref");
 				if (href == null || href == "" || href == "#" || href == "0") {
 					return;
@@ -111,7 +94,7 @@ function AjaxMenu(domId) {
 		var $li = $("<li></li>");
 		if (menu.childrenMenuList == null || menu.childrenMenuList.length <= 0) {
 			var $a = $("<a></a>");
-			$a.attr("class", "afinve");
+			//$a.attr("class", "afinve");
 			$a.attr("onclick", "javascript:return false;");
 			if (menu.link == null || menu.link == "")
 				$a.attr("menuhref", "#");
@@ -119,55 +102,44 @@ function AjaxMenu(domId) {
 				$a.attr("menuhref", menu.link);
 			if (menu.cdtb != null && menu.cdtb != "") {
 				var $i = $("<i>"+menu.cdtb+"</i>");
-				$i.attr("class", "layui-icon");
+				$i.attr("class", "fa "+getRandomIcon());
 				$a.append($i);
 			}
 			else{
 				var $i = $("<i>&nbsp;&nbsp;&nbsp;</i>");
-				$i.attr("class", "layui-icon");
+				$i.attr("class", "fa "+getRandomIcon());
 				$a.append($i);
 			}
-			var $spanname = $("<span></span>");
 			if (menu.name != null && menu.name != "") {
-				$spanname.append(menu.name);
-				if (menu.level == "1") {
-					$spanname.attr("class", "nav-text");
-				}
+				$a.append(menu.name);
 			}
-			$a.append($spanname);
 			$li.append($a);
 		} else {
 			var $a = $("<a></a>");
-			$a.attr("class", "afinve");
+			//$a.attr("class", "afinve");
 			if (menu.link == null || menu.link == "")
 				$a.attr("menuhref", "#");
 			else
 				$a.attr("menuhref", menu.link);
 			if (menu.cdtb != null && menu.cdtb != "") {
 				var $i = $("<i>"+menu.cdtb+"</i>");
-				$i.attr("class", "layui-icon");
+				$i.attr("class", "fa "+getRandomIcon());
 				$a.append($i);
 			}
 			else{
 				var $i = $("<i>&nbsp;&nbsp;&nbsp;</i>");
-				$i.attr("class", "layui-icon");
+				$i.attr("class", "fa "+getRandomIcon());
 				$a.append($i);
 			}
-			var $spanname = $("<span></span>");
 			if (menu.name != null && menu.name != "") {
-				$spanname.append(menu.name);
-				if (menu.level == "1") {
-					$spanname.attr("class", "nav-text");
-				}
+				$a.append(menu.name);
 			}
-			$a.append($spanname);
-			var $spanIcon = $("<span></span>");
-			$spanIcon.attr("class", "arrow");
-			$a.append($spanIcon);
+			var $span=$('<span class="fa arrow"></span>');
+			$a.append($span);
 			$li.append($a);
-
+			
 			var $ul = $("<ul></ul>");
-			$ul.attr("class", "sub-menu");
+			$ul.attr("class", "nav nav-second-level");
 			for (var i = 0; i < menu.childrenMenuList.length; i++) {
 				$ul.append(this.getChildrenMenuHtml(menu.childrenMenuList[i]));
 			}
@@ -187,4 +159,29 @@ function AjaxMenu(domId) {
 		return str;
 	}
 	return this;
+}
+
+var arr = [" fa-toggle-on ",
+           " fa-bell ",
+           " fa-circle-o ",
+           " fa-code ",
+           " fa-square-o ",
+           " fa-bug ",
+           " fa-edit ",
+           " fa-eyedropper ",
+           " fa-coffee ",
+           " fa-flash ",
+           " fa-key ",
+           " fa-send ",
+           " fa-recycle ",
+           " fa-desktop ",
+           " fa-anchor",
+           " fa-sign-in ",
+           " fa-flask ",
+           " fa-plus ",
+           ]; 
+var index = Math.floor((Math.random()*arr.length)); 
+function getRandomIcon(){
+	var index = Math.floor((Math.random()*arr.length)); 
+	return arr[index]; 
 }

@@ -24,6 +24,10 @@ li {list-style: none;}
 button,input,select,textarea {
     font:12px \5b8b\4f53,arial,sans-serif;
 }
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
 input,select,textarea {
     font-size:100%;
 }

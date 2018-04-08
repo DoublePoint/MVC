@@ -13,7 +13,7 @@ function componentToolBar(){
 	_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _FormFieldCommonInheritParams);
 	Vue.component(_ConstantComponentMap._ToolBar, {
 		props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
-		template : '<div class="layui-form-item" :style="clientStyle" >' + '<slot></slot>' + '</div>',
+		template : '<div :style="clientStyle" >' + '<slot></slot>' + '</div>',
 		data : function() {
 			var labelclientStyleBuffer = $._CreateStringBuffer();
 			for (clientStyleName in this._ClientStyleArr) {
@@ -23,6 +23,7 @@ function componentToolBar(){
 					labelclientStyleBuffer.append(labelalignbuffer.toString());
 				}
 			}
+			//labelclientStyleBuffer.append("line-height:").append();
 			return {
 				guid : $._GenerateUUID(),
 				clientStyle : labelclientStyleBuffer.toString()

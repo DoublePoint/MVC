@@ -1,11 +1,12 @@
 (function($) {
-	var componentTemplate='<div class="layui-inline">' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
-	+ '<div class="layui-input-block" >' + '<select :id="id+guid" :field="field"  lay-filter="aihao">' + '</select>'
-	+ '<div class="layui-unselect layui-form-select ll-framework-vue-select">' + '<div class="layui-select-title">' + '<input type="text" placeholder="请选择"  value="阅读" readonly=""'
-	+ 'class="layui-input layui-unselect">' + '<i class="layui-edge"></i>' + ' </div>' + ' <dl class="layui-anim layui-anim-upbit" style="display:none;" >'
-	+ ' <dd lay-value="" class="layui-select-tips">请选择</dd>' + ' <dd lay-value="0" class="">写作</dd>' + ' <dd lay-value="1" class="layui-this">阅读</dd>'
-	+ ' <dd lay-value="2" class="">游戏</dd>' + '</dl><input type="hidden" :name="field" />' + '</div>'
-
+	var componentTemplate='<div class="layui-inline">' 
+		+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
+	+ '<div class="layui-input-block" >' 
+	+ '<select :id="id+guid" :field="field"  class="selectpicker">' 
+	+ '<option>Mustard</option>' 
+	+ '  <option>Ketchup</option>' 
+	+ '  <option>Relish</option>' 
+	+ '</select>'
 	+ '</div>' + '</div>';
 	component(_ConstantComponentMap._FormSelect,componentTemplate);
 })(jQuery);

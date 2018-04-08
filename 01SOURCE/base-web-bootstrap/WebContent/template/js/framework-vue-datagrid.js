@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	props : [ 'id', 'datasource', 'columns', 'onrowclick', 'onpageclick','ondblclick' ],
-	template : '<div><table  :lay-filter="id+guid"  :id="id+guid" ><slot></slot></table><div :id="laypage+guid"></div></div>',
+	template : '<div style="height:100%;"><table  :id="id+guid" ><thead><tr><slot></slot></tr></thead></table><div :id="laypage+guid"></div></div>',
 
 	data : function() {
 		var dataList;
@@ -27,6 +27,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 				ajaxDataGrid[attrName] = this[attrName];
 			}
 			$._AddToLayuiObjectHashMap(domId, ajaxDataGrid);
+			ajaxDataGrid.initEvent();
 
 			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
 			$._RegisterResizeModel(ajaxDataGrid);
@@ -58,18 +59,6 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 				}
 			});
 
-			// 定义rowClick
-//			var onrowclickFunction = this.onrowclick;
-//			if (onrowclickFunction != null) {
-//				_Ajaxdatagrid.setRowClickFunctionName(onrowclickFunction);
-//				$table.on('tool(' + this._GetComponentDomId() + ')', function(obj) {
-//					if (onrowclickFunction == null)
-//						return;
-//					var data = obj.datawrap;
-//					$._Eval(onrowclickFunction, data);
-//				});
-//			}
-			
 			var pageclickFunction = this.onpageclick;
 			if (pageclickFunction != null) {
 				_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
@@ -84,50 +73,18 @@ function AjaxDataGrid(domId) {
 	this.pageId = 0;
 	this.pageHeight = 32;
 	this.ondblclick=null;
-	this.onRowClickFunctionName = null;
-	this.onPageClickFunctionName = null;
-	this.cols = [ [ {
-		type : 'numbers'
-	}, {
-		type : 'checkbox'
-	} ] ];
+	this.onrowclick = null;
+	this.onpageclick = null;
+	this.cols = [];
 	this.datasource = "";
 	this.datawrap = $._CreateAjaxDataWrap();
 	this.height = 300;
 	
 	this.addCol = function(col) {
-		this.cols[0].push(col);
+		this.cols.push(col);
 	}
 	this.bindListener= function(){
-		this.bindTrDblclick();
-	}
-	//绑定双击事件
-	this.bindTrDblclick=function(){
-		var grid=this;
-		if(grid.getOndblclick()!=null){
-			this.getDom().next().find(".layui-table-body").find("tr").on("dblclick",function(){
-				var rowIndex=$(this).index();
-				var row=grid.getRow(rowIndex);
-				var arr=new Array();
-				arr.push(row)
-				arr.push(rowIndex);
-				$._Eval(grid.getOndblclick(),arr);
-			});
-		}
-	}
-	//绑定单机事件
-	this.bindTrClick= function(){
-		var grid=this;
-		if(grid.getOndblclick()!=null){
-			this.getDom().next().find(".layui-table-body").find("tr").on("lclick",function(){
-				var rowIndex=$(this).index();
-				var row=grid.getRow(rowIndex);
-				var arr=new Array();
-				arr.push(row)
-				arr.push(rowIndex);
-				$._Eval(grid.getOndblclick(),arr);
-			});
-		}
+		this.initEvent();
 	}
 	this.getCheckedDataList = function() {
 		var checkStatus = $table.checkStatus(this.domId), checkedData = checkStatus.data;
@@ -155,45 +112,47 @@ function AjaxDataGrid(domId) {
 	this.getOndblclick = function(){
 		return this.ondblclick;
 	}
-	this.getPageClickFunctionName = function() {
-		return this.onPageClickFunctionName;
+	this.getPageClick = function() {
+		return this.onpageclick;
 	};
 	this.getRow = function(rowIndex){
 		return this.datawrap.getRow(rowIndex);
 	};
-	this.getRowClickFunctionName = function() {
-		return this.onRowClickFunctionName;
+	this.getRowClick = function() {
+		return this.onrowclick;
 	};
 	
 	this.init = function(msg) {
 		this.setData();
 	};
+	this.initEvent = function(){
+	}
 	this.render = function() {
-		var parentHeight = this.getDom().parent().height();
 		var allChildFixHeight = 0;
-		var brother = this.getDom().parent().parent().children();
-		var parentId = this.getDom().parent()[0].id;
+		var brother = this.getDom().closest(".lllayout").children();
+		var parentId =  this.getDom().closest(".layoutarea").attr("id");
 		for (var i = 0; i < brother.length; i++) {
 			if (brother[i].id != parentId) {
-				allChildFixHeight += brother[i].scrollHeight;
+				allChildFixHeight += brother[i].offsetHeight;
 			}
 		}
-		var thisResultHeight = this.getDom().parent().parent().height() - allChildFixHeight;
+		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
+		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
+			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
 		this.setLayuiTableData(this);
 		this.setPager(this.datawrap.getPageInfo(), this.id);
 	};
 	this.resize = function() {
-		var parentHeight = this.getDom().parent().height();
 		var allChildFixHeight = 0;
-		var brother = this.getDom().parent().parent().children();
-		var parentId = this.getDom().parent()[0].id;
+		var brother = this.getDom().closest(".lllayout").children();
+		var parentId =  this.getDom().closest(".layoutarea").attr("id");
 		for (var i = 0; i < brother.length; i++) {
 			if (brother[i].id != parentId) {
-				allChildFixHeight += brother[i].scrollHeight;
+				allChildFixHeight += brother[i].offsetHeight;
 			}
 		}
-		var thisResultHeight = this.getDom().parent().parent().height() - allChildFixHeight;
+		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
@@ -220,21 +179,23 @@ function AjaxDataGrid(domId) {
 		if(ajaxDataWrap.dataList.length<=0){
 			ajaxgrid.showEmpty();
 		}
-		var ss = $table.render({
-			elem : '#' + id + '',
-			data : $._Clone(ajaxDataWrap.dataList),
+	   var $table=$("#"+id);
+		$table.bootstrapTable({
 			height : height,
-			cols : cols,
-			// skin : 'row', // 表格风格
-			// even : true,
-			page : false, // 是否显示分页
-			limits : [ 5, 7, 10, 20, 100 ],
-			limit : 50,
-			done:function(res,curr,count){
-				ajaxgrid.bindListener();
+			data: $._Clone(ajaxDataWrap.dataList),
+			onClickRow:function(row, $element, field){
+				var arr=new Array();
+				arr.push(row)
+				arr.push($element);
+				arr.push(field);
+				$._Eval(ajaxgrid.getRowClick(),arr);
 			}
 		});
-		return ss;
+		$table.bootstrapTable('resetView',{
+	        height: height,
+	    });
+		$table.bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
+		return null;
 	};
 	this.setOndblclick = function(aOnDblclick){
 		this.ondblclick=aOnDblclick;
@@ -268,17 +229,16 @@ function AjaxDataGrid(domId) {
 	};
 	
 	this.showEmpty = function(){
-		var cols=this.getCols();
-		var object={};
-		object[this.cols[0][2].field]="未查询到任何数据";
-		this.datawrap.dataList[0]=object;
+		//var cols=this.getCols();
+		//var object={};
+		//object[this.cols[0][2].field]="未查询到任何数据";
+		//this.datawrap.dataList[0]=object;
 	}
 	
 	this.test = function() {
 		alert("测试成功");
 	}
 
-	
 	return this;
 }
 

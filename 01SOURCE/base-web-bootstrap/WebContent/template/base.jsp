@@ -3,9 +3,29 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/css/framework.css" type="text/css">
-<script src="${pageContext.request.contextPath}/template/js/jquery-1.9.1.js" charset="utf-8"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/bootstrap-3.3.7/dist/css/bootstrap.min.css" media="all">
+<!-- 引入bootstrap-table样式 -->
+<link href="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.css" rel="stylesheet">
+<!-- jquery -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/bootstrap-select/dist/css/bootstrap-select.css">
+    <!-- FONTAWESOME STYLES-->
+    <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/font-awesome.css" rel="stylesheet" />
+       <!--CUSTOM BASIC STYLES-->
+    <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/basic.css" rel="stylesheet" />
+    <!--CUSTOM MAIN STYLES-->
+    <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/custom.css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath}/template/js/jquery-1.12.4.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-constant.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/template/bootstrap-3.3.7/dist/js/bootstrap.min.js" media="all"></script>
+<!-- bootstrap-table.min.js -->
+<script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.js" media="all"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="${pageContext.request.contextPath}/template/bootstrap-select/js/bootstrap-select.js" ></script>
+
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
 	var $element;
@@ -14,7 +34,7 @@
 	var $layedit;
 	var $laydate;
 	var $tree;
-	var $table;
+	//var $table;
 	$element = layui.element; // 导航的hover效果、二级菜单等功能，需要依赖element模块
 	$layer = layui.layer;
 	$form = layui.form;
@@ -22,7 +42,7 @@
 	$laydate = layui.laydate;
 	$laypage = layui.laypage;
 	$tree = layui.tree;
-	$table = layui.table;
+	//$table = layui.table;
 	$layer.config({
 		  extend: 'frameworkskin/dialogStyle.css', //加载您的扩展样式
 		  skin: 'layui-layer-iframe'
@@ -51,4 +71,5 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-toolbar.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-region.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
-
+ <!-- METISMENU SCRIPTS -->
+<script src="${pageContext.request.contextPath}/template/btts_9_sp/assets/js/jquery.metisMenu.js"></script>
