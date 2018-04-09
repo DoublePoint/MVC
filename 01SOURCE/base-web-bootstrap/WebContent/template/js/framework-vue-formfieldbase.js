@@ -31,8 +31,7 @@ function component(fieldType, fieldTemplate) {
 				a : "a",
 				labelclientStyle : labelclientStyleBuffer.toString(),
 				guid : $._GenerateUUID(),
-				tree : "tree",
-				dataWidth:"",
+				tree : "tree"
 			}
 		},
 		created : function() {
@@ -54,7 +53,12 @@ function component(fieldType, fieldTemplate) {
 			} else if (_ConstantComponentMap._FormDate == fieldType) {
 				this._InitDateOnClick();// 初始化日期控件
 			} else if (_ConstantComponentMap._FormSelect == fieldType) {
-				this._InitDropData();
+				this._InitSelectOnClick();// 初始化select
+				this._InitSelectMouseEnter();
+				this._InitSelectMouseLeave();
+				this._InitSelectInputOnClick();
+				this._InitSelectInputMouseLeave();
+				this._InitSelectInputMouseEnter();
 			} else if (_ConstantComponentMap._FormDropTree == fieldType) {
 				this._InitSelectOnClick();// 初始化select
 				this._InitSelectMouseEnter();
@@ -148,10 +152,55 @@ function component(fieldType, fieldTemplate) {
 				});
 			},
 			/* select */
-			_InitDropData:function(){
-				this._GetFormFieldX().initData();
+			_InitSelectOnClick : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectDl().children("dd").click(function() {
+					formField.removeSelectDdClass();
+					formField.clearTimeoutInterval();
+					$(this).addClass("layui-this");
+					formField.hideSelectDl();
+					formField.getSelectInput().val($(this).text());
+					formField.getSelectHidden().val($(this).attr("lay-value"));
+				})
 			},
-			/* select */
+			_InitSelectMouseEnter : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectDl().mouseenter(function() {
+					formField.clearTimeoutInterval();
+				})
+			},
+			_InitSelectMouseLeave : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectDl().mouseleave(function() {
+					formField.setTimeoutInterval(setTimeout(function() {
+						formField.hideSelectDl();
+					}, 300));
+				});
+			},
+			_InitSelectInputOnClick : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectInput().click(function() {
+					formField.getSelectDiv().toggleClass("layui-form-selected");
+					if (formField.getSelectDiv().hasClass("layui-form-selected"))
+						formField.showSelectDl();
+					else
+						formField.hideSelectDl();
+				});
+			},
+			_InitSelectInputMouseLeave : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectInput().mouseleave(function() {
+					formField.setTimeoutInterval(setTimeout(function() {
+						formField.hideSelectDl();
+					}, 300));
+				});
+			},
+			_InitSelectInputMouseEnter : function() {
+				var formField = this._GetFormFieldX();
+				formField.getSelectInput().mouseenter(function() {
+					formField.clearTimeoutInterval();
+				})
+			},
 			_InitDropTreeData : function(){
 				var formTree = this._GetFormFieldX();
 				formTree.initData();
@@ -178,8 +227,6 @@ function FormFieldBase(domId) {
 	this.data = "";
 	this.isChanged = false;
 	this.parentAjaxFormId = "";
-	this.labelWidth="";
-	this.inputWidth="";
 	this.getDomId = function() {
 		return this.domId;
 	}
@@ -252,10 +299,6 @@ function FormFieldBase(domId) {
 	this.setInputStyle = function(cssKey, cssValue) {
 		this.getInputDom().css(cssKey, cssValue);
 	}
-	this.setInputWidth=function(inputWidth){
-		this.inputWidth=inputWidth;
-		this.getInputDom().css("width", inputWidth);
-	}
 	this.setIsChanged = function(aIsChanged) {
 		this.isChanged = aIsChanged;
 	}
@@ -264,10 +307,6 @@ function FormFieldBase(domId) {
 	}
 	this.setLabelStyle = function(cssKey, cssValue) {
 		this.getLabel().css(cssKey, cssValue);
-	}
-	this.setLabelWidth=function(labelWidth){
-		this.labelWidth=labelWidth;
-		this.getLabel().css("width", labelWidth);
 	}
 	this.setReadonly = function(aReadonly) {
 		this.readonly = aReadonly;
