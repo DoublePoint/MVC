@@ -2,19 +2,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/css/framework.css" type="text/css">
+<link rel="stylesheet/less" href="${pageContext.request.contextPath}/template/css/framework.less" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/bootstrap-3.3.7/dist/css/bootstrap.min.css" media="all">
 <!-- 引入bootstrap-table样式 -->
 <link href="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.css" rel="stylesheet">
 <!-- jquery -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/bootstrap-select/dist/css/bootstrap-select.css">
-    <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/font-awesome.css" rel="stylesheet" />
-       <!--CUSTOM BASIC STYLES-->
-    <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/basic.css" rel="stylesheet" />
-    <!--CUSTOM MAIN STYLES-->
-    <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/custom.css" rel="stylesheet" />
+<!-- FONTAWESOME STYLES-->
+<link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/font-awesome.css" rel="stylesheet" />
+<!--CUSTOM BASIC STYLES-->
+<link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/basic.css" rel="stylesheet" />
+<!--CUSTOM MAIN STYLES-->
+<link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/custom.css" rel="stylesheet" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.2.0/less.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/template/js/jquery-1.12.4.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-constant.js" charset="utf-8"></script>
