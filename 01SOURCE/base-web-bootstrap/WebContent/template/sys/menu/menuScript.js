@@ -89,24 +89,30 @@ function onClickDelete() {
 function zTreeOnClick(event, treeId, treeNode) {
 	lltestdatagrid.getDataWrap().getPageInfo().clear();
 	retrieve();
-	// var ajaxDataWrap= new $._AjaxDataWrap("treeNode");
-	// var data=$._ParseTreeNodeToCd(treeNode);
-	// ajaxDataWrap.setData(data);
-	// $.ajax({
-	// url : $$pageContextPath + "/template/sys/menu/datalist",
-	// type : "POST",
-	// contentType : 'application/json;charset=UTF-8',
-	// dataType : "json",
-	// data : JSON.stringify(ajaxDataWrap),
-	// async : false,
-	// success : function(datawrap) {
-	// lltestdatagrid.setDataWrap(datawrap);
-	// }
-	// });
 	return false;
 };
 function rowClickTest(data,a,b,c) {
 	var dd = data;
+	var arr=new Array();
+	arr.push(data);
+	var ajaxDataWrap =  $._CreateAjaxDataWrap();
+	ajaxDataWrap.setDataList(arr);
+	$._OpenDialog({
+		type : 2,
+		title : "修改菜单",
+		width : 630,
+		height : 330,
+		shade : 0.4,
+		closeBtn : 1,
+		shadeClose : true,
+		maxmin : true,
+		content : $$pageContextPath + '/template/sys/menu/menuDialog?type=modify',
+		data : ajaxDataWrap,
+		yes : function() {
+			retrieve();
+			retrieveTree();
+		},
+	});
 }
 
 function dbclickgrid(para1,data,index){

@@ -60,7 +60,8 @@ public class MenuApplicationService {
 				Menu parentCd=menuRepository.findOne(menu.getParentId());
 				menu.setLevel(parentCd.getLevel()+1);
 			}
-			menu.setId(idWorker.nextId());
+			if(StringUtil.isNullOrEmpty(menu.getId()))
+				menu.setId(idWorker.nextId());
 			menu.setCreateTime(new Date());
 			menuRepository.save(menu);
 		} catch (Exception e) {

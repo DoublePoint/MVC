@@ -28,7 +28,7 @@
 		<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
 			<ll-formfield id="cdmcId" title="菜单名称" field="name" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 			<ll-formfield title="菜单链接" field="link" maxlen="200"></ll-formfield>
-			<ll-formfield title="菜单序号" field="cdpx" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
+			<ll-formfield title="菜单序号" field="sn" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
 			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="InputButtonClick"></ll-forminputbutton>
 			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
 			<ll-toolbar align="center">

@@ -14,6 +14,7 @@ var _ConstantLayoutArea = {
 var _ConstantComponentMap = {
 	_AjaxDataGrid : "ll-ajaxdatagrid",
 	_AjaxDataGridRow : "ll-gridrow",
+	_GridCheck : "ll-gridcheck",
 	_AjaxMenu : "ll-menu",
 	_AjaxFormLine : "ll-ajaxformline",
 	_Tree : "ll-tree",

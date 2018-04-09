@@ -53,12 +53,7 @@ function component(fieldType, fieldTemplate) {
 			} else if (_ConstantComponentMap._FormDate == fieldType) {
 				this._InitDateOnClick();// 初始化日期控件
 			} else if (_ConstantComponentMap._FormSelect == fieldType) {
-				this._InitSelectOnClick();// 初始化select
-				this._InitSelectMouseEnter();
-				this._InitSelectMouseLeave();
-				this._InitSelectInputOnClick();
-				this._InitSelectInputMouseLeave();
-				this._InitSelectInputMouseEnter();
+				
 			} else if (_ConstantComponentMap._FormDropTree == fieldType) {
 				this._InitSelectOnClick();// 初始化select
 				this._InitSelectMouseEnter();

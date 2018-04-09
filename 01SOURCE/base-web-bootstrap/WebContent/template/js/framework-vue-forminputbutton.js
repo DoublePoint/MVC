@@ -11,16 +11,16 @@ function FormInputButton(domId) {
 	this.domId = domId;
 	this.fieldKey = null;
 	this.fieldValue = null;
-	this.setData = function(aKey,aValue, isChangede) {
+	this.setData = function(aKey, isChangede) {
 		//如果第二个参数为nul,那么如果数据改变时 设置为改变 只要是改变一次 那么就永久改变了
-		if(isChangede==null){
-			if(this.fieldKey!=aKey||this.fieldValue!=aValue)
-				isChanged=true;
-		}
-		this.getInputDom().val(aValue);
+		//if(isChangede==null){
+		//	if(this.fieldKey!=aKey||this.fieldValue!=aValue)
+		//		isChanged=true;
+		//}
+		this.getInputDom().val(aKey);
 		this.setInputHiddenDomValue(aKey);
-		if(isChangede.toString().toLowerCase()=='true')
-			this.showParentNotSave();
+		//if(isChangede.toString().toLowerCase()=='true')
+		//	this.showParentNotSave();
 	};
 
 	this.getInputHiddenDom = function() {

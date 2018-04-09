@@ -18,13 +18,13 @@ import cn.doublepoint.commonutil.domain.model.StringUtil;
 @Controller
 public class PageController {
 	// 索引页
-	@RequestMapping(value = "/index/{actionname}")
+	@RequestMapping(value = "/template/sys/index/{actionname}")
 	public String hello(@PathVariable String actionname) {
 		if(StringUtil.isNullOrEmpty(actionname))
 			return "/template/sys/index/index";
 		return "/template/sys/index/"+actionname;
 	}
-	@RequestMapping(value = "/template/sys/index/{actionname}")
+	@RequestMapping(value = "/index/{actionname}")
 	public String index(@PathVariable String actionname) {
 		return "/template/sys/index/"+actionname;
 	}
@@ -57,5 +57,9 @@ public class PageController {
 	@RequestMapping("/template/sys/bootstrap/{actionname}")
 	public String bootstrap(@PathVariable String actionname) {
 		return "/template/sys/bootstrap/" + actionname;
+	}
+	@RequestMapping("/template/sys/assistant/{actionname}")
+	public String assistant(@PathVariable String actionname) {
+		return "/template/sys/assistant/" + actionname;
 	}
 }

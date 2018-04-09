@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	props : [ 'id', 'datasource', 'columns', 'onrowclick', 'onpageclick','ondblclick' ],
-	template : '<div style="height:100%;"><table  :id="id+guid" ><thead><tr><slot></slot></tr></thead></table><div :id="laypage+guid"></div></div>',
+	template : '<div style="height:100%;"><table  :id="id+guid" data-checkbox="true"><thead><tr><slot></slot></tr></thead></table><div :id="laypage+guid"></div></div>',
 
 	data : function() {
 		var dataList;
@@ -87,8 +87,7 @@ function AjaxDataGrid(domId) {
 		this.initEvent();
 	}
 	this.getCheckedDataList = function() {
-		var checkStatus = $table.checkStatus(this.domId), checkedData = checkStatus.data;
-		return checkedData;
+		return this.getDom().bootstrapTable('getSelections');
 	}
 	this.getCols = function(){
 		return this.cols;
@@ -176,9 +175,6 @@ function AjaxDataGrid(domId) {
 		var datasource = ajaxgrid.datasource;
 		var cols = ajaxgrid.cols;
 		var height = ajaxgrid.height;
-		if(ajaxDataWrap.dataList.length<=0){
-			ajaxgrid.showEmpty();
-		}
 	   var $table=$("#"+id);
 		$table.bootstrapTable({
 			height : height,
@@ -193,6 +189,7 @@ function AjaxDataGrid(domId) {
 		});
 		$table.bootstrapTable('resetView',{
 	        height: height,
+	        checkbox:true
 	    });
 		$table.bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
 		return null;
@@ -228,17 +225,6 @@ function AjaxDataGrid(domId) {
 		this.onRowClickFunctionName = funName;
 	};
 	
-	this.showEmpty = function(){
-		//var cols=this.getCols();
-		//var object={};
-		//object[this.cols[0][2].field]="未查询到任何数据";
-		//this.datawrap.dataList[0]=object;
-	}
-	
-	this.test = function() {
-		alert("测试成功");
-	}
-
 	return this;
 }
 

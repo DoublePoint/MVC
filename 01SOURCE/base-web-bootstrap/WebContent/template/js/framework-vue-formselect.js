@@ -2,7 +2,7 @@
 	var componentTemplate='<div class="layui-inline">' 
 		+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
 	+ '<div class="layui-input-block" >' 
-	+ '<select :id="id+guid" :field="field" class="selectpicker"  data-width="66.6666%">' 
+	+ '<select :id="id+guid" :field="field" class="selectpicker"  >' 
 	+ '<option>Mustard</option>' 
 	+ '  <option>Ketchup</option>' 
 	+ '  <option>Relish</option>' 
@@ -22,6 +22,9 @@ function FormSelect(domId) {
 	this.hideSelectDl = function() {
 		this.getSelectDl().hide();
 		this.getSelectDiv().removeClass("layui-form-selected");
+	}
+	this.getSelect=function(){
+		return this.getInputDom();
 	}
 	this.getSelectDiv = function() {
 		return this.getInputDom().next();
@@ -58,13 +61,8 @@ function FormSelect(domId) {
 			// 舍掉后面两位小数
 			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
-			this.setInputStyle("padding-left", "10px");
-			this.getSelectDl().css("width", inputPercent * 100 + "%");
-			this.getSelectDl().css("left", labelPercent * 100 + "%");
-			this.getSelectInput().css("width", inputPercent * 100 + "%");
-			this.getSelectInput().show();
+			this.getSelect().attr("data-width", "66.6666%");
 			this.setLabelStyle("width", labelPercent * 100 + "%");
-			this.setInputStyle("width", inputPercent * 100 + "%");
 		}
 		if (linewidthPercent != null) {
 			this.setRootStyle("width", linewidthPercent * 100 + "%");
