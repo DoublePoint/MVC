@@ -31,11 +31,11 @@
 			<ll-fillarea-lr width="*">
 				<ll-filllayout > 
 					<ll-fillarea-tb height="86px" >
-							<ll-ajaxform id="ajaxform" cols="3" colproportion="4:8:4:8:3:10"> 
+							<ll-ajaxform id="ajaxform" cols="3" colproportion="1:3:1:3:1:3"> 
 									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formdate title="创建时间" field="createTime" ></ll-formdate>
-									<ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
+									<ll-formselect id="selectCdmcId" dropname="YesOrNo" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
 									<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="${pageContext.request.contextPath}/template/sys/menu/menu-tree/datalist?isHasRoot=true"></ll-formdroptree>
 									<ll-formtoolbar labelalign="right" colspan="1">
 									 	<input type="button" class="btn btn-info btn-sm " onclick="retrieve()"  value="查询"/>
@@ -46,7 +46,7 @@
 					<ll-fillarea-tb height="45px" >
 						<ll-toolbar style="line-height:45px;height:100%;">
 							<input type="button" class="btn btn-info btn-sm" onclick="onClickAdd()" value="增加"/>
-							<input type="button" class="btn btn-info btn-sm " value="编辑"/>
+							<input type="button" class="btn btn-info btn-sm " onclick="onClickEdit()" value="编辑"/>
 							<input type="button" class="btn btn-info btn-sm" onclick="onClickDelete()" value="删除"/></ll-toolbar>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*" >

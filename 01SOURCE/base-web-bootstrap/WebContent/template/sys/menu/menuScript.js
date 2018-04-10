@@ -61,6 +61,10 @@ function onClickAdd() {
 	return false;
 }
 
+function onClickEdit(){
+	selectCdmcId.refreshData();
+}
+
 function onClickDelete() {
 	$._Confirm('确定要删除吗？', function() {
 		var checkedDatas = lltestdatagrid.getCheckedDataList();

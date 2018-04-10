@@ -1,5 +1,5 @@
 var timeoutInterval = null;
-function component(fieldType, fieldTemplate) {
+function component(fieldType, fieldTemplate,props) {
 	// 创建style映射
 
 	var _ClientStyleMap = {};
@@ -12,6 +12,9 @@ function component(fieldType, fieldTemplate) {
 	_ClientStyleArr = [ "labelalign" ];
 	_ClientStyleMap["labelalign"] = "text-align";
 	_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _FormFieldCommonInheritParams);
+	if(props!=null){
+		_ClientPropsArrAll=_ClientPropsArrAll.concat(_ClientPropsArrAll,props);
+	}
 	Vue.component(fieldType, {
 		props : _ClientPropsArrAll,
 		template : fieldTemplate,
@@ -29,9 +32,9 @@ function component(fieldType, fieldTemplate) {
 			return {
 				hidden : "hidden",
 				a : "a",
+				tree : "tree",
 				labelclientStyle : labelclientStyleBuffer.toString(),
-				guid : $._GenerateUUID(),
-				tree : "tree"
+				guid : $._GenerateUUID()
 			}
 		},
 		created : function() {
@@ -53,7 +56,7 @@ function component(fieldType, fieldTemplate) {
 			} else if (_ConstantComponentMap._FormDate == fieldType) {
 				this._InitDateOnClick();// 初始化日期控件
 			} else if (_ConstantComponentMap._FormSelect == fieldType) {
-				
+				this._InitSelectData();
 			} else if (_ConstantComponentMap._FormDropTree == fieldType) {
 				this._InitSelectOnClick();// 初始化select
 				this._InitSelectMouseEnter();
@@ -147,6 +150,10 @@ function component(fieldType, fieldTemplate) {
 				});
 			},
 			/* select */
+			_InitSelectData:function(){
+				var formField = this._GetFormFieldX();
+				formField.initData();
+			},
 			_InitSelectOnClick : function() {
 				var formField = this._GetFormFieldX();
 				formField.getSelectDl().children("dd").click(function() {

@@ -16,7 +16,7 @@
 <!--CUSTOM MAIN STYLES-->
 <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/custom.css" rel="stylesheet" />
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.2.0/less.min.js"></script>
+<script src="${pageContext.request.contextPath}/template/less.js-2.5.3/dist/less.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/template/js/jquery-1.12.4.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>

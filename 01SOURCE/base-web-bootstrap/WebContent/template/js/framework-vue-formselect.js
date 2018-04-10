@@ -3,25 +3,26 @@
 		+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
 	+ '<div class="layui-input-block" >' 
 	+ '<select :id="id+guid" :field="field" class="selectpicker"  >' 
-	+ '<option>Mustard</option>' 
-	+ '  <option>Ketchup</option>' 
-	+ '  <option>Relish</option>' 
 	+ '</select>'
 	+ '</div>' + '</div>';
-	component(_ConstantComponentMap._FormSelect,componentTemplate);
+	var privateProps=["dropname"];
+	component(_ConstantComponentMap._FormSelect,componentTemplate,privateProps);
 })(jQuery);
 
 function FormSelect(domId) {
 	FormFieldBase.call(this);
 	this.domId = domId;
 	this.datasource=null;
-
+	this.dropname=null;
 	this.clearTimeoutInterval = function() {
 		clearTimeout(this.getTimeoutInterval());
 	}
 	this.hideSelectDl = function() {
 		this.getSelectDl().hide();
 		this.getSelectDiv().removeClass("layui-form-selected");
+	}
+	this.getDropName=function(){
+		return this.dropname;
 	}
 	this.getSelect=function(){
 		return this.getInputDom();
@@ -38,16 +39,40 @@ function FormSelect(domId) {
 	this.getSelectInput = function() {
 		return this.getInputDom().next().children("div").children("input");
 	}
+	
 	this.initData = function(){
-		var dl=getSelectDl();
-		dl.empty();
-		var $dd=$("<dd></dd>");
+		var formSelect=this;
+		$.ajax({
+			url : $$pageContextPath + "/template/sys/dropdown/datalist?dropName="+formSelect.getDropName(),
+			type : "POST",
+			contentType : 'application/json;charset=UTF-8',
+			dataType : "json",
+			async : false,
+			data : null,
+			success : function(ajaxDataWrap) {
+				var dataList=ajaxDataWrap.dataList;
+				var select=$("#"+formSelect.domId);
+				for(var i=0;i<dataList.length;i++){
+					var dropBean=dataList[i];
+					select.append($("<option>"+dropBean.value+"</option>"));
+				}
+				//select.selectpicker("refresh");
+			}
+		});
+		
+	}
+	this.refreshData=function(){
+		var select=$("#"+this.domId);
+		select.append($("<option>"+5+"</option>"));
+		select.selectpicker("refresh");
 	}
 	this.removeSelectDdClass = function() {
 		this.getSelectDl().children().removeClass();
 	}
+	this.setDropName=function(dropname){
+		this.dropname=dropname;
+	}
 	this.showSelectDl = function() {
-		this.getSelectDiv().addClass("layui-form-selected");
 		this.getSelectDl().show();
 	}
 	
@@ -61,7 +86,7 @@ function FormSelect(domId) {
 			// 舍掉后面两位小数
 			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
-			this.getSelect().attr("data-width", "66.6666%");
+			this.getSelect().attr("data-width", inputPercent * 100 + "%");
 			this.setLabelStyle("width", labelPercent * 100 + "%");
 		}
 		if (linewidthPercent != null) {

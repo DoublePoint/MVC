@@ -62,4 +62,5 @@ public class PageController {
 	public String assistant(@PathVariable String actionname) {
 		return "/template/sys/assistant/" + actionname;
 	}
+	
 }
