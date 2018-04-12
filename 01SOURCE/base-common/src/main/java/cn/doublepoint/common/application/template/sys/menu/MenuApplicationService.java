@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.constant.XTConstant;
@@ -59,6 +60,7 @@ public class MenuApplicationService {
 			else{
 				Menu parentCd=menuRepository.findOne(menu.getParentId());
 				menu.setLevel(parentCd.getLevel()+1);
+				menuRepository.findAll(example)
 			}
 			if(StringUtil.isNullOrEmpty(menu.getId()))
 				menu.setId(idWorker.nextId());

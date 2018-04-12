@@ -1,13 +1,18 @@
 package cn.doublepoint.common.application.template.sys.menu;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
@@ -32,8 +37,16 @@ import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 @Service
 public class MenuQueryService {
 
-	// @Resource
-	// BaseRepositoryUtil jpaUtil;
+	@Autowired  
+    @PersistenceContext  
+    private EntityManager entityManager;  
+      
+    private JPAQueryFactory queryFactory;  
+      
+    @PostConstruct  
+    public void init() {  
+        queryFactory = new JPAQueryFactory(entityManager);  
+    }  
 
 	@Resource
 	MenuRepository menuRepository;
@@ -91,4 +104,27 @@ public class MenuQueryService {
 		AjaxDataWrap<T> ajaxDataWrap = CommonBeanUtils.copyPageToAjaxDataWrap(page, clazz);
 		return ajaxDataWrap;
 	}
+	
+	private void test(){
+//		Predicate predicate = (QPerson.person.id.intValue()).eq(QIDCard.iDCard.person.id.intValue());  
+//        JPAQuery<Tuple> jpaQuery = queryFactory.select(QIDCard.iDCard.idNo, QPerson.person.address, QPerson.person.name)  
+//                .from(QIDCard.iDCard, QPerson.person)  
+//                .where(predicate);  
+//        List<Tuple> tuples = jpaQuery.fetch();  
+//        List<PersonIDCardDto> dtos = new ArrayList<PersonIDCardDto>();  
+//        if(null != tuples && !tuples.isEmpty()){  
+//            for(Tuple tuple:tuples){  
+//                String address = tuple.get(QPerson.person.address);  
+//                String name = tuple.get(QPerson.person.name);  
+//                String idCard = tuple.get(QIDCard.iDCard.idNo);  
+//                PersonIDCardDto dto = new PersonIDCardDto();  
+//                dto.setAddress(address);  
+//                dto.setIdNo(idCard);  
+//                dto.setName(name);  
+//                dtos.add(dto);  
+//            }  
+//        }  
+//        return dtos;  
+	}
 }
+
