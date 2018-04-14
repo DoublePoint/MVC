@@ -24,24 +24,5 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
 public class BaseHandleController implements BaseController{
-	@RequestMapping("/template/sys/dropdown/datalist")
-	@ResponseBody
-	public AjaxDataWrap<DropBean> assistant(@RequestParam(required=false) String dropName) {
-		AjaxDataWrap<DropBean> dataWrap=new AjaxDataWrap<>();
-		List<DropBean> dropBeans=new ArrayList<>();
-		DropBean dBean1=new DropBean();
-		dBean1.setValue("1");
-		dropBeans.add(dBean1);
-		DropBean dBean2=new DropBean();
-		dBean2.setValue("2");
-		dropBeans.add(dBean2);
-		DropBean dBean3=new DropBean();
-		dBean3.setValue("3");
-		dropBeans.add(dBean3);
-		DropBean dBean4=new DropBean();
-		dBean4.setValue(dropName);
-		dropBeans.add(dBean4);
-		dataWrap.setDataList(dropBeans);
-		return dataWrap;
-	}
+	
 }

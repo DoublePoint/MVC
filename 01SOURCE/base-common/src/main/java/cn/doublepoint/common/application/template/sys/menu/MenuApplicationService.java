@@ -60,7 +60,6 @@ public class MenuApplicationService {
 			else{
 				Menu parentCd=menuRepository.findOne(menu.getParentId());
 				menu.setLevel(parentCd.getLevel()+1);
-				menuRepository.findAll(example)
 			}
 			if(StringUtil.isNullOrEmpty(menu.getId()))
 				menu.setId(idWorker.nextId());
