@@ -38,7 +38,6 @@ public class DropBeanUtil{
 			String dataBaseName=DataBaseMetaDataUtil.getDataBaseName();
 			sql="select table_name as 'key',table_name  as 'value','' filter from information_schema.tables  WHERE TABLE_SCHEMA = '"+dataBaseName+"'";
 			List<Map<String, Object>> mapList=jdbcTemplate.queryForList(sql);
-			
 			List<DropBean> list=mapList.stream().map(m->{
 				String aKey=(String) m.get("key");
 				String aValue=(String) m.get("value");

@@ -24,8 +24,8 @@
 </head>
 <body>
 	<form>
-		<ll-filllayout width="200px"> 
-			<ll-fillarea-lr>
+		<ll-filllayout> 
+			<ll-fillarea-lr width="200px">
 				<ll-tree  id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true" showLine="true" onclick="zTreeOnClick"></ll-tree>
 			</ll-fillarea-lr>
 			<ll-fillarea-lr width="*">
@@ -58,7 +58,7 @@
 							<ll-gridrow field="link" title="菜单链接"></ll-gridrow> 
 							<ll-gridrow field="createTime" title="创建时间"></ll-gridrow> 
 							<ll-gridrow field="modifyTime" title="更新时间"></ll-gridrow> 
-						</ll-datagrid>
+						</ll-ajaxdatagrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>
 			</ll-fillarea-lr>

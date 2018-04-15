@@ -18,17 +18,39 @@
 </head>
 <body>
 	<form>
-			<ll-ajaxform id="ajaxform" cols="2" colproportion="4:8:4:8:3:10"> 
-				<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-				<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-				<ll-formdate title="创建时间" field="createTime" ></ll-formdate>
-				<ll-formselect id="cdmcId" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formselect>
-				<ll-formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="${pageContext.request.contextPath}/template/sys/menu/menu-tree/datalist?isHasRoot=true"></ll-formdroptree>
-				<ll-formtoolbar labelalign="right" colspan="1">
-			<input type="button" class="btn btn-info btn-sm " onclick="retrieve()"  value="查询"/>
-									 	&nbsp;&nbsp;
-				</ll-formtoolbar>
-			</ll-ajaxform>
+	<ll-filllayout> 
+		<ll-fillarea-tb height="*">
+			<ll-filllayout> 
+				<ll-fillarea-lr width="50%"  height="100%">
+					<ll-filllayout > 
+						<ll-fillarea-tb height="86px" >
+							<ll-ajaxdatagrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)" datasource="/template/sys/tables"> 
+								<ll-gridcheck></ll-gridcheck>
+								<ll-gridrow field="tABLE_NAME" title="表名"></ll-gridrow>
+							</ll-ajaxdatagrid>
+						</ll-fillarea-tb>
+					</ll-filllayout>
+				</ll-fillarea-lr>
+				<ll-fillarea-lr width="*"  height="100%">
+						<ll-filllayout > 
+							<ll-fillarea-tb height="86px" >
+								<ll-ajaxdatagrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
+									<ll-gridcheck></ll-gridcheck>
+									<ll-gridrow field="id" title="表名"></ll-gridrow>
+								</ll-ajaxdatagrid>
+							</ll-fillarea-tb>
+					</ll-filllayout>
+				</ll-fillarea-lr>
+			</ll-filllayout>
+		</ll-fillarea-tb>
+		<ll-fillarea-tb height="35">
+			<ll-toolbar style="line-height:35px;height:100%;">
+							<input type="button" class="btn btn-info btn-sm" onclick="onClickAdd()" value="增加"/>
+							<input type="button" class="btn btn-info btn-sm " onclick="onClickEdit()" value="编辑"/>
+							<input type="button" class="btn btn-info btn-sm" onclick="onClickDelete()" value="删除"/></ll-toolbar>
+		</ll-fillarea-tb>
+			
+	</ll-filllayout>
 	</form>
 </body>
 </html>

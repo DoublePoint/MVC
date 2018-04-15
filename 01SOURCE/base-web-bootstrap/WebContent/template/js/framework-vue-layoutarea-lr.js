@@ -188,6 +188,7 @@ function FillAreaLR(domId) {
 	this.resize = function() {
 		this.hide();
 		var parentWidth = this.getParent().width();
+		var parentHeight = this.getParent().height(); 
 		var varWidth = 0;
 		if (this.width == null)
 			varWidth = _ConstantLayoutArea._DEFAULT_MIN_WIDTH_LEFT;
@@ -207,16 +208,18 @@ function FillAreaLR(domId) {
 			}
 			varWidth = parentWidth - allChildFixWidth;
 		} else {
-			var allChildFixWidth = 0;
+			/*var allChildFixWidth = 0;
 			var children = this.getBrothers();
 			for (var i = 0; i < children.length; i++) {
 				if (children[i].id != this.id) {
 					allChildFixWidth += children[i].offsetWidth;
 				}
 			}
-			varWidth = parentWidth - allChildFixWidth;
+			varWidth = parentWidth - allChildFixWidth;*/
+			varWidth=this.width;
 		}
 		this.setFillAreaWidth(varWidth);
+		this.setFillAreaHeight(parentHeight);
 		var preBrother = this.getPreBrother();
 		var left = 0;
 		// 判断是否是第一个子节点
