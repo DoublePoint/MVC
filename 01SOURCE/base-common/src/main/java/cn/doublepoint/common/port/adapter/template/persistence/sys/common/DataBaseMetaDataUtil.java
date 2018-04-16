@@ -19,6 +19,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.commonutil.domain.model.DropBean;
@@ -50,8 +51,10 @@ public class DataBaseMetaDataUtil {
 	 * @return
 	 * @throws SQLException
 	 */
+	@Transactional
 	public static <E> List<MySQLTables> getTables() {
 		try {
+			jdbcTemplate.setQueryTimeout(30000);
 			String dataBaseName=DataBaseMetaDataUtil.getDataBaseName();
 			String sql="select  table_name as 'key',table_name  as 'value','' filter  from information_schema.tables  WHERE TABLE_SCHEMA = '"+dataBaseName+"'";
 			List<Map<String, Object>> mapList=jdbcTemplate.queryForList(sql);

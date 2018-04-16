@@ -15,6 +15,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 	},
 	mounted : function() {
 		this._MapComponent();
+		
 		this._RefreshForm();
 		
 		//初始化各个子标签的事件 例如文本改变时 设置该弹出窗口为未保存
@@ -24,6 +25,15 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		this._RegisterComponent();
 	},
 	methods : {
+		_GetComponentDomId : function() {
+			var _domId = this.id + this.guid;
+			return _domId;
+		},
+		_GetAjaxForm : function(){
+			var domId = this._GetComponentDomId();
+			var ajaxform = $._GetFromLayuiObjectHashMap(domId);
+			return ajaxform;
+		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var ajaxForm = new AjaxForm(domId);
@@ -44,15 +54,6 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 			if(this.showchanged.toString().toLowerCase()=="true")
 				return true;
 			return false;
-		},
-		_GetComponentDomId : function() {
-			var _domId = this.id + this.guid;
-			return _domId;
-		},
-		_GetAjaxForm : function(){
-			var domId = this._GetComponentDomId();
-			var ajaxform = $._GetFromLayuiObjectHashMap(domId);
-			return ajaxform;
 		},
 		_InitShowChanged : function(){
 			var ajaxform = this._GetAjaxForm();

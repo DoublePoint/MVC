@@ -2,39 +2,64 @@
 	var componentTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
 			+ '<div class="layui-input-block">'
 			+ '<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'
-			+ '<input :id="id+guid+hidden" type="hidden" value="" :name="field" />' + '<a :id="id+guid+a" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
+			+ '<input :id="inputButtonHiddenId" type="hidden" value="" :name="field" />' + '<a :id="inputButtonButtonId" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
 	component(_ConstantComponentMap._FormInputButton,componentTemplate);
 })(jQuery);
 
 function FormInputButton(domId) {
 	FormFieldBase.call(this);
 	this.domId = domId;
+	this.inputButtonHiddenId=null;
+	this.inputButtonButtonId=null;
 	this.fieldKey = null;
 	this.fieldValue = null;
+	this.onclick=null;
+	
+	this.getInputHiddenDom = function() {
+		return $("#" + this.inputButtonHiddenId);
+	};
+	this.getInputButtonButtonDom = function(){
+		return $("#"+this.getInputButtonButtonDomId());
+	};
+	this.getInputButtonButtonDomId=function(){
+		return this.inputButtonButtonId;
+	};
+	this.getOnClick=function(){
+		return this.onclick;
+	};
+	this.init = function(){
+		this.initData();
+		this.initEvent();
+	};
+	this.initData=function(){
+		
+	};
+	this.initEvent= function (){
+		this.initButtonClick();
+	};
+	this.initButtonClick=function(){
+		this.getInputButtonButtonDom().click(function() {
+			if (this.onclick == null)
+				return;
+			$._Eval(this.onclick);
+		});
+	}
 	this.setData = function(aKey, isChangede) {
-		//如果第二个参数为nul,那么如果数据改变时 设置为改变 只要是改变一次 那么就永久改变了
-		//if(isChangede==null){
-		//	if(this.fieldKey!=aKey||this.fieldValue!=aValue)
-		//		isChanged=true;
-		//}
 		this.getInputDom().val(aKey);
 		this.setInputHiddenDomValue(aKey);
-		//if(isChangede.toString().toLowerCase()=='true')
-		//	this.showParentNotSave();
 	};
 
-	this.getInputHiddenDom = function() {
-		return $("#" + this.domId).next();
-	}
 	this.setInputDomValue = function(aValue) {
 		this.fieldValue = aValue;
 		this.getInputDom().val(aValue);
-	}
+	};
 	this.setInputHiddenDomValue = function(aValue) {
 		this.fieldKey = aValue;
 		this.getInputHiddenDom().val(aValue);
-	}
-
+	};
+	this.setOnClick=function(onclick){
+		 this.onclick=onclick;
+	};
 	this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
 		/* 避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示 */
 		if (itemColproportion.length >= 2) {

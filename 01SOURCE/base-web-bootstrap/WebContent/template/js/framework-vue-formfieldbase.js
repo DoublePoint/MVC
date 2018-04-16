@@ -1,4 +1,22 @@
 var timeoutInterval = null;
+/*------AjaxForm-------*/
+var _FormProps = [ 'id', //
+				'maxlen', 
+				'readonly', 
+				'contentalign', 
+				'visible',
+				'onclick',
+				'field', 
+				'title',
+				'type',
+				'validtype', 
+				'colspan',
+				'placeholder',
+				'parentId',
+				'datasource',
+				// 文本框的显示格式,取值为text和password，默认为text
+				'errmsg' ];
+
 function component(fieldType, fieldTemplate,props) {
 	// 创建style映射
 
@@ -11,7 +29,7 @@ function component(fieldType, fieldTemplate,props) {
 	// 获取私有Style的对应的属性名称[key]:style样式名称[value] 例如 labelalign:text-align
 	_ClientStyleArr = [ "labelalign" ];
 	_ClientStyleMap["labelalign"] = "text-align";
-	_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _FormFieldCommonInheritParams);
+	_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _FormProps);
 	if(props!=null){
 		_ClientPropsArrAll=_ClientPropsArrAll.concat(_ClientPropsArrAll,props);
 	}
@@ -30,11 +48,11 @@ function component(fieldType, fieldTemplate,props) {
 				}
 			}
 			return {
-				hidden : "hidden",
-				a : "a",
 				tree : "tree",
 				labelclientStyle : labelclientStyleBuffer.toString(),
-				guid : $._GenerateUUID()
+				guid : $._GenerateUUID(),
+				inputButtonHiddenId:this.id+this.guid+"_hidden",
+				inputButtonButtonId:this.id+this.guid+"_button",
 			}
 		},
 		created : function() {
@@ -49,15 +67,12 @@ function component(fieldType, fieldTemplate,props) {
 			ajaxform.addLine();
 		},
 		mounted : function() {
+			//生成声明
 			this._MapComponent();
-			this._SetStyle();
-			if (_ConstantComponentMap._FormInputButton == fieldType) {
-				this._InitInputbuttonOnClick();// 初始化鼠标单击事件
-			} else if (_ConstantComponentMap._FormDate == fieldType) {
-				this._InitDateOnClick();// 初始化日期控件
-			} else if (_ConstantComponentMap._FormSelect == fieldType) {
-				this._InitSelectData();
-			} else if (_ConstantComponentMap._FormDropTree == fieldType) {
+			
+			this._InitFormField();
+			
+			if (_ConstantComponentMap._FormDropTree == fieldType) {
 				this._InitSelectOnClick();// 初始化select
 				this._InitSelectMouseEnter();
 				this._InitSelectMouseLeave();
@@ -84,6 +99,11 @@ function component(fieldType, fieldTemplate,props) {
 				var domId = this._GetComponentDomId();
 				var aFormFieldX = $._GetFromLayuiObjectHashMap(domId);
 				return aFormFieldX;
+			},
+			/* input-button */
+			_GetFormInputbuttonADomId : function() {
+				var _domId = this.id + this.guid + this.a;
+				return _domId;
 			},
 			// 添加生命ajaxDataGrid对象脚本
 			_MapComponent : function() {
@@ -116,38 +136,9 @@ function component(fieldType, fieldTemplate,props) {
 				$._AddToLayuiObjectHashMap(domId, formField);
 			},
 
-			_SetStyle : function() {
-				if (this.visible != null) {
-					var formField = this._GetFormFieldX();
-					if ((this.visible + "").toLowerCase() == "true") {
-						formField.show();
-					} else {
-						formField.hide();
-					}
-				}
-			},
-
-			/* input-button */
-			_GetFormInputbuttonADomId : function() {
-				var _domId = this.id + this.guid + this.a;
-				return _domId;
-			},
-			_InitInputbuttonOnClick : function() {
-				var aClickId = this._GetFormInputbuttonADomId();
-				var onclick = this.onclick;
-				$("#" + aClickId).click(function() {
-					if (onclick == null)
-						return;
-					$._Eval(onclick);
-				});
-			},
-
-			/* date start */
-			_InitDateOnClick : function() {
-				$laydate.render({
-					elem : "#" + this._GetComponentDomId(),
-					theme : 'molv'
-				});
+			_InitFormField : function(){
+				var formField = this._GetFormFieldX();
+				formField.init();
 			},
 			/* select */
 			_InitSelectData:function(){
@@ -243,6 +234,16 @@ function FormFieldBase(domId) {
 	}
 	this.getDomValue = function() {
 		return this.getInputDom().val();
+	}
+	this.init = function(){
+		this.initData();
+		this.initEvent();
+	}
+	this.initData = function(){
+		
+	}
+	this.initEvent = function (){
+		
 	}
 	this.getInputDom = function() {
 		return $("#" + this.domId);

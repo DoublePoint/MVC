@@ -1,12 +1,118 @@
+var gridProps=["classes"
+                ,"sortClass"
+                ,"height"
+                ,"undefinedText"
+                ,"striped"
+                ,"sortName"
+                ,"sortOrder"
+                ,"sortStable"
+                ,"iconsPrefix"
+                ,"icons"
+                ,"columns"
+                ,"data"
+                ,"ajax"
+                ,"method"
+                ,"url"
+                ,"cache"
+                ,"contentType"
+                ,"dataType"
+                ,"ajaxOptions"
+                ,"queryParams"
+                ,"queryParamsType"
+                ,"responseHandler"
+                ,"pagination"
+                ,"paginationLoop"
+                ,"onlyInfoPagination"
+                ,"sidePagination"
+                ,"pageNumber"
+                ,"pageSize"
+                ,"pageList"
+                ,"selectItemName"
+                ,"smartDisplay"
+                ,"escape"
+                ,"search"
+                ,"searchOnEnterKey"
+                ,"strictSearch"
+                ,"searchText"
+                ,"searchTimeOut"
+                ,"trimOnSearch"
+                ,"showHeader"
+                ,"showFooter"
+                ,"showColumns"
+                ,"showRefresh"
+                ,"showToggle"
+                ,"showPaginationSwitch"
+                ,"showFullscreen"
+                ,"minimumCountColumns"
+                ,"idField"
+                ,"uniqueId"
+                ,"cardView"
+                ,"detailView"
+                ,"detailFormatter"
+                ,"searchAlign"
+                ,"buttonsAlign"
+                ,"toolbarAlign"
+                ,"paginationVAlign"
+                ,"paginationHAlign"
+                ,"paginationDetailHAlign"
+                ,"paginationPreText"
+                ,"paginationNextText"
+                ,"clickToSelect"
+                ,"ignoreClickToSelectOn"
+                ,"singleSelect"
+                ,"toolbar"
+                ,"buttonsToolbar"
+                ,"checkboxHeader"
+                ,"maintainSelected"
+                ,"sortable"
+                ,"silentSort"
+                ,"rowStyle"
+                ,"rowAttributes"
+                ,"customSearch"
+                ,"customSort"
+                //事件
+                ,"onAll"
+                ,"onClickRow"
+                ,"onDblClickRow"
+                ,"onClickCell"
+                ,"onDblClickCell"
+                ,"onSort"
+                ,"oncheck"
+                ,"onUncheck"
+                ,"onCheckAll"
+                ,"onUncheckAll"
+                ,"onCheckSome"
+                ,"onUncheckSome"
+                ,"onLoadSuccess"
+                ,"onLoadError"
+                ,"onColumnSwitch"
+                ,"onColumnSearch"
+                ,"onPageChange"
+                ,"onSearch"
+                ,"onToggle"
+                ,"onPreBody"
+                ,"onPostBody"
+                ,"onPostHeader"
+                ,"onExpandRow"
+                ,"onCollapseRow"
+                ,"onRefreshOptions"
+                ,"onRefresh"
+                ,"onScrollBody"
+                //私有的
+                ,"id"
+                ,"datasource"
+                ,"columns",
+                "onrowclick"];
 Vue.component(_ConstantComponentMap._AjaxDataGrid, {
-	props : [ 'id', 'datasource', 'columns', 'onrowclick', 'onpageclick','ondblclick' ],
-	template : '<div style="height:100%;"><table  :id="id+guid" data-checkbox="true"><thead><tr><slot></slot></tr></thead></table><div :id="laypage+guid"></div></div>',
+	props : gridProps,
+	template : '<div style="height:100%;"><table  :id="gridId" data-checkbox="true"><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
 
 	data : function() {
-		var dataList;
+		var gridId=this.id+$._GenerateUUID();
+		var pagerId=this.id+"laypageid";
 		return {
-			guid : $._GenerateUUID(),
-			laypage : "laypageid"
+			gridId : gridId,
+			pagerId : pagerId
 		}
 	},
 	mounted : function() {
@@ -15,54 +121,37 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 
 	},
 	created : function() {
+		//注册到系统map
 		this._RegisterComponent();
+		//// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
+		this._RegisterResizeMap();
 	},
 	methods : {
+		_GetComponentDomId : function() {
+			return this.gridId;
+		},
+		_GetComponentDom : function(){
+			var grid = $._GetFromLayuiObjectHashMap(this._GetComponentDomId());
+			return grid;
+		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var ajaxDataGrid = new AjaxDataGrid(domId);
-			ajaxDataGrid.pageId = this.laypage + this.guid;
 			for ( var attrName in ajaxDataGrid) {
-			if (this[attrName] != null)
-				ajaxDataGrid[attrName] = this[attrName];
+				if (this[attrName] != null)
+					ajaxDataGrid[attrName] = this[attrName];
 			}
 			$._AddToLayuiObjectHashMap(domId, ajaxDataGrid);
-			ajaxDataGrid.initEvent();
-
-			// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
-			$._RegisterResizeModel(ajaxDataGrid);
-			
-			// 注册该对象 以便在页面加载结束后绑定事件
-//			$._RegisterComponentCompleteListenerModel(ajaxDataGrid);
 		},
-		// 添加生命ajaxDataGrid对象脚本
+		_RegisterResizeMap: function(){
+			$._RegisterResizeModel(this._GetComponentDom());
+		},
+		// 添加声明ajaxDataGrid对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
 		},
-		_GetComponentDomId : function() {
-			var _domId = this.id + this.guid;
-			return _domId;
-		},
 		_InitAjaxDataGridData : function() {
-			var cd = {};
-			var domId = this._GetComponentDomId();
-			var _Ajaxdatagrid = $._GetFromLayuiObjectHashMap(domId);
-			$.ajax({
-				url : $$pageContextPath + this.datasource,
-				type : "POST",
-				contentType : 'application/json;charset=UTF-8',
-				dataType : "json",
-				data : JSON.stringify(cd),
-				async : false,
-				success : function(ajaxDataWrap) {
-					_Ajaxdatagrid.setDataWrap(ajaxDataWrap);
-				}
-			});
-
-			var pageclickFunction = this.onpageclick;
-			if (pageclickFunction != null) {
-				_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
-			}
+			this._GetComponentDom().init();
 		}
 
 	},
@@ -70,26 +159,129 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 
 function AjaxDataGrid(domId) {
 	this.domId = domId;
-	this.pageId = 0;
+	this.pagerId = null;
 	this.pageHeight = 32;
-	this.ondblclick=null;
+	this.ondblclick = null;
 	this.onrowclick = null;
 	this.onpageclick = null;
 	this.cols = [];
 	this.datasource = "";
 	this.datawrap = $._CreateAjaxDataWrap();
 	this.height = 300;
-	
+
+	/* bootstrap */
+	this.sortClass;
+	this.height;
+	this.undefinedText;
+	this.striped;
+	this.sortName;
+	this.sortOrder;
+	this.sortStable;
+	this.iconsPrefix;
+	this.icons;
+	this.columns;
+	this.data;
+	this.ajax;
+	this.method;
+	this.url;
+	this.cache;
+	this.contentType;
+	this.dataType;
+	this.ajaxOptions;
+	this.queryParams;
+	this.queryParamsType;
+	this.responseHandler;
+	this.pagination;
+	this.paginationLoop;
+	this.onlyInfoPagination;
+	this.sidePagination;
+	this.pageNumber;
+	this.pageSize;
+	this.pageList;
+	this.selectItemName;
+	this.smartDisplay;
+	this.escape;
+	this.search;
+	this.searchOnEnterKey;
+	this.strictSearch;
+	this.searchText;
+	this.searchTimeOut;
+	this.trimOnSearch;
+	this.showHeader;
+	this.showFooter;
+	this.showColumns;
+	this.showRefresh;
+	this.showToggle;
+	this.showPaginationSwitch;
+	this.showFullscreen;
+	this.minimumCountColumns;
+	this.idField;
+	this.uniqueId;
+	this.cardView;
+	this.detailView;
+	this.detailFormatter;
+	this.searchAlign;
+	this.buttonsAlign;
+	this.toolbarAlign;
+	this.paginationVAlign;
+	this.paginationHAlign;
+	this.paginationDetailHAlign;
+	this.paginationPreText;
+	this.paginationNextText;
+	this.clickToSelect;
+	this.ignoreClickToSelectOn;
+	this.singleSelect;
+	this.toolbar;
+	this.buttonsToolbar;
+	this.checkboxHeader;
+	this.maintainSelected;
+	this.sortable;
+	this.silentSort;
+	this.rowStyle;
+	this.rowAttributes;
+	this.customSearch;
+	this.customSort;
+
+	/* 事件 */
+	this.onAll;
+	this.onClickRow;
+	this.onDblClickRow;
+	this.onClickCell;
+	this.onDblClickCell;
+	this.onSort;
+	this.oncheck=null;
+	this.onUncheck;
+	this.onCheckAll;
+	this.onUncheckAll;
+	this.onCheckSome;
+	this.onUncheckSome;
+	this.onLoadSuccess;
+	this.onLoadError;
+	this.onColumnSwitch;
+	this.onColumnSearch;
+	this.onPageChange;
+	this.onSearch;
+	this.onToggle;
+	this.onPreBody;
+	this.onPostBody;
+	this.onPostHeader;
+	this.onExpandRow;
+	this.onCollapseRow;
+	this.onRefreshOptions;
+	this.onRefresh;
+	this.onScrollBody;
+
 	this.addCol = function(col) {
 		this.cols.push(col);
 	}
-	this.bindListener= function(){
+	this.bindListener = function() {
 		this.initEvent();
 	}
 	this.getCheckedDataList = function() {
-		return this.getDom().bootstrapTable('getSelections');
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('getSelections');
 	}
-	this.getCols = function(){
+	this.getCols = function() {
 		return this.cols;
 	}
 	this.getDataWrap = function(isGetData) {
@@ -102,43 +294,60 @@ function AjaxDataGrid(domId) {
 		}
 		return this.datawrap;
 	}
-	this.getDomId = function(){
+	this.getDomId = function() {
 		return this.domId;
 	}
-	this.getDom = function(){
-		return $("#"+this.domId);
+	this.getDom = function() {
+		return $("#" + this.domId);
 	}
-	this.getOndblclick = function(){
+	this.getOndblclick = function() {
 		return this.ondblclick;
 	}
 	this.getPageClick = function() {
 		return this.onpageclick;
 	};
-	this.getRow = function(rowIndex){
+	this.getRow = function(rowIndex) {
 		return this.datawrap.getRow(rowIndex);
 	};
 	this.getRowClick = function() {
 		return this.onrowclick;
 	};
-	
-	this.init = function(msg) {
-		this.setData();
+
+	this.init = function() {
+		this.initData();
+		this.initEvent();
 	};
-	this.initEvent = function(){
-	}
-	this.render = function() {
-//		var allChildFixHeight = 0;
-//		var brother = this.getDom().closest(".lllayout").children();
-//		var parentId =  this.getDom().closest(".layoutarea").attr("id");
-//		for (var i = 0; i < brother.length; i++) {
-//			if (brother[i].id != parentId) {
-//				allChildFixHeight += brother[i].offsetHeight;
-//			}
-//		}
-//		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
+	this.initData = function(){
+		var data={};
+		var grid=this;
+		$.ajax({
+			url : $$pageContextPath + this.datasource,
+			type : "POST",
+			contentType : 'application/json;charset=UTF-8',
+			dataType : "json",
+			data : JSON.stringify(data),
+			async : false,
+			success : function(ajaxDataWrap) {
+				grid.setDataWrap(ajaxDataWrap);
+			},
+			error:function(){
+				grid.setLayuiTableDataNull();
+			}
+		});
+
 		
-		//高度设置为获取父元素的高度
-		var thisResultHeight=this.getDom().closest(".layoutarea").height();
+	};
+	this.initEvent = function() {
+		//分页点击事件
+		var pageclickFunction = this.onpageclick;
+		if (pageclickFunction != null) {
+			_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
+		}
+	};
+	this.render = function() {
+
+		// 高度设置为获取父元素的高度
+		var thisResultHeight = this.getDom().closest(".layoutarea").height();
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
@@ -146,23 +355,17 @@ function AjaxDataGrid(domId) {
 		this.setPager(this.datawrap.getPageInfo(), this.id);
 	};
 	this.resize = function() {
-//		var allChildFixHeight = 0;
-//		var brother = this.getDom().closest(".lllayout").children();
-//		var parentId =  this.getDom().closest(".layoutarea").attr("id");
-//		for (var i = 0; i < brother.length; i++) {
-//			if (brother[i].id != parentId) {
-//				allChildFixHeight += brother[i].offsetHeight;
-//			}
-//		}
-//		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
-		//高度设置为获取父元素的高度
-		var thisResultHeight=this.getDom().closest(".layoutarea").height();
+		// 高度设置为获取父元素的高度
+		var thisResultHeight = this.getDom().closest(".layoutarea").height();
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
-		this.setLayuiTableData();
+		var height = this.height;
+		this.getDom().bootstrapTable('resetView', {
+			height : height
+		});
 	}
-	
+
 	this.setCols = function(cols) {
 		this.cols = cols;
 	};
@@ -174,33 +377,39 @@ function AjaxDataGrid(domId) {
 		this.render();
 	};
 	this.setLayuiTableData = function() {
-		var ajaxgrid=this;
+		var ajaxgrid = this;
 		var id = ajaxgrid.domId;
 		var ajaxDataWrap = ajaxgrid.datawrap;
 		var datasource = ajaxgrid.datasource;
 		var cols = ajaxgrid.cols;
 		var height = ajaxgrid.height;
-	   var $table=$("#"+id);
+		var $table = $("#" + id);
 		$table.bootstrapTable({
 			height : height,
-			data: $._Clone(ajaxDataWrap.dataList),
-			onClickRow:function(row, $element, field){
-				var arr=new Array();
+			data : $._Clone(ajaxDataWrap.dataList),
+			onCheck:function(row){
+				$._Eval(ajaxgrid.oncheck,row);
+			},
+			onClickRow : function(row, $element, field) {
+				var arr = new Array();
 				arr.push(row)
 				arr.push($element);
 				arr.push(field);
-				$._Eval(ajaxgrid.getRowClick(),arr);
+				$._Eval(ajaxgrid.getRowClick(), arr);
 			}
 		});
-		$table.bootstrapTable('resetView',{
-	        height: height,
-	        checkbox:true
-	    });
-		$table.bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
 		return null;
 	};
-	this.setOndblclick = function(aOnDblclick){
-		this.ondblclick=aOnDblclick;
+	this.setLayuiTableDataNull = function (){
+		var ajaxgrid = this;
+		var id = ajaxgrid.domId;
+		var $table = $("#" + id);
+		$table.bootstrapTable({
+			height : this.height
+		});
+	}
+	this.setOndblclick = function(aOnDblclick) {
+		this.ondblclick = aOnDblclick;
 	}
 	this.setPageClickFunctionName = function(funName) {
 		this.onPageClickFunctionName = funName;
@@ -209,7 +418,7 @@ function AjaxDataGrid(domId) {
 		if (page == null)
 			return;
 		$laypage.render({
-			elem : this.pageId,
+			elem : this.pagerId,
 			count : page.totalElementCount,
 			curr : page.currentPageNum,
 			limit : page.pageSize,
@@ -230,6 +439,13 @@ function AjaxDataGrid(domId) {
 		this.onRowClickFunctionName = funName;
 	};
 	
+	/*bootstrap*/
+	this.addRecords = function(rows){
+		if(rows==null||rows.length==0)
+			return;
+		for(var i in rows)
+			this.getDom().bootstrapTable('append', rows[i]);
+	}
 	return this;
 }
 
@@ -242,6 +458,38 @@ function AjaxDataGridColumns(field, title, width, sort, fixed, event) {
 	this.sort = sort == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_SORT : sort;
 	this.fixed = fixed == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_FIXED : fixed;
 
+	/* bootstrap */
+	this.radio;
+	this.checkbox;
+	this.field;
+	this.title;
+	this.titleTooltip;
+	this.class;
+	this.rowspan;
+	this.colspan;
+	this.align;
+	this.halign;
+	this.falign;
+	this.valign;
+	this.width;
+	this.sortable;
+	this.order;
+	this.visible;
+	this.cardVisible;
+	this.switchable;
+	this.clickToSelect;
+	this.formatter;
+	this.footerFormatter;
+	this.events;
+	this.sorter;
+	this.sortName;
+	this.cellStyle;
+	this.searchable;
+	this.searchFormatter;
+	this.escape;
+	this.showSelectTitle;
+	
+	
 	this.setTemplet = function(tem) {
 		this.templet = tem;
 	}

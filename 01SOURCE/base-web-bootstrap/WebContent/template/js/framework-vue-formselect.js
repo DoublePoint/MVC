@@ -40,6 +40,10 @@ function FormSelect(domId) {
 		return this.getInputDom().next().children("div").children("input");
 	}
 	
+	this.init= function(){
+		this.initData();
+	}
+	
 	this.initData = function(){
 		var formSelect=this;
 		$.ajax({

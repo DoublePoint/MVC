@@ -20,9 +20,7 @@ function FormField(domId) {
 			// 舍掉后面两位小数
 			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
-//			this.setLabelStyle("display", "inline-block");
 			this.setInputStyle("padding-left", "10px");
-//			this.setInputStyle("display", "inline-block");
 			this.setLabelStyle("width", labelPercent * 100 + "%");
 			this.setInputStyle("width", inputPercent * 100 + "%");
 		}

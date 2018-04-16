@@ -8,6 +8,12 @@ function FormDate(domId) {
 	FormFieldBase.call(this);
 	this.domId = domId;
 
+	this.initEvent = function (){
+		$laydate.render({
+			elem : "#" + this.getDomId(),
+			theme : 'molv'
+		});
+	}
 	this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
 		/* 避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示 */
 		if (itemColproportion.length >= 2) {

@@ -15,6 +15,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/base.jsp"%>
+<script type="text/javascript" src="generateEntityScript.js"></script>
 </head>
 <body>
 	<form>
@@ -24,19 +25,21 @@
 				<ll-fillarea-lr width="50%"  height="100%">
 					<ll-filllayout > 
 						<ll-fillarea-tb >
-							<ll-ajaxdatagrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)" datasource="/template/sys/tables"> 
+							<ll-ajaxdatagrid id="gridResource" onCheck="gridLeftOncheck()" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)" datasource="/template/sys/tables"> 
 								<ll-gridcheck></ll-gridcheck>
 								<ll-gridrow field="tABLE_NAME" title="表名"></ll-gridrow>
 							</ll-ajaxdatagrid>
 						</ll-fillarea-tb>
 					</ll-filllayout>
 				</ll-fillarea-lr>
+				<ll-fillarea-lr width="10px"  height="100%">
+				</ll-fillarea-lr>
 				<ll-fillarea-lr width="*"  height="100%">
 						<ll-filllayout > 
 							<ll-fillarea-tb >
-								<ll-ajaxdatagrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
+								<ll-ajaxdatagrid id="gridAim" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"> 
 									<ll-gridcheck></ll-gridcheck>
-									<ll-gridrow field="id" title="表名"></ll-gridrow>
+									<ll-gridrow field="tABLE_NAME" title="表名"></ll-gridrow>
 								</ll-ajaxdatagrid>
 							</ll-fillarea-tb>
 					</ll-filllayout>
