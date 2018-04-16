@@ -4,7 +4,7 @@ Vue.component(_ConstantComponentMap._FillAreaTB, {
 
 	data : function() {
 		var varlayOutHeight=this.height;
-		if(varlayOutHeight==null)
+		if(varlayOutHeight==null||varlayOutHeight=="")
 			varlayOutHeight='100%';
 		var clientStyleBuffer=$._CreateStringBuffer();
 		var heightBuffer=$._CreateStyleBuffer("height",varlayOutHeight);
@@ -36,21 +36,21 @@ Vue.component(_ConstantComponentMap._FillAreaTB, {
 		var id = this._GetComponentDomId();
 		var parentWidth = $("#" + id).parent().width();
 		var parentheight = $("#" + id).parent().height();
-		var children = $("#" + id).parent().children();
-		if (children.length <= 0)
+		var brother = $("#" + id).parent().children();
+		if (brother.length <= 0)
 			return;
 		if (this.layOutHeight.toString().indexOf("px") != -1)
 			this.layOutHeight = this.layOutHeight;
 		else if (this.layOutHeight.toString().indexOf("%") != -1) {
 			this.layOutHeight = this.layOutHeight;
 		} else if (this.layOutHeight.toString().indexOf("*") != -1) {
-			var allChildFixHeight = 0;
-			for (var i = 0; i < children.length; i++) {
-				if (children[i].id != id) {
-					allChildFixHeight += children[i].offsetHeight;
+			var allBrotherFixHeight = 0;
+			for (var i = 0; i < brother.length; i++) {
+				if (brother[i].id != id) {
+					allBrotherFixHeight += brother[i].offsetHeight;
 				}
 			}
-			this.layOutHeight = (parentheight - allChildFixHeight).toString() + "px";
+			this.layOutHeight = (parentheight - allBrotherFixHeight).toString() + "px";
 		}
 		$("#" + id).width("100%");
 	},
@@ -134,13 +134,13 @@ function FillAreaTB(domId) {
 		var children = this.getBrother();
 		if (children.length <= 0)
 			return;
-		var allChildFixHeight = 0;
+		var allBrotherFixHeight = 0;
 		for (var i = 0; i < children.length; i++) {
 			if (children[i].id != this.domId) {
-				allChildFixHeight += children[i].offsetHeight;
+				allBrotherFixHeight += children[i].offsetHeight;
 			}
 		}
-		var thisRuleHright=parentheight - allChildFixHeight;
+		var thisRuleHright=parentheight - allBrotherFixHeight;
 		if(thisRuleHright<_ConstantLayoutArea._DEFAULT_MIN_HEIGHT)
 			thisRuleHright=_ConstantLayoutArea._DEFAULT_MIN_HEIGHT;
 		

@@ -4,7 +4,7 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 
 	data : function() {
 		var varlayOutWidth = this.width;
-		if (varlayOutWidth == null)
+		if (varlayOutWidth == null||varlayOutWidth=="")
 			varlayOutWidth = '100%';
 		var clientStyleBuffer = $._CreateStringBuffer();
 		var widthBuffer = $._CreateStyleBuffer("width", varlayOutWidth);
@@ -156,6 +156,8 @@ function FillAreaLR(domId) {
 		var left = this.getDom().width() + this.getDom().position().left;
 		var dragId = this.domId + this.getDragDomExtendId();
 		var dragStyleStringBuffer = $._CreateStringBuffer("left", left);
+		var parentHeight = this.getParent().height(); 
+		dragStyleStringBuffer.append("height:"+parentHeight+"px;");
 		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ><div class="ll-drag-to-left"></div>');
 		 $("#" + dragId ).draggable({
 		 axis : "x",
@@ -166,21 +168,6 @@ function FillAreaLR(domId) {
 			 var dragId = ui.helper.context.id;
 			 var drag=new LayoutDrag(dragId);
 			 drag.resize(ui);
-//			 var beforeDragLeft=$("#" + dragId).position().left;
-//			 var preLayoutArea=$("#" + dragId).prev();
-//			 var preLayoutAreaLeft=preLayoutArea.position().left;
-//			 var preLayoutWidth=dragCurrentLeft-preLayoutAreaLeft;
-//			 preLayoutArea.css("width",preLayoutWidth);//前一个layoutarea的宽度等于 后一个drag的左-前一个的left
-//			 
-//			 $("#" + dragId).css("left",dragCurrentLeft);
-//			 
-//			 var nextLayoutArea=$("#" + dragId).next();
-//			 var nextLayoutBeforeWidth=nextLayoutArea.width();
-//			 var nextLayoutCurrentWidth=beforeDragLeft-dragCurrentLeft+nextLayoutBeforeWidth; 
-//			 var nextLayoutCurrentLeft=dragCurrentLeft+$("#" + dragId).width();
-//			 
-//			 nextLayoutArea.css("width",nextLayoutCurrentWidth);
-//			 nextLayoutArea.css("left",nextLayoutCurrentLeft);
 		 }
 		 });
 		 
@@ -208,14 +195,6 @@ function FillAreaLR(domId) {
 			}
 			varWidth = parentWidth - allChildFixWidth;
 		} else {
-			/*var allChildFixWidth = 0;
-			var children = this.getBrothers();
-			for (var i = 0; i < children.length; i++) {
-				if (children[i].id != this.id) {
-					allChildFixWidth += children[i].offsetWidth;
-				}
-			}
-			varWidth = parentWidth - allChildFixWidth;*/
 			varWidth=this.width;
 		}
 		this.setFillAreaWidth(varWidth);
@@ -237,7 +216,7 @@ function FillAreaLR(domId) {
 }
 
 function LayoutDrag(domId) {
-	this.width = 5;
+	this.width = 2;
 	this.domId = domId;
 	this.height = '100%';
 	this.currentWidth = 0;

@@ -23,7 +23,7 @@
 			<ll-filllayout> 
 				<ll-fillarea-lr width="50%"  height="100%">
 					<ll-filllayout > 
-						<ll-fillarea-tb height="86px" >
+						<ll-fillarea-tb >
 							<ll-ajaxdatagrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)" datasource="/template/sys/tables"> 
 								<ll-gridcheck></ll-gridcheck>
 								<ll-gridrow field="tABLE_NAME" title="表名"></ll-gridrow>
@@ -33,7 +33,7 @@
 				</ll-fillarea-lr>
 				<ll-fillarea-lr width="*"  height="100%">
 						<ll-filllayout > 
-							<ll-fillarea-tb height="86px" >
+							<ll-fillarea-tb >
 								<ll-ajaxdatagrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
 									<ll-gridcheck></ll-gridcheck>
 									<ll-gridrow field="id" title="表名"></ll-gridrow>

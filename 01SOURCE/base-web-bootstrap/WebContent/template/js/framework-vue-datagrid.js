@@ -127,15 +127,18 @@ function AjaxDataGrid(domId) {
 	this.initEvent = function(){
 	}
 	this.render = function() {
-		var allChildFixHeight = 0;
-		var brother = this.getDom().closest(".lllayout").children();
-		var parentId =  this.getDom().closest(".layoutarea").attr("id");
-		for (var i = 0; i < brother.length; i++) {
-			if (brother[i].id != parentId) {
-				allChildFixHeight += brother[i].offsetHeight;
-			}
-		}
-		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
+//		var allChildFixHeight = 0;
+//		var brother = this.getDom().closest(".lllayout").children();
+//		var parentId =  this.getDom().closest(".layoutarea").attr("id");
+//		for (var i = 0; i < brother.length; i++) {
+//			if (brother[i].id != parentId) {
+//				allChildFixHeight += brother[i].offsetHeight;
+//			}
+//		}
+//		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
+		
+		//高度设置为获取父元素的高度
+		var thisResultHeight=this.getDom().closest(".layoutarea").height();
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
@@ -143,15 +146,17 @@ function AjaxDataGrid(domId) {
 		this.setPager(this.datawrap.getPageInfo(), this.id);
 	};
 	this.resize = function() {
-		var allChildFixHeight = 0;
-		var brother = this.getDom().closest(".lllayout").children();
-		var parentId =  this.getDom().closest(".layoutarea").attr("id");
-		for (var i = 0; i < brother.length; i++) {
-			if (brother[i].id != parentId) {
-				allChildFixHeight += brother[i].offsetHeight;
-			}
-		}
-		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
+//		var allChildFixHeight = 0;
+//		var brother = this.getDom().closest(".lllayout").children();
+//		var parentId =  this.getDom().closest(".layoutarea").attr("id");
+//		for (var i = 0; i < brother.length; i++) {
+//			if (brother[i].id != parentId) {
+//				allChildFixHeight += brother[i].offsetHeight;
+//			}
+//		}
+//		var thisResultHeight = this.getDom().closest(".lllayout").height() - allChildFixHeight;
+		//高度设置为获取父元素的高度
+		var thisResultHeight=this.getDom().closest(".layoutarea").height();
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;

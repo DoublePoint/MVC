@@ -13,6 +13,7 @@ Vue.component(_ConstantComponentMap._FillLayOut, {
 		clientStyleBuffer.append(heightBuffer.toString());
 		var widthBuffer=$._CreateStyleBuffer("width",'100%');
 		clientStyleBuffer.append(widthBuffer.toString());
+		clientStyleBuffer.append("position:relative;");
 		if(this.backgroundcolor!=null){
 			var bgBuffer=$._CreateStyleBuffer("background-color",this.backgroundcolor);
 			clientStyleBuffer.append(bgBuffer.toString());
