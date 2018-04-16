@@ -37,12 +37,16 @@ public class DataBaseMetaDataUtil {
 	 * @throws SQLException
 	 */
 	public static String getDataBaseName() throws SQLException{
-		DatabaseMetaData md = jdbcTemplate.getDataSource().getConnection().getMetaData();
-		String url=md.getURL();
-		int end=url.indexOf("?");
-		int start=url.lastIndexOf("/");
-		String dataBaseName=url.substring(start+1, end);
-		return dataBaseName;
+//		for(int i=0;i<7;i++){
+//			jdbcTemplate.getDataSource().getConnection();
+//		}
+//		DatabaseMetaData md = jdbcTemplate.getDataSource().getConnection().getMetaData();
+//		String url=md.getURL();
+//		int end=url.indexOf("?");
+//		int start=url.lastIndexOf("/");
+//		String dataBaseName=url.substring(start+1, end);
+//		return dataBaseName;
+		return "test";
 	}
 	
 	/**
@@ -54,9 +58,10 @@ public class DataBaseMetaDataUtil {
 	@Transactional
 	public static <E> List<MySQLTables> getTables() {
 		try {
-			jdbcTemplate.setQueryTimeout(30000);
+			jdbcTemplate.setQueryTimeout(30);
 			String dataBaseName=DataBaseMetaDataUtil.getDataBaseName();
 			String sql="select  table_name as 'key',table_name  as 'value','' filter  from information_schema.tables  WHERE TABLE_SCHEMA = '"+dataBaseName+"'";
+			sql="select id as 'key',id  as 'value','' filter from menu";
 			List<Map<String, Object>> mapList=jdbcTemplate.queryForList(sql);
 			List<MySQLTables> list=mapList.stream().map(m->{
 				String aKey=(String) m.get("key");
