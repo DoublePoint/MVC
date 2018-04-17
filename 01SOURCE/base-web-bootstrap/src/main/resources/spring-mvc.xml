@@ -31,7 +31,7 @@
 	<mvc:resources location="/images/" mapping="/images/**" />
 	<mvc:resources location="/script/" mapping="/script/**" />
 	
-	<!-- <mvc:default-servlet-handler></mvc:default-servlet-handler> -->
+	<mvc:default-servlet-handler></mvc:default-servlet-handler>
 	
 	<mvc:annotation-driven
 		content-negotiation-manager="contentNegotiationManager">

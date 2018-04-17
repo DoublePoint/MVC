@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.commonutil.domain.model;
 
-public class DropBean {
+public class DropBean extends BaseModel{
 	
 	private String key;
 	private String value;

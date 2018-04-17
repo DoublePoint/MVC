@@ -11,24 +11,26 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.common;
 
 import static java.util.stream.Collectors.toList;
 
-import java.sql.DatabaseMetaData;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
-import cn.doublepoint.commonutil.domain.model.DropBean;
 
 public class DataBaseMetaDataUtil {
 	private static JdbcTemplate jdbcTemplate;
+	private static Map<String, String> map;
 
 	static {
 		jdbcTemplate = (JdbcTemplate) ApplicationContectUtil.getBean("jdbcTemplate");
+		map=new HashMap<String, String>();
 	}
 
 	/**
@@ -37,16 +39,18 @@ public class DataBaseMetaDataUtil {
 	 * @throws SQLException
 	 */
 	public static String getDataBaseName() throws SQLException{
-//		for(int i=0;i<7;i++){
-//			jdbcTemplate.getDataSource().getConnection();
-//		}
-//		DatabaseMetaData md = jdbcTemplate.getDataSource().getConnection().getMetaData();
-//		String url=md.getURL();
-//		int end=url.indexOf("?");
-//		int start=url.lastIndexOf("/");
-//		String dataBaseName=url.substring(start+1, end);
-//		return dataBaseName;
-		return "test";
+		if(map.get("databaseName")==null){
+			Properties prop = new Properties();  
+			try {
+				prop.load(DataBaseMetaDataUtil.class.getResourceAsStream("/jdbc.properties"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}  
+			String jdbcName=(String) prop.get("jdbc.databsename");
+			return jdbcName;
+		}
+		else
+			return map.get("databaseName").toString();
 	}
 	
 	/**
@@ -61,7 +65,6 @@ public class DataBaseMetaDataUtil {
 			jdbcTemplate.setQueryTimeout(30);
 			String dataBaseName=DataBaseMetaDataUtil.getDataBaseName();
 			String sql="select  table_name as 'key',table_name  as 'value','' filter  from information_schema.tables  WHERE TABLE_SCHEMA = '"+dataBaseName+"'";
-			sql="select id as 'key',id  as 'value','' filter from menu";
 			List<Map<String, Object>> mapList=jdbcTemplate.queryForList(sql);
 			List<MySQLTables> list=mapList.stream().map(m->{
 				String aKey=(String) m.get("key");
@@ -74,6 +77,11 @@ public class DataBaseMetaDataUtil {
 				return dropBean;
 			}).collect(toList());
 			
+			for(int i=0;i<200;i++){
+				MySQLTables e=new MySQLTables();
+				e.setTABLE_NAME("123");
+				list.add(e);
+			}
 			return list;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

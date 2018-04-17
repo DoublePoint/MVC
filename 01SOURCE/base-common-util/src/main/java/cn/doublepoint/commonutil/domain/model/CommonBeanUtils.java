@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
+
 public class CommonBeanUtils extends BeanUtils {
 
 	public List<Object> copyListProperties(List<Object> sourceList, List<Object> targetList) {
@@ -99,7 +101,7 @@ public class CommonBeanUtils extends BeanUtils {
 	 * @param cla
 	 * @return
 	 */
-	public static <T, E> AjaxDataWrap<E> copyPageToAjaxDataWrap(Page<T> page, Class<E> cla) {
+	public static <T, E extends BaseEntity> AjaxDataWrap<E > copyPageToAjaxDataWrap(Page<T> page, Class<E> cla) {
 		AjaxDataWrap<E> ajaxDataWrap = new AjaxDataWrap<E>();
 		PageInfo pageInfo = new PageInfo();
 		if (page != null) {

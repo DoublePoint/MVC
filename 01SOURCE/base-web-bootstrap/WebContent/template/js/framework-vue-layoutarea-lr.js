@@ -1,5 +1,5 @@
 Vue.component(_ConstantComponentMap._FillAreaLR, {
-	props : [ 'id', 'width', 'backgroundcolor' ],
+	props : [ 'id', 'width', 'backgroundcolor','dragenable' ],
 	template : '<div :id="id+guid" class="ll-fill-area-lr"  :style="clientStyle"><slot></slot>' + '</div>',
 
 	data : function() {
@@ -79,6 +79,7 @@ function FillAreaLR(domId) {
 	this.width = null;//width属性 初始值 即40px 50% *
 	this.currentWidth=0;//实际的width 全是以px结束
 	this.isResize = true;
+	this.dragenable=false;
 	this.dragDomExtendId = "drag";
 	
 	this.getDomId = function() {
@@ -137,20 +138,6 @@ function FillAreaLR(domId) {
 	this.hide=function(){
 		this.getDom().hide();
 	}
-	// this.addDrag = function() {
-	// $("#" + dragId + "").draggable({
-	// axis : "x",
-	// helper : "clone",
-	// containment : "parent",
-	// stop : function(event, ui) {
-	// var dragLeft = ui.offset.left;
-	// var dragId = ui.helper.context.id;
-	// var preBrotherId = $("#" + dragId).prev().attr("id");
-	// var layoutarea = $._GetFromLayuiObjectHashMap(preBrotherId);
-	// layoutarea.resize();
-	// }
-	// });
-	// }
 	/* 添加拖动按钮 */
 	this.addDragDom = function() {
 		var left = this.getDom().width() + this.getDom().position().left;
@@ -159,18 +146,19 @@ function FillAreaLR(domId) {
 		var parentHeight = this.getParent().height(); 
 		dragStyleStringBuffer.append("height:"+parentHeight+"px;");
 		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ><div class="ll-drag-to-left"></div>');
-		 $("#" + dragId ).draggable({
-		 axis : "x",
-		 cursor: "w-resize",
-		 helper : "clone",
-		 containment : "parent",
-		 stop : function(event, ui) {
-			 var dragId = ui.helper.context.id;
-			 var drag=new LayoutDrag(dragId);
-			 drag.resize(ui);
-		 }
-		 });
-		 
+		if(this.dragenable){
+			$("#" + dragId ).draggable({
+			 axis : "x",
+			 cursor: "w-resize",
+			 helper : "clone",
+			 containment : "parent",
+			 stop : function(event, ui) {
+				 var dragId = ui.helper.context.id;
+				 var drag=new LayoutDrag(dragId);
+				 drag.resize(ui);
+			 }
+			 });
+		}
 	}
 	this.resize = function() {
 		this.hide();

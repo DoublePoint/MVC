@@ -10,6 +10,16 @@
 package cn.doublepoint.commonutil.domain.model;
 
 public class BaseModel {
+	public int rowId=-1;
+
+	public int getRowId() {
+		return rowId;
+	}
+
+	public void setRowId(int rowId) {
+		this.rowId = rowId;
+	}
+	
 	/*public String getUpdateSql() {
 		return null;
 	}

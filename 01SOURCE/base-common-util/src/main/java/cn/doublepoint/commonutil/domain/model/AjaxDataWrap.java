@@ -13,7 +13,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AjaxDataWrap<T> implements Serializable{
+import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
+
+public class AjaxDataWrap<T extends BaseModel> implements Serializable{
 	/**                                                                  
 	 *                                                                    
 	 */
@@ -41,6 +43,12 @@ public class AjaxDataWrap<T> implements Serializable{
 	}
 	public void setDataList(List<T> dataList) {
 		this.dataList = dataList;
+		
+		if(dataList!=null){
+			for (int i = 0; i < dataList.size(); i++) {
+				dataList.get(i).setRowId(i);
+			}
+		}
 	}
 	public PageInfo getPageInfo() {
 		return pageInfo;
@@ -58,7 +66,7 @@ public class AjaxDataWrap<T> implements Serializable{
 		this.msg=errMsg;
 	}
 	
-	public <R> AjaxDataWrap<R> copy(Class<R> targetClass){
+	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass){
 		AjaxDataWrap<R> ajaxDataWrap=new AjaxDataWrap<>();
 		ajaxDataWrap.setPageInfo(this.pageInfo);
 		ajaxDataWrap.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));

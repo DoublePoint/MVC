@@ -9,7 +9,7 @@ package cn.doublepoint.commonutil.domain.model.entity;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 
 public class BaseEntity extends BaseModel {
-
+	
 	/*private List<Field> realFieldList;
 
 	*//**

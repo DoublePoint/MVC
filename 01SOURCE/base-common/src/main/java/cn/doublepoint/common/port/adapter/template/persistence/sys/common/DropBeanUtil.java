@@ -9,12 +9,10 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.common;
 
 import static java.util.stream.Collectors.toList;
 
-import java.sql.DatabaseMetaData;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

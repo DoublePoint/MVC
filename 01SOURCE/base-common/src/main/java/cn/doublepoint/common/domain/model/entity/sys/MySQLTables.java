@@ -9,7 +9,9 @@
 */
 package cn.doublepoint.common.domain.model.entity.sys;
 
-public class MySQLTables {
+import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
+
+public class MySQLTables extends BaseEntity{
 	private String TABLE_CATALOG;
 	private String TABLE_SCHEMA;
 	private String TABLE_NAME;

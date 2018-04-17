@@ -215,8 +215,8 @@ function AjaxDataGrid(domId) {
 	this.showPaginationSwitch;
 	this.showFullscreen;
 	this.minimumCountColumns;
-	this.idField;
-	this.uniqueId;
+	this.idField="rowId";
+	this.uniqueId="rowId";
 	this.cardView;
 	this.detailView;
 	this.detailFormatter;
@@ -276,10 +276,6 @@ function AjaxDataGrid(domId) {
 	}
 	this.bindListener = function() {
 		this.initEvent();
-	}
-	this.getCheckedDataList = function() {
-		var $table = $("#" + this.domId);
-		return $table.bootstrapTable('getSelections');
 	}
 	this.getCols = function() {
 		return this.cols;
@@ -386,6 +382,8 @@ function AjaxDataGrid(domId) {
 		var $table = $("#" + id);
 		$table.bootstrapTable({
 			height : height,
+			idField : "rowId",
+			uniqueId : "rowId",
 			data : $._Clone(ajaxDataWrap.dataList),
 			onCheck:function(row){
 				$._Eval(ajaxgrid.oncheck,row);
@@ -445,6 +443,22 @@ function AjaxDataGrid(domId) {
 			return;
 		for(var i in rows)
 			this.getDom().bootstrapTable('append', rows[i]);
+	},
+	this.getCheckedDataList = function() {
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('getSelections');
+	},
+	this.removeChecked = function(){
+		var checkDataList=this.getCheckedDataList();
+		if(checkDataList==null||checkDataList.length<=0)
+			return;
+		var arr=new Array();
+		for(var i in checkDataList){
+			
+			arr.push(checkDataList[i].rowId);
+			//this.getDom().bootstrapTable('removeByUniqueId', checkDataList[i].rowId);
+		}
+		this.getDom().bootstrapTable('remove', "rowId",arr);
 	}
 	return this;
 }
