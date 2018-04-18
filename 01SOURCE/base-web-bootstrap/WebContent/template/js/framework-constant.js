@@ -14,14 +14,13 @@ var _ConstantLayoutArea = {
 var _ConstantComponentMap = {
 	_AjaxDataGrid : "ll-ajaxdatagrid",
 	_AjaxDataGridRow : "ll-gridrow",
-	_GridCheck : "ll-gridcheck",
+	_AjaxForm : "ll-ajaxform",
 	_AjaxMenu : "ll-menu",
 	_AjaxFormLine : "ll-ajaxformline",
 	_Tree : "ll-tree",
 	_FillLayOut : "ll-filllayout",
 	_FillAreaTB : "ll-fillarea-tb",
 	_FillAreaLR : "ll-fillarea-lr",
-	_AjaxForm : "ll-ajaxform",
 	_FormDropTree:"ll-formdroptree",
 	_FormField : "ll-formfield",
 	_FormCheck : "ll-formcheck",
@@ -29,7 +28,10 @@ var _ConstantComponentMap = {
 	_FormSelect : "ll-formselect",
 	_FormInputButton : "ll-forminputbutton",
 	_FormToolBar : "ll-formtoolbar",
+	_GridCheck : "ll-gridcheck",
 	_ToolBar : "ll-toolbar",
+	_TabPanel : "ll-tabpanel",
+	_Tab : "ll-tab",
 	_Region  :"ll-region"
 };
 var _ConstantPageDefaultParam = {

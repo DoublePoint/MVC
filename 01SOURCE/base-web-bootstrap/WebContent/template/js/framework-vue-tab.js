@@ -1,8 +1,12 @@
-Vue.component(_ConstantComponentMap._TabPanel, {
-	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div><ul :id="id+guid" class="nav nav-tabs"></ul><div>'+ '<slot></slot>' +'</div></div>',
+Vue.component(_ConstantComponentMap._Tab, {
+	props : [ 'id', 'height', 'width', 'backgroundcolor','title' ],
+	template : '<div class="tab-pane fade in active" :id="id+guid" :title="aTitle">'+ '<slot></slot>' +'</div>',
 	data : function() {
+		var aTitle="";
+		if(this.title!=null)
+			aTitle=this.title;
 		return {
+			aTitle:aTitle,
 			guid:$._GenerateUUID()
 		}
 	},
@@ -11,6 +15,11 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 	},
 	mounted:function(){
 		this._MapComponent();
+		// 将formfield添加到form中
+		this._AddToTabPanel();
+	},
+	beforeMount : function() {
+		
 	},
 	methods : {
 		_GetComponentDomId : function() {
@@ -24,12 +33,12 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
-			var tabpanel = new TablPanel(domId);
-			for ( var attrName in tabpanel) {
+			var tab = new Tab(domId);
+			for ( var attrName in tab) {
 				if (this[attrName] != null)
-					tabpanel[attrName] = this[attrName];
+					tab[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, tabpanel);
+			$._AddToLayuiObjectHashMap(domId, tab);
 		},
 		_AddDragDom : function(){
 		},
@@ -38,24 +47,30 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 			$._OutputMapCompoment(this);
 		},
 		_RegisterResize :function(){
+		},
+		_AddToTabPanel : function(){
+			var parentDomId = this.$parent._GetComponentDomId();
+			var tablePanel = $._GetFromLayuiObjectHashMap(parentDomId);
+			tablePanel.addTab(this._GetComponentDom());
 		}
 	},
 })
 
 
-function TablPanel(domId){
+function Tab(domId){
 	this.domId=domId;
+	this.title="";
 	
-	this.addTab=function(tab){
-		var title=tab.getTitle();
-		var domId=tab.getDomId();
-		var tabTemplate='<li><a href="#'+domId+'" data-toggle="tab">'+title+'</a></li>';
-		this.getDom().append(tabTemplate);
-	}
 	this.getDomId=function(){
 		return this.domId;
 	}
 	this.getDom = function() {
 		return $("#" + this.domId);
+	}
+	this.getTitle = function(){
+		return this.title;
+	}
+	this.setTitle = function(aTitle){
+		this.title=aTitle;
 	}
 }
