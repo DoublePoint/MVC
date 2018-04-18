@@ -421,11 +421,11 @@ function AjaxDataGrid(domId) {
 //        	        dataList : result.dataList //行数据，前面的key要与之前设置的dataField的值一致.
 //        	    };
 //            },//请求数据成功后，渲染表格前的方法
-			showRefresh: true,
-			sidePagination:"server",
+			showRefresh: false,
+			sidePagination:"client",
 			striped: true,    
-			toolbar: '#toolbar',//指定工具栏
-			toolbarAlign:'right',//工具栏对齐方式
+			//toolbar: '#toolbar',//指定工具栏
+			//toolbarAlign:'right',//工具栏对齐方式
 			uniqueId : "rowId",
 			
 			onCheck:function(row){
@@ -498,13 +498,10 @@ function AjaxDataGrid(domId) {
 		var checkDataList=this.getCheckedDataList();
 		if(checkDataList==null||checkDataList.length<=0)
 			return;
-		var arr=new Array();
 		for(var i in checkDataList){
-			
-			arr.push(checkDataList[i].rowId);
-			//this.getDom().bootstrapTable('removeByUniqueId', checkDataList[i].rowId);
+			//arr.push(checkDataList[i].rowId);
+			this.getDom().bootstrapTable('removeByUniqueId', checkDataList[i].rowId);
 		}
-		this.getDom().bootstrapTable('remove', "rowId",arr);
 	}
 	return this;
 }

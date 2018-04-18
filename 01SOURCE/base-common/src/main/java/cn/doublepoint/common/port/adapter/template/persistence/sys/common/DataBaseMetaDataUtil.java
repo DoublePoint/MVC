@@ -71,17 +71,10 @@ public class DataBaseMetaDataUtil {
 				String aValue=(String) m.get("value");
 				String aFilter=(String)m.getOrDefault("filter", "");
 				MySQLTables dropBean=new MySQLTables();
-				dropBean.setTABLE_NAME(aKey);
-				//dropBean.setValue(aValue);
-				//dropBean.setFilter(aFilter);
+				dropBean.setTableName(aKey);
 				return dropBean;
 			}).collect(toList());
 			
-			for(int i=0;i<200;i++){
-				MySQLTables e=new MySQLTables();
-				e.setTABLE_NAME("123");
-				list.add(e);
-			}
 			return list;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -89,18 +82,5 @@ public class DataBaseMetaDataUtil {
 		}
 		
 		
-//		List<DropBean> list=mapList.stream().map(m->{
-//			MySQLTables.class.getDeclaredFields()
-//			String aKey=(String) m.get("key");
-//			String aValue=(String) m.get("value");
-//			String aFilter=(String)m.getOrDefault("filter", "");
-//			DropBean dropBean=new DropBean();
-//			dropBean.setKey(aKey);
-//			dropBean.setValue(aValue);
-//			dropBean.setFilter(aFilter);
-//			return dropBean;
-//		}).collect(toList());
-//		
-//		return list;
 	}
 }

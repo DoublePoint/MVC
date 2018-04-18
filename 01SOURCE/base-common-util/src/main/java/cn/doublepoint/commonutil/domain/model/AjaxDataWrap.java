@@ -10,10 +10,7 @@
 package cn.doublepoint.commonutil.domain.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
-import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 public class AjaxDataWrap<T extends BaseModel> implements Serializable{
 	/**                                                                  

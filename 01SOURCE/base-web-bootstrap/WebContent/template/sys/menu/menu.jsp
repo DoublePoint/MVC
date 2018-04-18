@@ -30,7 +30,7 @@
 			</ll-fillarea-lr>
 			<ll-fillarea-lr width="*">
 				<ll-filllayout > 
-					<ll-fillarea-tb height="90" showtitle="true" title="查询条件">
+					<ll-fillarea-tb height="135" showtitle="true" title="查询条件" showborder="false">
 							<ll-ajaxform id="ajaxform" cols="3" colproportion="1:3:1:3:1:3"> 
 									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
@@ -43,12 +43,14 @@
 									</ll-formtoolbar>
 							</ll-ajaxform>
 					</ll-fillarea-tb>
-					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
-						<div id="toolbar" class="btn-group pull-right" style="margin-right: 20px;">
+					<ll-fillarea-tb height="45" >
+						<div class="btn-group " style="margin-left:5px;">
 							<input type="button" class="btn btn-info btn-sm" onclick="onClickAdd()" value="增加"/>
 							<input type="button" class="btn btn-info btn-sm " onclick="onClickEdit()" value="编辑"/>
 							<input type="button" class="btn btn-info btn-sm" onclick="onClickDelete()" value="删除"/></ll-toolbar>
- </div>
+ 						</div>
+					</ll-fillarea-tb>
+					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
 						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
 							<ll-gridcheck></ll-gridcheck>
 							<ll-gridrow field="id" title="菜单标识"></ll-gridrow>

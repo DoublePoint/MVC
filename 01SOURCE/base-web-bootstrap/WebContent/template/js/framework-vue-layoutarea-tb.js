@@ -30,27 +30,27 @@
 		mounted : function() {
 			this._MapComponent();
 			
-			//此段代码不能删除，因为需要首先确定各个div的高度，
-			var id = this._GetComponentDomId();
-			var parentWidth = $("#" + id).parent().width();
-			var parentheight = $("#" + id).parent().height();
-			var brother = $("#" + id).parent().children();
-			if (brother.length <= 0)
-				return;
-			if (this.layOutHeight.toString().indexOf("px") != -1)
-				this.layOutHeight = this.layOutHeight;
-			else if (this.layOutHeight.toString().indexOf("%") != -1) {
-				this.layOutHeight = this.layOutHeight;
-			} else if (this.layOutHeight.toString().indexOf("*") != -1) {
-				var allBrotherFixHeight = 0;
-				for (var i = 0; i < brother.length; i++) {
-					if (brother[i].id != id) {
-						allBrotherFixHeight += brother[i].offsetHeight;
-					}
-				}
-				this.layOutHeight = (parentheight - allBrotherFixHeight).toString() + "px";
-			}
-			$("#" + id).width("100%");
+//			//此段代码不能删除，因为需要首先确定各个div的高度，
+//			var id = this._GetComponentDomId();
+//			var parentWidth = $("#" + id).parent().width();
+//			var parentheight = $("#" + id).parent().height();
+//			var brother = $("#" + id).parent().children();
+//			if (brother.length <= 0)
+//				return;
+//			if (this.layOutHeight.toString().indexOf("px") != -1)
+//				this.layOutHeight = this.layOutHeight;
+//			else if (this.layOutHeight.toString().indexOf("%") != -1) {
+//				this.layOutHeight = this.layOutHeight;
+//			} else if (this.layOutHeight.toString().indexOf("*") != -1) {
+//				var allBrotherFixHeight = 0;
+//				for (var i = 0; i < brother.length; i++) {
+//					if (brother[i].id != id) {
+//						allBrotherFixHeight += brother[i].offsetHeight;
+//					}
+//				}
+//				this.layOutHeight = (parentheight - allBrotherFixHeight).toString() + "px";
+//			}
+//			$("#" + id).width("100%");
 		},
 		methods : {
 			_GetComponentDomId : function() {
@@ -65,6 +65,10 @@
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
 				var _FillArea = new FillAreaTB(domId);
+				for ( var attrName in _FillArea) {
+					if (this[attrName] != null)
+						_FillArea[attrName] = this[attrName];
+				}
 				$._AddToLayuiObjectHashMap(domId, _FillArea);
 				
 				// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
@@ -89,9 +93,17 @@
 			_InitClientStyle : function(){
 				var varlayOutHeight=this.height;
 				if(varlayOutHeight==null||varlayOutHeight=="")
-					varlayOutHeight='100%';
+					this.layOutHeight = '100%';
+				else if (varlayOutHeight.toString().indexOf("px") != -1
+						||varlayOutHeight.toString().indexOf("%") != -1
+						||varlayOutHeight.toString().indexOf("*") != -1) {
+					this.layOutHeight = varlayOutHeight;
+				}
+				else{
+					this.layOutHeight = varlayOutHeight + "px";
+				}
 				var clientStyleBuffer=$._CreateStringBuffer();
-				var heightBuffer=$._CreateStyleBuffer("height",varlayOutHeight);
+				var heightBuffer=$._CreateStyleBuffer("height",this.layOutHeight);
 				clientStyleBuffer.append(heightBuffer.toString());
 				var widthBuffer=$._CreateStyleBuffer("width",'100%');
 				clientStyleBuffer.append(widthBuffer.toString());
@@ -99,14 +111,13 @@
 					var bgBuffer=$._CreateStyleBuffer("background-color",this.backgroundcolor);
 					clientStyleBuffer.append(bgBuffer.toString());
 				}
-				this.showborder=true;
 				
 				return clientStyleBuffer;
 			},
 			_InitClientClassBuffer : function(){
 				var bf=$._CreateStringBuffer();
 				bf.append(" ll-fill-area-tb panel-info ll-panel");
-				if(this.showborder==true)
+				if(this.showborder=="true")
 					bf.append(" layout-area-Border ");
 				bf.append(" ll-panel");
 				return bf;

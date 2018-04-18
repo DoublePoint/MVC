@@ -12,153 +12,155 @@ package cn.doublepoint.common.domain.model.entity.sys;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 public class MySQLTables extends BaseEntity{
-	private String TABLE_CATALOG;
-	private String TABLE_SCHEMA;
-	private String TABLE_NAME;
-	private String TABLE_TYPE;
-	private String ENGINE;
-	private String VERSION;
-	private String ROW_FORMAT;
-	private String TABLE_ROWS;
-	private String AVG_ROW_LENGTH;
-	private String DATA_LENGTH;
-	private String MAX_DATA_LENGTH;
-	private String INDEX_LENGTH;
-	private String DATA_FREE;
-	private String AUTO_INCREMENT;
-	private String CREATE_TIME;
-	private String UPDATE_TIME;
-	private String CHECK_TIME;
-	private String TABLE_COLLATION;
-	private String CHECKSUM;
-	private String CREATE_OPTIONS;
-	private String TABLE_COMMENT;
-	public String getTABLE_CATALOG() {
-		return TABLE_CATALOG;
+	private String tableCatalog;
+	private String tableSchema;
+	private String tableName;
+	private String tableType;
+	private String engine;
+	private String version;
+	private String rowFormat;
+	private String tableRows;
+	private String avgRowLength;
+	private String dataLength;
+	private String maxDataLength;
+	private String indexLength;
+	private String dataFree;
+	private String autoIncrement;
+	private String createTime;
+	private String updateTime;
+	private String checkTime;
+	private String tableCollation;
+	private String checksum;
+	private String createOptions;
+	private String tableComment;
+	
+	public String getTableCatalog() {
+		return tableCatalog;
 	}
-	public void setTABLE_CATALOG(String tABLE_CATALOG) {
-		TABLE_CATALOG = tABLE_CATALOG;
+	public void setTableCatalog(String tableCatalog) {
+		this.tableCatalog = tableCatalog;
 	}
-	public String getTABLE_SCHEMA() {
-		return TABLE_SCHEMA;
+	public String getTableSchema() {
+		return tableSchema;
 	}
-	public void setTABLE_SCHEMA(String tABLE_SCHEMA) {
-		TABLE_SCHEMA = tABLE_SCHEMA;
+	public void setTableSchema(String tableSchema) {
+		this.tableSchema = tableSchema;
 	}
-	public String getTABLE_NAME() {
-		return TABLE_NAME;
+	public String getTableName() {
+		return tableName;
 	}
-	public void setTABLE_NAME(String tABLE_NAME) {
-		TABLE_NAME = tABLE_NAME;
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
-	public String getTABLE_TYPE() {
-		return TABLE_TYPE;
+	public String getTableType() {
+		return tableType;
 	}
-	public void setTABLE_TYPE(String tABLE_TYPE) {
-		TABLE_TYPE = tABLE_TYPE;
+	public void setTableType(String tableType) {
+		this.tableType = tableType;
 	}
-	public String getENGINE() {
-		return ENGINE;
+	public String getEngine() {
+		return engine;
 	}
-	public void setENGINE(String eNGINE) {
-		ENGINE = eNGINE;
+	public void setEngine(String engine) {
+		this.engine = engine;
 	}
-	public String getVERSION() {
-		return VERSION;
+	public String getVersion() {
+		return version;
 	}
-	public void setVERSION(String vERSION) {
-		VERSION = vERSION;
+	public void setVersion(String version) {
+		this.version = version;
 	}
-	public String getROW_FORMAT() {
-		return ROW_FORMAT;
+	public String getRowFormat() {
+		return rowFormat;
 	}
-	public void setROW_FORMAT(String rOW_FORMAT) {
-		ROW_FORMAT = rOW_FORMAT;
+	public void setRowFormat(String rowFormat) {
+		this.rowFormat = rowFormat;
 	}
-	public String getTABLE_ROWS() {
-		return TABLE_ROWS;
+	public String getTableRows() {
+		return tableRows;
 	}
-	public void setTABLE_ROWS(String tABLE_ROWS) {
-		TABLE_ROWS = tABLE_ROWS;
+	public void setTableRows(String tableRows) {
+		this.tableRows = tableRows;
 	}
-	public String getAVG_ROW_LENGTH() {
-		return AVG_ROW_LENGTH;
+	public String getAvgRowLength() {
+		return avgRowLength;
 	}
-	public void setAVG_ROW_LENGTH(String aVG_ROW_LENGTH) {
-		AVG_ROW_LENGTH = aVG_ROW_LENGTH;
+	public void setAvgRowLength(String avgRowLength) {
+		this.avgRowLength = avgRowLength;
 	}
-	public String getDATA_LENGTH() {
-		return DATA_LENGTH;
+	public String getDataLength() {
+		return dataLength;
 	}
-	public void setDATA_LENGTH(String dATA_LENGTH) {
-		DATA_LENGTH = dATA_LENGTH;
+	public void setDataLength(String dataLength) {
+		this.dataLength = dataLength;
 	}
-	public String getMAX_DATA_LENGTH() {
-		return MAX_DATA_LENGTH;
+	public String getMaxDataLength() {
+		return maxDataLength;
 	}
-	public void setMAX_DATA_LENGTH(String mAX_DATA_LENGTH) {
-		MAX_DATA_LENGTH = mAX_DATA_LENGTH;
+	public void setMaxDataLength(String maxDataLength) {
+		this.maxDataLength = maxDataLength;
 	}
-	public String getINDEX_LENGTH() {
-		return INDEX_LENGTH;
+	public String getIndexLength() {
+		return indexLength;
 	}
-	public void setINDEX_LENGTH(String iNDEX_LENGTH) {
-		INDEX_LENGTH = iNDEX_LENGTH;
+	public void setIndexLength(String indexLength) {
+		this.indexLength = indexLength;
 	}
-	public String getDATA_FREE() {
-		return DATA_FREE;
+	public String getDataFree() {
+		return dataFree;
 	}
-	public void setDATA_FREE(String dATA_FREE) {
-		DATA_FREE = dATA_FREE;
+	public void setDataFree(String dataFree) {
+		this.dataFree = dataFree;
 	}
-	public String getAUTO_INCREMENT() {
-		return AUTO_INCREMENT;
+	public String getAutoIncrement() {
+		return autoIncrement;
 	}
-	public void setAUTO_INCREMENT(String aUTO_INCREMENT) {
-		AUTO_INCREMENT = aUTO_INCREMENT;
+	public void setAutoIncrement(String autoIncrement) {
+		this.autoIncrement = autoIncrement;
 	}
-	public String getCREATE_TIME() {
-		return CREATE_TIME;
+	public String getCreateTime() {
+		return createTime;
 	}
-	public void setCREATE_TIME(String cREATE_TIME) {
-		CREATE_TIME = cREATE_TIME;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
-	public String getUPDATE_TIME() {
-		return UPDATE_TIME;
+	public String getUpdateTime() {
+		return updateTime;
 	}
-	public void setUPDATE_TIME(String uPDATE_TIME) {
-		UPDATE_TIME = uPDATE_TIME;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
-	public String getCHECK_TIME() {
-		return CHECK_TIME;
+	public String getCheckTime() {
+		return checkTime;
 	}
-	public void setCHECK_TIME(String cHECK_TIME) {
-		CHECK_TIME = cHECK_TIME;
+	public void setCheckTime(String checkTime) {
+		this.checkTime = checkTime;
 	}
-	public String getTABLE_COLLATION() {
-		return TABLE_COLLATION;
+	public String getTableCollation() {
+		return tableCollation;
 	}
-	public void setTABLE_COLLATION(String tABLE_COLLATION) {
-		TABLE_COLLATION = tABLE_COLLATION;
+	public void setTableCollation(String tableCollation) {
+		this.tableCollation = tableCollation;
 	}
-	public String getCHECKSUM() {
-		return CHECKSUM;
+	public String getChecksum() {
+		return checksum;
 	}
-	public void setCHECKSUM(String cHECKSUM) {
-		CHECKSUM = cHECKSUM;
+	public void setChecksum(String checksum) {
+		this.checksum = checksum;
 	}
-	public String getCREATE_OPTIONS() {
-		return CREATE_OPTIONS;
+	public String getCreateOptions() {
+		return createOptions;
 	}
-	public void setCREATE_OPTIONS(String cREATE_OPTIONS) {
-		CREATE_OPTIONS = cREATE_OPTIONS;
+	public void setCreateOptions(String createOptions) {
+		this.createOptions = createOptions;
 	}
-	public String getTABLE_COMMENT() {
-		return TABLE_COMMENT;
+	public String getTableComment() {
+		return tableComment;
 	}
-	public void setTABLE_COMMENT(String tABLE_COMMENT) {
-		TABLE_COMMENT = tABLE_COMMENT;
+	public void setTableComment(String tableComment) {
+		this.tableComment = tableComment;
 	}
+	
 	
 	
 }
