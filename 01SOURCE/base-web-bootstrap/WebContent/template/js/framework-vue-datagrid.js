@@ -310,9 +310,14 @@ function AjaxDataGrid(domId) {
 	};
 
 	this.init = function() {
+		this.initStyle();
 		this.initData();
 		this.initEvent();
 	};
+	this.initAjaxJsonData=function(ajaxDataWrap){
+		this.datawrap.parse(ajaxDataWrap);
+		this.render();
+	}
 	this.initData = function(){
 		var data={};
 		var grid=this;
@@ -324,14 +329,14 @@ function AjaxDataGrid(domId) {
 			data : JSON.stringify(data),
 			async : false,
 			success : function(ajaxDataWrap) {
-				grid.setDataWrap(ajaxDataWrap);
+				grid.initAjaxJsonData(ajaxDataWrap);
 			},
 			error:function(){
 				grid.setLayuiTableDataNull();
 			}
 		});
 
-		
+		this.initBootstrapSetting();
 	};
 	this.initEvent = function() {
 		//分页点击事件
@@ -340,22 +345,31 @@ function AjaxDataGrid(domId) {
 			_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
 		}
 	};
-	this.render = function() {
-
+	this.initStyle=function(){
 		// 高度设置为获取父元素的高度
-		var thisResultHeight = this.getDom().closest(".layoutarea").height();
+		var brotherHeight=0;
+		try{
+			brotherHeight=this.getDom().closest(".ll-fill-area-tb").children('.panel-heading').get(0).offsetHeight;
+		}
+		catch(e){
+			brotherHeight=0;
+		}
+		var thisResultHeight = this.getDom().closest(".ll-fill-area-tb").get(0).offsetHeight-brotherHeight;
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
-		this.setLayuiTableData(this);
+	};
+	this.render = function() {
+		this.initBootstrapSetting(this);
 		this.setPager(this.datawrap.getPageInfo(), this.id);
 	};
 	this.resize = function() {
+		this.initStyle();
 		// 高度设置为获取父元素的高度
-		var thisResultHeight = this.getDom().closest(".layoutarea").height();
-		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
-			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
-		this.height = thisResultHeight - this.pageHeight;
+//		var thisResultHeight = this.getDom().closest(".ll-fill-area-tb").get(0).offsetHeight-this.getDom().closest(".ll-fill-area-tb").children(':first').get(0).offsetHeight;
+//		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
+//			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
+//		this.height = thisResultHeight - this.pageHeight;
 		var height = this.height;
 		this.getDom().bootstrapTable('resetView', {
 			height : height
@@ -370,9 +384,10 @@ function AjaxDataGrid(domId) {
 	};
 	this.setDataWrap = function(ajaxDataWrap) {
 		this.datawrap.parse(ajaxDataWrap);
-		this.render();
+		$("#" + this.domId).bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
+		
 	};
-	this.setLayuiTableData = function() {
+	this.initBootstrapSetting = function() {
 		var ajaxgrid = this;
 		var id = ajaxgrid.domId;
 		var ajaxDataWrap = ajaxgrid.datawrap;
@@ -381,10 +396,38 @@ function AjaxDataGrid(domId) {
 		var height = ajaxgrid.height;
 		var $table = $("#" + id);
 		$table.bootstrapTable({
+			buttonsAlign:'right',//按钮对齐方式
+			//url : $$pageContextPath + ajaxgrid.datasource,
+			data : $._Clone(ajaxDataWrap.dataList),
+			dataField: "dataList",//这是返回的json数组的key.默认好像是"rows".这里只有前后端约定好就行
 			height : height,
 			idField : "rowId",
+			//pagination: true,
+			//pageSize: 1,                       //每页的记录行数（*）  
+           // pageList: [1,20, 50, 100],            //可供选择的每页的行数（*）  
+//            queryParams:function(params){
+//            	var ajaxDataWrap=new AjaxDataWrap
+//            },
+//            responseHandler:function(result){
+//            	ajaxgrid.datawrap.parse(ajaxDataWrap);
+//            	var code = result.code;//在此做了错误代码的判断
+//        	    if(code != 200){
+//        	        alert("错误代码" + errcode);
+//        	        return;
+//        	    }
+//        	    //如果没有错误则返回数据，渲染表格
+//        	    return {
+//        	        total : result.pageInfo.totalElementCount, //总页数,前面的key必须为"total"
+//        	        dataList : result.dataList //行数据，前面的key要与之前设置的dataField的值一致.
+//        	    };
+//            },//请求数据成功后，渲染表格前的方法
+			showRefresh: true,
+			sidePagination:"server",
+			striped: true,    
+			toolbar: '#toolbar',//指定工具栏
+			toolbarAlign:'right',//工具栏对齐方式
 			uniqueId : "rowId",
-			data : $._Clone(ajaxDataWrap.dataList),
+			
 			onCheck:function(row){
 				$._Eval(ajaxgrid.oncheck,row);
 			},
@@ -396,6 +439,7 @@ function AjaxDataGrid(domId) {
 				$._Eval(ajaxgrid.getRowClick(), arr);
 			}
 		});
+		
 		return null;
 	};
 	this.setLayuiTableDataNull = function (){
@@ -415,6 +459,8 @@ function AjaxDataGrid(domId) {
 	this.setPager = function(page, ajaxDataGridId) {
 		if (page == null)
 			return;
+
+		$("#" + this.domId).bootstrapTable('selectPage', page.currentPageNum); 
 		$laypage.render({
 			elem : this.pagerId,
 			count : page.totalElementCount,

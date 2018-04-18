@@ -28,7 +28,7 @@
 <script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.js" media="all"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="${pageContext.request.contextPath}/template/bootstrap-select/js/bootstrap-select.js" ></script>
-
+<script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
 	var $element;

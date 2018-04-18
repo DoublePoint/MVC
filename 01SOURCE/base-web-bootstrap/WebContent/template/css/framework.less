@@ -1,8 +1,11 @@
 @MenuBackgroundColor:#333333; //菜单导航背景色
 @PageHeaderBackgroundColor:#FFFFFF;//页面头部背景颜色
 @PageHeaderFontColor:#FFFFFF;//页面头部字体演示
-@DragLineBackgroundColor:#CECECE;//拖动条的颜色
+@DragLineBackgroundColor:#F1F1F1;//拖动条的颜色
+@BorderColor:#F1F1F1;//个布局边框的颜色
+@BorderWidth:1px;
 @DragLineWidth:1px;//拖动条的宽度
+
 
 html, body, form {
 	height: 100%;
@@ -260,4 +263,15 @@ ll-filllayout{
 @color:#ED8E1C;
 .title_value{
 	color:@color;
+}
+
+.layout-area-Border{
+	border-bottom:1px solid @BorderColor;//个布局边框的颜色
+}
+.ll-panel{
+	margin-bottom: 0px; 
+}
+
+.panel-heading{
+	padding: 5px 10px 5px 10px;
 }
