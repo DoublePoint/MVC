@@ -12,13 +12,6 @@ package cn.doublepoint.common.domain.model.viewmodel.sys;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-
-import org.springframework.beans.BeanUtils;
-
-import cn.doublepoint.common.domain.model.entity.sys.Menu;
-import cn.doublepoint.commonutil.annotations.domain.model.DateConvertor;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 public class VOMenu extends BaseEntity {

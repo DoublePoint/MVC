@@ -8,8 +8,8 @@
 		<artifactId>base-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-<dependencies>
-	<!--MySQL Driver -->
+	<dependencies>
+		<!--MySQL Driver -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -92,6 +92,12 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
 		</dependency>
 
 

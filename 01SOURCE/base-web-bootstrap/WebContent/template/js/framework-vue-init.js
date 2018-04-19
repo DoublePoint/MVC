@@ -66,7 +66,7 @@ function _InitExplorerResizeListener() {
 /*-----------根据参数判断是否执行init方法---------------*/
 function _InvokeTheInitFunction() {
 	// 当参数为N时才不执行，否则执行
-	if (!($._GetRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
+	if ($._GetRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION)==null||!($._GetRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
 		init();
 	}
 }

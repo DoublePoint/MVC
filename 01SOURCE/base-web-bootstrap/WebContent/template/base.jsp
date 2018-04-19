@@ -23,12 +23,15 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-constant.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/template/bootstrap-fileinput-master/js/fileinput.js" ></script>
+<script src="${pageContext.request.contextPath}/template/bootstrap-fileinput-master/js/locales/zh.js" ></script>
 <script src="${pageContext.request.contextPath}/template/bootstrap-3.3.7/dist/js/bootstrap.min.js" media="all"></script>
 <!-- bootstrap-table.min.js -->
 <script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.js" media="all"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="${pageContext.request.contextPath}/template/bootstrap-select/js/bootstrap-select.js" ></script>
 <script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
 	var $element;
@@ -37,7 +40,6 @@
 	var $layedit;
 	var $laydate;
 	var $tree;
-	//var $table;
 	$element = layui.element; // 导航的hover效果、二级菜单等功能，需要依赖element模块
 	$layer = layui.layer;
 	$form = layui.form;
@@ -45,7 +47,6 @@
 	$laydate = layui.laydate;
 	$laypage = layui.laypage;
 	$tree = layui.tree;
-	//$table = layui.table;
 	$layer.config({
 		  extend: 'frameworkskin/dialogStyle.css', //加载您的扩展样式
 		  skin: 'layui-layer-iframe'
@@ -79,3 +80,5 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
  <!-- METISMENU SCRIPTS -->
 <script src="${pageContext.request.contextPath}/template/btts_9_sp/assets/js/jquery.metisMenu.js"></script>
+
+<link href="${pageContext.request.contextPath}/template/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />

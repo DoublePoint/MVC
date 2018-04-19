@@ -1,13 +1,17 @@
 Vue.component(_ConstantComponentMap._Tab, {
-	props : [ 'id', 'height', 'width', 'backgroundcolor','title' ],
-	template : '<div class="tab-pane fade in active" :id="id+guid" :title="aTitle">'+ '<slot></slot>' +'</div>',
+	props : [ 'id', 'height', 'width', 'backgroundcolor','title','active' ],
+	template : '<div :class="clientClassBuffer" :style="clientStyle" :id="id+guid" :title="aTitle">'+ '<slot></slot>' +'</div>',
 	data : function() {
 		var aTitle="";
 		if(this.title!=null)
 			aTitle=this.title;
+		var clientClassBuffer=this._InitClientClassBuffer();
+		var clientStyleBuffer=this._InitClientStyleBuffer();
 		return {
 			aTitle:aTitle,
-			guid:$._GenerateUUID()
+			guid:$._GenerateUUID(),
+			clientClassBuffer : clientClassBuffer.toString(),
+			clientStyle:clientStyleBuffer.toString()
 		}
 	},
 	created : function() {//注册到系统map
@@ -52,6 +56,19 @@ Vue.component(_ConstantComponentMap._Tab, {
 			var parentDomId = this.$parent._GetComponentDomId();
 			var tablePanel = $._GetFromLayuiObjectHashMap(parentDomId);
 			tablePanel.addTab(this._GetComponentDom());
+		},
+		_InitClientClassBuffer : function(){
+			var buf=$._CreateStringBuffer();
+			buf.append(" tab-pane fade in ");
+			if(this.active=="true"){
+				buf.append(" active ");
+			}
+			return buf;
+		},
+		_InitClientStyleBuffer : function(){
+			var buf=$._CreateStringBuffer();
+			buf.append(" height:100%;");
+			return buf;
 		}
 	},
 })
@@ -60,12 +77,24 @@ Vue.component(_ConstantComponentMap._Tab, {
 function Tab(domId){
 	this.domId=domId;
 	this.title="";
-	
+	this.active="";
+	this.appendCode = function(code){
+		var $pre=$('<pre style="height:100%;border-top:0px;" ></pre>');
+		
+		$pre.append(code);
+		this.getDom.append();
+	}
+	this.getActive=function(){
+		return this.active;
+	}
 	this.getDomId=function(){
 		return this.domId;
 	}
 	this.getDom = function() {
 		return $("#" + this.domId);
+	}
+	this.setActive = function(aActive){
+		this.active=aActive;
 	}
 	this.getTitle = function(){
 		return this.title;
@@ -73,4 +102,5 @@ function Tab(domId){
 	this.setTitle = function(aTitle){
 		this.title=aTitle;
 	}
+	
 }

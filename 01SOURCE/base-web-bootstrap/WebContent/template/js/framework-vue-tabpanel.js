@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._TabPanel, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div><ul :id="id+guid" class="nav nav-tabs"></ul><div>'+ '<slot></slot>' +'</div></div>',
+	template : '<div style="height:100%;"><ul :id="id+guid" class="nav nav-tabs"></ul><div class="tab-content">'+ '<slot></slot>' +'</div></div>',
 	data : function() {
 		return {
 			guid:$._GenerateUUID()
@@ -24,7 +24,7 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
-			var tabpanel = new TablPanel(domId);
+			var tabpanel = new TabPanel(domId);
 			for ( var attrName in tabpanel) {
 				if (this[attrName] != null)
 					tabpanel[attrName] = this[attrName];
@@ -43,14 +43,19 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 })
 
 
-function TablPanel(domId){
+function TabPanel(domId){
 	this.domId=domId;
 	
 	this.addTab=function(tab){
 		var title=tab.getTitle();
 		var domId=tab.getDomId();
-		var tabTemplate='<li><a href="#'+domId+'" data-toggle="tab">'+title+'</a></li>';
-		this.getDom().append(tabTemplate);
+		var $li=$("<li></li>");
+		if(tab.getActive()=="true"){
+			$li.attr("class","active");
+		}
+		var $a=$('<a href="#'+domId+'" data-toggle="tab">'+tab.getTitle()+'</a>')
+		$li.append($a);
+		this.getDom().append($li);
 	}
 	this.getDomId=function(){
 		return this.domId;
