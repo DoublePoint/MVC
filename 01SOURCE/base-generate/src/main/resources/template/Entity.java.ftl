@@ -39,7 +39,8 @@ public class ${entityModel.className} extends BaseEntity {
 	}
 </#list>
 	public String toString() {
-		return "${entityModel.className} [<#list entityModel.fields as field><#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>=" + <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list> + "<#if field_has_next>,</#if></#list>]";
+		return "${entityModel.className} [<#list entityModel.fields as field>
+		<#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list>=" + <#list field.fieldName?split('_') as n><#if n_index ==0>${n}<#else>${n?cap_first}</#if></#list> + "<#if field_has_next>,</#if></#list>]";
 	}
 }
 <#macro fieldType type>
