@@ -53,8 +53,6 @@
             <ll-fillarea-lr  width="*"  height="100%">  
               <ll-tabpanel  id="abc">  
                 <ll-tab  id="tabEntity"  active="true"  title="实体">  
-                  <pre  style="height:  100%;  border-top:  0px;">
-			</pre>
                 </ll-tab>  
                 <ll-tab  id="tabRepository"  title="仓库">
                     	仓库
@@ -73,7 +71,7 @@
             <input  type="button"  class="btn  btn-info  btn-sm"  onclick="onClickDelete()"  value="删除"  />
           </ll-toolbar>  
         </ll-fillarea-tb>  
-        <ll-fillarea-tb  height="500">  
+        <ll-fillarea-tb  height="30">  
           	<input id="myfile" type="file" name="file">  
         </ll-fillarea-tb>  
       </ll-filllayout>  

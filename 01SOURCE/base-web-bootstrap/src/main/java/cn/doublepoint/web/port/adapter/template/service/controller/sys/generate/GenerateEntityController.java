@@ -50,30 +50,6 @@ public class GenerateEntityController extends BaseHandleController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return returnString;
-		
-//		// 原始名称
-//		String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
-//		// System.out.println(oldFileName);
-//		// 存储图片的虚拟本地路径（这里需要配置tomcat的web模块路径，双击猫进行配置）
-//		String saveFilePath = "F://AllProject//01SOURCE//base-web-bootstrap//tmp//spittr//uploads";
-//		// 上传图片
-//		if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
-//			// 新的图片名称
-//			String newFileName = "123" + oldFileName.substring(oldFileName.lastIndexOf("."));
-//			// 新图片
-//			File newFile = new File(saveFilePath + "//" + newFileName);
-//			// 将内存中的数据写入磁盘
-//			myfile.transferTo(newFile);
-//			// 将新图片名称返回到前端
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("success", "成功啦");
-//			map.put("url", newFileName);
-//			return map;
-//		} else {
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("error", "图片不合法");
-//			return map;
-//		}
+		return returnString.replace("<", "&lt;").replace("<", "&gt;");
 	}
 }

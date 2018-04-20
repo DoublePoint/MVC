@@ -75,7 +75,7 @@ public class GenerateEntityUtil {
 
 	private final static String GENERATE_FILE_ENTITY_TPL_NAME = "Entity.java.ftl";
 
-	private final static String TEMPLATE_DIR = "cn.doublepoint.generate.domain.model.helper.template/";
+	private final static String TEMPLATE_DIR = "/cn.doublepoint.generate.domain.model.helper.template/";
 
 	private final static String TEMPLATE_ENTITY_KEY_NAME = "entityModel";
 
@@ -91,8 +91,7 @@ public class GenerateEntityUtil {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 		data.put("datetime", formatter.format(date));
 		data.put(TEMPLATE_ENTITY_KEY_NAME, entityModelList.get(0));
-		String templateFileName = converString(TEMPLATE_DIR) + "" + GENERATE_FILE_ENTITY_TPL_NAME;
-		String template = createFileByTemplate(templateFileName, data);
+		String template = createFileByTemplate(GENERATE_FILE_ENTITY_TPL_NAME, data);
 		return template;
 	}
 
@@ -105,14 +104,15 @@ public class GenerateEntityUtil {
 	 * @throws TemplateException
 	 * @throws IOException
 	 */
-	public static String createFileByTemplate(String sourceTemplate, Map<String, Object> templateData)
+	public static String createFileByTemplate(String templateFile, Map<String, Object> templateData)
 			throws TemplateException, IOException {
 		ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:servlet-front.xml");
 		FreeMarkerConfigurer freemarkerConfig = (FreeMarkerConfigurer) ac.getBean("freemarkerConfig");
 		Configuration conf = freemarkerConfig.getConfiguration();
 		// FileWriter不能指定编码确实是个问题，只能用这个代替了。
-		sourceTemplate = "/target/classes/" + sourceTemplate;
-		Template template = conf.getTemplate(sourceTemplate);
+		//Template template = conf.getTemplate("classpath:"+sourceTemplate);
+		conf.setClassForTemplateLoading(GenerateEntityUtil.class, "/template" );
+		Template template = conf.getTemplate(templateFile); //framemaker.ftl为要装载的模板
 		String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, templateData);
 		return text;
 	}

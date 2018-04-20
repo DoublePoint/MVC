@@ -79,10 +79,11 @@ function Tab(domId){
 	this.title="";
 	this.active="";
 	this.appendCode = function(code){
-		var $pre=$('<pre style="height:100%;border-top:0px;" ></pre>');
+		this.getDom().empty();
 		
+		var $pre=$('<pre style="height:100%;border-top:0px;" >'+code+'</pre>');
 		$pre.append(code);
-		this.getDom.append();
+		this.getDom().append($pre);
 	}
 	this.getActive=function(){
 		return this.active;
