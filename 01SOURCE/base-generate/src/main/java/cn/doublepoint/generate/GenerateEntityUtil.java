@@ -193,7 +193,8 @@ public class GenerateEntityUtil {
 				}
 				if (isadd) {
 					entityModel.setFields(fieldList);
-					entityModelList.add(entityModel);
+					if(tableName.equalsIgnoreCase(entityModel.getTableName()))
+						entityModelList.add(entityModel);
 				}
 			}
 		} catch (Exception e) {

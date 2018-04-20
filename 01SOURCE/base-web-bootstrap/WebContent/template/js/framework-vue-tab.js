@@ -81,7 +81,7 @@ function Tab(domId){
 	this.appendCode = function(code){
 		this.getDom().empty();
 		
-		var $pre=$('<pre style="height:100%;border-top:0px;" >'+code+'</pre>');
+		var $pre=$('<pre style="height:100%;border-top:0px;" ></pre>');
 		$pre.append(code);
 		this.getDom().append($pre);
 	}

@@ -45,7 +45,7 @@ public class GenerateEntityController extends BaseHandleController {
 		try {
 			File file = File.createTempFile("tmp", null);
 			myfile.transferTo(file);
-			returnString=GenerateEntityUtil.buildEntityByTableName(file, "menu");
+			returnString=GenerateEntityUtil.buildEntityByTableName(file, "sys_menu");
 			file.deleteOnExit();
 		} catch (Exception e) {
 			e.printStackTrace();

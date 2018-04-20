@@ -71,7 +71,7 @@
             <input  type="button"  class="btn  btn-info  btn-sm"  onclick="onClickDelete()"  value="删除"  />
           </ll-toolbar>  
         </ll-fillarea-tb>  
-        <ll-fillarea-tb  height="30">  
+        <ll-fillarea-tb  height="80">  
           	<input id="myfile" type="file" name="file">  
         </ll-fillarea-tb>  
       </ll-filllayout>  
