@@ -3,12 +3,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <link rel="stylesheet/less" href="${pageContext.request.contextPath}/template/css/framework.less" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/bootstrap-3.3.7/dist/css/bootstrap.min.css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" media="all">
 <!-- 引入bootstrap-table样式 -->
-<link href="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/bootstrap-table.min.css" rel="stylesheet">
 <!-- jquery -->
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/bootstrap-select/dist/css/bootstrap-select.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/bootstrap-select/dist/css/bootstrap-select.css">
 <!-- FONTAWESOME STYLES-->
 <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/font-awesome.css" rel="stylesheet" />
 <!--CUSTOM BASIC STYLES-->
@@ -16,21 +16,21 @@
 <!--CUSTOM MAIN STYLES-->
 <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/custom.css" rel="stylesheet" />
 
-<script src="${pageContext.request.contextPath}/template/less.js-2.5.3/dist/less.min.js"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/less.js-2.5.3/dist/less.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/template/js/jquery-1.12.4.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/layui/layui.all.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-constant.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/template/bootstrap-fileinput-master/js/fileinput.js" ></script>
-<script src="${pageContext.request.contextPath}/template/bootstrap-fileinput-master/js/locales/zh.js" ></script>
-<script src="${pageContext.request.contextPath}/template/bootstrap-3.3.7/dist/js/bootstrap.min.js" media="all"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-fileinput-master/js/fileinput.js" ></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-fileinput-master/js/locales/zh.js" ></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js" media="all"></script>
 <!-- bootstrap-table.min.js -->
-<script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/bootstrap-table.min.js" media="all"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/bootstrap-table.js" media="all"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="${pageContext.request.contextPath}/template/bootstrap-select/js/bootstrap-select.js" ></script>
-<script src="${pageContext.request.contextPath}/template/bootstrap-table-1.12.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-select/js/bootstrap-select.js" ></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
@@ -77,8 +77,8 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tabpanel.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tab.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-region.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script> 
  <!-- METISMENU SCRIPTS -->
 <script src="${pageContext.request.contextPath}/template/btts_9_sp/assets/js/jquery.metisMenu.js"></script>
 
-<link href="${pageContext.request.contextPath}/template/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/template/plugins/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />

@@ -32,6 +32,8 @@ var _ConstantComponentMap = {
 	_ToolBar : "ll-toolbar",
 	_TabPanel : "ll-tabpanel",
 	_Tab : "ll-tab",
+	_StepPanel : "ll-steppanel",
+	_Step : "ll-step",
 	_Region  :"ll-region"
 };
 var _ConstantPageDefaultParam = {
