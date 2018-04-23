@@ -25,9 +25,12 @@ $.fn.extend({
 
     _showAria: function (show)
     {
-        return (show == null || show) ? 
-            this.show()._aria("hidden", "false") : 
-            this.hide()._aria("hidden", "true");
+    	if(show == null || show){
+    		return this.css("visibility",  "visible")._aria("hidden", "false"); 
+    	}
+    	else{
+    		return this.css("visibility",  "hidden")._aria("hidden", "true");
+    	}
     },
 
     _selectAria: function (select)

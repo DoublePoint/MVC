@@ -67,6 +67,9 @@
 				                <ll-tab  id="tabApplication"  title="应用层">
 				                   		 应用层
 				                </ll-tab>  
+				                 <ll-tab  id="tabApplication"  title=" Jsp页面">
+				                   		 Jsp页面
+				                </ll-tab>  
 				              </ll-tabpanel>  
 				            </ll-fillarea-lr>  
 				          </ll-filllayout>  

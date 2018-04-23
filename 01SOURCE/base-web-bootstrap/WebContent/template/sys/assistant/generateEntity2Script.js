@@ -1,10 +1,4 @@
 function init() {
-//	$("#wizard").steps({
-//		headerTag : "h2",
-//		bodyTag : "section",
-//		transitionEffect : "slideLeft",
-//		stepsOrientation : "vertical"
-//	});
 	$("#myfile").fileinput({
 		// 上传的地址
 		uploadUrl : $$pageContextPath+"/template/sys/uploadfile",
@@ -55,7 +49,6 @@ function init() {
 	$('#myfile').on('filepreupload', function(event, data, previewId, index) {
 		console.log("filepreupload");
 	});
-	
 }
 function gridLeftOncheck(row) {
 	var rows = gridResource.getCheckedDataList();

@@ -349,7 +349,8 @@ function AjaxDataGrid(domId) {
 		// 高度设置为获取父元素的高度
 		var brotherHeight=0;
 		try{
-			brotherHeight=this.getDom().closest(".ll-fill-area-tb").children('.panel-heading').get(0).offsetHeight;
+			//brotherHeight=this.getDom().closest(".ll-fill-area-tb").children('.panel-heading').get(0).offsetHeight;
+			brotherHeight=this.getDom().closest(".ll-fill-area-tb").children('.panel-heading').outerHeight(true);
 		}
 		catch(e){
 			brotherHeight=0;

@@ -76,6 +76,8 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-toolbar.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tabpanel.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tab.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-steppanel.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-step.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-region.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-init.js" charset="utf-8"></script> 
  <!-- METISMENU SCRIPTS -->

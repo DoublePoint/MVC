@@ -1,7 +1,7 @@
-Vue.component(_ConstantComponentMap._TabPanel, {
+Vue.component(_ConstantComponentMap._StepPanel, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
 	
-	template : '<div id="wizard" style="height:100%;"><div class="steps clearfix"></div><div class="content clearfix">'+ '<slot></slot>' +'</div></div>',
+	template : '<div :id="id+guid" style="height:100%;height:100%;">'+ '<slot></slot>' +'</div>',
 	data : function() {
 		return {
 			guid:$._GenerateUUID()
@@ -12,6 +12,9 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 	},
 	mounted:function(){
 		this._MapComponent();
+		
+		//初始化step模板
+		this._Init();
 	},
 	methods : {
 		_GetComponentDomId : function() {
@@ -25,43 +28,42 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
-			var tabpanel = new TabPanel(domId);
-			for ( var attrName in tabpanel) {
+			var steppanel = new StepPanel(domId);
+			for ( var attrName in steppanel) {
 				if (this[attrName] != null)
-					tabpanel[attrName] = this[attrName];
+					steppanel[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, tabpanel);
-		},
-		_AddDragDom : function(){
+			$._AddToLayuiObjectHashMap(domId, steppanel);
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
 		},
-		_RegisterResize :function(){
+		_Init:function(){
+			this._GetComponentDom().init();
 		}
 	},
 })
 
 
-function TabPanel(domId){
+function StepPanel(domId){
 	this.domId=domId;
 	
-	this.addTab=function(tab){
-		var title=tab.getTitle();
-		var domId=tab.getDomId();
-		var $li=$("<li></li>");
-		if(tab.getActive()=="true"){
-			$li.attr("class","active");
-		}
-		var $a=$('<a href="#'+domId+'" data-toggle="tab">'+tab.getTitle()+'</a>')
-		$li.append($a);
-		this.getDom().append($li);
-	}
 	this.getDomId=function(){
 		return this.domId;
 	}
 	this.getDom = function() {
 		return $("#" + this.domId);
+	}
+	this.init= function(){
+		this.getDom().steps({
+			headerTag : "h2",
+			bodyTag : "section",
+			transitionEffect : "slideLeft",
+			stepsOrientation : "vertical",
+			onStepChanged:function(event, currentIndex, priorIndex){
+				//resizeAllVueModel();
+			}
+		});
 	}
 }

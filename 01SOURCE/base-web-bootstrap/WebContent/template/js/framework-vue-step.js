@@ -1,17 +1,13 @@
 Vue.component(_ConstantComponentMap._Step, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor','title','active' ],
-	template : '<div >'+ '<slot></slot>' +'</div>',
+	template : '<section :id="id+guid" >'+ '<slot></slot>' +'</section>',
 	data : function() {
 		var aTitle="";
 		if(this.title!=null)
 			aTitle=this.title;
-		var clientClassBuffer=this._InitClientClassBuffer();
-		var clientStyleBuffer=this._InitClientStyleBuffer();
 		return {
 			aTitle:aTitle,
-			guid:$._GenerateUUID(),
-			clientClassBuffer : clientClassBuffer.toString(),
-			clientStyle:clientStyleBuffer.toString()
+			guid:$._GenerateUUID()
 		}
 	},
 	created : function() {//注册到系统map
@@ -19,8 +15,8 @@ Vue.component(_ConstantComponentMap._Step, {
 	},
 	mounted:function(){
 		this._MapComponent();
+		this._AddStepHeader();
 		// 将formfield添加到form中
-		this._AddToTabPanel();
 	},
 	beforeMount : function() {
 		
@@ -37,14 +33,12 @@ Vue.component(_ConstantComponentMap._Step, {
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
-			var tab = new Tab(domId);
-			for ( var attrName in tab) {
+			var step = new Step(domId);
+			for ( var attrName in step) {
 				if (this[attrName] != null)
-					tab[attrName] = this[attrName];
+					step[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, tab);
-		},
-		_AddDragDom : function(){
+			$._AddToLayuiObjectHashMap(domId, step);
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
@@ -52,38 +46,23 @@ Vue.component(_ConstantComponentMap._Step, {
 		},
 		_RegisterResize :function(){
 		},
-		_AddToTabPanel : function(){
-			var parentDomId = this.$parent._GetComponentDomId();
-			var tablePanel = $._GetFromLayuiObjectHashMap(parentDomId);
-			tablePanel.addTab(this._GetComponentDom());
-		},
-		_InitClientClassBuffer : function(){
-			var buf=$._CreateStringBuffer();
-			buf.append(" tab-pane fade in ");
-			if(this.active=="true"){
-				buf.append(" active ");
-			}
-			return buf;
+		_AddStepHeader:function(){
+			this._GetComponentDom().addStepName(this.title);
 		},
 		_InitClientStyleBuffer : function(){
-			var buf=$._CreateStringBuffer();
-			buf.append(" height:100%;");
-			return buf;
 		}
 	},
 })
 
 
-function Tab(domId){
+function Step(domId){
 	this.domId=domId;
 	this.title="";
 	this.active="";
-	this.appendCode = function(code){
-		this.getDom().empty();
-		
-		var $pre=$('<pre style="height:100%;border-top:0px;" ></pre>');
-		$pre.append(code);
-		this.getDom().append($pre);
+	
+	this.addStepName=function(stepTitle){
+		var $header=$("<h2>"+this.title+"</h2>");
+		this.getDom().before($header);
 	}
 	this.getActive=function(){
 		return this.active;

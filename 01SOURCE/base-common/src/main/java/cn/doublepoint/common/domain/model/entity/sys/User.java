@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="User")
+@Table(name="sys_user")
 public class User extends BaseEntity {
 	/**
 	 * 序列化ID

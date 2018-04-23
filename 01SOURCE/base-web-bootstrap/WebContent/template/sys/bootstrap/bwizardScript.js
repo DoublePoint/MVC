@@ -1,10 +1,10 @@
 function init() {
-	$("#wizard").steps({
-		headerTag : "h2",
-		bodyTag : "section",
-		transitionEffect : "slideLeft",
-		stepsOrientation : "vertical"
-	});
+//	$("#wizard").steps({
+//		headerTag : "h2",
+//		bodyTag : "section",
+//		transitionEffect : "slideLeft",
+//		stepsOrientation : "vertical"
+//	});
 	$("#myfile").fileinput({
 		// 上传的地址
 		uploadUrl : $$pageContextPath+"/template/sys/uploadfile",

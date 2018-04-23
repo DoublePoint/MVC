@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="Menu")
+@Table(name="sys_menu")
 public class Menu extends BaseEntity {
 	/**
 	 * 序列化ID

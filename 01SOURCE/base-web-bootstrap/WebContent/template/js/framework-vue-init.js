@@ -16,9 +16,6 @@ $(document).ready(function() {
 	/*-----添加LayoutArea合并监听*/
 	_InitLayoutAreaCombineListener();
 	
-	/*-----添加ajaxdatagrid事件监听-*/
-	_InitComponentCompleteListener();
-
 });
 
 /*-----------创建最底层vue对象---------------*/
@@ -47,19 +44,7 @@ function _InitExplorerResizeListener() {
 		// $("#testSpan").text($("#testSpan").text() + explorerHeight + " ");
 
 		// 设置各个vue组件的高度 datagrid layout 
-		var registeredModelList = $._GetRegisteredResizeModel();
-		if (registeredModelList != null) {
-			for (var i = 0; i < registeredModelList.length; i++) {
-				var domObj = registeredModelList[i];
-				domObj.resize();
-			}
-		}
-		try {
-			if (windowResize)
-				windowResize();
-		} catch (e) {
-
-		}
+		resizeAllVueModel();
 
 	}).resize();
 }
@@ -130,10 +115,19 @@ function initBeforeJspInit(){
 		registeredModelList[index].doInDialogSuccess();
 	}
 }
-function _InitComponentCompleteListener(){
-//	// 设置各个vue组件的高度 datagrid layout 
-//	var models = $._GetRegisteredComponentCompleteListenerModel();
-//	for(index in models){
-//		models[index].bindListener();
-//	}
+
+function resizeAllVueModel(){
+	var registeredModelList = $._GetRegisteredResizeModel();
+	if (registeredModelList != null) {
+		for (var i = 0; i < registeredModelList.length; i++) {
+			var domObj = registeredModelList[i];
+			domObj.resize();
+		}
+	}
+	try {
+		if (windowResize)
+			windowResize();
+	} catch (e) {
+
+	}
 }
