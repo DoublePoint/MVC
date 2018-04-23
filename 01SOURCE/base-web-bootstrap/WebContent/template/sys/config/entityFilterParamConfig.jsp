@@ -28,9 +28,9 @@
             <ll-fillarea-lr  width="500px" >  
               <ll-filllayout>  
                 <ll-fillarea-tb height="*" title="实体过滤字" showtitle="true">  
-                  <ll-ajaxdatagrid  id="gridResource"  onrowclick="rowClickTest()"  onpageclick="retrieveAjaxDataGrid"  ondblclick="dbclickgrid(1)"  datasource="/template/sys/tables">  
+                  <ll-ajaxdatagrid  id="gridResource" datasource="/template/sys/config/entityFilter">  
                     <ll-gridcheck></ll-gridcheck>  
-                    <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
+                    <ll-gridrow  field="filter"  title="过滤关键字"></ll-gridrow>  
                   </ll-ajaxdatagrid>  
                 </ll-fillarea-tb>  
                 <ll-fillarea-tb  height="35">  

@@ -32,10 +32,9 @@
 			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="InputButtonClick"></ll-forminputbutton>
 			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
 			<ll-toolbar align="center">
-				<input type="button" value="test" onclick="clicktest()"/>
-				<input type="button" value="delete" onclick="clickDelete()"/>
-				
-				<button class="layui-btn" lay-submit="" lay-filter="demo1" >立即提交</button>
+				<!-- <input type="button" value="test" onclick="clicktest()"/>
+				<input type="button" value="delete" onclick="clickDelete()"/> -->
+				<input type="button" class="btn btn-info btn-sm" onclick="onClickSave()" value="保存"/>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</ll-toolbar>
 		</ll-ajaxform>

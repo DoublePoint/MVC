@@ -14,14 +14,14 @@ function init(response) {
 
 }
 
-// 监听提交
-$form.on('submit(demo1)', function(data) {
+function onClickSave(){
+	var data=ajaxform.getData();
 	$.ajax({
 		type : 'post',
 		// dataType : "JSON",
 		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
 		url : $$pageContextPath + "/template/sys/menu/add",
-		data : JSON.stringify(data.field) + "",
+		data : JSON.stringify(data) + "",
 		success : function(data1) {
 			$._Alert('保存成功');
 			$._Close();
@@ -31,9 +31,7 @@ $form.on('submit(demo1)', function(data) {
 			return false;
 		}
 	});
-
-	return false;
-});
+}
 
 function InputButtonClick() {
 	var ajaxDataWrap = null;
