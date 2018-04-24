@@ -29,30 +29,18 @@
 </head>
 <body>
 	<form>
-		<div class="content" style="width:100%;height:100%;">
 			<ll-steppanel id="wizard"  >
 				<ll-step title="选择实体">
 					<ll-filllayout>  
-				        <ll-fillarea-tb  height="*">  
-				          <ll-filllayout>  
-				            <ll-fillarea-lr  width="*"  height="100%">  
-				              <ll-filllayout>  
-				                <ll-fillarea-tb title="数据库表" showtitle="true">  
-				                  <ll-ajaxdatagrid  id="gridResource"  onrowclick="rowClickTest()"  onpageclick="retrieveAjaxDataGrid"  ondblclick="dbclickgrid(1)"  datasource="/template/sys/tables">  
-				                    <ll-gridcheck></ll-gridcheck>  
-				                    <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
-				                  </ll-ajaxdatagrid>  
-				                </ll-fillarea-tb>  
-				              </ll-filllayout>  
-				            </ll-fillarea-lr>  
-				            <ll-fillarea-lr  width="200"  height="100%">  
-				            </ll-fillarea-lr>  
-				          </ll-filllayout>  
-				        </ll-fillarea-tb>  
+				       <ll-fillarea-tb title="数据库表" showtitle="true">  
+				           <ll-ajaxdatagrid  id="gridResource"  onrowclick="rowClickTest()"  onpageclick="retrieveAjaxDataGrid"  ondblclick="dbclickgrid(1)"  datasource="/template/sys/tables">  
+				           		<ll-gridcheck></ll-gridcheck>  
+				              	<ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
+				         	</ll-ajaxdatagrid>
+				         </ll-fillarea-tb>  
 				      </ll-filllayout>  
 				</ll-step>
-					
-					<ll-step title="生成模板">
+				<ll-step title="生成模板">
 						<ll-filllayout > 
 							<ll-fillarea-tb showtitle="true" title="查询条件" showborder="false">
 									<ll-ajaxform id="ajaxform" cols="1" colproportion="1:3:1:3:1:3" style="width:80%;"> 
@@ -111,10 +99,7 @@
 				<ll-step title="完成">
 						<p>完成</p>
 				</ll-step>
-				</div>
-			</div>
-		</div>
+			</ll-steppanel>
 
-	</form>
 </body>
 </html>

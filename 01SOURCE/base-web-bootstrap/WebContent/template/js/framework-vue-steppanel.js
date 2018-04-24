@@ -1,5 +1,5 @@
 Vue.component(_ConstantComponentMap._StepPanel, {
-	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
+	props : [ 'id', 'onstepchanged' ],
 	
 	template : '<div :id="id+guid" style="height:100%;height:100%;">'+ '<slot></slot>' +'</div>',
 	data : function() {
@@ -48,7 +48,7 @@ Vue.component(_ConstantComponentMap._StepPanel, {
 
 function StepPanel(domId){
 	this.domId=domId;
-	
+	this.onstepchanged;
 	this.getDomId=function(){
 		return this.domId;
 	}
@@ -56,13 +56,30 @@ function StepPanel(domId){
 		return $("#" + this.domId);
 	}
 	this.init= function(){
-		this.getDom().steps({
+		var panel=this;
+		panel.getDom().steps({
 			headerTag : "h2",
 			bodyTag : "section",
 			transitionEffect : "slideLeft",
 			stepsOrientation : "vertical",
+			/* Labels */
+		    labels: {
+		        cancel: "返回",
+		        current: "当前进度:",
+		        pagination: "Pagination",
+		        finish: "完成",
+		        next: "下一步",
+		        previous: "上一步",
+		        loading: "加载中 ..."
+		    },
 			onStepChanged:function(event, currentIndex, priorIndex){
-				//resizeAllVueModel();
+				if(panel.onstepchanged!=null){
+					var arr=new Array();
+					arr.push(event);
+					arr.push(currentIndex);
+					arr.push(priorIndex);
+					$._Eval(panel.onstepchanged,arr);
+				}
 			}
 		});
 	}

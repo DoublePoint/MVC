@@ -355,7 +355,11 @@ function AjaxDataGrid(domId) {
 		catch(e){
 			brotherHeight=0;
 		}
-		var thisResultHeight = this.getDom().closest(".ll-fill-area-tb").get(0).offsetHeight-brotherHeight;
+		var parentHeight=this.getDom().closest(".ll-fill-area-tb").get(0).offsetHeight;
+		if(parentHeight==0){
+			parentHeight=this.getDom().closest(".ll-fill-area-tb").height();
+		}
+		var thisResultHeight = parentHeight-brotherHeight;
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;

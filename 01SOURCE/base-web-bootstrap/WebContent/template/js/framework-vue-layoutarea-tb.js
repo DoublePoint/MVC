@@ -14,7 +14,6 @@
 			return {
 				guid : $._GenerateUUID(),
 				clientStyle:clientStyleBuffer.toString(),
-				layOutHeight: varlayOutHeight,
 				clientClassBuffer:clientClassBuffer.toString(),
 				clientHeadingStyle:clientHeadingStyle.toString(),
 				headTitle:this.title
@@ -37,18 +36,18 @@
 //			var brother = $("#" + id).parent().children();
 //			if (brother.length <= 0)
 //				return;
-//			if (this.layOutHeight.toString().indexOf("px") != -1)
-//				this.layOutHeight = this.layOutHeight;
-//			else if (this.layOutHeight.toString().indexOf("%") != -1) {
-//				this.layOutHeight = this.layOutHeight;
-//			} else if (this.layOutHeight.toString().indexOf("*") != -1) {
+//			if (this.height.toString().indexOf("px") != -1)
+//				varlayOutHeight = varlayOutHeight;
+//			else if (this.height.toString().indexOf("%") != -1) {
+//				varlayOutHeight = varlayOutHeight;
+//			} else if (this.height.toString().indexOf("*") != -1) {
 //				var allBrotherFixHeight = 0;
 //				for (var i = 0; i < brother.length; i++) {
 //					if (brother[i].id != id) {
 //						allBrotherFixHeight += brother[i].offsetHeight;
 //					}
 //				}
-//				this.layOutHeight = (parentheight - allBrotherFixHeight).toString() + "px";
+//				varlayOutHeight = (parentheight - allBrotherFixHeight).toString() + "px";
 //			}
 //			$("#" + id).width("100%");
 		},
@@ -70,11 +69,16 @@
 						_FillArea[attrName] = this[attrName];
 				}
 				$._AddToLayuiObjectHashMap(domId, _FillArea);
-				
-				// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
-				if (this.layOutHeight.toString().indexOf("*") != -1) {
-					_FillArea.setIsResize(true);
+				try{
+					// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
+					if (this.height.toString().indexOf("*") != -1) {
+						_FillArea.setIsResize(true);
+					}
 				}
+				catch(e){
+					console.log("加载模板出错。layoutarea-tb-79");
+				}
+				
 			},
 			// 将本标签作为ajaxform的一个属性
 			_AddToParent : function() {
@@ -93,17 +97,19 @@
 			_InitClientStyle : function(){
 				var varlayOutHeight=this.height;
 				if(varlayOutHeight==null||varlayOutHeight=="")
-					this.layOutHeight = '100%';
+					varlayOutHeight = '100%';
 				else if (varlayOutHeight.toString().indexOf("px") != -1
-						||varlayOutHeight.toString().indexOf("%") != -1
-						||varlayOutHeight.toString().indexOf("*") != -1) {
-					this.layOutHeight = varlayOutHeight;
+						||varlayOutHeight.toString().indexOf("%") != -1) {
+					varlayOutHeight = varlayOutHeight;
+				}
+				else if (varlayOutHeight.toString().indexOf("*") != -1){
+					varlayOutHeight = '100%';
 				}
 				else{
-					this.layOutHeight = varlayOutHeight + "px";
+					varlayOutHeight = varlayOutHeight + "px";
 				}
 				var clientStyleBuffer=$._CreateStringBuffer();
-				var heightBuffer=$._CreateStyleBuffer("height",this.layOutHeight);
+				var heightBuffer=$._CreateStyleBuffer("height",varlayOutHeight);
 				clientStyleBuffer.append(heightBuffer.toString());
 				var widthBuffer=$._CreateStyleBuffer("width",'100%');
 				clientStyleBuffer.append(widthBuffer.toString());

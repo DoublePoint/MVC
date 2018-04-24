@@ -6,6 +6,8 @@
 @BorderWidth:1px;
 @DragLineWidth:1px;//拖动条的宽度
 
+/* jquery step */
+@BorderRadius:0px;
 
 html, body, form {
 	height: 100%;
@@ -283,25 +285,15 @@ ll-filllayout{
     padding-top: 42px;
 }
 
-/** 步骤图 */
-//.wizard.vertical > .steps
-//{
-//    width: 150px !important;
-//     z-index:10;
-//}
-//
-//.wizard.vertical > .content {
-//    display: inline-block!important;
-//    float: left!important;
-//    left: 0px;
-//    top: 0px;
-//    margin: 0!important;
-//    position:absolute!important;
-//    width: 100%!important;
-//    padding-left: 150px;
-//}
-//.wizard > .content > .body {
-//    width: 100%!important;
-//    height: 100%!important;
-//    padding: 0 150px 0 0!important;
-//}
+/* jquery step*/
+.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
+    -webkit-border-radius: @BorderRadius!important; 
+    -moz-border-radius: @BorderRadius!important; 
+    border-radius: @BorderRadius!important; 
+}
+.wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active {
+    -webkit-border-radius: @BorderRadius!important; 
+    -moz-border-radius: @BorderRadius!important; 
+    border-radius: @BorderRadius!important; 
+}
+/* jquery step */

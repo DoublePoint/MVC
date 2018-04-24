@@ -60,8 +60,59 @@
 				              <ll-tabpanel  id="abc">  
 				                <ll-tab  id="tabEntity"  active="true"  title="实体">  
 				                </ll-tab>  
+				                <ll-tab  id="tabRepository22"  title="仓库">
+				                    	<ll-filllayout>  
+				        <ll-fillarea-tb  height="*">  
+				          <ll-filllayout>  
+				            <ll-fillarea-lr  width="400px"  height="100%">  
+				              <ll-filllayout>  
+				                <ll-fillarea-tb title="数据库表" showtitle="true">  
+				                  <ll-ajaxdatagrid  id="gridResource22" datasource="/template/sys/tables">  
+				                    <ll-gridcheck></ll-gridcheck>  
+				                    <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
+				                  </ll-ajaxdatagrid>  
+				                </ll-fillarea-tb>  
+				              </ll-filllayout>  
+				            </ll-fillarea-lr>  
+				            <ll-fillarea-lr  width="60px"  height="100%"  style="text-align:center;">  
+				              <ll-filllayout>  
+				                <ll-fillarea-tb  height="50%">  
+				                  <input  type="button"  value="&gt;&gt;"  class="btn  btn-info  btn-sm"  onclick="gridLeftOncheck()"  style="margin-top:  -35px;  top:  100%;  position:  relative;"  />  
+				                </ll-fillarea-tb>  
+				                <ll-fillarea-tb  height="50%">  
+				                  <input  type="button"  value="&lt;&lt;"  class="  btn
+							btn-info  btn-sm"  style="margin-top:  5px;  top:  0;  position:  relative;"  />  
+				                </ll-fillarea-tb>  
+				              </ll-filllayout>  
+				            </ll-fillarea-lr>  
+				            <ll-fillarea-lr  width="*"  height="100%">  
+				              <ll-tabpanel  id="abc">  
+				                <ll-tab  id="tabEntity2"  active="true"  title="实体">  
+				                </ll-tab>  
 				                <ll-tab  id="tabRepository"  title="仓库">
 				                    	仓库
+				                </ll-tab>  
+				                <ll-tab  id="tabApplication"  title="应用层">
+				                   		 应用层
+				                </ll-tab>  
+				                 <ll-tab  id="tabApplication"  title=" Jsp页面">
+				                   		 Jsp页面
+				                </ll-tab>  
+				              </ll-tabpanel>  
+				            </ll-fillarea-lr>  
+				          </ll-filllayout>  
+				        </ll-fillarea-tb>  
+				        <ll-fillarea-tb  height="35">  
+				          <ll-toolbar  style="line-height:35px;height:100%;">  
+				            <input  type="button"  class="btn  btn-info  btn-sm"  onclick="onClickAdd()"  value="增加"  />  
+				            <input  type="button"  class="btn  btn-info  btn-sm  "  onclick="onClickEdit()"  value="编辑"  />  
+				            <input  type="button"  class="btn  btn-info  btn-sm"  onclick="onClickDelete()"  value="删除"  />
+				          </ll-toolbar>  
+				        </ll-fillarea-tb>  
+				        <ll-fillarea-tb  height="80">  
+				          	<input id="myfile" type="file" name="file">  
+				        </ll-fillarea-tb>  
+				      </ll-filllayout>  
 				                </ll-tab>  
 				                <ll-tab  id="tabApplication"  title="应用层">
 				                   		 应用层

@@ -1,26 +1,31 @@
 Vue.component(_ConstantComponentMap._TabPanel, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
-	template : '<div style="height:100%;"><ul :id="id+guid" class="nav nav-tabs"></ul><div class="tab-content">'+ '<slot></slot>' +'</div></div>',
+	template : '<div style="height:100%;"><ul :id="id+guid" class="nav nav-tabs"></ul><div class="tab-content">' + '<slot></slot>' + '</div></div>',
 	data : function() {
 		return {
-			guid:$._GenerateUUID()
+			guid : $._GenerateUUID()
 		}
 	},
-	created : function() {//注册到系统map
+	created : function() {// 注册到系统map
 		this._RegisterComponent();
 	},
-	mounted:function(){
+	mounted : function() {
 		this._MapComponent();
+
+		this._Init();
 	},
 	methods : {
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
 			return _domId;
 		},
-		_GetComponentDom :function(){
+		_GetComponentDom : function() {
 			var domId = this._GetComponentDomId();
 			var componentDom = $._GetFromLayuiObjectHashMap(domId);
 			return componentDom;
+		},
+		_Init : function() {
+			this._GetComponentDom().init();
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
@@ -31,36 +36,43 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 			}
 			$._AddToLayuiObjectHashMap(domId, tabpanel);
 		},
-		_AddDragDom : function(){
+		_AddDragDom : function() {
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
 			$._OutputMapCompoment(this);
 		},
-		_RegisterResize :function(){
+		_RegisterResize : function() {
 		}
+
 	},
 })
 
+function TabPanel(domId) {
+	this.domId = domId;
 
-function TabPanel(domId){
-	this.domId=domId;
-	
-	this.addTab=function(tab){
-		var title=tab.getTitle();
-		var domId=tab.getDomId();
-		var $li=$("<li></li>");
-		if(tab.getActive()=="true"){
-			$li.attr("class","active");
+	this.addTab = function(tab) {
+		var title = tab.getTitle();
+		var domId = tab.getDomId();
+		var $li = $("<li></li>");
+		if (tab.getActive() == "true") {
+			$li.attr("class", "active");
 		}
-		var $a=$('<a href="#'+domId+'" data-toggle="tab">'+tab.getTitle()+'</a>')
+		var $a = $('<a href="#' + domId + '" data-toggle="tab">' + tab.getTitle() + '</a>')
 		$li.append($a);
 		this.getDom().append($li);
 	}
-	this.getDomId=function(){
+	this.getDomId = function() {
 		return this.domId;
 	}
 	this.getDom = function() {
 		return $("#" + this.domId);
+	}
+	this.init = function() {
+		this.getDom().on('shown.bs.tab', function(e) {
+			//e.target // 当前活动的标签
+			//e.relatedTarget // 上一个选择的标签
+			resizeAllVueModel();
+		})
 	}
 }
