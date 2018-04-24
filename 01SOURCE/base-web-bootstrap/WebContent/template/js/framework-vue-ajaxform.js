@@ -123,6 +123,7 @@ function AjaxForm(domId) {
 	}
 	this.setData = function(data,isChanged) {
 		//如果第二个参数为nul,那么设置ajaxform为未更改
+		this.data=data;
 		if(isChanged==null)
 			isChanged=false;
 		var items = this.formItems;

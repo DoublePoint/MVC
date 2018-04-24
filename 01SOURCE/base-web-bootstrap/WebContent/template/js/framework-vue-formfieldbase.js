@@ -230,6 +230,7 @@ function FormFieldBase(domId) {
 		return this.field;
 	}
 	this.getData = function() {
+		this.data=this.getInputDom().val();
 		return this.data;
 	}
 	this.getDomValue = function() {

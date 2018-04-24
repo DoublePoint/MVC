@@ -12,24 +12,10 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-
+import cn.doublepoint.common.port.adapter.template.persistence.sys.DBUtil;
 import cn.doublepoint.commonutil.domain.model.DropBean;
 
-public class DropBeanUtil{
-	
-	private static JdbcTemplate jdbcTemplate;
-	
-	@PostConstruct
-	public void setUp(){
-		
-	}
-
-	public DropBeanUtil() {
-		jdbcTemplate=(JdbcTemplate)ApplicationContectUtil.getBean("jdbcTemplate");
-	}
+public class DropBeanUtil extends DBUtil{
 	
 	public static List<DropBean> getDropListBySql(String sql){
 		try {
