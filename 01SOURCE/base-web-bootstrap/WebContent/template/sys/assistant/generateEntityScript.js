@@ -1,10 +1,4 @@
 function init() {
-//	$("#wizard").steps({
-//		headerTag : "h2",
-//		bodyTag : "section",
-//		transitionEffect : "slideLeft",
-//		stepsOrientation : "vertical"
-//	});
 	$("#myfile").fileinput({
 		// 上传的地址
 		uploadUrl : $$pageContextPath+"/template/sys/uploadfile",
@@ -58,8 +52,21 @@ function init() {
 	
 }
 function gridLeftOncheck(row) {
-	var rows = gridResource.getCheckedDataList();
+	var rows = gridResource.getCheckedRecords();
 	gridAim.addRecords(rows);
 
 	gridResource.removeChecked();
+}
+
+function stepChanged(event,currentIndex,previousIndex){
+	
+}
+function stepChanging(event, currentIndex, newIndex){
+	if(currentIndex==0){
+		var checkedRecords=gridTable.getCheckedRecords();
+		if(checkedRecords.length==0){
+			$._Alert("至少选择一个表。");
+			return false;
+		}
+	}
 }

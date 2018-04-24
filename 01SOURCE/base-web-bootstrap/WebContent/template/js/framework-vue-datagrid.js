@@ -495,65 +495,18 @@ function AjaxDataGrid(domId) {
 		for(var i in rows)
 			this.getDom().bootstrapTable('append', rows[i]);
 	},
-	this.getCheckedDataList = function() {
+	this.getCheckedRecords = function() {
 		var $table = $("#" + this.domId);
 		return $table.bootstrapTable('getSelections');
 	},
 	this.removeChecked = function(){
-		var checkDataList=this.getCheckedDataList();
+		var checkDataList=this.getCheckedRecords();
 		if(checkDataList==null||checkDataList.length<=0)
 			return;
 		for(var i in checkDataList){
 			//arr.push(checkDataList[i].rowId);
 			this.getDom().bootstrapTable('removeByUniqueId', checkDataList[i].rowId);
 		}
-	}
-	return this;
-}
-
-function AjaxDataGridColumns(field, title, width, sort, fixed, event) {
-	this.field = field;
-	this.title = title;
-	this.event = "CLICK";
-	this.templet = null;
-	this.width = width == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_WIDTH : width;
-	this.sort = sort == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_SORT : sort;
-	this.fixed = fixed == null ? _ConstantAjaxDataGrid._DEFAULT_COLUMN_FIXED : fixed;
-
-	/* bootstrap */
-	this.radio;
-	this.checkbox;
-	this.field;
-	this.title;
-	this.titleTooltip;
-	this.class;
-	this.rowspan;
-	this.colspan;
-	this.align;
-	this.halign;
-	this.falign;
-	this.valign;
-	this.width;
-	this.sortable;
-	this.order;
-	this.visible;
-	this.cardVisible;
-	this.switchable;
-	this.clickToSelect;
-	this.formatter;
-	this.footerFormatter;
-	this.events;
-	this.sorter;
-	this.sortName;
-	this.cellStyle;
-	this.searchable;
-	this.searchFormatter;
-	this.escape;
-	this.showSelectTitle;
-	
-	
-	this.setTemplet = function(tem) {
-		this.templet = tem;
 	}
 	return this;
 }

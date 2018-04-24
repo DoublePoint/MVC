@@ -51,7 +51,7 @@ function init() {
 	});
 }
 function gridLeftOncheck(row) {
-	var rows = gridResource.getCheckedDataList();
+	var rows = gridResource.getCheckedRecords();
 	gridAim.addRecords(rows);
 
 	gridResource.removeChecked();

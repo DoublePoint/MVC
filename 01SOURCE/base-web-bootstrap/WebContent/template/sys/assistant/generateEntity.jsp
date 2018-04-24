@@ -29,11 +29,11 @@
 </head>
 <body>
 	<form>
-			<ll-steppanel id="wizard"  >
+			<ll-steppanel id="wizard"  onstepchanged="stepChanged()" onstepchanging="stepChanging()">
 				<ll-step title="选择实体">
 					<ll-filllayout>  
 				       <ll-fillarea-tb title="数据库表" showtitle="true">  
-				           <ll-ajaxdatagrid  id="gridResource"  onrowclick="rowClickTest()"  onpageclick="retrieveAjaxDataGrid"  ondblclick="dbclickgrid(1)"  datasource="/template/sys/tables">  
+				           <ll-ajaxdatagrid  id="gridTable"  datasource="/template/sys/tables">  
 				           		<ll-gridcheck></ll-gridcheck>  
 				              	<ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
 				         	</ll-ajaxdatagrid>
@@ -64,37 +64,14 @@
 						</ll-filllayout>
 				</ll-step>
 				<ll-step title="包名类名">
-						 <ll-filllayout>  
+					<ll-filllayout>  
 				        <ll-fillarea-tb  height="*">  
-				          <ll-filllayout>  
-				            <ll-fillarea-lr  width="400px"  height="100%">  
-				              <ll-filllayout>  
-				                <ll-fillarea-tb title="数据库表" showtitle="true">  
-				                  <ll-ajaxdatagrid datasource="/template/sys/tables">  
-				                    <ll-gridcheck></ll-gridcheck>  
-				                    <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
-				                  </ll-ajaxdatagrid>  
-				                </ll-fillarea-tb>  
-				              </ll-filllayout>  
-				            </ll-fillarea-lr>  
-				            <ll-fillarea-lr  width="*"  height="100%">  
-				              <ll-tabpanel  id="abc">  
-				                <ll-tab  id="tabEntity"  active="true"  title="实体">  
-				                </ll-tab>  
-				                <ll-tab  id="tabRepository"  title="仓库">
-				                    	仓库
-				                </ll-tab>  
-				                <ll-tab  id="tabApplication"  title="应用层">
-				                   		 应用层
-				                </ll-tab>  
-				                 <ll-tab  id="tabApplication"  title=" Jsp页面">
-				                   		 Jsp页面
-				                </ll-tab>  
-				              </ll-tabpanel>  
-				            </ll-fillarea-lr>  
-				          </ll-filllayout>  
-				        </ll-fillarea-tb>  
-				      </ll-filllayout>  
+				             <ll-ajaxdatagrid datasource="/template/sys/tables">  
+				                <ll-gridcheck></ll-gridcheck>  
+				                <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
+				             </ll-ajaxdatagrid>  
+				         </ll-fillarea-tb>  
+				     </ll-filllayout>  
 				</ll-step>
 				<ll-step title="完成">
 						<p>完成</p>

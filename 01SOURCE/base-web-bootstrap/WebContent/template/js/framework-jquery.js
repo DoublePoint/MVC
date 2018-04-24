@@ -53,7 +53,7 @@ var _RegisterModel=new RegisterModel();
 				}
 			}
 			invokeString += ")";
-			eval(invokeString);
+			return eval(invokeString);
 			// param==null?func.apply(this):func.apply(this,param);
 		},
 		_GenerateUUID : function() {

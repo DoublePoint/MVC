@@ -67,7 +67,7 @@ function onClickEdit(){
 
 function onClickDelete() {
 	$._Confirm('确定要删除吗？', function() {
-		var checkedDatas = lltestdatagrid.getCheckedDataList();
+		var checkedDatas = lltestdatagrid.getCheckedRecords();
 		$.ajax({
 			url : $$pageContextPath + "/template/sys/menu/delete",
 			type : "POST",

@@ -28,28 +28,6 @@
 		},
 		mounted : function() {
 			this._MapComponent();
-			
-//			//此段代码不能删除，因为需要首先确定各个div的高度，
-//			var id = this._GetComponentDomId();
-//			var parentWidth = $("#" + id).parent().width();
-//			var parentheight = $("#" + id).parent().height();
-//			var brother = $("#" + id).parent().children();
-//			if (brother.length <= 0)
-//				return;
-//			if (this.height.toString().indexOf("px") != -1)
-//				varlayOutHeight = varlayOutHeight;
-//			else if (this.height.toString().indexOf("%") != -1) {
-//				varlayOutHeight = varlayOutHeight;
-//			} else if (this.height.toString().indexOf("*") != -1) {
-//				var allBrotherFixHeight = 0;
-//				for (var i = 0; i < brother.length; i++) {
-//					if (brother[i].id != id) {
-//						allBrotherFixHeight += brother[i].offsetHeight;
-//					}
-//				}
-//				varlayOutHeight = (parentheight - allBrotherFixHeight).toString() + "px";
-//			}
-//			$("#" + id).width("100%");
 		},
 		methods : {
 			_GetComponentDomId : function() {
@@ -71,7 +49,7 @@
 				$._AddToLayuiObjectHashMap(domId, _FillArea);
 				try{
 					// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
-					if (this.height.toString().indexOf("*") != -1) {
+					if (this.height!=null&&this.height.toString().indexOf("*") != -1) {
 						_FillArea.setIsResize(true);
 					}
 				}
