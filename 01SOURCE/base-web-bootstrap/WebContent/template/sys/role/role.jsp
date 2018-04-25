@@ -37,11 +37,11 @@
 					</ll-toolbar>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*" >
-						<ll-ajaxdatagrid id="roleAjaxGrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/role/datalist"> 
-							<ll-gridrow field="id" title="角色标识"></ll-gridrow>
-							<ll-gridrow field="name" title="角色名称"></ll-gridrow> 
-							<ll-gridrow field="createTime" title="创建时间"></ll-gridrow> 
-							<ll-gridrow field="modifyTime" title="更新时间"></ll-gridrow> 
+						<ll-ajaxgrid id="roleAjaxGrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/role/datalist"> 
+							<ll-gridfield field="id" title="角色标识"></ll-gridfield>
+							<ll-gridfield field="name" title="角色名称"></ll-gridfield> 
+							<ll-gridfield field="createTime" title="创建时间"></ll-gridfield> 
+							<ll-gridfield field="modifyTime" title="更新时间"></ll-gridfield> 
 						</ll-datagrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>

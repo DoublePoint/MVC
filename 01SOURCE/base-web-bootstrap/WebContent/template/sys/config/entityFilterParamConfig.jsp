@@ -28,10 +28,10 @@
             <ll-fillarea-lr  width="500px" >  
               <ll-filllayout>  
                 <ll-fillarea-tb height="*" title="实体过滤字" showtitle="true">  
-                  <ll-ajaxdatagrid  id="gridResource" datasource="/template/sys/config/entityFilter">  
+                  <ll-ajaxgrid  id="gridResource" datasource="/template/sys/config/entityFilter">  
                     <ll-gridcheck></ll-gridcheck>  
-                    <ll-gridrow  field="filter"  title="过滤关键字"></ll-gridrow>  
-                  </ll-ajaxdatagrid>  
+                    <ll-gridfield  field="filter"  title="过滤关键字"></ll-gridfield>  
+                  </ll-ajaxgrid>  
                 </ll-fillarea-tb>  
                 <ll-fillarea-tb  height="35">  
 			          <ll-toolbar  style="line-height:35px;height:100%;text-align:right;margin-right:20px;">  

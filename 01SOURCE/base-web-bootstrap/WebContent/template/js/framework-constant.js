@@ -1,4 +1,4 @@
-/*------AjaxDataGrid-------*/
+/*------AjaxGrid-------*/
 var _ConstantAjaxDataGrid = {
 	_DEFAULT_COLUMN_WIDTH : 180,
 	_DEFAULT_COLUMN_SORT : false,
@@ -12,8 +12,7 @@ var _ConstantLayoutArea = {
 	_DEFAULT_MIN_WIDTH_LEFT : _ConstantAjaxDataGrid._DEFAULT_MIN_WIDTH
 };
 var _ConstantComponentMap = {
-	_AjaxDataGrid : "ll-ajaxdatagrid",
-	_AjaxDataGridRow : "ll-gridrow",
+	_AjaxGrid : "ll-ajaxgrid",
 	_AjaxForm : "ll-ajaxform",
 	_AjaxMenu : "ll-menu",
 	_AjaxFormLine : "ll-ajaxformline",
@@ -28,7 +27,9 @@ var _ConstantComponentMap = {
 	_FormSelect : "ll-formselect",
 	_FormInputButton : "ll-forminputbutton",
 	_FormToolBar : "ll-formtoolbar",
+	_GridField : "ll-gridfield",
 	_GridCheck : "ll-gridcheck",
+	_GridCustom:"ll-gridcustom",
 	_ToolBar : "ll-toolbar",
 	_TabPanel : "ll-tabpanel",
 	_Tab : "ll-tab",

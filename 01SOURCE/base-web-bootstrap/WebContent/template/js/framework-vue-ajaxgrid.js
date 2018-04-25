@@ -103,7 +103,7 @@ var gridProps=["classes"
                 ,"datasource"
                 ,"columns",
                 "onrowclick"];
-Vue.component(_ConstantComponentMap._AjaxDataGrid, {
+Vue.component(_ConstantComponentMap._AjaxGrid, {
 	props : gridProps,
 	template : '<div style="height:100%;"><table  :id="gridId" data-checkbox="true"><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
 
@@ -136,7 +136,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
-			var ajaxDataGrid = new AjaxDataGrid(domId);
+			var ajaxDataGrid = new AjaxGrid(domId);
 			for ( var attrName in ajaxDataGrid) {
 				if (this[attrName] != null)
 					ajaxDataGrid[attrName] = this[attrName];
@@ -157,7 +157,7 @@ Vue.component(_ConstantComponentMap._AjaxDataGrid, {
 	},
 })
 
-function AjaxDataGrid(domId) {
+function AjaxGrid(domId) {
 	this.domId = domId;
 	this.pagerId = null;
 	this.pageHeight = 32;
@@ -349,15 +349,14 @@ function AjaxDataGrid(domId) {
 		// 高度设置为获取父元素的高度
 		var brotherHeight=0;
 		try{
-			//brotherHeight=this.getDom().closest(".ll-fill-area-tb").children('.panel-heading').get(0).offsetHeight;
-			brotherHeight=this.getDom().closest(".ll-fill-area-tb").children('.panel-heading').outerHeight(true);
+			brotherHeight=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").children('.panel-heading').outerHeight(true);
 		}
 		catch(e){
 			brotherHeight=0;
 		}
-		var parentHeight=this.getDom().closest(".ll-fill-area-tb").get(0).offsetHeight;
+		var parentHeight=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").get(0).offsetHeight;
 		if(parentHeight==0){
-			parentHeight=this.getDom().closest(".ll-fill-area-tb").height();
+			parentHeight=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").height();
 		}
 		var thisResultHeight = parentHeight-brotherHeight;
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
@@ -370,11 +369,6 @@ function AjaxDataGrid(domId) {
 	};
 	this.resize = function() {
 		this.initStyle();
-		// 高度设置为获取父元素的高度
-//		var thisResultHeight = this.getDom().closest(".ll-fill-area-tb").get(0).offsetHeight-this.getDom().closest(".ll-fill-area-tb").children(':first').get(0).offsetHeight;
-//		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
-//			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
-//		this.height = thisResultHeight - this.pageHeight;
 		var height = this.height;
 		this.getDom().bootstrapTable('resetView', {
 			height : height
@@ -402,35 +396,14 @@ function AjaxDataGrid(domId) {
 		var $table = $("#" + id);
 		$table.bootstrapTable({
 			buttonsAlign:'right',//按钮对齐方式
-			//url : $$pageContextPath + ajaxgrid.datasource,
 			data : $._Clone(ajaxDataWrap.dataList),
 			dataField: "dataList",//这是返回的json数组的key.默认好像是"rows".这里只有前后端约定好就行
 			height : height,
 			idField : "rowId",
-			//pagination: true,
-			//pageSize: 1,                       //每页的记录行数（*）  
-           // pageList: [1,20, 50, 100],            //可供选择的每页的行数（*）  
-//            queryParams:function(params){
-//            	var ajaxDataWrap=new AjaxDataWrap
-//            },
-//            responseHandler:function(result){
-//            	ajaxgrid.datawrap.parse(ajaxDataWrap);
-//            	var code = result.code;//在此做了错误代码的判断
-//        	    if(code != 200){
-//        	        alert("错误代码" + errcode);
-//        	        return;
-//        	    }
-//        	    //如果没有错误则返回数据，渲染表格
-//        	    return {
-//        	        total : result.pageInfo.totalElementCount, //总页数,前面的key必须为"total"
-//        	        dataList : result.dataList //行数据，前面的key要与之前设置的dataField的值一致.
-//        	    };
-//            },//请求数据成功后，渲染表格前的方法
+			columns : ajaxgrid.cols,
 			showRefresh: false,
 			sidePagination:"client",
 			striped: true,    
-			//toolbar: '#toolbar',//指定工具栏
-			//toolbarAlign:'right',//工具栏对齐方式
 			uniqueId : "rowId",
 			
 			onCheck:function(row){

@@ -38,10 +38,10 @@
 				            <ll-fillarea-lr  width="400px"  height="100%">  
 				              <ll-filllayout>  
 				                <ll-fillarea-tb title="数据库表" showtitle="true">  
-				                  <ll-ajaxdatagrid  id="gridResource"  onrowclick="rowClickTest()"  onpageclick="retrieveAjaxDataGrid"  ondblclick="dbclickgrid(1)"  datasource="/template/sys/tables">  
+				                  <ll-ajaxgrid  id="gridResource"  onrowclick="rowClickTest()"  onpageclick="retrieveAjaxDataGrid"  ondblclick="dbclickgrid(1)"  datasource="/template/sys/tables">  
 				                    <ll-gridcheck></ll-gridcheck>  
-				                    <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
-				                  </ll-ajaxdatagrid>  
+				                    <ll-gridfield  field="tableName"  title="表名"></ll-gridfield>  
+				                  </ll-ajaxgrid>  
 				                </ll-fillarea-tb>  
 				              </ll-filllayout>  
 				            </ll-fillarea-lr>  
@@ -106,10 +106,10 @@
 				<ll-step title="实体类名过滤">
 						<ll-filllayout > 
 							<ll-fillarea-tb showtitle="true" title="实体类名过滤1" showborder="false">
-									<ll-ajaxdatagrid  id="gridResource2" datasource="/template/sys/config/entityFilter">  
+									<ll-ajaxgrid  id="gridResource2" datasource="/template/sys/config/entityFilter">  
 				                    <ll-gridcheck></ll-gridcheck>  
-				                    <ll-gridrow  field="filter"  title="过滤字符串"></ll-gridrow>  
-				                  </ll-ajaxdatagrid>  
+				                    <ll-gridfield  field="filter"  title="过滤字符串"></ll-gridfield>  
+				                  </ll-ajaxgrid>  
 							</ll-fillarea-tb>
 						</ll-filllayout>
 				</ll-step>

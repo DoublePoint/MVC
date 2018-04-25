@@ -33,10 +33,10 @@
 				<ll-step title="选择实体">
 					<ll-filllayout>  
 				       <ll-fillarea-tb title="数据库表" showtitle="true">  
-				           <ll-ajaxdatagrid  id="gridTable"  datasource="/template/sys/tables">  
+				           <ll-ajaxgrid  id="gridTable"  datasource="/template/sys/tables">  
 				           		<ll-gridcheck></ll-gridcheck>  
-				              	<ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
-				         	</ll-ajaxdatagrid>
+				              	<ll-gridfield  field="tableName"  title="表名"></ll-gridfield>  
+				         	</ll-ajaxgrid>
 				         </ll-fillarea-tb>  
 				      </ll-filllayout>  
 				</ll-step>
@@ -56,20 +56,21 @@
 				<ll-step title="实体类名过滤">
 						<ll-filllayout > 
 							<ll-fillarea-tb showtitle="true" title="实体类名过滤1" showborder="false">
-									<ll-ajaxdatagrid  id="gridResource2" datasource="/template/sys/config/entityFilter">  
+									<ll-ajaxgrid  id="gridResource2" datasource="/template/sys/config/entityFilter">  
 				                    <ll-gridcheck></ll-gridcheck>  
-				                    <ll-gridrow  field="filter"  title="过滤字符串"></ll-gridrow>  
-				                  </ll-ajaxdatagrid>  
+				                    <ll-gridfield  field="filter"  title="过滤字符串"></ll-gridfield>  
+				                  </ll-ajaxgrid>  
 							</ll-fillarea-tb>
 						</ll-filllayout>
 				</ll-step>
 				<ll-step title="包名类名">
 					<ll-filllayout>  
 				        <ll-fillarea-tb  height="*">  
-				             <ll-ajaxdatagrid datasource="/template/sys/tables">  
+				             <ll-ajaxgrid datasource="/template/sys/tables">  
 				                <ll-gridcheck></ll-gridcheck>  
-				                <ll-gridrow  field="tableName"  title="表名"></ll-gridrow>  
-				             </ll-ajaxdatagrid>  
+				                <ll-gridcustom width="30" align="center" title="操作" formatter="customerFunction"></ll-gridcustom>  
+				                <ll-gridfield  field="tableName" width="200"  title="表名"></ll-gridfield>  
+				             </ll-ajaxgrid>  
 				         </ll-fillarea-tb>  
 				     </ll-filllayout>  
 				</ll-step>

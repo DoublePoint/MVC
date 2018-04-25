@@ -51,15 +51,15 @@
  						</div>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
-						<ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
+						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
 							<ll-gridcheck></ll-gridcheck>
-							<ll-gridrow field="id" title="菜单标识"></ll-gridrow>
-							<ll-gridrow field="name" title="菜单名称"></ll-gridrow> 
-							<ll-gridrow field="sn" title="菜单排序"></ll-gridrow> 
-							<ll-gridrow field="link" title="菜单链接"></ll-gridrow> 
-							<ll-gridrow field="createTime" title="创建时间"></ll-gridrow> 
-							<ll-gridrow field="modifyTime" title="更新时间"></ll-gridrow> 
-						</ll-ajaxdatagrid>
+							<ll-gridfield field="id" title="菜单标识"></ll-gridfield>
+							<ll-gridfield field="name" title="菜单名称"></ll-gridfield> 
+							<ll-gridfield field="sn" title="菜单排序"></ll-gridfield> 
+							<ll-gridfield field="link" title="菜单链接"></ll-gridfield> 
+							<ll-gridfield field="createTime" title="创建时间"></ll-gridfield> 
+							<ll-gridfield field="modifyTime" title="更新时间"></ll-gridfield> 
+						</ll-ajaxgrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>
 			</ll-fillarea-lr>

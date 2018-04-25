@@ -85,13 +85,13 @@
 					type="button" class="layui-btn" onclick="onClickDelete()" value="删除"
 				/>
 			</div>
-			</ll-fillarea-tb> <ll-fillarea-tb height="*"> <ll-ajaxdatagrid id="lltestdatagrid" onrowclick="rowClickTest()"
+			</ll-fillarea-tb> <ll-fillarea-tb height="*"> <ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()"
 				onpageclick="retrieveAjaxDataGrid" datasource="/template/sys/menu/datalistajaxdatawrap"
-			> <ll-gridrow field="cdbs" title="菜单标识"></ll-gridrow> <ll-gridrow field="cdmc" title="菜单名称"></ll-gridrow> <ll-gridrow field="cdpx"
+			> <ll-gridfield field="cdbs" title="菜单标识"></ll-gridfield> <ll-gridfield field="cdmc" title="菜单名称"></ll-gridfield> <ll-gridfield field="cdpx"
 				title="菜单排序"
-			></ll-gridrow> <ll-gridrow field="cdlj" title="菜单链接"></ll-gridrow> <ll-gridrow field="cjsj" title="创建时间"></ll-gridrow> <ll-gridrow field="gxsj"
+			></ll-gridfield> <ll-gridfield field="cdlj" title="菜单链接"></ll-gridfield> <ll-gridfield field="cjsj" title="创建时间"></ll-gridfield> <ll-gridfield field="gxsj"
 				title="更新时间"
-			></ll-gridrow> </ll-datagrid></ll-fillarea-tb> </ll-filllayout>
+			></ll-gridfield> </ll-datagrid></ll-fillarea-tb> </ll-filllayout>
 		</div>
 		<div id="center_div_clone" class="draggable "
 			style="height: 100%; width: 50px; display: none; z-index: 100; position: absolute; left: 300px; background-color: blue;"

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<ll:AjaxDataGrid />
+		<ll:AjaxGrid />
 	</div>
 </body>
 <style>

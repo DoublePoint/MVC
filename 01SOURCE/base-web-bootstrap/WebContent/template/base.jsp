@@ -59,9 +59,10 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layout.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-lr.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-tb.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/js/framework-vue-datagrid.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/js/framework-vue-datagridrow.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/js/framework-vue-datagridcheckbox.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxgrid.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-gridfield.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-gridcheckbox.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-gridcustom.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-tree.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-menu.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxform.js" charset="utf-8"></script>

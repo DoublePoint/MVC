@@ -70,3 +70,30 @@ function stepChanging(event, currentIndex, newIndex){
 		}
 	}
 }
+
+function customerFunction(a,b,c){
+	return ' <a href="javascript:showDetail(\''+b.tableName+'\')">'+
+     ' <span class="glyphicon glyphicon-fullscreen"></span>'+
+     ' </a>';
+}
+
+function showDetail(table){
+	$._OpenDialog({
+		type : 2,
+		title : "详细信息",
+		width : 930,
+		height : 630,
+		shade : 0.4,
+		closeBtn : 1,
+		shadeClose : true,
+		maxmin : true,
+		content : $$pageContextPath + '/template/sys/assistant/generateDetail.jsp',
+		data : null,
+		yes : function() {
+			
+		},
+		cancel : function() {
+
+		}
+	});
+}
