@@ -105,7 +105,7 @@ var gridProps=["classes"
                 "onrowclick"];
 Vue.component(_ConstantComponentMap._AjaxGrid, {
 	props : gridProps,
-	template : '<div style="height:100%;"><table  :id="gridId" data-checkbox="true"><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
+	template : '<div style="height:100%;" class="table-responsive"><table style="table-layout:fixed;"  :id="gridId" ><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
 
 	data : function() {
 		var gridId=this.id+$._GenerateUUID();
@@ -280,6 +280,15 @@ function AjaxGrid(domId) {
 	this.getCols = function() {
 		return this.cols;
 	}
+	/*丢弃formfield中属性为null的数据 因为会影响field的渲染*/
+	this.getBootStrapCols=function(){
+		var bootstrapColumns=[];
+		var cols=this.cols;
+		for(var i in cols){
+			bootstrapColumns.push(cols[i].getBoostrapField());
+		}
+		return bootstrapColumns;
+	}
 	this.getDataWrap = function(isGetData) {
 		if (isGetData == null)
 			isGetData = true;
@@ -391,7 +400,7 @@ function AjaxGrid(domId) {
 		var id = ajaxgrid.domId;
 		var ajaxDataWrap = ajaxgrid.datawrap;
 		var datasource = ajaxgrid.datasource;
-		var cols = ajaxgrid.cols;
+		var columns = ajaxgrid.getBootStrapCols();
 		var height = ajaxgrid.height;
 		var $table = $("#" + id);
 		$table.bootstrapTable({
@@ -400,7 +409,7 @@ function AjaxGrid(domId) {
 			dataField: "dataList",//这是返回的json数组的key.默认好像是"rows".这里只有前后端约定好就行
 			height : height,
 			idField : "rowId",
-			columns : ajaxgrid.cols,
+			columns : columns,
 			showRefresh: false,
 			sidePagination:"client",
 			striped: true,    
