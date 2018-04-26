@@ -56,7 +56,7 @@
 				<ll-step title="实体类名过滤">
 						<ll-filllayout > 
 							<ll-fillarea-tb showtitle="true" title="实体类名过滤1" showborder="false">
-									<ll-ajaxgrid  id="gridResource2" datasource="/template/sys/config/entityFilter">  
+									<ll-ajaxgrid   datasource="/template/sys/config/entityFilter">  
 				                    <ll-gridcheck></ll-gridcheck>  
 				                    <ll-gridfield  field="filter"  title="过滤字符串"></ll-gridfield>  
 				                  </ll-ajaxgrid>  
@@ -66,9 +66,9 @@
 				<ll-step title="包名类名">
 					<ll-filllayout>  
 				        <ll-fillarea-tb  height="*">  
-				             <ll-ajaxgrid datasource="/template/sys/tables">  
+				             <ll-ajaxgrid id="gridAim" >  
 				                <ll-gridcheck></ll-gridcheck>  
-				                <ll-gridcustom align="center" title="操作" formatter="customerFunction"></ll-gridcustom>  
+				                <ll-gridcustom align="center" width="80" title="操作" formatter="customerFunction"></ll-gridcustom>  
 				                <ll-gridfield  field="tableName" title="表名"></ll-gridfield>  
 				             </ll-ajaxgrid>  
 				         </ll-fillarea-tb>  

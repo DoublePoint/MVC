@@ -61,13 +61,17 @@ function gridLeftOncheck(row) {
 function stepChanged(event,currentIndex,previousIndex){
 	
 }
+var checkedRecords;
 function stepChanging(event, currentIndex, newIndex){
 	if(currentIndex==0){
-		var checkedRecords=gridTable.getCheckedRecords();
+		checkedRecords=gridTable.getCheckedRecords();
 		if(checkedRecords.length==0){
 			$._Alert("至少选择一个表。");
 			return false;
 		}
+	}
+	else if(currentIndex==2){
+		gridAim.addRecords(checkedRecords);
 	}
 }
 

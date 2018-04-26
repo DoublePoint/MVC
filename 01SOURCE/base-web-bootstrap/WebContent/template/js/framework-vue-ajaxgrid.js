@@ -331,6 +331,10 @@ function AjaxGrid(domId) {
 		this.render();
 	}
 	this.initData = function(){
+		if(this.datasource==null||this.datasource==""){
+			this.initBootstrapSetting();
+			return;
+		}
 		var data={};
 		var grid=this;
 		$.ajax({
