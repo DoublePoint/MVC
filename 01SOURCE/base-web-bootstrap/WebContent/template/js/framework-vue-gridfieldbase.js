@@ -36,13 +36,10 @@ function _LLGridFieldComponent(type){
 			//针对不同的类型 分别进行相关数据的初始化
 			if(type==_ConstantComponentMap._GridCheck){
 				this.checkbox=true;
-				if(!this.width){
-					this.width=5;
-				}
 			}
 			else{
 				if(!this.width){
-					this.width=20;
+					//this.width=100;
 				}
 			}
 			return {
@@ -72,7 +69,9 @@ function _LLGridFieldComponent(type){
 				
 				var _AjaxGridId = this.$parent._GetComponentDomId();
 				var _AjaxDatagrid = $._GetFromLayuiObjectHashMap(_AjaxGridId);
-				_AjaxDatagrid.addCol(field);
+				if(type!=_ConstantComponentMap._GridCheck){
+					_AjaxDatagrid.addCol(field);
+				}
 			}
 		},
 	});
@@ -115,9 +114,12 @@ function GridField(domId) {
 	//构造使用于bootstrap的field
 	this.getBoostrapField=function(){
 		var field={};
+		
 		for(var i in this){
-			if(this[i]){
-				field[i]=this[i];
+			if(i!="getBoostrapField"&&i!="domId"){
+				if(this[i]){
+					field[i]=this[i];
+				}
 			}
 		}
 		return field;

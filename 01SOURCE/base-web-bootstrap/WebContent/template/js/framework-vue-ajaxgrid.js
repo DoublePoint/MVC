@@ -105,7 +105,7 @@ var gridProps=["classes"
                 "onrowclick"];
 Vue.component(_ConstantComponentMap._AjaxGrid, {
 	props : gridProps,
-	template : '<div style="height:100%;" class="table-responsive"><table style="table-layout:fixed;"  :id="gridId" ><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
+	template : '<div style="height:100%;" class="table-responsive"><table class="bootstrapTable"  :id="gridId" ><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
 
 	data : function() {
 		var gridId=this.id+$._GenerateUUID();
@@ -164,7 +164,7 @@ function AjaxGrid(domId) {
 	this.ondblclick = null;
 	this.onrowclick = null;
 	this.onpageclick = null;
-	this.cols = [];
+	this.cols = [{ checkbox: true, align: 'center' }];
 	this.datasource = "";
 	this.datawrap = $._CreateAjaxDataWrap();
 	this.height = 300;
@@ -285,7 +285,10 @@ function AjaxGrid(domId) {
 		var bootstrapColumns=[];
 		var cols=this.cols;
 		for(var i in cols){
-			bootstrapColumns.push(cols[i].getBoostrapField());
+			if(cols[i].getBoostrapField)
+				bootstrapColumns.push(cols[i].getBoostrapField());
+			else
+				bootstrapColumns.push(cols[i]);
 		}
 		return bootstrapColumns;
 	}

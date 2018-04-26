@@ -37,8 +37,8 @@
 	            		<ll-fillarea-lr  width="*"  height="100%">  
 		                	 <ll-ajaxgrid datasource="/template/sys/tables">  
 						                <ll-gridcheck ></ll-gridcheck>  
-						                <ll-gridcustom width="30" align="center" title="操作" formatter="customerFunction"></ll-gridcustom>  
-						                <ll-gridfield  field="tableName" width="200"  title="表名"></ll-gridfield>  
+						                <ll-gridcustom width="80" align="center" title="操作" formatter="customerFunction"></ll-gridcustom>  
+						                <ll-gridfield  field="tableName" title="表名"></ll-gridfield>  
 						     </ll-ajaxgrid>  
 					     </ll-fillarea-lr>
 				     </ll-filllayout>
