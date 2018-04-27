@@ -33,7 +33,9 @@
 				<ll-step title="选择实体">
 					<ll-filllayout>  
 				        <ll-fillarea-tb title="文件导入"  height="120" showtitle="true">  
-				          	<input id="myfile" type="file" name="file">  
+				          	<ll-ajaxform>
+				          		<ll-formfileinput fileuploaded="fileuploaded()"></ll-formfileinput>
+				          	</ll-ajaxform>
 				        </ll-fillarea-tb>  
 				        <ll-fillarea-tb height="*" title="数据库表" showtitle="true">  
 				           <ll-ajaxgrid  id="gridResource"  >  

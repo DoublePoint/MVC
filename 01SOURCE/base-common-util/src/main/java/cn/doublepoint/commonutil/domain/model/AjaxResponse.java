@@ -14,21 +14,11 @@ import java.util.Map;
 
 public class AjaxResponse {
 	
-	private Map<String, AjaxDataWrap<BaseModel>> ajaxMap;
 	private Map<String, Object> parameterMap;
 	
-	/**
-	 * 设置返回dataWrap映射
-	 * @param dataWrapName dataWrap名称
-	 * @param dataWrap dataWrap值
-	 */
-	public void setAjaxDataWrap(String dataWrapName,AjaxDataWrap<BaseModel> dataWrap){
-		if(ajaxMap==null)
-			ajaxMap=new HashMap<>();
-		if(ajaxMap.containsKey(dataWrapName)){
-			ajaxMap.remove(dataWrapName);
-		}
-		ajaxMap.put(dataWrapName, dataWrap);
+	public AjaxResponse(){
+		if(parameterMap==null)
+			parameterMap=new HashMap<>();
 	}
 	
 	/**
@@ -37,11 +27,19 @@ public class AjaxResponse {
 	 * @param paramValue 参数值
 	 */
 	public void setAjaxParameter(String paramName,Object paramValue){
-		if(parameterMap==null)
-			parameterMap=new HashMap<>();
 		if(parameterMap.containsKey(paramName)){
 			parameterMap.remove(paramName);
 		}
 		parameterMap.put(paramName, paramValue);
 	}
+
+	public Map<String, Object> getParameterMap() {
+		return parameterMap;
+	}
+
+	public void setParameterMap(Map<String, Object> parameterMap) {
+		this.parameterMap = parameterMap;
+	}
+	
+	
 }

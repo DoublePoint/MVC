@@ -24,6 +24,7 @@ var _ConstantComponentMap = {
 	_FormField : "ll-formfield",
 	_FormCheck : "ll-formcheck",
 	_FormDate : "ll-formdate",
+	_FormFileInput:"ll-formfileinput",
 	_FormSelect : "ll-formselect",
 	_FormInputButton : "ll-forminputbutton",
 	_FormToolBar : "ll-formtoolbar",

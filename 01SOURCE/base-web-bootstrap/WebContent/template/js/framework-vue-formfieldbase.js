@@ -124,6 +124,8 @@ function component(fieldType, fieldTemplate,props) {
 					formField = new FormToolbar(domId);
 				else if (fieldType == _ConstantComponentMap._FormDropTree)
 					formField = new FormDropTree(domId);
+				else if (fieldType == _ConstantComponentMap._FormFileInput)
+					formField = new FormFileInput(domId);
 				else
 					formField = new FormFieldBase(domId);
 
@@ -222,6 +224,9 @@ function FormFieldBase(domId) {
 	this.parentAjaxFormId = "";
 	this.getDomId = function() {
 		return this.domId;
+	}
+	this.getDom = function(){
+		return $("#"+this.domId);
 	}
 	this.getColspan = function() {
 		return this.colspan;

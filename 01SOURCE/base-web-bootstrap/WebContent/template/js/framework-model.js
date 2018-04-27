@@ -128,3 +128,15 @@ function RegisterModel(){
 	// 事件注册Model
 	this._ComponentCompleteListenerModel = new Array();
 }
+
+function AjaxResponse(response){
+	if (response) {
+		for ( var attrName in response.parameterMap) {
+			this[attrName] = (response.parameterMap)[attrName];
+		}
+	}
+
+	this.get = function(field) {
+		return this[field];
+	}
+}

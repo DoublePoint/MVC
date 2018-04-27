@@ -14,9 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -35,8 +33,8 @@ import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.commonutil.domain.model.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
-import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.GenerateEntityUtil;
 import cn.doublepoint.generate.domain.model.helper.BeanModel;
@@ -72,7 +70,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	
 	@RequestMapping("/template/sys/getAllFileTable")
 	@ResponseBody
-	public AjaxDataWrap<BeanModel> getAllFileTable(@RequestParam("file") MultipartFile myfile,HttpServletRequest request) throws IllegalStateException, IOException {
+	public AjaxResponse getAllFileTable(@RequestParam("file") MultipartFile myfile,HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		try {
 			String oomFileName="";
@@ -84,7 +82,9 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(file);
 			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
 			ajaxDataWrap.setDataList(beanModelList);
-			return ajaxDataWrap;
+			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
+			responseData.setAjaxParameter("oomFileName", oomFileName);
+			return responseData;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
