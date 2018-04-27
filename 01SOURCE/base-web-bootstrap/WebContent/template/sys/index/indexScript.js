@@ -1,7 +1,7 @@
 function init(){
 	$('#admin-side-toggle').on('click', function() {
 		var sideWidth = $('#admin-side').width();
-		if (sideWidth === 200) {
+		if (sideWidth === 250) {
 			$('#admin-body').animate({
 				left : '0'
 			}); // admin-footer
@@ -13,13 +13,13 @@ function init(){
 			});
 		} else {
 			$('#admin-body').animate({
-				left : '200px'
+				left : '250px'
 			});
 			$('#admin-footer').animate({
-				left : '200px'
+				left : '250px'
 			});
 			$('#admin-side').animate({
-				width : '200px'
+				width : '250px'
 			});
 		}
 	});
@@ -29,8 +29,8 @@ function windowResize(){
 	if($('#admin-body').css("left")=='0px')
 		$('#admin-footer').css("left","0");
 	else
-		if($('#admin-body').css("left")=='200px')
-			$('#admin-footer').css("left","200px");
+		if($('#admin-body').css("left")=='250px')
+			$('#admin-footer').css("left","250px");
 }
 
 

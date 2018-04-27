@@ -78,11 +78,38 @@ public class GenerateEntityUtil {
 	private final static String TEMPLATE_DIR = "/cn.doublepoint.generate.domain.model.helper.template/";
 
 	private final static String TEMPLATE_ENTITY_KEY_NAME = "entityModel";
-
-	static {
+	
+	/**
+	 * 分别获取 某个表对应的某个文件内容
+	 * @param file
+	 * @param tableNameLlist
+	 * @return
+	 * @throws TemplateException
+	 * @throws IOException
+	 */
+	public static Map<String,String> buildEntityByTableNameList(File file, List<String> tableNameLlist) throws TemplateException, IOException {
+		if(tableNameLlist==null||tableNameLlist.size()==0)
+			return null;
+		Map<String,String> tableContentMap=new HashMap<String,String>();
+		tableNameLlist.forEach(tableName->{
+			List<BeanModel> entityModelList = buildEntityModelList(file, tableName);
+			
+			Map<String, Object> data = new HashMap<String, Object>();
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+			data.put("datetime", formatter.format(date));
+			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModelList.get(0));
+			try {
+				String template = createFileByTemplate(GENERATE_FILE_ENTITY_TPL_NAME, data);
+				tableContentMap.put(tableName, template);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 		
+		return tableContentMap;
 	}
-
+	
 	public static String buildEntityByTableName(File file, String tableName) throws TemplateException, IOException {
 		List<BeanModel> entityModelList = buildEntityModelList(file, tableName);
 		
@@ -116,8 +143,15 @@ public class GenerateEntityUtil {
 		String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, templateData);
 		return text;
 	}
-
-	private static List<BeanModel> buildEntityModelList(File file, String tableName) {
+	
+	
+	/**
+	 * 获取所有的实体信息 包括字段信息
+	 * @param file
+	 * @param tableName
+	 * @return
+	 */
+	public static List<BeanModel> buildEntityModelList(File file, String tableName) {
 		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -201,6 +235,58 @@ public class GenerateEntityUtil {
 			e.printStackTrace();
 		}
 		return entityModelList;
+	}
+	
+	/**
+	 * 获取文件中所有表信息 不包括字段信息
+	 * @param file
+	 * @return
+	 */
+	public static List<BeanModel> buildTableNameList(File file){
+		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			NodeList classElementNodeList = db.parse(file).getElementsByTagName("c:Classes").item(0).getChildNodes();
+			for (int i = 0; i < classElementNodeList.getLength(); i++) {
+				BeanModel entityModel = new BeanModel();
+				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
+				boolean isadd = false;
+				for (int j = 0; j < classChildrenList.getLength(); j++) {
+					if (!(classChildrenList.item(j) instanceof Element))
+						continue;
+					Element item = (Element) classChildrenList.item(j);
+					String nodeName = item.getNodeName();
+					String nodeValue = item.getTextContent();
+					if (nodeValue == null || nodeValue == "")
+						break;
+					isadd = true;
+					switch (nodeName) {
+					case "a:Name":// 中文说明
+						entityModel.setChName(nodeValue);
+						break;
+					case "a:Code":// 英文编码
+						entityModel.setTableName(nodeValue);
+						break;
+					case "a:Comment":// 中文备注
+						entityModel.setRemark(nodeValue);
+						break;
+					case "a:Stereotype":// 实体 枚举 值对象类型
+						entityModel.setType(nodeValue);
+						break;
+					default:
+						break;
+					}
+				}
+				if (isadd) {
+					entityModelList.add(entityModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return entityModelList;
+	
 	}
 
 	/**

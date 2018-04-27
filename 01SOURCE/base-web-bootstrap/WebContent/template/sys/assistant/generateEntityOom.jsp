@@ -25,22 +25,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/jquery-steps-master/demo/css/jquery.steps.css">
 
 <script src="${pageContext.request.contextPath}/template/plugins/jquery-steps-master/build/jquery.steps.js"></script>
-<script  type="text/javascript"  src="generateEntityScript.js"></script>  
+<script  type="text/javascript"  src="generateEntityOomScript.js"></script>  
 </head>
 <body>
 	<form>
 			<ll-steppanel id="wizard"  onstepchanged="stepChanged()" onstepchanging="stepChanging()">
 				<ll-step title="选择实体">
 					<ll-filllayout>  
-				       	<ll-fillarea-tb height="*" title="数据库表" showtitle="true">  
-				           <ll-ajaxgrid  id="gridTable"  datasource="/template/sys/tables">  
+				        <ll-fillarea-tb title="文件导入"  height="120" showtitle="true">  
+				          	<input id="myfile" type="file" name="file">  
+				        </ll-fillarea-tb>  
+				        <ll-fillarea-tb height="*" title="数据库表" showtitle="true">  
+				           <ll-ajaxgrid  id="gridResource"  >  
 				           		<ll-gridcheck></ll-gridcheck>  
 				              	<ll-gridfield  field="tableName"  title="表名"></ll-gridfield>  
 				         	</ll-ajaxgrid>
 				         </ll-fillarea-tb>  
-				          <ll-fillarea-tb title="文件导入"  height="80">  
-				          	<input id="myfile" type="file" name="file">  
-				        </ll-fillarea-tb>  
 				      </ll-filllayout>  
 				</ll-step>
 				<ll-step title="生成模板">

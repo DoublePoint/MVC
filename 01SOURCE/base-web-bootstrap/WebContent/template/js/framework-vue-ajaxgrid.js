@@ -326,26 +326,23 @@ function AjaxGrid(domId) {
 		this.initData();
 		this.initEvent();
 	};
-	this.initAjaxJsonData=function(ajaxDataWrap){
-		this.datawrap.parse(ajaxDataWrap);
-		this.render();
-	}
 	this.initData = function(){
 		if(this.datasource==null||this.datasource==""){
 			this.initBootstrapSetting();
 			return;
 		}
-		var data={};
 		var grid=this;
 		$.ajax({
 			url : $$pageContextPath + this.datasource,
 			type : "POST",
 			contentType : 'application/json;charset=UTF-8',
 			dataType : "json",
-			data : JSON.stringify(data),
+			data : JSON.stringify({}),
 			async : false,
 			success : function(ajaxDataWrap) {
-				grid.initAjaxJsonData(ajaxDataWrap);
+				grid.datawrap.parse(ajaxDataWrap);
+				grid.initBootstrapSetting(grid);
+				grid.setPager(grid.datawrap.getPageInfo());
 			},
 			error:function(){
 				grid.setLayuiTableDataNull();
@@ -379,10 +376,6 @@ function AjaxGrid(domId) {
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
 	};
-	this.render = function() {
-		this.initBootstrapSetting(this);
-		this.setPager(this.datawrap.getPageInfo(), this.id);
-	};
 	this.resize = function() {
 		this.initStyle();
 		var height = this.height;
@@ -398,9 +391,18 @@ function AjaxGrid(domId) {
 		this.datasource = ds;
 	};
 	this.setDataWrap = function(ajaxDataWrap) {
-		this.datawrap.parse(ajaxDataWrap);
-		$("#" + this.domId).bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
-		
+		try{
+			this.datawrap.parse(ajaxDataWrap);
+			$("#" + this.domId).bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
+		}
+		catch(e){
+			console.log(e);
+		}
+		try{
+			this.setPager(this.datawrap.getPageInfo());
+		}catch(e){
+			console.log(e);
+		}
 	};
 	this.initBootstrapSetting = function() {
 		var ajaxgrid = this;
@@ -450,10 +452,10 @@ function AjaxGrid(domId) {
 	this.setPageClickFunctionName = function(funName) {
 		this.onPageClickFunctionName = funName;
 	};
-	this.setPager = function(page, ajaxDataGridId) {
+	this.setPager = function(page) {
 		if (page == null)
 			return;
-
+		var ajaxDataGrid=this;
 		$("#" + this.domId).bootstrapTable('selectPage', page.currentPageNum); 
 		$laypage.render({
 			elem : this.pagerId,
@@ -465,7 +467,6 @@ function AjaxGrid(domId) {
 				if (!first) {
 					var currentPageNum = obj.curr;
 					var pageSize = obj.limit;
-					var ajaxDataGrid = $._GetFromLayuiObjectHashMap(ajaxDataGridId);
 					ajaxDataGrid.getDataWrap().pageInfo.pageSize = pageSize;
 					ajaxDataGrid.getDataWrap().pageInfo.currentPageNum = currentPageNum;
 					$._Eval(ajaxDataGrid.getPageClickFunctionName());

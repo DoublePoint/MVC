@@ -1,10 +1,13 @@
 @MenuBackgroundColor:#333333; //菜单导航背景色
+@MenuWidth:250px;
 @PageHeaderBackgroundColor:#FFFFFF;//页面头部背景颜色
 @PageHeaderFontColor:#FFFFFF;//页面头部字体演示
 @DragLineBackgroundColor:#F1F1F1;//拖动条的颜色
 @BorderColor:#F1F1F1;//个布局边框的颜色
 @BorderWidth:1px;
 @DragLineWidth:1px;//拖动条的宽度
+
+
 
 /* jquery step */
 @BorderRadius:0px;
@@ -39,10 +42,18 @@ form form {
 }
 
 .layui-side-scroll {
-	width: 200px;
+	width: @MenuWidth;
 	font-family: "Microsoft YaHei", SimSun, '\5b8b\4f53', sans-serif;
 }
-
+.layui-layout-admin .layui-side {
+    width:@MenuWidth;
+}
+.layui-body {
+	left:@MenuWidth;
+}
+.layui-footer{
+	left:@MenuWidth;
+}
 li {
 	list-style: none
 }

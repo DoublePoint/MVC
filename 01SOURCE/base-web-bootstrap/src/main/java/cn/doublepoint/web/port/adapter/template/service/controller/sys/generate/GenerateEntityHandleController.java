@@ -9,21 +9,17 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import javax.annotation.Resource;
-import javax.persistence.Entity;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,9 +36,10 @@ import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
+import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.GenerateEntityUtil;
-import freemarker.template.Configuration;
+import cn.doublepoint.generate.domain.model.helper.BeanModel;
 
 @Controller
 public class GenerateEntityHandleController extends BaseHandleController {
@@ -58,7 +55,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		return dataWrap;
 	}
 
-	@RequestMapping("/template/sys/uploadfile")
+	@RequestMapping("/template/sys/uploadfile1")
 	@ResponseBody
 	public String upload(@RequestParam("file") MultipartFile myfile) throws IllegalStateException, IOException {
 		String returnString = "";
@@ -66,12 +63,61 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			File file = File.createTempFile("tmp", null);
 			myfile.transferTo(file);
 			returnString = GenerateEntityUtil.buildEntityByTableName(file, "sys_entity_filter");
-			file.deleteOnExit();
+			//file.deleteOnExit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return returnString.replace("<", "&lt;").replace("<", "&gt;");
 	}
+	
+	@RequestMapping("/template/sys/getAllFileTable")
+	@ResponseBody
+	public AjaxDataWrap<BeanModel> getAllFileTable(@RequestParam("file") MultipartFile myfile,HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		try {
+			String oomFileName="";
+			String generateDirPath= generateDirPath(request);
+			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+			File file = new File(oomFileName);
+			myfile.transferTo(file);
+			
+			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(file);
+			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
+			ajaxDataWrap.setDataList(beanModelList);
+			return ajaxDataWrap;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+//	String oomFileName="";
+//	try {
+//		String generateDirPath= generateDirPath(request);
+//		
+//		oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+//		File file = new File(oomFileName);
+//		myfile.transferTo(file);
+//		List<String> tableNameLlist=new ArrayList<>();
+//		tableNameLlist.add("sys_menu");
+//		tableNameLlist.add("sys_entity_filter");
+//		
+//		Map<String,String> tableMap=GenerateEntityUtil.buildEntityByTableNameList(file, tableNameLlist);
+//		tableMap.entrySet().stream().forEach(entity->{
+//			String tableName=entity.getKey();
+//			String tableContent=entity.getValue();
+//			try {
+//				generateEntityFile(generateDirPath, tableName, tableContent);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		});
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	}
+//	
+//	return oomFileName;
 
 	@RequestMapping("/template/sys/config/entityFilter")
 	@ResponseBody
@@ -82,100 +128,85 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	@RequestMapping("/template/sys/config/generateFile")
 	@ResponseBody
 	private void downloadFiles(@RequestParam(required=false) List<File> files, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String savePath = request.getSession().getServletContext()
-				.getRealPath("/uploadTempDirectory/123/" + UUID.randomUUID() + ".java");
-		File htmlFile = new File(savePath);
-		
-		File dir=new File(request.getSession().getServletContext().getRealPath("/uploadTempDirectory/123/"));
-		if(!dir.exists()){
-			dir.mkdir();
-			System.out.println("dir：" + dir.getCanonicalPath());
+		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+		String tempDirName=UUID.randomUUID()+"";
+		String generateDirPath= tempDir + tempDirName;
+		File generateDir = new File(generateDirPath);
+		if(!generateDir.exists()){
+			generateDir.mkdir();
+			System.out.println("创建临时文件夹：" + generateDir.getCanonicalPath());
 		}
-		System.out.println("dir.exists()：" + dir.exists());
-		System.out.println("临时文件所在的本地路径：" + htmlFile.getCanonicalPath());
-		FileOutputStream fos = new FileOutputStream(htmlFile);
+		
+		String generateRepositoryDirPath=generateDirPath+"/repository";
+		File generateRepositoryDir = new File(generateRepositoryDirPath);
+		if(!generateRepositoryDir.exists()){
+			generateRepositoryDir.mkdir();
+			System.out.println("创建临时文件夹repository：" + generateRepositoryDir.getCanonicalPath());
+		}
+		
+		String generateJspDirPath=generateDirPath+"/jsp";
+		File generateJspDir = new File(generateJspDirPath);
+		if(!generateJspDir.exists()){
+			generateJspDir.mkdir();
+			System.out.println("创建临时文件夹jsp：" + generateJspDir.getCanonicalPath());
+		}
+		
+		// 在服务器端创建打包下载的临时文件
+		String zipFilePath = tempDir+"/"+tempDirName + ".zip";
+		
+		File fileZip = new File(zipFilePath);
+		// 文件输出流
+		FileOutputStream outStream = new FileOutputStream(fileZip);
+		// 压缩流
+		ZipUtil.toZip(generateDirPath,outStream,true);
+		
+		if(outStream!=null)
+			outStream.close();
+	}
+
+	/**
+	 * 生成实体文件
+	 * @param generateDirPath 生成文件夹根路径 在此基础上添加/entity/entity.java
+	 * @param fileName 文件名称
+	 * @param fileContent 文件内容
+	 * @throws IOException 异常
+	 */
+	private void generateEntityFile(String generateDirPath,String fileName,String fileContent) throws IOException{
+		String generateEntityDirPath=generateDirPath+"/entity";
+		File generateEntityDir = new File(generateEntityDirPath);
+		if(!generateEntityDir.exists()){
+			generateEntityDir.mkdir();
+		}
+		
+		String entityFilePath = generateEntityDirPath+"/" + fileName + ".java";
+		File entiryFile = new File(entityFilePath);
+		System.out.println("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
+		FileOutputStream fos = new FileOutputStream(entiryFile);
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(htmlFile));
-			out.write("aString");
+			BufferedWriter out = new BufferedWriter(new FileWriter(entiryFile));
+			out.write(fileContent);
 			out.close();
 			// 这里处理业务逻辑
 		} finally {
 			// 关闭临时文件
 			fos.flush();
 			fos.close();
-			// htmlFile.deleteOnExit();//程序退出时删除临时文件
-		}
-
-		String fileName = UUID.randomUUID().toString() + ".zip";
-		// 在服务器端创建打包下载的临时文件
-		String outFilePath = request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
-
-		File fileZip = new File(outFilePath + fileName);
-		// 文件输出流
-		FileOutputStream outStream = new FileOutputStream(fileZip);
-		// 压缩流
-		//ZipOutputStream zipOutStream = new ZipOutputStream(outStream);
-		ZipUtil.toZip(dir.getCanonicalPath(),outStream,true);
-		//zipFile(dir, zipOutStream);
-		//zipOutStream.close();
-		//outStream.close();
-	}
-
-	// 循环压缩多个文件
-	public static void zipFile(List<File> files, ZipOutputStream outputStream) throws IOException, ServletException {
-		try {
-			int size = files.size();
-			// 压缩列表中的文件
-			for (int i = 0; i < size; i++) {
-				File file = (File) files.get(i);
-				zipFile(file, outputStream);
-			}
-		} catch (IOException e) {
-			throw e;
 		}
 	}
-
-	public static void zipFile(File inputFile, ZipOutputStream outputstream) throws IOException, ServletException {
-		try {
-			if (inputFile.exists()) {
-				if (inputFile.isFile()) {
-					FileInputStream inStream = new FileInputStream(inputFile);
-					BufferedInputStream bInStream = new BufferedInputStream(inStream);
-					ZipEntry entry = new ZipEntry(inputFile.getName());
-					outputstream.putNextEntry(entry);
-					final int MAX_BYTE = 10 * 1024 * 1024; // 最大的流为10M
-					long streamTotal = 0; // 接受流的容量
-					int streamNum = 0; // 流需要分开的数量
-					int leaveByte = 0; // 文件剩下的字符数
-					byte[] inOutbyte; // byte数组接受文件的数据
-
-					streamTotal = bInStream.available(); // 通过available方法取得流的最大字符数
-					streamNum = (int) Math.floor(streamTotal / MAX_BYTE); // 取得流文件需要分开的数量
-					leaveByte = (int) streamTotal % MAX_BYTE; // 分开文件之后,剩余的数量
-
-					if (streamNum > 0) {
-						for (int j = 0; j < streamNum; ++j) {
-							inOutbyte = new byte[MAX_BYTE];
-							// 读入流,保存在byte数组
-							bInStream.read(inOutbyte, 0, MAX_BYTE);
-							outputstream.write(inOutbyte, 0, MAX_BYTE); // 写出流
-						}
-					}
-					// 写出剩下的流数据
-					inOutbyte = new byte[leaveByte];
-					bInStream.read(inOutbyte, 0, leaveByte);
-					outputstream.write(inOutbyte);
-					outputstream.closeEntry(); // Closes the current ZIP entry
-
-					bInStream.close(); // 关闭
-					inStream.close();
-				}
-			} else {
-				throw new ServletException("文件不存在！");
-			}
-		} catch (IOException e) {
-			throw e;
+	
+	/**
+	 * 生成  自动创建实体仓库根文件夹
+	 * @param request 
+	 * @return 返回根文件夹路径+名称
+	 */
+	private String generateDirPath(HttpServletRequest request){
+		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+		String tempDirName=UUID.randomUUID()+"";
+		String generateDirPath= tempDir + tempDirName;
+		File generateDir = new File(generateDirPath);
+		if(!generateDir.exists()){
+			generateDir.mkdir();
 		}
+		return generateDirPath;
 	}
-
 }
