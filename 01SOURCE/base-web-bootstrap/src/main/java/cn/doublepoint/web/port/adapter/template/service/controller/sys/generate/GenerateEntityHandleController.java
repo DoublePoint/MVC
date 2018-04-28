@@ -78,7 +78,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
 			File file = new File(oomFileName);
 			myfile.transferTo(file);
-			
+			 
 			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(file);
 			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
 			ajaxDataWrap.setDataList(beanModelList);
