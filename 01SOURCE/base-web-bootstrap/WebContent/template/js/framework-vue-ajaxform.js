@@ -4,12 +4,12 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 
 	data : function() {
 		return {
-			guid : $._GenerateUUID()
+			guid : $.generateUUID()
 		}
 	},
 	beforeMount : function() {
 		var domId = this._GetComponentDomId();
-		var _Ajaxform = $._GetFromLayuiObjectHashMap(domId);
+		var _Ajaxform = $.getFromLayuiObjectHashMap(domId);
 		var a = 1;
 		var b = a;
 	},
@@ -31,7 +31,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		},
 		_GetAjaxForm : function(){
 			var domId = this._GetComponentDomId();
-			var ajaxform = $._GetFromLayuiObjectHashMap(domId);
+			var ajaxform = $.getFromLayuiObjectHashMap(domId);
 			return ajaxform;
 		},
 		_RegisterComponent : function() {
@@ -41,12 +41,12 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 				if (this[attrName] != null)
 					ajaxForm[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, ajaxForm);
+			$.addToLayuiObjectHashMap(domId, ajaxForm);
 
 		},
 		// 添加生命ajaxDataGrid对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_GetShowChanged : function(){
 			if(this.showchanged==null)
@@ -58,7 +58,7 @@ Vue.component(_ConstantComponentMap._AjaxForm, {
 		_InitShowChanged : function(){
 			var ajaxform = this._GetAjaxForm();
 			if(this._GetShowChanged()){
-				$._RegisterDialogSuccessModel(ajaxform);
+				$.registerDialogSuccessModel(ajaxform);
 				ajaxform.initNotSave()
 			}
 		},
@@ -234,7 +234,7 @@ function AjaxForm(domId) {
 		}
 		if(this.getShowchanged().toString().toLowerCase()=="true"){
 			if(this.getIsChanged())
-				$._AddNotSaveIcon();
+				$.addNotSaveIcon();
 		}
 	}
 	
@@ -259,7 +259,7 @@ function AjaxForm(domId) {
 	this.showNotSave = function(){
 		if(this.getShowchanged().toString().toLowerCase()=="true"){
 			if(this.getIsChanged()){
-				$._AddNotSaveIcon();
+				$.addNotSaveIcon();
 			}
 		}
 	}

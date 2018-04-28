@@ -15,17 +15,17 @@ function componentToolBar(){
 		props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 		template : '<div :style="clientStyle" >' + '<slot></slot>' + '</div>',
 		data : function() {
-			var labelclientStyleBuffer = $._CreateStringBuffer();
+			var labelclientStyleBuffer = $.createStringBuffer();
 			for (clientStyleName in this._ClientStyleArr) {
 				var stylekey = _ClientStyleArr[clientStyleName];
 				if (this[stylekey] != null) {
-					var labelalignbuffer = $._CreateStyleBuffer(_ClientStyleMap[stylekey], this[stylekey]);
+					var labelalignbuffer = $.createStyleBuffer(_ClientStyleMap[stylekey], this[stylekey]);
 					labelclientStyleBuffer.append(labelalignbuffer.toString());
 				}
 			}
 			//labelclientStyleBuffer.append("line-height:").append();
 			return {
-				guid : $._GenerateUUID(),
+				guid : $.generateUUID(),
 				clientStyle : labelclientStyleBuffer.toString()
 			}
 		},

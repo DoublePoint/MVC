@@ -13,7 +13,7 @@ function stepChanging(event, currentIndex, newIndex){
 	if(currentIndex==0){
 		checkedRecords=gridResource.getCheckedRecords();
 		if(checkedRecords.length==0){
-			$._Alert("至少选择一个表。");
+			$.tips("至少选择一个表。");
 			return false;
 		}
 	}
@@ -29,7 +29,7 @@ function customerFunction(a,b,c){
 }
 
 function showDetail(table){
-	$._OpenDialog({
+	$.openDialog({
 		type : 2,
 		title : "详细信息",
 		width : 930,

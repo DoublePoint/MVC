@@ -7,7 +7,7 @@ Vue.component(_ConstantComponentMap._Step, {
 			aTitle=this.title;
 		return {
 			aTitle:aTitle,
-			guid:$._GenerateUUID()
+			guid:$.generateUUID()
 		}
 	},
 	created : function() {//注册到系统map
@@ -28,7 +28,7 @@ Vue.component(_ConstantComponentMap._Step, {
 		},
 		_GetComponentDom :function(){
 			var domId = this._GetComponentDomId();
-			var componentDom = $._GetFromLayuiObjectHashMap(domId);
+			var componentDom = $.getFromLayuiObjectHashMap(domId);
 			return componentDom;
 		},
 		_RegisterComponent : function() {
@@ -38,11 +38,11 @@ Vue.component(_ConstantComponentMap._Step, {
 				if (this[attrName] != null)
 					step[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, step);
+			$.addToLayuiObjectHashMap(domId, step);
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_RegisterResize :function(){
 		},

@@ -51,7 +51,7 @@ function _InitExplorerResizeListener() {
 /*-----------根据参数判断是否执行init方法---------------*/
 function _InvokeTheInitFunction() {
 	// 当参数为N时才不执行，否则执行
-	if ($._GetRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION)==null||!($._GetRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
+	if ($.getRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION)==null||!($.getRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
 		init();
 	}
 }
@@ -61,7 +61,7 @@ function _InitFormFieldListener() {
 		title : function(value, dom) {
 			var domid = dom.id;
 			if (domid != null) {
-				var formfield = $._GetFromLayuiObjectHashMap(domid);
+				var formfield = $.getFromLayuiObjectHashMap(domid);
 				if (formfield == null)
 					return;
 				var validtype = formfield.validtype;
@@ -69,7 +69,7 @@ function _InitFormFieldListener() {
 					validtype = "";
 				switch (validtype) {
 				case "int":
-					if (!$._IsInt(value)) {
+					if (!$.isInt(value)) {
 						return formfield.errmsg;
 					}
 					break;
@@ -110,14 +110,14 @@ function initJspParams(aJspParams){
 //如果该页面是弹窗 那么在弹窗执行完成success 以及 执行完用户自定义的init方法之前就会执行该方法
 function initBeforeJspInit(){
 	// 设置各个vue组件的高度 datagrid layout 
-	var registeredModelList = $._GetRegisteredDialogSuccessModel();
+	var registeredModelList = $.getRegisteredDialogSuccessModel();
 	for(index in registeredModelList){
 		registeredModelList[index].doInDialogSuccess();
 	}
 }
 
 function resizeAllVueModel(){
-	var registeredModelList = $._GetRegisteredResizeModel();
+	var registeredModelList = $.getRegisteredResizeModel();
 	if (registeredModelList != null) {
 		for (var i = 0; i < registeredModelList.length; i++) {
 			var domObj = registeredModelList[i];

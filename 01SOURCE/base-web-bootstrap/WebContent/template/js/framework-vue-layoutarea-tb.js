@@ -12,7 +12,7 @@
 			var clientClassBuffer=this._InitClientClassBuffer();
 			var clientHeadingStyle=this._InitClientHeadingStyleBuffer();
 			return {
-				guid : $._GenerateUUID(),
+				guid : $.generateUUID(),
 				clientStyle:clientStyleBuffer.toString(),
 				clientClassBuffer:clientClassBuffer.toString(),
 				clientHeadingStyle:clientHeadingStyle.toString(),
@@ -36,7 +36,7 @@
 			},
 			_GetLayoutAreaX :function(){
 				var domId = this._GetComponentDomId();
-				var aLayoutArea = $._GetFromLayuiObjectHashMap(domId);
+				var aLayoutArea = $.getFromLayuiObjectHashMap(domId);
 				return aLayoutArea;
 			},
 			_RegisterComponent : function() {
@@ -46,7 +46,7 @@
 					if (this[attrName] != null)
 						_FillArea[attrName] = this[attrName];
 				}
-				$._AddToLayuiObjectHashMap(domId, _FillArea);
+				$.addToLayuiObjectHashMap(domId, _FillArea);
 				try{
 					// 注册该对象ID 以便在浏览器大小改变时重新计算其大小
 					if (this.height!=null&&this.height.toString().indexOf("*") != -1) {
@@ -63,12 +63,12 @@
 				if(this.$parent==null) return;
 				var _FillArea = this._GetLayoutAreaX();
 				var layoutDomId = this.$parent._GetComponentDomId();
-				var layout = $._GetFromLayuiObjectHashMap(layoutDomId);
+				var layout = $.getFromLayuiObjectHashMap(layoutDomId);
 				layout.addLayoutAreaItem(_FillArea);
 			},
 			// 添加生命FillArea对象脚本
 			_MapComponent : function() {
-				$._OutputMapCompoment(this);
+				$.outputMapCompoment(this);
 			},
 			
 			
@@ -86,20 +86,20 @@
 				else{
 					varlayOutHeight = varlayOutHeight + "px";
 				}
-				var clientStyleBuffer=$._CreateStringBuffer();
-				var heightBuffer=$._CreateStyleBuffer("height",varlayOutHeight);
+				var clientStyleBuffer=$.createStringBuffer();
+				var heightBuffer=$.createStyleBuffer("height",varlayOutHeight);
 				clientStyleBuffer.append(heightBuffer.toString());
-				var widthBuffer=$._CreateStyleBuffer("width",'100%');
+				var widthBuffer=$.createStyleBuffer("width",'100%');
 				clientStyleBuffer.append(widthBuffer.toString());
 				if(this.backgroundcolor!=null){
-					var bgBuffer=$._CreateStyleBuffer("background-color",this.backgroundcolor);
+					var bgBuffer=$.createStyleBuffer("background-color",this.backgroundcolor);
 					clientStyleBuffer.append(bgBuffer.toString());
 				}
 				
 				return clientStyleBuffer;
 			},
 			_InitClientClassBuffer : function(){
-				var bf=$._CreateStringBuffer();
+				var bf=$.createStringBuffer();
 				bf.append(" ll-fill-area-tb panel-info ll-panel");
 				if(this.showborder=="true")
 					bf.append(" layout-area-Border ");
@@ -107,7 +107,7 @@
 				return bf;
 			},
 			_InitClientHeadingStyleBuffer : function(){
-				var bf=$._CreateStyleBuffer("padding: 5px 10px 5px 10px; ");
+				var bf=$.createStyleBuffer("padding: 5px 10px 5px 10px; ");
 				if(this.showtitle!="true")
 					bf.append('display:none;');
 				

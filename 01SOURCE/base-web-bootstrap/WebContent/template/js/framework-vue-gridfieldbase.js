@@ -43,7 +43,7 @@ function _LLGridFieldComponent(type){
 				}
 			}
 			return {
-				guid : $._GenerateUUID()
+				guid : $.generateUUID()
 			}
 		},
 		mounted : function() {
@@ -55,7 +55,7 @@ function _LLGridFieldComponent(type){
 				return this.id+this.guid;
 			},
 			_GetComponentDom : function(){
-				var dom = $._GetFromLayuiObjectHashMap(this._GetComponentDomId());
+				var dom = $.getFromLayuiObjectHashMap(this._GetComponentDomId());
 				return dom;
 			},
 			_RegisterComponent : function() {
@@ -65,10 +65,10 @@ function _LLGridFieldComponent(type){
 					if (this[attrName] != null)
 						field[attrName] = this[attrName];
 				}
-				$._AddToLayuiObjectHashMap(domId, field);
+				$.addToLayuiObjectHashMap(domId, field);
 				
 				var _AjaxGridId = this.$parent._GetComponentDomId();
-				var _AjaxDatagrid = $._GetFromLayuiObjectHashMap(_AjaxGridId);
+				var _AjaxDatagrid = $.getFromLayuiObjectHashMap(_AjaxGridId);
 				if(type!=_ConstantComponentMap._GridCheck){
 					_AjaxDatagrid.addCol(field);
 				}

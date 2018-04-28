@@ -6,18 +6,18 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 		var varlayOutWidth = this.width;
 		if (varlayOutWidth == null||varlayOutWidth=="")
 			varlayOutWidth = '100%';
-		var clientStyleBuffer = $._CreateStringBuffer();
-		var widthBuffer = $._CreateStyleBuffer("width", varlayOutWidth);
+		var clientStyleBuffer = $.createStringBuffer();
+		var widthBuffer = $.createStyleBuffer("width", varlayOutWidth);
 		clientStyleBuffer.append(widthBuffer.toString());
-		var heightBuffer = $._CreateStyleBuffer("height", '100%');
+		var heightBuffer = $.createStyleBuffer("height", '100%');
 		clientStyleBuffer.append(heightBuffer.toString());
 		if (this.backgroundcolor != null) {
-			var bgBuffer = $._CreateStyleBuffer("background-color", this.backgroundcolor);
+			var bgBuffer = $.createStyleBuffer("background-color", this.backgroundcolor);
 			clientStyleBuffer.append(bgBuffer.toString());
 		}
 
 		return {
-			guid : $._GenerateUUID(),
+			guid : $.generateUUID(),
 			clientStyle : clientStyleBuffer.toString(),
 			layOutWidth : varlayOutWidth
 		}
@@ -40,13 +40,13 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 		},
 		_GetComponentDom : function() {
 			var domId = this._GetComponentDomId();
-			var componentDom = $._GetFromLayuiObjectHashMap(domId);
+			var componentDom = $.getFromLayuiObjectHashMap(domId);
 			return componentDom;
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var fillArea = new FillAreaLR(domId);
-			$._AddToLayuiObjectHashMap(domId, fillArea);
+			$.addToLayuiObjectHashMap(domId, fillArea);
 
 			for ( var attrName in fillArea) {
 				if (this[attrName] != null)
@@ -63,12 +63,12 @@ Vue.component(_ConstantComponentMap._FillAreaLR, {
 				return;
 			var _FillArea = this._GetComponentDom();
 			var layoutDomId = this.$parent._GetComponentDomId();
-			var layout = $._GetFromLayuiObjectHashMap(layoutDomId);
+			var layout = $.getFromLayuiObjectHashMap(layoutDomId);
 			layout.addLayoutAreaItem(_FillArea);
 		},
 		// 添加生命FillArea对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		}
 	},
 })
@@ -142,7 +142,7 @@ function FillAreaLR(domId) {
 	this.addDragDom = function() {
 		var left = this.getDom().width() + this.getDom().position().left;
 		var dragId = this.domId + this.getDragDomExtendId();
-		var dragStyleStringBuffer = $._CreateStringBuffer("left", left);
+		var dragStyleStringBuffer = $.createStringBuffer("left", left);
 		var parentHeight = this.getParent().height(); 
 		dragStyleStringBuffer.append("height:"+parentHeight+"px;");
 		this.getDom().after('<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString() + '"  class="draggable ll-fill-area-left-right-center" ><div class="ll-drag-to-left"></div>');

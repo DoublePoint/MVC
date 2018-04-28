@@ -60,7 +60,7 @@ function _PageInfo() {
 function _JspParams() {
 	this._ParentDialogDiv=null;
 	this._YesFunctionName = null;
-	this._CancelFunctionName = null;
+	this.cancelFunctionName = null;
 	this.YesFunction = null;
 	this.CancelFunction = null;
 	this._TitleValue=null;
@@ -68,7 +68,7 @@ function _JspParams() {
 		this._YesFunctionName = funcName;
 	};
 	this.setCancelFunctionName = function(cancName) {
-		this._CancelFunctionName = cancName;
+		this.cancelFunctionName = cancName;
 	}
 	this.setParentDialogDiv = function(aParentDialogDiv){
 		this._ParentDialogDiv=aParentDialogDiv;
@@ -93,7 +93,7 @@ function _AjaxDataWrap(name) {
 	this.code = "";
 	this.msg = "";
 	this.dataList = [];
-	this.pageInfo = $._CreatePageInfo();
+	this.pageInfo = $.createPageInfo();
 	this.parse = function(jsonObjectDataWrap) {
 		if (jsonObjectDataWrap == null)
 			return;

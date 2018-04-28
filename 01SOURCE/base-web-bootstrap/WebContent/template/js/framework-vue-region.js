@@ -16,22 +16,22 @@ Vue
 						// if(varlayOutHeight==null)
 						// varlayOutHeight='100%';
 						//		
-						// var clientStyleBuffer=$._CreateStringBuffer();
+						// var clientStyleBuffer=$.createStringBuffer();
 						//		
 						// var
-						// heightBuffer=$._CreateStyleBuffer("height",varlayOutHeight);
+						// heightBuffer=$.createStyleBuffer("height",varlayOutHeight);
 						// clientStyleBuffer.append(heightBuffer.toString());
-						// var widthBuffer=$._CreateStyleBuffer("width",'100%');
+						// var widthBuffer=$.createStyleBuffer("width",'100%');
 						// clientStyleBuffer.append(widthBuffer.toString());
 						// if(this.backgroundcolor!=null){
 						// var
-						// bgBuffer=$._CreateStyleBuffer("background-color",this.backgroundcolor);
+						// bgBuffer=$.createStyleBuffer("background-color",this.backgroundcolor);
 						// clientStyleBuffer.append(bgBuffer.toString());
 						// }
 						//		
-						// var widthBuffer=$._CreateStringBuffer("width:")
+						// var widthBuffer=$.createStringBuffer("width:")
 						// return {
-						// guid : $._GenerateUUID(),
+						// guid : $.generateUUID(),
 						// clientStyle:clientStyleBuffer.toString(),
 						// layOutHeight: varlayOutHeight,
 						// layOutWidth : '100%'
@@ -52,7 +52,7 @@ Vue
 						},
 						_GetComponentDom : function() {
 							var domId = this._GetComponentDomId();
-							var componentDom = $._GetFromLayuiObjectHashMap(domId);
+							var componentDom = $.getFromLayuiObjectHashMap(domId);
 							return componentDom;
 						},
 						_RegisterComponent : function() {

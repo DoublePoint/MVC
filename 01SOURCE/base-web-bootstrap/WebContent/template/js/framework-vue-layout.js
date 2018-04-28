@@ -7,21 +7,21 @@ Vue.component(_ConstantComponentMap._FillLayOut, {
 		if(varlayOutHeight==null)
 			varlayOutHeight='100%';
 		
-		var clientStyleBuffer=$._CreateStringBuffer();
+		var clientStyleBuffer=$.createStringBuffer();
 		
-		var heightBuffer=$._CreateStyleBuffer("height",varlayOutHeight);
+		var heightBuffer=$.createStyleBuffer("height",varlayOutHeight);
 		clientStyleBuffer.append(heightBuffer.toString());
-		var widthBuffer=$._CreateStyleBuffer("width",'100%');
+		var widthBuffer=$.createStyleBuffer("width",'100%');
 		clientStyleBuffer.append(widthBuffer.toString());
 		clientStyleBuffer.append("position:relative;");
 		if(this.backgroundcolor!=null){
-			var bgBuffer=$._CreateStyleBuffer("background-color",this.backgroundcolor);
+			var bgBuffer=$.createStyleBuffer("background-color",this.backgroundcolor);
 			clientStyleBuffer.append(bgBuffer.toString());
 		}
 		
-		var widthBuffer=$._CreateStringBuffer("width:")
+		var widthBuffer=$.createStringBuffer("width:")
 		return {
-			guid : $._GenerateUUID(),
+			guid : $.generateUUID(),
 			clientStyle:clientStyleBuffer.toString(),
 			layOutHeight: varlayOutHeight,
 			layOutWidth : '100%'
@@ -43,13 +43,13 @@ Vue.component(_ConstantComponentMap._FillLayOut, {
 		},
 		_GetComponentDom :function(){
 			var domId = this._GetComponentDomId();
-			var componentDom = $._GetFromLayuiObjectHashMap(domId);
+			var componentDom = $.getFromLayuiObjectHashMap(domId);
 			return componentDom;
 		},
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var _FillLayout = new FillLayout(domId);
-			$._AddToLayuiObjectHashMap(domId, _FillLayout);
+			$.addToLayuiObjectHashMap(domId, _FillLayout);
 		},
 		_AddDragDom : function(){
 			var dom=this._GetComponentDom();
@@ -57,10 +57,10 @@ Vue.component(_ConstantComponentMap._FillLayOut, {
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_RegisterResize :function(){
-			$._RegisterResizeModel(this._GetComponentDom());
+			$.registerResizeModel(this._GetComponentDom());
 		}
 	},
 })

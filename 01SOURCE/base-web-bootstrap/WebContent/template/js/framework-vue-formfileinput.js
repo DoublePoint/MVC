@@ -37,6 +37,9 @@ function FormFileInput(domId) {
 		});
 		if(this.fileuploaded){
 			this.getDom().on("fileuploaded", function(event, data, previewId, index) {
+				if(!$.doResponse(data.response)){
+					return;
+				}
 				var res=new AjaxResponse(data.response);
 				var arr=new Array();
 				arr.push(res);

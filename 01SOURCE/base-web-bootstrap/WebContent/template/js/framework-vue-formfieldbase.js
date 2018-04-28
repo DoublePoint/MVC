@@ -39,18 +39,18 @@ function component(fieldType, fieldTemplate,props) {
 
 		data : function() {
 			// 设置label样式
-			var labelclientStyleBuffer = $._CreateStringBuffer();
+			var labelclientStyleBuffer = $.createStringBuffer();
 			for (clientStyleName in _ClientStyleArr) {
 				var stylekey = _ClientStyleArr[clientStyleName];
 				if (this[stylekey] != null) {
-					var labelalignbuffer = $._CreateStyleBuffer(_ClientStyleMap[stylekey], this[stylekey]);
+					var labelalignbuffer = $.createStyleBuffer(_ClientStyleMap[stylekey], this[stylekey]);
 					labelclientStyleBuffer.append(labelalignbuffer.toString());
 				}
 			}
 			return {
 				tree : "tree",
 				labelclientStyle : labelclientStyleBuffer.toString(),
-				guid : $._GenerateUUID(),
+				guid : $.generateUUID(),
 				inputButtonHiddenId:this.id+this.guid+"_hidden",
 				inputButtonButtonId:this.id+this.guid+"_button",
 			}
@@ -63,7 +63,7 @@ function component(fieldType, fieldTemplate,props) {
 			this._AddToAjaxForm();
 			var ajaxformDomId = this.$parent._GetComponentDomId();
 
-			var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
+			var ajaxform = $.getFromLayuiObjectHashMap(ajaxformDomId);
 			ajaxform.addLine();
 		},
 		mounted : function() {
@@ -88,7 +88,7 @@ function component(fieldType, fieldTemplate,props) {
 			_AddToAjaxForm : function() {
 				var formField = this._GetFormFieldX();
 				var ajaxformDomId = this.$parent._GetComponentDomId();
-				var ajaxform = $._GetFromLayuiObjectHashMap(ajaxformDomId);
+				var ajaxform = $.getFromLayuiObjectHashMap(ajaxformDomId);
 				ajaxform.addFormItem(formField);
 			},
 			_GetComponentDomId : function() {
@@ -97,7 +97,7 @@ function component(fieldType, fieldTemplate,props) {
 			},
 			_GetFormFieldX : function() {
 				var domId = this._GetComponentDomId();
-				var aFormFieldX = $._GetFromLayuiObjectHashMap(domId);
+				var aFormFieldX = $.getFromLayuiObjectHashMap(domId);
 				return aFormFieldX;
 			},
 			/* input-button */
@@ -107,7 +107,7 @@ function component(fieldType, fieldTemplate,props) {
 			},
 			// 添加生命ajaxDataGrid对象脚本
 			_MapComponent : function() {
-				$._OutputMapCompoment(this);
+				$.outputMapCompoment(this);
 			},
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
@@ -135,7 +135,7 @@ function component(fieldType, fieldTemplate,props) {
 				}
 				formField.setFieldType(fieldType);
 				formField.setParentAjaxFormId(this.$parent._GetComponentDomId());
-				$._AddToLayuiObjectHashMap(domId, formField);
+				$.addToLayuiObjectHashMap(domId, formField);
 			},
 
 			_InitFormField : function(){
@@ -268,7 +268,7 @@ function FormFieldBase(domId) {
 		return this.parentAjaxFormId;
 	}
 	this.getParentAjaxForm = function() {
-		return $._GetFromLayuiObjectHashMap(this.parentAjaxFormId);
+		return $.getFromLayuiObjectHashMap(this.parentAjaxFormId);
 	}
 	this.getRoot = function() {
 		return this.getInputDom().parents(".layui-inline");

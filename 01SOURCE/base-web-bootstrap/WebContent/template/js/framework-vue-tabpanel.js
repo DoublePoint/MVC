@@ -3,7 +3,7 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 	template : '<div style="height:100%;"><ul :id="id+guid" class="nav nav-tabs"></ul><div class="tab-content">' + '<slot></slot>' + '</div></div>',
 	data : function() {
 		return {
-			guid : $._GenerateUUID()
+			guid : $.generateUUID()
 		}
 	},
 	created : function() {// 注册到系统map
@@ -21,7 +21,7 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 		},
 		_GetComponentDom : function() {
 			var domId = this._GetComponentDomId();
-			var componentDom = $._GetFromLayuiObjectHashMap(domId);
+			var componentDom = $.getFromLayuiObjectHashMap(domId);
 			return componentDom;
 		},
 		_Init : function() {
@@ -34,13 +34,13 @@ Vue.component(_ConstantComponentMap._TabPanel, {
 				if (this[attrName] != null)
 					tabpanel[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, tabpanel);
+			$.addToLayuiObjectHashMap(domId, tabpanel);
 		},
 		_AddDragDom : function() {
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_RegisterResize : function() {
 		}

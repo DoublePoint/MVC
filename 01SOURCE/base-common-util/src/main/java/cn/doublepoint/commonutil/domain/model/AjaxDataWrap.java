@@ -17,23 +17,8 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable{
 	 *                                                                    
 	 */
 	private static final long serialVersionUID = 1L;
-	private String code="200";
-	private String msg;
 	private List<T> dataList;
 	private PageInfo pageInfo;
-	
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getMsg() {
-		return msg;
-	}
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
 	
 	public List<T> getDataList() {
 		return dataList;
@@ -56,11 +41,6 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable{
 	public AjaxDataWrap() {
 		super();
 		this.pageInfo=new PageInfo();
-	}
-	
-	public void setError(String errCode,String errMsg){
-		this.code=errCode;
-		this.msg=errMsg;
 	}
 	
 	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass){

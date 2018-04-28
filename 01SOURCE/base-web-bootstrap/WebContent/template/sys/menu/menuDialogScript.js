@@ -1,5 +1,5 @@
 function init(response) {
-	var type=$._GetRequestParam("type");
+	var type=$.getRequestParam("type");
 	if(type==null){
 		var treeNode = response.getDataList("clickNode");
 		var id = treeNode.id;
@@ -23,11 +23,11 @@ function onClickSave(){
 		url : $$pageContextPath + "/template/sys/menu/add",
 		data : JSON.stringify(data) + "",
 		success : function(data1) {
-			$._Alert('保存成功');
-			$._Close();
+			$.tips('保存成功');
+			$.close();
 		},
 		error : function(ecx) {
-			$._ShakeTips('保存失败');
+			$.shakeTips('保存失败');
 			return false;
 		}
 	});
@@ -35,7 +35,7 @@ function onClickSave(){
 
 function InputButtonClick() {
 	var ajaxDataWrap = null;
-	$._OpenDialog({
+	$.openDialog({
 		type : 2,
 		title : "添加菜单",
 		width : 360,
@@ -53,10 +53,10 @@ function InputButtonClick() {
 }
 
 function clicktest(){
-	$._AddNotSaveIcon();
+	$.addNotSaveIcon();
 	return ;
 }
 function clickDelete(){
-	$._RemoveNotSaveIcon();
+	$.removeNotSaveIcon();
 	return ;
 }

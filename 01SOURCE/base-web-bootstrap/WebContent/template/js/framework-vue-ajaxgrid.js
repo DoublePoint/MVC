@@ -108,7 +108,7 @@ Vue.component(_ConstantComponentMap._AjaxGrid, {
 	template : '<div style="height:100%;" class="table-responsive"><table class="bootstrapTable"  :id="gridId" ><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
 
 	data : function() {
-		var gridId=this.id+$._GenerateUUID();
+		var gridId=this.id+$.generateUUID();
 		var pagerId=this.id+"laypageid";
 		return {
 			gridId : gridId,
@@ -131,7 +131,7 @@ Vue.component(_ConstantComponentMap._AjaxGrid, {
 			return this.gridId;
 		},
 		_GetComponentDom : function(){
-			var grid = $._GetFromLayuiObjectHashMap(this._GetComponentDomId());
+			var grid = $.getFromLayuiObjectHashMap(this._GetComponentDomId());
 			return grid;
 		},
 		_RegisterComponent : function() {
@@ -141,14 +141,14 @@ Vue.component(_ConstantComponentMap._AjaxGrid, {
 				if (this[attrName] != null)
 					ajaxDataGrid[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, ajaxDataGrid);
+			$.addToLayuiObjectHashMap(domId, ajaxDataGrid);
 		},
 		_RegisterResizeMap: function(){
-			$._RegisterResizeModel(this._GetComponentDom());
+			$.registerResizeModel(this._GetComponentDom());
 		},
 		// 添加声明ajaxDataGrid对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_InitAjaxDataGridData : function() {
 			this._GetComponentDom().init();

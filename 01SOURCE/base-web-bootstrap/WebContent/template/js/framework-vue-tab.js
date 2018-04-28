@@ -9,7 +9,7 @@ Vue.component(_ConstantComponentMap._Tab, {
 		var clientStyleBuffer=this._InitClientStyleBuffer();
 		return {
 			aTitle:aTitle,
-			guid:$._GenerateUUID(),
+			guid:$.generateUUID(),
 			clientClassBuffer : clientClassBuffer.toString(),
 			clientStyle:clientStyleBuffer.toString()
 		}
@@ -32,7 +32,7 @@ Vue.component(_ConstantComponentMap._Tab, {
 		},
 		_GetComponentDom :function(){
 			var domId = this._GetComponentDomId();
-			var componentDom = $._GetFromLayuiObjectHashMap(domId);
+			var componentDom = $.getFromLayuiObjectHashMap(domId);
 			return componentDom;
 		},
 		_RegisterComponent : function() {
@@ -42,23 +42,23 @@ Vue.component(_ConstantComponentMap._Tab, {
 				if (this[attrName] != null)
 					tab[attrName] = this[attrName];
 			}
-			$._AddToLayuiObjectHashMap(domId, tab);
+			$.addToLayuiObjectHashMap(domId, tab);
 		},
 		_AddDragDom : function(){
 		},
 		// 添加生命FillLayout对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_RegisterResize :function(){
 		},
 		_AddToTabPanel : function(){
 			var parentDomId = this.$parent._GetComponentDomId();
-			var tablePanel = $._GetFromLayuiObjectHashMap(parentDomId);
+			var tablePanel = $.getFromLayuiObjectHashMap(parentDomId);
 			tablePanel.addTab(this._GetComponentDom());
 		},
 		_InitClientClassBuffer : function(){
-			var buf=$._CreateStringBuffer();
+			var buf=$.createStringBuffer();
 			buf.append(" tab-pane fade in ");
 			if(this.active=="true"){
 				buf.append(" active ");
@@ -66,7 +66,7 @@ Vue.component(_ConstantComponentMap._Tab, {
 			return buf;
 		},
 		_InitClientStyleBuffer : function(){
-			var buf=$._CreateStringBuffer();
+			var buf=$.createStringBuffer();
 			buf.append(" height:100%;");
 			return buf;
 		}

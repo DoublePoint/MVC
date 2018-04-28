@@ -7,7 +7,7 @@ Vue.component(_ConstantComponentMap._AjaxFormLine, {
 
 	data : function() {
 		return {
-			guid : $._GenerateUUID()
+			guid : $.generateUUID()
 		}
 	},
 	mounted:function(){
@@ -21,16 +21,16 @@ Vue.component(_ConstantComponentMap._AjaxFormLine, {
 		_RegisterComponent:function(){
 //			var domId=this._GetComponentDomId();
 //			var ajaxForm = new AjaxForm(domId);
-//			$._AddToLayuiObjectHashMap(domId, ajaxForm);
+//			$.addToLayuiObjectHashMap(domId, ajaxForm);
 			
 		},
 		//添加生命ajaxDataGrid对象脚本
 		_MapComponent:function(){
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 //			var documentWriteHtml = "";
 //			var domId = this._GetComponentDomId();
 //			var $script = $('<script type="text/javascript"></script>');
-//			$script.append('var ' + this.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
+//			$script.append('var ' + this.id + '=$.getFromLayuiObjectHashMap("' + domId + '");');
 //			documentWriteHtml = $script.prop("outerHTML");
 //			$("body").append(documentWriteHtml);
 		},

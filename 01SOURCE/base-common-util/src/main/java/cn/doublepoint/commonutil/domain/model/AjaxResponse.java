@@ -15,6 +15,8 @@ import java.util.Map;
 public class AjaxResponse {
 	
 	private Map<String, Object> parameterMap;
+	private String code;//状态编码
+	private String errorMessage;
 	
 	public AjaxResponse(){
 		if(parameterMap==null)
@@ -39,6 +41,22 @@ public class AjaxResponse {
 
 	public void setParameterMap(Map<String, Object> parameterMap) {
 		this.parameterMap = parameterMap;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 	
 	

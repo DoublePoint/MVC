@@ -43,11 +43,11 @@ function cliLogin() {
 		url : $$pageContextPath + "/template/sys/menu/add",
 		data : "username="+txtUser+"&password="+txtPwd,
 		success : function(data1) {
-			$._Alert('保存成功');
-			$._Close();
+			$.tips('保存成功');
+			$.close();
 		},
 		error : function(ecx) {
-			$._ShakeTips('保存失败');
+			$.shakeTips('保存失败');
 			return false;
 		}
 	});
@@ -95,11 +95,11 @@ $("#dynamicLogon").click(function() {
 		url : $$pageContextPath + "/template/sys/menu/add",
 		data : JSON.stringify(data.field) + "",
 		success : function(data1) {
-			$._Alert('保存成功');
-			$._Close();
+			$.tips('保存成功');
+			$.close();
 		},
 		error : function(ecx) {
-			$._ShakeTips('保存失败');
+			$.shakeTips('保存失败');
 			return false;
 		}
 	});

@@ -10,14 +10,28 @@ var _RegisterModel=new RegisterModel();
 	};
 
 	$.extend({
-		_AddToLayuiObjectHashMap : function(id, obj) {
+		addToLayuiObjectHashMap : function(id, obj) {
 			if (_LayuiObjectHashMap == null)
 				_LayuiObjectHashMap = new $._HashTable();
 			if (!_LayuiObjectHashMap.containsKey(id)) {
 				_LayuiObjectHashMap.add(id, obj);
 			}
 		},
-		_GetFromLayuiObjectHashMap : function(id) {
+		doResponse : function(responseData){
+			try{
+				if(responseData.errorMessage!=null&&responseData.errorMessage!=""){
+					$.alert(responseData.errorMessage);
+					return false;
+				}
+				return true;
+			}
+			catch(e){
+				$.alert("frameworl-jquery.js-22");
+				return false;
+			}
+			
+		},
+		getFromLayuiObjectHashMap : function(id) {
 			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
 		},
 		// 根据函数名进行方法调用
@@ -56,7 +70,7 @@ var _RegisterModel=new RegisterModel();
 			return eval(invokeString);
 			// param==null?func.apply(this):func.apply(this,param);
 		},
-		_GenerateUUID : function() {
+		generateUUID : function() {
 			var d = new Date().getTime();
 			var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 				var r = (d + Math.random() * 16) % 16 | 0;
@@ -66,25 +80,22 @@ var _RegisterModel=new RegisterModel();
 			return uuid;
 		},
 
-		_RegisterResizeModel : function(model) {
+		registerResizeModel : function(model) {
 			_RegisterModel._ResizeModel.push(model);
 		},
-		_RegisterComponentCompleteListenerModel : function(model) {
+		registerComponentCompleteListenerModel : function(model) {
 			_RegisterModel._ComponentCompleteListenerModel.push(model);
 		},
-		_RegisterDialogSuccessModel : function(model) {
+		registerDialogSuccessModel : function(model) {
 			_RegisterModel._DialogSuccessModel.push(model);
 		},
-		_GetRegisteredComponentCompleteListenerModel : function() {
-			return _RegisterModel._ComponentCompleteListenerModel;
-		},
-		_GetRegisteredDialogSuccessModel : function() {
+		getRegisteredDialogSuccessModel : function() {
 			return _RegisterModel._DialogSuccessModel;
 		},
-		_GetRegisteredResizeModel : function() {
+		getRegisteredResizeModel : function() {
 			return _RegisterModel._ResizeModel;
 		},
-		_OpenDialog : function(obj) {
+		openDialog : function(obj) {
 			/* title */
 			var title = obj.title;
 			if (title == null || title == "")
@@ -109,7 +120,7 @@ var _RegisterModel=new RegisterModel();
 
 			// 重新封装success方法
 			obj.success = function(layero, index) {
-				var jspParams = $._CreateJspParams();
+				var jspParams = $.createJspParams();
 				jspParams.setParentDialogDiv(layero);
 				if (obj.yes != null) {
 					if (typeof obj.yes === "function")
@@ -145,16 +156,16 @@ var _RegisterModel=new RegisterModel();
 
 			parent.$layer.open(obj);
 		},
-		_Close : function(data) {
+		close : function(data) {
 			// 弹出窗口的确定的点击
 			var index = parent.$layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
-			parent.$._CloseDialog(index, data);
+			parent.$.closeDialog(index, data);
 		},
-		_Cancel : function() {
+		cancel : function() {
 			// 弹出窗口的取消点击+关闭按钮的点击
 		},
 		// 父页面使用
-		_CloseDialog : function(index, data) {
+		closeDialog : function(index, data) {
 			$layer.close(index); // 再执行关闭
 
 			// _JspParams 页面默认参数 每个页面都有
@@ -165,14 +176,17 @@ var _RegisterModel=new RegisterModel();
 				$._Eval(yesFunction, data);
 			}
 		},
-		_Alert : function(msg, time) {
+		alert:function(msg){
+			parent.$layer.alert(msg);
+		},
+		tips : function(msg, time) {
 			if (time == null)
 				time = _ConstantDialog._DEFAULT_SHOW_TIME;
 			parent.$layer.msg(msg, {
 				time : time
 			});
 		},
-		_Confirm : function(msg, yes, cancel) {
+		confirm : function(msg, yes, cancel) {
 			var yesF = yes;
 			var cancelF = cancel;
 			parent.$layer.confirm(msg, {
@@ -186,7 +200,7 @@ var _RegisterModel=new RegisterModel();
 					cancelF.apply();
 			});
 		},
-		_ShakeTips : function(msg, time) {
+		shakeTips : function(msg, time) {
 			if (time == null)
 				time = _ConstantDialog._DEFAULT_SHOW_TIME;
 			parent.layer.msg(msg, {
@@ -196,7 +210,7 @@ var _RegisterModel=new RegisterModel();
 				// 关闭后的操作
 			});
 		},
-		_GetRequestParam : function(paramName) {
+		getRequestParam : function(paramName) {
 			if (paramName == null)
 				return null;
 			var url = location.search;
@@ -213,14 +227,14 @@ var _RegisterModel=new RegisterModel();
 			}
 			return null;
 		},
-		_AddNotSaveIcon : function() {
+		addNotSaveIcon : function() {
 			if (parent == null)
 				return;
 			if (parent._jspParams == null)
 				return;
 			parent._jspParams.addNotSaveIcon();
 		},
-		_RemoveNotSaveIcon : function() {
+		removeNotSaveIcon : function() {
 			if (parent == null)
 				return;
 			if (parent._jspParams == null)
@@ -228,7 +242,7 @@ var _RegisterModel=new RegisterModel();
 			parent._jspParams.removeNotSaveIcon();
 		},
 		// 是否是int类型的数值
-		_IsInt : function(str) {
+		isInt : function(str) {
 			var r = /^-?\d+$/;
 			return r.test(str);
 		},
@@ -321,14 +335,14 @@ var _RegisterModel=new RegisterModel();
 
 			throw new Error("Unable to copy obj! Its type isn't supported.");
 		},
-		_CreatePageInfo : function() {
+		createPageInfo : function() {
 			var pageinfo = new _PageInfo();
 			return pageinfo;
 		},
-		_CreateJspParams : function() {
+		createJspParams : function() {
 			return new _JspParams();
 		},
-		_ParseTreeNodeToCd : function(treeNode) {
+		parseTreeNodeToCd : function(treeNode) {
 			var arr = new Array();
 			var obj = {};
 			obj.cdbs = treeNode.cdbs;
@@ -340,7 +354,7 @@ var _RegisterModel=new RegisterModel();
 			arr.push(obj);
 			return arr;
 		},
-		_FormatToDate : function(datetime) {
+		formatToDate : function(datetime) {
 			return null;
 			var year = datetime.year;
 			var monthValue = datetime.monthValue;
@@ -360,7 +374,7 @@ var _RegisterModel=new RegisterModel();
 				second = "0" + second;
 			return "<span>" + year + "-" + monthValue + "-" + dayOfMonth + " " + hour + ":" + minute + ":" + second + "</span>"
 		},
-		_CreateStringBuffer : function(str) {
+		createStringBuffer : function(str) {
 			function StringBuffer(st) {
 				this.__strings__ = new Array();
 				if (st != null)
@@ -375,22 +389,22 @@ var _RegisterModel=new RegisterModel();
 			}
 			return new StringBuffer(str);
 		},
-		_CreateStyleBuffer : function(akey, avalue) {
-			var styleBuffer = $._CreateStringBuffer(akey);
+		createStyleBuffer : function(akey, avalue) {
+			var styleBuffer = $.createStringBuffer(akey);
 			styleBuffer.append(":").append(avalue).append(";");
 			return styleBuffer
 		},
-		_OutputMapCompoment : function(aComponent) {
+		outputMapCompoment : function(aComponent) {
 			if (aComponent.id == null)
 				return;
 			var documentWriteHtml = "";
 			var domId = aComponent._GetComponentDomId();
 			var $script = $('<script type="text/javascript"></script>');
-			$script.append('var ' + aComponent.id + '=$._GetFromLayuiObjectHashMap("' + domId + '");');
+			$script.append('var ' + aComponent.id + '=$.getFromLayuiObjectHashMap("' + domId + '");');
 			documentWriteHtml = $script.prop("outerHTML");
 			$("body").append(documentWriteHtml);
 		},
-		_RemoveArrayValue : function(arr, val) {
+		removeArrayValue : function(arr, val) {
 			for (var i = 0; i < arr.length; i++) {
 				if (arr[i] == val) {
 					arr.splice(i, 1);
@@ -398,6 +412,36 @@ var _RegisterModel=new RegisterModel();
 				}
 			}
 			return arr;
+		},
+		//重新封装Ajax清秀
+		request:function(settings){
+			if(settings==null)
+				return;
+			
+			//封装操作成功函数
+			var successFunction=settings.success;
+			if(success!=null){
+				setting.success=function(responseData){
+					var res=new AjaxResponse(responseData.response);
+					var arr=new Array();
+					arr.push(res);
+					$.eval(successFunction,arr);
+				}
+			};
+			
+			//封装操作失败函数
+			var errorFunction=settings.error;
+			if(success!=null){
+				setting.success=function(responseData){
+					var res=new AjaxResponse(responseData.response);
+					var arr=new Array();
+					arr.push(res);
+					$.eval(successFunction,arr);
+				}
+			}
+			else{
+				$.tips(responseData);
+			}
 		}
 	});
 

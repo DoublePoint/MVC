@@ -20,7 +20,7 @@ function retrieve() {
 		data : JSON.stringify(ajaxDataWrap),
 		success : function(ajaxDataWrap) {
 			if(ajaxDataWrap==null||ajaxDataWrap.dataList==null||ajaxDataWrap.dataList.length==0)
-				$._ShakeTips("未查询到任何数据!",2000);
+				$.shakeTips("未查询到任何数据!",2000);
 			lltestdatagrid.setDataWrap(ajaxDataWrap);
 		}
 	});
@@ -31,14 +31,14 @@ function retrieveTree() {
 function onClickAdd() {
 	var nodes = treeDemo.getSelectedNodes();
 	if (nodes.length == 0) {
-		$._ShakeTips("请选择父节点");
+		$.shakeTips("请选择父节点");
 		return;
 	} else {
 		cdbs = nodes[0].id;
 	}
 	var ajaxDataWrap =  $._CreateAjaxDataWrap();
 	ajaxDataWrap.setDataList(nodes[0]);
-	$._OpenDialog({
+	$.openDialog({
 		type : 2,
 		title : "添加菜单",
 		width : 630,
@@ -66,7 +66,7 @@ function onClickEdit(){
 }
 
 function onClickDelete() {
-	$._Confirm('确定要删除吗？', function() {
+	$.confirm('确定要删除吗？', function() {
 		var checkedDatas = lltestdatagrid.getCheckedRecords();
 		$.ajax({
 			url : $$pageContextPath + "/template/sys/menu/delete",
@@ -76,12 +76,12 @@ function onClickDelete() {
 			data : JSON.stringify(checkedDatas),
 			async : false,
 			success : function(data) {
-				$._Alert('删除成功');
+				$.tips('删除成功');
 				retrieve();
 				retrieveTree();
 			},
 			error : function() {
-				$._ShakeTips('删除失败');
+				$.shakeTips('删除失败');
 				return false;
 			}
 		});
@@ -101,7 +101,7 @@ function rowClickTest(data,a,b,c) {
 	arr.push(data);
 	var ajaxDataWrap =  $._CreateAjaxDataWrap();
 	ajaxDataWrap.setDataList(arr);
-	$._OpenDialog({
+	$.openDialog({
 		type : 2,
 		title : "修改菜单",
 		width : 630,
@@ -124,7 +124,7 @@ function dbclickgrid(para1,data,index){
 	var dataArr=new Array();
 	dataArr.push(data);
 	ajaxDataWrap.setDataList(dataArr);
-	$._OpenDialog({
+	$.openDialog({
 		type : 2,
 		title : "添加菜单",
 		width : 630,

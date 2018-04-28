@@ -5,7 +5,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 
 	data : function() {
 		return {
-			guid : $._GenerateUUID()
+			guid : $.generateUUID()
 		}
 	},
 	mounted : function() {
@@ -25,11 +25,11 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var _AjaxMenu = new AjaxMenu(domId);
-			$._AddToLayuiObjectHashMap(domId, _AjaxMenu);
+			$.addToLayuiObjectHashMap(domId, _AjaxMenu);
 		},
 		// 添加生命AjaxMenu对象脚本
 		_MapComponent : function() {
-			$._OutputMapCompoment(this);
+			$.outputMapCompoment(this);
 		},
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
@@ -66,7 +66,7 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 				data : JSON.stringify(cd),
 				async : false,
 				success : function(data) {
-					var _AjaxMenu = $._GetFromLayuiObjectHashMap(domId);
+					var _AjaxMenu = $.getFromLayuiObjectHashMap(domId);
 					_AjaxMenu.setData(data);
 				}
 			});
