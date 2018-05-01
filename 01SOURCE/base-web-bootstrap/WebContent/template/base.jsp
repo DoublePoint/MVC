@@ -87,3 +87,17 @@
 <script src="${pageContext.request.contextPath}/template/btts_9_sp/assets/js/jquery.metisMenu.js"></script>
 
 <link href="${pageContext.request.contextPath}/template/plugins/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+<script type="text/javascript">
+$(document).ready(function(){
+	try{
+		var responseData=${LLAjaxResponse};
+		var LLAjaxResponse= new AjaxResponse(responseData);
+		if(init!=null){
+			init(LLAjaxResponse);
+		}
+	}
+	catch(e){
+		alert(ss);
+	}
+});
+</script>

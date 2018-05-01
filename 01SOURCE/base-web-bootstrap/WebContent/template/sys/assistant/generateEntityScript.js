@@ -1,4 +1,5 @@
 function init() {
+	
 	$("#myfile").fileinput({
 		// 上传的地址
 		uploadUrl : $$pageContextPath+"/template/sys/uploadfile",

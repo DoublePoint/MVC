@@ -1,11 +1,12 @@
 var tempFile="";
-function init() {
-	
+function init(response) {
+	var testParamn=response.get("test111");
 }
-
+var oomFile="";
 function fileuploaded(response){
 	var ajaxDataWrap=response.get("ajaxDataWrap");
 	gridResource.setDataWrap(ajaxDataWrap);
+	
 }
 
 var checkedRecords;

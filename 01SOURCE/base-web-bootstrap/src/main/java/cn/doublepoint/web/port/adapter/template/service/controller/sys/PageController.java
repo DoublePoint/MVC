@@ -9,14 +9,19 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 
 @Controller
-public class PageController {
+public class PageController extends BaseRequestController{
 	// 索引页
 	@RequestMapping(value = "/template/sys/index/{actionname}")
 	public String hello(@PathVariable String actionname) {
@@ -60,6 +65,8 @@ public class PageController {
 	}
 	@RequestMapping("/template/sys/assistant/{actionname}")
 	public String assistant(@PathVariable String actionname) {
+		List<MySQLTables> list = DataBaseMetaDataUtil.getTables();
+		responseData.setAjaxParameter("test111", list);
 		return "/template/sys/assistant/" + actionname;
 	}
 	@RequestMapping("/template/sys/config/{actionname}")

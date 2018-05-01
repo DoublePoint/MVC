@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+	id="WebApp_ID" version="3.0">
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
@@ -28,6 +31,15 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	 <filter>  
+        <filter-name>dataDecapsulateFilter</filter-name>  
+        <filter-class>cn.doublepoint.commonutil.filter.DataDecapsulateFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>dataDecapsulateFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
 
 	<servlet-mapping>
 		<servlet-name>dispatch</servlet-name>
@@ -59,6 +71,5 @@
 			<max-request-size>4194304</max-request-size>
 		</multipart-config>
 	</servlet>
-
 
 </web-app>

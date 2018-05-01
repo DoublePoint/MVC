@@ -11,14 +11,9 @@ package cn.doublepoint.commonutil.port.adapter.controller.handle;
 
 import org.springframework.stereotype.Controller;
 
-import cn.doublepoint.commonutil.domain.model.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
-public class BaseHandleController implements BaseController{
-	public AjaxResponse responseData;
+public class BaseHandleController extends BaseController{
 	
-	public BaseHandleController(){
-		responseData=new AjaxResponse();
-	}
 }

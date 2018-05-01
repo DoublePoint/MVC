@@ -38,8 +38,14 @@ var _RegisterModel=new RegisterModel();
 		_Eval : function(func, paramArr) {
 			if (func == null)
 				return;
-
-			var invokeString = "" + func;
+			var invokeString="";
+			if(typeof func === "function"){
+				invokeString = "" + func.name;
+			}
+			else{
+				invokeString = "" + func;
+			}
+				
 			// 1、如果是functionName()类型的 则转换成
 			if (invokeString.endWith("()")) {
 				invokeString = invokeString.substr(0, invokeString.length - 2)
@@ -68,7 +74,7 @@ var _RegisterModel=new RegisterModel();
 			}
 			invokeString += ")";
 			return eval(invokeString);
-			// param==null?func.apply(this):func.apply(this,param);
+ 			// param==null?func.apply(this):func.apply(this,param);
 		},
 		generateUUID : function() {
 			var d = new Date().getTime();
@@ -413,35 +419,38 @@ var _RegisterModel=new RegisterModel();
 			}
 			return arr;
 		},
-		//重新封装Ajax清秀
+		//重新封装Ajax请求
 		request:function(settings){
 			if(settings==null)
 				return;
 			
 			//封装操作成功函数
 			var successFunction=settings.success;
-			if(success!=null){
-				setting.success=function(responseData){
+			if(successFunction!=null){
+				settings.success=function(responseData){
 					var res=new AjaxResponse(responseData.response);
-					var arr=new Array();
-					arr.push(res);
-					$.eval(successFunction,arr);
+					successFunction(res);
 				}
 			};
 			
 			//封装操作失败函数
 			var errorFunction=settings.error;
-			if(success!=null){
-				setting.success=function(responseData){
+			if(errorFunction!=null){
+				settings.error=function(responseData){
 					var res=new AjaxResponse(responseData.response);
-					var arr=new Array();
-					arr.push(res);
-					$.eval(successFunction,arr);
+					errorFunction(res);
 				}
 			}
-			else{
-				$.tips(responseData);
-			}
+			
+			var data=settings.data;
+			var params=settings.params;
+			var dataObj={};
+			dataObj.ajaxDataWrapList=data;
+			params={"aaa":123}
+			dataObj.paramList=params;
+			settings.data=dataObj;
+			
+			$.ajax(settings);
 		}
 	});
 

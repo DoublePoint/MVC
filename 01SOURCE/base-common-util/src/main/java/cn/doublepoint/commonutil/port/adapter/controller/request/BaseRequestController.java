@@ -11,6 +11,6 @@ package cn.doublepoint.commonutil.port.adapter.controller.request;
 
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
-public class BaseRequestController implements BaseController {
+public class BaseRequestController extends BaseController {
 
 }

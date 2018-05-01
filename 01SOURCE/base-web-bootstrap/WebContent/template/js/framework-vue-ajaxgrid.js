@@ -47,7 +47,7 @@ var gridProps=["classes"
                 ,"idField"
                 ,"uniqueId"
                 ,"cardView"
-                ,"detailView"
+                ,"detailview"
                 ,"detailFormatter"
                 ,"searchAlign"
                 ,"buttonsAlign"
@@ -93,7 +93,7 @@ var gridProps=["classes"
                 ,"onPreBody"
                 ,"onPostBody"
                 ,"onPostHeader"
-                ,"onExpandRow"
+                ,"onexpandrow"
                 ,"onCollapseRow"
                 ,"onRefreshOptions"
                 ,"onRefresh"
@@ -218,7 +218,7 @@ function AjaxGrid(domId) {
 	this.idField="rowId";
 	this.uniqueId="rowId";
 	this.cardView;
-	this.detailView;
+	this.detailview=null;
 	this.detailFormatter;
 	this.searchAlign;
 	this.buttonsAlign;
@@ -265,7 +265,7 @@ function AjaxGrid(domId) {
 	this.onPreBody;
 	this.onPostBody;
 	this.onPostHeader;
-	this.onExpandRow;
+	this.onexpandrow;
 	this.onCollapseRow;
 	this.onRefreshOptions;
 	this.onRefresh;
@@ -332,14 +332,14 @@ function AjaxGrid(domId) {
 			return;
 		}
 		var grid=this;
-		$.ajax({
+		$.request({
 			url : $$pageContextPath + this.datasource,
 			type : "POST",
 			contentType : 'application/json;charset=UTF-8',
 			dataType : "json",
 			data : JSON.stringify({}),
 			async : false,
-			success : function(ajaxDataWrap) {
+			success : function(data) {
 				grid.datawrap.parse(ajaxDataWrap);
 				grid.initBootstrapSetting(grid);
 				grid.setPager(grid.datawrap.getPageInfo());
@@ -433,6 +433,9 @@ function AjaxGrid(domId) {
 				arr.push($element);
 				arr.push(field);
 				$._Eval(ajaxgrid.getRowClick(), arr);
+			},
+			onExpandRow : function(){
+				
 			}
 		});
 		

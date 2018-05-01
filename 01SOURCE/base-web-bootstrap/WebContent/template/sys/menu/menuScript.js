@@ -11,7 +11,7 @@ function retrieve() {
 	array.push(formData);
 	ajaxDataWrap.setDataList(array);
 	// obj={"code":"","msg":"","dataList":[{"cdbs":"398121904285679616","cdmc":"菜单管理","sjcdbs":"","cdcj":1,"cdpx":1,"cdlj":"","gxsj":null,"cjsj":{"monthValue":1,"month":"JANUARY","year":2018,"dayOfMonth":3,"dayOfWeek":"WEDNESDAY","dayOfYear":3,"hour":14,"minute":34,"nano":758000000,"second":18,"chronology":{"id":"ISO","calendarType":"iso8601"}}}],"pageInfo":{"currentPageNum":1,"currentPageCount":1,"totalElementCount":3,"totalPageCount":3,"pageSize":1,"sort":null}};
-	$.ajax({
+	$.request({
 		url : $$pageContextPath + "/template/sys/menu/datalist",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
@@ -68,7 +68,7 @@ function onClickEdit(){
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var checkedDatas = lltestdatagrid.getCheckedRecords();
-		$.ajax({
+		$.request({
 			url : $$pageContextPath + "/template/sys/menu/delete",
 			type : "POST",
 			contentType : 'application/json;charset=UTF-8',

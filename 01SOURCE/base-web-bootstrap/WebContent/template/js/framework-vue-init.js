@@ -8,7 +8,7 @@ $(document).ready(function() {
 	_InitExplorerResizeListener();
 
 	/*-----------根据参数判断是否执行init方法---------------*/
-	_InvokeTheInitFunction();
+//	_InvokeTheInitFunction();
 
 	/*-----------添加事件监听---------------*/
 	_InitFormFieldListener();
@@ -49,12 +49,12 @@ function _InitExplorerResizeListener() {
 	}).resize();
 }
 /*-----------根据参数判断是否执行init方法---------------*/
-function _InvokeTheInitFunction() {
-	// 当参数为N时才不执行，否则执行
-	if ($.getRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION)==null||!($.getRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
-		init();
-	}
-}
+//function _InvokeTheInitFunction() {
+//	// 当参数为N时才不执行，否则执行
+//	if ($.getRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION)==null||!($.getRequestParam(_ConstantPageDefaultParam._IS_DO_INIT_FUNTION) == ConstantState._YES_NO_STATE_N)) {
+//		init();
+//	}
+//}
 /*-----------添加FormField事件监听---------------*/
 function _InitFormFieldListener() {
 	$form.verify({
