@@ -92,7 +92,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />	
-			<bean class="cn.doublepoint.commonutil.interceptor.DataEncapsulateIntecerptor"></bean>
+			<bean class="cn.doublepoint.commonutil.interceptor.DataEncapsulateAndDecapsulateIntecerptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	  <!-- 拦截器 ↑↑↑↑↑ -->

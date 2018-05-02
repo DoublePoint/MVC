@@ -4,11 +4,13 @@
 * 创   建   时   间 ： 2018年5月1日
 * 
 * 类   说   明 ：
-* 
+* 1：格式化请求JSON，默认将数据封装成统一的格式，并且给即将请求的Handler默认初始化的值
+* 2：格式化相应JSON，默认将数据封装成统一的格式
 * 修   改   人：          修   改   日   期：
 */
 package cn.doublepoint.commonutil.interceptor;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.stream.Stream;
@@ -29,14 +31,13 @@ import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
-public class DataEncapsulateIntecerptor implements HandlerInterceptor {
+public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		//解封装所有参数
 		decapsulateResponseData(request, response, handler);
-		System.out.println("preHandle run!");
 		return true;
 	}
 
@@ -45,14 +46,11 @@ public class DataEncapsulateIntecerptor implements HandlerInterceptor {
 			ModelAndView modelAndView) throws Exception {
 		// 封装返回结果
 		encapsulateResponseData(request, response, handler, modelAndView);
-		System.out.println("postHandle run!");
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-
-		System.out.println("afterCompletion run!");
 	}
 
 	/**
@@ -114,29 +112,52 @@ public class DataEncapsulateIntecerptor implements HandlerInterceptor {
 				return;
 			}
 			if (bean instanceof BaseController) {
-				BaseController requestController = (BaseController) bean;
-				AjaxResponse responseData = requestController.getResponseData();
 				if (request.getHeader("x-requested-with") != null
-						&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) { // 如果是ajax请求响应头会有x-requested-with
-					PrintWriter writer = response.getWriter();
-					response.setContentType("application/json;charset=UTF-8");
-					response.setCharacterEncoding("UTF-8");
-					writer.println(JSON.toJSONString(responseData));
-					writer.flush();
-					writer.close();
+						&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) { 
+					encapsulateAjaxResponseData(request, response, handler,bean);
 				} else {
-					if (responseData == null)
-						return;
-					if (modelAndView == null)
-						modelAndView = new ModelAndView();
-					modelAndView.addObject("LLAjaxResponse", JSON.toJSONString(responseData));
-
+					encapsulatePageRequestResponseData(request, response, handler,bean,modelAndView);
 				}
 			}
-			// 如果是ajax请求
-
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	/**
+	 * 如果是ajax请求响应头会有x-requested-with
+	 * @param request
+	 * @param response
+	 * @param handler
+	 * @param bean
+	 * @throws IOException
+	 */
+	private void encapsulateAjaxResponseData(HttpServletRequest request, HttpServletResponse response, Object handler,Object bean) throws IOException{
+		BaseController requestController = (BaseController) bean;
+		AjaxResponse responseData = requestController.getResponseData();
+		PrintWriter writer = response.getWriter();
+		response.setContentType("application/json;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		writer.println(JSON.toJSONString(responseData));
+		writer.flush();
+		writer.close();
+	}
+	
+	/**
+	 * 封装页面请求时的数据
+	 * @param request
+	 * @param response
+	 * @param handler
+	 * @param bean
+	 * @param modelAndView
+	 */
+	private void encapsulatePageRequestResponseData(HttpServletRequest request, HttpServletResponse response, Object handler,Object bean,ModelAndView modelAndView){
+		BaseController requestController = (BaseController) bean;
+		AjaxResponse responseData = requestController.getResponseData();
+		if (responseData == null)
+			return;
+		if (modelAndView == null)
+			modelAndView = new ModelAndView();
+		modelAndView.addObject("LLAjaxResponse", JSON.toJSONString(responseData));
 	}
 }
