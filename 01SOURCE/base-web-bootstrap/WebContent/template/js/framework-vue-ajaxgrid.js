@@ -332,14 +332,14 @@ function AjaxGrid(domId) {
 			return;
 		}
 		var grid=this;
-		$.request({
+		$.ajax({
 			url : $$pageContextPath + this.datasource,
 			type : "POST",
 			contentType : 'application/json;charset=UTF-8',
 			dataType : "json",
 			data : JSON.stringify({}),
 			async : false,
-			success : function(data) {
+			success : function(ajaxDataWrap) {
 				grid.datawrap.parse(ajaxDataWrap);
 				grid.initBootstrapSetting(grid);
 				grid.setPager(grid.datawrap.getPageInfo());

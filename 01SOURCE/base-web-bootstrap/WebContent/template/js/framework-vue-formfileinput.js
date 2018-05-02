@@ -19,6 +19,18 @@ function FormFileInput(domId) {
 		this.getDom().fileinput({
 			// 上传的地址
 			uploadUrl : $$pageContextPath+"/template/sys/getAllFileTable",
+			uploadExtraData : function(previewId, index) {
+				// 注意这里，传参是json格式,后台直接使用对象属性接收，比如employeeCode，我在RatingQuery
+				// 里面直接定义了employeeCode属性，然后最重要的也是
+				// 最容易忽略的，传递多个参数时，不要忘记里面大括号{}后面的分号，这里可以直接return {a:b};
+				// 或者{a:b}都可以，但必须要有大括号包裹
+				var data = {
+					employeeCode : 1,
+					result_id : 2,
+					month : 3
+				};
+				return data;
+			},
 			uploadAsync : true, // 默认异步上传
 			showUpload : true, // 是否显示上传按钮,跟随文本框的那个
 			showRemove : false, // 显示移除按钮,跟随文本框的那个

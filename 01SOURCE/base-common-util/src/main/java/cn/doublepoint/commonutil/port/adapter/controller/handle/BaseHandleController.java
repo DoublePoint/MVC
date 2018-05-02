@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
-@Controller
+
 public class BaseHandleController extends BaseController{
 	
 }

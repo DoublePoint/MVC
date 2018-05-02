@@ -43,6 +43,10 @@ import cn.doublepoint.generate.domain.model.helper.BeanModel;
 public class GenerateEntityHandleController extends BaseHandleController {
 	@Resource
 	EntityFilterQueryService efQueryService;
+	
+	private String employeeCode;
+	
+	private MultipartFile file;
 
 	@RequestMapping("/template/sys/tables")
 	@ResponseBody
@@ -55,12 +59,12 @@ public class GenerateEntityHandleController extends BaseHandleController {
 
 	@RequestMapping("/template/sys/uploadfile1")
 	@ResponseBody
-	public String upload(@RequestParam("file") MultipartFile myfile) throws IllegalStateException, IOException {
+	public String upload() throws IllegalStateException, IOException {
 		String returnString = "";
 		try {
-			File file = File.createTempFile("tmp", null);
-			myfile.transferTo(file);
-			returnString = GenerateEntityUtil.buildEntityByTableName(file, "sys_entity_filter");
+			File filev = File.createTempFile("tmp", null);
+			file.transferTo(filev);
+			returnString = GenerateEntityUtil.buildEntityByTableName(filev, "sys_entity_filter");
 			//file.deleteOnExit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,26 +73,22 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	}
 	
 	@RequestMapping("/template/sys/getAllFileTable")
-	@ResponseBody
-	public AjaxResponse getAllFileTable(@RequestParam("file") MultipartFile myfile,HttpServletRequest request) throws IllegalStateException, IOException {
-		
+	public void getAllFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
 			String oomFileName="";
 			String generateDirPath= generateDirPath(request);
 			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
-			File file = new File(oomFileName);
-			myfile.transferTo(file);
+			File filev = new File(oomFileName);
+			file.transferTo(filev);
 			 
-			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(file);
+			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(filev);
 			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
 			ajaxDataWrap.setDataList(beanModelList);
 			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
 			responseData.setAjaxParameter("oomFileName", oomFileName);
-			return responseData;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
 //	String oomFileName="";
