@@ -20,6 +20,16 @@ function stepChanging(event, currentIndex, newIndex){
 	}
 	else if(currentIndex==2){
 		gridAim.addRecords(checkedRecords);
+		var data1={
+				dataWrap:gridResource.collectData(),
+		};
+		$.request({
+			url : $$pageContextPath + "/template/sys/testGetDataWrap",
+			type : "POST",
+			contentType : 'application/json;charset=UTF-8',
+			dataType : "json",
+			data : JSON.stringify(data1),
+		});
 	}
 }
 

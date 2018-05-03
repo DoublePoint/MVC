@@ -36,7 +36,7 @@ function onClickAdd() {
 	} else {
 		cdbs = nodes[0].id;
 	}
-	var ajaxDataWrap =  $._CreateAjaxDataWrap();
+	var ajaxDataWrap =  $.createAjaxDataWrap();
 	ajaxDataWrap.setDataList(nodes[0]);
 	$.openDialog({
 		type : 2,
@@ -99,7 +99,7 @@ function rowClickTest(data,a,b,c) {
 	var dd = data;
 	var arr=new Array();
 	arr.push(data);
-	var ajaxDataWrap =  $._CreateAjaxDataWrap();
+	var ajaxDataWrap =  $.createAjaxDataWrap();
 	ajaxDataWrap.setDataList(arr);
 	$.openDialog({
 		type : 2,
@@ -120,7 +120,7 @@ function rowClickTest(data,a,b,c) {
 }
 
 function dbclickgrid(para1,data,index){
-	var ajaxDataWrap =  $._CreateAjaxDataWrap();
+	var ajaxDataWrap =  $.createAjaxDataWrap();
 	var dataArr=new Array();
 	dataArr.push(data);
 	ajaxDataWrap.setDataList(dataArr);

@@ -91,6 +91,27 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		}
 	}
 	
+	private AjaxDataWrap<MySQLTables> dataWrap;
+	@RequestMapping("/template/sys/testGetDataWrap")
+	public void testGetDataWrap(HttpServletRequest request) throws IllegalStateException, IOException {
+		try {
+			String oomFileName="";
+			String generateDirPath= generateDirPath(request);
+			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+			File filev = new File(oomFileName);
+			file.transferTo(filev);
+			 
+			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(filev);
+			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
+			ajaxDataWrap.setDataList(beanModelList);
+			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
+			responseData.setAjaxParameter("oomFileName", oomFileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 //	String oomFileName="";
 //	try {
 //		String generateDirPath= generateDirPath(request);

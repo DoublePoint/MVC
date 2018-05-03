@@ -166,7 +166,7 @@ function AjaxGrid(domId) {
 	this.onpageclick = null;
 	this.cols = [{ checkbox: true, align: 'center' }];
 	this.datasource = "";
-	this.datawrap = $._CreateAjaxDataWrap();
+	this.datawrap = $.createAjaxDataWrap();
 	this.height = 300;
 
 	/* bootstrap */
@@ -277,6 +277,14 @@ function AjaxGrid(domId) {
 	this.bindListener = function() {
 		this.initEvent();
 	}
+	this.collectData=function(){
+		var ajaxDataWrap=$.createAjaxDataWrap();
+		var dataList=this.getDom().bootstrapTable('getData');;
+		ajaxDataWrap.dataList=dataList;
+		var pageInfo=$.createPageInfo();
+		ajaxDataWrap.pageInfo=pageInfo;
+		return ajaxDataWrap;
+	}
 	this.getCols = function() {
 		return this.cols;
 	}
@@ -296,7 +304,7 @@ function AjaxGrid(domId) {
 		if (isGetData == null)
 			isGetData = true;
 		if (!isGetData) {
-			var adw = new $._CreateAjaxDataWrap();
+			var adw = new $.createAjaxDataWrap();
 			adw.pageInfo = this.datawrap.pageInfo;
 			return adw;
 		}

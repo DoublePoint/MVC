@@ -305,7 +305,7 @@ var _RegisterModel=new RegisterModel();
 			return this;
 		},
 
-		_CreateAjaxDataWrap : function(name) {
+		createAjaxDataWrap : function(name) {
 			return new _AjaxDataWrap();
 		},
 		_Clone : function clone(obj) {
@@ -442,13 +442,14 @@ var _RegisterModel=new RegisterModel();
 				}
 			}
 			
-			var data=settings.data;
-			var params=settings.params;
-			var dataObj={};
-			dataObj.ajaxDataWrapList=data;
-			params={"aaa":123}
-			dataObj.paramList=params;
-			settings.data=dataObj;
+//			var data=settings.data;
+//			var params=settings.params;
+//			var dataObj={};
+//			dataObj.ajaxDataWrapList=data;
+//			params={"aaa":123}
+//			dataObj.paramList=params;
+//			settings.data=dataObj;
+//			
 			
 			$.ajax(settings);
 		}
