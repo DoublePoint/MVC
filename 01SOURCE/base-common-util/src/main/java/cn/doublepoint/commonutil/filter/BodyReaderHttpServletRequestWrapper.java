@@ -20,10 +20,14 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	private final byte[] body;
+	private JSONObject jsonObject;
 
 	public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
 		super(request);
@@ -32,15 +36,37 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 
 	@Override
 	public BufferedReader getReader() throws IOException {
-		ServletInputStream inputStream=getInputStream();
-		if(inputStream==null)
+		ServletInputStream inputStream = getInputStream();
+		if (inputStream == null)
 			return null;
 		return new BufferedReader(new InputStreamReader(getInputStream()));
 	}
 
+	/**
+	 * 获取参数
+	 */
+	@Override
+	public String getParameter(String parameterName){
+		return this.getJSONObject().getString(parameterName);
+	}
+	
+	/**
+	 * 获取json对象
+	 * 
+	 * @return
+	 */
+	public JSONObject getJSONObject() {
+		if (jsonObject != null) {
+			return jsonObject;
+		}
+		String dataJsonString = new String(this.getBody());
+		JSONObject jsonObject = JSON.parseObject(dataJsonString);
+		return jsonObject;
+	}
+
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
-		if(body==null)
+		if (body == null)
 			return null;
 		final ByteArrayInputStream bais = new ByteArrayInputStream(body);
 		return new ServletInputStream() {
@@ -66,6 +92,10 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		};
 	}
 
+	public byte[] getBody() {
+		return body;
+	}
+	
 	/**
 	 * 通过BufferedReader和字符编码集转换成byte数组
 	 * 
@@ -84,4 +114,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		}
 		return null;
 	}
+
+	
+
 }

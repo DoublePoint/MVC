@@ -33,7 +33,6 @@ import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.GenerateEntityUtil;
@@ -73,6 +72,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	}
 	
 	@RequestMapping("/template/sys/getAllFileTable")
+	@ResponseBody
 	public void getAllFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
 			String oomFileName="";
@@ -92,20 +92,23 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	}
 	
 	private AjaxDataWrap<MySQLTables> dataWrap;
+	private String testParam;
 	@RequestMapping("/template/sys/testGetDataWrap")
+	@ResponseBody
 	public void testGetDataWrap(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
-			String oomFileName="";
-			String generateDirPath= generateDirPath(request);
-			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
-			File filev = new File(oomFileName);
-			file.transferTo(filev);
-			 
-			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(filev);
-			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
-			ajaxDataWrap.setDataList(beanModelList);
-			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
-			responseData.setAjaxParameter("oomFileName", oomFileName);
+ 			String oomFileName="";
+			testParam=request.getParameter("testParam");
+//			String generateDirPath= generateDirPath(request);
+//			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+//			File filev = new File(oomFileName);
+//			file.transferTo(filev);
+//			 
+//			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(filev);
+//			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
+//			ajaxDataWrap.setDataList(beanModelList);
+			responseData.setAjaxParameter("ajaxDataWrap", null);
+//			responseData.setAjaxParameter("oomFileName", oomFileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

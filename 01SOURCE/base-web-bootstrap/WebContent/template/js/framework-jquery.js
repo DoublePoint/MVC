@@ -428,7 +428,7 @@ var _RegisterModel=new RegisterModel();
 			var successFunction=settings.success;
 			if(successFunction!=null){
 				settings.success=function(responseData){
-					var res=new AjaxResponse(responseData.response);
+					var res=new AjaxResponse(responseData);
 					successFunction(res);
 				}
 			};
@@ -437,19 +437,15 @@ var _RegisterModel=new RegisterModel();
 			var errorFunction=settings.error;
 			if(errorFunction!=null){
 				settings.error=function(responseData){
-					var res=new AjaxResponse(responseData.response);
+					var res=new AjaxResponse(responseData);
 					errorFunction(res);
 				}
 			}
 			
-//			var data=settings.data;
-//			var params=settings.params;
-//			var dataObj={};
-//			dataObj.ajaxDataWrapList=data;
-//			params={"aaa":123}
-//			dataObj.paramList=params;
-//			settings.data=dataObj;
-//			
+			settings.type = "POST";
+			settings.contentType = 'application/json;charset=UTF-8';
+			settings.dataType = "json";
+			settings.data= JSON.stringify(settings.data);
 			
 			$.ajax(settings);
 		}

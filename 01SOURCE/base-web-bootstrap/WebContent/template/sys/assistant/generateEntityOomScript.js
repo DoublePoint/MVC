@@ -22,13 +22,14 @@ function stepChanging(event, currentIndex, newIndex){
 		gridAim.addRecords(checkedRecords);
 		var data1={
 				dataWrap:gridResource.collectData(),
+				testParam:"123123123123"
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/testGetDataWrap",
-			type : "POST",
-			contentType : 'application/json;charset=UTF-8',
-			dataType : "json",
-			data : JSON.stringify(data1),
+			data : data1,
+			success:function(response){
+				//alert(response);
+			}
 		});
 	}
 }

@@ -9,6 +9,11 @@
 */
 package cn.doublepoint.commonutil.domain.model;
 
+import java.lang.reflect.Field;
+import java.util.stream.Stream;
+
+import com.alibaba.fastjson.JSONObject;
+
 public class BaseModel {
 	public int rowId=-1;
 
@@ -32,4 +37,16 @@ public class BaseModel {
 	public <T> List<Object[]> getQueryParamList(List<T> queryModelList) {
 		return null;
 	}*/
+	
+	public void getFromJsonObject(JSONObject jsonObject){
+		Field[] fields = this.getClass().getDeclaredFields();
+		Stream.of(fields).forEach(field -> {
+			try {
+				field.setAccessible(true);
+				field.set(this, jsonObject.get(field.getName()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
 }
