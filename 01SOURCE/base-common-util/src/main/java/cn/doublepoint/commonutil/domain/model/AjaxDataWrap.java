@@ -25,12 +25,81 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 
 public class AjaxDataWrap<T extends BaseModel> implements Serializable {
-	/**                                                                  
-	 *                                                                    
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private List<T> dataList;
 	private PageInfo pageInfo;
+
+	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass) {
+		AjaxDataWrap<R> ajaxDataWrap = new AjaxDataWrap<>();
+		ajaxDataWrap.setPageInfo(this.pageInfo);
+		ajaxDataWrap.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));
+		return ajaxDataWrap;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getFromJsonObject(JSONObject jsonObject, Class modelClass) {
+		Field[] fields = this.getClass().getDeclaredFields();
+		dataList = new ArrayList<>();
+		Stream.of(fields).forEach(field -> {
+			field.setAccessible(true);
+			String fieldName = field.getName();
+			Class<?> fieldType = field.getType();
+			try {
+				if(fieldType==List.class){
+					initDataList(jsonObject,modelClass,field);
+				}
+				else if(fieldType==PageInfo.class){
+//					initPageInfo(jsonObject);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
+	/**
+	 * 初始化dataList
+	 * @param jsonObject
+	 * @param modelClass
+	 * @param field
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private void initDataList(JSONObject jsonObject, Class modelClass,Field field) throws Exception{
+		String fieldName=field.getName();
+		JSONArray jsonArray = jsonObject.getJSONArray(fieldName);
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JSONObject modelObject = jsonArray.getJSONObject(i);
+
+			T t = (T) modelClass.newInstance();
+			Method method1 = modelClass.getMethod("getFromJsonObject", JSONObject.class);
+			method1.invoke(t, modelObject);
+			dataList.add(t);
+		}
+
+		field.set(this, dataList);
+	}
+	
+	/**
+	 * 初始化分页信息
+	 * @param jsonObject
+	 * @param modelClass
+	 * @param field
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	private void initPageInfo(JSONObject jsonObject,Field field) throws Exception{
+		String fieldName=field.getName();
+		JSONObject pageInfoObj = jsonObject.getJSONObject(fieldName);
+
+		PageInfo pageInfo=new PageInfo();
+		Method getFromJsonObject = JSONObject.class.getMethod("getFromJsonObject", JSONObject.class);
+		getFromJsonObject.invoke(pageInfo, pageInfoObj);
+		field.set(this, pageInfo);
+	
+	}
 
 	public List<T> getDataList() {
 		return dataList;
@@ -57,52 +126,5 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 	public AjaxDataWrap() {
 		super();
 		this.pageInfo = new PageInfo();
-	}
-
-	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass) {
-		AjaxDataWrap<R> ajaxDataWrap = new AjaxDataWrap<>();
-		ajaxDataWrap.setPageInfo(this.pageInfo);
-		ajaxDataWrap.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));
-		return ajaxDataWrap;
-	}
-
-	@SuppressWarnings("unchecked")
-	public void getFromJsonObject(JSONObject jsonObject,Class modelClass) {
-		Field[] fields = this.getClass().getDeclaredFields();
-		dataList = new ArrayList<>();
-		Stream.of(fields).forEach(field -> {
-			field.setAccessible(true);
-			String fieldName = field.getName();
-			Class<?> fieldType = field.getType();
-			try {
-				
-				JSONArray jsonArray = jsonObject.getJSONArray(fieldName);
-				for (int i = 0; i < jsonArray.size(); i++) {
-					JSONObject modelObject = jsonArray.getJSONObject(i);
-
-					//ParameterizedType genericType = (ParameterizedType)field.getGenericType();
-					// 得到泛型里的class类型对象
-					//Class<?> genericClazz = (Class<?>) genericType.getActualTypeArguments()[0];
-					T t=(T) modelClass.newInstance();
-					Method method1 = modelClass.getMethod("getFromJsonObject", JSONObject.class);
-					method1.invoke(t, modelObject);
-					//field.set(this, modelObject);
-					dataList.add(t);
-				}
-				
-//				if (genericType instanceof ParameterizedType) {
-//					ParameterizedType pt = (ParameterizedType) genericType;
-//					// 得到泛型里的class类型对象
-//					Class<?> genericClazz = (Class<?>) pt.getActualTypeArguments()[0];
-//					Object object = genericClazz.newInstance();
-//					
-//					dataList.add(object);
-//				}
-				BeanUtils.copyProperties(jsonObject.get(fieldName), dataList);
-				field.set(this, dataList);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
 	}
 }

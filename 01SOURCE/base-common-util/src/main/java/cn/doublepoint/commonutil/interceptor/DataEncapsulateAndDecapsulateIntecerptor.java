@@ -31,9 +31,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.AjaxResponse;
+import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
@@ -177,24 +183,38 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws InvocationTargetException
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void decapsulateAjaxDataWrap(ServletRequest request, BaseController controller, Field field)
 			throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoSuchMethodException,
-			SecurityException, InvocationTargetException {
+			SecurityException, InvocationTargetException, JsonParseException, JsonMappingException, IOException {
 		Field wrapField = field;
-		Class ajaxDataWrapType = wrapField.getType();
+//		Class ajaxDataWrapType = wrapField.getType();
+//		String fieldName = wrapField.getName();
+//		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
+//		JSONObject dataWrapJson = requestWrapper.getJSONObject();
+//		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
+//		// 得到泛型里的class类型对象
+//		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
+//		Object ajaxDataWrap = ajaxDataWrapType.newInstance();
+//		Method ajaxDataWrapDescapsulate = ajaxDataWrapType.getMethod("getFromJsonObject", JSONObject.class,
+//				Class.class);
+//		ajaxDataWrapDescapsulate.invoke(ajaxDataWrap, dataWrapJson.getJSONObject(fieldName), baseModelClass);
+//		wrapField.set(controller, ajaxDataWrap);
 		String fieldName = wrapField.getName();
-		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
-		JSONObject dataWrapJson = requestWrapper.getJSONObject();
+		Class ajaxDataWrapType = wrapField.getType();
 		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
-		// 得到泛型里的class类型对象
 		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
-		Object ajaxDataWrap = ajaxDataWrapType.newInstance();
-		Method ajaxDataWrapDescapsulate = ajaxDataWrapType.getMethod("getFromJsonObject", JSONObject.class,
-				Class.class);
-		ajaxDataWrapDescapsulate.invoke(ajaxDataWrap, dataWrapJson.getJSONObject(fieldName), baseModelClass);
-		wrapField.set(controller, ajaxDataWrap);
+		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
+		String jsobString=requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
+		ObjectMapper mspp=new ObjectMapper();
+		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		JavaType type=mspp.getTypeFactory().constructParametricType(ajaxDataWrapType,baseModelClass);
+		Object oo=mspp.readValue(jsobString, type);
+		wrapField.set(controller, oo);
 	}
 
 	/**

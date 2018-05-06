@@ -9,16 +9,52 @@
 */ 
 package cn.doublepoint.commonutil.domain.model;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.springframework.data.domain.Sort;
+
+import com.alibaba.fastjson.JSONObject;
 
 public class PageInfo {
 	private final int DEFAULT_PAGE_SIZE=20;
+	
 	private int currentPageNum=1;
 	private int currentPageCount=0;
 	private long totalElementCount=0;
 	private int totalPageCount=1;
 	private int pageSize=DEFAULT_PAGE_SIZE;
 	private Sort sort;
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getFromJsonObject(JSONObject jsonObject, Class modelClass) {
+		Field[] fields = this.getClass().getDeclaredFields();
+		Stream.of(fields).forEach(field -> {
+			field.setAccessible(true);
+			String fieldName = field.getName();
+			Class<?> fieldType = field.getType();
+			try {
+				if(fieldType==int.class){
+					field.set(this, jsonObject.getIntValue(fieldName));
+					return;
+				}
+				if(fieldType==long.class){
+					field.set(this, jsonObject.getLongValue(fieldName));
+					return;
+				}
+				if(fieldType==Sort.class){
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
+	
+	
 	public int getCurrentPageNum() {
 		return currentPageNum;
 	}
@@ -68,6 +104,7 @@ public class PageInfo {
 		this.currentPageNum = currentPageNum;
 		this.pageSize = pageSize;
 	}
+	
 	//获取其实位置
 	public long getStart(){
 		return (this.currentPageNum-1)*this.pageSize;
@@ -80,4 +117,6 @@ public class PageInfo {
 	public String getLimitSql(){
 		return " limit "+this.currentPageNum*pageSize+","+pageSize+"";
 	}
+	
+	
 }
