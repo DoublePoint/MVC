@@ -34,6 +34,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleContro
 @RequestMapping("/template/sys/menu")
 public class MenuHandleController extends BaseHandleController {
 
+	private AjaxDataWrap<Menu> dataWrap;
 	@Autowired
 	MenuQueryService menuQueryService;
 
@@ -92,8 +93,11 @@ public class MenuHandleController extends BaseHandleController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(@RequestBody List<Menu> menuList) {
+	public void delete( ) {
+		if(dataWrap==null)
+			return;
+		List<Menu> menuList=dataWrap.getDataList();
 		menuApplicationService.removeMenu(menuList);
-		return true;
+		responseData.setAjaxParameter("deleteState", true);
 	}
 }

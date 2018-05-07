@@ -277,14 +277,6 @@ function AjaxGrid(domId) {
 	this.bindListener = function() {
 		this.initEvent();
 	}
-	this.collectData=function(){
-		var ajaxDataWrap=$.createAjaxDataWrap();
-		var dataList=this.getDom().bootstrapTable('getData');;
-		ajaxDataWrap.dataList=dataList;
-		var pageInfo=$.createPageInfo();
-		ajaxDataWrap.pageInfo=pageInfo;
-		return ajaxDataWrap;
-	}
 	this.getCols = function() {
 		return this.cols;
 	}
@@ -496,6 +488,20 @@ function AjaxGrid(domId) {
 		for(var i in rows)
 			this.getDom().bootstrapTable('append', rows[i]);
 	},
+	this.collectData = function(type){
+		if(type=="checked"){
+			var wrap=$._Clone(this.getDataWrap());
+			var dataList=this.getCheckedRecords();
+			wrap.dataList=$._Clone(dataList);
+			return wrap;
+		}
+		else if (type=="all"){
+			var wrap=$._Clone(this.getDataWrap());
+			var dataList=this.getDom().bootstrapTable('getData');;
+			wrap.dataList=$._Clone(dataList);
+			return wrap;
+		}
+	}
 	this.getCheckedRecords = function() {
 		var $table = $("#" + this.domId);
 		return $table.bootstrapTable('getSelections');

@@ -54,7 +54,7 @@ public class CommonBeanUtils extends BeanUtils {
 	public static PageRequest copyPageInfoToPageable(PageInfo pageInfo) {
 		if(pageInfo==null)
 			return null;
-		PageRequest pageable = new PageRequest(pageInfo.getCurrentPageNum()<=0?pageInfo.getCurrentPageNum():pageInfo.getCurrentPageNum()-1, pageInfo.getPageSize(),pageInfo.getSort());// 从0开始查询二十条
+		PageRequest pageable = new PageRequest(pageInfo.getCurrentPageNum()<=0?pageInfo.getCurrentPageNum():pageInfo.getCurrentPageNum()-1, pageInfo.getPageSize());// 从0开始查询二十条
 		return pageable;
 	}
 
@@ -111,7 +111,6 @@ public class CommonBeanUtils extends BeanUtils {
 			pageInfo.setTotalPageCount(page.getTotalPages());// 总页数
 			pageInfo.setTotalElementCount(page.getTotalElements());// 总条数
 			pageInfo.setPageSize(page.getSize());// 每页条数
-			pageInfo.setSort(page.getSort());
 		}
 		List<E> resList = copyTo(page.getContent(), cla);
 		ajaxDataWrap.setDataList(resList);
@@ -127,7 +126,6 @@ public class CommonBeanUtils extends BeanUtils {
 		pageInfo.setTotalElementCount(page.getTotalElements());
 		pageInfo.setTotalPageCount(page.getTotalPages());
 		pageInfo.setPageSize(page.getSize());
-		pageInfo.setSort(page.getSort());
 		AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<>();
 		ajaxDataWrap.setDataList(list);
 		ajaxDataWrap.setPageInfo(pageInfo);

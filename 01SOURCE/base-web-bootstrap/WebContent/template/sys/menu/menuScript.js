@@ -10,7 +10,6 @@ function retrieve() {
 	var array = new Array();
 	array.push(formData);
 	ajaxDataWrap.setDataList(array);
-	// obj={"code":"","msg":"","dataList":[{"cdbs":"398121904285679616","cdmc":"菜单管理","sjcdbs":"","cdcj":1,"cdpx":1,"cdlj":"","gxsj":null,"cjsj":{"monthValue":1,"month":"JANUARY","year":2018,"dayOfMonth":3,"dayOfWeek":"WEDNESDAY","dayOfYear":3,"hour":14,"minute":34,"nano":758000000,"second":18,"chronology":{"id":"ISO","calendarType":"iso8601"}}}],"pageInfo":{"currentPageNum":1,"currentPageCount":1,"totalElementCount":3,"totalPageCount":3,"pageSize":1,"sort":null}};
 	$.request({
 		url : $$pageContextPath + "/template/sys/menu/datalist",
 		type : "POST",
@@ -67,15 +66,18 @@ function onClickEdit(){
 
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
-		var checkedDatas = lltestdatagrid.getCheckedRecords();
+		var data={
+				dataWrap:lltestdatagrid.collectData("checked")
+		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/menu/delete",
-			type : "POST",
-			contentType : 'application/json;charset=UTF-8',
-			dataType : "json",
-			data : JSON.stringify(checkedDatas),
-			async : false,
-			success : function(data) {
+			data : data,
+			success : function(response) {
+				var deleteState=response.get("deleteState");
+				if(!deleteState){
+					$.alert("删除失败!");
+					return;
+				}
 				$.tips('删除成功');
 				retrieve();
 				retrieveTree();

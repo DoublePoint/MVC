@@ -9,12 +9,16 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -33,17 +37,21 @@ import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.GenerateEntityUtil;
 import cn.doublepoint.generate.domain.model.helper.BeanModel;
-
+import freemarker.template.TemplateException;
 @Controller
 public class GenerateEntityHandleController extends BaseHandleController {
 	@Resource
 	EntityFilterQueryService efQueryService;
 	
-	private String employeeCode;
+	private AjaxDataWrap<MySQLTables> dataWrap;
+	private String testParam;
+	private String tableName;
+	private String oomFileName;
 	
 	private MultipartFile file;
 
@@ -91,8 +99,29 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		}
 	}
 	
-	private AjaxDataWrap<MySQLTables> dataWrap;
-	private String testParam;
+	@RequestMapping("/template/sys/assistant/generateDetail")
+	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
+		
+		if(!StringUtil.isNullOrEmpty(oomFileName)){
+			List<String> tableNameList=new ArrayList<>();
+			if(dataWrap!=null){
+				tableNameList=dataWrap.getDataList().stream().map(MySQLTables::getTableName).collect(toList());
+			}
+			File file = new File(oomFileName);
+			Map<String, String> map=GenerateEntityUtil.buildEntityByTableNameList(file,tableNameList);
+			String generateDirPath= generateDirPath(request);
+			map.entrySet().stream().forEach(e->{
+				try {
+					generateEntityFile(generateDirPath,e.getKey(),e.getValue());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			});
+		}
+		
+		return "/template/sys/assistant/generateDetail";
+	}
+	
 	@RequestMapping("/template/sys/testGetDataWrap")
 	@ResponseBody
 	public void testGetDataWrap(HttpServletRequest request) throws IllegalStateException, IOException {

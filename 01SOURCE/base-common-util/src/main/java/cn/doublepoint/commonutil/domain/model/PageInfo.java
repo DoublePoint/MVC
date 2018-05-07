@@ -26,7 +26,6 @@ public class PageInfo {
 	private long totalElementCount=0;
 	private int totalPageCount=1;
 	private int pageSize=DEFAULT_PAGE_SIZE;
-	private Sort sort;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getFromJsonObject(JSONObject jsonObject, Class modelClass) {
@@ -84,12 +83,6 @@ public class PageInfo {
 	}
 	public void setCurrentPageCount(int currentPageCount) {
 		this.currentPageCount = currentPageCount;
-	}
-	public Sort getSort() {
-		return sort;
-	}
-	public void setSort(Sort sort) {
-		this.sort = sort;
 	}
 	public PageInfo() {
 		super();

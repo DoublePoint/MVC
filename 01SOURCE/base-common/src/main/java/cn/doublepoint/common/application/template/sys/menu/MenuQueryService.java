@@ -94,8 +94,6 @@ public class MenuQueryService extends BaseQueryService{
 		Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC,"sn"));
 		if(pageInfo==null)
 			pageInfo=new PageInfo();
-		if(pageInfo.getSort()==null)
-			pageInfo.setSort(sort);
 		PageRequest pageRequest = CommonBeanUtils.copyPageInfoToPageable(pageInfo);
 		Page<T> page = repository.findAll(predicate, pageRequest);
 		AjaxDataWrap<T> ajaxDataWrap = CommonBeanUtils.copyPageToAjaxDataWrap(page, clazz);

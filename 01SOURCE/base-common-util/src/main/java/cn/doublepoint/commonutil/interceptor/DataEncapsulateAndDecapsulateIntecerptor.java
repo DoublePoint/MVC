@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
 
 import javax.servlet.ServletRequest;
@@ -192,18 +193,6 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 			throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoSuchMethodException,
 			SecurityException, InvocationTargetException, JsonParseException, JsonMappingException, IOException {
 		Field wrapField = field;
-//		Class ajaxDataWrapType = wrapField.getType();
-//		String fieldName = wrapField.getName();
-//		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
-//		JSONObject dataWrapJson = requestWrapper.getJSONObject();
-//		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
-//		// 得到泛型里的class类型对象
-//		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
-//		Object ajaxDataWrap = ajaxDataWrapType.newInstance();
-//		Method ajaxDataWrapDescapsulate = ajaxDataWrapType.getMethod("getFromJsonObject", JSONObject.class,
-//				Class.class);
-//		ajaxDataWrapDescapsulate.invoke(ajaxDataWrap, dataWrapJson.getJSONObject(fieldName), baseModelClass);
-//		wrapField.set(controller, ajaxDataWrap);
 		String fieldName = wrapField.getName();
 		Class ajaxDataWrapType = wrapField.getType();
 		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
@@ -211,6 +200,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
 		String jsobString=requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
 		ObjectMapper mspp=new ObjectMapper();
+		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));  
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		JavaType type=mspp.getTypeFactory().constructParametricType(ajaxDataWrapType,baseModelClass);
 		Object oo=mspp.readValue(jsobString, type);

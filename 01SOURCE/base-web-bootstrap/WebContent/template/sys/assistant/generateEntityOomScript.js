@@ -2,11 +2,11 @@ var tempFile="";
 function init(response) {
 	var testParamn=response.get("test111");
 }
-var oomFile="";
+var oomFileName="";
 function fileuploaded(response){
 	var ajaxDataWrap=response.get("ajaxDataWrap");
 	gridResource.setDataWrap(ajaxDataWrap);
-	
+	oomFileName=response.get("oomFileName");
 }
 
 var checkedRecords;
@@ -19,10 +19,10 @@ function stepChanging(event, currentIndex, newIndex){
 		}
 	}
 	else if(currentIndex==2){
-		gridAim.addRecords(checkedRecords);
+		gridAim.setDataWrap(gridResource.collectData("checked"));
 		var data1={
-				dataWrap:gridResource.collectData(),
-				testParam:"123123123123"
+				dataWrap:gridResource.collectData("checked"),
+				oomFileName:oomFileName
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/testGetDataWrap",
@@ -40,7 +40,7 @@ function customerFunction(a,b,c){
      ' </a>';
 }
 
-function showDetail(table){
+function showDetail(tableName){
 	$.openDialog({
 		type : 2,
 		title : "详细信息",
@@ -50,8 +50,11 @@ function showDetail(table){
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/sys/assistant/generateDetail.jsp',
-		data : null,
+		content : $$pageContextPath + '/template/sys/assistant/generateDetail',
+		data : {
+			oomFileName:oomFileName,
+			tableName:tableName
+		},
 		yes : function() {
 			
 		},
