@@ -115,6 +115,9 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 					}
 					return;
 				}
+				else{
+					decapsulateBasicData(request, controller, field);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

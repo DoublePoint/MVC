@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/jquery-steps-master/demo/css/jquery.steps.css">
 
 <script src="${pageContext.request.contextPath}/template/plugins/jquery-steps-master/build/jquery.steps.js"></script>
-<script  type="text/javascript"  src="generateEntityScript.js"></script>  
+<script  type="text/javascript"  src="generateDetailScript.js"></script>  
 </head>
 <body>
 	<form>
@@ -33,15 +33,7 @@
             <ll-fillarea-lr  width="*"  height="100%">  
               <ll-tabpanel  id="abc">  
                 <ll-tab  id="tabEntity"  active="true"  title="实体">  
-                	 <ll-filllayout>  
-	            		<ll-fillarea-lr  width="*"  height="100%">  
-		                	 <ll-ajaxgrid datasource="/template/sys/tables">  
-						                <ll-gridcheck ></ll-gridcheck>  
-						                <ll-gridcustom width="80" align="center" title="操作" formatter="customerFunction"></ll-gridcustom>  
-						                <ll-gridfield  field="tableName" title="表名"></ll-gridfield>  
-						     </ll-ajaxgrid>  
-					     </ll-fillarea-lr>
-				     </ll-filllayout>
+                	 
                 </ll-tab>  
                 <ll-tab  id="tabRepository"  title="仓库">
                     	仓库

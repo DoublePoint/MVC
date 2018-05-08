@@ -11,12 +11,15 @@ package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -52,6 +55,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	private String testParam;
 	private String tableName;
 	private String oomFileName;
+	private String generateDirPath;//生成的实体类 服务 等存放路径
 	
 	private MultipartFile file;
 
@@ -84,8 +88,10 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	public void getAllFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
 			String oomFileName="";
-			String generateDirPath= generateDirPath(request);
-			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+			String oomDirName=UUID.randomUUID().toString();
+			String oomName=UUID.randomUUID()+".oom";
+			String generateDirPath= generateDirPath(request,oomDirName);
+			oomFileName=generateDirPath+"/"+oomName;
 			File filev = new File(oomFileName);
 			file.transferTo(filev);
 			 
@@ -93,32 +99,58 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
 			ajaxDataWrap.setDataList(beanModelList);
 			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
-			responseData.setAjaxParameter("oomFileName", oomFileName);
+			responseData.setAjaxParameter("oomFileName", oomDirName+"/"+oomName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@RequestMapping("/template/sys/assistant/generateDetail")
-	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
+	@RequestMapping("/template/sys/assistant/generate")
+	@ResponseBody
+	public void generate(HttpServletRequest request) throws TemplateException, IOException {
 		
 		if(!StringUtil.isNullOrEmpty(oomFileName)){
 			List<String> tableNameList=new ArrayList<>();
 			if(dataWrap!=null){
 				tableNameList=dataWrap.getDataList().stream().map(MySQLTables::getTableName).collect(toList());
 			}
-			File file = new File(oomFileName);
+			File file = new File(getTempDir(request)+oomFileName);
 			Map<String, String> map=GenerateEntityUtil.buildEntityByTableNameList(file,tableNameList);
-			String generateDirPath= generateDirPath(request);
+			
+			String generateDirName=UUID.randomUUID().toString();
+			generateDirPath= generateDirPath(request,generateDirName);
 			map.entrySet().stream().forEach(e->{
 				try {
 					generateEntityFile(generateDirPath,e.getKey(),e.getValue());
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			});
+			
+			responseData.setAjaxParameter("generateDirPath", generateDirName);
 		}
-		
+	}
+	
+	@SuppressWarnings("resource")
+	@RequestMapping("/template/sys/assistant/generateDetail")
+	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
+		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+		if(!StringUtil.isNullOrEmpty(generateDirPath)&&!StringUtil.isNullOrEmpty(tableName)){
+			String entityFileName=getTempDir(request)+generateDirPath+"/Entity/"+tableName.replace("t_", "").replace("T_", "")+".java";
+			Map<String, String> map=new HashMap<String, String>();
+			FileReader reader=new FileReader(entityFileName);
+			BufferedReader bReader=new BufferedReader(reader);
+			String s;
+			StringBuffer sBuffer=new StringBuffer();
+			while ((s = bReader.readLine()) != null) {
+				sBuffer.append(s+"<br/>");
+			}
+			map.put("entity", sBuffer.toString());
+			responseData.setAjaxParameter("map", map);
+			
+			
+		}
 		return "/template/sys/assistant/generateDetail";
 	}
 	
@@ -251,14 +283,23 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 * @param request 
 	 * @return 返回根文件夹路径+名称
 	 */
-	private String generateDirPath(HttpServletRequest request){
-		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
-		String tempDirName=UUID.randomUUID()+"";
-		String generateDirPath= tempDir + tempDirName;
+	private String generateDirPath(HttpServletRequest request,String driName){
+		String tempDir= getTempDir(request);
+		String generateDirPath= tempDir + driName;
 		File generateDir = new File(generateDirPath);
 		if(!generateDir.exists()){
 			generateDir.mkdir();
 		}
 		return generateDirPath;
+	}
+	
+	/**
+	 * 获取缓存文件路径
+	 * @param request
+	 * @return
+	 */
+	private String getTempDir(HttpServletRequest request){
+		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+		return tempDir;
 	}
 }

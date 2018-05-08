@@ -1,4 +1,5 @@
 var tempFile="";
+var generateDirPath="";
 function init(response) {
 	var testParamn=response.get("test111");
 }
@@ -25,10 +26,10 @@ function stepChanging(event, currentIndex, newIndex){
 				oomFileName:oomFileName
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/testGetDataWrap",
+			url : $$pageContextPath + "/template/sys/assistant/generate",
 			data : data1,
 			success:function(response){
-				//alert(response);
+				generateDirPath=response.get("generateDirPath");
 			}
 		});
 	}
@@ -50,9 +51,9 @@ function showDetail(tableName){
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/sys/assistant/generateDetail',
+		content : $$pageContextPath + '/template/sys/assistant/generateDetail?generateDirPath='+generateDirPath+"&tableName="+tableName,
 		data : {
-			oomFileName:oomFileName,
+			generateDirPath:generateDirPath,
 			tableName:tableName
 		},
 		yes : function() {
