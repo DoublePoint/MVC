@@ -82,6 +82,26 @@
 			<version>1.2.44</version>
 		</dependency>
 		
+		<!-- ============== log begin ============== -->  
+        <dependency>  
+            <groupId>org.slf4j</groupId>  
+            <artifactId>slf4j-log4j12</artifactId>  
+            <version>1.7.25</version>  
+        </dependency>  
+        <!-- ============== log end ============== -->  
+        <!-- 发送日志到邮箱依赖 -->  
+        <dependency>  
+            <groupId>javax.mail</groupId>  
+            <artifactId>mail</artifactId>  
+            <version>1.4</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>javax.activation</groupId>  
+            <artifactId>activation</artifactId>  
+            <version>1.1</version>  
+        </dependency>  
+        <!-- 发送日志到邮箱依赖 -->  
+		
 	</dependencies>
 
 

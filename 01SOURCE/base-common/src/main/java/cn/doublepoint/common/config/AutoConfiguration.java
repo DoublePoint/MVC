@@ -11,6 +11,7 @@ package cn.doublepoint.common.config;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
@@ -41,6 +42,8 @@ public class AutoConfiguration {
 	DataSource dataSource;
 
 	public AutoConfiguration() {
+		Logger logger=Logger.getLogger(this.getClass().getName());
+		logger.info("test");
 		System.out.println("run base-common AutoConfiguration");
 	}
 
