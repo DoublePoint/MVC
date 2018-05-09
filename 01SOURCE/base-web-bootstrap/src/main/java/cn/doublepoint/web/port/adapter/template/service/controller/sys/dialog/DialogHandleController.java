@@ -53,10 +53,8 @@ public class DialogHandleController extends BaseHandleController {
 
 	// 索引页
 	@RequestMapping(value = "/template/sys/dialog/dialog")
-	public String hello(@PathVariable String actionname) {
-		if (StringUtil.isNullOrEmpty(actionname))
-			return "/template/sys/index/index";
-		return "/template/sys/index/" + actionname;
+	public String hello() {
+		return "/template/sys/dialog/dialog";
 	}
 
 }

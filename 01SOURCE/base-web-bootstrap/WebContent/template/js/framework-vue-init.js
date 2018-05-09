@@ -1,6 +1,6 @@
 var $lform;
 var treeselect = null;
-$(document).ready(function() {
+function initReady(){
 	/*-----------创建最底层vue对象---------------*/
 	_InitBaseVueComponent();
 
@@ -15,7 +15,9 @@ $(document).ready(function() {
 	
 	/*-----添加LayoutArea合并监听*/
 	_InitLayoutAreaCombineListener();
-	
+}
+$(document).ready(function() {
+	initReady();
 });
 
 /*-----------创建最底层vue对象---------------*/

@@ -122,11 +122,23 @@ var _RegisterModel=new RegisterModel();
 
 			// 存储弹出窗口的传递值
 			var _DialogData = obj.data;
-			var _Client_Success_Funtion = obj.succeed;
+			_DialogData.requestUrl=obj.content;
 
 			// 重新封装success方法
 			obj.success = function(layero, index) {
+				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+				iframeWin.responseData=_DialogData;
 				
+				var settings={};
+				settings.url=url;
+				settings.type = "POST";
+				settings.contentType = 'application/json;charset=UTF-8';
+				settings.dataType = "html";
+				settings.data= JSON.stringify(_DialogData);
+				settings.success=function(response){
+					iframeWin.document.write(response+"<script type='text/javascript'>initReady();</script>");
+				}
+				$.ajax(settings);
 			}
 			var width = obj.width;
 			var height = obj.height;
@@ -141,20 +153,8 @@ var _RegisterModel=new RegisterModel();
 				height = obj.height + "px";
 			}
 			obj.area = [ width, height ];
-			$.requestHtml({  
-                type: 'POST',  
-                url: url,//发送请求  
-                data: obj.data,  
-                dataType : "html",  
-                success: function(result) {  
-                    var htmlCont = result;//返回的结果页面  
-                    obj.content="<iframe >"+htmlCont+"</iframe>";
-                    obj.type= 1;//弹出框类型  
-                    parent.$layer.open(obj);
-                }  
-              });  
-			
-			//parent.$layer.open(obj);
+			obj.content=$$pageContextPath+"/template/sys/dialog/dialog";
+			parent.$layer.open(obj);
 		},
 		close : function(data) {
 			// 弹出窗口的确定的点击
