@@ -126,25 +126,7 @@ var _RegisterModel=new RegisterModel();
 
 			// 重新封装success方法
 			obj.success = function(layero, index) {
-				var jspParams = $.createJspParams();
-				jspParams.setParentDialogDiv(layero);
-				if (obj.yes != null) {
-					if (typeof obj.yes === "function")
-						jspParams.YesFunction = obj.yes;
-					else
-						jspParams.setYesFunctionName(obj.yes);
-				}
-				parent.initJspParams(jspParams);
-				initBeforeJspInit();
-				// 执行该方法的是子页面
-				// 手动调用页面的init方法 由用户自动定义
-				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-				iframeWin.init(_DialogData);
-
-				// 添加用户定义success方法
-				if (_Client_Success_Funtion != null) {
-					$._Eval(_Client_Success_Funtion);
-				}
+				
 			}
 			var width = obj.width;
 			var height = obj.height;
@@ -159,8 +141,20 @@ var _RegisterModel=new RegisterModel();
 				height = obj.height + "px";
 			}
 			obj.area = [ width, height ];
-
-			parent.$layer.open(obj);
+			$.requestHtml({  
+                type: 'POST',  
+                url: url,//发送请求  
+                data: obj.data,  
+                dataType : "html",  
+                success: function(result) {  
+                    var htmlCont = result;//返回的结果页面  
+                    obj.content="<iframe >"+htmlCont+"</iframe>";
+                    obj.type= 1;//弹出框类型  
+                    parent.$layer.open(obj);
+                }  
+              });  
+			
+			//parent.$layer.open(obj);
 		},
 		close : function(data) {
 			// 弹出窗口的确定的点击
@@ -445,6 +439,34 @@ var _RegisterModel=new RegisterModel();
 			settings.type = "POST";
 			settings.contentType = 'application/json;charset=UTF-8';
 			settings.dataType = "json";
+			settings.data= JSON.stringify(settings.data);
+			
+			$.ajax(settings);
+		},
+		//重新封装Ajax请求
+		requestHtml:function(settings){
+			if(settings==null)
+				return;
+			
+			//封装操作成功函数
+			var successFunction=settings.success;
+			if(successFunction!=null){
+				settings.success=function(responseData){
+					successFunction(responseData);
+				}
+			};
+			
+			//封装操作失败函数
+			var errorFunction=settings.error;
+			if(errorFunction!=null){
+				settings.error=function(responseData){
+					errorFunction(responseData);
+				}
+			}
+			
+			settings.type = "POST";
+			settings.contentType = 'application/json;charset=UTF-8';
+			settings.dataType = "html";
 			settings.data= JSON.stringify(settings.data);
 			
 			$.ajax(settings);

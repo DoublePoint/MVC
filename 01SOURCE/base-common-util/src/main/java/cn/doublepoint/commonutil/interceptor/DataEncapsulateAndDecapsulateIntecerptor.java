@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -40,7 +39,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
@@ -141,9 +139,17 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 				return;
 			}
 			if (bean instanceof BaseController) {
+				//表明是Ajax请求
 				if (request.getHeader("x-requested-with") != null
 						&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
-					encapsulateAjaxResponseData(request, response, handler, bean,modelAndView);
+					System.out.println(request.getHeader("Accept"));
+					//说明期望请求返回类型为Json
+					if(request.getHeader("Accept")==null||request.getHeader("Accept").indexOf("application/json")!=-1)
+							encapsulateAjaxResponseData(request, response, handler, bean,modelAndView);
+					else{
+						//说明期望请求为 html或者其他
+						encapsulatePageRequestResponseData(request, response, handler, bean, modelAndView);
+					}
 				} else {
 					encapsulatePageRequestResponseData(request, response, handler, bean, modelAndView);
 				}

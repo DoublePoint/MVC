@@ -148,8 +148,6 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			}
 			map.put("entity", sBuffer.toString());
 			responseData.setAjaxParameter("map", map);
-			
-			
 		}
 		return "/template/sys/assistant/generateDetail";
 	}

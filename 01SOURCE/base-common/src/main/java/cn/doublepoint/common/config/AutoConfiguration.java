@@ -9,9 +9,7 @@
 */
 package cn.doublepoint.common.config;
 
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
@@ -20,14 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import cn.doublepoint.commonutil.domain.model.Log4jUtil;
 
 @Configuration
 @EnableTransactionManagement
@@ -42,16 +39,13 @@ public class AutoConfiguration {
 	DataSource dataSource;
 
 	public AutoConfiguration() {
-		Logger logger=Logger.getLogger(this.getClass().getName());
-		logger.info("test");
-		System.out.println("run base-common AutoConfiguration");
+		Log4jUtil.info("Run base-common AutoConfiguration");
 	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
-		// entityManagerFactoryBean.setPersistenceUnitName("doublepoint");
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		entityManagerFactoryBean.setPackagesToScan("cn.doublepoint");
 		entityManagerFactoryBean.setJpaProperties(hibProperties());

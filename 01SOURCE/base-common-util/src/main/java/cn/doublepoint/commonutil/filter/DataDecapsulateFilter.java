@@ -11,6 +11,7 @@
 package cn.doublepoint.commonutil.filter;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -22,14 +23,18 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+
 public class DataDecapsulateFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		Log4jUtil.info("Do fileter internal.");
 		String contentType = request.getContentType();// 获取请求的content-type
 		if (contentType == null) {
-			filterChain.doFilter(request, response);
+			//filterChain.doFilter(request, response);
+			doOtherRequest(request,response,filterChain);
 			return;
 		}
 		//如果是上传文件请求
@@ -38,7 +43,7 @@ public class DataDecapsulateFilter extends OncePerRequestFilter {
 		} else {
 			doOtherRequest(request,response,filterChain);
 		}
-
+		
 	}
 	
 	/**
