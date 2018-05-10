@@ -1,4 +1,5 @@
 /** 
+
 * 创   建   人： 刘磊
 * 
 * 创   建   时   间 ： 2018年5月1日
@@ -11,7 +12,6 @@
 package cn.doublepoint.commonutil.filter;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

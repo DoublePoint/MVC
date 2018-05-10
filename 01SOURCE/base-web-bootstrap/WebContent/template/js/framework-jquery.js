@@ -127,18 +127,7 @@ var _RegisterModel=new RegisterModel();
 			// 重新封装success方法
 			obj.success = function(layero, index) {
 				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-				iframeWin.responseData=_DialogData;
-				
-				var settings={};
-				settings.url=url;
-				settings.type = "POST";
-				settings.contentType = 'application/json;charset=UTF-8';
-				settings.dataType = "html";
-				settings.data= JSON.stringify(_DialogData);
-				settings.success=function(response){
-					iframeWin.document.write(response+"<script type='text/javascript'>initReady();</script>");
-				}
-				$.ajax(settings);
+				iframeWin._InitOpenDialog(url,_DialogData);
 			}
 			var width = obj.width;
 			var height = obj.height;
@@ -153,7 +142,7 @@ var _RegisterModel=new RegisterModel();
 				height = obj.height + "px";
 			}
 			obj.area = [ width, height ];
-			obj.content=$$pageContextPath+"/template/sys/dialog/dialog";
+			obj.content=$$pageContextPath+"/template/sys/dialog/dialog.jsp";
 			parent.$layer.open(obj);
 		},
 		close : function(data) {

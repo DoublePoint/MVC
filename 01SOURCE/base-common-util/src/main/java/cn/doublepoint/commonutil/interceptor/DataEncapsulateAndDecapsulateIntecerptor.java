@@ -19,7 +19,6 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -66,7 +65,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	}
 
 	/**
-	 *解封装请求参数 将传过来的数据进行解析 并给handler中的数据赋值 不需要进行request.get进行获取
+	 * 解封装请求参数 将传过来的数据进行解析 并给handler中的数据赋值 不需要进行request.get进行获取
 	 * 
 	 * @param request
 	 * @param response
@@ -86,40 +85,52 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	}
 
 	/**
-	 *初始化Handler的各个字段，给其赋值(前台传来的值)
+	 * 初始化Handler的各个字段，给其赋值(前台传来的值)
+	 * 
 	 * @param request
 	 * @param controller
 	 */
-	private void initHandlerField(ServletRequest request, BaseController controller) {
+	private void initHandlerField(HttpServletRequest request, BaseController controller) {
 		Field[] fields = controller.getClass().getDeclaredFields();
-		// 循环遍历Handler 设置Controller中各个字段的值
-		Stream.of(fields).forEach(field -> {
-			field.setAccessible(true);
-			String fieldName = field.getName();
-			Class<?> fieldType = field.getType();
-			try {
-				// 如果是上传文件类型 则需要将Request进行转换，通过request.getFile来获取数据
-				if (request instanceof MultipartHttpServletRequest && fieldType.equals(MultipartFile.class)) {
-					MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
-					field.set(controller, req.getFile(fieldName));
-					return;
-				}
-				// 如果过是其他类型 直接通过getParameter就可获取数据
-				if (request instanceof BodyReaderHttpServletRequestWrapper) {
-					if (fieldType == AjaxDataWrap.class) {
-						decapsulateAjaxDataWrap(request, controller, field);
+		if (request.getMethod().equalsIgnoreCase("post")) {
+			// 循环遍历Handler 设置Controller中各个字段的值
+			Stream.of(fields).forEach(field -> {
+				field.setAccessible(true);
+				String fieldName = field.getName();
+				Class<?> fieldType = field.getType();
+				try {
+					// 如果是上传文件类型 则需要将Request进行转换，通过request.getFile来获取数据
+					if (request instanceof MultipartHttpServletRequest && fieldType.equals(MultipartFile.class)) {
+						MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
+						field.set(controller, req.getFile(fieldName));
+						return;
+					}
+					// 如果过是其他类型 直接通过getParameter就可获取数据
+					if (request instanceof BodyReaderHttpServletRequestWrapper) {
+						if (fieldType == AjaxDataWrap.class) {
+							decapsulateAjaxDataWrap(request, controller, field);
+						} else {
+							decapsulateBasicData(request, controller, field);
+						}
+						return;
 					} else {
 						decapsulateBasicData(request, controller, field);
 					}
-					return;
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				else{
+			});
+		} else {
+			// 循环遍历Handler 设置Controller中各个字段的值
+			Stream.of(fields).forEach(field -> {
+				field.setAccessible(true);
+				try {
 					decapsulateBasicData(request, controller, field);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
+			});
+		}
 	}
 
 	/**
@@ -139,15 +150,16 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 				return;
 			}
 			if (bean instanceof BaseController) {
-				//表明是Ajax请求
+				// 表明是Ajax请求
 				if (request.getHeader("x-requested-with") != null
 						&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
 					System.out.println(request.getHeader("Accept"));
-					//说明期望请求返回类型为Json
-					if(request.getHeader("Accept")==null||request.getHeader("Accept").indexOf("application/json")!=-1)
-							encapsulateAjaxResponseData(request, response, handler, bean,modelAndView);
-					else{
-						//说明期望请求为 html或者其他
+					// 说明期望请求返回类型为Json
+					if (request.getHeader("Accept") == null
+							|| request.getHeader("Accept").indexOf("application/json") != -1)
+						encapsulateAjaxResponseData(request, response, handler, bean, modelAndView);
+					else {
+						// 说明期望请求为 html或者其他
 						encapsulatePageRequestResponseData(request, response, handler, bean, modelAndView);
 					}
 				} else {
@@ -169,7 +181,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 * @throws IOException
 	 */
 	private void encapsulateAjaxResponseData(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Object bean,ModelAndView modelAndView) throws IOException {
+			Object bean, ModelAndView modelAndView) throws IOException {
 		BaseController requestController = (BaseController) bean;
 		AjaxResponse responseData = requestController.getResponseData();
 		PrintWriter writer = response.getWriter();
@@ -178,7 +190,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 		writer.println(JSON.toJSONString(responseData));
 		writer.flush();
 		writer.close();
-		
+
 	}
 
 	/**
@@ -193,12 +205,12 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 * @throws InvocationTargetException
-	 * @throws IOException 
-	 * @throws JsonMappingException 
-	 * @throws JsonParseException 
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonParseException
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void decapsulateAjaxDataWrap(ServletRequest request, BaseController controller, Field field)
+	private void decapsulateAjaxDataWrap(HttpServletRequest request, BaseController controller, Field field)
 			throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoSuchMethodException,
 			SecurityException, InvocationTargetException, JsonParseException, JsonMappingException, IOException {
 		Field wrapField = field;
@@ -207,12 +219,16 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
 		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
 		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
-		String jsobString=requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
-		ObjectMapper mspp=new ObjectMapper();
-		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));  
+		if(requestWrapper.getJSONObject()==null)
+			return;
+		if(requestWrapper.getJSONObject().getJSONObject(fieldName)==null)
+			return;
+		String jsobString = requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
+		ObjectMapper mspp = new ObjectMapper();
+		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		JavaType type=mspp.getTypeFactory().constructParametricType(ajaxDataWrapType,baseModelClass);
-		Object oo=mspp.readValue(jsobString, type);
+		JavaType type = mspp.getTypeFactory().constructParametricType(ajaxDataWrapType, baseModelClass);
+		Object oo = mspp.readValue(jsobString, type);
 		wrapField.set(controller, oo);
 	}
 
@@ -225,13 +241,15 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	private void decapsulateBasicData(ServletRequest request, BaseController controller, Field field)
+	private void decapsulateBasicData(HttpServletRequest request, BaseController controller, Field field)
 			throws IllegalArgumentException, IllegalAccessException {
 		String fieldName = field.getName();
 		if (request.getParameter(fieldName) != null)
 			field.set(controller, request.getParameter(fieldName));
-	}
+		return;
 
+	}
+	
 	/**
 	 * 封装页面请求时的数据
 	 * 

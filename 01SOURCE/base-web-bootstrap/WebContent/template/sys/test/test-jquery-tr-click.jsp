@@ -18,23 +18,37 @@
 <head>
 <%@ include file="/template/base.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<TITLE>New Document</TITLE>
-<META NAME="Generator" CONTENT="EditPlus">
-<META NAME="Author" CONTENT="">
-<META NAME="Keywords" CONTENT="">
-<META NAME="Description" CONTENT="">
-<script src="jquery.js"></script>
+
 <script>
 	function aa() {
-		alert("2");
+		$.openDialog({
+			type : 2,
+			title : "详细信息",
+			width : 930,
+			height : 630,
+			shade : 0.4,
+			closeBtn : 1,
+			shadeClose : true,
+			maxmin : true,
+			content : $$pageContextPath + '/template/sys/assistant/generateDetail?generateDirPath='+1+"&tableName="+2,
+			data : {
+				generateDirPath:1,
+				tableName:2
+			},
+			yes : function() {
+				
+			},
+			cancel : function() {
+
+			}
+		});
 	}
 	$(function() {
 		$("table").find("tr").on("dblclick.a", function() {
-			alert("11");
+			aa();
 		});
 		$("table").find("tr").on("dblclick", function() {
-			alert("111");
+			aa();
 		});
 	});
 </script>

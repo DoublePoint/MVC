@@ -11,15 +11,12 @@ package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate
 
 import static java.util.stream.Collectors.toList;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -135,20 +132,20 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	@SuppressWarnings("resource")
 	@RequestMapping("/template/sys/assistant/generateDetail")
 	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
-		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
-		if(!StringUtil.isNullOrEmpty(generateDirPath)&&!StringUtil.isNullOrEmpty(tableName)){
-			String entityFileName=getTempDir(request)+generateDirPath+"/Entity/"+tableName.replace("t_", "").replace("T_", "")+".java";
-			Map<String, String> map=new HashMap<String, String>();
-			FileReader reader=new FileReader(entityFileName);
-			BufferedReader bReader=new BufferedReader(reader);
-			String s;
-			StringBuffer sBuffer=new StringBuffer();
-			while ((s = bReader.readLine()) != null) {
-				sBuffer.append(s+"<br/>");
-			}
-			map.put("entity", sBuffer.toString());
-			responseData.setAjaxParameter("map", map);
-		}
+//		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+//		if(!StringUtil.isNullOrEmpty(generateDirPath)&&!StringUtil.isNullOrEmpty(tableName)){
+//			String entityFileName=getTempDir(request)+generateDirPath+"/Entity/"+tableName.replace("t_", "").replace("T_", "")+".java";
+//			Map<String, String> map=new HashMap<String, String>();
+//			FileReader reader=new FileReader(entityFileName);
+//			BufferedReader bReader=new BufferedReader(reader);
+//			String s;
+//			StringBuffer sBuffer=new StringBuffer();
+//			while ((s = bReader.readLine()) != null) {
+//				sBuffer.append(s+"<br/>");
+//			}
+//			map.put("entity", sBuffer.toString());
+//			responseData.setAjaxParameter("map", map);
+//		}
 		return "/template/sys/assistant/generateDetail";
 	}
 	

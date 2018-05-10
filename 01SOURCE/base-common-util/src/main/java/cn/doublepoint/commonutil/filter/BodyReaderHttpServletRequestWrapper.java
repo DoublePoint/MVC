@@ -13,12 +13,15 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.swing.plaf.multi.MultiLabelUI;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -47,6 +50,10 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 */
 	@Override
 	public String getParameter(String parameterName){
+		if(super.getParameter(parameterName)!=null)
+			return super.getParameter(parameterName);
+		if(this.getJSONObject()==null)
+			return null;
 		return this.getJSONObject().getString(parameterName);
 	}
 	
@@ -59,11 +66,34 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		if (jsonObject != null) {
 			return jsonObject;
 		}
+		if(this.getBody()==null)
+			return null;
 		String dataJsonString = new String(this.getBody());
-		JSONObject jsonObject = JSON.parseObject(dataJsonString);
+		dataJsonString=filterJsonString(dataJsonString);
+		jsonObject = JSON.parseObject(dataJsonString);
 		return jsonObject;
 	}
-
+	
+	/**
+	 * 过滤JsonString
+	 * @param dataJsonString
+	 * @return
+	 */
+	private String filterJsonString(String dataJsonString){
+		try {
+			String resultString = URLDecoder.decode(dataJsonString,"UTF-8");
+			int i1=resultString.indexOf("{");
+			int i2=resultString.indexOf("=");
+			if(i2<i1){
+				resultString=resultString.substring(i2+1);
+			}
+			return resultString;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return dataJsonString;
+	}
+	
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
 		if (body == null)
