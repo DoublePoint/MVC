@@ -22,6 +22,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -29,6 +30,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.generate.domain.model.helper.BeanModel;
 import cn.doublepoint.generate.domain.model.helper.ModelField;
 import freemarker.template.Configuration;
@@ -74,6 +76,9 @@ public class GenerateEntityUtil {
 	static String templateFileName = null;
 
 	private final static String GENERATE_FILE_ENTITY_TPL_NAME = "Entity.java.ftl";
+	private final static String GENERATE_FILE_REPOSITORY_TPL_NAME = "Repository.java.ftl";
+	private final static String GENERATE_FILE_REPOSITORY_EXTEND_TPL_NAME = "RepositoryExtend.java.ftl";
+	private final static String GENERATE_FILE_REPOSITORY_EXTEND_IMPL_TPL_NAME = "RepositoryExtendImpl.java.ftl";
 
 	private final static String TEMPLATE_DIR = "/cn.doublepoint.generate.domain.model.helper.template/";
 
@@ -107,6 +112,32 @@ public class GenerateEntityUtil {
 			}
 		});
 		
+		return tableContentMap;
+	}
+	
+	/**
+	 * 分别获取 某个表对应的某个文件内容
+	 * @param file
+	 * @param tableNameLlist
+	 * @return
+	 * @throws TemplateException
+	 * @throws IOException
+	 */
+	public static Map<String,String> buildRepositoryByTableNameList(List<BeanModel> entityModelList) throws TemplateException, IOException {
+		Map<String,String> tableContentMap=new HashMap<String,String>();
+		entityModelList.stream().forEach(entityModel -> {
+			Map<String, Object> data = new HashMap<String, Object>();
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+			data.put("datetime", formatter.format(date));
+			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			try {
+				String template = createFileByTemplate(GENERATE_FILE_REPOSITORY_TPL_NAME, data);
+				tableContentMap.put(entityModel.getTableName(), template);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 		return tableContentMap;
 	}
 	
@@ -229,6 +260,97 @@ public class GenerateEntityUtil {
 					entityModel.setFields(fieldList);
 					if(tableName.equalsIgnoreCase(entityModel.getTableName()))
 						entityModelList.add(entityModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return entityModelList;
+	}
+	
+	/**
+	 * 获取所有的实体信息 包括字段信息
+	 * @param file
+	 * @param tableName
+	 * @return
+	 */
+	public static List<BeanModel> buildEntityModelList(File file) {
+		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			NodeList classElementNodeList = db.parse(file).getElementsByTagName("c:Classes").item(0).getChildNodes();
+			for (int i = 0; i < classElementNodeList.getLength(); i++) {
+				List<ModelField> fieldList = new ArrayList<ModelField>();
+				BeanModel entityModel = new BeanModel();
+				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
+				boolean isadd = false;
+				for (int j = 0; j < classChildrenList.getLength(); j++) {
+					if (!(classChildrenList.item(j) instanceof Element))
+						continue;
+					Element item = (Element) classChildrenList.item(j);
+					String nodeName = item.getNodeName();
+					String nodeValue = item.getTextContent();
+					if (nodeValue == null || nodeValue == "")
+						break;
+					isadd = true;
+					switch (nodeName) {
+					case "a:Name":// 中文说明
+						entityModel.setChName(nodeValue);
+						break;
+					case "a:Code":// 英文编码
+						entityModel.setTableName(nodeValue);
+						break;
+					case "a:Comment":// 中文备注
+						entityModel.setRemark(nodeValue);
+						break;
+					case "a:Stereotype":// 实体 枚举 值对象类型
+						entityModel.setType(nodeValue);
+						break;
+					// 属性名称
+					case "c:Attributes": {
+						NodeList attributeNodeList = item.getChildNodes();
+						for (int k = 0; k < attributeNodeList.getLength(); k++) {
+							ModelField field = new ModelField();
+							boolean addFlag = false;
+							Node attributeNode = attributeNodeList.item(k);
+							for (int l = 0; l < attributeNode.getChildNodes().getLength(); l++) {
+								Node attributeChildNode = attributeNode.getChildNodes().item(l);
+								String attributeChildNodeNameString = attributeChildNode.getNodeName();
+								String attributeChildNodeValueString = attributeChildNode.getTextContent();
+								if (attributeChildNodeValueString == null || attributeChildNodeValueString == "")
+									break;
+								switch (attributeChildNodeNameString) {
+								case "a:Name":
+									addFlag = true;
+									field.setFieldComment(attributeChildNodeValueString);
+									break;
+								case "a:Code":
+									addFlag = true;
+									field.setFieldName(attributeChildNodeValueString);
+									break;
+								case "a:DataType":
+									addFlag = true;
+									field.setFieldType(attributeChildNodeValueString);
+									break;
+								default:
+									break;
+								}
+
+							}
+							if (addFlag) {
+								fieldList.add(field);
+							}
+						}
+					}
+						break;
+					default:
+						break;
+					}
+				}
+				if (isadd) {
+					entityModel.setFields(fieldList);
+					entityModelList.add(entityModel);
 				}
 			}
 		} catch (Exception e) {
