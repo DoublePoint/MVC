@@ -1,16 +1,16 @@
 var tempFile="";
-var generateDirPath="";
+var generateDir="";
+var oomName="";
+var checkedRecords;
 function init(response) {
 	var testParamn=response.get("test111");
 }
-var oomFileName="";
 function fileuploaded(response){
 	var ajaxDataWrap=response.get("ajaxDataWrap");
 	gridResource.setDataWrap(ajaxDataWrap);
-	oomFileName=response.get("oomFileName");
+	oomName=response.get("oomName");
 }
 
-var checkedRecords;
 function stepChanging(event, currentIndex, newIndex){
 	if(currentIndex==0){
 		checkedRecords=gridResource.getCheckedRecords();
@@ -23,13 +23,13 @@ function stepChanging(event, currentIndex, newIndex){
 		gridAim.setDataWrap(gridResource.collectData("checked"));
 		var data1={
 				dataWrap:gridResource.collectData("checked"),
-				oomFileName:oomFileName
+				oomName:oomName
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/assistant/generate",
 			data : data1,
 			success:function(response){
-				generateDirPath=response.get("generateDirPath");
+				generateDir=response.get("generateDir");
 			}
 		});
 	}
@@ -44,6 +44,7 @@ function customerFunction(a,b,c){
 function showDetail(tableName){
 	$.openDialog({
 		type : 2,
+		url: $$pageContextPath + '/template/sys/assistant/generateDetail',
 		title : "详细信息",
 		width : 930,
 		height : 630,
@@ -51,16 +52,9 @@ function showDetail(tableName){
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/sys/assistant/generateDetail?generateDirPath='+generateDirPath+"&tableName="+tableName,
 		data : {
-			generateDirPath:generateDirPath,
+			generateDir:generateDir,
 			tableName:tableName
 		},
-		yes : function() {
-			
-		},
-		cancel : function() {
-
-		}
 	});
 }

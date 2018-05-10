@@ -110,24 +110,23 @@ var _RegisterModel=new RegisterModel();
 				title = title + "&nbsp;&nbsp;";
 			obj.title = title;
 
-			/* content */
-			var url = obj.content;
-			if (url != null) {
-				// 有参数
-				if (url.indexOf("?") > 0)
-					obj.content = obj.content + "&" + _ConstantPageDefaultParam._IS_DO_INIT_FUNTION + "=" + ConstantState._YES_NO_STATE_N;
-				else
-					obj.content = obj.content + "?" + _ConstantPageDefaultParam._IS_DO_INIT_FUNTION + "=" + ConstantState._YES_NO_STATE_N;
-			}
-
 			// 存储弹出窗口的传递值
 			var _DialogData = obj.data;
-			_DialogData.requestUrl=obj.content;
+			_DialogData.url=obj.url;
 
+			var showTimes=1;
 			// 重新封装success方法
 			obj.success = function(layero, index) {
+				if(showTimes!=1)
+					return;
+				showTimes++;
 				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-				iframeWin._InitOpenDialog(url,_DialogData);
+				try{
+					iframeWin._InitOpenDialog(_DialogData);
+				}
+				catch(e){
+					
+				}
 			}
 			var width = obj.width;
 			var height = obj.height;

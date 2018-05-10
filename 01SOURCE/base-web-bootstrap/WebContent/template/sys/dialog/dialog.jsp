@@ -24,13 +24,9 @@
 	var jq12 = jQuery.noConflict(true);
 </script>
 <script type="text/javascript" src="dialogScript.js"></script>
-<script type="text/javascript">
-	var responseData;
-</script>
 </head>
 <body>
 	<form id="popWinForm" method="post">
-
 		<input type="hidden" name="hiddenResponseData" id="hiddenResponseData" />
 	</form>
 

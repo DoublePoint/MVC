@@ -11,12 +11,15 @@ package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -43,17 +46,18 @@ import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleContro
 import cn.doublepoint.generate.GenerateEntityUtil;
 import cn.doublepoint.generate.domain.model.helper.BeanModel;
 import freemarker.template.TemplateException;
+
 @Controller
 public class GenerateEntityHandleController extends BaseHandleController {
 	@Resource
 	EntityFilterQueryService efQueryService;
 	
+	private final String oomDirPath="oom";
+
 	private AjaxDataWrap<MySQLTables> dataWrap;
-	private String testParam;
 	private String tableName;
-	private String oomFileName;
-	private String generateDirPath;//生成的实体类 服务 等存放路径
-	
+	private String oomName;
+	private String generateDir;// 生成的实体类 服务 等存放路径
 	private MultipartFile file;
 
 	@RequestMapping("/template/sys/tables")
@@ -65,138 +69,145 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		return dataWrap;
 	}
 
-	@RequestMapping("/template/sys/uploadfile1")
-	@ResponseBody
-	public String upload() throws IllegalStateException, IOException {
-		String returnString = "";
-		try {
-			File filev = File.createTempFile("tmp", null);
-			file.transferTo(filev);
-			returnString = GenerateEntityUtil.buildEntityByTableName(filev, "sys_entity_filter");
-			//file.deleteOnExit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return returnString.replace("<", "&lt;").replace("<", "&gt;");
-	}
-	
+	// @RequestMapping("/template/sys/uploadfile1")
+	// @ResponseBody
+	// public String upload() throws IllegalStateException, IOException {
+	// String returnString = "";
+	// try {
+	// File filev = File.createTempFile("tmp", null);
+	// file.transferTo(filev);
+	// returnString = GenerateEntityUtil.buildEntityByTableName(filev,
+	// "sys_entity_filter");
+	// //file.deleteOnExit();
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// return returnString.replace("<", "&lt;").replace("<", "&gt;");
+	// }
+
 	@RequestMapping("/template/sys/getAllFileTable")
 	@ResponseBody
 	public void getAllFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
-			String oomFileName="";
-			String oomDirName=UUID.randomUUID().toString();
-			String oomName=UUID.randomUUID()+".oom";
-			String generateDirPath= generateDirPath(request,oomDirName);
-			oomFileName=generateDirPath+"/"+oomName;
-			File filev = new File(oomFileName);
+			String oomName = UUID.randomUUID() + ".oom";
+			File filev = new File(getOomDirPath(request) + "/" + oomName);
 			file.transferTo(filev);
-			 
-			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(filev);
-			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
+
+			List<BeanModel> beanModelList = GenerateEntityUtil.buildTableNameList(filev);
+			AjaxDataWrap<BeanModel> ajaxDataWrap = new AjaxDataWrap<BeanModel>();
 			ajaxDataWrap.setDataList(beanModelList);
 			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
-			responseData.setAjaxParameter("oomFileName", oomDirName+"/"+oomName);
+			responseData.setAjaxParameter("oomName", oomName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * 获取OOm所在文件夹
+	 * @param request
+	 * @return
+	 */
+	private String getOomDirPath(HttpServletRequest request){
+		return generateDirPath(request, oomDirPath)+"/";
+	}
+
 	@RequestMapping("/template/sys/assistant/generate")
 	@ResponseBody
 	public void generate(HttpServletRequest request) throws TemplateException, IOException {
-		
-		if(!StringUtil.isNullOrEmpty(oomFileName)){
-			List<String> tableNameList=new ArrayList<>();
-			if(dataWrap!=null){
-				tableNameList=dataWrap.getDataList().stream().map(MySQLTables::getTableName).collect(toList());
+
+		if (!StringUtil.isNullOrEmpty(oomName)) {
+			List<String> tableNameList = new ArrayList<>();
+			if (dataWrap != null) {
+				tableNameList = dataWrap.getDataList().stream().map(MySQLTables::getTableName).collect(toList());
 			}
-			File file = new File(getTempDir(request)+oomFileName);
-			Map<String, String> map=GenerateEntityUtil.buildEntityByTableNameList(file,tableNameList);
-			
-			String generateDirName=UUID.randomUUID().toString();
-			generateDirPath= generateDirPath(request,generateDirName);
-			map.entrySet().stream().forEach(e->{
+			File file = new File(getOomDirPath(request) + oomName);
+			Map<String, String> map = GenerateEntityUtil.buildEntityByTableNameList(file, tableNameList);
+
+			String generateDir = UUID.randomUUID().toString();
+			String generateDirPath = generateDirPath(request, generateDir);
+			map.entrySet().stream().forEach(e -> {
 				try {
-					generateEntityFile(generateDirPath,e.getKey(),e.getValue());
-					
+					generateEntityFile(generateDirPath, e.getKey(), e.getValue());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			});
-			
-			responseData.setAjaxParameter("generateDirPath", generateDirName);
+
+			responseData.setAjaxParameter("generateDir", generateDir);
 		}
 	}
-	
+
 	@SuppressWarnings("resource")
 	@RequestMapping("/template/sys/assistant/generateDetail")
 	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
-//		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
-//		if(!StringUtil.isNullOrEmpty(generateDirPath)&&!StringUtil.isNullOrEmpty(tableName)){
-//			String entityFileName=getTempDir(request)+generateDirPath+"/Entity/"+tableName.replace("t_", "").replace("T_", "")+".java";
-//			Map<String, String> map=new HashMap<String, String>();
-//			FileReader reader=new FileReader(entityFileName);
-//			BufferedReader bReader=new BufferedReader(reader);
-//			String s;
-//			StringBuffer sBuffer=new StringBuffer();
-//			while ((s = bReader.readLine()) != null) {
-//				sBuffer.append(s+"<br/>");
-//			}
-//			map.put("entity", sBuffer.toString());
-//			responseData.setAjaxParameter("map", map);
-//		}
+		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
+			String entityFileName = getTempDir(request) + generateDir + "/Entity/"+ tableName.replace("t_", "").replace("T_", "") + ".java";
+			Map<String, String> map = new HashMap<String, String>();
+			FileReader reader = new FileReader(entityFileName);
+			BufferedReader bReader = new BufferedReader(reader);
+			String s;
+			StringBuffer sBuffer = new StringBuffer();
+			while ((s = bReader.readLine()) != null) {
+				sBuffer.append(s + "<br/>");
+			}
+			map.put("entity", sBuffer.toString());
+			responseData.setAjaxParameter("map", map);
+		}
 		return "/template/sys/assistant/generateDetail";
 	}
-	
+
 	@RequestMapping("/template/sys/testGetDataWrap")
 	@ResponseBody
 	public void testGetDataWrap(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
- 			String oomFileName="";
-			testParam=request.getParameter("testParam");
-//			String generateDirPath= generateDirPath(request);
-//			oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
-//			File filev = new File(oomFileName);
-//			file.transferTo(filev);
-//			 
-//			List<BeanModel> beanModelList=GenerateEntityUtil.buildTableNameList(filev);
-//			AjaxDataWrap<BeanModel> ajaxDataWrap=new AjaxDataWrap<BeanModel>();
-//			ajaxDataWrap.setDataList(beanModelList);
+			String oomFileName = "";
+//			testParam = request.getParameter("testParam");
+			// String generateDirPath= generateDirPath(request);
+			// oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+			// File filev = new File(oomFileName);
+			// file.transferTo(filev);
+			//
+			// List<BeanModel>
+			// beanModelList=GenerateEntityUtil.buildTableNameList(filev);
+			// AjaxDataWrap<BeanModel> ajaxDataWrap=new
+			// AjaxDataWrap<BeanModel>();
+			// ajaxDataWrap.setDataList(beanModelList);
 			responseData.setAjaxParameter("ajaxDataWrap", null);
-//			responseData.setAjaxParameter("oomFileName", oomFileName);
+			// responseData.setAjaxParameter("oomFileName", oomFileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-//	String oomFileName="";
-//	try {
-//		String generateDirPath= generateDirPath(request);
-//		
-//		oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
-//		File file = new File(oomFileName);
-//		myfile.transferTo(file);
-//		List<String> tableNameLlist=new ArrayList<>();
-//		tableNameLlist.add("sys_menu");
-//		tableNameLlist.add("sys_entity_filter");
-//		
-//		Map<String,String> tableMap=GenerateEntityUtil.buildEntityByTableNameList(file, tableNameLlist);
-//		tableMap.entrySet().stream().forEach(entity->{
-//			String tableName=entity.getKey();
-//			String tableContent=entity.getValue();
-//			try {
-//				generateEntityFile(generateDirPath, tableName, tableContent);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		});
-//	} catch (Exception e) {
-//		e.printStackTrace();
-//	}
-//	
-//	return oomFileName;
+
+	// String oomFileName="";
+	// try {
+	// String generateDirPath= generateDirPath(request);
+	//
+	// oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
+	// File file = new File(oomFileName);
+	// myfile.transferTo(file);
+	// List<String> tableNameLlist=new ArrayList<>();
+	// tableNameLlist.add("sys_menu");
+	// tableNameLlist.add("sys_entity_filter");
+	//
+	// Map<String,String>
+	// tableMap=GenerateEntityUtil.buildEntityByTableNameList(file,
+	// tableNameLlist);
+	// tableMap.entrySet().stream().forEach(entity->{
+	// String tableName=entity.getKey();
+	// String tableContent=entity.getValue();
+	// try {
+	// generateEntityFile(generateDirPath, tableName, tableContent);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// });
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	//
+	// return oomFileName;
 
 	@RequestMapping("/template/sys/config/entityFilter")
 	@ResponseBody
@@ -206,58 +217,64 @@ public class GenerateEntityHandleController extends BaseHandleController {
 
 	@RequestMapping("/template/sys/config/generateFile")
 	@ResponseBody
-	private void downloadFiles(@RequestParam(required=false) List<File> files, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
-		String tempDirName=UUID.randomUUID()+"";
-		String generateDirPath= tempDir + tempDirName;
+	private void downloadFiles(@RequestParam(required = false) List<File> files, HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+		String tempDir = request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+		String tempDirName = UUID.randomUUID() + "";
+		String generateDirPath = tempDir + tempDirName;
 		File generateDir = new File(generateDirPath);
-		if(!generateDir.exists()){
+		if (!generateDir.exists()) {
 			generateDir.mkdir();
 			System.out.println("创建临时文件夹：" + generateDir.getCanonicalPath());
 		}
-		
-		String generateRepositoryDirPath=generateDirPath+"/repository";
+
+		String generateRepositoryDirPath = generateDirPath + "/repository";
 		File generateRepositoryDir = new File(generateRepositoryDirPath);
-		if(!generateRepositoryDir.exists()){
+		if (!generateRepositoryDir.exists()) {
 			generateRepositoryDir.mkdir();
 			System.out.println("创建临时文件夹repository：" + generateRepositoryDir.getCanonicalPath());
 		}
-		
-		String generateJspDirPath=generateDirPath+"/jsp";
+
+		String generateJspDirPath = generateDirPath + "/jsp";
 		File generateJspDir = new File(generateJspDirPath);
-		if(!generateJspDir.exists()){
+		if (!generateJspDir.exists()) {
 			generateJspDir.mkdir();
 			System.out.println("创建临时文件夹jsp：" + generateJspDir.getCanonicalPath());
 		}
-		
+
 		// 在服务器端创建打包下载的临时文件
-		String zipFilePath = tempDir+"/"+tempDirName + ".zip";
-		
+		String zipFilePath = tempDir + "/" + tempDirName + ".zip";
+
 		File fileZip = new File(zipFilePath);
 		// 文件输出流
 		FileOutputStream outStream = new FileOutputStream(fileZip);
 		// 压缩流
-		ZipUtil.toZip(generateDirPath,outStream,true);
-		
-		if(outStream!=null)
+		ZipUtil.toZip(generateDirPath, outStream, true);
+
+		if (outStream != null)
 			outStream.close();
 	}
 
 	/**
 	 * 生成实体文件
-	 * @param generateDirPath 生成文件夹根路径 在此基础上添加/entity/entity.java
-	 * @param fileName 文件名称
-	 * @param fileContent 文件内容
-	 * @throws IOException 异常
+	 * 
+	 * @param generateDirPath
+	 *            生成文件夹根路径 在此基础上添加/entity/entity.java
+	 * @param fileName
+	 *            文件名称
+	 * @param fileContent
+	 *            文件内容
+	 * @throws IOException
+	 *             异常
 	 */
-	private void generateEntityFile(String generateDirPath,String fileName,String fileContent) throws IOException{
-		String generateEntityDirPath=generateDirPath+"/entity";
+	private void generateEntityFile(String generateDirPath, String fileName, String fileContent) throws IOException {
+		String generateEntityDirPath = generateDirPath + "/entity";
 		File generateEntityDir = new File(generateEntityDirPath);
-		if(!generateEntityDir.exists()){
+		if (!generateEntityDir.exists()) {
 			generateEntityDir.mkdir();
 		}
-		
-		String entityFilePath = generateEntityDirPath+"/" + fileName + ".java";
+
+		String entityFilePath = generateEntityDirPath + "/" + fileName + ".java";
 		File entiryFile = new File(entityFilePath);
 		System.out.println("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
 		FileOutputStream fos = new FileOutputStream(entiryFile);
@@ -272,29 +289,31 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			fos.close();
 		}
 	}
-	
+
 	/**
-	 * 生成  自动创建实体仓库根文件夹
-	 * @param request 
+	 * 生成 自动创建实体仓库根文件夹
+	 * 
+	 * @param request
 	 * @return 返回根文件夹路径+名称
 	 */
-	private String generateDirPath(HttpServletRequest request,String driName){
-		String tempDir= getTempDir(request);
-		String generateDirPath= tempDir + driName;
+	private String generateDirPath(HttpServletRequest request, String driName) {
+		String tempDir = getTempDir(request);
+		String generateDirPath = tempDir + driName;
 		File generateDir = new File(generateDirPath);
-		if(!generateDir.exists()){
+		if (!generateDir.exists()) {
 			generateDir.mkdir();
 		}
 		return generateDirPath;
 	}
-	
+
 	/**
 	 * 获取缓存文件路径
+	 * 
 	 * @param request
 	 * @return
 	 */
-	private String getTempDir(HttpServletRequest request){
-		String tempDir= request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
+	private String getTempDir(HttpServletRequest request) {
+		String tempDir = request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
 		return tempDir;
 	}
 }
