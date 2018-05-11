@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa 
+		http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<bean id="propertyConfiger"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:jdbc.properties</value> 	
+		</property>
+	</bean> 
+	 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" >
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="url" value="${jdbc.url}"/>
+    </bean>
+    
+    <!--第二步-->
+    <!--定义实体的工厂bean-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--实体类位置-->
+        <property name="packagesToScan" value="cn.doublepoint"/>
+        <!--持久化单元名-->
+        <property name="persistenceUnitName" value="entityManager" />
+        <!--JPA提供者-->
+        <property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence"/>
+        <!--JPA属性-->
+        <property name="jpaProperties">
+            <props>
+                <!--配置方言-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <!--激活查询日志功能-->
+                <prop key="hibernate.show_sql">false</prop>
+                <!--优雅地输出Sql-->
+                <prop key="hibernate.format_sql">false</prop>
+                <!--添加一条解释型标注-->
+                <prop key="hibernate.use_sql_comments">false</prop>
+                <!--配置如何根据java模型生成数据库表结构,常用update,validate-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!--第三步-->
+    <!--定义事务管理器-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    
+     <!--第四步-->
+    <!--定义repository接口的存放目录-->
+    <!--定义接口实现的后缀，通常用Impl-->
+    <!--定义实体工厂的引用-->
+    <!--定义事务管理器的引用-->
+    <jpa:repositories base-package="cn.doublepoint"
+                      entity-manager-factory-ref="entityManagerFactory"
+                      transaction-manager-ref="transactionManager"/>
+
+    <!--第五步-->
+    <!--声明采用注解的方式申明事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

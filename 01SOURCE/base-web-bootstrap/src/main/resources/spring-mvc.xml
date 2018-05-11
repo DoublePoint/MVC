@@ -12,6 +12,7 @@
 
 	<!--自动扫描包 -->
 	<context:component-scan base-package="cn.doublepoint" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
@@ -21,8 +22,6 @@
 		<!-- <property name="prefix" value="/template" /> -->
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<bean id="autoConfig" class="cn.doublepoint.common.config.AutoConfiguration"></bean>
 
 	<!--处理静态资源 -->
 	<mvc:resources location="/images/" mapping="/images/**" />

@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,22 +27,28 @@ import com.fasterxml.jackson.databind.deser.Deserializers.Base;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 
+@Service
 public class JPAUtil {
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	@PersistenceContext
+	EntityManager em;  
+	  
+	
 	public <T extends BaseModel> void remove(Class<T> clazz, Object id) {
-		EntityManager entityManager = getEntityManager();
-		// EntityTransaction transaction = entityManager.getTransaction();
-		// transaction.begin();
-		T t = entityManager.find(clazz, id);
-		entityManager.remove(t);
-		// transaction.commit();
-		// entityManager.close();
+		//EntityManager entityManager = getEntityManager();
+//		EntityTransaction transaction = entityManager.getTransaction();
+//	 transaction.begin();
+
+		T t = em.find(clazz, id);
+		em.remove(t);
+//		entityManager.flush();
+//		transaction.commit();
+//		entityManager.close();
 	}
 
 	private EntityManager getEntityManager() {
-		EntityManager entityManager = (EntityManager) ApplicationContextUtil.getBean("entityManager");
-		return entityManager;
+		EntityManagerFactory entityManagerFactory = (EntityManagerFactory) ApplicationContextUtil.getBean("entityManagerFactory");
+		return entityManagerFactory.createEntityManager();
 
 	}
 }

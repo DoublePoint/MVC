@@ -70,7 +70,12 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 			return null;
 		String dataJsonString = new String(this.getBody());
 		dataJsonString=filterJsonString(dataJsonString);
-		jsonObject = JSON.parseObject(dataJsonString);
+		try{
+			jsonObject = JSON.parseObject(dataJsonString);
+		}
+		catch (Exception e){
+			
+		}
 		return jsonObject;
 	}
 	
