@@ -7,17 +7,15 @@
 * 
 * 修   改   人：          修   改   日   期：
 */ 
-package cn.doublepoint.common.port.adapter.template.persistence.sys.common;
+package cn.doublepoint.commonutil;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @Service
-public class ApplicationContectUtil implements ApplicationContextAware{
+public class ApplicationContextUtil implements ApplicationContextAware{
 	
 	// Spring应用上下文环境  
     private static ApplicationContext applicationContext;  
@@ -28,6 +26,6 @@ public class ApplicationContectUtil implements ApplicationContextAware{
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		ApplicationContectUtil.applicationContext = applicationContext;  
+		ApplicationContextUtil.applicationContext = applicationContext;  
 	}
 }

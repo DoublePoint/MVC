@@ -16,8 +16,11 @@ function retrieve() {
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
 		async : false,
-		data : JSON.stringify(ajaxDataWrap),
-		success : function(ajaxDataWrap) {
+		data :{
+			dataWrap:ajaxDataWrap
+		},
+		success : function(response) {
+			var ajaxDataWrap=response.get("ajaxDataWrap");
 			if(ajaxDataWrap==null||ajaxDataWrap.dataList==null||ajaxDataWrap.dataList.length==0)
 				$.shakeTips("未查询到任何数据!",2000);
 			lltestdatagrid.setDataWrap(ajaxDataWrap);
@@ -46,7 +49,7 @@ function onClickAdd() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/sys/menu/menuDialog',
+		url : $$pageContextPath + '/template/sys/menu/menuDialog',
 		data : ajaxDataWrap,
 		yes : function() {
 			retrieve();
@@ -67,7 +70,7 @@ function onClickEdit(){
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data={
-				dataWrap:lltestdatagrid.collectData("checked")
+			deleteDataWrap:lltestdatagrid.collectData("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/menu/delete",
@@ -112,7 +115,7 @@ function rowClickTest(data,a,b,c) {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/sys/menu/menuDialog?type=modify',
+		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=modify',
 		data : ajaxDataWrap,
 		yes : function() {
 			retrieve();
@@ -135,7 +138,7 @@ function dbclickgrid(para1,data,index){
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		content : $$pageContextPath + '/template/sys/menu/menuDialog?type=edit',
+		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=edit',
 		data : ajaxDataWrap,
 		yes : function() {
 			retrieve();

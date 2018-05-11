@@ -410,6 +410,9 @@ var _RegisterModel=new RegisterModel();
 			var successFunction=settings.success;
 			if(successFunction!=null){
 				settings.success=function(responseData){
+					if(!$.doResponse(responseData)){
+						return;
+					}
 					var res=new AjaxResponse(responseData);
 					successFunction(res);
 				}
@@ -419,6 +422,9 @@ var _RegisterModel=new RegisterModel();
 			var errorFunction=settings.error;
 			if(errorFunction!=null){
 				settings.error=function(responseData){
+					if(!$.doResponse(responseData)){
+						return;
+					}
 					var res=new AjaxResponse(responseData);
 					errorFunction(res);
 				}

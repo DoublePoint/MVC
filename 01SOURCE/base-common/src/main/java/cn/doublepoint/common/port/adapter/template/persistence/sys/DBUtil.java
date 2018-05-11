@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import cn.doublepoint.common.port.adapter.template.persistence.sys.common.ApplicationContectUtil;
+import cn.doublepoint.commonutil.ApplicationContextUtil;
 
 public class DBUtil {
 	
@@ -25,6 +25,6 @@ public class DBUtil {
 	}
 
 	public DBUtil() {
-		jdbcTemplate=(JdbcTemplate)ApplicationContectUtil.getBean("jdbcTemplate");
+		jdbcTemplate=(JdbcTemplate)ApplicationContextUtil.getBean("jdbcTemplate");
 	}
 }

@@ -11,6 +11,9 @@ package cn.doublepoint.common.config;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
 import javax.sql.DataSource;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -50,6 +53,13 @@ public class AutoConfiguration {
 		entityManagerFactoryBean.setPackagesToScan("cn.doublepoint");
 		entityManagerFactoryBean.setJpaProperties(hibProperties());
 		return entityManagerFactoryBean;
+	}
+	
+	@Bean 
+	public EntityManager entityManager(EntityManagerFactory entityManagerFactory){
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.setFlushMode(FlushModeType.AUTO);
+		return entityManager;
 	}
 
 	@Bean

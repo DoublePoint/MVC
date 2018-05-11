@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.jpa.impl.JPAUtil;
+
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuRepository;
@@ -72,7 +74,7 @@ public class MenuApplicationService {
 	}
 	
 	public boolean removeMenu(List<Menu> menuList){
-		menuRepository.delete(menuList);
+		new cn.doublepoint.commonutil.persitence.jpa.JPAUtil().remove(Menu.class,menuList.get(0).getId());
 		return true;
 	}
 }

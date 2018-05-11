@@ -23,13 +23,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
+import cn.doublepoint.commonutil.ApplicationContextUtil;
 
 public class DataBaseMetaDataUtil {
 	private static JdbcTemplate jdbcTemplate;
 	private static Map<String, String> map;
 
 	static {
-		jdbcTemplate = (JdbcTemplate) ApplicationContectUtil.getBean("jdbcTemplate");
+		jdbcTemplate = (JdbcTemplate) ApplicationContextUtil.getBean("jdbcTemplate");
 		map=new HashMap<String, String>();
 	}
 

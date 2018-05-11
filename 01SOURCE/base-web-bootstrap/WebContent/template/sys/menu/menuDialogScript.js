@@ -16,12 +16,15 @@ function init(response) {
 
 function onClickSave(){
 	var data=ajaxform.getData();
-	$.ajax({
-		type : 'post',
-		// dataType : "JSON",
-		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
+	var addDataWrap =  $.createAjaxDataWrap();
+	var dataList=new Array();
+	dataList[0]=data;
+	addDataWrap.setDataList(dataList);
+	$.request({
 		url : $$pageContextPath + "/template/sys/menu/add",
-		data : JSON.stringify(data) + "",
+		data : {
+			addDataWrap:addDataWrap
+		},
 		success : function(data1) {
 			$.tips('保存成功');
 			$.close();

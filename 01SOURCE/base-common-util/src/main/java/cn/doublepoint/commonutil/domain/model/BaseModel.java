@@ -9,7 +9,13 @@
 */
 package cn.doublepoint.commonutil.domain.model;
 
-public class BaseModel {
+import java.io.Serializable;
+
+public class BaseModel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int rowId=-1;
 
 	public int getRowId() {
