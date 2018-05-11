@@ -1,8 +1,12 @@
 package cn.doublepoint.common.application.template.sys.menu;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Parameter;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.Query;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -42,6 +47,9 @@ public class MenuQueryService extends BaseQueryService{
 
 	@Resource
 	MenuRepository menuRepository;
+	
+	@Autowired
+	EntityManagerFactory entityManagerFactory;
 
 	/**
 	 * 查询最底层菜单
@@ -49,6 +57,10 @@ public class MenuQueryService extends BaseQueryService{
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VOMenu> findRootMenu(PageInfo pageInfo) {
+		EntityManager entityManager=entityManagerFactory.createEntityManager();
+		javax.persistence.Query qq=entityManager.createQuery("SELECT m,1 As aaa FROM Menu m where m.level=:level");
+		qq.setParameter("level", XTConstant.TREE_ROOT_NODE_CJ);
+		List list=qq.getResultList();
 		QMenu query = QMenu.menu;
 		Predicate predicate = query.level.eq(XTConstant.TREE_ROOT_NODE_CJ);
 		AjaxDataWrap<Menu> dataWrap = findAll(Menu.class, predicate, pageInfo, menuRepository);
