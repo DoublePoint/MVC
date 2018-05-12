@@ -48,7 +48,7 @@
  						</div>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
-						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
+						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
 							<ll-gridcheck ></ll-gridcheck>
 							<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
 							<ll-gridfield field="name" title="菜单名称" width="100"></ll-gridfield> 

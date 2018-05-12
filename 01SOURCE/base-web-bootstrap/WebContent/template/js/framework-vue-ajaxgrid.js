@@ -1,4 +1,11 @@
-var gridProps=["classes"
+var gridProps=[	//私有的
+                "id"
+                ,"datasource"
+                ,"columns",
+                "onrowclick",
+               	"onpageclick",
+               	//-----------
+               	"classes"
                 ,"sortClass"
                 ,"height"
                 ,"undefinedText"
@@ -98,11 +105,7 @@ var gridProps=["classes"
                 ,"onRefreshOptions"
                 ,"onRefresh"
                 ,"onScrollBody"
-                //私有的
-                ,"id"
-                ,"datasource"
-                ,"columns",
-                "onrowclick"];
+                ];
 Vue.component(_ConstantComponentMap._AjaxGrid, {
 	props : gridProps,
 	template : '<div style="height:100%;" class="table-responsive"><table class="bootstrapTable"  :id="gridId" ><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
@@ -296,7 +299,7 @@ function AjaxGrid(domId) {
 		if (isGetData == null)
 			isGetData = true;
 		if (!isGetData) {
-			var adw = new $.createAjaxDataWrap();
+			var adw =  $.createAjaxDataWrap();
 			adw.pageInfo = this.datawrap.pageInfo;
 			return adw;
 		}
@@ -311,7 +314,7 @@ function AjaxGrid(domId) {
 	this.getOndblclick = function() {
 		return this.ondblclick;
 	}
-	this.getPageClick = function() {
+	this.getOnPageClick = function() {
 		return this.onpageclick;
 	};
 	this.getRow = function(rowIndex) {
@@ -352,11 +355,11 @@ function AjaxGrid(domId) {
 		this.initBootstrapSetting();
 	};
 	this.initEvent = function() {
-		//分页点击事件
-		var pageclickFunction = this.onpageclick;
-		if (pageclickFunction != null) {
-			_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
-		}
+//		//分页点击事件
+//		var pageclickFunction = this.getPageClick();
+//		if (pageclickFunction != null) {
+//			_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
+//		}
 	};
 	this.initStyle=function(){
 		// 高度设置为获取父元素的高度
@@ -452,9 +455,9 @@ function AjaxGrid(domId) {
 	this.setOndblclick = function(aOnDblclick) {
 		this.ondblclick = aOnDblclick;
 	}
-	this.setPageClickFunctionName = function(funName) {
-		this.onPageClickFunctionName = funName;
-	};
+//	this.setPageClickFunctionName = function(funName) {
+//		this.onPageClickFunctionName = funName;
+//	};
 	this.setPager = function(page) {
 		if (page == null)
 			return;
@@ -472,7 +475,8 @@ function AjaxGrid(domId) {
 					var pageSize = obj.limit;
 					ajaxDataGrid.getDataWrap().pageInfo.pageSize = pageSize;
 					ajaxDataGrid.getDataWrap().pageInfo.currentPageNum = currentPageNum;
-					$._Eval(ajaxDataGrid.getPageClickFunctionName());
+					if(ajaxDataGrid.getOnPageClick()!=null)
+						$._Eval(ajaxDataGrid.getOnPageClick());
 				}
 			}
 		});
@@ -499,6 +503,10 @@ function AjaxGrid(domId) {
 			var wrap=$._Clone(this.getDataWrap());
 			var dataList=this.getDom().bootstrapTable('getData');;
 			wrap.dataList=$._Clone(dataList);
+			return wrap;
+		}
+		else{
+			var wrap=$._Clone(this.getDataWrap());
 			return wrap;
 		}
 	}

@@ -33,7 +33,6 @@ public class DataDecapsulateFilter extends OncePerRequestFilter {
 		Log4jUtil.info("Do fileter internal.");
 		String contentType = request.getContentType();// 获取请求的content-type
 		if (contentType == null) {
-			//filterChain.doFilter(request, response);
 			doOtherRequest(request,response,filterChain);
 			return;
 		}
@@ -43,7 +42,6 @@ public class DataDecapsulateFilter extends OncePerRequestFilter {
 		} else {
 			doOtherRequest(request,response,filterChain);
 		}
-		
 	}
 	
 	/**

@@ -1,5 +1,5 @@
 function retrieve() {
-	var ajaxDataWrap = lltestdatagrid.getDataWrap(false);
+	var dataWrap = lltestdatagrid.collectData();
 	var nodes = treeDemo.getSelectedNodes();
 	var selectNodeCdbs="";
 	if (nodes.length > 0) {
@@ -9,7 +9,7 @@ function retrieve() {
 	formData.id=selectNodeCdbs;
 	var array = new Array();
 	array.push(formData);
-	ajaxDataWrap.setDataList(array);
+	dataWrap.setDataList(array);
 	$.request({
 		url : $$pageContextPath + "/template/sys/menu/datalist",
 		type : "POST",
@@ -17,13 +17,13 @@ function retrieve() {
 		dataType : "json",
 		async : false,
 		data :{
-			dataWrap:ajaxDataWrap
+			dataWrap:dataWrap
 		},
 		success : function(response) {
-			var ajaxDataWrap=response.get("ajaxDataWrap");
-			if(ajaxDataWrap==null||ajaxDataWrap.dataList==null||ajaxDataWrap.dataList.length==0)
+			var dataWrap=response.get("dataWrap");
+			if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
 				$.shakeTips("未查询到任何数据!",2000);
-			lltestdatagrid.setDataWrap(ajaxDataWrap);
+			lltestdatagrid.setDataWrap(dataWrap);
 		}
 	});
 }

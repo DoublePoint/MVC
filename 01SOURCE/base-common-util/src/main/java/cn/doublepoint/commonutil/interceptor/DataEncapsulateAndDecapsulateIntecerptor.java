@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
 
@@ -29,7 +28,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -209,7 +207,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 * @throws JsonMappingException
 	 * @throws JsonParseException
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	private void decapsulateAjaxDataWrap(HttpServletRequest request, BaseController controller, Field field)
 			throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoSuchMethodException,
 			SecurityException, InvocationTargetException, JsonParseException, JsonMappingException, IOException {
@@ -270,43 +268,4 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 		modelAndView.addObject("LLAjaxResponse", JSON.toJSONString(responseData));
 	}
 
-	@SuppressWarnings("unused")
-	private void encapsulateAjaxDataWrap(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Object bean) {
-		BodyReaderHttpServletRequestWrapper req = (BodyReaderHttpServletRequestWrapper) request;
-		String dataJsonString = new String(req.getBody());
-		JSONObject jsonObject = JSON.parseObject(dataJsonString);
-		BaseController requestController = (BaseController) bean;
-		Field[] fields = requestController.getClass().getDeclaredFields();
-		Stream.of(fields).forEach(field -> {
-
-			// 获取f字段的通用类型
-			Type genericType = field.getGenericType(); // 关键的地方得到其Generic的类型
-			// 如果不为空并且是泛型参数的类型
-			if (genericType != null && genericType instanceof ParameterizedType) {
-				ParameterizedType fieldTypeReal = (ParameterizedType) genericType;
-
-				// 泛型有可能有多个
-				Type[] types = fieldTypeReal.getActualTypeArguments();
-				if (types != null && types.length > 0) {
-					// 默认就使用一个
-					Type type = types[0];
-					Class c = type.getClass();
-					try {
-						Object cObject = c.newInstance();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					// 遍历方形进行操作
-					// Class<?>[] classes = new Class<?>[types.length];
-					// for (int i = 0; i < classes.length; i++) {
-					// classes[i] = (Class<?>) types[i];
-					// }
-				}
-			}
-
-		});
-	}
 }
