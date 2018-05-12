@@ -19,13 +19,12 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.querydsl.jpa.impl.JPAUtil;
-
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuRepository;
 import cn.doublepoint.commonutil.domain.model.SnowflakeIdWorker;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 
 @Service("menuApplicationService")
 public class MenuApplicationService {
@@ -34,9 +33,6 @@ public class MenuApplicationService {
 	
 	@Resource
 	SnowflakeIdWorker idWorker;
-	
-	@Autowired
-	cn.doublepoint.commonutil.persitence.jpa.JPAUtil jpaUtil;
 	
 	/*@Resource
 	BaseRepositoryUtil jpaUtil;	*/
@@ -78,9 +74,9 @@ public class MenuApplicationService {
 		return true;
 	}
 	
-	@Transactional
+	
 	public boolean removeMenu(List<Menu> menuList){
-		jpaUtil.remove(Menu.class,menuList.get(0).getId());
+		JPAUtil.remove(Menu.class,menuList.get(0).getId());
 		return true;
 	}
 }
