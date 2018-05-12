@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Query;
+import com.querydsl.core.types.Constant;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -32,6 +33,8 @@ import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
+import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 
 /**
  * 创 建 人： 刘磊
@@ -57,13 +60,11 @@ public class MenuQueryService extends BaseQueryService{
 	 * @return 最底层菜单列表
 	 */
 	public AjaxDataWrap<VOMenu> findRootMenu(PageInfo pageInfo) {
-		EntityManager entityManager=entityManagerFactory.createEntityManager();
-		javax.persistence.Query qq=entityManager.createQuery("SELECT m,1 As aaa FROM Menu m where m.level=:level");
-		qq.setParameter("level", XTConstant.TREE_ROOT_NODE_CJ);
-		List list=qq.getResultList();
-		QMenu query = QMenu.menu;
-		Predicate predicate = query.level.eq(XTConstant.TREE_ROOT_NODE_CJ);
-		AjaxDataWrap<Menu> dataWrap = findAll(Menu.class, predicate, pageInfo, menuRepository);
+		AjaxDataWrap<Menu> dataWrap=new AjaxDataWrap<>();
+		QueryParamList queryParamList=new QueryParamList();
+		queryParamList.addParam("level", XTConstant.TREE_ROOT_NODE_CJ);
+		List<Menu> list=JPAUtil.load(Menu.class, queryParamList);
+		dataWrap.setDataList(list);
 		AjaxDataWrap<VOMenu> ajaxDataWrap = dataWrap.copy(VOMenu.class);
 		return ajaxDataWrap;
 	}

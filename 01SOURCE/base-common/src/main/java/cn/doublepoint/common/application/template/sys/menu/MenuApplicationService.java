@@ -14,10 +14,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
@@ -76,7 +73,9 @@ public class MenuApplicationService {
 	
 	
 	public boolean removeMenu(List<Menu> menuList){
-		JPAUtil.remove(Menu.class,menuList.get(0).getId());
+		menuList.stream().forEach(item->{
+			JPAUtil.remove(item);
+		});
 		return true;
 	}
 }

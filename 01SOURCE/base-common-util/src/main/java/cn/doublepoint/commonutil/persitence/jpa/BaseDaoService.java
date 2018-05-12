@@ -9,7 +9,10 @@
 */ 
 package cn.doublepoint.commonutil.persitence.jpa;
 
+import java.util.List;
+
 import cn.doublepoint.commonutil.domain.model.BaseModel;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 
 public interface BaseDaoService {
 
@@ -19,4 +22,19 @@ public interface BaseDaoService {
 	 * @param id
 	 */
 	public <T extends BaseModel> void remove(Class<T> clazz, Object id);
+
+	/**
+	 * 加载数据
+	 * @param clazz
+	 * @param paramsList
+	 * @return
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList paramsList);
+
+	/**
+	 * 加载全部数据
+	 * @param clazz
+	 * @return
+	 */
+	public <T extends BaseModel> List<T> loadAll(Class<T> clazz);
 }
