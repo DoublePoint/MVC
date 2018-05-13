@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.application.template.sys.menu.MenuQueryService;
+import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
@@ -56,9 +58,12 @@ public class MenuTreeController extends BaseTreeController {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
 		if (cd == null||StringUtil.isNullOrEmpty(cd.getId()))
-			menuList = menuQueryService.findRootMenu(pageRequest).getDataList();
-		else
-			menuList = menuQueryService.findChildrenMenu(cd, pageRequest).getDataList();
+			menuList = CommonBeanUtils.copyTo(menuQueryService.findRootMenu(pageRequest), VOMenu.class);
+		else{
+			Menu query=new Menu();
+			CommonBeanUtils.copyProperties(cd, query);
+			menuList = CommonBeanUtils.copyTo(menuQueryService.findChildrenMenu(query, pageRequest), VOMenu.class);
+		}
 		if (menuList == null) {
 			return null;
 		} else {

@@ -19,45 +19,18 @@ import org.springframework.data.domain.Sort;
 import com.alibaba.fastjson.JSONObject;
 
 public class PageInfo {
-	private final int DEFAULT_PAGE_SIZE=20;
+	private final long DEFAULT_PAGE_SIZE=20;
 	
-	private int currentPageNum=1;
-	private int currentPageCount=0;
+	private long currentPageNum=1;
+	private long currentPageCount=0;
 	private long totalElementCount=0;
-	private int totalPageCount=1;
-	private int pageSize=DEFAULT_PAGE_SIZE;
+	private long totalPageCount=1;
+	private long pageSize=DEFAULT_PAGE_SIZE;
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getFromJsonObject(JSONObject jsonObject, Class modelClass) {
-		Field[] fields = this.getClass().getDeclaredFields();
-		Stream.of(fields).forEach(field -> {
-			field.setAccessible(true);
-			String fieldName = field.getName();
-			Class<?> fieldType = field.getType();
-			try {
-				if(fieldType==int.class){
-					field.set(this, jsonObject.getIntValue(fieldName));
-					return;
-				}
-				if(fieldType==long.class){
-					field.set(this, jsonObject.getLongValue(fieldName));
-					return;
-				}
-				if(fieldType==Sort.class){
-					
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-	
-	
-	
-	public int getCurrentPageNum() {
+	public long getCurrentPageNum() {
 		return currentPageNum;
 	}
-	public void setCurrentPageNum(int currentPageNum) {
+	public void setCurrentPageNum(long currentPageNum) {
 		this.currentPageNum = currentPageNum;
 	}
 	public long getTotalElementCount() {
@@ -65,23 +38,25 @@ public class PageInfo {
 	}
 	public void setTotalElementCount(long totalElementCount) {
 		this.totalElementCount = totalElementCount;
+		this.totalPageCount=(long)Math.ceil(totalElementCount/pageSize);
 	}
-	public int getTotalPageCount() {
+	public long getTotalPageCount() {
 		return totalPageCount;
 	}
-	public void setTotalPageCount(int totalPageCount) {
+	public void setTotalPageCount(long totalPageCount) {
 		this.totalPageCount = totalPageCount;
 	}
-	public int getPageSize() {
+	public long getPageSize() {
 		return pageSize;
 	}
-	public void setPageSize(int pageSize) {
+	public void setPageSize(long pageSize) {
 		this.pageSize = pageSize;
+		this.totalPageCount=(long)Math.ceil(totalElementCount/pageSize);
 	}
-	public int getCurrentPageCount() {
+	public long getCurrentPageCount() {
 		return currentPageCount;
 	}
-	public void setCurrentPageCount(int currentPageCount) {
+	public void setCurrentPageCount(long currentPageCount) {
 		this.currentPageCount = currentPageCount;
 	}
 	public PageInfo() {
@@ -92,7 +67,7 @@ public class PageInfo {
 		totalPageCount=1;
 		pageSize=DEFAULT_PAGE_SIZE;
 	}
-	public PageInfo(int currentPageNum, int pageSize) {
+	public PageInfo(long currentPageNum, long pageSize) {
 		super();
 		this.currentPageNum = currentPageNum;
 		this.pageSize = pageSize;

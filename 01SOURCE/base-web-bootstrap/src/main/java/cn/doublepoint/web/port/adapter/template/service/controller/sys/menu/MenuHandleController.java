@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cn.doublepoint.common.application.template.sys.menu.MenuApplicationService;
 import cn.doublepoint.common.application.template.sys.menu.MenuQueryService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
-import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
@@ -34,7 +33,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleContro
 @RequestMapping("/template/sys/menu")
 public class MenuHandleController extends BaseHandleController {
 
-	private AjaxDataWrap<VOMenu> dataWrap;
+	private AjaxDataWrap<Menu> dataWrap;
 	private AjaxDataWrap<Menu> deleteDataWrap;
 	private AjaxDataWrap<Menu> addDataWrap;
 	
@@ -49,7 +48,7 @@ public class MenuHandleController extends BaseHandleController {
 	public void menuDataList() {
 		if(dataWrap==null)
 			return;
-		VOMenu menuQuery=null;
+		Menu menuQuery=null;
 		PageInfo pageInfo=dataWrap.getPageInfo();
 		pageInfo.setPageSize(10);
 		if(dataWrap.getDataList()!=null&&dataWrap.getDataList().size()>0){
@@ -57,7 +56,8 @@ public class MenuHandleController extends BaseHandleController {
 		}
 	
 		if(menuQuery!=null){
-			dataWrap=menuQueryService.findChildrenMenu(menuQuery,pageInfo);
+			List<Menu> list=menuQueryService.findChildrenMenu(menuQuery,pageInfo);
+			dataWrap.setDataList(list);
 		}
 		responseData.setAjaxParameter("dataWrap", dataWrap);
 	}
@@ -65,25 +65,19 @@ public class MenuHandleController extends BaseHandleController {
 	
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
-	public AjaxDataWrap<VOMenu> menuDataListDataWrap(@RequestBody(required=false) Menu menu) {
+	public AjaxDataWrap<Menu> menuDataListDataWrap(@RequestBody(required=false) Menu menu) {
 		PageInfo pageRequest=new PageInfo(1, 10);
-		AjaxDataWrap<VOMenu> ajaxDataWrap=new AjaxDataWrap<VOMenu>();
+		AjaxDataWrap<Menu> ajaxDataWrap=new AjaxDataWrap<Menu>();
 		if(menu==null||menu.getId()==null||"".equals(menu.getId())){
 			ajaxDataWrap= menuQueryService.findAllMenu(pageRequest);
 		}
 		else{
-			VOMenu menuQuery=new VOMenu();
+			Menu menuQuery=new Menu();
 			menuQuery.setId(menu.getId());
-			ajaxDataWrap=menuQueryService.findChildrenMenu(menuQuery,pageRequest);
+			List<Menu> list=menuQueryService.findChildrenMenu(menuQuery,pageRequest);
+			dataWrap.setDataList(list);
 		}
 
-		ObjectMapper mapper = new ObjectMapper();  
-		try {
-			String jsonStr = mapper.writeValueAsString(ajaxDataWrap);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return ajaxDataWrap;
 	}
 	

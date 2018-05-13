@@ -2,12 +2,8 @@ package cn.doublepoint.common.application.template.sys.menu;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Parameter;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,17 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Query;
-import com.querydsl.core.types.Constant;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import cn.doublepoint.common.application.template.sys.BaseQueryService;
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
-import cn.doublepoint.common.domain.model.entity.sys.QMenu;
-import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuRepository;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
@@ -59,14 +49,11 @@ public class MenuQueryService extends BaseQueryService{
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VOMenu> findRootMenu(PageInfo pageInfo) {
-		AjaxDataWrap<Menu> dataWrap=new AjaxDataWrap<>();
+	public List<Menu> findRootMenu(PageInfo pageInfo) {
 		QueryParamList queryParamList=new QueryParamList();
 		queryParamList.addParam("level", XTConstant.TREE_ROOT_NODE_CJ);
 		List<Menu> list=JPAUtil.load(Menu.class, queryParamList);
-		dataWrap.setDataList(list);
-		AjaxDataWrap<VOMenu> ajaxDataWrap = dataWrap.copy(VOMenu.class);
-		return ajaxDataWrap;
+		return list;
 	}
 
 	/**
@@ -74,13 +61,11 @@ public class MenuQueryService extends BaseQueryService{
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VOMenu> findChildrenMenu(VOMenu menu, PageInfo pageInfo) {
-		QMenu query = QMenu.menu;
-		BooleanBuilder bb=new BooleanBuilder();
-		if(StringUtil.isNotEmpty(menu.getId()))
-			bb.and(query.parentId.eq(menu.getId()));
-		AjaxDataWrap<Menu> dataWrap = findAll(Menu.class, bb.getValue(), pageInfo, menuRepository);
-		return dataWrap.copy(VOMenu.class);
+	public List<Menu> findChildrenMenu(Menu menu, PageInfo pageInfo) {
+		QueryParamList paramList=new QueryParamList();
+		if(!StringUtil.isNullOrEmpty(menu.getId()))
+			paramList.addParam("parentId",menu.getId());
+		return JPAUtil.load(Menu.class,paramList, pageInfo);
 	}
 
 	/**
@@ -88,18 +73,19 @@ public class MenuQueryService extends BaseQueryService{
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VOMenu> findAllMenu(PageInfo pageInfo) {
+	public AjaxDataWrap<Menu> findAllMenu(PageInfo pageInfo) {
+		JPAUtil.load(Menu.class, pageInfo);
 		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, menuRepository);
-		return ajaxDataWrap.copy(VOMenu.class);
+		return ajaxDataWrap.copy(Menu.class);
 	}
 	/**
 	 * 查询所有菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<VOMenu> findAllMenu(VOMenu menu,PageInfo pageInfo) {
+	public AjaxDataWrap<Menu> findAllMenu(Menu menu,PageInfo pageInfo) {
 		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, menuRepository);
-		return ajaxDataWrap.copy(VOMenu.class);
+		return ajaxDataWrap.copy(Menu.class);
 	}
 
 	private <T extends BaseEntity> AjaxDataWrap<T> findAll(Class<T> clazz, Predicate predicate, PageInfo pageInfo,

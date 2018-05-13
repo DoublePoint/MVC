@@ -18,18 +18,47 @@ import javax.persistence.Id;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 
 public class JPAUtil {
 	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
 	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList);
+		return daoService.load(clazz,queryParamList,null);
+	}
+	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> List<T> load(Class<T> clazz,PageInfo pageInfo) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.load(clazz,null,pageInfo);
+	}
+	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,PageInfo pageInfo) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.load(clazz,queryParamList,pageInfo);
 	}
 	
 	public static <T extends BaseModel> List<T> loadAll(Class<T> clazz) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.loadAll(clazz);
+		return daoService.load(clazz,null,null);
 	}
 
 	/**

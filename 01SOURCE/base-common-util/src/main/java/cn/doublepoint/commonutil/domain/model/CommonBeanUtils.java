@@ -54,7 +54,7 @@ public class CommonBeanUtils extends BeanUtils {
 	public static PageRequest copyPageInfoToPageable(PageInfo pageInfo) {
 		if(pageInfo==null)
 			return null;
-		PageRequest pageable = new PageRequest(pageInfo.getCurrentPageNum()<=0?pageInfo.getCurrentPageNum():pageInfo.getCurrentPageNum()-1, pageInfo.getPageSize());// 从0开始查询二十条
+		PageRequest pageable = new PageRequest(pageInfo.getCurrentPageNum()<=0?(int)pageInfo.getCurrentPageNum():(int)(pageInfo.getCurrentPageNum()-1), (int)(pageInfo.getPageSize()));// 从0开始查询二十条
 		return pageable;
 	}
 

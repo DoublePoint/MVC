@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.domain.model.AjaxResponse;
+import cn.doublepoint.commonutil.domain.model.Log4jUtil;
 
 public class BaseController {
 	public AjaxResponse responseData;
@@ -29,6 +30,7 @@ public class BaseController {
 		AjaxResponse response=new AjaxResponse();
 		response.setCode("-1");
 		response.setErrorMessage(ex.getMessage());
+		Log4jUtil.error(ex.getMessage());
 		return response;
     }
 
