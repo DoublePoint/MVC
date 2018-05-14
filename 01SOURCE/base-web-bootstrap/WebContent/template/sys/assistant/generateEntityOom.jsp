@@ -40,7 +40,7 @@
 				        <ll-fillarea-tb height="*" title="数据库表" showtitle="true">  
 				           <ll-ajaxgrid  id="gridResource"  >  
 				           		<ll-gridcheck></ll-gridcheck>  
-				              	<ll-gridfield  field="tableName"  title="表名"></ll-gridfield>  
+				              	<ll-gridfield  field="annotationTableName"  title="表名"></ll-gridfield>  
 				         	</ll-ajaxgrid>
 				         </ll-fillarea-tb>  
 				      </ll-filllayout>  

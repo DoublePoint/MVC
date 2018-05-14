@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-04-03 23:07:367
+ * 创   建   时   间 ： 2018-05-14 17:22:04
  * 
  * 类   说   明 ：
  * 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="sys_menu")
+@Table(name="SYS_MENU")
 public class Menu extends BaseEntity {
 	/**
 	 * 序列化ID
@@ -23,36 +23,36 @@ public class Menu extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private String id;
+	@Column(name="ID")
+	private Long id;
 	
-	@Column
+	@Column(name="NAME")
 	private String name;
 	
-	@Column
+	@Column(name="LINK")
 	private String link;
 	
-	@Column
-	private String parentId;
+	@Column(name="PARENT_ID")
+	private Long parentId;
 	
-	@Column
+	@Column(name="LEVEL")
 	private Integer level;
 	
-	@Column
+	@Column(name="SN")
 	private Integer sn;
 	
-	@Column
+	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 	
-	@Column
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -72,11 +72,11 @@ public class Menu extends BaseEntity {
 		this.link = link;
 	}
 
-	public String getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 	
-	public void setParentId(String parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
@@ -112,6 +112,15 @@ public class Menu extends BaseEntity {
 		this.createTime = createTime;
 	}
 	public String toString() {
-		return "Menu [id=" + id + ",name=" + name + ",link=" + link + ",parentId=" + parentId + ",level=" + level + ",sn=" + sn + ",modifyTime=" + modifyTime + ",createTime=" + createTime + "]";
+		return "Menu ["
+		+"id=" + id +","
+		+"name=" + name +","
+		+"link=" + link +","
+		+"parentId=" + parentId +","
+		+"level=" + level +","
+		+"sn=" + sn +","
+		+"modifyTime=" + modifyTime +","
+		+"createTime=" + createTime 
+		+"]";
 	}
 }

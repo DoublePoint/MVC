@@ -24,7 +24,6 @@ import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
-import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
 @Controller
@@ -57,7 +56,7 @@ public class MenuTreeController extends BaseTreeController {
 	private List<VOMenu> getChildrenMenuList(VOMenu cd) {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
-		if (cd == null||StringUtil.isNullOrEmpty(cd.getId()))
+		if (cd == null||cd.getId()==null)
 			menuList = CommonBeanUtils.copyTo(menuQueryService.findRootMenu(pageRequest), VOMenu.class);
 		else{
 			Menu query=new Menu();

@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-04-03 23:07:367
+ * 创   建   时   间 ： 2018-05-14 17:22:476
  * 
  * 类   说   明 ：
  * 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="sys_admin")
+@Table(name="SYS_ADMIN")
 public class Admin extends BaseEntity {
 	/**
 	 * 序列化ID
@@ -23,27 +23,27 @@ public class Admin extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private String id;
+	@Column(name="ID")
+	private Long id;
 	
-	@Column
+	@Column(name="LOGIN_ACCOUNT_NO")
 	private String loginAccountNo;
 	
-	@Column
+	@Column(name="LOGIN_PASSWORD")
 	private String loginPassword;
 	
-	@Column
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column
+	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -79,6 +79,12 @@ public class Admin extends BaseEntity {
 		this.modifyTime = modifyTime;
 	}
 	public String toString() {
-		return "Admin [id=" + id + ",loginAccountNo=" + loginAccountNo + ",loginPassword=" + loginPassword + ",createTime=" + createTime + ",modifyTime=" + modifyTime + "]";
+		return "Admin ["
+		+"id=" + id +","
+		+"loginAccountNo=" + loginAccountNo +","
+		+"loginPassword=" + loginPassword +","
+		+"createTime=" + createTime +","
+		+"modifyTime=" + modifyTime 
+		+"]";
 	}
 }

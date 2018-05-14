@@ -9,16 +9,9 @@
 */
 package cn.doublepoint.common.application.template.sys.entity;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
-import cn.doublepoint.common.port.adapter.template.persistence.sys.entity.EntityFilterRepository;
 
 @Service
 public class EntityFilterApplicationService {
-
-	@Resource
-	EntityFilterRepository repository;
 
 }

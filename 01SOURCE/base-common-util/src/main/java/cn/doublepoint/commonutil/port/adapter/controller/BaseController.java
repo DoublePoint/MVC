@@ -30,7 +30,7 @@ public class BaseController {
 		AjaxResponse response=new AjaxResponse();
 		response.setCode("-1");
 		response.setErrorMessage(ex.getMessage());
-		Log4jUtil.error(ex.getMessage());
+		Log4jUtil.error(ex);
 		return response;
     }
 

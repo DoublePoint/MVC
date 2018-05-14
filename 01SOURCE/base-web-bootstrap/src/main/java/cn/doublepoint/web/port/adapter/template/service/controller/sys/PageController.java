@@ -65,8 +65,8 @@ public class PageController extends BaseRequestController{
 	}
 	@RequestMapping("/template/sys/assistant/{actionname}")
 	public String assistant(@PathVariable String actionname) {
-		List<MySQLTables> list = DataBaseMetaDataUtil.getTables();
-		responseData.setAjaxParameter("test111", list);
+//		List<MySQLTables> list = DataBaseMetaDataUtil.getTables();
+//		responseData.setAjaxParameter("test111", list);
 		return "/template/sys/assistant/" + actionname;
 	}
 	@RequestMapping("/template/sys/config/{actionname}")

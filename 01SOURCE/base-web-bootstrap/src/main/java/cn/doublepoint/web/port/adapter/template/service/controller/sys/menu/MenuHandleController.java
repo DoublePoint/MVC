@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import cn.doublepoint.common.application.template.sys.menu.MenuApplicationService;
 import cn.doublepoint.common.application.template.sys.menu.MenuQueryService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
@@ -69,7 +66,7 @@ public class MenuHandleController extends BaseHandleController {
 		PageInfo pageRequest=new PageInfo(1, 10);
 		AjaxDataWrap<Menu> ajaxDataWrap=new AjaxDataWrap<Menu>();
 		if(menu==null||menu.getId()==null||"".equals(menu.getId())){
-			ajaxDataWrap= menuQueryService.findAllMenu(pageRequest);
+			ajaxDataWrap.setDataList( menuQueryService.findAllMenu(pageRequest));
 		}
 		else{
 			Menu menuQuery=new Menu();

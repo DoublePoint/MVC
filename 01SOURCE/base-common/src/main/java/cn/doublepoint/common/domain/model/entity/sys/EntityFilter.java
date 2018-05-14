@@ -1,21 +1,21 @@
-
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-04-23 22:17:368
+ * 创   建   时   间 ： 2018-05-14 17:22:518
  * 
  * 类   说   明 ：
  * 
  * 修   改   人：          修   改   日   期：
  */
 package cn.doublepoint.common.domain.model.entity.sys;
+
 import java.util.*;
 import java.io.Serializable;
 import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="Sys_Entity_Filter")
+@Table(name="SYS_ENTITY_FILTER")
 public class EntityFilter extends BaseEntity {
 	/**
 	 * 序列化ID
@@ -23,27 +23,27 @@ public class EntityFilter extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private String id;
+	@Column(name="ID")
+	private Long id;
 	
-	@Column
+	@Column(name="FILTER")
 	private String filter;
 	
-	@Column
+	@Column(name="USER_ID")
 	private String userId;
 	
-	@Column
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column
+	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -79,6 +79,12 @@ public class EntityFilter extends BaseEntity {
 		this.modifyTime = modifyTime;
 	}
 	public String toString() {
-		return "EntityFilter [id=" + id + ",filter=" + filter + ",userId=" + userId + ",createTime=" + createTime + ",modifyTime=" + modifyTime + "]";
+		return "EntityFilter ["
+		+"id=" + id +","
+		+"filter=" + filter +","
+		+"userId=" + userId +","
+		+"createTime=" + createTime +","
+		+"modifyTime=" + modifyTime 
+		+"]";
 	}
 }

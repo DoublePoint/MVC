@@ -15,13 +15,23 @@ import java.util.stream.Stream;
 
 import javax.persistence.Id;
 
-import cn.doublepoint.commonutil.ApplicationContextUtil;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.Log4jUtil;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
+import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 
-public class JPAUtil {
+public class JPAUtil extends DataBaseUtil{
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> T loadById(Class<T> clazz,Object id) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.loadById(clazz,id);
+	}
 	
 	/**
 	 * 获取实体信息
@@ -31,7 +41,7 @@ public class JPAUtil {
 	 */
 	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList,null);
+		return daoService.load(clazz,queryParamList,null,null);
 	}
 	
 	/**
@@ -42,7 +52,18 @@ public class JPAUtil {
 	 */
 	public static <T extends BaseModel> List<T> load(Class<T> clazz,PageInfo pageInfo) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,null,pageInfo);
+		return daoService.load(clazz,null,pageInfo,null);
+	}
+	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> List<T> load(Class<T> clazz,SortParamList sortParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.load(clazz,null,null,sortParamList);
 	}
 	
 	/**
@@ -53,12 +74,45 @@ public class JPAUtil {
 	 */
 	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,PageInfo pageInfo) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList,pageInfo);
+		return daoService.load(clazz,queryParamList,pageInfo,null);
+	}
+	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,SortParamList sortParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.load(clazz,queryParamList,null,sortParamList);
+	}
+	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> List<T> load(Class<T> clazz,PageInfo pageInfo,SortParamList sortParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.load(clazz,null,pageInfo,sortParamList);
+	}
+	
+	/**
+	 * 获取实体信息
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,PageInfo pageInfo,SortParamList sortParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.load(clazz,queryParamList,pageInfo,sortParamList);
 	}
 	
 	public static <T extends BaseModel> List<T> loadAll(Class<T> clazz) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,null,null);
+		return daoService.load(clazz,null,null,null);
 	}
 
 	/**
@@ -69,6 +123,24 @@ public class JPAUtil {
 		if (list == null || list.size() == 0)
 			return;
 		list.stream().forEach(JPAUtil::remove);
+	}
+	
+	/**
+	 * 保存
+	 * @param list
+	 */
+	public static <T extends BaseModel> void saveOrUpdate(T t) {
+		BaseDaoService daoService = getDaoService();
+		daoService.saveOrUpdate(t);
+	}
+	
+	/**
+	 * 保存
+	 * @param list
+	 */
+	public static <T extends BaseModel> void saveOrUpdate(List<T> list) {
+		BaseDaoService daoService = getDaoService();
+		daoService.saveOrUpdate(list);
 	}
 
 	/**
@@ -107,11 +179,6 @@ public class JPAUtil {
 			return (field.getAnnotation(Id.class) != null);
 		}).findAny().get();
 		return res.get(model);
-	}
-
-	public static BaseDaoService getDaoService() {
-		BaseDaoService daoService = (BaseDaoService) ApplicationContextUtil.getBean("daoService");
-		return daoService;
 	}
 
 }

@@ -21,6 +21,11 @@ public class SortParamList {
 		}
 		this.params.add(param);
 	}
+	
+	public void addParam(String property) {
+		SortParam sortParam = new SortParam(property, SortParam.SORT_TYPE_ASCENDING);
+		this.params.add(sortParam);
+	}
 
 	public void addParam(String property, String type) {
 		SortParam sortParam = new SortParam(property, type);

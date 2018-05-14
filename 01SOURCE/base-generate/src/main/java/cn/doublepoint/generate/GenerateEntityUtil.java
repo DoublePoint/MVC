@@ -433,4 +433,17 @@ public class GenerateEntityUtil {
 	private static String converString(String s) {
 		return s.replaceAll("\\.", "/").replace("\\", "/");
 	}
+	
+	/**
+	 * 根据Table名称获取对应的名称
+	 * @param tableName
+	 * @return
+	 */
+	public static String getFileNameByTableName(String tableName,EGenerateType type){
+		if(type==EGenerateType.Entity)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),StringUtil.underlineToCamelOfFirstUpper(tableName));
+		if(type==EGenerateType.Repository)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),StringUtil.underlineToCamelOfFirstUpper(tableName))+"Repository";
+		return tableName;
+	}
 }

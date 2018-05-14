@@ -2,29 +2,16 @@ package cn.doublepoint.common.application.template.sys.menu;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Service;
-
-import com.querydsl.core.types.Predicate;
 
 import cn.doublepoint.common.application.template.sys.BaseQueryService;
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuRepository;
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
-import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
+import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 
 /**
  * 创 建 人： 刘磊
@@ -38,12 +25,15 @@ import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 @Service
 public class MenuQueryService extends BaseQueryService{
 
-	@Resource
-	MenuRepository menuRepository;
+	/**
+	 * 根据Id获取数据
+	 * @param id
+	 * @return
+	 */
+	public Menu getById(long id){
+		return JPAUtil.loadById(Menu.class, id);
+	}
 	
-	@Autowired
-	EntityManagerFactory entityManagerFactory;
-
 	/**
 	 * 查询最底层菜单
 	 * 
@@ -52,7 +42,9 @@ public class MenuQueryService extends BaseQueryService{
 	public List<Menu> findRootMenu(PageInfo pageInfo) {
 		QueryParamList queryParamList=new QueryParamList();
 		queryParamList.addParam("level", XTConstant.TREE_ROOT_NODE_CJ);
-		List<Menu> list=JPAUtil.load(Menu.class, queryParamList);
+		SortParamList sortParamList=new SortParamList();
+		sortParamList.addParam("sn");
+		List<Menu> list=JPAUtil.load(Menu.class, queryParamList,sortParamList);
 		return list;
 	}
 
@@ -63,9 +55,11 @@ public class MenuQueryService extends BaseQueryService{
 	 */
 	public List<Menu> findChildrenMenu(Menu menu, PageInfo pageInfo) {
 		QueryParamList paramList=new QueryParamList();
-		if(!StringUtil.isNullOrEmpty(menu.getId()))
+		if(menu.getId()!=null)
 			paramList.addParam("parentId",menu.getId());
-		return JPAUtil.load(Menu.class,paramList, pageInfo);
+		SortParamList sortParamList=new SortParamList();
+		sortParamList.addParam("sn");
+		return JPAUtil.load(Menu.class,paramList, pageInfo,sortParamList);
 	}
 
 	/**
@@ -73,30 +67,24 @@ public class MenuQueryService extends BaseQueryService{
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<Menu> findAllMenu(PageInfo pageInfo) {
-		JPAUtil.load(Menu.class, pageInfo);
-		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, menuRepository);
-		return ajaxDataWrap.copy(Menu.class);
+	public List<Menu> findAllMenu(PageInfo pageInfo) {
+		SortParamList sortParamList=new SortParamList();
+		sortParamList.addParam("sn");
+		return findAll(Menu.class, null, pageInfo,sortParamList);
 	}
 	/**
 	 * 查询所有菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<Menu> findAllMenu(Menu menu,PageInfo pageInfo) {
-		AjaxDataWrap<Menu> ajaxDataWrap = findAll(Menu.class, null, pageInfo, menuRepository);
-		return ajaxDataWrap.copy(Menu.class);
+	public List<Menu> findAllMenu(Menu menu,PageInfo pageInfo) {
+		SortParamList sortParamList=new SortParamList();
+		sortParamList.addParam("sn");
+		return findAll(Menu.class, null, pageInfo,sortParamList);
 	}
 
-	private <T extends BaseEntity> AjaxDataWrap<T> findAll(Class<T> clazz, Predicate predicate, PageInfo pageInfo,
-			 QueryDslPredicateExecutor<T> repository) {
-		Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC,"sn"));
-		if(pageInfo==null)
-			pageInfo=new PageInfo();
-		PageRequest pageRequest = CommonBeanUtils.copyPageInfoToPageable(pageInfo);
-		Page<T> page = repository.findAll(predicate, pageRequest);
-		AjaxDataWrap<T> ajaxDataWrap = CommonBeanUtils.copyPageToAjaxDataWrap(page, clazz);
-		return ajaxDataWrap;
+	private <T extends BaseEntity> List<T> findAll(Class<T> clazz, QueryParamList parameterList, PageInfo pageInfo,SortParamList sortParamList) {
+		return JPAUtil.load(clazz, parameterList, pageInfo,sortParamList);
 	}
 	
 }

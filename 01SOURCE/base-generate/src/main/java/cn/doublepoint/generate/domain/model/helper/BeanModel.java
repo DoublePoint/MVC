@@ -13,6 +13,8 @@ import java.util.List;
 
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.generate.EGenerateType;
+import cn.doublepoint.generate.GenerateEntityUtil;
 
 public class BeanModel extends BaseModel{
 
@@ -20,8 +22,9 @@ public class BeanModel extends BaseModel{
 	private String type;//实体类型
 	private String modelExtend;
 	private String chName;//实例名称
-	private String tableName;//实体表明
-	private String className;//类名
+	private String tableName;//实体表名称
+	private String annotationTableName;//实体中 注解Entity中显示的表名称 默认全部大写
+	private String entityClassName;//类名
 	private String idField;//id字段名
 	private boolean isDeleteThe_=true;//是否删除下划线
 	private boolean isUpcaseTheFirstCharSplit=true;//是否驼峰大写自定字符后的字符串
@@ -67,13 +70,8 @@ public class BeanModel extends BaseModel{
 
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
-		
-		if(isUpcaseTheFirstCharSplit&&isDeleteThe_){
-			className=StringUtil.upcaseAfter(this.tableName,"_");
-		}
-		if(isFilterSomeChar){
-			className=className.replaceFirst("Sys", "");
-		}
+		this.annotationTableName=StringUtil.upcase(tableName);
+		this.entityClassName=GenerateEntityUtil.getFileNameByTableName(tableName, EGenerateType.Entity);
 	}
 
 	public String getIdField() {
@@ -102,12 +100,12 @@ public class BeanModel extends BaseModel{
 		this.filterStr = filterStr;
 	}
 
-	public String getClassName() {
-		return className;
+	public String getEntityClassName() {
+		return entityClassName;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setEntityClassName(String entityClassName) {
+		this.entityClassName = entityClassName;
 	}
 
 	public boolean isDeleteThe_() {
@@ -132,6 +130,14 @@ public class BeanModel extends BaseModel{
 
 	public void setFilterSomeChar(boolean isFilterSomeChar) {
 		this.isFilterSomeChar = isFilterSomeChar;
+	}
+
+	public String getAnnotationTableName() {
+		return annotationTableName;
+	}
+
+	public void setAnnotationTableName(String annotationTableName) {
+		this.annotationTableName = annotationTableName;
 	}
 
 }

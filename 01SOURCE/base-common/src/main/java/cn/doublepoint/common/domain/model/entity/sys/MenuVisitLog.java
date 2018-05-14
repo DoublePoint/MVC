@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-04-03 23:07:367
+ * 创   建   时   间 ： 2018-05-14 17:22:411
  * 
  * 类   说   明 ：
  * 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="sys_menu_visit_log")
+@Table(name="SYS_MENU_VISIT_LOG")
 public class MenuVisitLog extends BaseEntity {
 	/**
 	 * 序列化ID
@@ -23,35 +23,35 @@ public class MenuVisitLog extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private String id;
+	@Column(name="ID")
+	private Long id;
 	
-	@Column
-	private String menuId;
+	@Column(name="MENU_ID")
+	private Long menuId;
 	
-	@Column
+	@Column(name="VISIT_TIME")
 	private Date visitTime;
 	
-	@Column
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column
+	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getMenuId() {
+	public Long getMenuId() {
 		return menuId;
 	}
 	
-	public void setMenuId(String menuId) {
+	public void setMenuId(Long menuId) {
 		this.menuId = menuId;
 	}
 
@@ -79,6 +79,12 @@ public class MenuVisitLog extends BaseEntity {
 		this.modifyTime = modifyTime;
 	}
 	public String toString() {
-		return "MenuVisitLog [id=" + id + ",menuId=" + menuId + ",visitTime=" + visitTime + ",createTime=" + createTime + ",modifyTime=" + modifyTime + "]";
+		return "MenuVisitLog ["
+		+"id=" + id +","
+		+"menuId=" + menuId +","
+		+"visitTime=" + visitTime +","
+		+"createTime=" + createTime +","
+		+"modifyTime=" + modifyTime 
+		+"]";
 	}
 }

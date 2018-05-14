@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-04-03 23:07:367
+ * 创   建   时   间 ： 2018-05-14 17:22:188
  * 
  * 类   说   明 ：
  * 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="sys_code")
+@Table(name="SYS_CODE")
 public class Code extends BaseEntity {
 	/**
 	 * 序列化ID
@@ -23,45 +23,45 @@ public class Code extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private String id;
+	@Column(name="ID")
+	private Long id;
 	
-	@Column
+	@Column(name="CLASSIFY")
 	private String classify;
 	
-	@Column
+	@Column(name="CODE")
 	private String code;
 	
-	@Column
+	@Column(name="CODE_NAME")
 	private String codeName;
 	
-	@Column
+	@Column(name="DISPLAY_SN")
 	private Integer displaySn;
 	
-	@Column
+	@Column(name="SCENE1")
 	private String scene1;
 	
-	@Column
+	@Column(name="SCENE2")
 	private String scene2;
 	
-	@Column
+	@Column(name="SCENE3")
 	private String scene3;
 	
-	@Column
+	@Column(name="PARENT_ID")
 	private String parentId;
 	
-	@Column
+	@Column(name="CREATE_TIME")
 	private Date createTime;
 	
-	@Column
+	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -145,6 +145,18 @@ public class Code extends BaseEntity {
 		this.modifyTime = modifyTime;
 	}
 	public String toString() {
-		return "Code [id=" + id + ",classify=" + classify + ",code=" + code + ",codeName=" + codeName + ",displaySn=" + displaySn + ",scene1=" + scene1 + ",scene2=" + scene2 + ",scene3=" + scene3 + ",parentId=" + parentId + ",createTime=" + createTime + ",modifyTime=" + modifyTime + "]";
+		return "Code ["
+		+"id=" + id +","
+		+"classify=" + classify +","
+		+"code=" + code +","
+		+"codeName=" + codeName +","
+		+"displaySn=" + displaySn +","
+		+"scene1=" + scene1 +","
+		+"scene2=" + scene2 +","
+		+"scene3=" + scene3 +","
+		+"parentId=" + parentId +","
+		+"createTime=" + createTime +","
+		+"modifyTime=" + modifyTime 
+		+"]";
 	}
 }

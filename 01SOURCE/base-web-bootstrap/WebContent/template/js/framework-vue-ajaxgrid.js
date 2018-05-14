@@ -316,19 +316,19 @@ function AjaxGrid(domId) {
 	}
 	this.getOnPageClick = function() {
 		return this.onpageclick;
-	};
+	}
 	this.getRow = function(rowIndex) {
 		return this.datawrap.getRow(rowIndex);
-	};
+	}
 	this.getRowClick = function() {
 		return this.onrowclick;
-	};
+	}
 
 	this.init = function() {
 		this.initStyle();
 		this.initData();
 		this.initEvent();
-	};
+	}
 	this.initData = function(){
 		if(this.datasource==null||this.datasource==""){
 			this.initBootstrapSetting();
@@ -353,14 +353,10 @@ function AjaxGrid(domId) {
 		});
 
 		this.initBootstrapSetting();
-	};
+	}
 	this.initEvent = function() {
-//		//分页点击事件
-//		var pageclickFunction = this.getPageClick();
-//		if (pageclickFunction != null) {
-//			_Ajaxdatagrid.setPageClickFunctionName(pageclickFunction);
-//		}
-	};
+		
+	}
 	this.initStyle=function(){
 		// 高度设置为获取父元素的高度
 		var brotherHeight=0;
@@ -378,7 +374,7 @@ function AjaxGrid(domId) {
 		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
 			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
-	};
+	}
 	this.resize = function() {
 		this.initStyle();
 		var height = this.height;
@@ -389,11 +385,14 @@ function AjaxGrid(domId) {
 
 	this.setCols = function(cols) {
 		this.cols = cols;
-	};
+	}
 	this.setDataSource = function(ds) {
 		this.datasource = ds;
-	};
+	}
 	this.setDataWrap = function(ajaxDataWrap) {
+		if(ajaxDataWrap==null){
+			ajaxDataWrap=$.createAjaxDataWrap();
+		}
 		try{
 			this.datawrap.parse(ajaxDataWrap);
 			$("#" + this.domId).bootstrapTable('load', $._Clone(ajaxDataWrap.dataList)); 
@@ -406,7 +405,7 @@ function AjaxGrid(domId) {
 		}catch(e){
 			console.log(e);
 		}
-	};
+	}
 	this.initBootstrapSetting = function() {
 		var ajaxgrid = this;
 		var id = ajaxgrid.domId;
@@ -439,11 +438,15 @@ function AjaxGrid(domId) {
 			},
 			onExpandRow : function(){
 				
+			},
+			onLoadSuccess : function(){
+			},
+			onLoadError : function(){
 			}
 		});
 		
 		return null;
-	};
+	}
 	this.setLayuiTableDataNull = function (){
 		var ajaxgrid = this;
 		var id = ajaxgrid.domId;
@@ -455,9 +458,6 @@ function AjaxGrid(domId) {
 	this.setOndblclick = function(aOnDblclick) {
 		this.ondblclick = aOnDblclick;
 	}
-//	this.setPageClickFunctionName = function(funName) {
-//		this.onPageClickFunctionName = funName;
-//	};
 	this.setPager = function(page) {
 		if (page == null)
 			return;
@@ -483,15 +483,41 @@ function AjaxGrid(domId) {
 	}
 	this.setRowClickFunctionName = function(funName) {
 		this.onRowClickFunctionName = funName;
-	};
+	}
 	
 	/*bootstrap*/
+	//append
+	this.addRecord = function(data){
+		var $table = $("#" + this.domId);
+		var index=0;
+		try{
+			index=this.datawrap.dataList.length;
+		}
+		catch(e){
+			index=0;
+		}
+		$table.bootstrapTable('insertRow', {index: index, row: data});
+	}
+	this.addRecordBefore = function(data) {
+		$table.bootstrapTable('insertRow', {
+			index : 0,
+			row : data
+		});
+	}
 	this.addRecords = function(rows){
 		if(rows==null||rows.length==0)
 			return;
 		for(var i in rows)
 			this.getDom().bootstrapTable('append', rows[i]);
-	},
+	}
+	this.addRecordsBefore = function(rows){
+		if(rows==null||rows.length==0)
+			return;
+		for(var i in rows)
+			this.getDom().bootstrapTable('prepend', rows[i]);
+	}
+	
+	//getData
 	this.collectData = function(type){
 		if(type=="checked"){
 			var wrap=$._Clone(this.getDataWrap());
@@ -510,10 +536,51 @@ function AjaxGrid(domId) {
 			return wrap;
 		}
 	}
+	this.checkAll = function(){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('checkAll');
+	}
+	this.check = function(index){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('check',index);
+	}
+	this.uncheckAll = function(){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('uncheckAll');
+	}
+	this.check = function(index){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('uncheck',index);
+	}
+	//getSelections
 	this.getCheckedRecords = function() {
 		var $table = $("#" + this.domId);
 		return $table.bootstrapTable('getSelections');
-	},
+	}
+	//getRowByUniqueId
+	this.getRecord = function(rowNum){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('getRowByUniqueId',rowNum);
+	}
+	this.remove = function(rowNum){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('removeByUniqueId',rowNum);
+	}
+	this.removeAll= function(){
+		var $table = $("#" + this.domId);
+		return $table.bootstrapTable('removeAll');
+	}
+	this.updateRecord= function(obj,newRecord){
+		if($.isNumber(obj)){
+			
+		}
+		else if($.isObject(obj)){
+			obj=obj.rowId;
+		}
+		var $table = $("#" + this.domId);
+		$table.bootstrapTable('updateRow',{index:obj,row: newRecord});
+	}
+	//removeByUniqueId
 	this.removeChecked = function(){
 		var checkDataList=this.getCheckedRecords();
 		if(checkDataList==null||checkDataList.length<=0)
@@ -522,6 +589,34 @@ function AjaxGrid(domId) {
 			//arr.push(checkDataList[i].rowId);
 			this.getDom().bootstrapTable('removeByUniqueId', checkDataList[i].rowId);
 		}
+	}
+	//load
+	this.setData = function(dataList){
+		$("#" + this.domId).bootstrapTable('load', dataList); 
+	}
+	//showAllColumns
+	this.showAllColumns = function(){
+		$("#" + this.domId).bootstrapTable('showAllColumns'); 
+	}
+	this.showColumn = function(field){
+		$("#" + this.domId).bootstrapTable('showColumn',field); 
+	}
+	this.showRow= function(index){
+		var $table = $("#" + this.domId);
+		$table.bootstrapTable('showRow',{index:index});
+	}
+	this.hideAllColumns = function(){
+		$("#" + this.domId).bootstrapTable('hideAllColumns'); 
+	}
+	this.hideColumn = function(field){
+		$("#" + this.domId).bootstrapTable('hideColumn',field); 
+	}
+	this.hideRow= function(index){
+		var $table = $("#" + this.domId);
+		$table.bootstrapTable('hideRow',{index:index});
+	}
+	this.updateCell = function(index,field,value){
+		$("#" + this.domId).bootstrapTable('updateCell',{index:index,field:field,value:value}); 
 	}
 	return this;
 }

@@ -382,6 +382,18 @@ var _RegisterModel=new RegisterModel();
 			styleBuffer.append(":").append(avalue).append(";");
 			return styleBuffer
 		},
+		//是否是字符串类型
+		isString : function(obj){ 
+			return (typeof obj=='string')&&str.constructor==String; 
+		} ,
+		//是否是数值类型
+		isNumber : function(obj){ 
+			return (typeof obj=='number')&&str.constructor==String; 
+		},
+		//是否是对象类型
+		isObject : function(obj){
+			return (obj instanceof Object);
+		},
 		outputMapCompoment : function(aComponent) {
 			if (aComponent.id == null)
 				return;
@@ -403,6 +415,7 @@ var _RegisterModel=new RegisterModel();
 		},
 		//重新封装Ajax请求
 		request:function(settings){
+			var index = $layer.load(0, {shade: false});
 			if(settings==null)
 				return;
 			
@@ -410,6 +423,7 @@ var _RegisterModel=new RegisterModel();
 			var successFunction=settings.success;
 			if(successFunction!=null){
 				settings.success=function(responseData){
+					$layer.closeAll('loading');
 					if(!$.doResponse(responseData)){
 						return;
 					}
@@ -421,6 +435,7 @@ var _RegisterModel=new RegisterModel();
 			//封装操作失败函数
 			var errorFunction=settings.error;
 			if(errorFunction!=null){
+				$layer.closeAll('loading');
 				settings.error=function(responseData){
 					if(!$.doResponse(responseData)){
 						return;

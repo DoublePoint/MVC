@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-04-03 23:07:367
+ * 创   建   时   间 ： 2018-05-14 17:22:625
  * 
  * 类   说   明 ：
  * 
@@ -15,7 +15,7 @@ import javax.persistence.*;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
-@Table(name="sys_admin_login_log")
+@Table(name="SYS_ADMIN_LOGIN_LOG")
 public class AdminLoginLog extends BaseEntity {
 	/**
 	 * 序列化ID
@@ -23,32 +23,32 @@ public class AdminLoginLog extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private String id;
+	@Column(name="ID")
+	private Long id;
 	
-	@Column
-	private String adminId;
+	@Column(name="ADMIN_ID")
+	private Long adminId;
 	
-	@Column
+	@Column(name="LOGIN_TIME")
 	private Date loginTime;
 	
-	@Column
+	@Column(name="IS_PASSWORD_ERROR")
 	private String isPasswordError;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getAdminId() {
+	public Long getAdminId() {
 		return adminId;
 	}
 	
-	public void setAdminId(String adminId) {
+	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
 
@@ -68,6 +68,11 @@ public class AdminLoginLog extends BaseEntity {
 		this.isPasswordError = isPasswordError;
 	}
 	public String toString() {
-		return "AdminLoginLog [id=" + id + ",adminId=" + adminId + ",loginTime=" + loginTime + ",isPasswordError=" + isPasswordError + "]";
+		return "AdminLoginLog ["
+		+"id=" + id +","
+		+"adminId=" + adminId +","
+		+"loginTime=" + loginTime +","
+		+"isPasswordError=" + isPasswordError 
+		+"]";
 	}
 }

@@ -47,24 +47,8 @@ public class RoleHandleController extends BaseHandleController {
 			roleQuery=dataWrap.getDataList().get(0);
 		}
 	
-		if(roleQuery==null){
-			dataWrap=roleQueryService.findAllRole(pageInfo);
-		}
 		return dataWrap;
 	}
 	
-	@RequestMapping("/add")
-	@ResponseBody
-	public Role add(@RequestBody Role role) {
-		roleApplicationService.createRole(role);
-		Role role2 = new Role();
-		return role2;
-	}
-
-	@RequestMapping("/delete")
-	@ResponseBody
-	public boolean delete(@RequestBody List<Role> roleList) {
-		roleApplicationService.removeRole(roleList);
-		return true;
-	}
+	
 }

@@ -11,12 +11,18 @@ package cn.doublepoint.generate.domain.model.helper;
 
 import java.util.Date;
 
+import cn.doublepoint.commonutil.domain.model.StringUtil;
+
 public class ModelField {
 	
 	
-	private String fieldType;
-	private String fieldName;
-	private String fieldComment;
+	private String fieldType;//属性类型
+	private String fieldName;//数据库字段名称 暂时的类型为带有下划线的例如create_time 后期还需要进行转换
+	private String annotationColumnName;
+	private String fieldComment;//字段备注
+	private String propertyName;//属性名称
+	private String getFunctionName;//get方法名称
+	private String setFunctionName;//set方法名称
 	private boolean isId;
 
 	public String getFieldType() {
@@ -33,6 +39,10 @@ public class ModelField {
 
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
+		this.setAnnotationColumnName(StringUtil.upcase(fieldName));
+		this.setPropertyName(StringUtil.underlineToCamel(fieldName));
+		this.setGetFunctionName("get"+StringUtil.underlineToCamelOfFirstUpper(fieldName));
+		this.setSetFunctionName("set"+StringUtil.underlineToCamelOfFirstUpper(fieldName));
 	}
 
 	public String getFieldComment() {
@@ -51,71 +61,6 @@ public class ModelField {
 		this.isId = isId;
 	}
 
-	public StringBuilder getEntityFieldContent(){
-		if(fieldName==null||"".equals(fieldName))
-			return new StringBuilder();
-		String firstCharUpperString=fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1);
-		
-		StringBuilder sbBuffer=new StringBuilder();
-		sbBuffer.append("	@Column (name = \""+ fieldName.replaceAll("[A-Z]", "_$0").toLowerCase()+"\")                                  \r\n");
-		sbBuffer.append("	private "+switchFieldType(fieldType)+" "+fieldName+"; //"+fieldComment+"                                                \r\n");
-		sbBuffer.append("	                                                                 \r\n");
-		sbBuffer.append("	public "+switchFieldType(fieldType)+" get"+firstCharUpperString+"() {                                            \r\n");
-		sbBuffer.append("		return "+fieldName+";                                                     \r\n");
-		sbBuffer.append("	}                                                                \r\n");
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("	public void set"+firstCharUpperString+"("+switchFieldType(fieldType)+" "+fieldName+") {                                     \r\n");
-		sbBuffer.append("		this."+fieldName+" = "+fieldName+";                                                  \r\n");
-		sbBuffer.append("	}                                                                \r\n");			
-		return sbBuffer;
-	}
-	/**
-	 * 获取私有属性
-	 * @return
-	 */
-	public StringBuilder getFieldContent(){
-		if(fieldName==null||"".equals(fieldName))
-			return new StringBuilder();
-		
-		StringBuilder sbBuffer=new StringBuilder();
-		sbBuffer.append("	@Column (name = \""+ fieldName.replaceAll("[A-Z]", "_$0").toLowerCase()+"\")                                  \r\n");
-		sbBuffer.append("	private "+switchFieldType(fieldType)+" "+fieldName+"; //"+fieldComment+"       \r\n");
-		return sbBuffer;
-	}
-	/**
-	 * 获取set方法
-	 */
-	public StringBuilder getSetFunctionContent(){
-		String firstCharUpperString=fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1);
-		StringBuilder sbBuffer=new StringBuilder();
-		sbBuffer.append("                                                                  \r\n");
-		sbBuffer.append("	public void set"+firstCharUpperString+"("+switchFieldType(fieldType)+" "+fieldName+") {                                     \r\n");
-		sbBuffer.append("		this."+fieldName+" = "+fieldName+";                                                  \r\n");
-		sbBuffer.append("	}                                                                \r\n");			
-		return sbBuffer;
-	}
-	/**
-	 * 获取get方法
-	 * @return
-	 */
-	public StringBuilder getGetFunctionContent(){
-		String firstCharUpperString=fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1);
-		StringBuilder sbBuffer=new StringBuilder();
-		sbBuffer.append("	                                                                 \r\n");
-		sbBuffer.append("	public "+switchFieldType(fieldType)+" get"+firstCharUpperString+"() {                                           \r\n");
-		sbBuffer.append("		return "+fieldName+";                                                     \r\n");
-		sbBuffer.append("	}                                                                \r\n");
-		return sbBuffer;
-	}
-	public StringBuilder getEnumFieldContent(int index,boolean isLast){
-		if(fieldName==null)
-			return new StringBuilder();
-		StringBuilder sbBuffer=new StringBuilder();
-		String str=isLast?";":",";
-		sbBuffer.append("	"+fieldName.toUpperCase()+"(\""+index+"\")"+str+""+"//"+fieldComment+"\r\n");
-		return sbBuffer;
-	}
-	
 	private String switchFieldType(String fieldType){
 		switch (fieldType.toLowerCase()) {
 		case "int":
@@ -130,4 +75,37 @@ public class ModelField {
 			return fieldType;
 		}
 	}
+
+	public String getAnnotationColumnName() {
+		return annotationColumnName;
+	}
+
+	public void setAnnotationColumnName(String annotationColumnName) {
+		this.annotationColumnName = annotationColumnName;
+	}
+
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getGetFunctionName() {
+		return getFunctionName;
+	}
+
+	public void setGetFunctionName(String getFunctionName) {
+		this.getFunctionName = getFunctionName;
+	}
+
+	public String getSetFunctionName() {
+		return setFunctionName;
+	}
+
+	public void setSetFunctionName(String setFunctionName) {
+		this.setFunctionName = setFunctionName;
+	}
+	
 }

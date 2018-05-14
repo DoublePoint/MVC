@@ -20,13 +20,13 @@ public class VOMenu extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	private Long id;
 	
 	private String name;
 	
 	private String link;
 	
-	private String parentId;
+	private Long parentId;
 	
 	private Integer level;
 	
@@ -38,11 +38,11 @@ public class VOMenu extends BaseEntity {
 
 	private List<VOMenu> childrenMenuList;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -62,11 +62,11 @@ public class VOMenu extends BaseEntity {
 		this.link = link;
 	}
 
-	public String getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 	
-	public void setParentId(String parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 

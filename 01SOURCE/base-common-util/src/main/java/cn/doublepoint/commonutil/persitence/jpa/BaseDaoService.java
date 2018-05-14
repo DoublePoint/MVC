@@ -14,8 +14,34 @@ import java.util.List;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
+import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 
 public interface BaseDaoService {
+	
+	/**
+	 * 获取count个数量的序列
+	 * @param clazz 实体类型
+	 * @param count 需要获取的数量
+	 * @return
+	 */
+	public <T extends BaseModel> List<Long> getNextVal(Class<T> clazz, int count); 
+
+	/**
+	 * 根据Id获取数据
+	 * @param clazz 实体类型
+	 * @param id 主键
+	 * @return
+	 */
+	public <T extends BaseModel> T loadById(Class<T> clazz, Object id); 
+	
+	/**
+	 * 加载数据
+	 * @param clazz
+	 * @param paramsList
+	 * @param pageInfo
+	 * @return
+	 */
+	public <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList paramsList,PageInfo pageInfo,SortParamList sortParamList); 
 
 	/**
 	 * 删除
@@ -24,13 +50,18 @@ public interface BaseDaoService {
 	 */
 	public <T extends BaseModel> void remove(Class<T> clazz, Object id);
 
+	
 	/**
-	 * 加载数据
+	 * 删除
 	 * @param clazz
-	 * @param paramsList
-	 * @param pageInfo
-	 * @return
+	 * @param id
 	 */
-	public <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList paramsList,PageInfo pageInfo); 
-
+	public <T extends BaseModel> void saveOrUpdate(T model);
+	
+	/**
+	 * 删除
+	 * @param clazz
+	 * @param id
+	 */
+	public <T extends BaseModel> void saveOrUpdate(List<T> list);
 }
