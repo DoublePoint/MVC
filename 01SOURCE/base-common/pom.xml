@@ -40,7 +40,27 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-
+		<!-- 测试相关 ↓↓↓-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!--MySQL Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 测试相关↑↑↑-->
 		<!-- 本地项目 -->
 		<!-- <dependency> <groupId>cn.doublepoint.base</groupId> <artifactId>base-datajpa</artifactId> <version>${cn.doublepoint.base.version}</version> </dependency> -->
 
