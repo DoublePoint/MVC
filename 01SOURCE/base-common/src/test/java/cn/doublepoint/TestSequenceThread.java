@@ -38,11 +38,6 @@ public class TestSequenceThread {
 				e.printStackTrace();
 			}
 			sequenceThread3.run();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			sequenceThread4.run();
 			
 		}
