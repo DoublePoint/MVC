@@ -9,6 +9,8 @@
 */
 package cn.doublepoint.generate;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,14 +33,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.fasterxml.jackson.databind.deser.Deserializers.Base;
+
+import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
-import cn.doublepoint.generate.domain.model.helper.BeanModel;
-import cn.doublepoint.generate.domain.model.helper.ModelField;
+import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
+import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
+import cn.doublepoint.generate.domain.model.helper.TemplateEntityField;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-public class GenerateEntityUtil {
+public class GenerateTemplateUtil {
 	public final String ENTITY_P = "com.caland.core.bean";
 	public final String QUERY_P = "com.caland.core.query";
 	public final String ENTITY_XML_P = "ibatis";
@@ -82,68 +89,70 @@ public class GenerateEntityUtil {
 
 	private final static String TEMPLATE_DIR = "/cn.doublepoint.generate.domain.model.helper.template/";
 
-	private final static String TEMPLATE_ENTITY_KEY_NAME = "entityModel";
-	
+	private final static String TEMPLATE_ENTITY_KEY_NAME = "baseModel";
+
 	/**
 	 * 分别获取 某个表对应的某个文件内容
+	 * 
 	 * @param file
 	 * @param tableNameLlist
 	 * @return
 	 * @throws TemplateException
 	 * @throws IOException
 	 */
-	public static Map<String,String> buildEntityByTableNameList(File file, List<String> tableNameLlist) throws TemplateException, IOException {
-		if(tableNameLlist==null||tableNameLlist.size()==0)
+	public static Map<String, String> buildEntityByTableNameList(List<BaseTemplate> baseModelList)
+			throws TemplateException, IOException {
+		if (baseModelList == null || baseModelList.size() == 0)
 			return null;
-		Map<String,String> tableContentMap=new HashMap<String,String>();
-		tableNameLlist.forEach(tableName->{
-			List<BeanModel> entityModelList = buildEntityModelList(file, tableName);
-			
+		Map<String, String> tableContentMap = new HashMap<String, String>();
+		baseModelList.forEach(baseModel -> {
 			Map<String, Object> data = new HashMap<String, Object>();
 			Date date = new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 			data.put("datetime", formatter.format(date));
-			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModelList.get(0));
+			data.put(TEMPLATE_ENTITY_KEY_NAME, baseModel);
 			try {
 				String template = createFileByTemplate(GENERATE_FILE_ENTITY_TPL_NAME, data);
-				tableContentMap.put(tableName, template);
+				tableContentMap.put(baseModel.getEntityModel().getTableName(), template);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
-		
+
 		return tableContentMap;
 	}
-	
+
 	/**
 	 * 分别获取 某个表对应的某个文件内容
+	 * 
 	 * @param file
 	 * @param tableNameLlist
 	 * @return
 	 * @throws TemplateException
 	 * @throws IOException
 	 */
-	public static Map<String,String> buildRepositoryByTableNameList(List<BeanModel> entityModelList) throws TemplateException, IOException {
-		Map<String,String> tableContentMap=new HashMap<String,String>();
-		entityModelList.stream().forEach(entityModel -> {
+	public static Map<String, String> buildRepositoryByTableNameList(List<BaseTemplate> baseModelList)
+			throws TemplateException, IOException {
+		Map<String, String> tableContentMap = new HashMap<String, String>();
+		baseModelList.stream().forEach(baseModel -> {
 			Map<String, Object> data = new HashMap<String, Object>();
 			Date date = new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 			data.put("datetime", formatter.format(date));
-			data.put(TEMPLATE_ENTITY_KEY_NAME, entityModel);
+			data.put(TEMPLATE_ENTITY_KEY_NAME, baseModel);
 			try {
 				String template = createFileByTemplate(GENERATE_FILE_REPOSITORY_TPL_NAME, data);
-				tableContentMap.put(entityModel.getTableName(), template);
+				tableContentMap.put(baseModel.getEntityModel().getTableName(), template);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 		return tableContentMap;
 	}
-	
+
 	public static String buildEntityByTableName(File file, String tableName) throws TemplateException, IOException {
-		List<BeanModel> entityModelList = buildEntityModelList(file, tableName);
-		
+		List<BaseTemplate> entityModelList = buildEntityModelList(file, tableName);
+
 		Map<String, Object> data = new HashMap<String, Object>();
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
@@ -168,29 +177,29 @@ public class GenerateEntityUtil {
 		FreeMarkerConfigurer freemarkerConfig = (FreeMarkerConfigurer) ac.getBean("freemarkerConfig");
 		Configuration conf = freemarkerConfig.getConfiguration();
 		// FileWriter不能指定编码确实是个问题，只能用这个代替了。
-		//Template template = conf.getTemplate("classpath:"+sourceTemplate);
-		conf.setClassForTemplateLoading(GenerateEntityUtil.class, "/template" );
-		Template template = conf.getTemplate(templateFile); //framemaker.ftl为要装载的模板
+		// Template template = conf.getTemplate("classpath:"+sourceTemplate);
+		conf.setClassForTemplateLoading(GenerateTemplateUtil.class, "/template");
+		Template template = conf.getTemplate(templateFile); // framemaker.ftl为要装载的模板
 		String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, templateData);
 		return text;
 	}
-	
-	
+
 	/**
 	 * 获取所有的实体信息 包括字段信息
+	 * 
 	 * @param file
 	 * @param tableName
 	 * @return
 	 */
-	public static List<BeanModel> buildEntityModelList(File file, String tableName) {
-		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
+	public static List<BaseTemplate> buildEntityModelList(File file, List<String> tableNameList) {
+		List<BaseTemplate> baseModelList = new ArrayList<BaseTemplate>();
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			NodeList classElementNodeList = db.parse(file).getElementsByTagName("c:Classes").item(0).getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
-				List<ModelField> fieldList = new ArrayList<ModelField>();
-				BeanModel entityModel = new BeanModel();
+				List<TemplateEntityField> fieldList = new ArrayList<TemplateEntityField>();
+				TemplateEntityModel entityModel = new TemplateEntityModel();
 				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
 				boolean isadd = false;
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
@@ -219,7 +228,7 @@ public class GenerateEntityUtil {
 					case "c:Attributes": {
 						NodeList attributeNodeList = item.getChildNodes();
 						for (int k = 0; k < attributeNodeList.getLength(); k++) {
-							ModelField field = new ModelField();
+							TemplateEntityField field = new TemplateEntityField();
 							boolean addFlag = false;
 							Node attributeNode = attributeNodeList.item(k);
 							for (int l = 0; l < attributeNode.getChildNodes().getLength(); l++) {
@@ -258,120 +267,66 @@ public class GenerateEntityUtil {
 				}
 				if (isadd) {
 					entityModel.setFields(fieldList);
-					if(tableName.equalsIgnoreCase(entityModel.getTableName()))
-						entityModelList.add(entityModel);
+					if(tableNameList==null||tableNameList.size()==0){
+						BaseTemplate baseTemplate=new BaseTemplate(entityModel);
+						baseModelList.add(baseTemplate);
+					}
+					else if(tableNameList.stream().filter(entityModel.getTableName()::equalsIgnoreCase).count()>0){
+						BaseTemplate baseTemplate=new BaseTemplate(entityModel);
+						baseModelList.add(baseTemplate);
+					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return entityModelList;
+		return baseModelList;
 	}
-	
+
 	/**
 	 * 获取所有的实体信息 包括字段信息
+	 * 
 	 * @param file
 	 * @param tableName
 	 * @return
 	 */
-	public static List<BeanModel> buildEntityModelList(File file) {
-		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			NodeList classElementNodeList = db.parse(file).getElementsByTagName("c:Classes").item(0).getChildNodes();
-			for (int i = 0; i < classElementNodeList.getLength(); i++) {
-				List<ModelField> fieldList = new ArrayList<ModelField>();
-				BeanModel entityModel = new BeanModel();
-				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
-				boolean isadd = false;
-				for (int j = 0; j < classChildrenList.getLength(); j++) {
-					if (!(classChildrenList.item(j) instanceof Element))
-						continue;
-					Element item = (Element) classChildrenList.item(j);
-					String nodeName = item.getNodeName();
-					String nodeValue = item.getTextContent();
-					if (nodeValue == null || nodeValue == "")
-						break;
-					isadd = true;
-					switch (nodeName) {
-					case "a:Name":// 中文说明
-						entityModel.setChName(nodeValue);
-						break;
-					case "a:Code":// 英文编码
-						entityModel.setTableName(nodeValue);
-						break;
-					case "a:Comment":// 中文备注
-						entityModel.setRemark(nodeValue);
-						break;
-					case "a:Stereotype":// 实体 枚举 值对象类型
-						entityModel.setType(nodeValue);
-						break;
-					// 属性名称
-					case "c:Attributes": {
-						NodeList attributeNodeList = item.getChildNodes();
-						for (int k = 0; k < attributeNodeList.getLength(); k++) {
-							ModelField field = new ModelField();
-							boolean addFlag = false;
-							Node attributeNode = attributeNodeList.item(k);
-							for (int l = 0; l < attributeNode.getChildNodes().getLength(); l++) {
-								Node attributeChildNode = attributeNode.getChildNodes().item(l);
-								String attributeChildNodeNameString = attributeChildNode.getNodeName();
-								String attributeChildNodeValueString = attributeChildNode.getTextContent();
-								if (attributeChildNodeValueString == null || attributeChildNodeValueString == "")
-									break;
-								switch (attributeChildNodeNameString) {
-								case "a:Name":
-									addFlag = true;
-									field.setFieldComment(attributeChildNodeValueString);
-									break;
-								case "a:Code":
-									addFlag = true;
-									field.setFieldName(attributeChildNodeValueString);
-									break;
-								case "a:DataType":
-									addFlag = true;
-									field.setFieldType(attributeChildNodeValueString);
-									break;
-								default:
-									break;
-								}
-
-							}
-							if (addFlag) {
-								fieldList.add(field);
-							}
-						}
-					}
-						break;
-					default:
-						break;
-					}
-				}
-				if (isadd) {
-					entityModel.setFields(fieldList);
-					entityModelList.add(entityModel);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	public static List<BaseTemplate> buildEntityModelList(File file, String tableName) {
+		if(StringUtil.isNullOrEmpty(tableName)){
+			List<String> list=new ArrayList<String>();
+			return buildEntityModelList(file,list);
 		}
-		return entityModelList;
+		else {
+			List<String> list=new ArrayList<String>();
+			list.add(tableName);
+			return buildEntityModelList(file,list);
+		}
+ 	}
+
+	/**
+	 * 获取所有的实体信息 包括字段信息
+	 * 
+	 * @param file
+	 * @param tableName
+	 * @return
+	 */
+	public static List<BaseTemplate> buildEntityModelList(File file) {
+		return buildEntityModelList(file,"");
 	}
-	
+
 	/**
 	 * 获取文件中所有表信息 不包括字段信息
+	 * 
 	 * @param file
 	 * @return
 	 */
-	public static List<BeanModel> buildTableNameList(File file){
-		List<BeanModel> entityModelList = new ArrayList<BeanModel>();
+	public static List<TemplateEntityModel> buildTableNameList(File file) {
+		List<TemplateEntityModel> entityModelList = new ArrayList<TemplateEntityModel>();
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			NodeList classElementNodeList = db.parse(file).getElementsByTagName("c:Classes").item(0).getChildNodes();
 			for (int i = 0; i < classElementNodeList.getLength(); i++) {
-				BeanModel entityModel = new BeanModel();
+				TemplateEntityModel entityModel = new TemplateEntityModel();
 				NodeList classChildrenList = classElementNodeList.item(i).getChildNodes();
 				boolean isadd = false;
 				for (int j = 0; j < classChildrenList.getLength(); j++) {
@@ -408,7 +363,77 @@ public class GenerateEntityUtil {
 			e.printStackTrace();
 		}
 		return entityModelList;
-	
+
+	}
+
+	/**
+	 * 获取生成的模板的文件名称，包括扩展名
+	 * 
+	 * @param tableName
+	 * @param type
+	 * @return
+	 */
+	public static String getFileNameContainExt(String tableName, EGenerateType type) {
+		return getName(tableName, type, true);
+	}
+
+	/**
+	 * 获取生成的模板的文件名称，不包括扩展名
+	 * 
+	 * @param tableName
+	 * @param type
+	 * @return
+	 */
+	public static String getFileNameNotContainExt(String tableName, EGenerateType type) {
+		return getName(tableName, type, false);
+	}
+
+	/**
+	 * 获取生成的模板的文件名称，不包括扩展名
+	 * 
+	 * @param tableName
+	 * @param type
+	 * @return
+	 */
+	public static String getClassName(String tableName, EGenerateType type) {
+		return getName(tableName, type, false);
+	}
+
+	/**
+	 * 根据Table名称获取对应的名称
+	 * 
+	 * @param tableName
+	 * @param type
+	 * @param isContainExt
+	 *            是否包含扩展名
+	 * @return
+	 */
+	public static String getName(String tableName, EGenerateType type, boolean isContainExt) {
+		if (type == EGenerateType.Entity)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + (isContainExt ? ".java" : "");
+		if (type == EGenerateType.Repository)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Repository" + (isContainExt ? ".java" : "");
+		if (type == EGenerateType.Application)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Application" + (isContainExt ? ".java" : "");
+		if (type == EGenerateType.Jsp)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "" + (isContainExt ? ".jsp" : "");
+		if (type == EGenerateType.Sctipt)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Sctipt" + (isContainExt ? ".js" : "");
+		if (type == EGenerateType.DialogJsp)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Dialog" + (isContainExt ? ".jsp" : "");
+		if (type == EGenerateType.DialogScript)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "DialogScript" + (isContainExt ? ".js" : "");
+		if (type == EGenerateType.Controller)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Controller" + (isContainExt ? ".java" : "");
+		return tableName;
 	}
 
 	/**
@@ -432,18 +457,5 @@ public class GenerateEntityUtil {
 	 */
 	private static String converString(String s) {
 		return s.replaceAll("\\.", "/").replace("\\", "/");
-	}
-	
-	/**
-	 * 根据Table名称获取对应的名称
-	 * @param tableName
-	 * @return
-	 */
-	public static String getFileNameByTableName(String tableName,EGenerateType type){
-		if(type==EGenerateType.Entity)
-			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),StringUtil.underlineToCamelOfFirstUpper(tableName));
-		if(type==EGenerateType.Repository)
-			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),StringUtil.underlineToCamelOfFirstUpper(tableName))+"Repository";
-		return tableName;
 	}
 }

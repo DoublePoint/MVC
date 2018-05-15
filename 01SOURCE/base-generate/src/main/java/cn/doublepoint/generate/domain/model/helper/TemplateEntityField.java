@@ -9,11 +9,9 @@
  */
 package cn.doublepoint.generate.domain.model.helper;
 
-import java.util.Date;
-
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 
-public class ModelField {
+public class TemplateEntityField{
 	
 	
 	private String fieldType;//属性类型

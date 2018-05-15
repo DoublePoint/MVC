@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenerateEntityFilterUtil {
+	private boolean isDeleteThe_ = true;// 是否删除下划线
+	private boolean isFilterSomeChar = true;// 是否进行某些字符串的过滤
 	
 	/**
 	 * 获取Filter 信息
@@ -26,4 +28,19 @@ public class GenerateEntityFilterUtil {
 		list.add("_");
 		return list;
 	}
+	
+	public boolean isDeleteThe_() {
+		return isDeleteThe_;
+	}
+	public void setDeleteThe_(boolean isDeleteThe_) {
+		this.isDeleteThe_ = isDeleteThe_;
+	}
+	public boolean isFilterSomeChar() {
+		return isFilterSomeChar;
+	}
+	public void setFilterSomeChar(boolean isFilterSomeChar) {
+		this.isFilterSomeChar = isFilterSomeChar;
+	}
+	
+	
 }

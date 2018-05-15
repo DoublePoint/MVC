@@ -45,9 +45,9 @@ import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.EGenerateType;
-import cn.doublepoint.generate.GenerateEntityFilterUtil;
-import cn.doublepoint.generate.GenerateEntityUtil;
-import cn.doublepoint.generate.domain.model.helper.BeanModel;
+import cn.doublepoint.generate.GenerateTemplateUtil;
+import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
+import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
 import freemarker.template.TemplateException;
 
 @Controller
@@ -88,16 +88,16 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	// return returnString.replace("<", "&lt;").replace("<", "&gt;");
 	// }
 
-	@RequestMapping("/template/sys/getAllFileTable")
+	@RequestMapping("/template/sys/getFileTable")
 	@ResponseBody
-	public void getAllFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
+	public void getFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
 		try {
 			String oomName = UUID.randomUUID() + ".oom";
 			File filev = new File(getOomDirPath(request) + "/" + oomName);
 			file.transferTo(filev);
-
-			List<BeanModel> beanModelList = GenerateEntityUtil.buildTableNameList(filev);
-			AjaxDataWrap<BeanModel> ajaxDataWrap = new AjaxDataWrap<BeanModel>();
+			
+			List<TemplateEntityModel> beanModelList = GenerateTemplateUtil.buildTableNameList(filev);
+			AjaxDataWrap<TemplateEntityModel> ajaxDataWrap = new AjaxDataWrap<TemplateEntityModel>();
 			ajaxDataWrap.setDataList(beanModelList);
 			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
 			responseData.setAjaxParameter("oomName", oomName);
@@ -126,9 +126,9 @@ public class GenerateEntityHandleController extends BaseHandleController {
 				tableNameList = dataWrap.getDataList().stream().map(MySQLTables::getTableName).collect(toList());
 			}
 			File file = new File(getOomDirPath(request) + oomName);
-			List<BeanModel> models = GenerateEntityUtil.buildEntityModelList(file);
-			Map<String, String> mapEntity = GenerateEntityUtil.buildEntityByTableNameList(file, tableNameList);
-			Map<String, String> mapRepository = GenerateEntityUtil.buildRepositoryByTableNameList(models);
+			List<BaseTemplate> models = GenerateTemplateUtil.buildEntityModelList(file);
+			Map<String, String> mapEntity = GenerateTemplateUtil.buildEntityByTableNameList(models);
+			Map<String, String> mapRepository = GenerateTemplateUtil.buildRepositoryByTableNameList(models);
 
 			String generateDir = UUID.randomUUID().toString();
 			String generateDirPath = generateDirPath(request, generateDir);
@@ -172,7 +172,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	private void getEntityContent(HttpServletRequest request, Map<String, String> map) throws IOException {
 		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
 			String entityFileName = getTempDir(request) + generateDir + "/Entity/"
-					+ GenerateEntityUtil.getFileNameByTableName(tableName, EGenerateType.Entity) + ".java";
+					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Entity);
 			FileReader reader = new FileReader(entityFileName);
 			BufferedReader bReader = new BufferedReader(reader);
 			String s;
@@ -194,7 +194,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	private void getRepositoryContent(HttpServletRequest request, Map<String, String> map) throws IOException {
 		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
 			String entityFileName = getTempDir(request) + generateDir + "/repository/"
-					+ GenerateEntityUtil.getFileNameByTableName(tableName, EGenerateType.Repository) + ".java";
+					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Repository);
 			FileReader reader = new FileReader(entityFileName);
 			BufferedReader bReader = new BufferedReader(reader);
 			String s;
@@ -324,7 +324,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		}
 
 		String entityFilePath = generateEntityDirPath + "/"
-				+ GenerateEntityUtil.getFileNameByTableName(fileName, EGenerateType.Entity) + ".java";
+				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Entity);
 		File entiryFile = new File(entityFilePath);
 		System.out.println("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
 		FileOutputStream fos = new FileOutputStream(entiryFile);
@@ -360,8 +360,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			generateEntityDir.mkdir();
 		}
 
-		String entityFilePath = generateDirPath + "/"
-				+ GenerateEntityUtil.getFileNameByTableName(fileName, EGenerateType.Repository) + ".java";
+		String entityFilePath = generateDirPath + "/"+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Repository);
 		File entiryFile = new File(entityFilePath);
 		Log4jUtil.info("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
 		FileOutputStream fos = new FileOutputStream(entiryFile);

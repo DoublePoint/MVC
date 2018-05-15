@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.generate.domain.model.helper;
 
-public class ModelConstantJS {
+public class TemplateConstantJS {
 	private String fieldName;
 	private String fieldType;
 	public String getFieldType() {
@@ -41,7 +41,7 @@ public class ModelConstantJS {
 		this.fieldComment = fieldComment;
 	}
 	
-	public ModelConstantJS(String fieldName, String fieldType, String fieldValue, String fieldComment) {
+	public TemplateConstantJS(String fieldName, String fieldType, String fieldValue, String fieldComment) {
 		super();
 		this.fieldName = fieldName;
 		this.fieldType = fieldType;

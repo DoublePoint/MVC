@@ -14,24 +14,29 @@ import java.util.List;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.generate.EGenerateType;
-import cn.doublepoint.generate.GenerateEntityUtil;
+import cn.doublepoint.generate.GenerateTemplateUtil;
 
-public class BeanModel extends BaseModel{
+public class TemplateEntityModel extends BaseModel {
 
-	private String remark;//实体备注
-	private String type;//实体类型
+	private String remark;// 实体备注
+	private String type;// 实体类型
 	private String modelExtend;
-	private String chName;//实例名称
-	private String tableName;//实体表名称
-	private String annotationTableName;//实体中 注解Entity中显示的表名称 默认全部大写
-	private String entityClassName;//类名
-	private String idField;//id字段名
-	private boolean isDeleteThe_=true;//是否删除下划线
-	private boolean isUpcaseTheFirstCharSplit=true;//是否驼峰大写自定字符后的字符串
-	private boolean isFilterSomeChar=true;//是否进行某些字符串的过滤
-	private List<String> filterStr;//过滤字符串
-	private List<ModelField> fields;
-	
+	private String chName;// 实例名称
+	private String tableName;// 表名称
+	private String annotationTableName;// 实体中 注解Entity中显示的表名称 默认全部大写
+	private String entityClassName;// 类名
+	private String idField;// id字段名
+	private boolean isUpcaseTheFirstCharSplit = true;// 是否驼峰大写自定字符后的字符串
+	private List<TemplateEntityField> fields;
+
+	public TemplateEntityModel() {
+	}
+
+	public TemplateEntityModel(String tableName) {
+		super();
+		this.tableName = tableName;
+	}
+
 	public String getRemark() {
 		return remark;
 	}
@@ -70,8 +75,8 @@ public class BeanModel extends BaseModel{
 
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
-		this.annotationTableName=StringUtil.upcase(tableName);
-		this.entityClassName=GenerateEntityUtil.getFileNameByTableName(tableName, EGenerateType.Entity);
+		this.annotationTableName = StringUtil.upcase(tableName);
+		this.entityClassName = GenerateTemplateUtil.getClassName(tableName, EGenerateType.Entity);
 	}
 
 	public String getIdField() {
@@ -81,24 +86,16 @@ public class BeanModel extends BaseModel{
 	public void setIdField(String idField) {
 		this.idField = idField;
 	}
-	
-	public List<ModelField> getFields() {
+
+	public List<TemplateEntityField> getFields() {
 		return fields;
 	}
 
-	public void setFields(List<ModelField> fields) {
+	public void setFields(List<TemplateEntityField> fields) {
 		this.fields = fields;
 	}
-	
-	
 
-	public List<String> getFilterStr() {
-		return filterStr;
-	}
-
-	public void setFilterStr(List<String> filterStr) {
-		this.filterStr = filterStr;
-	}
+	
 
 	public String getEntityClassName() {
 		return entityClassName;
@@ -108,28 +105,12 @@ public class BeanModel extends BaseModel{
 		this.entityClassName = entityClassName;
 	}
 
-	public boolean isDeleteThe_() {
-		return isDeleteThe_;
-	}
-
-	public void setDeleteThe_(boolean isDeleteThe_) {
-		this.isDeleteThe_ = isDeleteThe_;
-	}
-
 	public boolean isUpcaseTheFirstCharSplit() {
 		return isUpcaseTheFirstCharSplit;
 	}
 
 	public void setUpcaseTheFirstCharSplit(boolean isUpcaseTheFirstCharSplit) {
 		this.isUpcaseTheFirstCharSplit = isUpcaseTheFirstCharSplit;
-	}
-
-	public boolean isFilterSomeChar() {
-		return isFilterSomeChar;
-	}
-
-	public void setFilterSomeChar(boolean isFilterSomeChar) {
-		this.isFilterSomeChar = isFilterSomeChar;
 	}
 
 	public String getAnnotationTableName() {
