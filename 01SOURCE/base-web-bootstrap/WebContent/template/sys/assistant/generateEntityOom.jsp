@@ -80,7 +80,7 @@
 				     </ll-filllayout>  
 				</ll-step>
 				<ll-step title="完成">
-						<p>完成</p>
+						<input type="button" class="btn btn-info btn-sm" onclick="zipAndDownLoad()" value="打包并下载"/>
 				</ll-step>
 			</ll-steppanel>
 

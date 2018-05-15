@@ -58,3 +58,13 @@ function showDetail(tableName){
 		},
 	});
 }
+
+function zipAndDownLoad(){
+	$.request({
+		contentType:"application/octet-stream",
+		url: $$pageContextPath + '/template/sys/assistant/zipAndDownload',
+		data:{
+			generateDir:generateDir
+		},
+	});
+}

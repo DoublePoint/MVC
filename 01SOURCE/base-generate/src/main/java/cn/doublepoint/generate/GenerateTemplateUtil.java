@@ -267,12 +267,12 @@ public class GenerateTemplateUtil {
 				}
 				if (isadd) {
 					entityModel.setFields(fieldList);
-					if(tableNameList==null||tableNameList.size()==0){
-						BaseTemplate baseTemplate=new BaseTemplate(entityModel);
+					if (tableNameList == null || tableNameList.size() == 0) {
+						BaseTemplate baseTemplate = new BaseTemplate(entityModel);
 						baseModelList.add(baseTemplate);
-					}
-					else if(tableNameList.stream().filter(entityModel.getTableName()::equalsIgnoreCase).count()>0){
-						BaseTemplate baseTemplate=new BaseTemplate(entityModel);
+					} else if (tableNameList.stream().filter(entityModel.getTableName()::equalsIgnoreCase)
+							.count() > 0) {
+						BaseTemplate baseTemplate = new BaseTemplate(entityModel);
 						baseModelList.add(baseTemplate);
 					}
 				}
@@ -291,16 +291,15 @@ public class GenerateTemplateUtil {
 	 * @return
 	 */
 	public static List<BaseTemplate> buildEntityModelList(File file, String tableName) {
-		if(StringUtil.isNullOrEmpty(tableName)){
-			List<String> list=new ArrayList<String>();
-			return buildEntityModelList(file,list);
-		}
-		else {
-			List<String> list=new ArrayList<String>();
+		if (StringUtil.isNullOrEmpty(tableName)) {
+			List<String> list = new ArrayList<String>();
+			return buildEntityModelList(file, list);
+		} else {
+			List<String> list = new ArrayList<String>();
 			list.add(tableName);
-			return buildEntityModelList(file,list);
+			return buildEntityModelList(file, list);
 		}
- 	}
+	}
 
 	/**
 	 * 获取所有的实体信息 包括字段信息
@@ -310,7 +309,7 @@ public class GenerateTemplateUtil {
 	 * @return
 	 */
 	public static List<BaseTemplate> buildEntityModelList(File file) {
-		return buildEntityModelList(file,"");
+		return buildEntityModelList(file, "");
 	}
 
 	/**
@@ -434,6 +433,36 @@ public class GenerateTemplateUtil {
 			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
 					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Controller" + (isContainExt ? ".java" : "");
 		return tableName;
+	}
+
+	/**
+	 * 实体字段映射
+	 * @param source
+	 * @return
+	 */
+	public static String entityFieldMap(String source) {
+		switch (source) {
+		case "bigint":
+			return "Integer";
+		case "long":
+			return "Long";
+		case "int":
+			return "Integer";
+		case "datetime":
+			return "Date";
+		case "date":
+			return "Date";
+		case "binary":
+			return "Byte[]";
+		case "blob":
+			return "Byte[]";
+		case "float":
+			return "Float";
+		case "double":
+			return "Double";
+		default:
+			return source;
+		}
 	}
 
 	/**

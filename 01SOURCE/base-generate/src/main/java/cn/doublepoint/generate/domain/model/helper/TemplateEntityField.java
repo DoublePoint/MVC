@@ -10,11 +10,13 @@
 package cn.doublepoint.generate.domain.model.helper;
 
 import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.generate.GenerateTemplateUtil;
 
 public class TemplateEntityField{
 	
 	
 	private String fieldType;//属性类型
+	private String fieldTypeStr;//属性类型
 	private String fieldName;//数据库字段名称 暂时的类型为带有下划线的例如create_time 后期还需要进行转换
 	private String annotationColumnName;
 	private String fieldComment;//字段备注
@@ -29,6 +31,7 @@ public class TemplateEntityField{
 
 	public void setFieldType(String fieldType) {
 		this.fieldType = fieldType;
+		this.fieldTypeStr = GenerateTemplateUtil.entityFieldMap(fieldType);
 	}
 
 	public String getFieldName() {
@@ -57,21 +60,6 @@ public class TemplateEntityField{
 
 	public void setId(boolean isId) {
 		this.isId = isId;
-	}
-
-	private String switchFieldType(String fieldType){
-		switch (fieldType.toLowerCase()) {
-		case "int":
-			return "Integer";
-		case "long":
-			return "Long";
-		case "string":
-			return "String";
-		case "date":
-			return "Date";
-		default:
-			return fieldType;
-		}
 	}
 
 	public String getAnnotationColumnName() {
@@ -104,6 +92,14 @@ public class TemplateEntityField{
 
 	public void setSetFunctionName(String setFunctionName) {
 		this.setFunctionName = setFunctionName;
+	}
+
+	public String getFieldTypeStr() {
+		return fieldTypeStr;
+	}
+
+	public void setFieldTypeStr(String fieldTypeStr) {
+		this.fieldTypeStr = fieldTypeStr;
 	}
 	
 }

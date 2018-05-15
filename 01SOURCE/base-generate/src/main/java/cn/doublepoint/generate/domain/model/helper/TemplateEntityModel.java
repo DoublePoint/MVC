@@ -95,8 +95,6 @@ public class TemplateEntityModel extends BaseModel {
 		this.fields = fields;
 	}
 
-	
-
 	public String getEntityClassName() {
 		return entityClassName;
 	}

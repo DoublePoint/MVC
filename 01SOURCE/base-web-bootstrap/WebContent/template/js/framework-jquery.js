@@ -446,7 +446,8 @@ var _RegisterModel=new RegisterModel();
 			}
 			
 			settings.type = "POST";
-			settings.contentType = 'application/json;charset=UTF-8';
+			if(settings.contentType==null||settings.contentType=="")
+				settings.contentType = 'application/json;charset=UTF-8';
 			settings.dataType = "json";
 			settings.data= JSON.stringify(settings.data);
 			

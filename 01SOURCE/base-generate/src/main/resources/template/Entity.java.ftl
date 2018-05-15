@@ -25,44 +25,22 @@ public class ${baseModel.entityModel.entityClassName} extends BaseEntity {
 <#list baseModel.entityModel.fields as field>
 	<#if field_index ==0>@Id</#if>
 	@Column(name="${field.annotationColumnName}")
-	private <@fieldType type=field.fieldType/> ${field.propertyName};
+	private ${field.fieldTypeStr} ${field.propertyName};
 </#list>
-
 <#list baseModel.entityModel.fields as field>
 
-	public <@fieldType type=field.fieldType/> ${field.getFunctionName}() {
+	public ${field.fieldTypeStr} ${field.getFunctionName}() {
 		return ${field.propertyName};
 	}
 	
-	public void ${field.setFunctionName}(<@fieldType type=field.fieldType/> ${field.propertyName}) {
+	public void ${field.setFunctionName}(${field.fieldTypeStr} ${field.propertyName}) {
 		this.${field.propertyName} = ${field.propertyName};
 	}
 </#list>
+
 	public String toString() {
 		return "${baseModel.entityModel.entityClassName} ["<#list baseModel.entityModel.fields as field>
 		+"${field.propertyName}=" + ${field.propertyName} <#if field_has_next>+","</#if></#list>
 		+"]";
 	}
 }
-<#macro fieldType type>
-	
-	<#if type?contains("bigint")>
-	Long<#t/>
-		<#elseif type?contains("long")>
-	Long<#t/>
-	<#elseif type?contains("int")>
-	Integer<#t/>
-	<#elseif type?contains("datetime")>
-	Date<#t/>
-	<#elseif type?contains("date")>
-	Date<#t/>
-	<#elseif type?contains("binary") || type?contains("blob")>
-	Byte[]<#t/>
-	<#elseif type?contains("float")>
-	Float<#t/>
-	<#elseif type?contains("double")>
-	Double<#t/>
-	<#else>
-	${type}<#t/>
-	</#if>
-</#macro>

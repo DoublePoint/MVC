@@ -152,12 +152,13 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 				if (request.getHeader("x-requested-with") != null
 						&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
 					System.out.println(request.getHeader("Accept"));
+					 if(response.getHeader("Content-Type").indexOf("application/octet-stream") != -1)
+							return;
 					// 说明期望请求返回类型为Json
-					if (request.getHeader("Accept") == null
-							|| request.getHeader("Accept").indexOf("application/json") != -1)
+					else if (request.getHeader("Accept") == null|| request.getHeader("Accept").indexOf("application/json") != -1)
 						encapsulateAjaxResponseData(request, response, handler, bean, modelAndView);
-					else {
-						// 说明期望请求为 html或者其他
+					
+					else { // 说明期望请求为 html或者其他
 						encapsulatePageRequestResponseData(request, response, handler, bean, modelAndView);
 					}
 				} else {
@@ -217,9 +218,9 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
 		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
 		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
-		if(requestWrapper.getJSONObject()==null)
+		if (requestWrapper.getJSONObject() == null)
 			return;
-		if(requestWrapper.getJSONObject().getJSONObject(fieldName)==null)
+		if (requestWrapper.getJSONObject().getJSONObject(fieldName) == null)
 			return;
 		String jsobString = requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
 		ObjectMapper mspp = new ObjectMapper();
@@ -247,7 +248,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 		return;
 
 	}
-	
+
 	/**
 	 * 封装页面请求时的数据
 	 * 
