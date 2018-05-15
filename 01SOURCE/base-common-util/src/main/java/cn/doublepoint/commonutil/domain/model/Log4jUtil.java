@@ -17,8 +17,8 @@ public class Log4jUtil {
 		getLogger().debug(obj);
 	}
 
-	public static void error(Object obj) {
-		getLogger().error(obj);
+	public static void error(Exception obj) {
+		getLogger().error("", obj);
 	}
 
 	public static void info(Object obj) {

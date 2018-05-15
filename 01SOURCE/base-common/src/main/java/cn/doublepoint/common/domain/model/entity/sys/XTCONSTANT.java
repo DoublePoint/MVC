@@ -9,14 +9,16 @@
  */
 package cn.doublepoint.common.domain.model.entity.sys;
 
-import java.util.*;
-import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity
 @Table(name="XTCONSTANT")
-public class Xtconstant extends BaseEntity {
+public class XTCONSTANT extends BaseEntity {
 	/**
 	 * 序列化ID
 	 */
