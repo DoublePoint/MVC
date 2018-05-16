@@ -36,13 +36,13 @@ import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.DownloadFileUtil;
-import cn.doublepoint.commonutil.domain.model.FileUtil;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.EGenerateType;
-import cn.doublepoint.generate.GenerateApplicationTemplateUtil;
+import cn.doublepoint.generate.GenerateServiceTemplateUtil;
 import cn.doublepoint.generate.GenerateEntityTemplateUtil;
+import cn.doublepoint.generate.GenerateServiceImplTemplateUtil;
 import cn.doublepoint.generate.GenerateTemplateUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
@@ -107,8 +107,8 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		if (!StringUtil.isNullOrEmpty(oomName)) {
 			List<GenerateTemplateUtil> templateUtils=new ArrayList<>();
 			templateUtils.add(new GenerateEntityTemplateUtil());
-			templateUtils.add(new GenerateApplicationTemplateUtil());
-			
+			templateUtils.add(new GenerateServiceTemplateUtil());
+			templateUtils.add(new GenerateServiceImplTemplateUtil());
 			
 			File file = new File(getOomDirPath(request) + oomName);
 			List<BaseTemplate> models = GenerateTemplateUtil.buildTemplateModelList(file);
@@ -136,7 +136,8 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
 		Map<String, String> map = new HashMap<String, String>();
 		getEntityContent(request, map);
-		getRepositoryContent(request, map);
+		getServiceContent(request, map);
+		getServiceImplContent(request, map);
 		responseData.setAjaxParameter("map", map);
 		return "/template/sys/assistant/generateDetail";
 	}
@@ -182,16 +183,16 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	}
 
 	/**
-	 * 获取RepositoryContent
+	 * 获取ServiceContent
 	 * 
 	 * @param request
 	 * @throws IOException
 	 */
 	@SuppressWarnings("resource")
-	private void getRepositoryContent(HttpServletRequest request, Map<String, String> map) throws IOException {
+	private void getServiceContent(HttpServletRequest request, Map<String, String> map) throws IOException {
 		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
-			String entityFileName = getTempDir(request) + generateDir + "/repository/"
-					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Repository);
+			String entityFileName = getTempDir(request) + generateDir + "/service/"
+					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Service);
 			FileReader reader = new FileReader(entityFileName);
 			BufferedReader bReader = new BufferedReader(reader);
 			String s;
@@ -199,7 +200,29 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			while ((s = bReader.readLine()) != null) {
 				sBuffer.append(s + "<br/>");
 			}
-			map.put("repository", sBuffer.toString());
+			map.put("service", sBuffer.toString());
+		}
+	}
+	
+	/**
+	 * 获取ServiceContent
+	 * 
+	 * @param request
+	 * @throws IOException
+	 */
+	@SuppressWarnings("resource")
+	private void getServiceImplContent(HttpServletRequest request, Map<String, String> map) throws IOException {
+		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
+			String entityFileName = getTempDir(request) + generateDir + "/service/impl/"
+					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Service);
+			FileReader reader = new FileReader(entityFileName);
+			BufferedReader bReader = new BufferedReader(reader);
+			String s;
+			StringBuffer sBuffer = new StringBuffer();
+			while ((s = bReader.readLine()) != null) {
+				sBuffer.append(s + "<br/>");
+			}
+			map.put("serviceImpl", sBuffer.toString());
 		}
 	}
 

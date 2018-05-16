@@ -15,7 +15,7 @@ public class BaseTemplate {
 	private TemplateDialogJsp dialogJsp;
 	private TemplateScript script;
 	private TemplateDialogScript dialogScript;
-	private TemplateApplication application;
+	private TemplateService service;
 	private TemplateController action;
 
 	public BaseTemplate(TemplateEntityModel entityModel) {
@@ -26,7 +26,7 @@ public class BaseTemplate {
 		this.dialogJsp=new TemplateDialogJsp(entityModel);
 		this.script=new TemplateScript(entityModel);
 		this.dialogScript=new TemplateDialogScript(entityModel);
-		this.application=new TemplateApplication(entityModel);
+		this.service=new TemplateService(entityModel);
 		this.action=new TemplateController(entityModel);
 
 	}
@@ -55,12 +55,12 @@ public class BaseTemplate {
 		this.script = script;
 	}
 
-	public TemplateApplication getApplication() {
-		return application;
+	public TemplateService getService() {
+		return service;
 	}
 
-	public void setApplication(TemplateApplication application) {
-		this.application = application;
+	public void setService(TemplateService service) {
+		this.service = service;
 	}
 
 	public TemplateController getAction() {

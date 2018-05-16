@@ -63,19 +63,4 @@ function zipAndDownLoad() {
 			generateDir:generateDir
 		}
 	});
-//	var form = $("<form>");// 定义一个form表单
-//	form.attr("style", "display:none");
-//	form.attr("target", "");
-//	form.attr("method", "post");
-//	form.attr("action", $$pageContextPath + '/template/sys/assistant/zipAndDownload');
-//	var fileInput = $("<input>");
-//	fileInput.attr("type", "hidden");
-//	fileInput.attr("id", "generateDir");
-//	fileInput.attr("name", "generateDir");// 设置属性的名字
-//	//fileInput.attr("value", JSON.stringify({generateDir:generateDir}));// 设置属性的值
-//	fileInput.attr("value", generateDir);// 设置属性的值
-//	$("body").append(form);//将表单放置在web中
-//	form.append(fileInput);
-//	form.submit();// 表单提交
-//	$("body").remove(form);
 }

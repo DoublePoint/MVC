@@ -35,10 +35,10 @@
                 <ll-tab  id="tabEntity"  active="true"  title="实体">  
                 	 
                 </ll-tab>  
-                <ll-tab  id="tabRepository"  title="仓库">
+                <ll-tab  id="tabService"  title="服务层（Service）">
                     	仓库
                 </ll-tab>  
-                <ll-tab  id="tabApplication"  title="应用层">
+                <ll-tab  id="tabServiceImpl"  title="服务层（ServiceImpl）">
                    		 应用层
                 </ll-tab>  
                  <ll-tab  id="tabApplication"  title=" Jsp页面">

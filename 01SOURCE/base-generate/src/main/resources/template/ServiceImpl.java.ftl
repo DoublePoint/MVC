@@ -3,12 +3,12 @@
  * 
  * 创   建   时   间 ： ${datetime}
  * 
- * 类   说   明 ：${baseModel.entityModel.entityClassName}维护类
+ * 类   说   明 ：${baseModel.entityModel.chName}维护类
  * 
  * 修   改   人：          修   改   日   期：
  */
 
-package cn.doublepoint.common.application.template.sys.?;
+package cn.doublepoint.common.service.template.sys.${baseModel.service.packageName}.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -21,21 +21,81 @@ import cn.doublepoint.common.domain.model.entity.sys.${baseModel.entityModel.ent
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 
-@Service(" ${baseModel.application.annotationApplicationName}")
-public class  ${baseModel.application.applicationClassName} implements ${baseModel.application.applicationClassName}Service{
+@Service("${baseModel.service.annotationServiceName}")
+public interface ${baseModel.service.serviceClassName}Impl  implements ${baseModel.service.serviceClassName}Service {
 
-	public boolean saveOrUpdate(${baseModel.entityModel.entityClassName} ${baseModel.entityModel.paramName}) {
-		if (${baseModel.entityModel.paramName}.getId() == null)
-			${baseModel.entityModel.paramName}.setId(SequenceUtil.getNextVal(${baseModel.entityModel.entityClassName}.class));
-		${baseModel.entityModel.paramName}.setCreateTime(new Date());
-		JPAUtil.saveOrUpdate(${baseModel.entityModel.paramName});
+	/**
+	 * 根据查询条件以及分页信息，查询所有数据
+	 * 
+	 * @return 
+	 */
+	public List<${baseModel.entityModel.entityClassName}> find(${baseModel.entityModel.entityClassName} ${baseModel.service.paramName},PageInfo pageInfo) {
+		return JPAUtil.load(${baseModel.entityModel.entityClassName}.class, pageInfo);
+	}
+	
+	/**
+	 * 根据Id获取数据
+	 * @param id
+	 * @return
+	 */
+	public ${baseModel.entityModel.entityClassName} getById(long id){
+		return JPAUtil.loadById(${baseModel.entityModel.entityClassName}.class, id);
+	}
+	
+	/**
+	 * 移除
+	 * @param ${baseModel.service.paramName}
+	 * @return
+	 */
+	public boolean remove(${baseModel.entityModel.entityClassName} ${baseModel.service.paramName}){
+		JPAUtil.remove(item);
 		return true;
 	}
-
-	public boolean remove${baseModel.entityModel.entityClassName}(List<${baseModel.entityModel.entityClassName}> ${baseModel.entityModel.paramListName}) {
-		${baseModel.entityModel.paramListName}.stream().forEach(item -> {
+	
+	
+	/**
+	 * 移除
+	 * @param ${baseModel.service.paramListName}
+	 * @return
+	 */
+	public boolean remove(List<${baseModel.entityModel.entityClassName}> ${baseModel.service.paramListName}){
+		${baseModel.service.paramListName}.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
 		return true;
 	}
+	
+	/**
+	 * 创建或更新数据
+	 * @param ${baseModel.service.paramName}
+	 * @return
+	 */
+	public boolean saveOrUpdate(${baseModel.entityModel.entityClassName} ${baseModel.service.paramName}) {
+		if (${baseModel.service.paramName}.getId() == null){
+			${baseModel.service.paramName}.setId(SequenceUtil.getNextVal(${baseModel.entityModel.entityClassName}.class));
+			${baseModel.service.paramName}.setCreateTime(DateTimeUtil.getCurrentDate());
+		}
+		${baseModel.service.paramName}.setModifyTime(DateTimeUtil.getCurrentDate());
+		JPAUtil.saveOrUpdate(${baseModel.service.paramName});
+		return true;
+	}
+	
+	/**
+	 * 创建或更新数据
+	 * @param ${baseModel.service.paramListName}
+	 * @return
+	 */
+	public boolean saveOrUpdate(List<${baseModel.entityModel.entityClassName}> ${baseModel.service.paramListName}) {
+		${baseModel.service.paramListName}.stream().forEach(item->{
+			if (item.getId() == null){
+				item.setId(SequenceUtil.getNextVal(${baseModel.entityModel.entityClassName}.class));
+				item.setCreateTime(DateTimeUtil.getCurrentDate());
+			}
+			item.setModifyTime(DateTimeUtil.getCurrentDate());
+		});
+		
+		JPAUtil.saveOrUpdate(${baseModel.service.paramListName});
+		return true;
+	}
+
 }

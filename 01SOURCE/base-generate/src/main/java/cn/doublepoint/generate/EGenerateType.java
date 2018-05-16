@@ -12,7 +12,8 @@ package cn.doublepoint.generate;
 public enum EGenerateType {
 	Entity,//实体类型
 	Repository,//仓库类型
-	Application,//应用程序
+	Service,//应用程序
+	ServiceImpl,
 	Jsp,//jsp
 	Sctipt,//script
 	DialogJsp,//Dialog jsp

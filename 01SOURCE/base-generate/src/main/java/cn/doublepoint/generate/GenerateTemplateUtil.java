@@ -303,9 +303,12 @@ public class GenerateTemplateUtil {
 		if (type == EGenerateType.Repository)
 			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
 					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Repository" + (isContainExt ? ".java" : "");
-		if (type == EGenerateType.Application)
+		if (type == EGenerateType.Service)
 			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
-					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Application" + (isContainExt ? ".java" : "");
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "Service" + (isContainExt ? ".java" : "");
+		if (type == EGenerateType.Service)
+			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
+					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "ServiceImpl" + (isContainExt ? ".java" : "");
 		if (type == EGenerateType.Jsp)
 			return StringUtil.filter(GenerateEntityFilterUtil.getFilters(),
 					StringUtil.underlineToCamelOfFirstUpper(tableName)) + "" + (isContainExt ? ".jsp" : "");

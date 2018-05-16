@@ -18,13 +18,13 @@ import cn.doublepoint.commonutil.domain.model.Log4jUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 
 public class GenerateEntityTemplateUtil extends GenerateTemplateUtil {
-	public final static String GENERATE_FILE_ENTITY_TPL_NAME = "Entity.java.ftl";
+	public final static String ENTITY_TPL_NAME = "Entity.java.ftl";
 	
 	Map<String, String> mapEntity;
 	
 	public void generateFile(List<BaseTemplate> models,String generateDirPath){
 		try {
-			mapEntity = buildTemplate(models,GENERATE_FILE_ENTITY_TPL_NAME);
+			mapEntity = buildTemplate(models,ENTITY_TPL_NAME);
 			generateEntityFile(generateDirPath);
 		} catch (Exception e) {
 			Log4jUtil.error(e);
@@ -59,9 +59,9 @@ public class GenerateEntityTemplateUtil extends GenerateTemplateUtil {
 	 *             异常
 	 */
 	private static void generateEntityFile(String generateDirPath, String fileName, String fileContent) throws IOException {
-		String generateEntityDirPath = generateDirPath + "/entity";
+		generateDirPath = generateDirPath + "/entity";
 
-		String entityFilePath = generateEntityDirPath + "/"
+		String entityFilePath = generateDirPath + "/"
 				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Entity);
 		
 		FileUtil.createFile(generateDirPath, entityFilePath, fileContent);

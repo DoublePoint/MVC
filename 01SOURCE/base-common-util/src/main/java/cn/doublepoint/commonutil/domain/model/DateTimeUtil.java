@@ -34,5 +34,13 @@ public class DateTimeUtil {
 		return formatter.format(date);
 	}
 	
+	/**
+	 * //获取当前日期时间 格式为yyyy-MM-dd
+	 * @return
+	 */
+	public static Date getCurrentDate(){
+		return new Date();
+	}
+	
 	
 }

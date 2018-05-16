@@ -1,6 +1,5 @@
 package cn.doublepoint.common.application.template.sys.menu;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,8 +7,8 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.util.SequenceUtil;
+import cn.doublepoint.commonutil.domain.model.DateTimeUtil;
 import cn.doublepoint.commonutil.domain.model.PageInfo;
-import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
@@ -53,26 +52,27 @@ public class MenuServiceImpl implements MenuService{
 		sortParamList.addParam("sn");
 		return JPAUtil.load(Menu.class,paramList, pageInfo,sortParamList);
 	}
+	
+	/**
+	 * 查询所有菜单
+	 * 
+	 * @return 最底层菜单列表
+	 */
+	public List<Menu> find(Menu menu,PageInfo pageInfo) {
+		SortParamList sortParamList=new SortParamList();
+		sortParamList.addParam("sn");
+		return JPAUtil.load(Menu.class, pageInfo,sortParamList);
+	}
 
 	/**
 	 * 查询所有菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public List<Menu> findAllMenu(PageInfo pageInfo) {
+	public List<Menu> findAll(PageInfo pageInfo) {
 		SortParamList sortParamList=new SortParamList();
 		sortParamList.addParam("sn");
-		return findAll(Menu.class, null, pageInfo,sortParamList);
-	}
-	/**
-	 * 查询所有菜单
-	 * 
-	 * @return 最底层菜单列表
-	 */
-	public List<Menu> findAllMenu(Menu menu,PageInfo pageInfo) {
-		SortParamList sortParamList=new SortParamList();
-		sortParamList.addParam("sn");
-		return findAll(Menu.class, null, pageInfo,sortParamList);
+		return JPAUtil.load(Menu.class, pageInfo,sortParamList);
 	}
 	
 	/**
@@ -110,16 +110,38 @@ public class MenuServiceImpl implements MenuService{
 			Menu parentCd = getById(Long.valueOf(menu.getParentId()));
 			menu.setLevel(parentCd.getLevel() + 1);
 		}
-		if (menu.getId() == null)
+		if (menu.getId() == null){
 			menu.setId(SequenceUtil.getNextVal(Menu.class));
-		menu.setCreateTime(new Date());
+			menu.setCreateTime(DateTimeUtil.getCurrentDate());
+		}
+		menu.setModifyTime(DateTimeUtil.getCurrentDate());
 		JPAUtil.saveOrUpdate(menu);
 		return true;
 	}
 	
-	
-	private <T extends BaseEntity> List<T> findAll(Class<T> clazz, QueryParamList parameterList, PageInfo pageInfo,SortParamList sortParamList) {
-		return JPAUtil.load(clazz, parameterList, pageInfo,sortParamList);
+	/**
+	 * 保存或更新
+	 * @param menu
+	 * @return
+	 */
+	public boolean saveOrUpdate(List<Menu> menuList) {
+		menuList.stream().forEach(menu->{
+			if (menu.getParentId() == null) {
+				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
+				menu.setParentId(0L);
+			} else {
+				Menu parentCd = getById(Long.valueOf(menu.getParentId()));
+				menu.setLevel(parentCd.getLevel() + 1);
+			}
+			if (menu.getId() == null){
+				menu.setId(SequenceUtil.getNextVal(Menu.class));
+				menu.setCreateTime(DateTimeUtil.getCurrentDate());
+			}
+			menu.setModifyTime(DateTimeUtil.getCurrentDate());
+		});
+		
+		JPAUtil.saveOrUpdate(menuList);
+		return true;
 	}
 	
 }

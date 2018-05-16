@@ -30,19 +30,20 @@ public interface MenuService {
 	 * @return 最底层菜单列表
 	 */
 	public List<Menu> findChildrenMenu(Menu menu, PageInfo pageInfo);
+	
+	/**
+	 * 查询所有菜单
+	 * 
+	 * @return 最底层菜单列表
+	 */
+	public List<Menu> find(Menu menu,PageInfo pageInfo) ;
 
 	/**
 	 * 查询所有菜单
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public List<Menu> findAllMenu(PageInfo pageInfo);
-	/**
-	 * 查询所有菜单
-	 * 
-	 * @return 最底层菜单列表
-	 */
-	public List<Menu> findAllMenu(Menu menu,PageInfo pageInfo) ;
+	public List<Menu> findAll(PageInfo pageInfo);
 	
 	/**
 	 * 根据Id获取数据

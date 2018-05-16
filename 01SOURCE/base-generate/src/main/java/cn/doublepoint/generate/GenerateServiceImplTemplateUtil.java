@@ -17,14 +17,14 @@ import cn.doublepoint.commonutil.domain.model.FileUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import freemarker.template.TemplateException;
 
-public class GenerateApplicationTemplateUtil extends GenerateTemplateUtil {
-	public final static String GENERATE_FILE_REPOSITORY_TPL_NAME = "Service.java.ftl";
+public class GenerateServiceImplTemplateUtil extends GenerateTemplateUtil {
+	public final static String SERVICVE_IMPL_TPL_NAME = "ServiceImpl.java.ftl";
 	
-	Map<String, String> mapApplication;
+	Map<String, String> mapServiceImpl;
 	public void generateFile(List<BaseTemplate> models,String generateDirPath){
 		try {
-			mapApplication = buildApplicationTemplate(models);
-			generateRepositoryFile(generateDirPath);
+			mapServiceImpl = buildServiceImplTemplate(models);
+			generateServiceImplFile(generateDirPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,10 +35,10 @@ public class GenerateApplicationTemplateUtil extends GenerateTemplateUtil {
 	 * @param mapEntity
 	 * @param generateDirPath
 	 */
-	private void generateRepositoryFile(String generateDirPath){
-		mapApplication.entrySet().stream().forEach(e -> {
+	private void generateServiceImplFile(String generateDirPath){
+		mapServiceImpl.entrySet().stream().forEach(e -> {
 			try {
-				generateRepositoryFile(generateDirPath, e.getKey(), e.getValue());
+				generateServiceImplFile(generateDirPath, e.getKey(), e.getValue());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -57,11 +57,11 @@ public class GenerateApplicationTemplateUtil extends GenerateTemplateUtil {
 	 * @throws IOException
 	 *             异常
 	 */
-	private static void generateRepositoryFile(String generateDirPath, String fileName, String fileContent)
+	private static void generateServiceImplFile(String generateDirPath, String fileName, String fileContent)
 			throws IOException {
-		generateDirPath = generateDirPath + "/repository";
+		generateDirPath = generateDirPath + "/service/impl";
 		String filePath = generateDirPath + "/"
-				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Repository);
+				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Service);
 		FileUtil.createFile(generateDirPath, filePath, fileContent);
 	}
 
@@ -74,8 +74,8 @@ public class GenerateApplicationTemplateUtil extends GenerateTemplateUtil {
 	 * @throws TemplateException
 	 * @throws IOException
 	 */
-	public static Map<String, String> buildApplicationTemplate(List<BaseTemplate> baseModelList)
+	public static Map<String, String> buildServiceImplTemplate(List<BaseTemplate> baseModelList)
 			throws TemplateException, IOException {
-		return buildTemplate(baseModelList, GENERATE_FILE_REPOSITORY_TPL_NAME);
+		return buildTemplate(baseModelList, SERVICVE_IMPL_TPL_NAME);
 	}
 }
