@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.sys.menu.MenuQueryService;
+import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
@@ -33,7 +33,7 @@ public class MenuTreeController extends BaseTreeController {
 	private final String rooTreeName = "菜单树";
 
 	@Resource
-	MenuQueryService menuQueryService;
+	MenuService menuService;
 
 	@RequestMapping("/menu/menu-tree/datalist")
 	@ResponseBody
@@ -57,11 +57,11 @@ public class MenuTreeController extends BaseTreeController {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
 		if (cd == null||cd.getId()==null)
-			menuList = CommonBeanUtils.copyTo(menuQueryService.findRootMenu(pageRequest), VOMenu.class);
+			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
 		else{
 			Menu query=new Menu();
 			CommonBeanUtils.copyProperties(cd, query);
-			menuList = CommonBeanUtils.copyTo(menuQueryService.findChildrenMenu(query, pageRequest), VOMenu.class);
+			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		}
 		if (menuList == null) {
 			return null;

@@ -14,16 +14,19 @@ import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateTemplateUtil;
 
 public class TemplateApplication {
-	//Application的bean名称
-	private String annotationApplicationName;
-	//Application的Class名称
-	private String applicationClassName;
+	
+	private String annotationApplicationName;//Application的bean名称
+	private String applicationClassName;//Application的Class名称
+	private String paramName;//参数名称
+	private String paramListName;//列表参数名称
 
 	public TemplateApplication(TemplateEntityModel entityModel) {
 		String tableName = entityModel.getTableName();
 		String entityClassName = GenerateTemplateUtil.getClassName(tableName, EGenerateType.Entity);
 		annotationApplicationName = StringUtil.lowercaseTheFirstChar(entityClassName) + "Application";
 		applicationClassName = entityClassName + "Application";
+		paramName=StringUtil.camelToUnderlineOfAllLowcase(entityClassName);
+		paramListName=paramName+"List";
 	}
 
 	public String getAnnotationApplicationName() {

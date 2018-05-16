@@ -21,7 +21,7 @@ public class TemplateEntityModel extends BaseModel {
 	private String remark;// 实体备注
 	private String type;// 实体类型
 	private String modelExtend;
-	private String chName;// 实例名称
+	private String chName;// 实例中文名称
 	private String tableName;// 表名称
 	private String annotationTableName;// 实体中 注解Entity中显示的表名称 默认全部大写
 	private String entityClassName;// 类名

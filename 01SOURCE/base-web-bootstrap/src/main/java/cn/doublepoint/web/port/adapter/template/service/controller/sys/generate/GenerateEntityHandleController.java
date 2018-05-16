@@ -10,12 +10,11 @@
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +24,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,11 +36,13 @@ import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
 import cn.doublepoint.commonutil.domain.model.DownloadFileUtil;
-import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+import cn.doublepoint.commonutil.domain.model.FileUtil;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.EGenerateType;
+import cn.doublepoint.generate.GenerateApplicationTemplateUtil;
+import cn.doublepoint.generate.GenerateEntityTemplateUtil;
 import cn.doublepoint.generate.GenerateTemplateUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
@@ -74,6 +70,12 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		return dataWrap;
 	}
 
+	/**
+	 * 导入文件 并返回文件中的所有表
+	 * @param request
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	@RequestMapping("/template/sys/getFileTable")
 	@ResponseBody
 	public void getFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
@@ -93,46 +95,43 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	}
 
 	/**
-	 * 获取OOm所在文件夹
-	 * 
+	 * 生成该实体的各个源文件
 	 * @param request
-	 * @return
+	 * @throws TemplateException
+	 * @throws IOException
 	 */
-	private String getOomDirPath(HttpServletRequest request) {
-		return generateDirPath(request, oomDirPath) + "/";
-	}
-
 	@RequestMapping("/template/sys/assistant/generate")
 	@ResponseBody
 	public void generate(HttpServletRequest request) throws TemplateException, IOException {
+		
 		if (!StringUtil.isNullOrEmpty(oomName)) {
+			List<GenerateTemplateUtil> templateUtils=new ArrayList<>();
+			templateUtils.add(new GenerateEntityTemplateUtil());
+			templateUtils.add(new GenerateApplicationTemplateUtil());
+			
+			
 			File file = new File(getOomDirPath(request) + oomName);
-			List<BaseTemplate> models = GenerateTemplateUtil.buildEntityModelList(file);
-			Map<String, String> mapEntity = GenerateTemplateUtil.buildEntityByTableNameList(models);
-			Map<String, String> mapRepository = GenerateTemplateUtil.buildRepositoryByTableNameList(models);
+			List<BaseTemplate> models = GenerateTemplateUtil.buildTemplateModelList(file);
 
 			String generateDir = UUID.randomUUID().toString();
 			String generateDirPath = generateDirPath(request, generateDir);
-			mapEntity.entrySet().stream().forEach(e -> {
-				try {
-					generateEntityFile(generateDirPath, e.getKey(), e.getValue());
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			});
-
-			mapRepository.entrySet().stream().forEach(e -> {
-				try {
-					generateRepositoryFile(generateDirPath, e.getKey(), e.getValue());
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+			
+			templateUtils.stream().forEach(util->{
+				util.generateFile(models, generateDirPath);
 			});
 
 			responseData.setAjaxParameter("generateDir", generateDir);
 		}
 	}
 
+	
+	/**
+	 * 源文件详细信息页面
+	 * @param request
+	 * @return
+	 * @throws TemplateException
+	 * @throws IOException
+	 */
 	@RequestMapping("/template/sys/assistant/generateDetail")
 	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
 		Map<String, String> map = new HashMap<String, String>();
@@ -142,6 +141,12 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		return "/template/sys/assistant/generateDetail";
 	}
 
+	/**
+	 * 压缩并下载源文件
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping("/template/sys/assistant/zipAndDownload")
 	public void zipAndDownload1(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -204,79 +209,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		return efQueryService.findAllEntityFilter(null);
 	}
 
-	/**
-	 * 生成实体文件
-	 * 
-	 * @param generateDirPath
-	 *            生成文件夹根路径 在此基础上添加/entity/entity.java
-	 * @param fileName
-	 *            文件名称
-	 * @param fileContent
-	 *            文件内容
-	 * @throws IOException
-	 *             异常
-	 */
-	private void generateEntityFile(String generateDirPath, String fileName, String fileContent) throws IOException {
-		String generateEntityDirPath = generateDirPath + "/entity";
-		File generateEntityDir = new File(generateEntityDirPath);
-		if (!generateEntityDir.exists()) {
-			generateEntityDir.mkdir();
-		}
-
-		String entityFilePath = generateEntityDirPath + "/"
-				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Entity);
-		File entiryFile = new File(entityFilePath);
-		System.out.println("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
-		FileOutputStream fos = new FileOutputStream(entiryFile);
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(entiryFile));
-			out.write(fileContent);
-			out.close();
-			// 这里处理业务逻辑
-		} finally {
-			// 关闭临时文件
-			fos.flush();
-			fos.close();
-		}
-	}
-
-	/**
-	 * 生成实体文件
-	 * 
-	 * @param generateDirPath
-	 *            生成文件夹根路径 在此基础上添加/entity/entity.java
-	 * @param fileName
-	 *            文件名称
-	 * @param fileContent
-	 *            文件内容
-	 * @throws IOException
-	 *             异常
-	 */
-	private void generateRepositoryFile(String generateDirPath, String fileName, String fileContent)
-			throws IOException {
-		generateDirPath = generateDirPath + "/repository";
-		File generateEntityDir = new File(generateDirPath);
-		if (!generateEntityDir.exists()) {
-			generateEntityDir.mkdir();
-		}
-
-		String entityFilePath = generateDirPath + "/"
-				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Repository);
-		File entiryFile = new File(entityFilePath);
-		Log4jUtil.info("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
-		FileOutputStream fos = new FileOutputStream(entiryFile);
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(entiryFile));
-			out.write(fileContent);
-			out.close();
-			// 这里处理业务逻辑
-		} finally {
-			// 关闭临时文件
-			fos.flush();
-			fos.close();
-		}
-	}
-
+	
 	/**
 	 * 生成 自动创建实体仓库根文件夹
 	 * 
@@ -302,6 +235,16 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	private String getTempDir(HttpServletRequest request) {
 		String tempDir = request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
 		return tempDir;
+	}
+	
+	/**
+	 * 获取OOm所在文件夹
+	 * 
+	 * @param request
+	 * @return
+	 */
+	private String getOomDirPath(HttpServletRequest request) {
+		return generateDirPath(request, oomDirPath) + "/";
 	}
 
 }

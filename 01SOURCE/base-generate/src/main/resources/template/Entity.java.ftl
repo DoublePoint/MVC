@@ -3,7 +3,7 @@
  * 
  * 创   建   时   间 ： ${datetime}
  * 
- * 类   说   明 ：${baseModel.entityModel.modelComment}
+ * 类   说   明 ：${baseModel.entityModel.remark}
  * 
  * 修   改   人：          修   改   日   期：
  */
@@ -25,7 +25,7 @@ public class ${baseModel.entityModel.entityClassName} extends BaseEntity {
 <#list baseModel.entityModel.fields as field>
 	<#if field_index ==0>@Id</#if>
 	@Column(name="${field.annotationColumnName}")
-	private ${field.fieldTypeStr} ${field.propertyName};
+	private ${field.fieldTypeStr} ${field.propertyName};//${field.fieldComment}
 </#list>
 <#list baseModel.entityModel.fields as field>
 
