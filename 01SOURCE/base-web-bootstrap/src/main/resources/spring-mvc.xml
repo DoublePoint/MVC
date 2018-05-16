@@ -91,7 +91,13 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />	
-			<bean class="cn.doublepoint.commonutil.interceptor.DataEncapsulateAndDecapsulateIntecerptor"></bean>
+			<bean class="cn.doublepoint.commonutil.interceptor.DataEncapsulateAndDecapsulateIntecerptor">
+				<property name="exceptUrls">  
+                    <list>  
+                       <!--  <value>/template/sys/assistant/zipAndDownload1</value>   -->
+                    </list>  
+                </property>  
+			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	  <!-- 拦截器 ↑↑↑↑↑ -->

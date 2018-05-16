@@ -81,6 +81,8 @@
 				</ll-step>
 				<ll-step title="完成">
 						<input type="button" class="btn btn-info btn-sm" onclick="zipAndDownLoad()" value="打包并下载"/>
+						<a type="button" class="btn btn-info btn-sm" href="${pageContext.request.contextPath}/template/sys/assistant/zipAndDownload1">打包并下载</a>
+						
 				</ll-step>
 			</ll-steppanel>
 

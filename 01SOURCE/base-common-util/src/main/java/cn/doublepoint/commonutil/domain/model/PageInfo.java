@@ -9,15 +9,6 @@
 */ 
 package cn.doublepoint.commonutil.domain.model;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import org.springframework.data.domain.Sort;
-
-import com.alibaba.fastjson.JSONObject;
-
 public class PageInfo {
 	private final long DEFAULT_PAGE_SIZE=20;
 	

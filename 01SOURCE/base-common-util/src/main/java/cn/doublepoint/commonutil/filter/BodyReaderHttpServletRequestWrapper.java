@@ -21,11 +21,11 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import javax.swing.plaf.multi.MultiLabelUI;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.doublepoint.commonutil.domain.model.Log4jUtil;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
@@ -74,7 +74,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 			jsonObject = JSON.parseObject(dataJsonString);
 		}
 		catch (Exception e){
-			
+			Log4jUtil.error(e);
 		}
 		return jsonObject;
 	}

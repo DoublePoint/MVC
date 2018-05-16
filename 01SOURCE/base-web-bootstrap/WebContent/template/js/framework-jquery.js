@@ -1,4 +1,4 @@
-var _RegisterModel=new RegisterModel();
+var _RegisterModel = new RegisterModel();
 (function($) {
 	// html标签Id对应Model键值对
 	var _LayuiObjectHashMap;
@@ -17,19 +17,18 @@ var _RegisterModel=new RegisterModel();
 				_LayuiObjectHashMap.add(id, obj);
 			}
 		},
-		doResponse : function(responseData){
-			try{
-				if(responseData.errorMessage!=null&&responseData.errorMessage!=""){
+		doResponse : function(responseData) {
+			try {
+				if (responseData.errorMessage != null && responseData.errorMessage != "") {
 					$.alert(responseData.errorMessage);
 					return false;
 				}
 				return true;
-			}
-			catch(e){
+			} catch (e) {
 				$.alert("frameworl-jquery.js-22");
 				return false;
 			}
-			
+
 		},
 		getFromLayuiObjectHashMap : function(id) {
 			return _LayuiObjectHashMap == null ? null : _LayuiObjectHashMap.getValue(id);
@@ -38,14 +37,13 @@ var _RegisterModel=new RegisterModel();
 		_Eval : function(func, paramArr) {
 			if (func == null)
 				return;
-			var invokeString="";
-			if(typeof func === "function"){
+			var invokeString = "";
+			if (typeof func === "function") {
 				invokeString = "" + func.name;
-			}
-			else{
+			} else {
 				invokeString = "" + func;
 			}
-				
+
 			// 1、如果是functionName()类型的 则转换成
 			if (invokeString.endWith("()")) {
 				invokeString = invokeString.substr(0, invokeString.length - 2)
@@ -74,7 +72,7 @@ var _RegisterModel=new RegisterModel();
 			}
 			invokeString += ")";
 			return eval(invokeString);
- 			// param==null?func.apply(this):func.apply(this,param);
+			// param==null?func.apply(this):func.apply(this,param);
 		},
 		generateUUID : function() {
 			var d = new Date().getTime();
@@ -112,20 +110,19 @@ var _RegisterModel=new RegisterModel();
 
 			// 存储弹出窗口的传递值
 			var _DialogData = obj.data;
-			_DialogData.url=obj.url;
+			_DialogData.url = obj.url;
 
-			var showTimes=1;
+			var showTimes = 1;
 			// 重新封装success方法
 			obj.success = function(layero, index) {
-				if(showTimes!=1)
+				if (showTimes != 1)
 					return;
 				showTimes++;
 				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-				try{
+				try {
 					iframeWin._InitOpenDialog(_DialogData);
-				}
-				catch(e){
-					
+				} catch (e) {
+
 				}
 			}
 			var width = obj.width;
@@ -141,7 +138,7 @@ var _RegisterModel=new RegisterModel();
 				height = obj.height + "px";
 			}
 			obj.area = [ width, height ];
-			obj.content=$$pageContextPath+"/template/sys/dialog/dialog.jsp";
+			obj.content = $$pageContextPath + "/template/sys/dialog/dialog.jsp";
 			parent.$layer.open(obj);
 		},
 		close : function(data) {
@@ -164,7 +161,7 @@ var _RegisterModel=new RegisterModel();
 				$._Eval(yesFunction, data);
 			}
 		},
-		alert:function(msg){
+		alert : function(msg) {
 			parent.$layer.alert(msg);
 		},
 		tips : function(msg, time) {
@@ -382,16 +379,16 @@ var _RegisterModel=new RegisterModel();
 			styleBuffer.append(":").append(avalue).append(";");
 			return styleBuffer
 		},
-		//是否是字符串类型
-		isString : function(obj){ 
-			return (typeof obj=='string')&&str.constructor==String; 
-		} ,
-		//是否是数值类型
-		isNumber : function(obj){ 
-			return (typeof obj=='number')&&str.constructor==String; 
+		// 是否是字符串类型
+		isString : function(obj) {
+			return (typeof obj == 'string') && str.constructor == String;
 		},
-		//是否是对象类型
-		isObject : function(obj){
+		// 是否是数值类型
+		isNumber : function(obj) {
+			return (typeof obj == 'number') && str.constructor == String;
+		},
+		// 是否是对象类型
+		isObject : function(obj) {
 			return (obj instanceof Object);
 		},
 		outputMapCompoment : function(aComponent) {
@@ -413,73 +410,69 @@ var _RegisterModel=new RegisterModel();
 			}
 			return arr;
 		},
-		//重新封装Ajax请求
-		request:function(settings){
-			var index = $layer.load(0, {shade: false});
-			if(settings==null)
+		// 重新封装Ajax请求
+		request : function(settings) {
+			var index = $layer.load(0, {
+				shade : false
+			});
+			if (settings == null)
 				return;
-			
-			//封装操作成功函数
-			var successFunction=settings.success;
-			if(successFunction!=null){
-				settings.success=function(responseData){
+
+			// 封装操作成功函数
+			var successFunction = settings.success;
+			if (successFunction != null) {
+				settings.success = function(responseData) {
 					$layer.closeAll('loading');
-					if(!$.doResponse(responseData)){
+					if (!$.doResponse(responseData)) {
 						return;
 					}
-					var res=new AjaxResponse(responseData);
+					var res = new AjaxResponse(responseData);
 					successFunction(res);
 				}
-			};
-			
-			//封装操作失败函数
-			var errorFunction=settings.error;
-			if(errorFunction!=null){
+			}
+			;
+
+			// 封装操作失败函数
+			var errorFunction = settings.error;
+			if (errorFunction != null) {
 				$layer.closeAll('loading');
-				settings.error=function(responseData){
-					if(!$.doResponse(responseData)){
+				settings.error = function(responseData) {
+					if (!$.doResponse(responseData)) {
 						return;
 					}
-					var res=new AjaxResponse(responseData);
+					var res = new AjaxResponse(responseData);
 					errorFunction(res);
 				}
 			}
-			
+
 			settings.type = "POST";
-			if(settings.contentType==null||settings.contentType=="")
+			if (settings.contentType == null || settings.contentType == "")
 				settings.contentType = 'application/json;charset=UTF-8';
 			settings.dataType = "json";
-			settings.data= JSON.stringify(settings.data);
-			
+			//settings.data = JSON.stringify($('form').serializeObject(settings.data));
+			settings.data = JSON.stringify(settings.data);
+			settings.accept = "*/*";
+
 			$.ajax(settings);
 		},
-		//重新封装Ajax请求
-		requestHtml:function(settings){
-			if(settings==null)
-				return;
-			
-			//封装操作成功函数
-			var successFunction=settings.success;
-			if(successFunction!=null){
-				settings.success=function(responseData){
-					successFunction(responseData);
-				}
-			};
-			
-			//封装操作失败函数
-			var errorFunction=settings.error;
-			if(errorFunction!=null){
-				settings.error=function(responseData){
-					errorFunction(responseData);
-				}
-			}
-			
-			settings.type = "POST";
-			settings.contentType = 'application/json;charset=UTF-8';
-			settings.dataType = "html";
-			settings.data= JSON.stringify(settings.data);
-			
-			$.ajax(settings);
+		// 重新封装Ajax请求
+		formSubmit : function(settings) {
+			var url=settings.url;
+			var data=settings.data;
+			var form = $("<form>");// 定义一个form表单
+			form.attr("style", "display:none");
+			form.attr("target", "");
+			form.attr("method", "post");
+			form.attr("action", url);
+			var fileInput = $("<input>");
+			fileInput.attr("type", "hidden");
+			fileInput.attr("id", "generateDir");
+			fileInput.attr("name", "generateDir");// 设置属性的名字
+			fileInput.attr("value", JSON.stringify(data));// 设置属性的值
+			$("body").append(form);// 将表单放置在web中
+			form.append(fileInput);
+			form.submit();// 表单提交
+			$("body").remove(form);
 		}
 	});
 
@@ -492,4 +485,23 @@ var _RegisterModel=new RegisterModel();
 			$(this).hide();
 		}
 	};
+	/**
+	 * 自动将form表单封装成json对象
+	 */
+	$.fn.serializeObject = function(o) {
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
 })(jQuery);
+
+

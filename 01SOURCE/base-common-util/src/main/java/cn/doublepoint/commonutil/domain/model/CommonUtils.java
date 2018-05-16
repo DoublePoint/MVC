@@ -16,8 +16,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-//import com.google.gson.Gson;
-
 public class CommonUtils {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -206,15 +204,4 @@ public class CommonUtils {
 		long current = System.currentTimeMillis();
 		return new Timestamp(current);
 	}
-
-//	/**
-//	 * 对象转变成json字符串
-//	 * @param object
-//	 * @return
-//	 */
-//	public static String tojson(Object object){
-//		Gson gson=new Gson();
-//		String returnstr=gson.toJson(object);
-//		return returnstr;
-//	}
 }

@@ -9,29 +9,19 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate;
 
-import static java.util.stream.Collectors.toList;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,6 +41,7 @@ import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.commonutil.domain.model.DownloadFileUtil;
 import cn.doublepoint.commonutil.domain.model.Log4jUtil;
 import cn.doublepoint.commonutil.domain.model.StringUtil;
 import cn.doublepoint.commonutil.domain.model.ZipUtil;
@@ -67,7 +58,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	EntityFilterQueryService efQueryService;
 
 	private final String oomDirPath = "oom";
-
+	
 	private AjaxDataWrap<MySQLTables> dataWrap;
 	private String tableName;
 	private String oomName;
@@ -83,22 +74,6 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		return dataWrap;
 	}
 
-	// @RequestMapping("/template/sys/uploadfile1")
-	// @ResponseBody
-	// public String upload() throws IllegalStateException, IOException {
-	// String returnString = "";
-	// try {
-	// File filev = File.createTempFile("tmp", null);
-	// file.transferTo(filev);
-	// returnString = GenerateEntityUtil.buildEntityByTableName(filev,
-	// "sys_entity_filter");
-	// //file.deleteOnExit();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// return returnString.replace("<", "&lt;").replace("<", "&gt;");
-	// }
-
 	@RequestMapping("/template/sys/getFileTable")
 	@ResponseBody
 	public void getFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
@@ -106,7 +81,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			String oomName = UUID.randomUUID() + ".oom";
 			File filev = new File(getOomDirPath(request) + "/" + oomName);
 			file.transferTo(filev);
-			
+
 			List<TemplateEntityModel> beanModelList = GenerateTemplateUtil.buildTableNameList(filev);
 			AjaxDataWrap<TemplateEntityModel> ajaxDataWrap = new AjaxDataWrap<TemplateEntityModel>();
 			ajaxDataWrap.setDataList(beanModelList);
@@ -130,12 +105,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	@RequestMapping("/template/sys/assistant/generate")
 	@ResponseBody
 	public void generate(HttpServletRequest request) throws TemplateException, IOException {
-
 		if (!StringUtil.isNullOrEmpty(oomName)) {
-			List<String> tableNameList = new ArrayList<>();
-			if (dataWrap != null) {
-				tableNameList = dataWrap.getDataList().stream().map(MySQLTables::getTableName).collect(toList());
-			}
 			File file = new File(getOomDirPath(request) + oomName);
 			List<BaseTemplate> models = GenerateTemplateUtil.buildEntityModelList(file);
 			Map<String, String> mapEntity = GenerateTemplateUtil.buildEntityByTableNameList(models);
@@ -163,7 +133,6 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		}
 	}
 
-	@SuppressWarnings("resource")
 	@RequestMapping("/template/sys/assistant/generateDetail")
 	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
 		Map<String, String> map = new HashMap<String, String>();
@@ -174,65 +143,17 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	}
 
 	@RequestMapping("/template/sys/assistant/zipAndDownload")
-	public ResponseEntity<byte[]> zipAndDownload1(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		String fileZip=getTempDir(request) + generateDir+".zip";
+	public void zipAndDownload1(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		String fileZip = getTempDir(request) + generateDir + ".zip";
 		// 文件输出流
 		FileOutputStream outStream = new FileOutputStream(fileZip);
 		// 压缩流
 		ZipUtil.toZip(getTempDir(request) + generateDir, outStream, true);
-        File file=new File(fileZip);  
-        HttpHeaders headers = new HttpHeaders();    
-        String downloadFielName = new String(fileZip.getBytes("UTF-8"),"iso-8859-1");
-        //通知浏览器以attachment（下载方式）打开图片
-        //headers.setContentDispositionFormData("attachment", downloadFielName);
-        response.setHeader("Content-disposition","attachment; filename="+downloadFielName+"");
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);   
-        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers, HttpStatus.CREATED);    
-	}
-	
-	@RequestMapping("/template/sys/assistant/zipAndDownload1")
-	public void zipAndDownload(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		String fileZip=getTempDir(request) + generateDir+".zip";
-		// 文件输出流
-		FileOutputStream outStream = new FileOutputStream(fileZip);
-		// 压缩流
-		ZipUtil.toZip(getTempDir(request) + generateDir, outStream, true);
-        File file=new File(fileZip);  
-        
-      //声明本次下载状态的记录对象
-	    DownloadRecord downloadRecord = new DownloadRecord(fileZip, "", request);
-	    //设置响应头和客户端保存文件名
-	    response.setCharacterEncoding("utf-8");
-	    response.setContentType("multipart/form-data");
-	    response.setHeader("Content-Disposition", "attachment;fileName=" + fileZip);
-	    //用于记录以完成的下载的数据量，单位是byte
-	    long downloadedLength = 0l;
-	    try {
-	        //打开本地文件流
-	        InputStream inputStream = new FileInputStream(fileZip);
-	        //激活下载操作
-	        OutputStream os = response.getOutputStream();
 
-	        //循环写入输出流
-	        byte[] b = new byte[2048];
-	        int length;
-	        while ((length = inputStream.read(b)) > 0) {
-	            os.write(b, 0, length);
-	            downloadedLength += b.length;
-	        }
-
-	        // 这里主要关闭。
-	        os.close();
-	        inputStream.close();
-	    } catch (Exception e){
-	        downloadRecord.setStatus(DownloadRecord.STATUS_ERROR);
-	        throw e;
-	    }
-	    downloadRecord.setStatus(DownloadRecord.STATUS_SUCCESS);
-	    downloadRecord.setEndTime(new Timestamp(System.currentTimeMillis()));
-	    downloadRecord.setLength(downloadedLength);
+		DownloadFileUtil.download(response, fileZip, "实体映射包.zip");
 	}
+
 	/**
 	 * 获取EntityContent
 	 * 
@@ -277,102 +198,10 @@ public class GenerateEntityHandleController extends BaseHandleController {
 		}
 	}
 
-	@RequestMapping("/template/sys/testGetDataWrap")
-	@ResponseBody
-	public void testGetDataWrap(HttpServletRequest request) throws IllegalStateException, IOException {
-		try {
-			String oomFileName = "";
-			// testParam = request.getParameter("testParam");
-			// String generateDirPath= generateDirPath(request);
-			// oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
-			// File filev = new File(oomFileName);
-			// file.transferTo(filev);
-			//
-			// List<BeanModel>
-			// beanModelList=GenerateEntityUtil.buildTableNameList(filev);
-			// AjaxDataWrap<BeanModel> ajaxDataWrap=new
-			// AjaxDataWrap<BeanModel>();
-			// ajaxDataWrap.setDataList(beanModelList);
-			responseData.setAjaxParameter("ajaxDataWrap", null);
-			// responseData.setAjaxParameter("oomFileName", oomFileName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	// String oomFileName="";
-	// try {
-	// String generateDirPath= generateDirPath(request);
-	//
-	// oomFileName=generateDirPath+"/"+UUID.randomUUID()+".oom";
-	// File file = new File(oomFileName);
-	// myfile.transferTo(file);
-	// List<String> tableNameLlist=new ArrayList<>();
-	// tableNameLlist.add("sys_menu");
-	// tableNameLlist.add("sys_entity_filter");
-	//
-	// Map<String,String>
-	// tableMap=GenerateEntityUtil.buildEntityByTableNameList(file,
-	// tableNameLlist);
-	// tableMap.entrySet().stream().forEach(entity->{
-	// String tableName=entity.getKey();
-	// String tableContent=entity.getValue();
-	// try {
-	// generateEntityFile(generateDirPath, tableName, tableContent);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// });
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return oomFileName;
-
 	@RequestMapping("/template/sys/config/entityFilter")
 	@ResponseBody
 	public AjaxDataWrap<EntityFilter> getEntityFilter(@RequestParam(required = false) String userId) {
 		return efQueryService.findAllEntityFilter(null);
-	}
-
-	@RequestMapping("/template/sys/config/generateFile")
-	@ResponseBody
-	private void downloadFiles(@RequestParam(required = false) List<File> files, HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
-		String tempDir = request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
-		String tempDirName = UUID.randomUUID() + "";
-		String generateDirPath = tempDir + tempDirName;
-		File generateDir = new File(generateDirPath);
-		if (!generateDir.exists()) {
-			generateDir.mkdir();
-			System.out.println("创建临时文件夹：" + generateDir.getCanonicalPath());
-		}
-
-		String generateRepositoryDirPath = generateDirPath + "/repository";
-		File generateRepositoryDir = new File(generateRepositoryDirPath);
-		if (!generateRepositoryDir.exists()) {
-			generateRepositoryDir.mkdir();
-			System.out.println("创建临时文件夹repository：" + generateRepositoryDir.getCanonicalPath());
-		}
-
-		String generateJspDirPath = generateDirPath + "/jsp";
-		File generateJspDir = new File(generateJspDirPath);
-		if (!generateJspDir.exists()) {
-			generateJspDir.mkdir();
-			System.out.println("创建临时文件夹jsp：" + generateJspDir.getCanonicalPath());
-		}
-
-		// 在服务器端创建打包下载的临时文件
-		String zipFilePath = tempDir + "/" + tempDirName + ".zip";
-
-		File fileZip = new File(zipFilePath);
-		// 文件输出流
-		FileOutputStream outStream = new FileOutputStream(fileZip);
-		// 压缩流
-		ZipUtil.toZip(generateDirPath, outStream, true);
-
-		if (outStream != null)
-			outStream.close();
 	}
 
 	/**
@@ -431,7 +260,8 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			generateEntityDir.mkdir();
 		}
 
-		String entityFilePath = generateDirPath + "/"+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Repository);
+		String entityFilePath = generateDirPath + "/"
+				+ GenerateTemplateUtil.getFileNameContainExt(fileName, EGenerateType.Repository);
 		File entiryFile = new File(entityFilePath);
 		Log4jUtil.info("临时文件所在的本地路径：" + entiryFile.getCanonicalPath());
 		FileOutputStream fos = new FileOutputStream(entiryFile);
