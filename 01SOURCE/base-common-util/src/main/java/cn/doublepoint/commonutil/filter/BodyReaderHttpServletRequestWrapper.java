@@ -9,13 +9,19 @@
 */
 package cn.doublepoint.commonutil.filter;
 
+import java.awt.Menu;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.ParameterizedType;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -24,22 +30,24 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.doublepoint.commonutil.StringUtil;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	private final byte[] body;
-	private JSONObject jsonObject;
+	private Map<String, Object> map;
 
 	public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
 		super(request);
+		map = new HashMap<String, Object>();
 		body = readBytes(request.getReader(), "utf-8");
-		try {
-			System.out.println("--------------"+new String(body));
-		} catch (Exception e) {
-		}
-		
+		translateFomrDataToJsonMap();
 	}
 
 	@Override
@@ -54,56 +62,35 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 * 获取参数
 	 */
 	@Override
-	public String getParameter(String parameterName){
-		if(super.getParameter(parameterName)!=null)
-			return super.getParameter(parameterName);
-		if(this.getJSONObject()==null)
-			return null;
-		return this.getJSONObject().getString(parameterName);
+	public String getParameter(String parameterName) {
+		return map.get(parameterName)==null?null:map.get(parameterName).toString();
 	}
 	
 	/**
-	 * 获取json对象
-	 * 
+	 * 获取ajaxdataWrap
+	 * @param ajaxDataWrapName
+	 * @param clazz
 	 * @return
 	 */
-	public JSONObject getJSONObject() {
-		if (jsonObject != null) {
-			return jsonObject;
-		}
-		if(this.getBody()==null)
+	public <T extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName,Class<T> clazz){
+		ObjectMapper mspp = new ObjectMapper();
+		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Object wrapObj=map.get(ajaxDataWrapName);
+		if(wrapObj==null)
 			return null;
-		String dataJsonString = new String(this.getBody());
-		dataJsonString=filterJsonString(dataJsonString);
-		try{
-			jsonObject = JSON.parseObject(dataJsonString);
-		}
-		catch (Exception e){
-			Log4jUtil.warn(e);
-		}
-		return jsonObject;
-	}
-	
-	/**
-	 * 过滤JsonString
-	 * @param dataJsonString
-	 * @return
-	 */
-	private String filterJsonString(String dataJsonString){
+		String wrapJsonString=String.valueOf(wrapObj);
+		JSONObject obj=JSON.parseObject(wrapJsonString);
+		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
 		try {
-			String resultString = URLDecoder.decode(dataJsonString,"UTF-8");
-			int i1=resultString.indexOf("{");
-			int i2=resultString.indexOf("=");
-			if(i2<i1){
-				resultString=resultString.substring(i2+1);
-			}
-			return resultString;
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			AjaxDataWrap<T> dataWrap=mspp.readValue(obj.toJSONString(), type);
+			return dataWrap;
+		} catch (Exception e) {
+			Log4jUtil.error(e);
+			return new AjaxDataWrap<T>();
 		}
-		return dataJsonString;
 	}
-	
+
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
 		if (body == null)
@@ -135,7 +122,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	public byte[] getBody() {
 		return body;
 	}
-	
+
 	/**
 	 * 通过BufferedReader和字符编码集转换成byte数组
 	 * 
@@ -155,6 +142,26 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		return null;
 	}
 
-	
+	/**
+	 * 将FomnData类型的数据转换成Json
+	 */
+	private void translateFomrDataToJsonMap() {
+		if (this.body == null)
+			return;
+		try {
+			String formdataString = URLDecoder.decode(new String(body), "UTF-8");
+			String[] strings = formdataString.split("&");
+			if (strings != null) {
+				Stream.of(strings).forEach(item -> {
+					int startIndex = item.indexOf("=");
+					String key = item.substring(0, startIndex);
+					String value = item.substring(startIndex + 1);
+					map.put(key, value);
+				});
+			}
+		} catch (Exception e) {
+			Log4jUtil.error(e);
+		}
+	}
 
 }

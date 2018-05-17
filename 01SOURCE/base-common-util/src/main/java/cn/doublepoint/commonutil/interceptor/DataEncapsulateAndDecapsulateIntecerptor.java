@@ -13,8 +13,6 @@ package cn.doublepoint.commonutil.interceptor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -28,9 +26,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
@@ -54,11 +49,6 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		if (!isHasRight(request))
-			return true;
-		// 解封装所有参数
-		decapsulateRequestData(request, response, handler);
 		return true;
 	}
 
@@ -76,25 +66,6 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 			throws Exception {
 	}
 
-	/**
-	 * 解封装请求参数 将传过来的数据进行解析 并给handler中的数据赋值 不需要进行request.get进行获取
-	 * 
-	 * @param request
-	 * @param response
-	 * @param handler
-	 * @param modelAndView
-	 */
-	private void decapsulateRequestData(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		try {
-			Object bean = ((HandlerMethod) handler).getBean();
-			if (bean instanceof BaseController) {
-				BaseController controller = (BaseController) bean;
-				initHandlerField(request, controller);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
 
 	/**
 	 * 初始化Handler的各个字段，给其赋值(前台传来的值)
@@ -110,6 +81,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 			decapsulateGet(request, controller, fields);
 		}
 	}
+
 
 	/**
 	 * 封装返回结果,将数据封装成固定格式的请求结果 以便在jsp中通过封装的脚本可以直接获取数据
@@ -193,27 +165,27 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	private void decapsulateAjaxDataWrap(HttpServletRequest request, BaseController controller, Field field) {
-		Field wrapField = field;
-		String fieldName = wrapField.getName();
-		Class ajaxDataWrapType = wrapField.getType();
-		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
-		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
-		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
-		if (requestWrapper.getJSONObject() == null)
-			return;
-		if (requestWrapper.getJSONObject().getJSONObject(fieldName) == null)
-			return;
-		String jsobString = requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
-		ObjectMapper mspp = new ObjectMapper();
-		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		JavaType type = mspp.getTypeFactory().constructParametricType(ajaxDataWrapType, baseModelClass);
-		try {
-			Object oo = mspp.readValue(jsobString, type);
-			wrapField.set(controller, oo);
-		} catch (Exception e) {
-			Log4jUtil.error(e);
-		}
+//		Field wrapField = field;
+//		String fieldName = wrapField.getName();
+//		Class ajaxDataWrapType = wrapField.getType();
+//		ParameterizedType genericType = (ParameterizedType) wrapField.getGenericType();
+//		Class<?> baseModelClass = (Class<?>) genericType.getActualTypeArguments()[0];
+//		BodyReaderHttpServletRequestWrapper requestWrapper = (BodyReaderHttpServletRequestWrapper) request;
+//		if (requestWrapper.getJSONObject() == null)
+//			return;
+//		if (requestWrapper.getJSONObject().getJSONObject(fieldName) == null)
+//			return;
+//		String jsobString = requestWrapper.getJSONObject().getJSONObject(fieldName).toJSONString();
+//		ObjectMapper mspp = new ObjectMapper();
+//		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+//		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		JavaType type = mspp.getTypeFactory().constructParametricType(ajaxDataWrapType, baseModelClass);
+//		try {
+//			Object oo = mspp.readValue(jsobString, type);
+//			wrapField.set(controller, oo);
+//		} catch (Exception e) {
+//			Log4jUtil.error(e);
+//		}
 
 	}
 
@@ -334,12 +306,4 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 				&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest");
 	}
 
-	/**
-	 * 判断是否是Ajax请求
-	 * 
-	 * @param request
-	 * @return
-	private boolean isResponseJson(HttpServletRequest request) {
-		return request.getHeader("Accept") == null || request.getHeader("Accept").indexOf("application/json") != -1;
-	}*/
 }

@@ -7,7 +7,7 @@ function retrieve() {
 	}
 	var formData=ajaxform.getData();
 	formData.id=selectNodeCdbs;
-	var array = new Array();
+	var array = [];
 	array.push(formData);
 	dataWrap.setDataList(array);
 	$.request({
@@ -39,6 +39,7 @@ function onClickAdd() {
 		cdbs = nodes[0].id;
 	}
 	var ajaxDataWrap =  $.createAjaxDataWrap();
+	nodes[0].childrenMenuList=null;
 	ajaxDataWrap.setDataList(nodes[0]);
 	$.openDialog({
 		type : 2,

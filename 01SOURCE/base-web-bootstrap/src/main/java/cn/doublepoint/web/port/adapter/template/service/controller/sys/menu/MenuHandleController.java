@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
+import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
@@ -40,7 +41,7 @@ public class MenuHandleController extends BaseHandleController {
 	
 	@RequestMapping("/menuDialog")
 	public String menuDialog(BodyReaderHttpServletRequestWrapper request) {
-		AjaxDataWrap ajaxDataWrap=request.getParameter("ajaxDataWrap");
+		AjaxDataWrap ajaxDataWrap=request.getAjaxDataWrap("dataWrap",Menu.class);
 		responseData.setAjaxParameter("dataWrap", ajaxDataWrap);
 		return "/template/sys/menu/menuDialog";
 	}
