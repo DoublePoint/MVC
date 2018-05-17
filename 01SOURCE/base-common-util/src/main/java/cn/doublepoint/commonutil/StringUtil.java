@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.commonutil.domain.model;
+package cn.doublepoint.commonutil;
 
 import java.util.List;
 import java.util.regex.Matcher;

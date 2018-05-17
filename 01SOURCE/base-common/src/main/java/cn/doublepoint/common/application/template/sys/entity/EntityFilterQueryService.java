@@ -8,9 +8,9 @@ import com.querydsl.core.types.Predicate;
 
 import cn.doublepoint.common.application.template.sys.BaseQueryService;
 import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
-import cn.doublepoint.commonutil.domain.model.PageInfo;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 /**

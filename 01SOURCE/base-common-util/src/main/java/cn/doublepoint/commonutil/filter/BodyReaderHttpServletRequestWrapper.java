@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import cn.doublepoint.commonutil.domain.model.Log4jUtil;
-import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.StringUtil;
+import cn.doublepoint.commonutil.log.Log4jUtil;
 
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	private final byte[] body;
@@ -35,10 +35,10 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
 		super(request);
 		body = readBytes(request.getReader(), "utf-8");
-//		try {
-//			System.out.println("--------------"+new String(body));
-//		} catch (Exception e) {
-//		}
+		try {
+			System.out.println("--------------"+new String(body));
+		} catch (Exception e) {
+		}
 		
 	}
 

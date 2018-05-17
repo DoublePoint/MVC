@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import cn.doublepoint.commonutil.domain.model.FileUtil;
-import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+import cn.doublepoint.commonutil.file.FileUtil;
+import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 
 public class GenerateEntityTemplateUtil extends GenerateTemplateUtil {
@@ -58,7 +58,7 @@ public class GenerateEntityTemplateUtil extends GenerateTemplateUtil {
 	 * @throws IOException
 	 *             异常
 	 */
-	private static void generateEntityFile(String generateDirPath, String fileName, String fileContent) throws IOException {
+	private void generateEntityFile(String generateDirPath, String fileName, String fileContent) throws IOException {
 		generateDirPath = generateDirPath + "/entity";
 
 		String entityFilePath = generateDirPath + "/"

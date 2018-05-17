@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DropBeanUtil;
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.DropBean;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.DropBean;
 
 @Controller
 public class FrameworkCommonPage {

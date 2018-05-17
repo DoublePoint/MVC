@@ -20,15 +20,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="${pageContext.request.contextPath}/template/js/jquery-1.12.4.js" charset="utf-8"></script>
-<script>
-	var jq12 = jQuery.noConflict(true);
-</script>
 <script type="text/javascript" src="dialogScript.js"></script>
 </head>
 <body>
 	<form id="popWinForm" method="post">
 		<input type="hidden" name="hiddenResponseData" id="hiddenResponseData" />
 	</form>
-
 </body>
 </html>

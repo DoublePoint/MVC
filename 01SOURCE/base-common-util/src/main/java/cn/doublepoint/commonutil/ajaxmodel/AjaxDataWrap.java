@@ -7,10 +7,13 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.commonutil.domain.model;
+package cn.doublepoint.commonutil.ajaxmodel;
 
 import java.io.Serializable;
 import java.util.List;
+
+import cn.doublepoint.commonutil.domain.model.BaseModel;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 
 public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 	

@@ -22,7 +22,7 @@ import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 
 @Service("${baseModel.service.annotationServiceName}")
-public interface ${baseModel.service.serviceClassName}Impl  implements ${baseModel.service.serviceClassName}Service {
+public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.service.serviceClassName}Service {
 
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据

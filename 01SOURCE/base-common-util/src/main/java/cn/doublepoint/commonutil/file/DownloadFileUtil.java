@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.commonutil.domain.model;
+package cn.doublepoint.commonutil.file;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -15,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
+
+import cn.doublepoint.commonutil.log.Log4jUtil;
 
 public class DownloadFileUtil {
 	

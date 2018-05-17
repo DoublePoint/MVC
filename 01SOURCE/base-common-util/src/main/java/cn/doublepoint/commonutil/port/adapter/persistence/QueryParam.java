@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.commonutil.port.adapter.persistence;
 
-import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.StringUtil;
 
 public class QueryParam {
 	public static final String RELATION_EQUAL = "=";

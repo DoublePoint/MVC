@@ -1,3 +1,4 @@
+package cn.doublepoint.commonutil.persitence.jpa;
 ///** 
 //* 创   建   人： 刘磊
 //* 

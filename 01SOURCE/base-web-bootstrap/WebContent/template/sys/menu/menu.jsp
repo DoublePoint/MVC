@@ -35,20 +35,25 @@
 									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formtoolbar labelalign="right" colspan="1">
-									 	<input type="button" class="btn btn-info btn-sm " onclick="retrieve()"  value="查询"/>
-									 	&nbsp;&nbsp;
+										<button class="btn btn-info btn-sm ll-search" onclick="onClickAdd();return false;" style="width:100px;">  
+        									<span class="glyphicon glyphicon-search "></span> 查询
+   										</button>  
+   										&nbsp;
 									</ll-formtoolbar>
+									
 							</ll-ajaxform>
+							
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="35" > 
-						<div class="btn-group " style="margin-left:5px;">
-							<input type="button" class="btn btn-info btn-sm" onclick="onClickAdd()" value="增加"/>
-							<input type="button" class="btn btn-info btn-sm " onclick="onClickEdit()" value="编辑"/>
-							<input type="button" class="btn btn-info btn-sm" onclick="onClickDelete()" value="删除"/></ll-toolbar>
- 						</div>
+							<button  style="width:70px;" class="btn btn-default btn-sm " onclick="onClickAdd();return false;">  
+        						<span class="glyphicon glyphicon-plus ll_add_icon"></span> 增加
+   							</button>  
+   							<button  style="width:70px;" class="btn btn-default btn-sm" onclick="onClickDelete();return false;">  
+        						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 删除
+   							</button>  
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
-						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
+						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" datasource="/template/sys/menu/datalistajaxdatawrap"> 
 							<ll-gridcheck ></ll-gridcheck>
 							<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
 							<ll-gridfield field="name" title="菜单名称" width="150"></ll-gridfield> 

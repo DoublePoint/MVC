@@ -7,9 +7,11 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.commonutil.domain.model;
+package cn.doublepoint.commonutil.ajaxmodel;
 
 import java.util.List;
+
+import cn.doublepoint.commonutil.domain.model.BaseModel;
 
 public class AjaxRequest {
 	

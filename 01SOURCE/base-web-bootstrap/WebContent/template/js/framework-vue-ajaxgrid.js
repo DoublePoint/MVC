@@ -2,7 +2,6 @@ var gridProps=[	//私有的
                 "id"
                 ,"datasource"
                 ,"columns",
-                "onrowclick",
                	"onpageclick",
                	//-----------
                	"classes"
@@ -79,8 +78,8 @@ var gridProps=[	//私有的
                 ,"customSort"
                 //事件
                 ,"onAll"
-                ,"onClickRow"
-                ,"onDblClickRow"
+                ,"onclickrow"
+                ,"ondblclickrow"
                 ,"onClickCell"
                 ,"onDblClickCell"
                 ,"onSort"
@@ -164,8 +163,6 @@ function AjaxGrid(domId) {
 	this.domId = domId;
 	this.pagerId = null;
 	this.pageHeight = 32;
-	this.ondblclick = null;
-	this.onrowclick = null;
 	this.onpageclick = null;
 	this.cols = [{ checkbox: true, align: 'center' }];
 	this.datasource = "";
@@ -247,8 +244,8 @@ function AjaxGrid(domId) {
 
 	/* 事件 */
 	this.onAll;
-	this.onClickRow;
-	this.onDblClickRow;
+	this.onclickrow = null;
+	this.ondblclickrow = null;
 	this.onClickCell;
 	this.onDblClickCell;
 	this.onSort;
@@ -311,8 +308,8 @@ function AjaxGrid(domId) {
 	this.getDom = function() {
 		return $("#" + this.domId);
 	}
-	this.getOndblclick = function() {
-		return this.ondblclick;
+	this.getOndblclickrow = function() {
+		return this.ondblclickrow;
 	}
 	this.getOnPageClick = function() {
 		return this.onpageclick;
@@ -320,8 +317,8 @@ function AjaxGrid(domId) {
 	this.getRow = function(rowIndex) {
 		return this.datawrap.getRow(rowIndex);
 	}
-	this.getRowClick = function() {
-		return this.onrowclick;
+	this.getOnclickrow = function() {
+		return this.onclickrow;
 	}
 
 	this.init = function() {
@@ -434,7 +431,14 @@ function AjaxGrid(domId) {
 				arr.push(row)
 				arr.push($element);
 				arr.push(field);
-				$._Eval(ajaxgrid.getRowClick(), arr);
+				$._Eval(ajaxgrid.getOnclickrow(), arr);
+			},
+			onDblClickRow : function(row, $element, field){
+				var arr = new Array();
+				arr.push(row)
+				arr.push($element);
+				arr.push(field);
+				$._Eval(ajaxgrid.getOndblclickrow(), arr);
 			},
 			onExpandRow : function(){
 				
@@ -455,8 +459,8 @@ function AjaxGrid(domId) {
 			height : this.height
 		});
 	}
-	this.setOndblclick = function(aOnDblclick) {
-		this.ondblclick = aOnDblclick;
+	this.setOndblClick = function(a) {
+		this.ondblclickrow = a;
 	}
 	this.setPager = function(page) {
 		if (page == null)
@@ -480,9 +484,6 @@ function AjaxGrid(domId) {
 				}
 			}
 		});
-	}
-	this.setRowClickFunctionName = function(funName) {
-		this.onRowClickFunctionName = funName;
 	}
 	
 	/*bootstrap*/

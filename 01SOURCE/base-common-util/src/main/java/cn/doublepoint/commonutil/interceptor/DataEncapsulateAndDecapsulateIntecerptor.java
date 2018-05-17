@@ -32,10 +32,10 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
@@ -54,6 +54,7 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
 		if (!isHasRight(request))
 			return true;
 		// 解封装所有参数

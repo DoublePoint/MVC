@@ -1,16 +1,17 @@
-@MenuBackgroundColor:#333333; //菜单导航背景色
-@MenuWidth:250px;
-@PageHeaderBackgroundColor:#FFFFFF;//页面头部背景颜色
-@PageHeaderFontColor:#FFFFFF;//页面头部字体演示
-@DragLineBackgroundColor:#F1F1F1;//拖动条的颜色
-@BorderColor:#F1F1F1;//个布局边框的颜色
+@BorderColor:#F2F2F3;//个布局边框的颜色
 @BorderWidth:1px;
+@DragLineBackgroundColor:#F1F1F1;//拖动条的颜色
 @DragLineWidth:1px;//拖动条的宽度
-
-
+@LLLayoutHeaderBackgroundColor:#F2F2F3;//Layout area 的title背景颜色
+@MenuBackgroundColor:#253848; //菜单导航背景色
+@MenuItemBackgroundColor:@MenuBackgroundColor;//菜单主内容背景色
+@MenuWidth:250px;
+@PageHeaderBackgroundColor:#253848;//页面头部背景颜色
+@PageHeaderFontColor:#FFFFFF;//页面头部字体颜色
+@SystemMainColor:#17B294;//系统主颜色
 
 /* jquery step */
-@BorderRadius:0px;
+@BorderRadius:0px;//button、
 
 html, body, form {
 	height: 100%;
@@ -20,7 +21,6 @@ html, body, form {
 }
 
 form form {
-	/* height: 0; */
 	height: 100%;
 	width: 100%;
 }
@@ -47,6 +47,7 @@ form form {
 }
 .layui-layout-admin .layui-side {
     width:@MenuWidth;
+    border-top: 5px solid @SystemMainColor;
 }
 .layui-body {
 	left:@MenuWidth;
@@ -65,10 +66,6 @@ a {
 .layui-side-scroll {
 	padding: 0px 0;
 	background: @MenuBackgroundColor;
-}
-
-.layui-layout-admin .layui-side {
-	border-top: 5px solid #1AA094;
 }
 .btn{
 	background-color: @MenuBackgroundColor;
@@ -320,3 +317,50 @@ ll-filllayout{
     text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 }
 /** ↑↑↑ bootstrap table */
+
+/** bootstrap button */
+.btn-sm {
+    border-radius: @BorderRadius!important; 
+}
+.ll-search{
+	background-color: @SystemMainColor!important; 
+}
+.ll_add_icon{
+	
+}
+
+.ll_edit_icon{
+	
+}
+
+.ll_delete_icon{
+	
+}
+/** ↑↑↑ bootstrap button */
+/** 多任务 导航 */
+.admin-side-toggle, .admin-side-full {
+    background-color: @SystemMainColor!important; 
+}
+.admin-nav-card>.layui-tab-title .layui-this {
+    color: white;
+    background-color: @SystemMainColor!important; 
+}
+.sidebar-collapse .nav > li > a {
+    background: @MenuItemBackgroundColor!important; 
+    border-bottom: 1px solid #2F2E31;
+}
+.sidebar-collapse .nav > li > a:hover {
+    background-color: black!important; 
+}
+/** ↑↑↑多任务 导航顶部边框 */
+/** 页面头部样式 */
+.layui-layout-admin .layui-header {
+    background-color: @PageHeaderBackgroundColor!important; 
+}
+/** ↑↑↑页面头部样式 */
+/** 布局LL-layout样式 */
+.panel-info>.panel-heading {
+    background-color: @LLLayoutHeaderBackgroundColor!important; 
+    border-color: @LLLayoutHeaderBackgroundColor!important; 
+}
+/** ↑↑↑布局LL-layout样式 */

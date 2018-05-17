@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.common.application.template.sys.role.RoleApplicationService;
 import cn.doublepoint.common.application.template.sys.role.RoleQueryService;
 import cn.doublepoint.common.domain.model.entity.sys.Role;
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 
 @Controller

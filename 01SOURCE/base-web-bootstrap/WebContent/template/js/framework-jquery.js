@@ -111,7 +111,6 @@ var _RegisterModel = new RegisterModel();
 			// 存储弹出窗口的传递值
 			var _DialogData = obj.data;
 			_DialogData.url = obj.url;
-
 			var showTimes = 1;
 			// 重新封装success方法
 			obj.success = function(layero, index) {
@@ -466,12 +465,14 @@ var _RegisterModel = new RegisterModel();
 			form.attr("method", "post");
 			form.attr("action", url);
 			if (data != null) {
-				var fileInput = $("<input>");
-				fileInput.attr("type", "hidden");
-				fileInput.attr("id", "hiddenResponseData");
-				fileInput.attr("name", "hiddenResponseData");// 设置属性的名字
-				fileInput.attr("value", JSON.stringify(data));// 设置属性的值
-				form.append(fileInput);
+				for(attr in data){
+					var fileInput = $("<input>");
+					fileInput.attr("type", "hidden");
+					fileInput.attr("id", "attr");
+					fileInput.attr("name", "attr");// 设置属性的名字
+					fileInput.attr("value", JSON.stringify(data[attr]));// 设置属性的值
+					form.append(fileInput);
+				}
 			}
 			$("body").append(form);// 将表单放置在web中
 			form.submit();// 表单提交

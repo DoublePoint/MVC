@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
-import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 
 @Controller
@@ -34,11 +34,6 @@ public class PageController extends BaseRequestController{
 	@RequestMapping(value = "/index/{actionname}")
 	public String index(@PathVariable String actionname) {
 		return "/template/sys/index/"+actionname;
-	}
-	// 菜单页面
-	@RequestMapping("/template/sys/menu/{actionname}")
-	public String cd(@PathVariable String actionname) {
-		return "/template/sys/menu/" + actionname;
 	}
 
 	@RequestMapping("/template/sys/login/{actionname}")

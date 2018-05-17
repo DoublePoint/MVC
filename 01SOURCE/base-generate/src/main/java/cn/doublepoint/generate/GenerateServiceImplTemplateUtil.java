@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import cn.doublepoint.commonutil.domain.model.FileUtil;
+import cn.doublepoint.commonutil.file.FileUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import freemarker.template.TemplateException;
 

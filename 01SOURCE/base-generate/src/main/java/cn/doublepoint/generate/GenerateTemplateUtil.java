@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import cn.doublepoint.generate.domain.model.helper.TemplateEntityField;
 import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;

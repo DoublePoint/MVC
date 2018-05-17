@@ -26,7 +26,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+import cn.doublepoint.commonutil.log.Log4jUtil;
 
 @Configuration
 @EnableTransactionManagement

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.commonutil.domain.model.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.Log4jUtil;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.log.Log4jUtil;
 
 public class BaseController {
 	public AjaxResponse responseData;

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.DBUtil;
-import cn.doublepoint.commonutil.domain.model.DropBean;
+import cn.doublepoint.commonutil.ajaxmodel.DropBean;
 
 public class DropBeanUtil extends DBUtil{
 	

@@ -12,7 +12,7 @@ package cn.doublepoint.common.application.template.sys.menu;
 import java.util.List;
 
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
-import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 
 
 public interface MenuService {

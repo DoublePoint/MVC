@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.generate.domain.model.helper;
 
-import cn.doublepoint.commonutil.domain.model.StringUtil;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateTemplateUtil;
 

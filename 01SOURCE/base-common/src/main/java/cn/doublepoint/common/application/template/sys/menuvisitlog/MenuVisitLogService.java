@@ -11,7 +11,7 @@ package cn.doublepoint.common.application.template.sys.menuvisitlog;
 import java.util.List;
 
 import cn.doublepoint.common.domain.model.entity.sys.MenuVisitLog;
-import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 
 
 public interface MenuVisitLogService {

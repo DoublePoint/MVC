@@ -141,7 +141,9 @@ function dbclickgrid(para1,data,index){
 		shadeClose : true,
 		maxmin : true,
 		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=edit',
-		data : ajaxDataWrap,
+		data : {
+			dataWrap:ajaxDataWrap
+		},
 		yes : function() {
 			retrieve();
 			retrieveTree();

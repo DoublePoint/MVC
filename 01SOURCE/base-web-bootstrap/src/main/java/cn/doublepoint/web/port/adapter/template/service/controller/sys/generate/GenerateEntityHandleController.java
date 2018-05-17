@@ -34,10 +34,10 @@ import cn.doublepoint.common.application.template.sys.entity.EntityFilterQuerySe
 import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.DownloadFileUtil;
-import cn.doublepoint.commonutil.domain.model.StringUtil;
-import cn.doublepoint.commonutil.domain.model.ZipUtil;
+import cn.doublepoint.commonutil.StringUtil;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.file.DownloadFileUtil;
+import cn.doublepoint.commonutil.file.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateServiceTemplateUtil;
@@ -176,8 +176,9 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			String s;
 			StringBuffer sBuffer = new StringBuffer();
 			while ((s = bReader.readLine()) != null) {
-				sBuffer.append(s + "<br/>");
+				sBuffer.append(s.replace("<", "&lt;").replace(">", "&gt;") + "<br/>");
 			}
+			
 			map.put("entity", sBuffer.toString());
 		}
 	}
@@ -198,7 +199,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			String s;
 			StringBuffer sBuffer = new StringBuffer();
 			while ((s = bReader.readLine()) != null) {
-				sBuffer.append(s + "<br/>");
+				sBuffer.append(s.replace("<", "&lt;").replace(">", "&gt;") + "<br/>");
 			}
 			map.put("service", sBuffer.toString());
 		}
@@ -220,7 +221,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			String s;
 			StringBuffer sBuffer = new StringBuffer();
 			while ((s = bReader.readLine()) != null) {
-				sBuffer.append(s + "<br/>");
+				sBuffer.append(s.replace("<", "&lt;").replace(">", "&gt;") + "<br/>");
 			}
 			map.put("serviceImpl", sBuffer.toString());
 		}

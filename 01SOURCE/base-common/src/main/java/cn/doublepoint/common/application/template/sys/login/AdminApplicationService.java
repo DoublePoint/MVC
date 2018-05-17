@@ -12,7 +12,7 @@ package cn.doublepoint.common.application.template.sys.login;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.domain.model.entity.sys.Admin;
-import cn.doublepoint.commonutil.domain.model.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 
 @Service
 public class AdminApplicationService {
