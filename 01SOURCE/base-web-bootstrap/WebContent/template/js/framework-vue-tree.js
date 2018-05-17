@@ -65,7 +65,8 @@ function AjaxTree(domId) {
 			url : this.datasource,
 			autoParam : [ "id", "name=n", "level=lv" ],
 			otherParam : {
-				"otherParam" : "zTreeAsyncTest"
+				"otherParam" : "zTreeAsyncTest",
+				"otherParam2" : "zTreeAsyncTest",
 			},
 			dataFilter : this.filter
 		},

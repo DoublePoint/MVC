@@ -49,8 +49,10 @@ function onClickAdd() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		url : $$pageContextPath + '/template/sys/menu/menuDialog',
-		data : ajaxDataWrap,
+		url : $$pageContextPath + '/template/sys/menu/menuDialog?aaa=2&testParam=321',
+		data : {
+			ajaxDataWrap:ajaxDataWrap
+		},
 		yes : function() {
 			retrieve();
 			retrieveTree();

@@ -22,6 +22,8 @@ import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestCont
 
 @Controller
 public class PageController extends BaseRequestController{
+	private String testParam;
+	private String aaa;
 	// 索引页
 	@RequestMapping(value = "/template/sys/index/{actionname}")
 	public String hello(@PathVariable String actionname) {

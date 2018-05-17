@@ -449,7 +449,8 @@ var _RegisterModel = new RegisterModel();
 			if (settings.contentType == null || settings.contentType == "")
 				settings.contentType = 'application/json;charset=UTF-8';
 			settings.dataType = "json";
-			//settings.data = JSON.stringify($('form').serializeObject(settings.data));
+			// settings.data =
+			// JSON.stringify($('form').serializeObject(settings.data));
 			settings.data = JSON.stringify(settings.data);
 			settings.accept = "*/*";
 
@@ -457,20 +458,22 @@ var _RegisterModel = new RegisterModel();
 		},
 		// 重新封装Ajax请求
 		formSubmit : function(settings) {
-			var url=settings.url;
-			var data=settings.data;
+			var url = settings.url;
+			var data = settings.data;
 			var form = $("<form>");// 定义一个form表单
 			form.attr("style", "display:none");
 			form.attr("target", "");
 			form.attr("method", "post");
 			form.attr("action", url);
-			var fileInput = $("<input>");
-			fileInput.attr("type", "hidden");
-			fileInput.attr("id", "generateDir");
-			fileInput.attr("name", "generateDir");// 设置属性的名字
-			fileInput.attr("value", JSON.stringify(data));// 设置属性的值
+			if (data != null) {
+				var fileInput = $("<input>");
+				fileInput.attr("type", "hidden");
+				fileInput.attr("id", "hiddenResponseData");
+				fileInput.attr("name", "hiddenResponseData");// 设置属性的名字
+				fileInput.attr("value", JSON.stringify(data));// 设置属性的值
+				form.append(fileInput);
+			}
 			$("body").append(form);// 将表单放置在web中
-			form.append(fileInput);
 			form.submit();// 表单提交
 			$("body").remove(form);
 		}
@@ -503,5 +506,3 @@ var _RegisterModel = new RegisterModel();
 		return o;
 	};
 })(jQuery);
-
-

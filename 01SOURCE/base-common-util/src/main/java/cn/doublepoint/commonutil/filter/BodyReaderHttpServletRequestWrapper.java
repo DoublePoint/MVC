@@ -35,6 +35,11 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
 		super(request);
 		body = readBytes(request.getReader(), "utf-8");
+//		try {
+//			System.out.println("--------------"+new String(body));
+//		} catch (Exception e) {
+//		}
+		
 	}
 
 	@Override
@@ -74,7 +79,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 			jsonObject = JSON.parseObject(dataJsonString);
 		}
 		catch (Exception e){
-			Log4jUtil.error(e);
+			Log4jUtil.warn(e);
 		}
 		return jsonObject;
 	}

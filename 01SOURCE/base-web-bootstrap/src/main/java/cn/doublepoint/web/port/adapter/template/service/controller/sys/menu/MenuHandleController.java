@@ -40,14 +40,12 @@ public class MenuHandleController extends BaseHandleController {
 		if (dataWrap == null)
 			return;
 		Menu menuQuery = null;
-		PageInfo pageInfo = dataWrap.getPageInfo();
-		pageInfo.setPageSize(10);
 		if (dataWrap.getDataList() != null && dataWrap.getDataList().size() > 0) {
 			menuQuery = dataWrap.getDataList().get(0);
 		}
 
 		if (menuQuery != null) {
-			List<Menu> list = menuService.findChildrenMenu(menuQuery, pageInfo);
+			List<Menu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
 			dataWrap.setDataList(list);
 		}
 		responseData.setAjaxParameter("dataWrap", dataWrap);
@@ -59,7 +57,7 @@ public class MenuHandleController extends BaseHandleController {
 		PageInfo pageRequest = new PageInfo(1, 10);
 		AjaxDataWrap<Menu> ajaxDataWrap = new AjaxDataWrap<Menu>();
 		if (menu == null || menu.getId() == null || "".equals(menu.getId())) {
-			ajaxDataWrap.setDataList(menuService.findAllMenu(pageRequest));
+			ajaxDataWrap.setDataList(menuService.findAll(pageRequest));
 		} else {
 			Menu menuQuery = new Menu();
 			menuQuery.setId(menu.getId());

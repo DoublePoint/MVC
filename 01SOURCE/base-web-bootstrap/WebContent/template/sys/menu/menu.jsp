@@ -51,9 +51,9 @@
 						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclick="dbclickgrid(1)"datasource="/template/sys/menu/datalistajaxdatawrap"> 
 							<ll-gridcheck ></ll-gridcheck>
 							<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-							<ll-gridfield field="name" title="菜单名称" width="100"></ll-gridfield> 
-							<ll-gridfield field="sn" title="菜单排序" width="100"></ll-gridfield> 
-							<ll-gridfield field="link" title="菜单链接" width="150"></ll-gridfield> 
+							<ll-gridfield field="name" title="菜单名称" width="150"></ll-gridfield> 
+							<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
+							<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield> 
 						</ll-ajaxgrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>

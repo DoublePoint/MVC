@@ -24,6 +24,10 @@ public class Log4jUtil {
 	public static void info(Object obj) {
 		getLogger().info(obj);
 	}
+	
+	public static void warn(Exception obj){
+		getLogger().warn(obj.getMessage(), null);
+	}
 
 	/**
 	 * 获取最开始的调用者所在类
