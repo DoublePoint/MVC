@@ -61,50 +61,62 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 */
 	@Override
 	public String getParameter(String parameterName) {
-		if(super.getParameter(parameterName)!=null)
+		if (super.getParameter(parameterName) != null)
 			return super.getParameter(parameterName);
-		if(jsonObject!=null){
-			if(jsonObject.get(parameterName)!=null)
+		if (jsonObject != null) {
+			if (jsonObject.get(parameterName) != null)
 				return String.valueOf(jsonObject.get(parameterName));
 		}
-		return map.get(parameterName)==null?null:map.get(parameterName).toString();
+		Object valObj = map.get(parameterName);
+		if (valObj == null)
+			return "";
+		String val = valObj.toString();
+		try {
+
+			if ((val.startsWith("\"") && val.endsWith("\"")) || (val.startsWith("'") && val.endsWith("'")))
+				return val.substring(1, val.length() - 1);
+			return val;
+		} catch (Exception e) {
+			Log4jUtil.warn(e);
+			return val;
+		}
 	}
-	
+
 	/**
 	 * 获取ajaxdataWrap
+	 * 
 	 * @param ajaxDataWrapName
 	 * @param clazz
 	 * @return
 	 */
-	public <T extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName,Class<T> clazz){
+	public <T extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName, Class<T> clazz) {
 		ObjectMapper mspp = new ObjectMapper();
 		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		
-		String wrapJsonString="";
-		JSONObject obj=null;
-		try{
-			if(jsonObject!=null)
-				obj=jsonObject.getJSONObject(ajaxDataWrapName);
-		}
-		finally{
+
+		String wrapJsonString = "";
+		JSONObject obj = null;
+		try {
+			if (jsonObject != null)
+				obj = jsonObject.getJSONObject(ajaxDataWrapName);
+		} finally {
 			try {
-				if(obj==null){
-					Object wrapObj=map.get(ajaxDataWrapName);
-					if(wrapObj==null)
+				if (obj == null) {
+					Object wrapObj = map.get(ajaxDataWrapName);
+					if (wrapObj == null)
 						return null;
-					wrapJsonString=String.valueOf(wrapObj);
-					obj=JSON.parseObject(wrapJsonString);
+					wrapJsonString = String.valueOf(wrapObj);
+					obj = JSON.parseObject(wrapJsonString);
 				}
 			} catch (Exception e) {
 				Log4jUtil.error(e);
 			}
-			
+
 		}
-		
+
 		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
 		try {
-			AjaxDataWrap<T> dataWrap=mspp.readValue(obj.toJSONString(), type);
+			AjaxDataWrap<T> dataWrap = mspp.readValue(obj.toJSONString(), type);
 			return dataWrap;
 		} catch (Exception e) {
 			Log4jUtil.error(e);
@@ -170,14 +182,13 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		if (this.body == null)
 			return;
 		String bodyString = new String(body);
-		System.out.println("bodyString-----"+bodyString);
-		try{
-			jsonObject=JSON.parseObject(bodyString);
-		}
-		catch (Exception e) {
+		System.out.println("bodyString-----" + bodyString);
+		try {
+			jsonObject = JSON.parseObject(bodyString);
+		} catch (Exception e) {
 			Log4jUtil.warn(e);
 		}
-		
+
 		try {
 			String formdataString = URLDecoder.decode(new String(body), "UTF-8");
 			System.out.println(formdataString);

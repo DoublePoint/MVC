@@ -90,8 +90,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	try{
-		var responseData=${LLAjaxResponse};
-		var LLAjaxResponse= new AjaxResponse(responseData);
+		var LLAjaxResponse= new AjaxResponse(${LLAjaxResponse});
 		if(init!=null){
 			init(LLAjaxResponse);
 		}

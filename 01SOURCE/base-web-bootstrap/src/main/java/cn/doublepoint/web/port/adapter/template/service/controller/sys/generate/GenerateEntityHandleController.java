@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,13 +36,14 @@ import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.file.DownloadFileUtil;
 import cn.doublepoint.commonutil.file.ZipUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 import cn.doublepoint.generate.EGenerateType;
-import cn.doublepoint.generate.GenerateServiceTemplateUtil;
 import cn.doublepoint.generate.GenerateEntityTemplateUtil;
 import cn.doublepoint.generate.GenerateServiceImplTemplateUtil;
+import cn.doublepoint.generate.GenerateServiceTemplateUtil;
 import cn.doublepoint.generate.GenerateTemplateUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
@@ -73,20 +73,18 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 */
 	@RequestMapping("/template/sys/getFileTable")
 	@ResponseBody
-	public void getFileTable(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
-		try {
-			String oomName = UUID.randomUUID() + ".oom";
-			File filev = new File(getOomDirPath(request) + "/" + oomName);
-			file.transferTo(filev);
+	public AjaxResponse getFileTable(HttpServletRequest request, @RequestParam("file") MultipartFile file,AjaxResponse responseData) throws IllegalStateException, IOException {
+		String oomName = UUID.randomUUID() + ".oom";
+		File filev = new File(getOomDirPath(request) + "/" + oomName);
+		file.transferTo(filev);
 
-			List<TemplateEntityModel> beanModelList = GenerateTemplateUtil.buildTableNameList(filev);
-			AjaxDataWrap<TemplateEntityModel> ajaxDataWrap = new AjaxDataWrap<TemplateEntityModel>();
-			ajaxDataWrap.setDataList(beanModelList);
-			responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
-			responseData.setAjaxParameter("oomName", oomName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<TemplateEntityModel> beanModelList = GenerateTemplateUtil.buildTableNameList(filev);
+		AjaxDataWrap<TemplateEntityModel> ajaxDataWrap = new AjaxDataWrap<TemplateEntityModel>();
+		ajaxDataWrap.setDataList(beanModelList);
+		responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
+		responseData.setAjaxParameter("oomName", oomName);
+		return responseData;
+	
 	}
 
 	/**
@@ -97,7 +95,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 */
 	@RequestMapping("/template/sys/assistant/generate")
 	@ResponseBody
-	public void generate(HttpServletRequest request) throws TemplateException, IOException {
+	public AjaxResponse generate(HttpServletRequest request,AjaxResponse responseData) throws TemplateException, IOException {
 		
 		String oomName=request.getParameter("oomName");
 		if (!StringUtil.isNullOrEmpty(oomName)) {
@@ -115,9 +113,9 @@ public class GenerateEntityHandleController extends BaseHandleController {
 			templateUtils.stream().forEach(util->{
 				util.generateFile(models, generateDirPath);
 			});
-
 			responseData.setAjaxParameter("generateDir", generateDir);
 		}
+		return responseData;
 	}
 
 	
@@ -129,13 +127,14 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/template/sys/assistant/generateDetail")
-	public String generateDetail(HttpServletRequest request) throws TemplateException, IOException {
+	public AjaxResponse generateDetail(HttpServletRequest request,AjaxResponse responseData) throws TemplateException, IOException {
 		Map<String, String> map = new HashMap<String, String>();
 		getEntityContent(request, map);
 		getServiceContent(request, map);
 		getServiceImplContent(request, map);
 		responseData.setAjaxParameter("map", map);
-		return "/template/sys/assistant/generateDetail";
+		responseData.setViewName("generateDetail");
+		return responseData;
 	}
 
 	/**

@@ -58,7 +58,8 @@ function TabPanel(domId) {
 		if (tab.getActive() == "true") {
 			$li.attr("class", "active");
 		}
-		var $a = $('<a href="#' + domId + '" data-toggle="tab">' + tab.getTitle() + '</a>')
+		var $a = $('<a href="#' + domId + '" data-toggle="tab">' + tab.getTitle() + '</a>');
+		
 		$li.append($a);
 		this.getDom().append($li);
 	}
@@ -69,6 +70,20 @@ function TabPanel(domId) {
 		return $("#" + this.domId);
 	}
 	this.init = function() {
+		//鼠标悬停
+		var showTabTimeout;
+		$('#'+this.domId+' a').mouseover(function (e) {
+			var $a=$(this);
+			showTabTimeout=setTimeout(function (){
+				$a.tab('show');
+			},500)
+		});
+		$('#'+this.domId+' a').mouseout(function (e) {
+			clearTimeout(showTabTimeout);
+		});
+		
+		
+		//Tab切换
 		this.getDom().on('shown.bs.tab', function(e) {
 			//e.target // 当前活动的标签
 			//e.relatedTarget // 上一个选择的标签

@@ -43,21 +43,22 @@ public class MenuHandleController extends BaseHandleController {
 
 	@Autowired
 	MenuService menuService;
-	
+
 	// 菜单页面
 	@RequestMapping("/{actionname}")
-	public String cd(HttpServletRequest request,@PathVariable String actionname) {
-		String aaa=request.getParameter("aaa");
-		String sdf=request.getParameter("sdf");
+	public String cd(HttpServletRequest request, @PathVariable String actionname) {
+		String aaa = request.getParameter("aaa");
+		String sdf = request.getParameter("sdf");
 		return "/template/sys/menu/" + actionname;
 	}
-	
+
 	@RequestMapping("/menuDialog")
-	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request,@RequestParam(required=false) String type,ModelAndView modelAndView,AjaxResponse response) {
-		AjaxDataWrap<Menu> ajaxDataWrap=request.getAjaxDataWrap("dataWrap",Menu.class);
-		String ss=request.getParameter("type");
-		
-		ajaxDataWrap=new AjaxDataWrap<>();
+	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request,
+			@RequestParam(required = false) String type, ModelAndView modelAndView, AjaxResponse response) {
+		AjaxDataWrap<Menu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
+		String ss = request.getParameter("type");
+
+		ajaxDataWrap = new AjaxDataWrap<>();
 		ajaxDataWrap.setPageInfo(new PageInfo());
 		response.setAjaxParameter("dataWrap", ajaxDataWrap);
 		response.setViewName("menuDialog");
@@ -67,7 +68,7 @@ public class MenuHandleController extends BaseHandleController {
 	@RequestMapping("/datalist")
 	@ResponseBody
 	public AjaxResponse menuDataList(BodyReaderHttpServletRequestWrapper request) {
-		AjaxDataWrap<Menu> dataWrap=request.getAjaxDataWrap("dataWrap", Menu.class);
+		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		if (dataWrap == null)
 			return null;
 		Menu menuQuery = null;
@@ -80,14 +81,16 @@ public class MenuHandleController extends BaseHandleController {
 			dataWrap.setDataList(list);
 		}
 
-		AjaxResponse ajaxResponse=new AjaxResponse();
+		AjaxResponse ajaxResponse = new AjaxResponse();
 		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
 		return ajaxResponse;
 	}
 
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
-	public AjaxDataWrap<Menu> menuDataListDataWrap(@RequestBody(required = false) Menu menu,@RequestBody AjaxDataWrap<Menu> dataWrap) {
+	public AjaxDataWrap<Menu> menuDataListDataWrap(BodyReaderHttpServletRequestWrapper request,
+			@RequestBody(required = false) Menu menu) {
+		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		PageInfo pageRequest = new PageInfo(1, 10);
 		AjaxDataWrap<Menu> ajaxDataWrap = new AjaxDataWrap<Menu>();
 		if (menu == null || menu.getId() == null || "".equals(menu.getId())) {
@@ -104,9 +107,8 @@ public class MenuHandleController extends BaseHandleController {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public void add(BodyReaderHttpServletRequestWrapper request, @RequestBody AjaxRequest ajaxRequest) {
-		AjaxDataWrap<Menu> aa=request.getAjaxDataWrap("addDataWrap", Menu.class);
-		AjaxDataWrap<Menu> addDataWrap=ajaxRequest.getAjaxDataWrap("addDataWrap",Menu.class);
+	public void add(BodyReaderHttpServletRequestWrapper request) {
+		AjaxDataWrap<Menu> addDataWrap = request.getAjaxDataWrap("addDataWrap", Menu.class);
 		if (addDataWrap == null)
 			return;
 		Menu menu = addDataWrap.getDataList().get(0);
@@ -115,11 +117,13 @@ public class MenuHandleController extends BaseHandleController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public void delete(@RequestBody AjaxDataWrap<Menu> deleteDataWrap) {
+	public AjaxResponse delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse responseData) {
+		AjaxDataWrap<Menu> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", Menu.class);
 		if (deleteDataWrap == null)
-			return;
+			return null;
 		List<Menu> menuList = deleteDataWrap.getDataList();
 		menuService.removeMenu(menuList);
 		responseData.setAjaxParameter("deleteState", true);
+		return responseData;
 	}
 }

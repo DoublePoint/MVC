@@ -18,12 +18,6 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 
 public class BaseController {
-	public AjaxResponse responseData;
-	
-	public BaseController(){
-		responseData=new AjaxResponse();
-	}
-	
 	@ExceptionHandler  
 	@ResponseBody
     public AjaxResponse exp(HttpServletRequest request, Exception ex) { 
@@ -33,14 +27,4 @@ public class BaseController {
 		Log4jUtil.error(ex);
 		return response;
     }
-
-	public AjaxResponse getResponseData() {
-		return responseData;
-	}
-
-	public void setResponseData(AjaxResponse responseData) {
-		this.responseData = responseData;
-	}
-	
-	
 }
