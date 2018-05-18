@@ -42,6 +42,7 @@ import cn.doublepoint.commonutil.log.Log4jUtil;
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	private final byte[] body;
 	private Map<String, Object> map;
+	private JSONObject jsonObject;
 
 	public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
 		super(request);
@@ -63,6 +64,12 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 */
 	@Override
 	public String getParameter(String parameterName) {
+		if(super.getParameter(parameterName)!=null)
+			return super.getParameter(parameterName);
+		if(jsonObject!=null){
+			if(jsonObject.get(parameterName)!=null)
+				return String.valueOf(jsonObject.get(parameterName));
+		}
 		return map.get(parameterName)==null?null:map.get(parameterName).toString();
 	}
 	
@@ -76,11 +83,27 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		ObjectMapper mspp = new ObjectMapper();
 		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		Object wrapObj=map.get(ajaxDataWrapName);
-		if(wrapObj==null)
-			return null;
-		String wrapJsonString=String.valueOf(wrapObj);
-		JSONObject obj=JSON.parseObject(wrapJsonString);
+		
+		String wrapJsonString="";
+		JSONObject obj=null;
+		try{
+			obj=jsonObject.getJSONObject(ajaxDataWrapName);
+		}
+		finally{
+			try {
+				if(obj==null){
+					Object wrapObj=map.get(ajaxDataWrapName);
+					if(wrapObj==null)
+						return null;
+					wrapJsonString=String.valueOf(wrapObj);
+					obj=JSON.parseObject(wrapJsonString);
+				}
+			} catch (Exception e) {
+				Log4jUtil.error(e);
+			}
+			
+		}
+		
 		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
 		try {
 			AjaxDataWrap<T> dataWrap=mspp.readValue(obj.toJSONString(), type);
@@ -148,8 +171,17 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	private void translateFomrDataToJsonMap() {
 		if (this.body == null)
 			return;
+		String bodyString = new String(body);
+		System.out.println("bodyString-----"+bodyString);
+		try{
+			jsonObject=JSON.parseObject(bodyString);
+		}
+		catch (Exception e) {
+			Log4jUtil.error(e);
+		}
 		try {
 			String formdataString = URLDecoder.decode(new String(body), "UTF-8");
+			System.out.println(formdataString);
 			String[] strings = formdataString.split("&");
 			if (strings != null) {
 				Stream.of(strings).forEach(item -> {

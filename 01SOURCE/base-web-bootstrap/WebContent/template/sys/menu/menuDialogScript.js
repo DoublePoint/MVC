@@ -21,7 +21,7 @@ function onClickSave(){
 	dataList[0]=data;
 	addDataWrap.setDataList(dataList);
 	$.request({
-		url : $$pageContextPath + "/template/sys/menu/add",
+		url : $$pageContextPath + "/template/sys/menu/add?testtest=111&test=123",
 		data : {
 			addDataWrap:addDataWrap
 		},

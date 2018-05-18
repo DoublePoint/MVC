@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,12 +56,6 @@ public class GenerateEntityHandleController extends BaseHandleController {
 
 	private final String oomDirPath = "oom";
 	
-	private AjaxDataWrap<MySQLTables> dataWrap;
-	private String tableName;
-	private String oomName;
-	private String generateDir;// 生成的实体类 服务 等存放路径
-	private MultipartFile file;
-
 	@RequestMapping("/template/sys/tables")
 	@ResponseBody
 	public AjaxDataWrap<MySQLTables> getTables() {
@@ -78,7 +73,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 */
 	@RequestMapping("/template/sys/getFileTable")
 	@ResponseBody
-	public void getFileTable(HttpServletRequest request) throws IllegalStateException, IOException {
+	public void getFileTable(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
 		try {
 			String oomName = UUID.randomUUID() + ".oom";
 			File filev = new File(getOomDirPath(request) + "/" + oomName);
@@ -104,6 +99,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	@ResponseBody
 	public void generate(HttpServletRequest request) throws TemplateException, IOException {
 		
+		String oomName=request.getParameter("oomName");
 		if (!StringUtil.isNullOrEmpty(oomName)) {
 			List<GenerateTemplateUtil> templateUtils=new ArrayList<>();
 			templateUtils.add(new GenerateEntityTemplateUtil());
@@ -151,6 +147,7 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	@RequestMapping("/template/sys/assistant/zipAndDownload")
 	public void zipAndDownload1(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+		String generateDir=request.getParameter("generateDir");
 		String fileZip = getTempDir(request) + generateDir + ".zip";
 		// 文件输出流
 		FileOutputStream outStream = new FileOutputStream(fileZip);
@@ -168,6 +165,8 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 */
 	@SuppressWarnings("resource")
 	private void getEntityContent(HttpServletRequest request, Map<String, String> map) throws IOException {
+		String generateDir=request.getParameter("generateDir");
+		String tableName=request.getParameter("tableName");
 		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
 			String entityFileName = getTempDir(request) + generateDir + "/Entity/"
 					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Entity);
@@ -191,6 +190,8 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 */
 	@SuppressWarnings("resource")
 	private void getServiceContent(HttpServletRequest request, Map<String, String> map) throws IOException {
+		String generateDir=request.getParameter("generateDir");
+		String tableName=request.getParameter("tableName");
 		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
 			String entityFileName = getTempDir(request) + generateDir + "/service/"
 					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Service);
@@ -213,6 +214,8 @@ public class GenerateEntityHandleController extends BaseHandleController {
 	 */
 	@SuppressWarnings("resource")
 	private void getServiceImplContent(HttpServletRequest request, Map<String, String> map) throws IOException {
+		String generateDir=request.getParameter("generateDir");
+		String tableName=request.getParameter("tableName");
 		if (!StringUtil.isNullOrEmpty(generateDir) && !StringUtil.isNullOrEmpty(tableName)) {
 			String entityFileName = getTempDir(request) + generateDir + "/service/impl/"
 					+ GenerateTemplateUtil.getFileNameContainExt(tableName, EGenerateType.Service);
