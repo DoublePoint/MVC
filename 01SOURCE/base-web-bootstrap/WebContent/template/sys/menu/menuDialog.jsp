@@ -22,6 +22,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/base.jsp"%>
+<script type="text/javascript" src="menuDialogScript.js"></script>
 </head>
 <body>
 	<form style="width:98%;">
@@ -39,6 +40,5 @@
 			</ll-toolbar>
 		</ll-ajaxform>
 	</form>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/template/sys/menu/menuDialogScript.js"></script>
+	
 </body>

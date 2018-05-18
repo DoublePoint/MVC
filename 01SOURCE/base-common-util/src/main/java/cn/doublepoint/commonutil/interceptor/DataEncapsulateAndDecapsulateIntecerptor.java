@@ -147,13 +147,13 @@ public class DataEncapsulateAndDecapsulateIntecerptor implements HandlerIntercep
 	 */
 	private void encapsulatePageRequestResponseData(HttpServletRequest request, HttpServletResponse response,
 			Object handler, Object bean, ModelAndView modelAndView) {
-		BaseController requestController = (BaseController) bean;
-		AjaxResponse responseData = requestController.getResponseData();
-		if (responseData == null)
-			return;
-		if (modelAndView == null)
-			modelAndView = new ModelAndView();
-		modelAndView.addObject("LLAjaxResponse", JSON.toJSONString(responseData));
+//		BaseController requestController = (BaseController) bean;
+//		AjaxResponse responseData = requestController.getResponseData();
+//		if (responseData == null)
+//			return;
+//		if (modelAndView == null)
+//			modelAndView = new ModelAndView();
+//		modelAndView.addObject("LLAjaxResponse", JSON.toJSONString(responseData));
 	}
 
 	/**

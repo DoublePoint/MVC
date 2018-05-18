@@ -17,6 +17,7 @@ public class AjaxResponse {
 	private Map<String, Object> parameterMap;
 	private String code;//状态编码
 	private String errorMessage;
+	private String viewName;
 	
 	public AjaxResponse(){
 		if(parameterMap==null)
@@ -39,10 +40,6 @@ public class AjaxResponse {
 		return parameterMap;
 	}
 
-	public void setParameterMap(Map<String, Object> parameterMap) {
-		this.parameterMap = parameterMap;
-	}
-
 	public String getCode() {
 		return code;
 	}
@@ -57,6 +54,14 @@ public class AjaxResponse {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	}
+
+	public String getViewName() {
+		return viewName;
+	}
+
+	public void setViewName(String viewName) {
+		this.viewName = viewName;
 	}
 	
 	

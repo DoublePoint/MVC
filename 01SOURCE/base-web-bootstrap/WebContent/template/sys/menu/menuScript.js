@@ -39,7 +39,6 @@ function onClickAdd() {
 		cdbs = nodes[0].id;
 	}
 	var ajaxDataWrap =  $.createAjaxDataWrap();
-	nodes[0].childrenMenuList=null;
 	ajaxDataWrap.setDataList(nodes[0]);
 	$.openDialog({
 		type : 2,
@@ -64,10 +63,6 @@ function onClickAdd() {
 	});
 
 	return false;
-}
-
-function onClickEdit(){
-	selectCdmcId.refreshData();
 }
 
 function onClickDelete() {
@@ -103,29 +98,6 @@ function zTreeOnClick(event, treeId, treeNode) {
 	retrieve();
 	return false;
 };
-function rowClickTest(data,a,b,c) {
-	var dd = data;
-	var arr=new Array();
-	arr.push(data);
-	var ajaxDataWrap =  $.createAjaxDataWrap();
-	ajaxDataWrap.setDataList(arr);
-	$.openDialog({
-		type : 2,
-		title : "修改菜单",
-		width : 630,
-		height : 330,
-		shade : 0.4,
-		closeBtn : 1,
-		shadeClose : true,
-		maxmin : true,
-		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=modify',
-		data : ajaxDataWrap,
-		yes : function() {
-			retrieve();
-			retrieveTree();
-		},
-	});
-}
 
 function dbclickgrid(para1,data,index){
 	var ajaxDataWrap =  $.createAjaxDataWrap();

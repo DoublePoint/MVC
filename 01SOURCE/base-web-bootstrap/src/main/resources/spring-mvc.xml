@@ -30,6 +30,14 @@
 	<mvc:default-servlet-handler></mvc:default-servlet-handler>
 
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+		<!-- 执行完Controller中的方法调用拦截器 HandleMethodInteceptor -->
+		<mvc:return-value-handlers>
+            <bean class="cn.doublepoint.commonutil.interceptor.ControllerReturnIntecerptor"/>
+        </mvc:return-value-handlers>
+        <!-- 自定义参数解析器 -->
+        <mvc:argument-resolvers>
+       	 	<bean class="cn.doublepoint.commonutil.interceptor.AjaxResponseArgumentsResolver"></bean>
+    	</mvc:argument-resolvers>
 		<mvc:message-converters register-defaults="true">
 			<!-- 将Jackson2HttpMessageConverter的默认格式化输出为true -->
 			<!-- 配置Fastjson支持 -->

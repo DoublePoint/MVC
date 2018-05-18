@@ -9,13 +9,10 @@
 */
 package cn.doublepoint.commonutil.filter;
 
-import java.awt.Menu;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.ParameterizedType;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
@@ -87,7 +84,8 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		String wrapJsonString="";
 		JSONObject obj=null;
 		try{
-			obj=jsonObject.getJSONObject(ajaxDataWrapName);
+			if(jsonObject!=null)
+				obj=jsonObject.getJSONObject(ajaxDataWrapName);
 		}
 		finally{
 			try {
@@ -177,8 +175,9 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 			jsonObject=JSON.parseObject(bodyString);
 		}
 		catch (Exception e) {
-			Log4jUtil.error(e);
+			Log4jUtil.warn(e);
 		}
+		
 		try {
 			String formdataString = URLDecoder.decode(new String(body), "UTF-8");
 			System.out.println(formdataString);
@@ -192,7 +191,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 				});
 			}
 		} catch (Exception e) {
-			Log4jUtil.error(e);
+			Log4jUtil.warn(e);
 		}
 	}
 

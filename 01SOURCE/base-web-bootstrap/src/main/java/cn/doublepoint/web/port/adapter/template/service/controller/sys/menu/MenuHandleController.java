@@ -22,12 +22,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.fastjson.JSON;
 
 import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
@@ -49,18 +53,23 @@ public class MenuHandleController extends BaseHandleController {
 	}
 	
 	@RequestMapping("/menuDialog")
-	public String menuDialog(BodyReaderHttpServletRequestWrapper request,@RequestParam(required=false) String type) {
-		AjaxDataWrap ajaxDataWrap=request.getAjaxDataWrap("dataWrap",Menu.class);
+	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request,@RequestParam(required=false) String type,ModelAndView modelAndView,AjaxResponse response) {
+		AjaxDataWrap<Menu> ajaxDataWrap=request.getAjaxDataWrap("dataWrap",Menu.class);
 		String ss=request.getParameter("type");
-		responseData.setAjaxParameter("dataWrap", ajaxDataWrap);
-		return "/template/sys/menu/menuDialog";
+		
+		ajaxDataWrap=new AjaxDataWrap<>();
+		ajaxDataWrap.setPageInfo(new PageInfo());
+		response.setAjaxParameter("dataWrap", ajaxDataWrap);
+		response.setViewName("menuDialog");
+		return response;
 	}
 
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public void menuDataList(@RequestBody AjaxDataWrap<Menu> dataWrap) {
+	public AjaxResponse menuDataList(BodyReaderHttpServletRequestWrapper request) {
+		AjaxDataWrap<Menu> dataWrap=request.getAjaxDataWrap("dataWrap", Menu.class);
 		if (dataWrap == null)
-			return;
+			return null;
 		Menu menuQuery = null;
 		if (dataWrap.getDataList() != null && dataWrap.getDataList().size() > 0) {
 			menuQuery = dataWrap.getDataList().get(0);
@@ -70,7 +79,10 @@ public class MenuHandleController extends BaseHandleController {
 			List<Menu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
 			dataWrap.setDataList(list);
 		}
-		responseData.setAjaxParameter("dataWrap", dataWrap);
+
+		AjaxResponse ajaxResponse=new AjaxResponse();
+		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		return ajaxResponse;
 	}
 
 	@RequestMapping("/datalistajaxdatawrap")
