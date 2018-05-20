@@ -22,13 +22,14 @@ import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 
 @Service("${baseModel.service.annotationServiceName}")
-public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.service.serviceClassName}Service {
+public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.service.serviceClassName}{
 
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return 
 	 */
+	@Override
 	public List<${baseModel.entityModel.entityClassName}> find(${baseModel.entityModel.entityClassName} ${baseModel.service.paramName},PageInfo pageInfo) {
 		return JPAUtil.load(${baseModel.entityModel.entityClassName}.class, pageInfo);
 	}
@@ -38,6 +39,7 @@ public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.s
 	 * @param id
 	 * @return
 	 */
+	@Override
 	public ${baseModel.entityModel.entityClassName} getById(long id){
 		return JPAUtil.loadById(${baseModel.entityModel.entityClassName}.class, id);
 	}
@@ -47,8 +49,9 @@ public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.s
 	 * @param ${baseModel.service.paramName}
 	 * @return
 	 */
+	@Override
 	public boolean remove(${baseModel.entityModel.entityClassName} ${baseModel.service.paramName}){
-		JPAUtil.remove(item);
+		JPAUtil.remove(${baseModel.service.paramName});
 		return true;
 	}
 	
@@ -58,6 +61,7 @@ public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.s
 	 * @param ${baseModel.service.paramListName}
 	 * @return
 	 */
+	@Override
 	public boolean remove(List<${baseModel.entityModel.entityClassName}> ${baseModel.service.paramListName}){
 		${baseModel.service.paramListName}.stream().forEach(item -> {
 			JPAUtil.remove(item);
@@ -70,6 +74,7 @@ public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.s
 	 * @param ${baseModel.service.paramName}
 	 * @return
 	 */
+	@Override
 	public boolean saveOrUpdate(${baseModel.entityModel.entityClassName} ${baseModel.service.paramName}) {
 		if (${baseModel.service.paramName}.getId() == null){
 			${baseModel.service.paramName}.setId(SequenceUtil.getNextVal(${baseModel.entityModel.entityClassName}.class));
@@ -85,6 +90,7 @@ public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.s
 	 * @param ${baseModel.service.paramListName}
 	 * @return
 	 */
+	@Override
 	public boolean saveOrUpdate(List<${baseModel.entityModel.entityClassName}> ${baseModel.service.paramListName}) {
 		${baseModel.service.paramListName}.stream().forEach(item->{
 			if (item.getId() == null){
@@ -98,4 +104,8 @@ public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.s
 		return true;
 	}
 
+	@Override
+	public List<${baseModel.entityModel.entityClassName}> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(${baseModel.entityModel.entityClassName}.class,pageInfo);
+	}
 }

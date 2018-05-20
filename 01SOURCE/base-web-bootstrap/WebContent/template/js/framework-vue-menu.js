@@ -53,6 +53,17 @@ Vue.component(_ConstantComponentMap._AjaxMenu, {
 				}
 				// 切换到指定Tab项
 				$element.tabChange('admin-tab', $(this).text());
+				var dataWrap=$.createAjaxDataWrap();
+				var menu={
+						id:$(this).attr("menuId")
+				};
+				dataWrap.dataList[0]=menu;
+				$.request({
+					url:$$pageContextPath+"/template/sys/menu-visit/add-log",
+					data:{
+						dataWrap:dataWrap
+					}
+				});
 			});
 		},
 		_InitAjaxMenuData : function() {
@@ -96,12 +107,15 @@ function AjaxMenu(domId) {
 			var $a = $("<a></a>");
 			//$a.attr("class", "afinve");
 			$a.attr("onclick", "javascript:return false;");
-			if (menu.link == null || menu.link == "")
+			if (menu.link == null || menu.link == ""){
 				$a.attr("menuhref", "#");
-			else
+			}
+			else{
+				$a.attr("menuId",menu.id);	
 				$a.attr("menuhref", menu.link);
-			if (menu.cdtb != null && menu.cdtb != "") {
-				var $i = $("<i>"+menu.cdtb+"</i>");
+			}
+			if (menu.icon != null && menu.icon != "") {
+				var $i = $("<i>"+menu.icon+"</i>");
 				$i.attr("class", "fa "+getRandomIcon());
 				$a.append($i);
 			}
@@ -119,10 +133,12 @@ function AjaxMenu(domId) {
 			//$a.attr("class", "afinve");
 			if (menu.link == null || menu.link == "")
 				$a.attr("menuhref", "#");
-			else
+			else{
+				$a.attr("menuId",menu.id);	
 				$a.attr("menuhref", menu.link);
-			if (menu.cdtb != null && menu.cdtb != "") {
-				var $i = $("<i>"+menu.cdtb+"</i>");
+			}
+			if (menu.icon != null && menu.icon != "") {
+				var $i = $("<i>"+menu.icon+"</i>");
 				$i.attr("class", "fa "+getRandomIcon());
 				$a.append($i);
 			}

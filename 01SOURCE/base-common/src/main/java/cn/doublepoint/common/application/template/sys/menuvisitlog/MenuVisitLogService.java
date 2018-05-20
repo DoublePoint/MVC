@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-05-16 22:46:960
+ * 创   建   时   间 ： 2018-05-20 22:07:493
  * 
  * 类   说   明 ：系统菜单访问日志维护类
  * 
@@ -21,14 +21,14 @@ public interface MenuVisitLogService {
 	 * 
 	 * @return 系统菜单访问日志
 	 */
-	public List findAll(PageInfo pageInfo);
+	public List<MenuVisitLog> findAll(PageInfo pageInfo);
 	
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return 
 	 */
-	public List find(MenuVisitLog menuVisitLog,PageInfo pageInfo) ;
+	public List<MenuVisitLog> find(MenuVisitLog menuVisitLog,PageInfo pageInfo) ;
 	
 	/**
 	 * 根据Id获取数据
@@ -50,7 +50,7 @@ public interface MenuVisitLogService {
 	 * @param menuVisitLogList
 	 * @return
 	 */
-	public boolean remove(List menuVisitLogList);
+	public boolean remove(List<MenuVisitLog> menuVisitLogList);
 	
 	/**
 	 * 创建或更新数据
@@ -64,6 +64,6 @@ public interface MenuVisitLogService {
 	 * @param menuVisitLog
 	 * @return
 	 */
-	public boolean saveOrUpdate(List menuVisitLogList) ;
+	public boolean saveOrUpdate(List<MenuVisitLog> menuVisitLogList) ;
 
 }

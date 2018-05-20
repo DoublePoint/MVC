@@ -109,14 +109,14 @@ var _RegisterModel = new RegisterModel();
 			obj.title = title;
 
 			// 存储弹出窗口的传递值
-			var _DialogData = obj.data==null?{}:obj.data;
+			var _DialogData = obj.data == null ? {} : obj.data;
 			_DialogData.url = obj.url;
 			var showTimes = 1;
 			// 重新封装success方法
 			obj.success = function(layero, index) {
 				if (showTimes != 1)
 					return;
-				
+
 				var jspParams = $.createJspParams();
 				jspParams.setParentDialogDiv(layero);
 				if (obj.yes != null) {
@@ -125,7 +125,7 @@ var _RegisterModel = new RegisterModel();
 					else
 						jspParams.setDialogYesFunctionName(obj.yes);
 				}
-				parent.addLayerDialogMap(index,jspParams);
+				parent.addLayerDialogMap(index, jspParams);
 				// 执行该方法的是子页面
 
 				showTimes++;
@@ -168,8 +168,8 @@ var _RegisterModel = new RegisterModel();
 		// 父页面使用
 		closeDialog : function(index, data) {
 			$layer.close(index); // 再执行关闭
-			var _jspParams=_DialogIndexMap.getValue(index);
-			if(_jspParams==null)
+			var _jspParams = _DialogIndexMap.getValue(index);
+			if (_jspParams == null)
 				return;
 			// _DialogParams 页面默认参数 每个页面都有，一种通过函数体调用 两一种通过函数名调用
 			if (_jspParams._DialogYesFunction != null) {
@@ -178,7 +178,7 @@ var _RegisterModel = new RegisterModel();
 				var dialogYesFunction = _jspParams._DialogYesFunctionName;
 				$._Eval(dialogYesFunction, data);
 			}
-			
+
 			_DialogIndexMap.remove(index);
 		},
 		alert : function(msg) {
@@ -440,34 +440,38 @@ var _RegisterModel = new RegisterModel();
 
 			// 封装操作成功函数
 			var successFunction = settings.success;
-			if (successFunction != null) {
-				settings.success = function(responseData) {
+
+			settings.success = function(responseData) {
+				if (successFunction != null) {
 					$layer.closeAll('loading');
-					try{
+					try {
 						if (!$.doResponse(responseData)) {
 							return;
 						}
 						var res = new AjaxResponse(responseData);
 						successFunction(res);
+					} catch (e) {
+
 					}
-					catch(e){
-						
-					}
-					
+				} else {
+					$layer.closeAll('loading');
 				}
+
 			}
-			;
 
 			// 封装操作失败函数
 			var errorFunction = settings.error;
-			if (errorFunction != null) {
-				$layer.closeAll('loading');
-				settings.error = function(responseData) {
+
+			settings.error = function(responseData) {
+				if (errorFunction != null) {
+					$layer.closeAll('loading');
 					if (!$.doResponse(responseData)) {
 						return;
 					}
 					var res = new AjaxResponse(responseData);
 					errorFunction(res);
+				} else {
+					$layer.closeAll('loading');
 				}
 			}
 
@@ -492,7 +496,7 @@ var _RegisterModel = new RegisterModel();
 			form.attr("method", "post");
 			form.attr("action", url);
 			if (data != null) {
-				for(attr in data){
+				for (attr in data) {
 					var fileInput = $("<input>");
 					fileInput.attr("type", "hidden");
 					fileInput.attr("id", "attr");
