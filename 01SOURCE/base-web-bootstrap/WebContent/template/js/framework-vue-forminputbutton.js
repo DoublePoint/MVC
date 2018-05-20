@@ -15,6 +15,9 @@ function FormInputButton(domId) {
 	this.fieldValue = null;
 	this.onclick=null;
 	
+	this.getData = function(){
+		return this.getInputHiddenDom().val();
+	}
 	this.getInputHiddenDom = function() {
 		return $("#" + this.inputButtonHiddenId);
 	};
@@ -32,22 +35,40 @@ function FormInputButton(domId) {
 		this.initEvent();
 	};
 	this.initData=function(){
-		
+		return this.getInputHiddenDom().val();
 	};
 	this.initEvent= function (){
 		this.initButtonClick();
 	};
 	this.initButtonClick=function(){
+		var inpbtn=this;
 		this.getInputButtonButtonDom().click(function() {
-			if (this.onclick == null)
+			if (inpbtn.onclick == null)
 				return;
-			$._Eval(this.onclick);
+			$._Eval(inpbtn.onclick);
 		});
 	}
-	this.setData = function(aKey, isChangede) {
-		this.getInputDom().val(aKey);
-		this.setInputHiddenDomValue(aKey);
+	this.setData = function(aKey,aIsChanged, aValue) {
+		var arr;
+		try{
+			arr=aKey.split("&");
+		}
+		catch(e){
+			
+		}
+		if(arr!=null&&arr.length==2){
+			this.getInputDom().val(arr[0]);
+			this.setInputHiddenDomValue(arr[1]);
+		}
+		else{
+			this.getInputDom().val(aValue);
+			this.setInputHiddenDomValue(aKey);
+		}
 	};
+	this.selectItem=function(aKey, aValue,aIsChanged){
+		this.getInputDom().val(aValue);
+		this.setInputHiddenDomValue(aKey);
+	}
 
 	this.setInputDomValue = function(aValue) {
 		this.fieldValue = aValue;
@@ -69,9 +90,7 @@ function FormInputButton(domId) {
 			// 舍掉后面两位小数
 			labelPercent = parseInt(itemColproportion[0]) / totalWidthPercent;
 			inputPercent = parseInt(itemColproportion[1]) / totalWidthPercent;
-//			this.setLabelStyle("display", "inline-block");
 			this.setInputStyle("padding-left", "10px");
-//			this.setInputStyle("display", "inline-block");
 			this.setLabelStyle("width", labelPercent * 100 + "%");
 			this.setInputStyle("width", inputPercent * 100 + "%");
 		}

@@ -57,18 +57,18 @@ function _PageInfo() {
 };
 
 
-function _JspParams() {
+function _DialogParams() {
 	this._ParentDialogDiv=null;
-	this._YesFunctionName = null;
-	this.cancelFunctionName = null;
-	this.YesFunction = null;
-	this.CancelFunction = null;
+	this._DialogYesFunctionName = null;
+	this._DialogCancelFunctionName = null;
+	this._DialogYesFunction = null;
+	this._CancelFunction = null;
 	this._TitleValue=null;
-	this.setYesFunctionName = function(funcName) {
-		this._YesFunctionName = funcName;
+	this.setDialogYesFunctionName = function(funcName) {
+		this._DialogYesFunctionName = funcName;
 	};
-	this.setCancelFunctionName = function(cancName) {
-		this.cancelFunctionName = cancName;
+	this.setDialogCancelFunctionName = function(cancName) {
+		this._DialogCancelFunctionName = cancName;
 	}
 	this.setParentDialogDiv = function(aParentDialogDiv){
 		this._ParentDialogDiv=aParentDialogDiv;

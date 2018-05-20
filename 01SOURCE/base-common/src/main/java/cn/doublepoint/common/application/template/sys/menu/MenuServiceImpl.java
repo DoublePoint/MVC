@@ -108,7 +108,12 @@ public class MenuServiceImpl implements MenuService{
 			menu.setParentId(0L);
 		} else {
 			Menu parentCd = getById(Long.valueOf(menu.getParentId()));
-			menu.setLevel(parentCd.getLevel() + 1);
+			if(parentCd==null){
+				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
+				menu.setParentId(0L);
+			}
+			else
+				menu.setLevel(parentCd.getLevel() + 1);
 		}
 		if (menu.getId() == null){
 			menu.setId(SequenceUtil.getNextVal(Menu.class));

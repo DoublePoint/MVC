@@ -4,14 +4,13 @@ function init(response) {
 		var treeNode = response.getDataList("clickNode");
 		var id = treeNode.id;
 		var name = treeNode.name;
-		inpbtn_sjcdbs.setData(id, name);
+		inpbtn_sjcdbs.selectItem(id, name);
 	}
 	else{
-		var data=response.getDataList()[0];
+		var dataWrap=response.get("dataWrap");
+		var data=dataWrap.dataList[0];
 		ajaxform.setData(data);
 	}
-//	ajaxform.setFieldValue("sjcdbs", cdbs);
-
 }
 
 function onClickSave(){
@@ -36,21 +35,17 @@ function onClickSave(){
 	});
 }
 
-function InputButtonClick() {
-	var ajaxDataWrap = null;
+
+function selectParent(){
 	$.openDialog({
-		type : 2,
 		title : "添加菜单",
 		width : 360,
-		height : 630,
-		shade : 0.4,
-		closeBtn : 1,
-		shadeClose : true,
-		maxmin : true,
-		content : $$pageContextPath + '/template/sys/menu/menu-tree',
-		data : ajaxDataWrap,
-		yes : function() {
-			alert("关闭");
+		height : 430,
+		url : $$pageContextPath + '/template/sys/commonpage/selectMenu.jsp',
+		yes : function(selectTreeNode) {
+			var menuId=selectTreeNode.id;
+			var menuName=selectTreeNode.name;
+			inpbtn_sjcdbs.selectItem(menuId,menuName);
 		}
 	});
 }

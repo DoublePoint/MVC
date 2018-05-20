@@ -30,13 +30,14 @@
 			<ll-formfield id="cdmcId" title="菜单名称" field="name" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 			<ll-formfield title="菜单链接" field="link" maxlen="200"></ll-formfield>
 			<ll-formfield title="菜单序号" field="sn" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
-			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="InputButtonClick"></ll-forminputbutton>
+			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="selectParent()"></ll-forminputbutton>
 			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
 			<ll-toolbar align="center">
 				<!-- <input type="button" value="test" onclick="clicktest()"/>
 				<input type="button" value="delete" onclick="clickDelete()"/> -->
-				<input type="button" class="btn btn-info btn-sm" onclick="onClickSave()" value="保存"/>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="onClickSave();">  
+        			<span class="glyphicon glyphicon-ok ll_add_icon"></span> 保存
+   				</button>  
 			</ll-toolbar>
 		</ll-ajaxform>
 	</form>

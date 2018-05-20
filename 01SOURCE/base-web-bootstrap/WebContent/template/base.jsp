@@ -10,6 +10,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/bootstrap-select/dist/css/bootstrap-select.css">
 <!-- FONTAWESOME STYLES-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/Font-Awesome-3.2.1/css/font-awesome.min.css">
 <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/font-awesome.css" rel="stylesheet" />
 <!--CUSTOM BASIC STYLES-->
 <link href="${pageContext.request.contextPath}/template/btts_9_sp/assets/css/basic.css" rel="stylesheet" />

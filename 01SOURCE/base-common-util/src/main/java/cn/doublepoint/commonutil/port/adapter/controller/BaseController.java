@@ -23,7 +23,7 @@ public class BaseController {
     public AjaxResponse exp(HttpServletRequest request, Exception ex) { 
 		AjaxResponse response=new AjaxResponse();
 		response.setCode("-1");
-		response.setErrorMessage(ex.getMessage());
+		response.setErrorMessage(ex.toString());
 		Log4jUtil.error(ex);
 		return response;
     }

@@ -35,7 +35,7 @@
 									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formtoolbar labelalign="right" colspan="1">
-										<button class="btn btn-info btn-sm ll-search" onclick="onClickAdd();return false;" style="width:100px;">  
+										<button class="btn btn-info btn-sm ll-search" type="button" onclick="retrieve()" style="width:100px;">  
         									<span class="glyphicon glyphicon-search "></span> 查询
    										</button>  
    										&nbsp;
@@ -45,10 +45,10 @@
 							
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="35" > 
-							<button  style="width:70px;" class="btn btn-default btn-sm " onclick="onClickAdd();return false;">  
+							<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="onClickAdd();">  
         						<span class="glyphicon glyphicon-plus ll_add_icon"></span> 增加
    							</button>  
-   							<button  style="width:70px;" class="btn btn-default btn-sm" onclick="onClickDelete();return false;">  
+   							<button type="button" style="width:70px;" class="btn btn-default btn-sm" onclick="onClickDelete();">  
         						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 删除
    							</button>  
 					</ll-fillarea-tb>

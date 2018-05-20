@@ -109,13 +109,25 @@ var _RegisterModel = new RegisterModel();
 			obj.title = title;
 
 			// 存储弹出窗口的传递值
-			var _DialogData = obj.data;
+			var _DialogData = obj.data==null?{}:obj.data;
 			_DialogData.url = obj.url;
 			var showTimes = 1;
 			// 重新封装success方法
 			obj.success = function(layero, index) {
 				if (showTimes != 1)
 					return;
+				
+				var jspParams = $.createJspParams();
+				jspParams.setParentDialogDiv(layero);
+				if (obj.yes != null) {
+					if (typeof obj.yes === "function")
+						jspParams._DialogYesFunction = obj.yes;
+					else
+						jspParams.setDialogYesFunctionName(obj.yes);
+				}
+				parent.addLayerDialogMap(index,jspParams);
+				// 执行该方法的是子页面
+
 				showTimes++;
 				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
 				try {
@@ -136,6 +148,11 @@ var _RegisterModel = new RegisterModel();
 			else if (("" + height).indexOf("px") == -1) {
 				height = obj.height + "px";
 			}
+			obj.type = 2;
+			obj.shade = 0.4;
+			obj.closeBtn = 1;
+			obj.shadeClose = true;
+			obj.maxmin = true;
 			obj.area = [ width, height ];
 			obj.content = $$pageContextPath + "/template/sys/dialog/dialog.jsp";
 			parent.$layer.open(obj);
@@ -151,14 +168,18 @@ var _RegisterModel = new RegisterModel();
 		// 父页面使用
 		closeDialog : function(index, data) {
 			$layer.close(index); // 再执行关闭
-
-			// _JspParams 页面默认参数 每个页面都有
-			if (_jspParams.YesFunction != null) {
-				_jspParams.YesFunction(data);
+			var _jspParams=_DialogIndexMap.getValue(index);
+			if(_jspParams==null)
+				return;
+			// _DialogParams 页面默认参数 每个页面都有，一种通过函数体调用 两一种通过函数名调用
+			if (_jspParams._DialogYesFunction != null) {
+				_jspParams._DialogYesFunction(data);
 			} else {
-				var yesFunction = _jspParams._YesFunctionName;
-				$._Eval(yesFunction, data);
+				var dialogYesFunction = _jspParams._DialogYesFunctionName;
+				$._Eval(dialogYesFunction, data);
 			}
+			
+			_DialogIndexMap.remove(index);
 		},
 		alert : function(msg) {
 			parent.$layer.alert(msg);
@@ -324,7 +345,7 @@ var _RegisterModel = new RegisterModel();
 			return pageinfo;
 		},
 		createJspParams : function() {
-			return new _JspParams();
+			return new _DialogParams();
 		},
 		parseTreeNodeToCd : function(treeNode) {
 			var arr = new Array();
@@ -422,11 +443,17 @@ var _RegisterModel = new RegisterModel();
 			if (successFunction != null) {
 				settings.success = function(responseData) {
 					$layer.closeAll('loading');
-					if (!$.doResponse(responseData)) {
-						return;
+					try{
+						if (!$.doResponse(responseData)) {
+							return;
+						}
+						var res = new AjaxResponse(responseData);
+						successFunction(res);
 					}
-					var res = new AjaxResponse(responseData);
-					successFunction(res);
+					catch(e){
+						
+					}
+					
 				}
 			}
 			;

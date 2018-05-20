@@ -1,6 +1,6 @@
 Vue.component(_ConstantComponentMap._Tree, {
 	props : [ 'id', 'datasource','onclick', 'columns', 'showLine' ],
-	template : '<ul type="hidden"  :id="id+guid" class="ztree" :onclick="onclick"></ul>',
+	template : '<ul type="hidden"  :id="id+guid" class="ztree"></ul>',
 
 	data : function() {
 		var dataList;
@@ -26,12 +26,6 @@ Vue.component(_ConstantComponentMap._Tree, {
 		// 添加生命Tree对象脚本
 		_MapComponent : function() {
 			$.outputMapCompoment(this);
-//			var documentWriteHtml = "";
-//			var domId = this._GetComponentDomId();
-//			var $script = $('<script type="text/javascript"></script>');
-//			$script.append('var ' + this.id + '=$.getFromLayuiObjectHashMap("' + domId + '");');
-//			documentWriteHtml = $script.prop("outerHTML");
-//			$("body").append(documentWriteHtml);
 		},
 		_GetComponentDomId : function() {
 			var _domId = this.id + this.guid;
