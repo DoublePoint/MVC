@@ -24,7 +24,7 @@
 	<form>
 		<ll-filllayout>
 			<ll-fillarea-tb height="*">
-				<ll-tree id="treeDemo" showcheckbox="true" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true"
+				<ll-tree id="menuTree" showcheckbox="true" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true"
 				showLine="true" onclick="zTreeOnClick()"></ll-tree>
 			</ll-fillarea-tb>
 			<ll-fillarea-tb height="40" style="align:center">

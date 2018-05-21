@@ -64,4 +64,12 @@ public interface BaseDaoService {
 	 * @param id
 	 */
 	public <T extends BaseModel> void saveOrUpdate(List<T> list);
+	
+	/**
+	 * 批量更新
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public int executeUpdate(String jpql,QueryParamList queryParamList);
 }

@@ -108,7 +108,18 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		});
 	}
 	
-	
+	@Override
+	@Transactional
+	public int executeUpdate(String jpql,QueryParamList queryParamList) {
+		Query query=em.createQuery(jpql);
+		
+		queryParamList.getParams().stream().forEach(param->{
+			query.setParameter(param.getName(), param.getValue());
+		});
+		int result=query.executeUpdate();
+		return result;
+	}
+
 
 	public EntityManager getEm() {
 		return em;
@@ -128,4 +139,5 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		return (int) pageInfo.getPageSize();
 	}
 
+	
 }

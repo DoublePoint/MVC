@@ -25,11 +25,6 @@ function GridField(domId) {
 			emptytext : "&nbsp;&nbsp;",
 			mode : "inline",
 			onblur : "submit",
-			validate : function(value) {
-				if ($.trim(value) == '') {
-					return '姓名不能为空!';
-				}
-			}
 		};
 		return field;
 	}

@@ -170,6 +170,17 @@ public class JPAUtil extends DataBaseUtil{
 			Log4jUtil.error(e);
 		}
 	}
+	
+	/**
+	 * 执行更新或删除语句
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static int executeUpdate(String jpql,QueryParamList queryParamList){
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeUpdate(jpql, queryParamList);
+	}
 
 	private static <T extends BaseModel> Object getPrimary(T model)
 			throws IllegalArgumentException, IllegalAccessException {

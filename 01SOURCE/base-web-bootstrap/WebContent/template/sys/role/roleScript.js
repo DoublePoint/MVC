@@ -55,8 +55,10 @@ function onClickSave() {
 			dataWrap : data
 		},
 		success : function(response) {
-			if (response)
+			if (response){
+				retrieve();
 				$.tips('保存成功');
+			}
 		},
 		error : function(ecx) {
 			$.shakeTips('保存失败');
@@ -68,20 +70,18 @@ function onClickSave() {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			deleteDataWrap : lltestdatagrid.collectData("checked")
+			deleteDataWrap : roleAjaxGrid.collectData("checked")
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/menu/delete",
+			url : $$pageContextPath + "/template/sys/role/delete",
 			data : data,
 			success : function(response) {
-				var deleteState = response.get("deleteState");
-				if (!deleteState) {
+				if (!response) {
 					$.alert("删除失败!");
 					return;
 				}
 				$.tips('删除成功');
 				retrieve();
-				retrieveTree();
 			},
 			error : function() {
 				$.shakeTips('删除失败');
@@ -94,24 +94,22 @@ function onClickDelete() {
 }
 
 function customerFunction(a, record, c) {
-	if (record.id == null || record.id == "") {
+	return ' <a href="javascript:checkMenu(\'' + record.id + '\')">' + ' <span class="glyphicon icon-tags" style="color:#15B194;"></span>' + ' </a>';
+}
+
+function checkMenu(id) {
+	if (id == null || id == "") {
 		$.shakeTips("请先保存");
 		return;
 	}
 
-	return ' <a href="javascript:checkMenu(\'' + record.id + '\')">' + ' <span class="glyphicon icon-tags" style="color:#15B194;"></span>' + ' </a>';
-}
-
-function checkMenu() {
 	$.openDialog({
-		title : "添加菜单",
+		title : "绑定权限",
 		width : 360,
 		height : 430,
-		url : $$pageContextPath + '/template/sys/role/bindMenu.jsp',
-		yes : function(selectTreeNode) {
-			var menuId = selectTreeNode.id;
-			var menuName = selectTreeNode.name;
-			inpbtn_sjcdbs.selectItem(menuId, menuName);
+		url : $$pageContextPath + '/template/sys/role/bindMenu',
+		data:{
+			roleId:id
 		}
 	});
 }

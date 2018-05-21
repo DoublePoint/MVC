@@ -9,18 +9,24 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.role;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.doublepoint.common.application.template.sys.role.MenuRoleService;
 import cn.doublepoint.common.application.template.sys.role.RoleService;
+import cn.doublepoint.common.domain.model.entity.sys.Menu;
+import cn.doublepoint.common.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.common.domain.model.entity.sys.Role;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
+import static java.util.stream.Collectors.toList;
 
 @Controller
 @RequestMapping("/template/sys/role")
@@ -28,12 +34,21 @@ public class RoleHandleController extends BaseHandleController {
 
 	@Autowired
 	RoleService roleService;
+	@Autowired
+	MenuRoleService menuRoleService;
 	
 	@RequestMapping("/{actionname}")
 	public String role(@PathVariable String actionname) {
 		return actionname;
 	}
 	
+	@RequestMapping("/bindMenu")
+	public AjaxResponse bindMenuJsp(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
+		String roleId=request.getParameter("roleId");
+		response.setViewName("bindMenu");
+		response.setAjaxParameter("roleId", roleId);
+		return response;
+	}
 
 	@RequestMapping("/search")
 	@ResponseBody
@@ -52,17 +67,55 @@ public class RoleHandleController extends BaseHandleController {
 		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("dataWrap", Role.class);
 		if(dataWrap==null)
 			return true;
-		
 		roleService.saveOrUpdate(dataWrap.getDataList());
 		return true;
 	}
-
+	
+	@RequestMapping("/bind-menu")
+	@ResponseBody
+	public boolean bindMenu(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
+		AjaxDataWrap<Menu> dataWrap=request.getAjaxDataWrap("dataWrap", Menu.class);
+		String roleId=request.getParameter("roleId");
+		if(dataWrap==null)
+			return true;
+		List<Menu> menus=dataWrap.getDataList();
+		if(menus==null)
+			return false;
+		List<MenuRole> list=menus.stream().map(menu->{
+			MenuRole mRole=new MenuRole();
+			mRole.setMenuId(menu.getId());
+			mRole.setRoleId(Long.valueOf(roleId));
+			return mRole;
+		}).collect(toList());
+		menuRoleService.saveOrUpdate(list);
+		return true;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public boolean delete(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
+		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("deleteDataWrap", Role.class);
+		if(dataWrap==null)
+			return true;
+		
+		roleService.remove(dataWrap.getDataList());
+		return true;
+	}
+	
 	public RoleService getRoleService() {
 		return roleService;
 	}
 
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
+	}
+
+	public MenuRoleService getMenuRoleService() {
+		return menuRoleService;
+	}
+
+	public void setMenuRoleService(MenuRoleService menuRoleService) {
+		this.menuRoleService = menuRoleService;
 	}
 	
 }

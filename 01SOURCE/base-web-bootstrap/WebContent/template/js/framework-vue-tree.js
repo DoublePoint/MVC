@@ -107,6 +107,9 @@ function AjaxTree(domId) {
 			treeObject = $.fn.zTree.getZTreeObj(this.domId);
 		return treeObject;
 	}
+	this.getCheckedNodes=function(){
+		return this.getTreeObject().getCheckedNodes(true);
+	}
 	this.getSelectedNodes = function() {
 		return this.getTreeObject().getSelectedNodes();
 	}
