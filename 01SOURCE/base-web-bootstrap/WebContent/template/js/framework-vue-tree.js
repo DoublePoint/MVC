@@ -1,5 +1,12 @@
 Vue.component(_ConstantComponentMap._Tree, {
-	props : [ 'id', 'datasource','onclick', 'columns', 'showLine' ],
+	props : [ 
+	          'id', //id
+	          'datasource',//数据源
+	          'onclick', //单击方法
+	          'columns', //列
+	          'showLine', //是否显示线条
+	          'showcheckbox'
+	          ],
 	template : '<ul type="hidden"  :id="id+guid" class="ztree"></ul>',
 
 	data : function() {
@@ -19,8 +26,11 @@ Vue.component(_ConstantComponentMap._Tree, {
 		_RegisterComponent : function() {
 			var domId = this._GetComponentDomId();
 			var tree = new AjaxTree(domId);
+			for ( var attrName in tree) {
+				if (this[attrName] != null)
+					tree[attrName] = this[attrName];
+			}
 			tree.setDataSource($$pageContextPath+this.datasource);
-			tree.setOnclick(this.onclick);
 			$.addToLayuiObjectHashMap(domId, tree);
 		},
 		// 添加生命Tree对象脚本
@@ -40,10 +50,11 @@ Vue.component(_ConstantComponentMap._Tree, {
 })
 
 function AjaxTree(domId) {
-	this.id = domId;
+	this.domId = domId;
 	this.treeObject = null;
 	this.datasource=null;
 	this.onclick=null;
+	this.showcheckbox=false;
 	this.setting = {
 		view : {
 			showLine : true,
@@ -52,6 +63,11 @@ function AjaxTree(domId) {
 			},
 			showIcon : true,
 			dblClickExpand : true
+		},
+		check : {
+			enable:false,
+			chkStyle: "checkbox",
+			chkboxType: { "Y": "ps", "N": "ps" }
 		},
 		async : {
 			enable : true,
@@ -83,9 +99,12 @@ function AjaxTree(domId) {
 			}
 		}
 	};
+	this.resetCheckBoxState=function(){
+		this.setting.check.enable=this.showcheckbox=="true"?true:false;
+	};
 	this.getTreeObject = function() {
 		if (this.treeObject == null)
-			treeObject = $.fn.zTree.getZTreeObj(this.id);
+			treeObject = $.fn.zTree.getZTreeObj(this.domId);
 		return treeObject;
 	}
 	this.getSelectedNodes = function() {
@@ -95,10 +114,14 @@ function AjaxTree(domId) {
 		this.setting.async.url=datasource;
 	}
 	this.setData = function(data) {
-		$.fn.zTree.init($("#" + this.id + ""), this.setting);
+		//设置checkbox的显示
+		this.resetCheckBoxState();
+		$.fn.zTree.init($("#" + this.domId + ""), this.setting);
 	}
 	this.render = function() {
-		$.fn.zTree.init($("#" + this.id + ""), this.setting);
+		//设置checkbox的显示
+		this.resetCheckBoxState();
+		$.fn.zTree.init($("#" + this.domId + ""), this.setting);
 	}
 	this.setSetting = function(setting) {
 		this.setting = setting;

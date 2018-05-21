@@ -442,36 +442,41 @@ var _RegisterModel = new RegisterModel();
 			var successFunction = settings.success;
 
 			settings.success = function(responseData) {
+				$layer.closeAll('loading');
 				if (successFunction != null) {
-					$layer.closeAll('loading');
-					try {
-						if (!$.doResponse(responseData)) {
-							return;
+					if (typeof (responseData) == 'string'||
+							typeof (responseData) == 'boolean') {
+						successFunction(responseData);
+					} else {
+						try {
+							if (!$.doResponse(responseData)) {
+								return;
+							}
+							var res = new AjaxResponse(responseData);
+							successFunction(res);
+						} catch (e) {
+
 						}
-						var res = new AjaxResponse(responseData);
-						successFunction(res);
-					} catch (e) {
-
 					}
-				} else {
-					$layer.closeAll('loading');
-				}
 
+				}
 			}
 
 			// 封装操作失败函数
 			var errorFunction = settings.error;
 
 			settings.error = function(responseData) {
+				$layer.closeAll('loading');
 				if (errorFunction != null) {
-					$layer.closeAll('loading');
-					if (!$.doResponse(responseData)) {
-						return;
+					if (typeof (responseData) == 'string') {
+						errorFunction(responseData);
+					} else {
+						if (!$.doResponse(responseData)) {
+							return;
+						}
+						var res = new AjaxResponse(responseData);
+						errorFunction(res);
 					}
-					var res = new AjaxResponse(responseData);
-					errorFunction(res);
-				} else {
-					$layer.closeAll('loading');
 				}
 			}
 

@@ -9,21 +9,17 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.role;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.sys.role.RoleApplicationService;
-import cn.doublepoint.common.application.template.sys.role.RoleQueryService;
+import cn.doublepoint.common.application.template.sys.role.RoleService;
 import cn.doublepoint.common.domain.model.entity.sys.Role;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
-import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
 
 @Controller
@@ -31,24 +27,42 @@ import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleContro
 public class RoleHandleController extends BaseHandleController {
 
 	@Autowired
-	RoleQueryService roleQueryService;
-
-	@Resource
-	RoleApplicationService roleApplicationService;
+	RoleService roleService;
 	
-	@RequestMapping("/datalist")
-	@ResponseBody
-	public AjaxDataWrap<Role> roleDataList(@RequestBody(required=false) AjaxDataWrap<Role> dataWrap) {
-		if(dataWrap==null)
-			return null;
-		Role roleQuery=null;
-		PageInfo pageInfo=dataWrap.getPageInfo();
-		if(dataWrap.getDataList()!=null&&dataWrap.getDataList().size()>0){
-			roleQuery=dataWrap.getDataList().get(0);
-		}
-	
-		return dataWrap;
+	@RequestMapping("/{actionname}")
+	public String role(@PathVariable String actionname) {
+		return actionname;
 	}
 	
+
+	@RequestMapping("/search")
+	@ResponseBody
+	public AjaxResponse roleDataList(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
+		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("dataWrap", Role.class);
+		if(dataWrap==null)
+			return null;
+		dataWrap.setDataList(roleService.findAll(dataWrap.getPageInfo()));
+		response.setAjaxParameter("dataWrap", dataWrap);
+		return response;
+	}
+	
+	@RequestMapping("/save")
+	@ResponseBody
+	public boolean save(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
+		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("dataWrap", Role.class);
+		if(dataWrap==null)
+			return true;
+		
+		roleService.saveOrUpdate(dataWrap.getDataList());
+		return true;
+	}
+
+	public RoleService getRoleService() {
+		return roleService;
+	}
+
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
 	
 }

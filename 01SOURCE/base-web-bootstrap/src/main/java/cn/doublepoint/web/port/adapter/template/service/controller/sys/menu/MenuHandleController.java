@@ -47,13 +47,25 @@ public class MenuHandleController extends BaseHandleController {
 	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request,
 			@RequestParam(required = false) String type, ModelAndView modelAndView, AjaxResponse response) {
 		AjaxDataWrap<Menu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
-		if(ajaxDataWrap!=null){
+		if (ajaxDataWrap != null) {
 			ajaxDataWrap.setPageInfo(new PageInfo());
 			response.setAjaxParameter("dataWrap", ajaxDataWrap);
 		}
 		response.setAjaxParameter("type", request.getParameter("type"));
 		response.setViewName("menuDialog");
 		return response;
+	}
+
+	@RequestMapping("/getMenuName")
+	@ResponseBody
+	public String getMenuName(BodyReaderHttpServletRequestWrapper request) {
+		String id = request.getParameter("id");
+		Menu menu = menuService.getById(Long.valueOf(id));
+		String menuName = "";
+		if (menu != null) {
+			menuName = menu.getName();
+		}
+		return menuName;
 	}
 
 	@RequestMapping("/datalist")

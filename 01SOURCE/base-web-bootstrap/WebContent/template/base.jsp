@@ -1,7 +1,7 @@
 <%-- <%@ taglib prefix="ll" uri="http://ll.taglib/menu"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/layui.css" media="all">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <link rel="stylesheet/less" href="${pageContext.request.contextPath}/template/css/framework.less" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" media="all">
 <!-- 引入bootstrap-table样式 -->
@@ -29,6 +29,8 @@
 <script src="${pageContext.request.contextPath}/template/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js" media="all"></script>
 <!-- bootstrap-table.min.js -->
 <script src="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/bootstrap-table.js" media="all"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap3-editable-1.5.1/bootstrap3-editable/js/bootstrap-editable.js" media="all"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/extensions/editable/bootstrap-table-editable.js" media="all"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="${pageContext.request.contextPath}/template/plugins/bootstrap-select/js/bootstrap-select.js" ></script>
 <script src="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -56,7 +58,8 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/vue.min.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/template/zTree_v3/js/jquery.ztree.core.js"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/zTree_v3/js/jquery.ztree.core.js"></script>
+<script src="${pageContext.request.contextPath}/template/plugins/zTree_v3/js/jquery.ztree.excheck.js"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layout.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-lr.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-tb.js" charset="utf-8"></script>
@@ -88,6 +91,8 @@
 <script src="${pageContext.request.contextPath}/template/btts_9_sp/assets/js/jquery.metisMenu.js"></script>
 
 <link href="${pageContext.request.contextPath}/template/plugins/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/template/plugins/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+
 <script type="text/javascript">
 $(document).ready(function(){
 	try{

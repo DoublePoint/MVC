@@ -35,7 +35,7 @@ function stepChanging(event, currentIndex, newIndex) {
 }
 
 function customerFunction(a, b, c) {
-	return ' <a href="javascript:showDetail(\'' + b.tableName + '\')">' + ' <span class="glyphicon glyphicon-fullscreen"></span>' + ' </a>';
+	return ' <a href="javascript:showDetail(\'' + b.tableName + '\')">' + ' <span class="glyphicon icon-tags"></span>' + ' </a>';
 }
 
 function showDetail(tableName) {

@@ -20,6 +20,7 @@ import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.${baseModel.entityModel.entityClassName};
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 
 @Service("${baseModel.service.annotationServiceName}")
 public class ${baseModel.service.serviceClassName}Impl  implements ${baseModel.service.serviceClassName}{

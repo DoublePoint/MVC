@@ -7,6 +7,7 @@ var _FormProps = [ 'id', //
 				'visible',
 				'onclick',
 				'field', 
+				'labelprovider',
 				'title',
 				'type',
 				'validtype', 

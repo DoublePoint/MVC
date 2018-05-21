@@ -36,7 +36,7 @@
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formtoolbar labelalign="right" colspan="1">
 										<button class="btn btn-info btn-sm ll-search" type="button" onclick="retrieve()" style="width:100px;">  
-        									<span class="glyphicon glyphicon-search "></span> 查询
+        									<span class="glyphicon glyphicon-search ll-main"></span> 查询
    										</button>  
    										&nbsp;
 									</ll-formtoolbar>
@@ -56,7 +56,7 @@
 						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" datasource="/template/sys/menu/datalistajaxdatawrap"> 
 							<ll-gridcheck ></ll-gridcheck>
 							<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-							<ll-gridfield field="name" title="菜单名称" width="150"></ll-gridfield> 
+							<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
 							<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
 							<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield> 
 						</ll-ajaxgrid>

@@ -19,14 +19,17 @@ function retrieve() {
 		data :{
 			dataWrap:dataWrap
 		},
-		success : function(response) {
-			var dataWrap=response.get("dataWrap");
-			if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
-				$.shakeTips("未查询到任何数据!",2000);
-			lltestdatagrid.setDataWrap(dataWrap);
-		}
+		success : retrieveSuccess
 	});
 }
+
+function retrieveSuccess(response){
+	var dataWrap=response.get("dataWrap");
+	if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
+		$.shakeTips("未查询到任何数据!",2000);
+	lltestdatagrid.setDataWrap(dataWrap);
+}
+
 function retrieveTree() {
 	treeDemo.render();
 }

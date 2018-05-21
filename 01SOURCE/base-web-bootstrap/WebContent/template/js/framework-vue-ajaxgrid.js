@@ -545,6 +545,17 @@ function AjaxGrid(domId) {
 		var $table = $("#" + this.domId);
 		return $table.bootstrapTable('check',index);
 	}
+	this.createRecord=function(){
+		var record={};
+		
+		var cols=this.getCols();
+		if(cols==null)
+			return record;
+		for(col in cols){
+			record[cols[col]["field"]]="";
+		} 
+		return record;
+	}
 	this.uncheckAll = function(){
 		var $table = $("#" + this.domId);
 		return $table.bootstrapTable('uncheckAll');

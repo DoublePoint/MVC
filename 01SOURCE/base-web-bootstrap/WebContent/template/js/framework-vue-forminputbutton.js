@@ -11,12 +11,16 @@ function FormInputButton(domId) {
 	this.domId = domId;
 	this.inputButtonHiddenId=null;
 	this.inputButtonButtonId=null;
+	this.labelprovider=null;
 	this.fieldKey = null;
 	this.fieldValue = null;
 	this.onclick=null;
 	
 	this.getData = function(){
 		return this.getInputHiddenDom().val();
+	}
+	this.getDisplayValue=function(){
+		return this.getInputDom().val();
 	}
 	this.getInputHiddenDom = function() {
 		return $("#" + this.inputButtonHiddenId);
@@ -64,7 +68,27 @@ function FormInputButton(domId) {
 			this.getInputDom().val(aValue);
 			this.setInputHiddenDomValue(aKey);
 		}
+		if(this.labelprovider!=null){
+			this.setDataByLabelProvider();
+		}
 	};
+	this.setDataByLabelProvider= function(){
+		var fieldKey=this.fieldKey;
+		var labelProvider=this.labelprovider;
+		var inputButton=this;
+		if(labelProvider!=null){
+			$.request({
+				url:labelProvider,
+				data:{
+					id:fieldKey,
+				},
+				success:function(response){
+					var label=response;
+					inputButton.setInputDomValue(response);
+				}
+			});
+		}
+	}
 	this.selectItem=function(aKey, aValue,aIsChanged){
 		this.getInputDom().val(aValue);
 		this.setInputHiddenDomValue(aKey);

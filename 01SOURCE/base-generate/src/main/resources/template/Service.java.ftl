@@ -11,7 +11,7 @@ package cn.doublepoint.common.service.template.sys.${baseModel.service.packageNa
 import java.util.List;
 
 import cn.doublepoint.common.domain.model.entity.sys.${baseModel.entityModel.entityClassName};
-import cn.doublepoint.commonutil.domain.model.PageInfo;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 
 
 public interface ${baseModel.service.serviceClassName} {

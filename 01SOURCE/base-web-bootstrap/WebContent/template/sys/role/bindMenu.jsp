@@ -18,13 +18,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/template/base.jsp"%>
 <title>Insert title here</title>
-<script type="text/javascript" src="selectMenuScript.js"></script>
+<script type="text/javascript" src="bindMenuScript.js"></script>
 </head>
 <body>
 	<form>
 		<ll-filllayout>
 			<ll-fillarea-tb height="*">
-				<ll-tree id="treeDemo" showcheckbox="false" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true"
+				<ll-tree id="treeDemo" showcheckbox="true" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true"
 				showLine="true" onclick="zTreeOnClick()"></ll-tree>
 			</ll-fillarea-tb>
 			<ll-fillarea-tb height="40" style="align:center">
