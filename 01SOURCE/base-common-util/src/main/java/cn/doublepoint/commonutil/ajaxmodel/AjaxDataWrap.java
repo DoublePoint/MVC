@@ -10,6 +10,7 @@
 package cn.doublepoint.commonutil.ajaxmodel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.doublepoint.commonutil.domain.model.BaseModel;
@@ -18,7 +19,7 @@ import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	private List<T> dataList;
+	private List<T> dataList=new ArrayList<T>();
 	private PageInfo pageInfo;
 
 	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass) {

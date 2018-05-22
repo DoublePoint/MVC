@@ -36,53 +36,58 @@ public class RoleHandleController extends BaseHandleController {
 	RoleService roleService;
 	@Autowired
 	MenuRoleService menuRoleService;
-	
+
 	@RequestMapping("/{actionname}")
 	public String role(@PathVariable String actionname) {
 		return actionname;
 	}
-	
+
 	@RequestMapping("/bindMenu")
-	public AjaxResponse bindMenuJsp(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
-		String roleId=request.getParameter("roleId");
+	public AjaxResponse bindMenuJsp(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+		String roleId = request.getParameter("roleId");
 		response.setViewName("bindMenu");
 		response.setAjaxParameter("roleId", roleId);
+		AjaxDataWrap<MenuRole> dataWrap = new AjaxDataWrap<MenuRole>();
+		MenuRole query = new MenuRole();
+		query.setRoleId(Long.valueOf(roleId));
+		dataWrap.setDataList(menuRoleService.find(query, null));
+		response.setAjaxParameter("dataWrap", dataWrap);
 		return response;
 	}
 
 	@RequestMapping("/search")
 	@ResponseBody
-	public AjaxResponse roleDataList(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
-		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("dataWrap", Role.class);
-		if(dataWrap==null)
+	public AjaxResponse roleDataList(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
+		if (dataWrap == null)
 			return null;
 		dataWrap.setDataList(roleService.findAll(dataWrap.getPageInfo()));
 		response.setAjaxParameter("dataWrap", dataWrap);
 		return response;
 	}
-	
+
 	@RequestMapping("/save")
 	@ResponseBody
-	public boolean save(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
-		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("dataWrap", Role.class);
-		if(dataWrap==null)
+	public boolean save(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
+		if (dataWrap == null)
 			return true;
 		roleService.saveOrUpdate(dataWrap.getDataList());
 		return true;
 	}
-	
+
 	@RequestMapping("/bind-menu")
 	@ResponseBody
-	public boolean bindMenu(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
-		AjaxDataWrap<Menu> dataWrap=request.getAjaxDataWrap("dataWrap", Menu.class);
-		String roleId=request.getParameter("roleId");
-		if(dataWrap==null)
+	public boolean bindMenu(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
+		String roleId = request.getParameter("roleId");
+		if (dataWrap == null)
 			return true;
-		List<Menu> menus=dataWrap.getDataList();
-		if(menus==null)
+		List<Menu> menus = dataWrap.getDataList();
+		if (menus == null)
 			return false;
-		List<MenuRole> list=menus.stream().map(menu->{
-			MenuRole mRole=new MenuRole();
+		List<MenuRole> list = menus.stream().map(menu -> {
+			MenuRole mRole = new MenuRole();
 			mRole.setMenuId(menu.getId());
 			mRole.setRoleId(Long.valueOf(roleId));
 			return mRole;
@@ -90,18 +95,18 @@ public class RoleHandleController extends BaseHandleController {
 		menuRoleService.saveOrUpdate(list);
 		return true;
 	}
-	
+
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
-		AjaxDataWrap<Role> dataWrap=request.getAjaxDataWrap("deleteDataWrap", Role.class);
-		if(dataWrap==null)
+	public boolean delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("deleteDataWrap", Role.class);
+		if (dataWrap == null)
 			return true;
-		
+
 		roleService.remove(dataWrap.getDataList());
 		return true;
 	}
-	
+
 	public RoleService getRoleService() {
 		return roleService;
 	}
@@ -117,5 +122,5 @@ public class RoleHandleController extends BaseHandleController {
 	public void setMenuRoleService(MenuRoleService menuRoleService) {
 		this.menuRoleService = menuRoleService;
 	}
-	
+
 }

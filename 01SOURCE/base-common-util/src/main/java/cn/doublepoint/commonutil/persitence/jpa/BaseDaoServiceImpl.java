@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.domain.model.BaseModel;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 
@@ -42,41 +43,54 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	@SuppressWarnings({ "unchecked" })
 	@Transactional
 	@Override
-	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList paramsList, PageInfo pageInfo,SortParamList sortParamList) {
+	public <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList paramsList, PageInfo pageInfo,
+			SortParamList sortParamList) {
 		try {
 			String className = clazz.getName();
 			StringBuffer jpqlFromBuffer = new StringBuffer("FROM " + className + " U WHERE 1=1");
 			if (paramsList != null) {
 				paramsList.getParams().stream().forEach(param -> {
-					jpqlFromBuffer.append(" AND U.").append(param.getName()).append(param.getRelation())
-							.append(param.getValue());
+					if (param.getRelation() != QueryParam.RELATION_ISNULL
+							&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
+						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(param.getRelation())
+								.append(":" + param.getName());
+					} else
+						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(param.getRelation());
+
 				});
 			}
 
-			int firstIndex=-1;
-			int lastIndex=-1;
+			int firstIndex = -1;
+			int lastIndex = -1;
 			if (pageInfo != null) {
-				StringBuffer countBuffer = new StringBuffer("Select count(U)" + jpqlFromBuffer.toString());
-				Query countQuery = em.createQuery(countBuffer.toString());
-				long count = (long) countQuery.getSingleResult();
+				long count=getTotalCount(jpqlFromBuffer.toString(),paramsList);
 				pageInfo.setTotalElementCount(count);
-				firstIndex=getFirstResult(pageInfo);
-				lastIndex=getMaxRsults(pageInfo);
+				firstIndex = getFirstResult(pageInfo);
+				lastIndex = getMaxRsults(pageInfo);
 			}
-			
-			StringBuffer queryBuffer=new StringBuffer();
+
+			StringBuffer queryBuffer = new StringBuffer();
 			queryBuffer.append("SELECT U ").append(jpqlFromBuffer);
-			if(sortParamList!=null){
+			if (sortParamList != null) {
 				queryBuffer.append(" order by ");
-				sortParamList.getParams().stream().forEach(param->{
-					queryBuffer.append(" U.").append(param.getSortProperty()).append(" ").append(param.getSortType()).append(",");
+				sortParamList.getParams().stream().forEach(param -> {
+					queryBuffer.append(" U.").append(param.getSortProperty()).append(" ").append(param.getSortType())
+							.append(",");
 				});
 				queryBuffer.deleteCharAt(queryBuffer.length() - 1);
 			}
 			Query query = em.createQuery(queryBuffer.toString());
-			if(firstIndex!=-1 && lastIndex !=-1){
+			if (firstIndex != -1 && lastIndex != -1) {
 				query.setFirstResult(getFirstResult(pageInfo));
 				query.setMaxResults(getMaxRsults(pageInfo));
+			}
+			if (paramsList != null) {
+				paramsList.getParams().stream().forEach(param -> {
+					if (param.getRelation() != QueryParam.RELATION_ISNULL
+							&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
+						query.setParameter(param.getName(), param.getValue());
+					}
+				});
 			}
 			List<T> list = query.getResultList();
 			return list;
@@ -93,7 +107,7 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		T t = em.find(clazz, id);
 		em.remove(t);
 	}
-	
+
 	@Transactional
 	@Override
 	public <T extends BaseModel> void saveOrUpdate(T model) {
@@ -103,23 +117,22 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	@Transactional
 	@Override
 	public <T extends BaseModel> void saveOrUpdate(List<T> list) {
-		list.stream().forEach(model->{
+		list.stream().forEach(model -> {
 			saveOrUpdate(model);
 		});
 	}
-	
+
 	@Override
 	@Transactional
-	public int executeUpdate(String jpql,QueryParamList queryParamList) {
-		Query query=em.createQuery(jpql);
-		
-		queryParamList.getParams().stream().forEach(param->{
+	public int executeUpdate(String jpql, QueryParamList queryParamList) {
+		Query query = em.createQuery(jpql);
+
+		queryParamList.getParams().stream().forEach(param -> {
 			query.setParameter(param.getName(), param.getValue());
 		});
-		int result=query.executeUpdate();
+		int result = query.executeUpdate();
 		return result;
 	}
-
 
 	public EntityManager getEm() {
 		return em;
@@ -137,6 +150,27 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 
 	private int getMaxRsults(PageInfo pageInfo) {
 		return (int) pageInfo.getPageSize();
+	}
+
+	/**
+	 * 更具查询条件和查询参数 获取结果总数
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	private long getTotalCount(String jpql, QueryParamList queryParamList) {
+		StringBuffer countBuffer = new StringBuffer("Select count(U)" + jpql);
+		Query countQuery = em.createQuery(countBuffer.toString());
+		if (queryParamList != null) {
+			queryParamList.getParams().stream().forEach(param -> {
+				if (param.getRelation() != QueryParam.RELATION_ISNULL
+						&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
+					countQuery.setParameter(param.getName(), param.getValue());
+				}
+			});
+		}
+		long count = (long) countQuery.getSingleResult();
+		return count;
 	}
 
 	

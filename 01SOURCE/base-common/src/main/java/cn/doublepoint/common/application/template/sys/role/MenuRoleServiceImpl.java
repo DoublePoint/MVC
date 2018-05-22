@@ -21,10 +21,12 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 */
 	@Override
 	public List<MenuRole> find(MenuRole menuRole, PageInfo pageInfo) {
+		QueryParamList queryParamList=new QueryParamList();
 		if (menuRole != null) {
-
+			if(menuRole.getRoleId()!=null)
+				queryParamList.addParam("roleId",menuRole.getRoleId());
 		}
-		return JPAUtil.load(MenuRole.class, pageInfo);
+		return JPAUtil.load(MenuRole.class,queryParamList, pageInfo);
 	}
 
 	/**

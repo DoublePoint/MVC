@@ -5,7 +5,8 @@ Vue.component(_ConstantComponentMap._Tree, {
 	          'onclick', //单击方法
 	          'columns', //列
 	          'showLine', //是否显示线条
-	          'showcheckbox'
+	          'showcheckbox',
+	          'onload'
 	          ],
 	template : '<ul type="hidden"  :id="id+guid" class="ztree"></ul>',
 
@@ -55,6 +56,8 @@ function AjaxTree(domId) {
 	this.datasource=null;
 	this.onclick=null;
 	this.showcheckbox=false;
+	this.onload=null;
+	
 	this.setting = {
 		view : {
 			showLine : true,
@@ -89,23 +92,70 @@ function AjaxTree(domId) {
 			},
 		},
 		callback: {
-			//回调成功时展开第一层节点
-			onAsyncSuccess: function(){
-				var treeObj = $.fn.zTree.getZTreeObj(domId);
-				var nodes = treeObj.getNodes();
-				for (var i = 0; i < nodes.length; i++) { // 设置节点展开
-					treeObj.expandNode(nodes[i], true, false, true);
-				}
-			}
+			
 		}
 	};
 	this.resetCheckBoxState=function(){
 		this.setting.check.enable=this.showcheckbox=="true"?true:false;
 	};
+	this.checkNode = function(node){
+		this.getTreeObject().checkNode(node, true, true);
+	};
+	this.init = function(){
+		this.initEvent();
+	};
+	this.initEvent = function(){
+		this.initOnAsycSuccess();
+	};
+	this.initOnAsycSuccess = function(){
+		//回调成功时展开第一层节点
+		var treeDom=this;
+		this.setting.callback.onAsyncSuccess=function(){
+			var treeObj = $.fn.zTree.getZTreeObj(domId);
+			var nodes = treeObj.getNodes();
+			for (var i = 0; i < nodes.length; i++) { // 设置节点展开
+				treeObj.expandNode(nodes[i], true, false, true);
+			}
+			if(treeDom.onload)
+				$._Eval(treeDom.onload);
+		}
+	}
+	this.uncheckNodeByData = function(node,srourceField,targetField){
+		var arr=new Array();
+		arr.push(node);
+		this.uncheckNodesByDataList(arr,srourceField,targetField);
+	};
+	this.checkNodeByData = function(node,srourceField,targetField){
+		var arr=new Array();
+		arr.push(node);
+		this.checkNodesByDataList(arr,srourceField,targetField);
+	};
+	this.checkNodesByDataList = function(dataList,srourceField,targetField){
+		if(srourceField==null)
+			srourceField="id";
+		if(targetField==null)
+			targetField="id";
+		for(var i in dataList){
+			var node=this.getTreeObject().getNodeByParam(targetField,dataList[i][srourceField]);
+			if(node!=null)
+				this.getTreeObject().checkNode(node, true, false);
+		}
+	};
+	this.uncheckNodesByDataList = function(dataList,srourceField,targetField){
+		if(srourceField==null)
+			srourceField="id";
+		if(targetField==null)
+			targetField="id";
+		for(var i in dataList){
+			var node=this.getTreeObject().getNodeByParam(targetField,dataList[i][srourceField]);
+			if(node!=null)
+				this.getTreeObject().checkNode(node, false, false);
+		}
+	};
 	this.getTreeObject = function() {
 		if (this.treeObject == null)
-			treeObject = $.fn.zTree.getZTreeObj(this.domId);
-		return treeObject;
+			this.treeObject = $.fn.zTree.getZTreeObj(this.domId);
+		return this.treeObject;
 	}
 	this.getCheckedNodes=function(){
 		return this.getTreeObject().getCheckedNodes(true);
@@ -116,14 +166,10 @@ function AjaxTree(domId) {
 	this.setDataSource=function(datasource){
 		this.setting.async.url=datasource;
 	}
-	this.setData = function(data) {
-		//设置checkbox的显示
-		this.resetCheckBoxState();
-		$.fn.zTree.init($("#" + this.domId + ""), this.setting);
-	}
 	this.render = function() {
 		//设置checkbox的显示
 		this.resetCheckBoxState();
+		this.init();
 		$.fn.zTree.init($("#" + this.domId + ""), this.setting);
 	}
 	this.setSetting = function(setting) {

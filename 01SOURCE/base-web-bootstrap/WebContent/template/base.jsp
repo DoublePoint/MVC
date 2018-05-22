@@ -102,6 +102,7 @@ $(document).ready(function(){
 		}
 	}
 	catch(e){
+		throw new Error(e);
 	}
 });
 </script>

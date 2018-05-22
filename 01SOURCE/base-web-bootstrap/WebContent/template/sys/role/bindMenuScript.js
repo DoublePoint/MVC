@@ -1,12 +1,15 @@
 var roleId;
+var dataWrap;
 function init(response){
 	roleId=response.get("roleId");
+	dataWrap=response.get("dataWrap");
 }
-function zTreeOnClick(event, treeId, treeNode) {
-	var menuId=treeNode.id;
-	var menuName=treeNode.name;
-	$.close(treeNode);
-};
+
+function treeOnLoad(){
+	var dataList=dataWrap.dataList;
+	menuTree.checkNodesByDataList(dataList,"menuId","id");
+}
+
 function onOk(){
 	var checkNodes=menuTree.getCheckedNodes();
 	if(checkNodes==null||checkNodes.length==0){
