@@ -26,15 +26,26 @@
 </head>
 <body>
 	<form style="width:98%;">
-		<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
-			<ll-formfield title="操作员名称" required="true" field="loginAccountNo" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-			<ll-formfield title="操作员密码" required="true" field="loginPassword" type="password" maxlen="200"></ll-formfield>
-			<ll-toolbar align="center">
-				<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickSave();">  
-        			<span class="glyphicon glyphicon-ok "></span> 保存 
-   				</button>  
-			</ll-toolbar>
-		</ll-ajaxform>
+		<ll-filllayout>
+			<ll-fillarea-tb height="*">
+				<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
+					<ll-formfield title="操作员名称" required="true" field="loginAccountNo" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+					<ll-formfield title="操作员密码" required="true" field="loginPassword" type="password" maxlen="200"></ll-formfield>
+					 <ll-formtoolbar align="left">
+					 	<div class="switch switch-mini">
+						    <input type="checkbox" id="testswitch" data-size="mini" checked />
+						</div>
+   					 </ll-formtoolbar>
+				</ll-ajaxform>
+			</ll-fillarea-tb>
+			<ll-fillarea-tb height="40">
+				<ll-toolbar align="center">
+						<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickSave();">  
+		        			<span class="glyphicon glyphicon-ok "></span> 保存 
+		   				</button>  
+				</ll-toolbar>
+			</ll-fillarea-tb>
+		</ll-filllayout>
 	</form>
 	
 </body>

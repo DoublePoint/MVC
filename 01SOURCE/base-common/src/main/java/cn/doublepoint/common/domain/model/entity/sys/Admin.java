@@ -1,7 +1,7 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-05-22 14:51:535
+ * 创   建   时   间 ： 2018-05-22 22:38:951
  * 
  * 类   说   明 ：系统管理员表，包含了系统的管理员信息
  * 
@@ -36,6 +36,9 @@ public class Admin extends BaseEntity {
 	@Column(name="LOGIN_PASSWORD")
 	private String loginPassword;//登录密码
 	
+	@Column(name="ENABLE")
+	private String enable;//是否启用
+	
 	@Column(name="CREATE_TIME")
 	private Date createTime;//创建时间
 	
@@ -66,6 +69,14 @@ public class Admin extends BaseEntity {
 		this.loginPassword = loginPassword;
 	}
 
+	public String getEnable() {
+		return enable;
+	}
+	
+	public void setEnable(String enable) {
+		this.enable = enable;
+	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -87,6 +98,7 @@ public class Admin extends BaseEntity {
 		+"id=" + id +","
 		+"loginAccountNo=" + loginAccountNo +","
 		+"loginPassword=" + loginPassword +","
+		+"enable=" + enable +","
 		+"createTime=" + createTime +","
 		+"modifyTime=" + modifyTime 
 		+"]";

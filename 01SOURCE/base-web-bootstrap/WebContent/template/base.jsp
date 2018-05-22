@@ -34,7 +34,8 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="${pageContext.request.contextPath}/template/plugins/bootstrap-select/js/bootstrap-select.js" ></script>
 <script src="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-
+<!-- switch -->
+<script src="${pageContext.request.contextPath}/template/plugins/bootstrap-switch-master/dist/js/bootstrap-switch.min.js" ></script>
 <script type="text/javascript">
 	var $$pageContextPath = "${pageContext.request.contextPath}";
 	var $element;
@@ -92,6 +93,8 @@
 
 <link href="${pageContext.request.contextPath}/template/plugins/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/template/plugins/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+ <!-- switch -->
+<link href="${pageContext.request.contextPath}/template/plugins/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
 
 <script type="text/javascript">
 $(document).ready(function(){

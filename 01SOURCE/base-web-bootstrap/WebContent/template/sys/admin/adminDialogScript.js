@@ -1,27 +1,42 @@
 function init(response) {
-	var type=response.get("type");
-	if(type=="add"){
-	}
-	else{
-		var dataWrap=response.get("dataWrap");
-		var data=dataWrap.dataList[0];
+	$('#testswitch').bootstrapSwitch({
+		onText : "启动",
+		offText : "停止",
+		onColor : "success",
+		offColor : "info",
+		size : "large",  
+		onSwitchChange : function(event, state) {
+			if (state == true) {
+				alert('已打开');
+			} else {
+				alert('已关闭');
+			}
+		}
+
+	});
+
+	var type = response.get("type");
+	if (type == "add") {
+	} else {
+		var dataWrap = response.get("dataWrap");
+		var data = dataWrap.dataList[0];
 		ajaxform.setData(data);
 	}
 }
 
-function onClickSave(){
-	if(!ajaxform.validate(true)){
+function onClickSave() {
+	if (!ajaxform.validate(true)) {
 		return;
-	} 
-	var data=ajaxform.collectData();
-	var dataWrap =  $.createAjaxDataWrap();
-	var dataList=new Array();
-	dataList[0]=data;
+	}
+	var data = ajaxform.collectData();
+	var dataWrap = $.createAjaxDataWrap();
+	var dataList = new Array();
+	dataList[0] = data;
 	dataWrap.setDataList(dataList);
 	$.request({
 		url : $$pageContextPath + "/template/sys/admin/save?testtest=111&test=123",
 		data : {
-			dataWrap:dataWrap
+			dataWrap : dataWrap
 		},
 		success : function(data1) {
 			$.tips('保存成功');
@@ -34,26 +49,25 @@ function onClickSave(){
 	});
 }
 
-
-function selectParent(){
+function selectParent() {
 	$.openDialog({
 		title : "添加菜单",
 		width : 360,
 		height : 430,
 		url : $$pageContextPath + '/template/sys/commonpage/selectMenu.jsp',
 		yes : function(selectTreeNode) {
-			var menuId=selectTreeNode.id;
-			var menuName=selectTreeNode.name;
-			inpbtn_sjcdbs.selectItem(menuId,menuName);
+			var menuId = selectTreeNode.id;
+			var menuName = selectTreeNode.name;
+			inpbtn_sjcdbs.selectItem(menuId, menuName);
 		}
 	});
 }
 
-function clicktest(){
+function clicktest() {
 	$.addNotSaveIcon();
-	return ;
+	return;
 }
-function clickDelete(){
+function clickDelete() {
 	$.removeNotSaveIcon();
-	return ;
+	return;
 }

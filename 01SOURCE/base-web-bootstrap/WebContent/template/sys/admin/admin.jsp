@@ -50,6 +50,7 @@
 						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" ondblclickrow="dbclickgrid()" > 
 							<ll-gridcheck ></ll-gridcheck>
 							<ll-gridcustom align="center" width="80" title="操作" formatter="customerFunction"></ll-gridcustom>  
+							<ll-gridfield field="enable" title="是否启用" width="150"></ll-gridfield>
 							<ll-gridfield field="id" title="登录人标识" width="150"></ll-gridfield>
 							<ll-gridfield field="loginAccountNo" title="登录账号"  ></ll-gridfield> 
 						</ll-ajaxgrid>
