@@ -21,10 +21,11 @@ import cn.doublepoint.common.domain.model.entity.sys.Admin;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
 @RequestMapping("/template/sys/admin")
-public class AdminController {
+public class AdminController extends BaseController{
 
 	@Autowired
 	AdminServiceImpl adminService;

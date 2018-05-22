@@ -167,8 +167,6 @@ public class JPAUtil extends DataBaseUtil{
 		} catch (IllegalArgumentException e) {
 			Log4jUtil.error(e);
 			throw(e);
-		} catch (IllegalAccessException e) {
-			Log4jUtil.error(e);
 		}
 	}
 	
@@ -183,14 +181,18 @@ public class JPAUtil extends DataBaseUtil{
 		return daoService.executeUpdate(jpql, queryParamList);
 	}
 
-	private static <T extends BaseModel> Object getPrimary(T model)
-			throws IllegalArgumentException, IllegalAccessException {
+	private static <T extends BaseModel> Object getPrimary(T model){
 		Field[] fields = model.getClass().getDeclaredFields();
 		Field res = Stream.of(fields).filter(field -> {
 			field.setAccessible(true);
 			return (field.getAnnotation(Id.class) != null);
 		}).findAny().get();
-		return res.get(model);
+		try {
+			return res.get(model);
+		} catch (Exception e) {
+			Log4jUtil.error(e);
+		} 
+		return null;
 	}
 
 }
