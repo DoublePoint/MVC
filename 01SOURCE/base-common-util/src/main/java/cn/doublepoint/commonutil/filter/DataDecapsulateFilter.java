@@ -30,7 +30,6 @@ public class DataDecapsulateFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		Log4jUtil.info("Do fileter internal.");
 		String contentType = request.getContentType();// 获取请求的content-type
 		if (contentType == null) {
 			doOtherRequest(request,response,filterChain);

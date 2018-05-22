@@ -18,21 +18,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
-import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
+import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
 @RequestMapping("/template/sys/menu")
-public class MenuHandleController extends BaseHandleController {
+public class MenuController extends BaseController {
 
 	@Autowired
 	MenuService menuService;
@@ -44,14 +44,18 @@ public class MenuHandleController extends BaseHandleController {
 	}
 
 	@RequestMapping("/menuDialog")
-	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request,
-			@RequestParam(required = false) String type, ModelAndView modelAndView, AjaxResponse response) {
-		AjaxDataWrap<Menu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
-		if (ajaxDataWrap != null) {
-			ajaxDataWrap.setPageInfo(new PageInfo());
+	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request, ModelAndView modelAndView,
+			AjaxResponse response) {
+		String type = request.getParameter("type");
+		if ("edit".equals(type)) {
+			AjaxDataWrap<Menu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 			response.setAjaxParameter("dataWrap", ajaxDataWrap);
+		} else {
+			String parentMenuId = request.getParameter("parentMenuId");
+			if (!StringUtil.isNullOrEmpty(parentMenuId))
+				response.setAjaxParameter("parentMenuId", parentMenuId);
+			response.setAjaxParameter("type", type);
 		}
-		response.setAjaxParameter("type", request.getParameter("type"));
 		response.setViewName("menuDialog");
 		return response;
 	}
@@ -60,17 +64,21 @@ public class MenuHandleController extends BaseHandleController {
 	@ResponseBody
 	public String getMenuName(BodyReaderHttpServletRequestWrapper request) {
 		String id = request.getParameter("id");
-		Menu menu = menuService.getById(Long.valueOf(id));
 		String menuName = "";
-		if (menu != null) {
-			menuName = menu.getName();
+		try {
+			Menu menu = menuService.getById(Long.valueOf(id));
+			if (menu != null) {
+				menuName = menu.getName();
+			}
+		} catch (Exception e) {
+
 		}
 		return menuName;
 	}
 
-	@RequestMapping("/datalist")
+	@RequestMapping("/retrieve")
 	@ResponseBody
-	public AjaxResponse menuDataList(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request) {
 		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		if (dataWrap == null)
 			return null;

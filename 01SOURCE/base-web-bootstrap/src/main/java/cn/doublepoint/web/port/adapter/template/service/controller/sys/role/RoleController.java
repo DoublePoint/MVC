@@ -9,6 +9,8 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.role;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,11 @@ import cn.doublepoint.common.domain.model.entity.sys.Role;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
-import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
-import static java.util.stream.Collectors.toList;
+import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
 @RequestMapping("/template/sys/role")
-public class RoleHandleController extends BaseHandleController {
+public class RoleController extends BaseController {
 
 	@Autowired
 	RoleService roleService;

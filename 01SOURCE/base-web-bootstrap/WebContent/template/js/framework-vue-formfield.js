@@ -1,8 +1,8 @@
 (function($) {
 	var componentTemplate='<div class="layui-inline" >'
-		+ '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
+		+ '<label class="layui-form-label" :style="labelclientStyle"><span v-html="requiredIconText"></span>{{"&nbsp;"+title+"："}}</label>'
 		+ '<div class="layui-input-block">'
-		+ '<input :id="id+guid" type="text" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
+		+ '<input :id="id+guid" :type="type" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
 		+ '</div>' + '</div>';
 	component(_ConstantComponentMap._FormField,componentTemplate);
 })(jQuery);

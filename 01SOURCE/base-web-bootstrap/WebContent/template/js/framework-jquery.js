@@ -139,12 +139,12 @@ var _RegisterModel = new RegisterModel();
 			var width = obj.width;
 			var height = obj.height;
 			if (width == null)
-				width = "100px";
+				width = "630px";
 			else if (("" + width).indexOf("px") == -1) {
 				width = obj.width + "px";
 			}
 			if (height == null)
-				height = "100px";
+				height = "330px";
 			else if (("" + height).indexOf("px") == -1) {
 				height = obj.height + "px";
 			}
@@ -183,6 +183,13 @@ var _RegisterModel = new RegisterModel();
 		},
 		alert : function(msg) {
 			parent.$layer.alert(msg);
+		},
+		alertError : function(msg) {
+			parent.$layer.alert(msg, {
+				title : '错误信息',
+				area: ['360px', '220px'],
+				icon : 5
+			});
 		},
 		tips : function(msg, time) {
 			if (time == null)
@@ -444,8 +451,7 @@ var _RegisterModel = new RegisterModel();
 			settings.success = function(responseData) {
 				$layer.closeAll('loading');
 				if (successFunction != null) {
-					if (typeof (responseData) == 'string'||
-							typeof (responseData) == 'boolean') {
+					if (typeof (responseData) == 'string' || typeof (responseData) == 'boolean') {
 						successFunction(responseData);
 					} else {
 						try {

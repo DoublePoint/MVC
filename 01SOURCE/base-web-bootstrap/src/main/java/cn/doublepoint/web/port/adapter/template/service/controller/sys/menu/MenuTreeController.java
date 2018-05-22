@@ -60,7 +60,7 @@ public class MenuTreeController extends BaseTreeController {
 			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
 		else{
 			Menu query=new Menu();
-			CommonBeanUtils.copyProperties(cd, query);
+			query.setId(cd.getId());
 			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		}
 		if (menuList == null) {

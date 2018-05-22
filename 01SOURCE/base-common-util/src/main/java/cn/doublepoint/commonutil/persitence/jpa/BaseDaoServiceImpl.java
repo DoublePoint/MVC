@@ -14,9 +14,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.criteria.Order;
 
-import org.springframework.objenesis.instantiator.android.Android10Instantiator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,15 +45,15 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 			SortParamList sortParamList) {
 		try {
 			String className = clazz.getName();
-			StringBuffer jpqlFromBuffer = new StringBuffer("FROM " + className + " U WHERE 1=1");
+			StringBuffer jpqlFromBuffer = new StringBuffer(" FROM " + className + " U WHERE 1=1 ");
 			if (paramsList != null) {
 				paramsList.getParams().stream().forEach(param -> {
 					if (param.getRelation() != QueryParam.RELATION_ISNULL
 							&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
-						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(param.getRelation())
+						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation()).append(" ")
 								.append(":" + param.getName());
 					} else
-						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(param.getRelation());
+						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation());
 
 				});
 			}

@@ -25,27 +25,21 @@
 <body>
 	<form>
 		<ll-filllayout> 
-			<ll-fillarea-lr width="200px">
-				<ll-tree  id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true" showLine="true" onclick="zTreeOnClick()"></ll-tree>
-			</ll-fillarea-lr>
 			<ll-fillarea-lr width="*">
 				<ll-filllayout > 
 					<ll-fillarea-tb height="85" showtitle="true" title="查询条件" showborder="false">
-							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:3:2:3:1:3"> 
-									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+							<ll-ajaxform id="ajaxform" cols="2" colproportion="1:3:3:3"> 
+									<ll-formfield id="name" title="操作员名称"  field="name"  ></ll-formfield>
 									<ll-formtoolbar labelalign="right" colspan="1">
 										<button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width:100px;">  
         									<span class="glyphicon glyphicon-search "></span> 查询
    										</button>  
    										&nbsp;
 									</ll-formtoolbar>
-									
 							</ll-ajaxform>
-							
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="35" > 
-							<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="onClickAdd();">  
+							<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="maintenceAdmin();">  
         						<span class="glyphicon glyphicon-plus ll_add_icon"></span> 增加
    							</button>  
    							<button type="button" style="width:70px;" class="btn btn-default btn-sm" onclick="onClickDelete();">  
@@ -53,19 +47,18 @@
    							</button>  
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
-						<ll-ajaxgrid id="lltestdatagrid" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
+						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" ondblclickrow="dbclickgrid()" > 
 							<ll-gridcheck ></ll-gridcheck>
-							<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-							<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
-							<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
-							<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield> 
+							<ll-gridcustom align="center" width="80" title="操作" formatter="customerFunction"></ll-gridcustom>  
+							<ll-gridfield field="id" title="登录人标识" width="150"></ll-gridfield>
+							<ll-gridfield field="loginAccountNo" title="登录账号"  ></ll-gridfield> 
 						</ll-ajaxgrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>
 			</ll-fillarea-lr>
 		</ll-filllayout>
 	</form>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/menu/menuScript.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/admin/adminScript.js"></script>
 </style>
 </body>
 </html>

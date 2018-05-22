@@ -1,5 +1,5 @@
 (function($) {
-	var componentTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
+	var componentTemplate = '<div class="layui-inline" >' + '<label class="layui-form-label" :style="labelclientStyle">{{requiredIconText}}{{"&nbsp;&nbsp;"+title+"："}}</label>'
 			+ '<div class="layui-input-block">'
 			+ '<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'
 			+ '<input :id="inputButtonHiddenId" type="hidden" value="" :name="field" />' + '<a :id="inputButtonButtonId" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
@@ -121,6 +121,16 @@ function FormInputButton(domId) {
 		if (linewidthPercent != null) {
 			this.setRootStyle("width", linewidthPercent * 100 + "%");
 		}
+	};
+	this.validate = function(){
+		if((this.readonly+"")!="true"){
+			if((this.required+"")=="true"){
+				if(this.getInputHiddenDom()==null||$.trim(this.getInputHiddenDom())==""){
+					return "\""+this.title+"\""+" 不能为空；</br>";
+				}
+			}
+		}
+		return true;
 	}
 }
 (function() {

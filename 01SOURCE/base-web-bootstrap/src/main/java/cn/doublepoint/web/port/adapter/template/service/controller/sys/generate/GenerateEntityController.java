@@ -39,7 +39,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.file.DownloadFileUtil;
 import cn.doublepoint.commonutil.file.ZipUtil;
-import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
+import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateEntityTemplateUtil;
 import cn.doublepoint.generate.GenerateServiceImplTemplateUtil;
@@ -50,7 +50,7 @@ import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
 import freemarker.template.TemplateException;
 
 @Controller
-public class GenerateEntityHandleController extends BaseHandleController {
+public class GenerateEntityController extends BaseController {
 	@Resource
 	EntityFilterQueryService efQueryService;
 

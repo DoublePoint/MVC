@@ -5,13 +5,13 @@ function retrieve() {
 	if (nodes.length > 0) {
 		selectNodeCdbs = nodes[0].id;
 	}
-	var formData=ajaxform.getData();
+	var formData=ajaxform.collectData();
 	formData.id=selectNodeCdbs;
 	var array = [];
 	array.push(formData);
 	dataWrap.setDataList(array);
 	$.request({
-		url : $$pageContextPath + "/template/sys/menu/datalist",
+		url : $$pageContextPath + "/template/sys/menu/retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -35,17 +35,18 @@ function retrieveTree() {
 }
 function onClickAdd() {
 	var nodes = treeDemo.getSelectedNodes();
+	var parentMenuId;
 	if (nodes.length == 0) {
 		$.shakeTips("请选择父节点");
 		return;
 	} else {
-		cdbs = nodes[0].id;
+		parentMenuId = nodes[0].id;
 	}
 	var ajaxDataWrap =  $.createAjaxDataWrap();
 	ajaxDataWrap.setDataList(nodes[0]);
 	$.openDialog({
 		type : 2,
-		title : "添加菜单",
+		title : "维护菜单",
 		width : 630,
 		height : 330,
 		shade : 0.4,
@@ -54,7 +55,9 @@ function onClickAdd() {
 		maxmin : true,
 		url : $$pageContextPath + '/template/sys/menu/menuDialog?aaa=2&testParam=321',
 		data : {
-			ajaxDataWrap:ajaxDataWrap
+			ajaxDataWrap:ajaxDataWrap,
+			type:"add",
+			parentMenuId:parentMenuId
 		},
 		yes : function() {
 			retrieve();
@@ -109,7 +112,7 @@ function dbclickgrid(para1,data,index){
 	ajaxDataWrap.setDataList(dataArr);
 	$.openDialog({
 		type : 2,
-		title : "添加菜单",
+		title : "维护菜单",
 		width : 630,
 		height : 330,
 		shade : 0.4,
@@ -118,7 +121,8 @@ function dbclickgrid(para1,data,index){
 		maxmin : true,
 		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=edit',
 		data : {
-			dataWrap:ajaxDataWrap
+			dataWrap:ajaxDataWrap,
+			type:"edit",
 		},
 		yes : function() {
 			retrieve();

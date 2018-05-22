@@ -1,9 +1,9 @@
 /** 
  * 创   建   人： 刘磊
  * 
- * 创   建   时   间 ： 2018-05-14 17:22:476
+ * 创   建   时   间 ： 2018-05-22 14:51:535
  * 
- * 类   说   明 ：
+ * 类   说   明 ：系统管理员表，包含了系统的管理员信息
  * 
  * 修   改   人：          修   改   日   期：
  */
@@ -28,20 +28,19 @@ public class Admin extends BaseEntity {
 
 	@Id
 	@Column(name="ID")
-	private Long id;
+	private Long id;//管理员标识
 	
 	@Column(name="LOGIN_ACCOUNT_NO")
-	private String loginAccountNo;
+	private String loginAccountNo;//登录账号
 	
 	@Column(name="LOGIN_PASSWORD")
-	private String loginPassword;
+	private String loginPassword;//登录密码
 	
 	@Column(name="CREATE_TIME")
-	private Date createTime;
+	private Date createTime;//创建时间
 	
 	@Column(name="MODIFY_TIME")
-	private Date modifyTime;
-
+	private Date modifyTime;//更新时间
 
 	public Long getId() {
 		return id;
@@ -82,6 +81,7 @@ public class Admin extends BaseEntity {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+
 	public String toString() {
 		return "Admin ["
 		+"id=" + id +","

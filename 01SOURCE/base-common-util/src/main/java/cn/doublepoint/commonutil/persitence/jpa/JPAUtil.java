@@ -166,6 +166,7 @@ public class JPAUtil extends DataBaseUtil{
 			daoService.remove(model.getClass(), getPrimary(model));
 		} catch (IllegalArgumentException e) {
 			Log4jUtil.error(e);
+			throw(e);
 		} catch (IllegalAccessException e) {
 			Log4jUtil.error(e);
 		}

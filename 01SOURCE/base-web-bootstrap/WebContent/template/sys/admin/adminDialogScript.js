@@ -1,8 +1,6 @@
 function init(response) {
 	var type=response.get("type");
 	if(type=="add"){
-		var parentMenuId = response.get("parentMenuId");
-		inpbtn_sjcdbs.setData(parentMenuId);
 	}
 	else{
 		var dataWrap=response.get("dataWrap");
@@ -12,15 +10,18 @@ function init(response) {
 }
 
 function onClickSave(){
+	if(!ajaxform.validate(true)){
+		return;
+	} 
 	var data=ajaxform.collectData();
-	var addDataWrap =  $.createAjaxDataWrap();
+	var dataWrap =  $.createAjaxDataWrap();
 	var dataList=new Array();
 	dataList[0]=data;
-	addDataWrap.setDataList(dataList);
+	dataWrap.setDataList(dataList);
 	$.request({
-		url : $$pageContextPath + "/template/sys/menu/add?testtest=111&test=123",
+		url : $$pageContextPath + "/template/sys/admin/save?testtest=111&test=123",
 		data : {
-			addDataWrap:addDataWrap
+			dataWrap:dataWrap
 		},
 		success : function(data1) {
 			$.tips('保存成功');

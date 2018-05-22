@@ -9,8 +9,6 @@
 */ 
 package cn.doublepoint.commonutil.port.adapter.controller.handle;
 
-import org.springframework.stereotype.Controller;
-
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 

@@ -105,7 +105,8 @@ function AjaxTree(domId) {
 		this.initEvent();
 	};
 	this.initEvent = function(){
-		this.initOnAsycSuccess();
+		this.initOnAsycSuccess();//初始化加载完成事件
+		this.initOnClick();//初始化单击事件
 	};
 	this.initOnAsycSuccess = function(){
 		//回调成功时展开第一层节点
@@ -119,17 +120,27 @@ function AjaxTree(domId) {
 			if(treeDom.onload)
 				$._Eval(treeDom.onload);
 		}
+	};
+	this.initOnClick = function(){
+		var treeDom=this;
+		this.setting.callback.onClick=function(){
+			if(treeDom.onclick)
+				$._Eval(treeDom.onclick);
+		}
 	}
+	//根据数据反选树节点 * srourceField 数据字段名称 * targetField 树节点的字段名称
 	this.uncheckNodeByData = function(node,srourceField,targetField){
 		var arr=new Array();
 		arr.push(node);
 		this.uncheckNodesByDataList(arr,srourceField,targetField);
 	};
+	//根据数据选择节点 * srourceField 数据字段名称 * targetField 树节点的字段名称
 	this.checkNodeByData = function(node,srourceField,targetField){
 		var arr=new Array();
 		arr.push(node);
 		this.checkNodesByDataList(arr,srourceField,targetField);
 	};
+	//根据数据List选择节点 * srourceField 数据字段名称 * targetField 树节点的字段名称(默认为id)
 	this.checkNodesByDataList = function(dataList,srourceField,targetField){
 		if(srourceField==null)
 			srourceField="id";
@@ -141,6 +152,7 @@ function AjaxTree(domId) {
 				this.getTreeObject().checkNode(node, true, false);
 		}
 	};
+	//根据数据List 反选择节点 * srourceField 数据字段名称 * targetField 树节点的字段名称
 	this.uncheckNodesByDataList = function(dataList,srourceField,targetField){
 		if(srourceField==null)
 			srourceField="id";

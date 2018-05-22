@@ -8,8 +8,10 @@ import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 
@@ -48,6 +50,9 @@ public class MenuServiceImpl implements MenuService{
 		QueryParamList paramList=new QueryParamList();
 		if(menu.getId()!=null)
 			paramList.addParam("parentId",menu.getId());
+		if(!StringUtil.isNullOrEmpty(menu.getName())){
+			paramList.addParam("name","%"+menu.getName()+"%",QueryParam.RELATION_LIKE);
+		}
 		SortParamList sortParamList=new SortParamList();
 		sortParamList.addParam("sn");
 		return JPAUtil.load(Menu.class,paramList, pageInfo,sortParamList);

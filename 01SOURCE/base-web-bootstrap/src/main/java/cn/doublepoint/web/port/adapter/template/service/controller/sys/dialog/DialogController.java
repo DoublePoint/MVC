@@ -12,10 +12,10 @@ package cn.doublepoint.web.port.adapter.template.service.controller.sys.dialog;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.doublepoint.commonutil.port.adapter.controller.handle.BaseHandleController;
+import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
-public class DialogHandleController extends BaseHandleController {
+public class DialogController extends BaseController {
 
 	// 索引页
 	@RequestMapping(value = "/template/sys/dialog/dialog")

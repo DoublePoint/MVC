@@ -24,7 +24,7 @@ function addNewRecord() {
 function retrieve() {
 	var dataWrap = roleAjaxGrid.collectData();
 
-	var formData = ajaxform.getData();
+	var formData = ajaxform.collectData();
 	var array = [];
 	array.push(formData);
 	dataWrap.setDataList(array);

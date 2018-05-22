@@ -14,7 +14,7 @@ function init(response) {
 }
 
 function onClickSave(){
-	var data=ajaxform.getData();
+	var data=ajaxform.collectData();
 	var addDataWrap =  $.createAjaxDataWrap();
 	var dataList=new Array();
 	dataList[0]=data;

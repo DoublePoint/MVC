@@ -2,19 +2,20 @@ var timeoutInterval = null;
 /*------AjaxForm-------*/
 var _FormProps = [ 'id', //
 				'maxlen', 
-				'readonly', 
-				'contentalign', 
-				'visible',
-				'onclick',
-				'field', 
-				'labelprovider',
-				'title',
-				'type',
-				'validtype', 
+				'readonly', //是否只读
+				'contentalign', //内容对其方式
+				'visible',//是否可见
+				'onclick',//单击事件
+				'field', //绑定字段名称
+				'labelprovider',//
+				'title',//label名称
+				'type',//类型
+				'validtype', //验证类型
 				'colspan',
 				'placeholder',
 				'parentId',
 				'datasource',
+				'required',//是否必填
 				// 文本框的显示格式,取值为text和password，默认为text
 				'errmsg' ];
 
@@ -48,12 +49,20 @@ function component(fieldType, fieldTemplate,props) {
 					labelclientStyleBuffer.append(labelalignbuffer.toString());
 				}
 			}
+			
+			// 设置是否必填标识
+			var requiredIconText="";
+			if(this.required!=null&&(this.required+"")=="true"){
+				requiredIconText='<span style="color:red;font-size: 10px; font-weight: 800;" class="glyphicon-asterisk"></span>';
+			}
+			
 			return {
 				tree : "tree",
 				labelclientStyle : labelclientStyleBuffer.toString(),
 				guid : $.generateUUID(),
 				inputButtonHiddenId:this.id+this.guid+"_hidden",
 				inputButtonButtonId:this.id+this.guid+"_button",
+				requiredIconText:requiredIconText
 			}
 		},
 		created : function() {
@@ -223,6 +232,14 @@ function FormFieldBase(domId) {
 	this.data = "";
 	this.isChanged = false;
 	this.parentAjaxFormId = "";
+	this.required=false;
+	
+	this.addLineStart = function() {
+		this.getRoot().before('<div class="layui-form-item">');
+	}
+	this.addLineEnd = function() {
+		this.getRoot().after('</div>');
+	}
 	this.getDomId = function() {
 		return this.domId;
 	}
@@ -241,16 +258,6 @@ function FormFieldBase(domId) {
 	}
 	this.getDomValue = function() {
 		return this.getInputDom().val();
-	}
-	this.init = function(){
-		this.initData();
-		this.initEvent();
-	}
-	this.initData = function(){
-		
-	}
-	this.initEvent = function (){
-		
 	}
 	this.getInputDom = function() {
 		return $("#" + this.domId);
@@ -280,8 +287,21 @@ function FormFieldBase(domId) {
 	this.getLabel = function() {
 		return this.getInputDom().parents(".layui-inline").children("label");
 	}
+	this.getVisible = function() {
+		return this.visible;
+	};
 	this.setColspan = function(colspan) {
 		this.colspan = colspan;
+	}
+	this.init = function(){
+		this.initData();
+		this.initEvent();
+	}
+	this.initData = function(){
+		
+	}
+	this.initEvent = function (){
+		
 	}
 	this.setData = function(aData, isChanged) {
 		// 如果第二个参数为nul,那么如果数据改变时 设置为改变 只要是改变一次 那么就永久改变了
@@ -355,20 +375,24 @@ function FormFieldBase(domId) {
 	this.showParentNotSave = function() {
 		this.getParentAjaxForm().showNotSave();
 	}
-	this.getVisible = function() {
-		return this.visible;
-	};
-	this.addLineStart = function() {
-		this.getRoot().before('<div class="layui-form-item">');
-	}
-	this.addLineEnd = function() {
-		this.getRoot().after('</div>');
-	}
+	
 	this.show = function() {
 		this.getRoot().show();
 	}
 	this.hide = function() {
 		this.getRoot().hide();
 	}
+	
+	this.validate = function(){
+		if((this.readonly+"")!="true"){
+			if((this.required+"")=="true"){
+				if(this.getDomValue()==null||$.trim(this.getDomValue())==""){
+					return "\""+this.title+"\""+" 不能为空；</br>";
+				}
+			}
+		}
+		return "";
+	}
+	
 	return this;
 }
