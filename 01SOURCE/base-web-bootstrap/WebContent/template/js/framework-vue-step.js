@@ -1,86 +1,87 @@
-Vue.component(_LL_Constant._ConstantComponentMap._Step, {
-	props : [ 'id', 'height', 'width', 'backgroundcolor','title','active' ],
-	template : '<section :id="id+guid" >'+ '<slot></slot>' +'</section>',
-	data : function() {
-		var aTitle="";
-		if(this.title!=null)
-			aTitle=this.title;
-		return {
-			aTitle:aTitle,
-			guid:$.generateUUID()
-		}
-	},
-	created : function() {//注册到系统map
-		this._RegisterComponent();
-	},
-	mounted:function(){
-		this._MapComponent();
-		this._AddStepHeader();
-		// 将formfield添加到form中
-	},
-	beforeMount : function() {
-		
-	},
-	methods : {
-		_GetComponentDomId : function() {
-			var _domId = this.id + this.guid;
-			return _domId;
-		},
-		_GetComponentDom :function(){
-			var domId = this._GetComponentDomId();
-			var componentDom = $.getFromLayuiObjectHashMap(domId);
-			return componentDom;
-		},
-		_RegisterComponent : function() {
-			var domId = this._GetComponentDomId();
-			var step = new Step(domId);
-			for ( var attrName in step) {
-				if (this[attrName] != null)
-					step[attrName] = this[attrName];
+(function($) {
+	Vue.component(_LL_Constant._ConstantComponentMap._Step, {
+		props : [ 'id', 'height', 'width', 'backgroundcolor', 'title', 'active' ],
+		template : '<section :id="id+guid" >' + '<slot></slot>' + '</section>',
+		data : function() {
+			var aTitle = "";
+			if (this.title != null)
+				aTitle = this.title;
+			return {
+				aTitle : aTitle,
+				guid : $.generateUUID()
 			}
-			$.addToLayuiObjectHashMap(domId, step);
 		},
-		// 添加生命FillLayout对象脚本
-		_MapComponent : function() {
-			$.outputMapCompoment(this);
+		created : function() {// 注册到系统map
+			this._RegisterComponent();
 		},
-		_RegisterResize :function(){
+		mounted : function() {
+			this._MapComponent();
+			this._AddStepHeader();
+			// 将formfield添加到form中
 		},
-		_AddStepHeader:function(){
-			this._GetComponentDom().addStepName(this.title);
+		beforeMount : function() {
+
 		},
-		_InitClientStyleBuffer : function(){
+		methods : {
+			_GetComponentDomId : function() {
+				var _domId = this.id + this.guid;
+				return _domId;
+			},
+			_GetComponentDom : function() {
+				var domId = this._GetComponentDomId();
+				var componentDom = $.getFromLayuiObjectHashMap(domId);
+				return componentDom;
+			},
+			_RegisterComponent : function() {
+				var domId = this._GetComponentDomId();
+				var step = new Step(domId);
+				for ( var attrName in step) {
+					if (this[attrName] != null)
+						step[attrName] = this[attrName];
+				}
+				$.addToLayuiObjectHashMap(domId, step);
+			},
+			// 添加生命FillLayout对象脚本
+			_MapComponent : function() {
+				$.outputMapCompoment(this);
+			},
+			_RegisterResize : function() {
+			},
+			_AddStepHeader : function() {
+				this._GetComponentDom().addStepName(this.title);
+			},
+			_InitClientStyleBuffer : function() {
+			}
+		},
+	})
+
+	function Step(domId) {
+		this.domId = domId;
+		this.title = "";
+		this.active = "";
+
+		this.addStepName = function(stepTitle) {
+			var $header = $("<h2>" + this.title + "</h2>");
+			this.getDom().before($header);
 		}
-	},
-})
+		this.getActive = function() {
+			return this.active;
+		}
+		this.getDomId = function() {
+			return this.domId;
+		}
+		this.getDom = function() {
+			return $("#" + this.domId);
+		}
+		this.setActive = function(aActive) {
+			this.active = aActive;
+		}
+		this.getTitle = function() {
+			return this.title;
+		}
+		this.setTitle = function(aTitle) {
+			this.title = aTitle;
+		}
+	}
 
-
-function Step(domId){
-	this.domId=domId;
-	this.title="";
-	this.active="";
-	
-	this.addStepName=function(stepTitle){
-		var $header=$("<h2>"+this.title+"</h2>");
-		this.getDom().before($header);
-	}
-	this.getActive=function(){
-		return this.active;
-	}
-	this.getDomId=function(){
-		return this.domId;
-	}
-	this.getDom = function() {
-		return $("#" + this.domId);
-	}
-	this.setActive = function(aActive){
-		this.active=aActive;
-	}
-	this.getTitle = function(){
-		return this.title;
-	}
-	this.setTitle = function(aTitle){
-		this.title=aTitle;
-	}
-	
-}
+})(jQuery);

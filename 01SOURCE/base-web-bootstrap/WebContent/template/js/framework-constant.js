@@ -13,6 +13,9 @@ var _LL_Constant = new function() {
 		_DEFAULT_MIN_HEIGHT : contObj._ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT,
 		_DEFAULT_MIN_WIDTH_LEFT : contObj._ConstantAjaxDataGrid._DEFAULT_MIN_WIDTH
 	};
+	this._ConstantAjaxForm = {
+		_FormFieldProps:[],	
+	};
 	this._ConstantComponentMap = {
 		_AjaxGrid : "ll-ajaxgrid",
 		_AjaxForm : "ll-ajaxform",

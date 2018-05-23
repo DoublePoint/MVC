@@ -1,11 +1,11 @@
 (function($) {
 	var componentTemplate = '<div class="layui-inline">' + '<label class="layui-form-label">{{"&nbsp;&nbsp;"+title+"："}}</label>' + '<div class="layui-input-block">'
 			+ '<input :id="id+guid" type="text" class="layui-input" lay-verify="title" :field="field" :id="id+guid" :placeholder="placeholder">' + ' </div>' + '</div>';
-	component(_LL_Constant._ConstantComponentMap._FormDate,componentTemplate);
+	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormDate,componentTemplate);
 })(jQuery);
 
 function FormDate(domId) {
-	FormFieldBase.call(this);
+	_LL_Model.FormFieldBase.call(this);
 	this.domId = domId;
 
 	this.initEvent = function (){
@@ -36,7 +36,7 @@ function FormDate(domId) {
 	// 创建一个没有实例方法的类
 	var Super = function() {
 	};
-	Super.prototype = FormFieldBase.prototype;
+	Super.prototype = _LL_Model.FormFieldBase.prototype;
 	// 将实例作为子类的原型
 	FormDate.prototype = new Super();
 	FormDate.prototype.constructor = FormDate; // 需要修复下构造函数

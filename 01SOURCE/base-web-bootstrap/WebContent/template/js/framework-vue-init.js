@@ -1,5 +1,4 @@
 var $lform;
-var treeselect = null;
 function initReady(){
 	/*-----------创建最底层vue对象---------------*/
 	_InitBaseVueComponent();
@@ -85,13 +84,13 @@ function _InitLayoutAreaCombineListener(){
 	 $(".ll-fill-area-left-right-center .ll-drag-to-left").click(function(){
 		 var dragId=$(this).parent(".ll-fill-area-left-right-center").attr("id");
 		 var parentId=$(this).parent().attr("id");
-		 var drag=new LayoutDrag(dragId);
+		 var drag=new _LL_Model.LayoutDrag(dragId);
 		 drag.moveLeft();
 	 })
 	 $(".ll-fill-area-left-right-center .ll-drag-to-right").click(function(){
 		 var dragId=$(this).parent(".ll-fill-area-left-right-center").attr("id");
 		 var parentId=$(this).parent().attr("id");
-		 var drag=new LayoutDrag(dragId);
+		 var drag=new _LL_Model.LayoutDrag(dragId);
 		 drag.moveRight();
 	 })
 }

@@ -41,7 +41,7 @@
 			},
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
-				var _FillArea = new FillAreaTB(domId);
+				var _FillArea = new _LL_Model.FillAreaTB(domId);
 				for ( var attrName in _FillArea) {
 					if (this[attrName] != null)
 						_FillArea[attrName] = this[attrName];
@@ -116,7 +116,7 @@
 		},
 	})
 
-	function FillAreaTB(domId) {
+_LL_Model.FillAreaTB=function(domId) {
 		this.domId = domId;
 		this.height = 0;
 		this.isResize=false;
@@ -176,6 +176,5 @@
 			this.setFillAreaWidth("100%");
 		}
 	}
-
 
 })($);

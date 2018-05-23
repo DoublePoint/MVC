@@ -14,11 +14,11 @@
 			+ '<input type="hidden" :name="field" />' + '</div>'
 
 			+ '</div>' + '</div>';
-	component(_LL_Constant._ConstantComponentMap._FormDropTree, componentTemplate);
+	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormDropTree, componentTemplate);
 })(jQuery);
 
 function FormDropTree(domId) {
-	FormFieldBase.call(this);
+	_LL_Model.FormFieldBase.call(this);
 	this.domId = domId;
 	this.datasource = "";
 	this.onclick = null;
@@ -122,7 +122,7 @@ function FormDropTree(domId) {
 	// 创建一个没有实例方法的类
 	var Super = function() {
 	};
-	Super.prototype = FormFieldBase.prototype;
+	Super.prototype = _LL_Model.FormFieldBase.prototype;
 	// 将实例作为子类的原型
 	FormDropTree.prototype = new Super();
 	FormDropTree.prototype.constructor = FormDropTree; // 需要修复下构造函数
