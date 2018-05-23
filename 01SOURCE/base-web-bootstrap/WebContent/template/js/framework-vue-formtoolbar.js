@@ -14,7 +14,6 @@ function FormToolbar(domId) {
 		this.getContentDiv().css(cssKey, cssValue);
 	}
 	this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
-		
 		if (linewidthPercent != null) {
 			this.setRootStyle("width", linewidthPercent * 100 + "%");
 		}

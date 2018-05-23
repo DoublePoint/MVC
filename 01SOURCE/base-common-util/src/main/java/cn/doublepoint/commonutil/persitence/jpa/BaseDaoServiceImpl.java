@@ -50,10 +50,11 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 				paramsList.getParams().stream().forEach(param -> {
 					if (param.getRelation() != QueryParam.RELATION_ISNULL
 							&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
-						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation()).append(" ")
-								.append(":" + param.getName());
+						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation())
+								.append(" ").append(":" + param.getName());
 					} else
-						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation());
+						jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ")
+								.append(param.getRelation());
 
 				});
 			}
@@ -61,7 +62,7 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 			int firstIndex = -1;
 			int lastIndex = -1;
 			if (pageInfo != null) {
-				long count=getTotalCount(jpqlFromBuffer.toString(),paramsList);
+				long count = count(jpqlFromBuffer.toString(), paramsList);
 				pageInfo.setTotalElementCount(count);
 				firstIndex = getFirstResult(pageInfo);
 				lastIndex = getMaxRsults(pageInfo);
@@ -132,6 +133,52 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		return result;
 	}
 
+	/**
+	 * 更具查询条件和查询参数 获取结果总数
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public long count(String jpql, QueryParamList queryParamList) {
+		StringBuffer countBuffer = new StringBuffer("Select count(U)" + jpql);
+		Query countQuery = em.createQuery(countBuffer.toString());
+		if (queryParamList != null) {
+			queryParamList.getParams().stream().forEach(param -> {
+				if (param.getRelation() != QueryParam.RELATION_ISNULL
+						&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
+					countQuery.setParameter(param.getName(), param.getValue());
+				}
+			});
+		}
+		long count = (long) countQuery.getSingleResult();
+		return count;
+	}
+
+	/**
+	 * 更具查询条件和查询参数 获取结果总数
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public <T extends BaseModel> long count(Class<T> clazz, QueryParamList paramsList) {
+		String className = clazz.getName();
+		StringBuffer jpqlFromBuffer = new StringBuffer(" FROM " + className + " U WHERE 1=1 ");
+		if (paramsList != null) {
+			paramsList.getParams().stream().forEach(param -> {
+				if (param.getRelation() != QueryParam.RELATION_ISNULL
+						&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
+					jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation())
+							.append(" ").append(":" + param.getName());
+				} else
+					jpqlFromBuffer.append(" AND U.").append(param.getName()).append(" ").append(param.getRelation());
+
+			});
+		}
+		return count(jpqlFromBuffer.toString(), paramsList);
+	}
+
 	public EntityManager getEm() {
 		return em;
 	}
@@ -150,26 +197,4 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		return (int) pageInfo.getPageSize();
 	}
 
-	/**
-	 * 更具查询条件和查询参数 获取结果总数
-	 * @param jpql
-	 * @param queryParamList
-	 * @return
-	 */
-	private long getTotalCount(String jpql, QueryParamList queryParamList) {
-		StringBuffer countBuffer = new StringBuffer("Select count(U)" + jpql);
-		Query countQuery = em.createQuery(countBuffer.toString());
-		if (queryParamList != null) {
-			queryParamList.getParams().stream().forEach(param -> {
-				if (param.getRelation() != QueryParam.RELATION_ISNULL
-						&& param.getRelation() != QueryParam.RELATION_NOTNULL) {
-					countQuery.setParameter(param.getName(), param.getValue());
-				}
-			});
-		}
-		long count = (long) countQuery.getSingleResult();
-		return count;
-	}
-
-	
 }

@@ -26,20 +26,25 @@
 </head>
 <body>
 	<form style="width:98%;">
-		<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
-			<ll-formfield id="cdmcId" title="菜单名称" field="name" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
-			<ll-formfield title="菜单链接" field="link" maxlen="200"></ll-formfield>
-			<ll-formfield title="菜单序号" field="sn" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
-			<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="selectParent()" labelprovider="${pageContext.request.contextPath}/template/sys/menu/getMenuName"></ll-forminputbutton>
-			<!-- <ll-formdate title="创建时间" field="sjcd" ></ll-formdate> -->
-			<ll-toolbar align="center">
-				<!-- <input type="button" value="test" onclick="clicktest()"/>
-				<input type="button" value="delete" onclick="clickDelete()"/> -->
-				<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickSave();">  
-        			<span class="glyphicon glyphicon-ok "></span> 保存 
-   				</button>  
-			</ll-toolbar>
-		</ll-ajaxform>
+		<ll-filllayout>
+			<ll-fillarea-tb height="*">
+				<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
+					<ll-formfield id="cdmcId" title="菜单名称" field="name" placeholder="菜单名称" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
+					<ll-formfield title="菜单链接" field="link" maxlen="200"></ll-formfield>
+					<ll-formfield title="菜单序号" field="sn" validtype="int" errmsg="菜单序号必须为整数"></ll-formfield>
+					<ll-forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="selectParent()" labelprovider="${pageContext.request.contextPath}/template/sys/menu/getMenuName"></ll-forminputbutton>
+				</ll-ajaxform>
+			</ll-fillarea-tb>
+			<ll-fillarea-tb height="40">
+				<ll-toolbar align="center">
+					<!-- <input type="button" value="test" onclick="clicktest()"/>
+					<input type="button" value="delete" onclick="clickDelete()"/> -->
+					<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickSave();">  
+	        			<span class="glyphicon glyphicon-ok "></span> 保存 
+	   				</button>  
+				</ll-toolbar>
+			</ll-fillarea-tb>
+		</ll-filllayout>
 	</form>
 	
 </body>

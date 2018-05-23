@@ -2,7 +2,7 @@ Vue.component(_ConstantComponentMap._Tree, {
 	props : [ 
 	          'id', //id
 	          'datasource',//数据源
-	          'onclick', //单击方法
+	          'onnodeclick', //单击方法
 	          'columns', //列
 	          'showLine', //是否显示线条
 	          'showcheckbox',
@@ -54,7 +54,7 @@ function AjaxTree(domId) {
 	this.domId = domId;
 	this.treeObject = null;
 	this.datasource=null;
-	this.onclick=null;
+	this.onnodeclick=null;
 	this.showcheckbox=false;
 	this.onload=null;
 	
@@ -74,9 +74,8 @@ function AjaxTree(domId) {
 		},
 		async : {
 			enable : true,
-			showLine : true,
 			url : this.datasource,
-			autoParam : [ "id", "name=n", "level=lv" ],
+			autoParam : [ "code"],
 			otherParam : {
 				"otherParam" : "zTreeAsyncTest",
 				"otherParam2" : "zTreeAsyncTest",
@@ -84,11 +83,14 @@ function AjaxTree(domId) {
 			dataFilter : this.filter
 		},
 		data : {
+			keep: {
+				parent: true
+			},
 			key : {
 				name : "name",
 				title : "name",
-				url : "null",
-				children : "childrenMenuList"
+				url : "url",
+//				children : "childrenMenuList"
 			},
 		},
 		callback: {
@@ -124,8 +126,8 @@ function AjaxTree(domId) {
 	this.initOnClick = function(){
 		var treeDom=this;
 		this.setting.callback.onClick=function(){
-			if(treeDom.onclick)
-				$._Eval(treeDom.onclick);
+			if(treeDom.onnodeclick)
+				$._Eval(treeDom.onnodeclick);
 		}
 	}
 	//根据数据反选树节点 * srourceField 数据字段名称 * targetField 树节点的字段名称
@@ -188,13 +190,13 @@ function AjaxTree(domId) {
 		this.setting = setting;
 	}
 	
-	this.setOnclick=function(evt){
+	/*this.setOnclick=function(evt){
 		var funcitonname=evt;
 		this.setting.callback.onClick=function(event, treeId, treeNode){
 			$._Eval(funcitonname,[event, treeId, treeNode]);
 			return false;
 		};
-	}
+	}*/
 	
 	return this;
 }

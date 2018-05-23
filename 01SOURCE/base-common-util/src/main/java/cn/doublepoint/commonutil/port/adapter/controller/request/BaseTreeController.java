@@ -9,6 +9,6 @@
 */ 
 package cn.doublepoint.commonutil.port.adapter.controller.request;
 
-public class BaseTreeController  extends BaseRequestController{
+public class BaseTreeController  extends BaseRequestController {
 
 }

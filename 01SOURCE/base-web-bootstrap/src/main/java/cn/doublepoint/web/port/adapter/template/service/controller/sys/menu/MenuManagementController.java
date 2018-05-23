@@ -32,7 +32,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
 @Controller
 @RequestMapping("/template/sys/menu")
-public class MenuController extends BaseController {
+public class MenuManagementController extends BaseController {
 
 	@Autowired
 	MenuService menuService;

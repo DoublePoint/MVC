@@ -130,7 +130,7 @@ function component(fieldType, fieldTemplate,props) {
 					formField = new FormDate(domId);
 				else if (fieldType == _ConstantComponentMap._FormInputButton)
 					formField = new FormInputButton(domId);
-				else if (fieldType == _ConstantComponentMap._FormToolbar)
+				else if (fieldType == _ConstantComponentMap._FormToolBar)
 					formField = new FormToolbar(domId);
 				else if (fieldType == _ConstantComponentMap._FormDropTree)
 					formField = new FormDropTree(domId);

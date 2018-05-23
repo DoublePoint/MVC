@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 
 @Controller
@@ -37,39 +40,53 @@ public class MenuTreeController extends BaseTreeController {
 
 	@RequestMapping("/menu/menu-tree/datalist")
 	@ResponseBody
-	public List<VOMenu> getMenuTree(@RequestParam(required = false) Boolean isHasRoot) {
-		List<VOMenu> returnMenuList;
-		if (isHasRoot != null && isHasRoot.booleanValue()) {
-			VOMenu rootCd = new VOMenu();
-			rootCd.setName(rooTreeName);
-			returnMenuList = new ArrayList<VOMenu>();
-			List<VOMenu> childrenMenuList = getChildrenMenuList(null);
-			rootCd.setChildrenMenuList(childrenMenuList);
-			returnMenuList.add(rootCd);
+	public List<TreeNodeBean> getMenuTree(BodyReaderHttpServletRequestWrapper request, @RequestParam(required = false) Boolean isHasRoot) {
+		List<TreeNodeBean> returnMenuList2 = new ArrayList<TreeNodeBean>();
+		String codeStr=request.getParameter("code");
+		if (StringUtil.isNullOrEmpty(codeStr)) {
+			if (isHasRoot != null && isHasRoot.booleanValue()) {
+				TreeNodeBean treeNode = new TreeNodeBean();
+				treeNode.setName(rooTreeName);
+				treeNode.setCode("0");
+				treeNode.setIsParent(true);
+				returnMenuList2.add(treeNode);
+			}
+			else{
+				List<VOMenu> menus = getChildrenMenuList(0L);
+				returnMenuList2 = menus.stream().map(menu -> {
+					TreeNodeBean nodeBean = new TreeNodeBean();
+					nodeBean.setName(menu.getName());
+					if(!isHasChild(menu.getId()))
+						nodeBean.setIsParent(false);
+					nodeBean.setCode(String.valueOf(menu.getId()));
+					return nodeBean;
+				}).collect(java.util.stream.Collectors.toList());
+			}
 		} else {
-			returnMenuList = getChildrenMenuList(null);
+			Long code=Long.valueOf(codeStr);
+			List<VOMenu> menus = getChildrenMenuList(code);
+			returnMenuList2 = menus.stream().map(menu -> {
+				TreeNodeBean nodeBean = new TreeNodeBean();
+				nodeBean.setName(menu.getName());
+				if(!isHasChild(menu.getId()))
+					nodeBean.setIsParent(false);
+				nodeBean.setCode(String.valueOf(menu.getId()));
+				return nodeBean;
+			}).collect(java.util.stream.Collectors.toList());
 		}
-		return returnMenuList;
+		return returnMenuList2;
 	}
 
+	private boolean isHasChild(Long id){
+		return menuService.getChildrenCount(id)>0;
+	}
 	
-	private List<VOMenu> getChildrenMenuList(VOMenu cd) {
+	private List<VOMenu> getChildrenMenuList(Long id) {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
-		if (cd == null||cd.getId()==null)
-			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
-		else{
-			Menu query=new Menu();
-			query.setId(cd.getId());
-			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
-		}
-		if (menuList == null) {
-			return null;
-		} else {
-			for (int i = 0; i < menuList.size(); i++) {
-				menuList.get(i).setChildrenMenuList(getChildrenMenuList(menuList.get(i)));
-			}
-		}
+		Menu query = new Menu();
+		query.setId(id);
+		menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		return menuList;
 	}
 }

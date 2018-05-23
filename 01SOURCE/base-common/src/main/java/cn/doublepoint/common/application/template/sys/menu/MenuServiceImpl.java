@@ -153,6 +153,14 @@ public class MenuServiceImpl implements MenuService{
 		JPAUtil.saveOrUpdate(menuList);
 		return true;
 	}
+
+	@Override
+	public long getChildrenCount(Long parentMenuId) {
+		QueryParamList queryParamList=new QueryParamList();
+		if(parentMenuId!=null)
+			queryParamList.addParam("parentId",parentMenuId);
+		return JPAUtil.getDaoService().count(Menu.class, queryParamList);
+	}
 	
 }
 

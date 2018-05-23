@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.management.Query;
 import javax.persistence.Id;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
@@ -21,102 +22,113 @@ import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 
-public class JPAUtil extends DataBaseUtil{
+public class JPAUtil extends DataBaseUtil {
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> T loadById(Class<T> clazz,Object id) {
+	public static <T extends BaseModel> T loadById(Class<T> clazz, Object id) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.loadById(clazz,id);
+		return daoService.loadById(clazz, id);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList,null,null);
+		return daoService.load(clazz, queryParamList, null, null);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,PageInfo pageInfo) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, PageInfo pageInfo) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,null,pageInfo,null);
+		return daoService.load(clazz, null, pageInfo, null);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,SortParamList sortParamList) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, SortParamList sortParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,null,null,sortParamList);
+		return daoService.load(clazz, null, null, sortParamList);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,PageInfo pageInfo) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList queryParamList, PageInfo pageInfo) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList,pageInfo,null);
+		return daoService.load(clazz, queryParamList, pageInfo, null);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,SortParamList sortParamList) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList queryParamList,
+			SortParamList sortParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList,null,sortParamList);
+		return daoService.load(clazz, queryParamList, null, sortParamList);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,PageInfo pageInfo,SortParamList sortParamList) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, PageInfo pageInfo, SortParamList sortParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,null,pageInfo,sortParamList);
+		return daoService.load(clazz, null, pageInfo, sortParamList);
 	}
-	
+
 	/**
 	 * 获取实体信息
+	 * 
 	 * @param clazz
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<T> load(Class<T> clazz,QueryParamList queryParamList,PageInfo pageInfo,SortParamList sortParamList) {
+	public static <T extends BaseModel> List<T> load(Class<T> clazz, QueryParamList queryParamList, PageInfo pageInfo,
+			SortParamList sortParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,queryParamList,pageInfo,sortParamList);
+		return daoService.load(clazz, queryParamList, pageInfo, sortParamList);
 	}
-	
+
 	public static <T extends BaseModel> List<T> loadAll(Class<T> clazz) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.load(clazz,null,null,null);
+		return daoService.load(clazz, null, null, null);
 	}
 
 	/**
 	 * 删除列表
+	 * 
 	 * @param list
 	 */
 	public static <T extends BaseModel> void remove(List<T> list) {
@@ -124,18 +136,20 @@ public class JPAUtil extends DataBaseUtil{
 			return;
 		list.stream().forEach(JPAUtil::remove);
 	}
-	
+
 	/**
 	 * 保存
+	 * 
 	 * @param list
 	 */
 	public static <T extends BaseModel> void saveOrUpdate(T t) {
 		BaseDaoService daoService = getDaoService();
 		daoService.saveOrUpdate(t);
 	}
-	
+
 	/**
 	 * 保存
+	 * 
 	 * @param list
 	 */
 	public static <T extends BaseModel> void saveOrUpdate(List<T> list) {
@@ -166,22 +180,71 @@ public class JPAUtil extends DataBaseUtil{
 			daoService.remove(model.getClass(), getPrimary(model));
 		} catch (IllegalArgumentException e) {
 			Log4jUtil.error(e);
-			throw(e);
+			throw (e);
 		}
 	}
-	
+
 	/**
-	 * 执行更新或删除语句
+	 * 查询总数
+	 * 
 	 * @param jpql
 	 * @param queryParamList
 	 * @return
 	 */
-	public static int executeUpdate(String jpql,QueryParamList queryParamList){
+	public static <T extends BaseModel> long count(Class<T> clazz) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.count(clazz, null);
+	}
+
+	/**
+	 * 查询总数
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> long count(Class<T> clazz, QueryParamList queryParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.count(clazz, queryParamList);
+	}
+
+	/**
+	 * 查询总数
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> long count(String jpql, QueryParamList queryParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.count(jpql, queryParamList);
+	}
+
+	/**
+	 * 查询总数
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> long count(String jpql) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.count(jpql, null);
+	}
+
+	/**
+	 * 执行更新或删除语句
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static int executeUpdate(String jpql, QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeUpdate(jpql, queryParamList);
 	}
 
-	private static <T extends BaseModel> Object getPrimary(T model){
+	private static <T extends BaseModel> Object getPrimary(T model) {
 		Field[] fields = model.getClass().getDeclaredFields();
 		Field res = Stream.of(fields).filter(field -> {
 			field.setAccessible(true);
@@ -191,7 +254,7 @@ public class JPAUtil extends DataBaseUtil{
 			return res.get(model);
 		} catch (Exception e) {
 			Log4jUtil.error(e);
-		} 
+		}
 		return null;
 	}
 

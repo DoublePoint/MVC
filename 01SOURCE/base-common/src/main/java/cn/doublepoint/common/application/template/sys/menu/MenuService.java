@@ -31,6 +31,7 @@ public interface MenuService {
 	 */
 	public List<Menu> findChildrenMenu(Menu menu, PageInfo pageInfo);
 	
+	
 	/**
 	 * 查询所有菜单
 	 * 
@@ -51,6 +52,13 @@ public interface MenuService {
 	 * @return
 	 */
 	public Menu getById(long id);
+	
+	/**
+	 * 获取子节点数目
+	 * @param menu
+	 * @return
+	 */
+	public long getChildrenCount(Long parentMenuId);
 	
 	/**
 	 * 移除菜单
