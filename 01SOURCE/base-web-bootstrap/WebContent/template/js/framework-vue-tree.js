@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._Tree, {
+Vue.component(_LL_Constant._ConstantComponentMap._Tree, {
 	props : [ 
 	          'id', //id
 	          'datasource',//数据源

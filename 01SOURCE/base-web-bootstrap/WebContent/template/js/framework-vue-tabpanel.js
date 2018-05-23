@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._TabPanel, {
+Vue.component(_LL_Constant._ConstantComponentMap._TabPanel, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor' ],
 	template : '<div style="height:100%;"><ul :id="id+guid" class="nav nav-tabs"></ul><div class="tab-content">' + '<slot></slot>' + '</div></div>',
 	data : function() {

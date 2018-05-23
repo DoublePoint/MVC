@@ -3,7 +3,7 @@
 			+ '<div class="layui-input-block">'
 			+ '<input :id="id+guid" type="text" :field="field" lay-verify="title" autocomplete="off" class="layui-input" style="padding-right:38px;"/>'
 			+ '<input :id="inputButtonHiddenId" type="hidden" value="" :name="field" />' + '<a :id="inputButtonButtonId" href="#" class="layui-btn inputbutton">...</a>' + '</div>' + '</div>';
-	component(_ConstantComponentMap._FormInputButton,componentTemplate);
+	component(_LL_Constant._ConstantComponentMap._FormInputButton,componentTemplate);
 })(jQuery);
 
 function FormInputButton(domId) {

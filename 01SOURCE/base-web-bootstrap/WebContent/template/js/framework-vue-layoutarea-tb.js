@@ -1,6 +1,6 @@
 (function($) {
 	var FillAreaTBTemplate='<div  :id="id+guid" :class="clientClassBuffer" :style="clientStyle" ><div class="panel-heading" :style="clientHeadingStyle">{{headTitle}}</div><slot></slot></div>';
-	Vue.component(_ConstantComponentMap._FillAreaTB, {
+	Vue.component(_LL_Constant._ConstantComponentMap._FillAreaTB, {
 		props : [ 'id', 'height',  'backgroundcolor',"showborder","showtitle","title" ],
 		template : FillAreaTBTemplate,
 
@@ -169,8 +169,8 @@
 			}
 			var thisRuleHright=parentheight - allBrotherFixHeight;
 			
-			if(thisRuleHright<_ConstantLayoutArea._DEFAULT_MIN_HEIGHT)
-				thisRuleHright=_ConstantLayoutArea._DEFAULT_MIN_HEIGHT;
+			if(thisRuleHright<_LL_Constant._ConstantLayoutArea._DEFAULT_MIN_HEIGHT)
+				thisRuleHright=_LL_Constant._ConstantLayoutArea._DEFAULT_MIN_HEIGHT;
 			
 			this.setFillAreaHeight(thisRuleHright);
 			this.setFillAreaWidth("100%");

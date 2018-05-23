@@ -1,5 +1,5 @@
 (function($) {
-	_LLGridFieldComponent(_ConstantComponentMap._GridField)
+	_LLGridFieldComponent(_LL_Constant._ConstantComponentMap._GridField)
 })(jQuery);
 
 function GridField(domId) {

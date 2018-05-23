@@ -56,7 +56,7 @@ function selectParent() {
 		height : 430,
 		url : $$pageContextPath + '/template/sys/commonpage/selectMenu.jsp',
 		yes : function(selectTreeNode) {
-			var menuId = selectTreeNode.id;
+			var menuId = selectTreeNode.code;
 			var menuName = selectTreeNode.name;
 			inpbtn_sjcdbs.selectItem(menuId, menuName);
 		}

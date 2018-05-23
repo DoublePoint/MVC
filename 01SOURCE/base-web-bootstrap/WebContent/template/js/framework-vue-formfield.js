@@ -4,7 +4,7 @@
 		+ '<div class="layui-input-block">'
 		+ '<input :id="id+guid" :type="type" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
 		+ '</div>' + '</div>';
-	component(_ConstantComponentMap._FormField,componentTemplate);
+	component(_LL_Constant._ConstantComponentMap._FormField,componentTemplate);
 })(jQuery);
 
 function FormField(domId) {

@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._StepPanel, {
+Vue.component(_LL_Constant._ConstantComponentMap._StepPanel, {
 	props : [ 'id', 'onstepchanged','onstepchanging' ],
 
 	template : '<div :id="id+guid" style="height:100%;height:100%;">' + '<slot></slot>' + '</div>',

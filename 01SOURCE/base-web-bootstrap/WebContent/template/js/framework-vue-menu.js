@@ -1,5 +1,5 @@
 var existTabsNameArray = new Array();
-Vue.component(_ConstantComponentMap._AjaxMenu, {
+Vue.component(_LL_Constant._ConstantComponentMap._AjaxMenu, {
 	props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 	template : ' <div class="sidebar-collapse"><ul :id="id+guid" lay-filter="side" class="nav"></ul></div>',
 

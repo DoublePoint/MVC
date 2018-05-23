@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._Tab, {
+Vue.component(_LL_Constant._ConstantComponentMap._Tab, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor','title','active' ],
 	template : '<div :class="clientClassBuffer" :style="clientStyle" :id="id+guid" :title="aTitle">'+ '<slot></slot>' +'</div>',
 	data : function() {

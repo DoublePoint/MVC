@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._AjaxForm, {
+Vue.component(_LL_Constant._ConstantComponentMap._AjaxForm, {
 	props : [ 'id', 'onrowclick', 'cols', 'colproportion', 'showchanged' ],
 	template : '<form class="layui-form " :id="id+guid"  action=""><slot ></slot></form>',
 

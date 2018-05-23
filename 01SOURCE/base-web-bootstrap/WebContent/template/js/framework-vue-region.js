@@ -1,6 +1,6 @@
 Vue
 		.component(
-				_ConstantComponentMap._Region,
+				_LL_Constant._ConstantComponentMap._Region,
 				{
 					props : [ 'id', 'height', 'width', 'backgroundcolor' ],
 					template : '<div class="layui-collapse" lay-filter="test">'

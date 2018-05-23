@@ -13,7 +13,7 @@ function _LLGridFieldComponent(type) {
 		template : template,
 		data : function() {
 			// 针对不同的类型 分别进行相关数据的初始化
-			if (type == _ConstantComponentMap._GridCheck) {
+			if (type == _LL_Constant._ConstantComponentMap._GridCheck) {
 				this.checkbox = true;
 			} else {
 				if (!this.width) {
@@ -39,7 +39,7 @@ function _LLGridFieldComponent(type) {
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
 				var field;
-				if(type==_ConstantComponentMap._GridField)
+				if(type==_LL_Constant._ConstantComponentMap._GridField)
 					field= new GridField(domId);
 				else
 					field= new GridFieldBase(domId);
@@ -51,7 +51,7 @@ function _LLGridFieldComponent(type) {
 
 				var _AjaxGridId = this.$parent._GetComponentDomId();
 				var _AjaxDatagrid = $.getFromLayuiObjectHashMap(_AjaxGridId);
-				if (type != _ConstantComponentMap._GridCheck) {
+				if (type != _LL_Constant._ConstantComponentMap._GridCheck) {
 					_AjaxDatagrid.addCol(field);
 				}
 			}

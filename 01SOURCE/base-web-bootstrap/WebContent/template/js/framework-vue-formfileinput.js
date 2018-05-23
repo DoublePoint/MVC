@@ -1,7 +1,7 @@
 (function($) {
 	var componentTemplate='<input :id="id+guid" type="file" name="file">  ';
 	var privateProps=['fileuploaded'];
-	component(_ConstantComponentMap._FormFileInput,componentTemplate,privateProps);
+	component(_LL_Constant._ConstantComponentMap._FormFileInput,componentTemplate,privateProps);
 })(jQuery);
 
 function FormFileInput(domId) {
@@ -52,7 +52,7 @@ function FormFileInput(domId) {
 				if(!$.doResponse(data.response)){
 					return;
 				}
-				var res=new AjaxResponse(data.response);
+				var res=new _LL_Model.AjaxResponse(data.response);
 				var arr=new Array();
 				arr.push(res);
 				arr.push(event);

@@ -1,4 +1,3 @@
-var timeoutInterval = null;
 /*------AjaxForm-------*/
 var _FormProps = [ 'id', //
 				'maxlen', 
@@ -82,7 +81,7 @@ function component(fieldType, fieldTemplate,props) {
 			
 			this._InitFormField();
 			
-			if (_ConstantComponentMap._FormDropTree == fieldType) {
+			if (_LL_Constant._ConstantComponentMap._FormDropTree == fieldType) {
 				this._InitSelectOnClick();// 初始化select
 				this._InitSelectMouseEnter();
 				this._InitSelectMouseLeave();
@@ -122,19 +121,19 @@ function component(fieldType, fieldTemplate,props) {
 			_RegisterComponent : function() {
 				var domId = this._GetComponentDomId();
 				var formField;
-				if (fieldType == _ConstantComponentMap._FormField)
+				if (fieldType == _LL_Constant._ConstantComponentMap._FormField)
 					formField = new FormField(domId);
-				else if (fieldType == _ConstantComponentMap._FormSelect)
+				else if (fieldType == _LL_Constant._ConstantComponentMap._FormSelect)
 					formField = new FormSelect(domId);
-				else if (fieldType == _ConstantComponentMap._FormDate)
+				else if (fieldType == _LL_Constant._ConstantComponentMap._FormDate)
 					formField = new FormDate(domId);
-				else if (fieldType == _ConstantComponentMap._FormInputButton)
+				else if (fieldType == _LL_Constant._ConstantComponentMap._FormInputButton)
 					formField = new FormInputButton(domId);
-				else if (fieldType == _ConstantComponentMap._FormToolBar)
+				else if (fieldType == _LL_Constant._ConstantComponentMap._FormToolBar)
 					formField = new FormToolbar(domId);
-				else if (fieldType == _ConstantComponentMap._FormDropTree)
+				else if (fieldType == _LL_Constant._ConstantComponentMap._FormDropTree)
 					formField = new FormDropTree(domId);
-				else if (fieldType == _ConstantComponentMap._FormFileInput)
+				else if (fieldType == _LL_Constant._ConstantComponentMap._FormFileInput)
 					formField = new FormFileInput(domId);
 				else
 					formField = new FormFieldBase(domId);

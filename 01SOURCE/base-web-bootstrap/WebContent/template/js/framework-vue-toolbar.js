@@ -11,7 +11,7 @@ function componentToolBar(){
 	_ClientStyleArr = [ "align" ];
 	_ClientStyleMap["align"] = "text-align";
 	_ClientPropsArrAll = _ClientStyleArr.concat(_ClientStyleArr, _FormProps);
-	Vue.component(_ConstantComponentMap._ToolBar, {
+	Vue.component(_LL_Constant._ConstantComponentMap._ToolBar, {
 		props : [ 'id', 'datasource', 'columns', 'onmenuclick' ],
 		template : '<div :style="clientStyle" >' + '<slot></slot>' + '</div>',
 		data : function() {

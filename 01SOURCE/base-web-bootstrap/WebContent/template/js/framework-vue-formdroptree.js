@@ -14,7 +14,7 @@
 			+ '<input type="hidden" :name="field" />' + '</div>'
 
 			+ '</div>' + '</div>';
-	component(_ConstantComponentMap._FormDropTree, componentTemplate);
+	component(_LL_Constant._ConstantComponentMap._FormDropTree, componentTemplate);
 })(jQuery);
 
 function FormDropTree(domId) {

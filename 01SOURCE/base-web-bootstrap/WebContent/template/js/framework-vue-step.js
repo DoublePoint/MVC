@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._Step, {
+Vue.component(_LL_Constant._ConstantComponentMap._Step, {
 	props : [ 'id', 'height', 'width', 'backgroundcolor','title','active' ],
 	template : '<section :id="id+guid" >'+ '<slot></slot>' +'</section>',
 	data : function() {

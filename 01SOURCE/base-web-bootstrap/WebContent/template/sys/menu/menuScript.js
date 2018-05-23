@@ -3,7 +3,7 @@ function retrieve() {
 	var nodes = treeDemo.getSelectedNodes();
 	var selectNodeCdbs="";
 	if (nodes.length > 0) {
-		selectNodeCdbs = nodes[0].id;
+		selectNodeCdbs = nodes[0].code;
 	}
 	var formData=ajaxform.collectData();
 	formData.id=selectNodeCdbs;
@@ -40,7 +40,7 @@ function onClickAdd() {
 		$.shakeTips("请选择父节点");
 		return;
 	} else {
-		parentMenuId = nodes[0].id;
+		parentMenuId = nodes[0].code;
 	}
 	var ajaxDataWrap =  $.createAjaxDataWrap();
 	ajaxDataWrap.setDataList(nodes[0]);

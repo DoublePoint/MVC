@@ -6,7 +6,7 @@
 	+ '</select>'
 	+ '</div>' + '</div>';
 	var privateProps=["dropname"];
-	component(_ConstantComponentMap._FormSelect,componentTemplate,privateProps);
+	component(_LL_Constant._ConstantComponentMap._FormSelect,componentTemplate,privateProps);
 })(jQuery);
 
 function FormSelect(domId) {

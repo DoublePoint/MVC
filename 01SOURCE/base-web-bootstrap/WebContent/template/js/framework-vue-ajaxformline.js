@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._AjaxFormLine, {
+Vue.component(_LL_Constant._ConstantComponentMap._AjaxFormLine, {
 	props : [ 'id', 'onrowclick','colproportion' ],
 	template : '<div class="layui-form-item">' 
 //		+ 	' <div class="layui-inline"><slot></slot></div>'

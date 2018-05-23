@@ -1,7 +1,7 @@
 (function($) {
 	var componentTemplate = '<div class="layui-inline" style="padding-top:0px;">' 
 			+ '<div class="layui-input-block" :style="labelclientStyle" :id="id+guid">' +  '<slot></slot>' + '</div>' + '</div>';
-	component(_ConstantComponentMap._FormToolBar,componentTemplate);
+	component(_LL_Constant._ConstantComponentMap._FormToolBar,componentTemplate);
 })(jQuery);
 
 function FormToolbar(domId) {

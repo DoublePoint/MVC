@@ -1,4 +1,4 @@
-Vue.component(_ConstantComponentMap._FillAreaLR, {
+Vue.component(_LL_Constant._ConstantComponentMap._FillAreaLR, {
 	props : [ 'id', 'width', 'backgroundcolor','dragenable' ],
 	template : '<div :id="id+guid" class="ll-fill-area-lr"  :style="clientStyle"><slot></slot>' + '</div>',
 
@@ -166,7 +166,7 @@ function FillAreaLR(domId) {
 		var parentHeight = this.getParent().height(); 
 		var varWidth = 0;
 		if (this.width == null)
-			varWidth = _ConstantLayoutArea._DEFAULT_MIN_WIDTH_LEFT;
+			varWidth = _LL_Constant._ConstantLayoutArea._DEFAULT_MIN_WIDTH_LEFT;
 		else if (this.width.toString().indexOf("px") != -1)
 			varWidth = parseInt(this.width.replace("px", ""));
 		else if (this.width.toString().indexOf("%") != -1) {

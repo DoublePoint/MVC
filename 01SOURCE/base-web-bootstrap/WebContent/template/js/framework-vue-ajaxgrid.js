@@ -105,7 +105,7 @@ var gridProps=[	//私有的
                 ,"onRefresh"
                 ,"onScrollBody"
                 ];
-Vue.component(_ConstantComponentMap._AjaxGrid, {
+Vue.component(_LL_Constant._ConstantComponentMap._AjaxGrid, {
 	props : gridProps,
 	template : '<div style="height:100%;" class="table-responsive"><table class="bootstrapTable"  :id="gridId" ><thead><tr><slot></slot></tr></thead></table><div :id="pagerId"></div></div>',
 
@@ -368,8 +368,8 @@ function AjaxGrid(domId) {
 			parentHeight=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").height();
 		}
 		var thisResultHeight = parentHeight-brotherHeight;
-		if (thisResultHeight <= _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
-			thisResultHeight = _ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
+		if (thisResultHeight <= _LL_Constant._ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)
+			thisResultHeight = _LL_Constant._ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT;
 		this.height = thisResultHeight - this.pageHeight;
 	}
 	this.resize = function() {

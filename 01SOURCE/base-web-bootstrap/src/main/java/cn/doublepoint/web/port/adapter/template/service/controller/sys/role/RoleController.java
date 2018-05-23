@@ -26,6 +26,7 @@ import cn.doublepoint.common.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.common.domain.model.entity.sys.Role;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 
@@ -80,16 +81,16 @@ public class RoleController extends BaseController {
 	@RequestMapping("/bind-menu")
 	@ResponseBody
 	public boolean bindMenu(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
-		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
+		AjaxDataWrap<TreeNodeBean> dataWrap = request.getAjaxDataWrap("dataWrap", TreeNodeBean.class);
 		String roleId = request.getParameter("roleId");
 		if (dataWrap == null)
 			return true;
-		List<Menu> menus = dataWrap.getDataList();
+		List<TreeNodeBean> menus = dataWrap.getDataList();
 		if (menus == null)
 			return false;
 		List<MenuRole> list = menus.stream().map(menu -> {
 			MenuRole mRole = new MenuRole();
-			mRole.setMenuId(menu.getId());
+			mRole.setMenuId(Long.valueOf(menu.getCode()));
 			mRole.setRoleId(Long.valueOf(roleId));
 			return mRole;
 		}).collect(toList());

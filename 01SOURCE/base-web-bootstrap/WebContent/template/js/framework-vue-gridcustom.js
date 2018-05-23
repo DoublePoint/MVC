@@ -1,3 +1,3 @@
 (function($) {
-	_LLGridFieldComponent(_ConstantComponentMap._GridCustom)
+	_LLGridFieldComponent(_LL_Constant._ConstantComponentMap._GridCustom)
 })(jQuery);

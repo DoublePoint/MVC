@@ -1,4 +1,3 @@
-var _RegisterModel = new RegisterModel();
 (function($) {
 	// html标签Id对应Model键值对
 	var _LayuiObjectHashMap;
@@ -85,19 +84,16 @@ var _RegisterModel = new RegisterModel();
 		},
 
 		registerResizeModel : function(model) {
-			_RegisterModel._ResizeModel.push(model);
-		},
-		registerComponentCompleteListenerModel : function(model) {
-			_RegisterModel._ComponentCompleteListenerModel.push(model);
+			_LL_APP_CONTEXT._RegisterModel._ResizeModel.push(model);
 		},
 		registerDialogSuccessModel : function(model) {
-			_RegisterModel._DialogSuccessModel.push(model);
+			_LL_APP_CONTEXT._RegisterModel._DialogSuccessModel.push(model);
 		},
 		getRegisteredDialogSuccessModel : function() {
-			return _RegisterModel._DialogSuccessModel;
+			return _LL_APP_CONTEXT._RegisterModel._DialogSuccessModel;
 		},
 		getRegisteredResizeModel : function() {
-			return _RegisterModel._ResizeModel;
+			return _LL_APP_CONTEXT._RegisterModel._ResizeModel;
 		},
 		openDialog : function(obj) {
 			/* title */
@@ -171,7 +167,7 @@ var _RegisterModel = new RegisterModel();
 			var _jspParams = _DialogIndexMap.getValue(index);
 			if (_jspParams == null)
 				return;
-			// _DialogParams 页面默认参数 每个页面都有，一种通过函数体调用 两一种通过函数名调用
+			// _LL_Model._DialogParams 页面默认参数 每个页面都有，一种通过函数体调用 两一种通过函数名调用
 			if (_jspParams._DialogYesFunction != null) {
 				_jspParams._DialogYesFunction(data);
 			} else {
@@ -193,7 +189,7 @@ var _RegisterModel = new RegisterModel();
 		},
 		tips : function(msg, time) {
 			if (time == null)
-				time = _ConstantDialog._DEFAULT_SHOW_TIME;
+				time = _LL_Constant._ConstantDialog._DEFAULT_SHOW_TIME;
 			parent.$layer.msg(msg, {
 				time : time
 			});
@@ -214,7 +210,7 @@ var _RegisterModel = new RegisterModel();
 		},
 		shakeTips : function(msg, time) {
 			if (time == null)
-				time = _ConstantDialog._DEFAULT_SHOW_TIME;
+				time = _LL_Constant._ConstantDialog._DEFAULT_SHOW_TIME;
 			parent.layer.msg(msg, {
 				anim : 6,
 				time : time
@@ -312,7 +308,7 @@ var _RegisterModel = new RegisterModel();
 		},
 
 		createAjaxDataWrap : function(name) {
-			return new _AjaxDataWrap();
+			return new _LL_Model._AjaxDataWrap();
 		},
 		_Clone : function clone(obj) {
 			// Handle the 3 simple types, and null or undefined
@@ -348,11 +344,11 @@ var _RegisterModel = new RegisterModel();
 			throw new Error("Unable to copy obj! Its type isn't supported.");
 		},
 		createPageInfo : function() {
-			var pageinfo = new _PageInfo();
+			var pageinfo = new _LL_Model._PageInfo();
 			return pageinfo;
 		},
 		createJspParams : function() {
-			return new _DialogParams();
+			return new _LL_Model._DialogParams();
 		},
 		parseTreeNodeToCd : function(treeNode) {
 			var arr = new Array();
@@ -458,7 +454,7 @@ var _RegisterModel = new RegisterModel();
 							if (!$.doResponse(responseData)) {
 								return;
 							}
-							var res = new AjaxResponse(responseData);
+							var res = new _LL_Model.AjaxResponse(responseData);
 							successFunction(res);
 						} catch (e) {
 
@@ -480,7 +476,7 @@ var _RegisterModel = new RegisterModel();
 						if (!$.doResponse(responseData)) {
 							return;
 						}
-						var res = new AjaxResponse(responseData);
+						var res = new _LL_Model.AjaxResponse(responseData);
 						errorFunction(res);
 					}
 				}

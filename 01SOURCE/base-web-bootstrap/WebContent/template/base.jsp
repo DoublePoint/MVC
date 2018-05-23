@@ -57,6 +57,7 @@
 	}); 
 </script>
 <script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-model-context.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/vue.min.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/plugins/zTree_v3/js/jquery.ztree.core.js"></script>
@@ -99,7 +100,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	try{
-		var LLAjaxResponse= new AjaxResponse(${LLAjaxResponse});
+		var LLAjaxResponse= new _LL_Model.AjaxResponse(${LLAjaxResponse});
 		if(init!=null){
 			init(LLAjaxResponse);
 		}
