@@ -1,9 +1,7 @@
 (function($) {
 	var componentTemplate = '<div class="layui-inline" >'
-			+ '<label class="layui-form-label" :style="labelclientStyle"><span v-html="requiredIconText"></span>{{"&nbsp;"+title+"："}}</label>'
-			+ '<div class="layui-input-block">'
-			+ '<input :id="id+guid" :type="type" lay-verify="title" :validtype="validtype" :field="field" :name="field" autocomplete="off" class="layui-input" :placeholder="placeholder" >'
-			+ '</div>' + '</div>';
+			+ '<label class="layui-form-label" :style="labelclientStyle"><span v-html="requiredIconText"></span>{{"&nbsp;"+title+"："}}</label>' + '<div class="layui-input-block">'
+			+ '<input :id="id+guid"  :field="field" :name="field" type="checkbox"   checked class="layui-input" >' + '</div>' + '</div>';
 	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormSwitch, componentTemplate);
 
 	_LL_Model.FormSwitch = function(domId) {
@@ -26,6 +24,22 @@
 			if (linewidthPercent != null) {
 				this.setRootStyle("width", linewidthPercent * 100 + "%");
 			}
+		}
+		this.initData = function() {
+
+		}
+		this.initEvent = function() {
+			this.getDom().bootstrapSwitch({
+				onText : "启用",
+				offText : "停用",
+				onColor : "success",
+				offColor : "default",
+				onSwitchChange : function(event, state) {
+				}
+
+			});
+
+//			this.getDom().bootstrapSwitch("size", "small")
 		}
 	}
 	// 创建一个没有实例方法的类

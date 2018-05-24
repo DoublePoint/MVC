@@ -31,6 +31,7 @@ var _LL_Constant = new function() {
 		_FormDate : "ll-formdate",
 		_FormFileInput : "ll-formfileinput",
 		_FormSelect : "ll-formselect",
+		_FormSwitch : "ll-formswitch",
 		_FormInputButton : "ll-forminputbutton",
 		_FormToolBar : "ll-formtoolbar",
 		_GridField : "ll-gridfield",

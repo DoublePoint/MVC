@@ -1,20 +1,4 @@
 function init(response) {
-	$('#testswitch').bootstrapSwitch({
-		onText : "启动",
-		offText : "停止",
-		onColor : "success",
-		offColor : "info",
-		size : "large",  
-		onSwitchChange : function(event, state) {
-			if (state == true) {
-				alert('已打开');
-			} else {
-				alert('已关闭');
-			}
-		}
-
-	});
-
 	var type = response.get("type");
 	if (type == "add") {
 	} else {

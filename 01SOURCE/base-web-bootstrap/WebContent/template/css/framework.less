@@ -369,6 +369,17 @@ ll-filllayout{
 }
 /** ↑↑↑布局LL-layout样式 */
 
-/*** 按钮相关 */
-.icon-visible{
+/*** ↓↓↓switch */
+.bootstrap-switch {
+   border-radius: @BorderRadius!important; 
 }
+.bootstrap-switch .bootstrap-switch-handle-off,.bootstrap-switch .bootstrap-switch-handle-on  {
+    border-bottom-right-radius: @BorderRadius!important; 
+    border-top-right-radius:@BorderRadius!important; 
+    border-bottom-left-radius: @BorderRadius!important; 
+    border-top-left-radius: @BorderRadius!important; 
+}
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-success, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-success {
+    background: @SystemMainColor!important; 
+}
+/*** ↑↑↑ switch */

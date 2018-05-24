@@ -121,6 +121,8 @@
 						formField = new _LL_Model.FormField(domId);
 					else if (fieldType == _LL_Constant._ConstantComponentMap._FormSelect)
 						formField = new _LL_Model.FormSelect(domId);
+					else if (fieldType == _LL_Constant._ConstantComponentMap._FormSwitch)
+						formField = new _LL_Model.FormSwitch(domId);
 					else if (fieldType == _LL_Constant._ConstantComponentMap._FormDate)
 						formField = new FormDate(domId);
 					else if (fieldType == _LL_Constant._ConstantComponentMap._FormInputButton)
