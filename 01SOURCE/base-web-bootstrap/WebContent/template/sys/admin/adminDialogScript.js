@@ -6,6 +6,8 @@ function init(response) {
 		var data = dataWrap.dataList[0];
 		ajaxform.setData(data);
 	}
+	
+	enableSwitch.setData("1");
 }
 
 function onClickSave() {

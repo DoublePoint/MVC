@@ -207,7 +207,18 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.count(clazz, queryParamList);
 	}
-
+	/**
+	 * 查询总数
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T extends BaseModel> long count(String jpql) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.count(jpql, null);
+	}
+	
 	/**
 	 * 查询总数
 	 * 
@@ -219,17 +230,17 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.count(jpql, queryParamList);
 	}
-
+	
 	/**
-	 * 查询总数
+	 * 执行更新或删除语句
 	 * 
 	 * @param jpql
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> long count(String jpql) {
+	public static int executeUpdate(String jpql) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.count(jpql, null);
+		return daoService.executeUpdate(jpql, null);
 	}
 
 	/**
@@ -242,6 +253,30 @@ public class JPAUtil extends DataBaseUtil {
 	public static int executeUpdate(String jpql, QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeUpdate(jpql, queryParamList);
+	}
+	
+	/**
+	 * 执行更新或删除语句
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static int executeUpdateSql(String sql) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeUpdateSql(sql, null);
+	}
+	
+	/**
+	 * 执行更新或删除语句
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static int executeUpdateSql(String sql, QueryParamList queryParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeUpdateSql(sql, queryParamList);
 	}
 
 	private static <T extends BaseModel> Object getPrimary(T model) {

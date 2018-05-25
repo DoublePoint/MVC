@@ -1,7 +1,10 @@
 (function($) {
 	/*------AjaxForm-------*/
 	_LL_Constant._ConstantAjaxForm._FormFieldProps = [ 'id', //
-	'maxlen', 'readonly', // 是否只读
+	'maxlen', //最大长度
+	'ontext',//当为switch时的 On文本
+	'offtext',//当为switch时的 Off文本
+	'readonly', // 是否只读
 	'contentalign', // 内容对其方式
 	'visible',// 是否可见
 	'onclick',// 单击事件
@@ -10,7 +13,11 @@
 	'title',// label名称
 	'type',// 类型
 	'validtype', // 验证类型
-	'colspan', 'placeholder', 'parentId', 'datasource', 'required',// 是否必填
+	'colspan', //横跨列数
+	'placeholder', //占位文字
+	'parentId', 
+	'datasource', //数据源 对某些标签
+	'required',// 是否必填
 	// 文本框的显示格式,取值为text和password，默认为text
 	'errmsg' ];
 

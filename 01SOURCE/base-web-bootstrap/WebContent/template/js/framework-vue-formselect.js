@@ -9,6 +9,7 @@
 		this.domId = domId;
 		this.datasource = null;
 		this.dropname = null;
+		this.dropBeanList=null;
 		this.clearTimeoutInterval = function() {
 			clearTimeout(this.getTimeoutInterval());
 		}
@@ -50,6 +51,7 @@
 				data : null,
 				success : function(ajaxDataWrap) {
 					var dataList = ajaxDataWrap.dataList;
+					formSelect.dropBeanList=dataList;
 					var select = $("#" + formSelect.domId);
 					for (var i = 0; i < dataList.length; i++) {
 						var dropBean = dataList[i];

@@ -83,6 +83,18 @@ public interface BaseDaoService {
 	 * @return
 	 */
 	public int executeUpdate(String jpql, QueryParamList queryParamList);
+	
+	/**
+	 * 批量更新
+	 * 
+	 * @param sql
+	 * @param queryParamList
+	 * @return
+	 */
+	public int executeUpdateSql(String sql, QueryParamList queryParamList);
+	
+	
+	
 
 	/**
 	 * 查询总数
