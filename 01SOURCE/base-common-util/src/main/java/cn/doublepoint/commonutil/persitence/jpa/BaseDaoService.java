@@ -83,7 +83,6 @@ public interface BaseDaoService {
 	 * @return
 	 */
 	public int executeUpdate(String jpql, QueryParamList queryParamList);
-	
 	/**
 	 * 批量更新
 	 * 
@@ -91,9 +90,17 @@ public interface BaseDaoService {
 	 * @param queryParamList
 	 * @return
 	 */
-	public int executeUpdateSql(String sql, QueryParamList queryParamList);
+	public int executeNativeUpdate(String sql, QueryParamList queryParamList);
 	
+	/**
+	 * 执行jpql查询
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public List<Object> executeQuery(String jpql, QueryParamList queryParamList);
 	
+	public List<Object> executeNativeQuery(String sql, QueryParamList queryParamList);
 	
 
 	/**
@@ -113,4 +120,6 @@ public interface BaseDaoService {
 	 * @return
 	 */
 	public <T extends BaseModel> long count(Class<T> clazz, QueryParamList queryParamList);
+
+	
 }

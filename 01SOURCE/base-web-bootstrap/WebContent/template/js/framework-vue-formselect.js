@@ -1,5 +1,5 @@
 (function($) {
-	var componentTemplate = '<div class="layui-inline">' + '<label class="layui-form-label" :style="labelclientStyle">{{"&nbsp;&nbsp;"+title+"："}}</label>'
+	var componentTemplate = '<div class="layui-inline">' + '<label class="layui-form-label" :style="labelclientStyle"><span v-html="requiredIconText"></span>{{"&nbsp;&nbsp;"+title+"："}}</label>'
 			+ '<div class="layui-input-block" >' + '<select :id="id+guid" :field="field" class="selectpicker"  >' + '</select>' + '</div>' + '</div>';
 	var privateProps = [ "dropname" ];
 	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormSelect, componentTemplate, privateProps);
@@ -13,10 +13,6 @@
 		this.clearTimeoutInterval = function() {
 			clearTimeout(this.getTimeoutInterval());
 		}
-		this.hideSelectDl = function() {
-			this.getSelectDl().hide();
-			this.getSelectDiv().removeClass("layui-form-selected");
-		}
 		this.getDropName = function() {
 			return this.dropname;
 		}
@@ -28,12 +24,6 @@
 		}
 		this.getSelectDl = function() {
 			return this.getInputDom().next().children("dl");
-		}
-		this.getSelectHidden = function() {
-			return this.getInputDom().next().children("input");
-		}
-		this.getSelectInput = function() {
-			return this.getInputDom().next().children("div").children("input");
 		}
 
 		this.init = function() {
@@ -49,29 +39,38 @@
 				dataType : "json",
 				async : false,
 				data : null,
+				noneSelectedText:"",
 				success : function(ajaxDataWrap) {
 					var dataList = ajaxDataWrap.dataList;
 					formSelect.dropBeanList=dataList;
 					var select = $("#" + formSelect.domId);
+					select.append($("<option>&nbsp;</option>"));
 					for (var i = 0; i < dataList.length; i++) {
 						var dropBean = dataList[i];
-						select.append($("<option>" + dropBean.value + "</option>"));
+						select.append($("<option value="+dropBean.key+">" + dropBean.value + "</option>"));
 					}
 					// select.selectpicker("refresh");
 				}
 			});
 
 		}
+		
+		this.getData = function(){
+			var select = this.getSelect();
+			return select.val();
+		}
+		
 		this.refreshData = function() {
 			var select = $("#" + this.domId);
 			select.append($("<option>" + 5 + "</option>"));
 			select.selectpicker("refresh");
 		}
-		this.removeSelectDdClass = function() {
-			this.getSelectDl().children().removeClass();
-		}
 		this.setDropName = function(dropname) {
 			this.dropname = dropname;
+		}
+		this.setData = function(val){
+			var select = this.getSelect();
+			return select.val(val);
 		}
 		this.showSelectDl = function() {
 			this.getSelectDl().show();

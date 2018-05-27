@@ -1,7 +1,7 @@
 (function($) {
 	_LL_Model.StringUtil = {
 		isNullOrEmpty : function(s) {
-			if (s == null||s==""||_LL_Model.StringUtil.trim(s)=="") {
+			if (s == null||s==""||this.trim(s)=="") {
 				return true;
 			}
 			return false;
@@ -15,7 +15,7 @@
 			return leftStr + center + rigthStr;
 		},
 		trim : function(s) {
-			return trimLeft(trimRight(s));
+			return this.trimLeft(this.trimRight(s));
 		},
 
 		// 去掉左边的空白

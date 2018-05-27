@@ -58,6 +58,7 @@
 </script>
 <script src="${pageContext.request.contextPath}/template/js/framework-model.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-model-context.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-common.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-jquery.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/vue.min.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/plugins/zTree_v3/js/jquery.ztree.core.js"></script>

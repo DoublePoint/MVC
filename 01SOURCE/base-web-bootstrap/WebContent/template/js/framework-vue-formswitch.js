@@ -1,14 +1,16 @@
 (function($) {
+	var privateProps = [ "dropname" ];
 	var componentTemplate = '<div class="layui-inline" >'
 			+ '<label class="layui-form-label" :style="labelclientStyle"><span v-html="requiredIconText"></span>{{"&nbsp;"+title+"："}}</label>' + '<div class="layui-input-block">'
 			+ '<input :id="id+guid"  :field="field" :name="field" type="checkbox"   checked class="layui-input" >' + '</div>' + '</div>';
-	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormSwitch, componentTemplate);
+	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormSwitch, componentTemplate,privateProps);
 
 	_LL_Model.FormSwitch = function(domId) {
 		_LL_Model.FormFieldBase.call(this);
 		this.domId = domId;
-		this.dropBeanList=null;
-
+		this.dropname = null;
+		this.dropBeanList=[{key:"1",value:"是1"},{key:"0",value:"否2"}];
+		
 		this.setWidthByColproportion = function(linewidthPercent, itemColproportion) {
 			/* 避免浏览器闪现调整过程，那么需要对数据进行宽度的设置 首先为0 然后显示 */
 			if (itemColproportion.length >= 2) {
@@ -26,6 +28,12 @@
 				this.setRootStyle("width", linewidthPercent * 100 + "%");
 			}
 		}
+		this.getData=function(){
+			if(this.getDom().bootstrapSwitch("state")){
+				return this.dropBeanList[0].key;
+			}
+			return  this.dropBeanList[1].key;
+		}
 		this.initData = function() {
 			var switchObj=this;
 			if(_LL_Model.StringUtil.isNullOrEmpty(this.dropname)){
@@ -38,7 +46,7 @@
 			}
 			else{
 				$.ajax({
-					url : $$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + switchObj.getDropName(),
+					url : $$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + switchObj.dropname,
 					type : "POST",
 					contentType : 'application/json;charset=UTF-8',
 					dataType : "json",
@@ -46,6 +54,9 @@
 					data : null,
 					success : function(ajaxDataWrap) {
 						var dataList = ajaxDataWrap.dataList;
+						if(dataList.length==0){
+							dataList=[{},{}];
+						}
 						switchObj.dropBeanList=dataList;
 						switchObj.getDom().bootstrapSwitch({
 							onText : dataList[0].value,
@@ -53,13 +64,14 @@
 							onColor : "success",
 							offColor : "default",
 						});
+						switchObj.setTrue();
 					}
 				});
 			}
 			
 		}
 		this.initEvent = function() {
-			this.getDom().bootstrapSwitch("size", "small");
+//			this.getDom().bootstrapSwitch("size", "small");
 			this.getDom().bootstrapSwitch("onSwitchChange", function(event, data){
 				var $el = $(data.el)
 			      , value = data.value;
@@ -68,7 +80,7 @@
 		}
 		
 		this.setData = function(val){
-			if(dropBeanList!=null&&dropBeanList.length>=2){
+			if(this.dropBeanList!=null&&this.dropBeanList.length>=2){
 				if(val==this.dropBeanList[0].key){
 					this.setTrue();
 				}

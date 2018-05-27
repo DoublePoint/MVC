@@ -2,12 +2,10 @@ function init(response) {
 	var type = response.get("type");
 	if (type == "add") {
 	} else {
-		var dataWrap = response.get("dataWrap");
-		var data = dataWrap.dataList[0];
-		ajaxform.setData(data);
+		var admin = response.get("admin");
+		ajaxform.setData(admin);
 	}
 	
-	enableSwitch.setData("1");
 }
 
 function onClickSave() {
@@ -26,7 +24,7 @@ function onClickSave() {
 		},
 		success : function(data1) {
 			$.tips('保存成功');
-			$.close();
+			$.close(true);
 		},
 		error : function(ecx) {
 			$.shakeTips('保存失败');

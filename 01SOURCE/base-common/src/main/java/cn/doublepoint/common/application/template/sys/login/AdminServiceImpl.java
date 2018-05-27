@@ -73,7 +73,7 @@ public class AdminServiceImpl  implements AdminService{
 		}
 		else{
 			Admin dbAdmin=JPAUtil.loadById(Admin.class,admin.getId());
-			if(!dbAdmin.getLoginPassword().equals(admin.getLoginPassword())){
+			if(!dbAdmin.getLoginPassword().equals(EncyptUtil.encypt(admin.getLoginPassword()))){
 				admin.setLoginPassword(EncyptUtil.encypt(admin.getLoginPassword()));
 			}
 		}
@@ -97,7 +97,7 @@ public class AdminServiceImpl  implements AdminService{
 			}
 			else{
 				Admin dbAdmin=JPAUtil.loadById(Admin.class,admin.getId());
-				if(!dbAdmin.getLoginPassword().equals(admin.getLoginPassword())){
+				if(!dbAdmin.getLoginPassword().equals(EncyptUtil.encypt(admin.getLoginPassword()))){
 					admin.setLoginPassword(EncyptUtil.encypt(admin.getLoginPassword()));
 				}
 			}

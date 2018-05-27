@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.web.port.adapter.template.service.controller.sys.menu;
+package cn.doublepoint.web.port.adapter.template.service.controller.sys.extendproperty;
 
 import java.util.List;
 

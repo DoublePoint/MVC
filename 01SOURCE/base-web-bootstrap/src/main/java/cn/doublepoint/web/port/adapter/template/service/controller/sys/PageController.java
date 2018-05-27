@@ -9,14 +9,10 @@
 */
 package cn.doublepoint.web.port.adapter.template.service.controller.sys;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
 

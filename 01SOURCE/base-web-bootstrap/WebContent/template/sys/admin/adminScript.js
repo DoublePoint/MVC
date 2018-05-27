@@ -60,6 +60,13 @@ function customerFunction(a, record, c) {
 	return ' <a href="javascript:maintenceAdmin(\'' + record.id + '\')">' + ' <span class="glyphicon icon-tags" style="color:#15B194;"></span>' + ' </a>';
 }
 
+function customerEnableFunction(a, record, c){
+	var state=record.enable;
+	if(state=="1"){
+		return ' <span class="fa fa-check" style="color:#15B194;"></span>';
+	}
+	return ' <span class="fa fa-ban"></span>';
+}
 function maintenceAdmin(id) {
 	var type = "add";
 	if (id != null && id != "") {
@@ -73,5 +80,9 @@ function maintenceAdmin(id) {
 		},
 		width : 630,
 		height : 330,
+		yes:function(state){
+			if(state)
+				retrieve();
+		}
 	});
 }

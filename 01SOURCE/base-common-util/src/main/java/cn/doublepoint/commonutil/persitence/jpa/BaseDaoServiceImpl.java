@@ -132,6 +132,44 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		int result = query.executeUpdate();
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public  List<Object> executeQuery(String jpql, QueryParamList queryParamList) {
+		Query query = em.createQuery(jpql);
+
+		queryParamList.getParams().stream().forEach(param -> {
+			query.setParameter(param.getName(), param.getValue());
+		});
+		List<Object> result = query.getResultList();
+		return result;
+	}
+	
+	@Override
+	public int executeNativeUpdate(String sql, QueryParamList queryParamList) {
+		Query query = em.createNativeQuery(sql);
+
+		queryParamList.getParams().stream().forEach(param -> {
+			query.setParameter(param.getName(), param.getValue());
+		});
+		int result = query.executeUpdate();
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public  List<Object> executeNativeQuery(String sql, QueryParamList queryParamList) {
+		Query query = em.createNativeQuery(sql);
+		if(queryParamList!=null){
+			queryParamList.getParams().stream().forEach(param -> {
+				query.setParameter(param.getName(), param.getValue());
+			});
+		}
+		List<Object> result = query.getResultList();
+		return result;
+	}
 
 	/**
 	 * 更具查询条件和查询参数 获取结果总数
@@ -196,5 +234,6 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	private int getMaxRsults(PageInfo pageInfo) {
 		return (int) pageInfo.getPageSize();
 	}
+
 
 }

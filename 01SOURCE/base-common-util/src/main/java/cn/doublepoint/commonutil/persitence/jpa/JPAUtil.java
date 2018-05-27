@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Stream;
 
-import javax.management.Query;
 import javax.persistence.Id;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
@@ -242,7 +241,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeUpdate(jpql, null);
 	}
-
+	
 	/**
 	 * 执行更新或删除语句
 	 * 
@@ -256,15 +255,27 @@ public class JPAUtil extends DataBaseUtil {
 	}
 	
 	/**
-	 * 执行更新或删除语句
+	 * JPQL方式执行更新或删除语句
 	 * 
 	 * @param jpql
 	 * @param queryParamList
 	 * @return
 	 */
-	public static int executeUpdateSql(String sql) {
+	public static List<Object> executeQuery(String jpql) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeUpdateSql(sql, null);
+		return daoService.executeQuery(jpql, null);
+	}
+
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static List<Object> executeQuery(String jpql, QueryParamList queryParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeQuery(jpql, queryParamList);
 	}
 	
 	/**
@@ -274,9 +285,45 @@ public class JPAUtil extends DataBaseUtil {
 	 * @param queryParamList
 	 * @return
 	 */
-	public static int executeUpdateSql(String sql, QueryParamList queryParamList) {
+	public static int executeNativeUpdate(String sql) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeUpdateSql(sql, queryParamList);
+		return daoService.executeNativeUpdate(sql, null);
+	}
+	
+	/**
+	 * 执行更新或删除语句
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static int executeNativeUpdate(String sql, QueryParamList queryParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeNativeUpdate(sql, queryParamList);
+	}
+	
+	/**
+	 * JPQL方式执行更新或删除语句
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static List<Object> executeNativeQuery(String sql) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeNativeQuery(sql, null);
+	}
+
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static List<Object> executeNativeQuery(String sql, QueryParamList queryParamList) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeNativeQuery(sql, queryParamList);
 	}
 
 	private static <T extends BaseModel> Object getPrimary(T model) {

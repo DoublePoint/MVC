@@ -36,6 +36,9 @@ public class Admin extends BaseEntity {
 	@Column(name="LOGIN_PASSWORD")
 	private String loginPassword;//登录密码
 	
+	@Column(name="role_id")
+	private Long roleId;//角色标识
+	
 	@Column(name="ENABLE")
 	private String enable;//是否启用
 	
@@ -92,12 +95,23 @@ public class Admin extends BaseEntity {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+	
+	
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 
 	public String toString() {
 		return "Admin ["
 		+"id=" + id +","
 		+"loginAccountNo=" + loginAccountNo +","
 		+"loginPassword=" + loginPassword +","
+		+"roleId=" + roleId +","
 		+"enable=" + enable +","
 		+"createTime=" + createTime +","
 		+"modifyTime=" + modifyTime 

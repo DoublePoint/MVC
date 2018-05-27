@@ -1,4 +1,5 @@
 
+
 <%
 	/* 
 	 * 创   建   人： 刘磊
@@ -24,12 +25,14 @@
 </head>
 <body>
 	<form>
-		<ll-filllayout> 
+		<ll-filllayout width="200px"> 
 			<ll-fillarea-lr width="*">
 				<ll-filllayout > 
-					<ll-fillarea-tb height="85" showtitle="true" title="查询条件" showborder="false">
-							<ll-ajaxform id="ajaxform" cols="2" colproportion="1:3:3:3"> 
-									<ll-formfield id="name" title="操作员名称"  field="name"  ></ll-formfield>
+					<ll-fillarea-tb height="125" showtitle="true" title="查询条件" showborder="false">
+							<ll-ajaxform id="ajaxform" cols="2" colproportion="1:3:2:3:1:3"> 
+									<ll-formfield title="属性代码"  field="code"></ll-formfield>
+									<ll-formfield title="属性名称"  field="name"></ll-formfield>
+									<ll-formfield title="查询语句"  field="query"></ll-formfield>
 									<ll-formtoolbar labelalign="right" colspan="1">
 										<button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width:100px;">  
         									<span class="glyphicon glyphicon-search "></span> 查询
@@ -39,27 +42,30 @@
 							</ll-ajaxform>
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="35" > 
-							<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="maintenceAdmin();">  
+							<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="addNewRecord();">  
         						<span class="glyphicon glyphicon-plus ll_add_icon"></span> 增加
    							</button>  
    							<button type="button" style="width:70px;" class="btn btn-default btn-sm" onclick="onClickDelete();">  
         						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 删除
    							</button>  
+   							<button class="btn btn-info btn-sm ll-main" style="width:70px;" type="button" onclick="onClickSave()" >  
+        									<span class="glyphicon glyphicon-ok "></span> 保存
+   							</button>  
 					</ll-fillarea-tb>
-					<ll-fillarea-tb height="*"  showtitle="true" title="菜单列表">
-						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" > 
-							<ll-gridcheck ></ll-gridcheck>
-							<ll-gridcustom align="center" width="80" title="操作" formatter="customerFunction"></ll-gridcustom>  
-							<ll-gridcustom align="center" width="150" title="是否启用" formatter="customerEnableFunction"></ll-gridcustom> 
-							<ll-gridfield field="roleId" width="150"  title="绑定角色"  ></ll-gridfield>  
-							<ll-gridfield field="loginAccountNo" title="登录账号"  ></ll-gridfield> 
-						</ll-ajaxgrid>
+					<ll-fillarea-tb height="*" showtitle="true" title="权限列表">
+							<ll-ajaxgrid id="ajaxgrid" onrowclick="rowClickTest()" onpageclick="retrieveAjaxDataGrid" >
+								<ll-gridcheck ></ll-gridcheck>  
+								<ll-gridcustom align="center" width="80" title="操作" formatter="customerFunction"></ll-gridcustom>  
+								<ll-gridfield field="code" title="扩展属性代码" width="120" readonly="false"></ll-gridfield>
+								<ll-gridfield field="name" title="扩展属性名称" width="120" readonly="false"></ll-gridfield>
+								<ll-gridfield field="query" title="查询语句" readonly="false"></ll-gridfield>
+							</ll-datagrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>
 			</ll-fillarea-lr>
 		</ll-filllayout>
 	</form>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/admin/adminScript.js"></script>
+	<script type="text/javascript" src="extendPropertyScript.js"></script>
 </style>
 </body>
 </html>

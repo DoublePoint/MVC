@@ -31,7 +31,8 @@
 				<ll-ajaxform id="ajaxform" cols="1" colproportion="1:5" showchanged="True"> 
 					<ll-formfield title="操作员名称" required="true" field="loginAccountNo" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 					<ll-formfield title="操作员密码" required="true" field="loginPassword" type="password" maxlen="200"></ll-formfield>
-					<ll-formswitch title="启用标志" id="enableSwitch"  field="loginPassword"></ll-formswitch>
+					<ll-formselect title="角色" required="true" field="roleId" dropname="Role"></ll-formselect>
+					<ll-formswitch title="启用标志" id="enableSwitch" dropname="YesOrNo"  field="enable"></ll-formswitch>
 				</ll-ajaxform>
 			</ll-fillarea-tb>
 			<ll-fillarea-tb height="40"> 

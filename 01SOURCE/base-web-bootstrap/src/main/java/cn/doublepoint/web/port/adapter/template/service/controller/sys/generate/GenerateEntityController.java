@@ -32,8 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.doublepoint.common.application.template.sys.entity.EntityFilterQueryService;
 import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
-import cn.doublepoint.common.domain.model.entity.sys.MySQLTables;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.common.DataBaseMetaDataUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
@@ -56,15 +54,6 @@ public class GenerateEntityController extends BaseController {
 
 	private final String oomDirPath = "oom";
 	
-	@RequestMapping("/template/sys/tables")
-	@ResponseBody
-	public AjaxDataWrap<MySQLTables> getTables() {
-		List<MySQLTables> list = DataBaseMetaDataUtil.getTables();
-		AjaxDataWrap<MySQLTables> dataWrap = new AjaxDataWrap<>();
-		dataWrap.setDataList(list);
-		return dataWrap;
-	}
-
 	/**
 	 * 导入文件 并返回文件中的所有表
 	 * @param request
