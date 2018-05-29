@@ -31,4 +31,9 @@
     <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
     <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
 
+ 	<!-- 单例json对象 --><!-- 集成REST服务需要的bean -->
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+    <bean id="restResponseFactory" class="org.activiti.rest.service.api.RestResponseFactory" />
+    <bean id="contentTypeResolver" class="org.activiti.rest.common.application.DefaultContentTypeResolver" />
+    
 </beans>
