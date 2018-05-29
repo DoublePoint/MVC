@@ -20,7 +20,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
-@ComponentScan({"org.activiti.rest,org.activiti.conf"})
+@ComponentScan()
 @EnableAsync
 public class DispatcherServletConfiguration extends WebMvcConfigurationSupport {
 

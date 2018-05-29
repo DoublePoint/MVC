@@ -33,7 +33,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-mvc-rest.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RestServlet</servlet-name>
@@ -59,7 +59,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-mvc.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
