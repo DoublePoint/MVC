@@ -1,6 +1,7 @@
 package cn.doublepoint.workflow.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.log.Log4jUtil;
+
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -26,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,136 +44,107 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "/workflow/model")
 public class ModelController {
 
-    protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    RepositoryService repositoryService;
+	@Autowired
+	RepositoryService repositoryService;
 
-    /**
-     * 模型列表
-     */
-    @RequestMapping(value = "list")
-    public ModelAndView modelList() {
-        ModelAndView mav = new ModelAndView("workflow/model-list");
-        List<Model> list = repositoryService.createModelQuery().list();
-        mav.addObject("list", list);
-        return mav;
-    }
+	/**
+	 * 模型列表
+	 */
+	@RequestMapping(value = "list")
+	public ModelAndView modelList() {
+		ModelAndView mav = new ModelAndView("workflow/model-list");
+		List<Model> list = repositoryService.createModelQuery().list();
+		mav.addObject("list", list);
+		return mav;
+	}
 
-    /**
-     * 创建模型
-     */
-    @RequestMapping(value = "create")
-    public void create(@RequestParam("name") String name, @RequestParam("key") String key, @RequestParam("description") String description,
-                       HttpServletRequest request, HttpServletResponse response) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            ObjectNode editorNode = objectMapper.createObjectNode();
-            editorNode.put("id", "canvas");
-            editorNode.put("resourceId", "canvas");
-            ObjectNode stencilSetNode = objectMapper.createObjectNode();
-            stencilSetNode.put("namespace", "http://b3mn.org/stencilset/bpmn2.0#");
-            editorNode.put("stencilset", stencilSetNode);
-            Model modelData = repositoryService.newModel();
+	
 
-            ObjectNode modelObjectNode = objectMapper.createObjectNode();
-            modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, name);
-            modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, 1);
-            description = StringUtils.defaultString(description);
-            modelObjectNode.put(ModelDataJsonConstants.MODEL_DESCRIPTION, description);
-            modelData.setMetaInfo(modelObjectNode.toString());
-            modelData.setName(name);
-            modelData.setKey(StringUtils.defaultString(key));
+	/**
+	 * 根据Model部署流程
+	 */
+	@RequestMapping(value = "deploy/{modelId}")
+	public String deploy(@PathVariable("modelId") String modelId, RedirectAttributes redirectAttributes) {
+		try {
+			Model modelData = repositoryService.getModel(modelId);
+			ObjectNode modelNode = (ObjectNode) new ObjectMapper()
+					.readTree(repositoryService.getModelEditorSource(modelData.getId()));
+			byte[] bpmnBytes = null;
 
-            repositoryService.saveModel(modelData);
-            repositoryService.addModelEditorSource(modelData.getId(), editorNode.toString().getBytes("utf-8"));
+			BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+			bpmnBytes = new BpmnXMLConverter().convertToXML(model);
 
-            response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelData.getId());
-        } catch (Exception e) {
-            logger.error("创建模型失败：", e);
-        }
-    }
+			String processName = modelData.getName() + ".bpmn20.xml";
+			Deployment deployment = repositoryService.createDeployment().name(modelData.getName())
+					.addString(processName, new String(bpmnBytes)).deploy();
+			redirectAttributes.addFlashAttribute("message", "部署成功，部署ID=" + deployment.getId());
+		} catch (Exception e) {
+			logger.error("根据模型部署流程失败：modelId={}", modelId, e);
+		}
+		return "redirect:/workflow/model/list";
+	}
 
-    /**
-     * 根据Model部署流程
-     */
-    @RequestMapping(value = "deploy/{modelId}")
-    public String deploy(@PathVariable("modelId") String modelId, RedirectAttributes redirectAttributes) {
-        try {
-            Model modelData = repositoryService.getModel(modelId);
-            ObjectNode modelNode = (ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
-            byte[] bpmnBytes = null;
+	/**
+	 * 导出model对象为指定类型
+	 *
+	 * @param modelId
+	 *            模型ID
+	 * @param type
+	 *            导出文件类型(bpmn\json)
+	 */
+	@RequestMapping(value = "export/{modelId}/{type}")
+	public void export(@PathVariable("modelId") String modelId, @PathVariable("type") String type,
+			HttpServletResponse response) {
+		try {
+			Model modelData = repositoryService.getModel(modelId);
+			BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
+			byte[] modelEditorSource = repositoryService.getModelEditorSource(modelData.getId());
 
-            BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
-            bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+			JsonNode editorNode = new ObjectMapper().readTree(modelEditorSource);
+			BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
 
-            String processName = modelData.getName() + ".bpmn20.xml";
-            Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes)).deploy();
-            redirectAttributes.addFlashAttribute("message", "部署成功，部署ID=" + deployment.getId());
-        } catch (Exception e) {
-            logger.error("根据模型部署流程失败：modelId={}", modelId, e);
-        }
-        return "redirect:/workflow/model/list";
-    }
+			// 处理异常
+			if (bpmnModel.getMainProcess() == null) {
+				response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+				response.getOutputStream().println("no main process, can't export for type: " + type);
+				response.flushBuffer();
+				return;
+			}
 
-    /**
-     * 导出model对象为指定类型
-     *
-     * @param modelId 模型ID
-     * @param type    导出文件类型(bpmn\json)
-     */
-    @RequestMapping(value = "export/{modelId}/{type}")
-    public void export(@PathVariable("modelId") String modelId,
-                       @PathVariable("type") String type,
-                       HttpServletResponse response) {
-        try {
-            Model modelData = repositoryService.getModel(modelId);
-            BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
-            byte[] modelEditorSource = repositoryService.getModelEditorSource(modelData.getId());
+			String filename = "";
+			byte[] exportBytes = null;
 
-            JsonNode editorNode = new ObjectMapper().readTree(modelEditorSource);
-            BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
+			String mainProcessId = bpmnModel.getMainProcess().getId();
 
-            // 处理异常
-            if (bpmnModel.getMainProcess() == null) {
-                response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
-                response.getOutputStream().println("no main process, can't export for type: " + type);
-                response.flushBuffer();
-                return;
-            }
+			if (type.equals("bpmn")) {
 
-            String filename = "";
-            byte[] exportBytes = null;
+				BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
+				exportBytes = xmlConverter.convertToXML(bpmnModel);
 
-            String mainProcessId = bpmnModel.getMainProcess().getId();
+				filename = mainProcessId + ".bpmn20.xml";
+			} else if (type.equals("json")) {
 
-            if (type.equals("bpmn")) {
+				exportBytes = modelEditorSource;
+				filename = mainProcessId + ".json";
 
-                BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
-                exportBytes = xmlConverter.convertToXML(bpmnModel);
+			}
 
-                filename = mainProcessId + ".bpmn20.xml";
-            } else if (type.equals("json")) {
+			ByteArrayInputStream in = new ByteArrayInputStream(exportBytes);
+			IOUtils.copy(in, response.getOutputStream());
 
-                exportBytes = modelEditorSource;
-                filename = mainProcessId + ".json";
+			response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+			response.flushBuffer();
+		} catch (Exception e) {
+			logger.error("导出model的xml文件失败：modelId={}, type={}", modelId, type, e);
+		}
+	}
 
-            }
-
-            ByteArrayInputStream in = new ByteArrayInputStream(exportBytes);
-            IOUtils.copy(in, response.getOutputStream());
-
-            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
-            response.flushBuffer();
-        } catch (Exception e) {
-            logger.error("导出model的xml文件失败：modelId={}, type={}", modelId, type, e);
-        }
-    }
-
-    @RequestMapping(value = "delete/{modelId}")
-    public String delete(@PathVariable("modelId") String modelId) {
-        repositoryService.deleteModel(modelId);
-        return "redirect:/workflow/model/list";
-    }
+	@RequestMapping(value = "delete/{modelId}")
+	public String delete(@PathVariable("modelId") String modelId) {
+		repositoryService.deleteModel(modelId);
+		return "redirect:/workflow/model/list";
+	}
 
 }

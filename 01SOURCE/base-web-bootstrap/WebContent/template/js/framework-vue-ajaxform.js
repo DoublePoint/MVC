@@ -158,6 +158,16 @@ function AjaxForm(domId) {
 	this.getFormItems = function(item) {
 		return this.formItems;
 	}
+	
+	this.getFieldValue = function(name) {
+		var items = this.formItems;
+		for (var i = 0; i < items.length; i++) {
+			if (items[i].field == name) {
+				return items[i].getData();
+			}
+		}
+		return null;
+	}
 
 	// 如果所有的fieldItem的isChanged有一个为true 则该form即为true
 	this.getIsChanged = function() {

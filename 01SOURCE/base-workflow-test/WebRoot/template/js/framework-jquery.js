@@ -153,6 +153,10 @@
 			obj.content = $$pageContextPath + "/template/sys/dialog/dialog.jsp";
 			parent.$layer.open(obj);
 		},
+		openTab : function(setting){
+			// 新增一个Tab项
+			parent.$element.tabAdd('admin-tab', setting);
+		},
 		close : function(data) {
 			// 弹出窗口的确定的点击
 			var index = parent.$layer.getFrameIndex(window.name); // 先得到当前iframe层的索引

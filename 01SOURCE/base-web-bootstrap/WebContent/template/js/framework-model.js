@@ -136,9 +136,19 @@ var _LL_Model = new function() {
 				this[attrName] = (response.parameterMap)[attrName];
 			}
 		}
-
+		
+		this.code=response.code;//状态编码
+		this.errorMessage=response.errorMessage;//状态编码
+		this.viewName=response.viewName;//状态编码
+		
 		this.get = function(field) {
 			return this[field];
+		}
+		this.getErrorMessage=function(){
+			return this.errorMessage;
+		}
+		this.getCode = function(){
+			return this.code;
 		}
 		return this;
 	}

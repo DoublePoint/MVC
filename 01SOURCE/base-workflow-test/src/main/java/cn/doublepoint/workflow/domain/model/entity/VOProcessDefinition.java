@@ -19,7 +19,7 @@ public class VOProcessDefinition extends BaseModel{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2721910031981101440L;
+	private static final long serialVersionUID = 1L;
 	
 	public String key;
 	public int revision = 1;
