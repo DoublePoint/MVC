@@ -89,7 +89,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 * @param clazz
 	 * @return
 	 */
-	public <T extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName, Class<T> clazz) {
+	public <T  extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName, Class<T> clazz) {
 		ObjectMapper mspp = new ObjectMapper();
 		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

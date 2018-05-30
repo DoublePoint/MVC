@@ -1,0 +1,389 @@
+@BorderColor:#F2F2F3;//个布局边框的颜色
+@BorderWidth:1px;
+@DragLineBackgroundColor:#F1F1F1;//拖动条的颜色
+@DragLineWidth:1px;//拖动条的宽度
+@LLLayoutHeaderBackgroundColor:#F2F2F3;//Layout area 的title背景颜色
+@MenuBackgroundColor:#253848; //菜单导航背景色
+@MenuItemBackgroundColor:@MenuBackgroundColor;//菜单主内容背景色
+@MenuWidth:250px;
+@PageHeaderBackgroundColor:#253848;//页面头部背景颜色
+@PageHeaderFontColor:#FFFFFF;//页面头部字体颜色
+@SystemMainColor:#17B294;//系统主颜色
+
+/* jquery step */
+@BorderRadius:0px;//button、
+
+html, body, form {
+	height: 100%;
+	width: 100%;
+	margin:0px;
+	padding:0px;
+}
+
+form form {
+	height: 100%;
+	width: 100%;
+}
+
+.layui-layout-body form {
+	min-width: 1000px;
+}
+
+.layui-col-md0, .layui-col-md1, .layui-col-md2, .layui-col-md3,
+	.layui-col-md4, .layui-col-md5, .layui-col-md6, .layui-col-md7,
+	.layui-col-md8, .layui-col-md9, .layui-col-md10, .layui-col-md11,
+	.layui-col-md12 {
+	height: 100%;
+}
+
+.lllayout {
+	clear: both;
+	overflow:hidden;
+}
+
+.layui-side-scroll {
+	width: @MenuWidth;
+	font-family: "Microsoft YaHei", SimSun, '\5b8b\4f53', sans-serif;
+}
+.layui-layout-admin .layui-side {
+    width:@MenuWidth;
+    border-top: 5px solid @SystemMainColor;
+}
+.layui-body {
+	left:@MenuWidth;
+}
+.layui-footer{
+	left:@MenuWidth;
+}
+li {
+	list-style: none
+}
+
+a {
+	text-decoration: none;
+}
+/* navMenu */
+.layui-side-scroll {
+	padding: 0px 0;
+	background: @MenuBackgroundColor;
+}
+.btn{
+	background-color: @MenuBackgroundColor;
+}
+
+.layui-table-view {
+	margin: 0px;
+}
+
+.inputbutton {
+	height: 38px;
+	width: 38px;
+	text-align: center;
+	line-height: 38px;
+	display: inline-block;
+	/* left: 100%; */
+	margin-left: -38px;
+	top: 0px;
+	position: absolute;
+	background-color: #1EA296;
+	font-weight: bold;
+	color: white;
+	padding: 0px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+/*分页*/
+.layui-laypage {
+	margin: 0px;
+	margin-top: 1px;
+}
+
+.layui-laypage a, .layui-laypage span {
+	margin: 0 -1px 0px 0;
+}
+
+.layui-table-click, .layui-table-hover {
+	/* background-color:#DCF8A8; */
+	
+}
+/*树*/
+.ztree {
+	overflow: auto;
+	height: 100%;
+	padding: 0;
+}
+
+.layui-form-item {
+	margin: 2px 0 3px 0;
+}
+
+.layui-form  .layui-inline {
+	margin: 0 0px;
+}
+
+.layui-form-item:first-child {
+	margin: 0;
+	padding: 5px 0 0px 0;
+}
+
+.layui-input-block>.layui-input {
+	padding-left: 0px;
+	padding-right: 0px;
+	display: inline-block;
+	/* display: none; */
+	width: 0;
+}
+
+.layui-inline>.layui-form-label {
+	padding-left: 0px;
+	padding-right: 0px;
+	/* display: none; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 0;
+}
+
+.layui-inline>.layui-input-block {
+	margin-left: 0px;
+}
+
+.layui-form {
+	font-size: 0;
+}
+
+.layui-form .layui-form-item:nth-child(n+2){
+	margin: 0px 0 0px 0;
+} 
+
+.layui-inline, .layoutarea {
+	font-size: 14px;
+}
+
+.layui-body {
+	overflow: hidden;
+}
+
+.layui-form-item {
+	font-size: 16px;
+}
+
+.ll-framework-vue-select dl {
+	max-height: 220px;
+	min-width: 0;
+}
+
+.layui-select-title>input {
+	display: none;
+}
+
+.ll-framework-vue-select dl dd, .ll-framework-vue-select dl dt {
+	line-height: 20px;
+}
+.ll-framework-vue-select dl dd.layui-this{
+	background-color:#1AA094;
+}
+.ll-framework-vue-select dl {
+	padding: 0px;
+	top: 38px;
+}
+
+.layui-form-select-dl-unselect {
+	display: none;
+}
+/*原生select start*/
+.layui-form select {
+	border-color: #e6e6e6;
+}
+
+.layui-form select option {
+	background-color: white;
+}
+
+.layui-form select option:hover {
+	background-color: #EEEEEE;
+}
+
+.layui-form select:active, .layui-form select:focus {
+	border-color: -webkit-linear-gradient(left, #e6e6e6, #c9c9c9);
+	/* Safari 5.1 - 6.0 */
+	border-color: -o-linear-gradient(right, #e6e6e6, #c9c9c9);
+	/* Opera 11.1 - 12.0 */
+	border-color: -moz-linear-gradient(right, #e6e6e6, #c9c9c9);
+	/* Firefox 3.6 - 15 */
+	border-color: linear-gradient(to right, #e6e6e6, #c9c9c9); /* 标准的语法 */
+	border-color: #c9c9c9;
+}
+/*原生select end*/
+
+/* layout start */
+.ll-fill-area-lr {
+	width: 0px;
+	height: 100%;
+	display: inline-block;
+	position: absolute;
+	left:0;
+}
+
+.ll-fill-area-left-right-center {
+	height: 100%;
+	width: @DragLineWidth;
+	display: inline-block;
+	z-index: 100;
+	position: absolute;
+	left: 300px;
+	background-color: @DragLineBackgroundColor;
+	cursor: col-resize;
+}
+ .ll-drag-to-left{
+	height:20px;
+	width:20px;
+	left:-15px;
+	top:50%;
+	margin-top:-10px;
+	position:relative;
+	cursor:pointer;
+	/*background-image: url(../image/togglebar.gif);*/
+	background-repeat: no-repeat;
+	background-position: -20px 0px;
+}
+.ll-fill-area-left-right-center:hover .ll-drag-to-right{
+	height:20px;
+	width:20px;
+	left:5px;
+	top:50%;
+	margin-top:-10px;
+	position:relative;
+	cursor:pointer;
+	background-image: url(../image/togglebar.gif);
+	background-repeat: no-repeat;
+	background-position: -20px -40px;
+}
+.layui-tab-title li:first-child i {
+	display:none;
+}
+ll-filllayout{
+	display:none;
+}
+
+/*页面头部*/
+.llsystitle{
+	color:#FFFFFF;
+}
+@color:#ED8E1C;
+.title_value{
+	color:@color;
+}
+
+.layout-area-Border{
+	border-bottom:1px solid @BorderColor;//个布局边框的颜色
+}
+.ll-panel{
+	margin-bottom: 0px; 
+}
+
+.panel-heading{
+	padding: 5px 10px 5px 10px;
+}
+
+.tab-content{
+	height: 100%;
+	width: 100%;
+    margin-top: -42px;
+    padding-top: 42px;
+}
+
+/* ↓↓↓ jquery step*/
+.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
+    -webkit-border-radius: @BorderRadius!important; 
+    -moz-border-radius: @BorderRadius!important; 
+    border-radius: @BorderRadius!important; 
+}
+.wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active {
+    -webkit-border-radius: @BorderRadius!important; 
+    -moz-border-radius: @BorderRadius!important; 
+    border-radius: @BorderRadius!important; 
+}
+/* ↑↑↑jquery step */
+
+/** ↓↓↓bootstrap table */
+.bootstrapTable{
+    table-layout: fixed;
+}
+.bootstrapTable td{
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+/** ↑↑↑ bootstrap table */
+
+/** bootstrap button */
+.btn-sm {
+    border-radius: @BorderRadius!important; 
+}
+.ll-main{
+	background-color: @SystemMainColor!important; 
+	color:white!important; 
+}
+.ll-search{
+	
+}
+.ll_add_icon{
+	
+}
+
+.ll_edit_icon{
+	
+}
+
+.ll_delete_icon{
+	
+}
+/** ↑↑↑ bootstrap button */
+/** 多任务 导航 */
+.admin-side-toggle, .admin-side-full {
+    background-color: @SystemMainColor!important; 
+}
+.admin-nav-card>.layui-tab-title .layui-this {
+    color: white;
+    background-color: @SystemMainColor!important; 
+}
+.sidebar-collapse .nav > li > a {
+    background: @MenuItemBackgroundColor!important; 
+    border-bottom: 1px solid #2F2E31;
+}
+.sidebar-collapse .nav > li > a:hover {
+    background-color: black!important; 
+}
+/** ↑↑↑多任务 导航顶部边框 */
+/** 页面头部样式 */
+.layui-layout-admin .layui-header {
+    background-color: @PageHeaderBackgroundColor!important; 
+}
+/** ↑↑↑页面头部样式 */
+/** 布局LL-layout样式 */
+.panel-info>.panel-heading {
+    background-color: @LLLayoutHeaderBackgroundColor!important; 
+    border-color: @LLLayoutHeaderBackgroundColor!important; 
+}
+/** ↑↑↑布局LL-layout样式 */
+
+/*** ↓↓↓switch */
+.bootstrap-switch {
+   border-radius: @BorderRadius!important; 
+}
+.bootstrap-switch .bootstrap-switch-handle-off,.bootstrap-switch .bootstrap-switch-handle-on  {
+    border-bottom-right-radius: @BorderRadius!important; 
+    border-top-right-radius:@BorderRadius!important; 
+    border-bottom-left-radius: @BorderRadius!important; 
+    border-top-left-radius: @BorderRadius!important; 
+}
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-success, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-success {
+    background: @SystemMainColor!important; 
+}
+/*** ↑↑↑ switch */
+
+.mainBackGroundColor{
+	 background-color: @SystemMainColor!important; 
+}

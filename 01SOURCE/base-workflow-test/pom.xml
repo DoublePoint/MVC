@@ -7,10 +7,10 @@
 		<artifactId>base-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<properties>
-        <activiti.version>5.22.0</activiti.version>
-    </properties>
+		<activiti.version>5.22.0</activiti.version>
+	</properties>
 
 	<!-- Modeler模块使用的后台服务都存放在activiti-modeler模块中，在自己的项目中添加依赖： activiti-modeler模块提供模型先关的操作：创建、保存、转换json与xml格式等 activiti-diagram-rest模块用来处理流程图有关的功能：流程图布局（layout）、节点高亮等 -->
 	<dependencies>
@@ -24,47 +24,47 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -74,44 +74,44 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.2.3</version>
+			<version>${jackson.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.2.3</version>
+			<version>${jackson.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.3</version>
+			<version>${jackson.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-modeler</artifactId>
-			 <version>${activiti.version}</version>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
-			 <version>${activiti.version}</version>
+			<version>${activiti.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-rest</artifactId>
-			 <version>${activiti.version}</version>
+			<version>${activiti.version}</version>
 		</dependency>
-		
-        <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-cxf</artifactId>
-            <version>${activiti.version}</version>
-        </dependency>
+
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-cxf</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -123,12 +123,12 @@
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-spring</artifactId>
-			 <version>${activiti.version}</version>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 
@@ -151,5 +151,22 @@
 			<version>1.0</version>
 		</dependency>
 		<!--spring data jpa -->
+		
+		<!-- 本地项目 -->
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-common</artifactId>
+			<version>${cn.doublepoint.base.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-common-util</artifactId>
+			<version>${cn.doublepoint.base.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-generate</artifactId>
+			<version>${cn.doublepoint.base.version}</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -35,7 +35,7 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 
 	public void setDataList(List<T> dataList) {
 		this.dataList = dataList;
-
+		
 		if (dataList != null) {
 			for (int i = 0; i < dataList.size(); i++) {
 				dataList.get(i).setRowId(i);
