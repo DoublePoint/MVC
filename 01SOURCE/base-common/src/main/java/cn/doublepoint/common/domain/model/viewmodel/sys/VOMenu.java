@@ -35,6 +35,8 @@ public class VOMenu extends BaseEntity {
 	private Date modifyTime;
 	
 	private Date createTime;
+	
+	private String isCrossDomain;
 
 	private List<VOMenu> childrenMenuList;
 
@@ -104,6 +106,14 @@ public class VOMenu extends BaseEntity {
 	
 	
 	
+	public String getIsCrossDomain() {
+		return isCrossDomain;
+	}
+
+	public void setIsCrossDomain(String isCrossDomain) {
+		this.isCrossDomain = isCrossDomain;
+	}
+
 	public List<VOMenu> getChildrenMenuList() {
 		return childrenMenuList;
 	}

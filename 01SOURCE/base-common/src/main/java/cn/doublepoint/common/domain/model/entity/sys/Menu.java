@@ -45,6 +45,9 @@ public class Menu extends BaseEntity {
 	@Column(name="SN")
 	private Integer sn;
 	
+	@Column(name="IS_CROSS_DOMAIN")
+	private String isCrossDomain;
+	
 	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 	
@@ -112,6 +115,15 @@ public class Menu extends BaseEntity {
 		return createTime;
 	}
 	
+	
+	public String getIsCrossDomain() {
+		return isCrossDomain;
+	}
+
+	public void setIsCrossDomain(String isCrossDomain) {
+		this.isCrossDomain = isCrossDomain;
+	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
