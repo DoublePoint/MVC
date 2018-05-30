@@ -14,13 +14,13 @@ function onClickSave() {
 	}
 	var data = ajaxform.collectData();
 	$.request({
-		url : $$pageContextPath + "/workflow/model/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
+		url : $$pageContextPath + "/template/sys/workflow/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {
 
 		},
 		success : function(response) {
 			var modelId = response.get("modelId");
-			$.openTab("1", {
+			$.openTab({
 				title : "Model:"+modelId,
 				content : '<iframe src="' + $$pageContextPath + "/modeler.html?modelId=" + modelId + '"></iframe>',
 				id : modelId
