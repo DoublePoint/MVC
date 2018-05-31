@@ -43,8 +43,7 @@
 							<ll-gridcheck ></ll-gridcheck>
 							<ll-gridfield field="key" width="150"  title="KEY"  ></ll-gridfield>  
 							<ll-gridfield field="version" width="150"  title="VERSION"  ></ll-gridfield>  
-							<ll-gridfield field="resourceName" width="150"  title="RESOURCE NAME"  ></ll-gridfield>  
-							<ll-gridfield field="diagramResourceName" title="DIAGRAM RESOURCE NAME"  ></ll-gridfield>  
+							<ll-gridcustom align="center" title="流程图" formatter="customerFunction"></ll-gridcustom>  
 						</ll-ajaxgrid>
 					</ll-fillarea-tb>
 				</ll-filllayout>

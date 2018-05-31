@@ -46,6 +46,7 @@
 					<ll-fillarea-tb height="*"  showtitle="true" title="流程列表">
 						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" > 
 							<ll-gridcheck ></ll-gridcheck>
+							<ll-gridcustom align="center" width="120" title="操作" formatter="customerFunction"></ll-gridcustom>  
 							<ll-gridfield field="name" width="150"  title="流程名称"  ></ll-gridfield>  
 							<ll-gridfield field="version" width="150"  title="版本"  ></ll-gridfield>  
 							<ll-gridfield field="createTime"   title="创建时间"  ></ll-gridfield>  
