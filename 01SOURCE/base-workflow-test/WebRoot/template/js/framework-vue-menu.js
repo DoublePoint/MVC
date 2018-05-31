@@ -39,17 +39,28 @@
 			_InitMenuClick : function() {
 				$('.nav li a').on('click', function() {
 					var href = $(this).attr("menuhref");
+					var isCrossDomain=$(this).attr("isCrossDomain");
 					if (href == null || href == "" || href == "#" || href == "0") {
 						return;
 					}
 					var textarr = $("#admin-body").find(".layui-tab-title").find("li").text();
 					if (textarr.indexOf($(this).text()) == -1) {
-						// 新增一个Tab项
-						$element.tabAdd('admin-tab', {
-							title : $(this).text(),
-							content : '<iframe src="' + $$pageContextPath + href + '"></iframe>',
-							id : $(this).text()
-						});
+						if(isCrossDomain=="true"){
+							$element.tabAdd('admin-tab', {
+								title : $(this).text(),
+								content : '<iframe src="' + href + '"></iframe>',
+								id : $(this).text()
+							});
+						}
+						else{
+							// 新增一个Tab项
+							$element.tabAdd('admin-tab', {
+								title : $(this).text(),
+								content : '<iframe src="' + $$pageContextPath + href + '"></iframe>',
+								id : $(this).text()
+							});
+						}
+						
 						// existTabsNameArray.push($(this).text());
 					}
 					// 切换到指定Tab项
@@ -108,6 +119,7 @@
 				var $a = $("<a></a>");
 				// $a.attr("class", "afinve");
 				$a.attr("onclick", "javascript:return false;");
+				$a.attr("isCrossDomain", menu.isCrossDomain);
 				if (menu.link == null || menu.link == "") {
 					$a.attr("menuhref", "#");
 				} else {
@@ -130,6 +142,7 @@
 			} else {
 				var $a = $("<a></a>");
 				// $a.attr("class", "afinve");
+				$a.attr("isCrossDomain", menu.isCrossDomain);
 				if (menu.link == null || menu.link == "")
 					$a.attr("menuhref", "#");
 				else {

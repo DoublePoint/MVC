@@ -21,6 +21,7 @@ var _LL_Constant = new function() {
 		_AjaxForm : "ll-ajaxform",
 		_AjaxMenu : "ll-menu",
 		_AjaxFormLine : "ll-ajaxformline",
+		_Card :"ll-card",
 		_Tree : "ll-tree",
 		_FillLayOut : "ll-filllayout",
 		_FillAreaTB : "ll-fillarea-tb",

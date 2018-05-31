@@ -67,6 +67,7 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-lr.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-layoutarea-tb.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxgrid.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-card.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-gridfieldbase.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-gridfield.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-gridcheckbox.js" charset="utf-8"></script>

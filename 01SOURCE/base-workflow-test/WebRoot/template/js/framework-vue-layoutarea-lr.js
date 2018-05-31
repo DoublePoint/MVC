@@ -1,6 +1,6 @@
 (function($) {
 	Vue.component(_LL_Constant._ConstantComponentMap._FillAreaLR, {
-		props : [ 'id', 'width', 'backgroundcolor', 'dragenable' ],
+		props : [ 'id', 'width', 'backgroundcolor', 'dragenable',"showborder" ],
 		template : '<div :id="id+guid" class="ll-fill-area-lr"  :style="clientStyle"><slot></slot>' + '</div>',
 
 		data : function() {
@@ -141,27 +141,27 @@
 		}
 		/* 添加拖动按钮 */
 		this.addDragDom = function() {
-			var left = this.getDom().width() + this.getDom().position().left;
-			var dragId = this.domId + this.getDragDomExtendId();
-			var dragStyleStringBuffer = $.createStringBuffer("left", left);
-			var parentHeight = this.getParent().height();
-			dragStyleStringBuffer.append("height:" + parentHeight + "px;");
-			this.getDom().after(
-					'<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString()
-							+ '"  class="draggable ll-fill-area-left-right-center" ><div class="ll-drag-to-left"></div>');
-			if (this.dragenable) {
-				$("#" + dragId).draggable({
-					axis : "x",
-					cursor : "w-resize",
-					helper : "clone",
-					containment : "parent",
-					stop : function(event, ui) {
-						var dragId = ui.helper.context.id;
-						var drag = new _LL_Model.LayoutDrag(dragId);
-						drag.resize(ui);
-					}
-				});
-			}
+//			var left = this.getDom().width() + this.getDom().position().left;
+//			var dragId = this.domId + this.getDragDomExtendId();
+//			var dragStyleStringBuffer = $.createStringBuffer("left", left);
+//			var parentHeight = this.getParent().height();
+//			dragStyleStringBuffer.append("height:" + parentHeight + "px;");
+//			this.getDom().after(
+//					'<div id="' + dragId + '" style="' + dragStyleStringBuffer.toString()
+//							+ '"  class="draggable ll-fill-area-left-right-center" ><div class="ll-drag-to-left"></div>');
+//			if (this.dragenable) {
+//				$("#" + dragId).draggable({
+//					axis : "x",
+//					cursor : "w-resize",
+//					helper : "clone",
+//					containment : "parent",
+//					stop : function(event, ui) {
+//						var dragId = ui.helper.context.id;
+//						var drag = new _LL_Model.LayoutDrag(dragId);
+//						drag.resize(ui);
+//					}
+//				});
+//			}
 		}
 		this.resize = function() {
 			this.hide();
