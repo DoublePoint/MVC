@@ -20,6 +20,7 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private List<T> dataList=new ArrayList<T>();
+	private T data;
 	private PageInfo pageInfo;
 
 	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass) {
@@ -55,4 +56,13 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 		super();
 		this.pageInfo = new PageInfo();
 	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+	
 }

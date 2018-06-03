@@ -16,17 +16,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -72,6 +78,21 @@ public class LLController {
     	List<Model> list = repositoryService.createModelQuery().list();
     	resultList=CommonBeanUtils.copyTo(list, VOModel.class);
         response.setViewName("/sys/workflow/modelList");
+        dataWrap.setDataList(resultList);
+        response.setAjaxParameter("dataWrap", dataWrap);
+        return response;
+    }
+    
+    /**
+     * 模型列表
+     */
+    @RequestMapping(value = "model-retrieve")
+    @ResponseBody
+    public AjaxResponse retrieveModel(AjaxResponse response) {
+    	AjaxDataWrap<VOModel> dataWrap=new AjaxDataWrap<VOModel>();
+    	List<VOModel> resultList=new ArrayList<VOModel>();
+    	List<Model> list = repositoryService.createModelQuery().list();
+    	resultList=CommonBeanUtils.copyTo(list, VOModel.class);
         dataWrap.setDataList(resultList);
         response.setAjaxParameter("dataWrap", dataWrap);
         return response;
@@ -123,6 +144,33 @@ public class LLController {
 		ajaxResponse.setAjaxParameter("modelId", modelData.getId());
 		return ajaxResponse;
 	
+	}
+	
+	/**
+	 * 根据Model部署流程
+	 */
+	@RequestMapping(value = "model/deploy/{modelId}")
+	@ResponseBody
+	public AjaxResponse deploy(@PathVariable("modelId") String modelId, RedirectAttributes redirectAttributes) {
+		AjaxResponse response = new AjaxResponse();
+		try {
+			Model modelData = repositoryService.getModel(modelId);
+			ObjectNode modelNode = (ObjectNode) new ObjectMapper()
+					.readTree(repositoryService.getModelEditorSource(modelData.getId()));
+			byte[] bpmnBytes = null;
+
+			BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+			bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+
+			String processName = modelData.getName() + ".bpmn20.xml";
+			Deployment deployment = repositoryService.createDeployment().name(modelData.getName())
+					.addString(processName, new String(bpmnBytes)).deploy();
+			response.setAjaxParameter("returnMessage", "部署成功，部署ID=" + deployment.getId());
+		} catch (Exception e) {
+			Log4jUtil.error(e);
+			response.setErrorMessage("部署失败。");
+		}
+		return response;
 	}
 
 }

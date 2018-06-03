@@ -441,7 +441,7 @@ function AjaxGrid(domId) {
 	}
 
 	// getData
-	this.collectData = function(type) {
+	this.collectDataWrap = function(type) {
 		if (type == "checked") {
 			var wrap = $._Clone(this.getDataWrap());
 			var dataList = this.getCheckedRecords();

@@ -83,8 +83,8 @@ public class MenuManagementController extends BaseController {
 		if (dataWrap == null)
 			return null;
 		Menu menuQuery = null;
-		if (dataWrap.getDataList() != null && dataWrap.getDataList().size() > 0) {
-			menuQuery = dataWrap.getDataList().get(0);
+		if (dataWrap.getData()!=null) {
+			menuQuery = dataWrap.getData();
 		}
 
 		if (menuQuery != null) {

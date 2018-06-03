@@ -3,6 +3,30 @@ function init(response) {
 	ajaxgrid.setDataWrap(dataWrap);
 }
 
+function retrieve() {
+	var gridWrap = ajaxgrid.collectDataWrap();
+	var formWrap=ajaxform.collectDataWrap();
+	$.request({
+		url : $$pageContextPath + "/template/sys/workflow/model-retrieve",
+		type : "POST",
+		contentType : 'application/json;charset=UTF-8',
+		dataType : "json",
+		async : false,
+		data :{
+			gridWrap:gridWrap,
+			formWrap:formWrap
+		},
+		success : retrieveSuccess
+	});
+}
+
+function retrieveSuccess(response){
+	var dataWrap=response.get("dataWrap");
+	if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
+		$.shakeTips("未查询到任何数据!",2000);
+	ajaxgrid.setDataWrap(dataWrap);
+}
+
 function onClickAdd() {
 	$.openDialog({
 		type : 2,
@@ -12,6 +36,7 @@ function onClickAdd() {
 		url : $$pageContextPath + '/template/sys/workflow/model-add',
 		data : {},
 		yes : function() {
+			retrieve();
 		},
 		cancel : function() {
 
@@ -19,7 +44,16 @@ function onClickAdd() {
 	});
 }
 
-function customerFunction(a, b, c) {
-	return ' <button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width:80px;">  ' + '<span class="glyphicon "></span> 部署'
-			+ '</button>  ';
+function customerFunction(a, record, c) {
+	return ' <a href="javascript:deploy(\'' + record.id + '\')">' + ' <i class="glyphicon glyphicon-bullhorn"></i>' + ' </a>';
+}
+
+function deploy(modelId){
+	$.request({
+		url:$$pageContextPath+"/template/sys/workflow/model/deploy/"+modelId,
+		success:function(response){
+			var returnMessage=response.get("returnMessage");
+			$.alert(returnMessage);
+		}
+	});
 }

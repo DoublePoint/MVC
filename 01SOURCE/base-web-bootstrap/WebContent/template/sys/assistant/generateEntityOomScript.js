@@ -19,9 +19,9 @@ function stepChanging(event, currentIndex, newIndex) {
 			return false;
 		}
 	} else if (currentIndex == 2) {
-		gridAim.setDataWrap(gridResource.collectData("checked"));
+		gridAim.setDataWrap(gridResource.collectDataWrap("checked"));
 		var data1 = {
-			dataWrap : gridResource.collectData("checked"),
+			dataWrap : gridResource.collectDataWrap("checked"),
 			oomName : oomName
 		};
 		$.request({

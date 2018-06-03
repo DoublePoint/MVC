@@ -12,7 +12,7 @@ function onClickSave() {
 	if (!ajaxform.validate(true)) {
 		return;
 	}
-	var data = ajaxform.collectData();
+	var data = ajaxform.collectDataWrap();
 	var dataWrap = $.createAjaxDataWrap();
 	var dataList = new Array();
 	dataList[0] = data;

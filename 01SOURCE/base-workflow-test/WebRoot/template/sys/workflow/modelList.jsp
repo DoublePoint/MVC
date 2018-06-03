@@ -42,13 +42,20 @@
 							<button type="button" style="width:100px;" class="btn btn-default btn-sm " onclick="onClickAdd();">  
         						<span class="glyphicon glyphicon-plus ll_add_icon"></span> 创建模型
    							</button>  
+   							<button type="button" style="width:70px;" class="btn btn-default btn-sm" onclick="onClickDelete();">  
+        						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 删除
+   							</button>  
+   							<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickDelete();">  
+        						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 部署
+   							</button>  
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="*"  showtitle="true" title="流程列表">
 						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" > 
 							<ll-gridcheck ></ll-gridcheck>
-							<ll-gridcustom align="center" width="120" title="操作" formatter="customerFunction"></ll-gridcustom>  
+							<ll-gridcustom align="center" width="80" title="部署" formatter="customerFunction"></ll-gridcustom>  
+							<ll-gridcustom align="center" width="80" title="编辑" formatter="customerFunction"></ll-gridcustom>  
 							<ll-gridfield field="name" width="150"  title="流程名称"  ></ll-gridfield>  
-							<ll-gridfield field="version" width="150"  title="版本"  ></ll-gridfield>  
+							<ll-gridfield field="version" width="80"  title="版本"  ></ll-gridfield>  
 							<ll-gridfield field="createTime"   title="创建时间"  ></ll-gridfield>  
 						</ll-ajaxgrid>
 					</ll-fillarea-tb>

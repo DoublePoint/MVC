@@ -8,9 +8,9 @@ function addNewRecord() {
 }
 
 function retrieve() {
-	var dataWrap = ajaxgrid.collectData();
+	var dataWrap = ajaxgrid.collectDataWrap();
 
-	var formData = ajaxform.collectData();
+	var formData = ajaxform.collectDataWrap();
 	var array = [];
 	array.push(formData);
 	dataWrap.setDataList(array);
@@ -34,7 +34,7 @@ function retrieve() {
 }
 
 function onClickSave() {
-	var data = ajaxgrid.collectData("all");
+	var data = ajaxgrid.collectDataWrap("all");
 	$.request({
 		url : $$pageContextPath + "/template/sys/code/add",
 		data : {
@@ -56,7 +56,7 @@ function onClickSave() {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			deleteDataWrap : ajaxgrid.collectData("checked")
+			deleteDataWrap : ajaxgrid.collectDataWrap("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/code/delete",

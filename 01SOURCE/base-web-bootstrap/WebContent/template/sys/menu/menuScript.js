@@ -1,15 +1,13 @@
 function retrieve() {
-	var dataWrap = lltestdatagrid.collectData();
+	var dataWrap = lltestdatagrid.collectDataWrap();
 	var nodes = treeDemo.getSelectedNodes();
 	var selectNodeCdbs="";
 	if (nodes.length > 0) {
 		selectNodeCdbs = nodes[0].code;
 	}
-	var formData=ajaxform.collectData();
-	formData.id=selectNodeCdbs;
-	var array = [];
-	array.push(formData);
-	dataWrap.setDataList(array);
+	var formData=ajaxform.collectDataWrap();
+	formData.data.id=selectNodeCdbs;
+	dataWrap.setData(formData.data);
 	$.request({
 		url : $$pageContextPath + "/template/sys/menu/retrieve",
 		type : "POST",
@@ -74,7 +72,7 @@ function onClickAdd() {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data={
-			deleteDataWrap:lltestdatagrid.collectData("checked")
+			deleteDataWrap:lltestdatagrid.collectDataWrap("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/menu/delete",

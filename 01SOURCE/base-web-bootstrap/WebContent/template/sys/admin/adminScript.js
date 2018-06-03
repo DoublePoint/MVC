@@ -1,6 +1,6 @@
 function retrieve() {
-	var dataWrap = ajaxgrid.collectData();
-	var formData = ajaxform.collectData();
+	var dataWrap = ajaxgrid.collectDataWrap();
+	var formData = ajaxform.collectDataWrap();
 	var array = [];
 	array.push(formData);
 	dataWrap.setDataList(array);
@@ -28,7 +28,7 @@ function retrieveSuccess(response) {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			dataWrap : ajaxgrid.collectData("checked")
+			dataWrap : ajaxgrid.collectDataWrap("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/admin/delete",

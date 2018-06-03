@@ -62,29 +62,7 @@ public class ModelController {
 
 	
 
-	/**
-	 * 根据Model部署流程
-	 */
-	@RequestMapping(value = "deploy/{modelId}")
-	public String deploy(@PathVariable("modelId") String modelId, RedirectAttributes redirectAttributes) {
-		try {
-			Model modelData = repositoryService.getModel(modelId);
-			ObjectNode modelNode = (ObjectNode) new ObjectMapper()
-					.readTree(repositoryService.getModelEditorSource(modelData.getId()));
-			byte[] bpmnBytes = null;
-
-			BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
-			bpmnBytes = new BpmnXMLConverter().convertToXML(model);
-
-			String processName = modelData.getName() + ".bpmn20.xml";
-			Deployment deployment = repositoryService.createDeployment().name(modelData.getName())
-					.addString(processName, new String(bpmnBytes)).deploy();
-			redirectAttributes.addFlashAttribute("message", "部署成功，部署ID=" + deployment.getId());
-		} catch (Exception e) {
-			logger.error("根据模型部署流程失败：modelId={}", modelId, e);
-		}
-		return "redirect:/workflow/model/list";
-	}
+	
 
 	/**
 	 * 导出model对象为指定类型

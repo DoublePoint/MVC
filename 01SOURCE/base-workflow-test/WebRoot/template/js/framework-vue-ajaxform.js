@@ -100,6 +100,11 @@ function AjaxForm(domId) {
 		}
 		return obj;
 	}
+	this.collectDataWrap = function(){
+		var dataWrap=$.createAjaxDataWrap();
+		dataWrap.setData($.collectData());
+		return dataWrap;
+	}
 	this.doInDialogSuccess = function() {
 		this.initNotSave();
 	}

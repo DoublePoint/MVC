@@ -41,8 +41,9 @@
 					<ll-fillarea-tb height="*"  showtitle="true" title="流程列表">
 						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" > 
 							<ll-gridcheck ></ll-gridcheck>
-							<ll-gridfield field="key" width="150"  title="KEY"  ></ll-gridfield>  
-							<ll-gridfield field="version" width="150"  title="VERSION"  ></ll-gridfield>  
+							<ll-gridfield field="deploymentId" width="80"  title="部署Id"  ></ll-gridfield>  
+							<ll-gridfield field="key" width="150"  title="流程名称"  ></ll-gridfield>  
+							<ll-gridfield field="version" width="80"  title="版本"  ></ll-gridfield>  
 							<ll-gridcustom align="center" title="流程图" formatter="customerFunction"></ll-gridcustom>  
 						</ll-ajaxgrid>
 					</ll-fillarea-tb>

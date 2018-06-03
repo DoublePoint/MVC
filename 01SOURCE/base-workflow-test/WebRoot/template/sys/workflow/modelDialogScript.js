@@ -12,7 +12,7 @@ function onClickSave() {
 	if (!ajaxform.validate(true)) {
 		return;
 	}
-	var data = ajaxform.collectData();
+	var data = ajaxform.collectDataWrap();
 	$.request({
 		url : $$pageContextPath + "/template/sys/workflow/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {

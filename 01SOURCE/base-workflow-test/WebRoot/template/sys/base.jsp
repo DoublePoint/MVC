@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" media="all">
 <!-- 引入bootstrap-table样式 -->
 <link href="${pageContext.request.contextPath}/template/plugins/bootstrap-table-1.12.1/dist/bootstrap-table.min.css" rel="stylesheet">
-<!-- jquery -->
+<!-- jquery --> 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/template/plugins/bootstrap-select/dist/css/bootstrap-select.css">
 <!-- FONTAWESOME STYLES-->

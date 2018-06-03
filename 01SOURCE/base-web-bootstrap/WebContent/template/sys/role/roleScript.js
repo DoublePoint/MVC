@@ -22,9 +22,9 @@ function addNewRecord() {
 }
 
 function retrieve() {
-	var dataWrap = roleAjaxGrid.collectData();
+	var dataWrap = roleAjaxGrid.collectDataWrap();
 
-	var formData = ajaxform.collectData();
+	var formData = ajaxform.collectDataWrap();
 	var array = [];
 	array.push(formData);
 	dataWrap.setDataList(array);
@@ -48,7 +48,7 @@ function retrieve() {
 }
 
 function onClickSave() {
-	var data = roleAjaxGrid.collectData("all");
+	var data = roleAjaxGrid.collectDataWrap("all");
 	$.request({
 		url : $$pageContextPath + "/template/sys/role/save",
 		data : {
@@ -70,7 +70,7 @@ function onClickSave() {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			deleteDataWrap : roleAjaxGrid.collectData("checked")
+			deleteDataWrap : roleAjaxGrid.collectDataWrap("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "/template/sys/role/delete",
