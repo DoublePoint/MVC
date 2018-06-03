@@ -21,6 +21,7 @@ public class VOProcessDefinition extends BaseModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public String id;
 	public String key;
 	public int revision = 1;
 	public int version;
@@ -146,6 +147,14 @@ public class VOProcessDefinition extends BaseModel{
 
 	public void setIdentityLinksInitialized(boolean isIdentityLinksInitialized) {
 		this.isIdentityLinksInitialized = isIdentityLinksInitialized;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
