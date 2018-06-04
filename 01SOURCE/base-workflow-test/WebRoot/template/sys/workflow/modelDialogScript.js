@@ -13,7 +13,7 @@ function onClickSave() {
 		return;
 	}
 	var dataWrap = ajaxform.collectDataWrap();
-	var record=dataWrap.getData();
+	var data=dataWrap.getData();
 	$.request({
 		url : $$pageContextPath + "/template/sys/workflow/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {
