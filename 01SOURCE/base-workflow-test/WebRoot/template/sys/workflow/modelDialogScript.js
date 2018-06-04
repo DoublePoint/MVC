@@ -12,7 +12,8 @@ function onClickSave() {
 	if (!ajaxform.validate(true)) {
 		return;
 	}
-	var data = ajaxform.collectDataWrap();
+	var dataWrap = ajaxform.collectDataWrap();
+	var record=dataWrap.getData();
 	$.request({
 		url : $$pageContextPath + "/template/sys/workflow/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {
@@ -20,6 +21,8 @@ function onClickSave() {
 		},
 		success : function(response) {
 			var modelId = response.get("modelId");
+			$.tips("创建成功。");
+			$.close();
 			$.openTab({
 				title : "Model:"+modelId,
 				content : '<iframe src="' + $$pageContextPath + "/modeler.html?modelId=" + modelId + '"></iframe>',
@@ -32,3 +35,4 @@ function onClickSave() {
 		}
 	});
 }
+

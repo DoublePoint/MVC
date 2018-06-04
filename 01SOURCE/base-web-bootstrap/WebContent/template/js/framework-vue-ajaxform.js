@@ -102,7 +102,7 @@ function AjaxForm(domId) {
 	}
 	this.collectDataWrap = function(){
 		var dataWrap=$.createAjaxDataWrap();
-		dataWrap.setData($.collectData());
+		dataWrap.setData(this.collectData());
 		return dataWrap;
 	}
 	this.doInDialogSuccess = function() {

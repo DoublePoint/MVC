@@ -44,6 +44,34 @@ function onClickAdd() {
 	});
 }
 
+
+function onClickDelete() {
+	$.confirm('确定要删除吗？', function() {
+		var data={
+			dataWrap:ajaxgrid.collectDataWrap("checked")
+		};
+		$.request({
+			url : $$pageContextPath + "/template/sys/workflow/model-delete",
+			data : data,
+			success : function(response) {
+				var deleteState=response.get("deleteState");
+				if(!deleteState){
+					$.alert("删除失败!");
+					return;
+				}
+				$.tips('删除成功');
+				retrieve();
+			},
+			error : function() {
+				$.shakeTips('删除失败');
+				return false;
+			}
+		});
+	}, function() {
+	});
+
+}
+
 function customerFunction(a, record, c) {
 	return ' <a href="javascript:deploy(\'' + record.id + '\')">' + ' <i class="glyphicon glyphicon-bullhorn"></i>' + ' </a>';
 }

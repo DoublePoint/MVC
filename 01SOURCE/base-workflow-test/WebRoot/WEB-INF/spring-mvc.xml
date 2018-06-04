@@ -82,4 +82,19 @@
 
 	<!-- 支持上传文件 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
+	 <!-- 拦截器 ↓↓↓↓↓ -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />	
+			<bean class="cn.doublepoint.commonutil.interceptor.DataEncapsulateAndDecapsulateIntecerptor">
+				<property name="exceptUrls">  
+                    <list>  
+                       <!--  <value>/template/sys/assistant/zipAndDownload1</value>   -->
+                    </list>  
+                </property>  
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	  <!-- 拦截器 ↑↑↑↑↑ -->
 </beans>

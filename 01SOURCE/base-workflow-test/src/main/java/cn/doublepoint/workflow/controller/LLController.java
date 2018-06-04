@@ -29,6 +29,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.StreamingHttpOutputMessage.Body;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.workflow.domain.model.entity.VOModel;
 import cn.doublepoint.workflow.domain.model.entity.VOProcessDefinition;
@@ -108,7 +110,18 @@ public class LLController {
         response.setViewName("/sys/workflow/modelDialog");
         return response;
 	}
-    
+    @RequestMapping(value = "model-delete")
+    @ResponseBody
+	public AjaxResponse delete(BodyReaderHttpServletRequestWrapper request) {
+    	AjaxDataWrap<VOModel> dataWrap=request.getAjaxDataWrap("dataWrap", VOModel.class);
+    	List<VOModel> deleteList=dataWrap.getDataList();
+    	if(deleteList!=null&&deleteList.size()>0){
+    		deleteList.stream().forEach(item->repositoryService.deleteModel(item.getId()));
+    	}
+		AjaxResponse response=new AjaxResponse();
+		response.setAjaxParameter("deleteState", true);
+		return response;
+	}
     /**
 	 * 创建模型
 	 */

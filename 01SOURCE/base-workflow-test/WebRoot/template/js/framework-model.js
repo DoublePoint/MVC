@@ -93,6 +93,7 @@ var _LL_Model = new function() {
 		this.code = "";
 		this.msg = "";
 		this.dataList = [];
+		this.data=null;
 		this.pageInfo = $.createPageInfo();
 		this.parse = function(jsonObjectDataWrap) {
 			if (jsonObjectDataWrap == null)
@@ -103,6 +104,12 @@ var _LL_Model = new function() {
 		this.setDataList = function(dataList) {
 			this.dataList = dataList;
 		};
+		this.setData = function(data){
+			this.data=data;
+		};
+		this.getData = function(){
+			return this.data;
+		}
 		this.getDataList = function() {
 			return this.dataList;
 		};

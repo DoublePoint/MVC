@@ -30,7 +30,7 @@
 			</ll-fillarea-lr>
 			<ll-fillarea-lr width="*">
 				<ll-filllayout > 
-					<ll-fillarea-tb height="85" showtitle="true" title="查询条件" showborder="false">
+					<ll-fillarea-tb height="85" showtitle="true" title="查询条件1" showborder="false">
 							<ll-ajaxform id="ajaxform" cols="3" colproportion="2:3:2:3:1:3"> 
 									<ll-formfield id="name" title="菜单名称"  field="name" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
 									<ll-formfield id="fcdmc" title="父菜单名称"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll-formfield>
@@ -40,9 +40,7 @@
    										</button>  
    										&nbsp;
 									</ll-formtoolbar>
-									
 							</ll-ajaxform>
-							
 					</ll-fillarea-tb>
 					<ll-fillarea-tb height="35" > 
 							<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="onClickAdd();">  
