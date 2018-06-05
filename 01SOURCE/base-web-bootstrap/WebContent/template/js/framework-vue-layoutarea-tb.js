@@ -1,5 +1,5 @@
 (function($) {
-	var FillAreaTBTemplate='<div  :id="id+guid" :class="clientClassBuffer" :style="clientStyle" ><div class="panel-heading" :style="clientHeadingStyle">{{headTitle}}</div><slot></slot></div>';
+	var FillAreaTBTemplate='<div  :id="id+guid" :class="clientClassBuffer" :style="clientStyle" ><div class="panel-heading" :style="clientHeadingStyle">{{headTitle}}</div><div class="panel-content-l" style="height:100%;"><slot></slot></div></div>';
 	Vue.component(_LL_Constant._ConstantComponentMap._FillAreaTB, {
 		props : [ 'id', 'height',  'backgroundcolor',"showborder","showtitle","title" ],
 		template : FillAreaTBTemplate,
@@ -121,7 +121,7 @@ _LL_Model.FillAreaTB=function(domId) {
 		this.height = 0;
 		this.isResize=false;
 		this.showborder=false;
-		
+		this.showtitle=false;
 		this.getDomId=function(){
 			return this.domId;
 		}
@@ -168,7 +168,10 @@ _LL_Model.FillAreaTB=function(domId) {
 				}
 			}
 			var thisRuleHright=parentheight - allBrotherFixHeight;
-			
+			if(this.showtitle=="true")
+				this.getDom().children(".panel-content-l").eq(0).height(thisRuleHright-36);
+			else
+				this.getDom().children(".panel-content-l").eq(0).height(thisRuleHright);
 			if(thisRuleHright<_LL_Constant._ConstantLayoutArea._DEFAULT_MIN_HEIGHT)
 				thisRuleHright=_LL_Constant._ConstantLayoutArea._DEFAULT_MIN_HEIGHT;
 			

@@ -272,7 +272,11 @@ function AjaxGrid(domId) {
 		// 高度设置为获取父元素的高度
 		var brotherHeight = 0;
 		try {
-			brotherHeight = this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").children('.panel-heading').outerHeight(true);
+			var tb_lr_title=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").children('.panel-heading');
+			if(tb_lr_title.css("display")=="none")
+				brotherHeight=0;
+			else
+				brotherHeight = tb_lr_title.outerHeight(true);
 		} catch (e) {
 			brotherHeight = 0;
 		}
