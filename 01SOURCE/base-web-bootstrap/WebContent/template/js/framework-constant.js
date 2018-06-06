@@ -26,6 +26,7 @@ var _LL_Constant = new function() {
 		_FillLayOut : "ll-filllayout",
 		_FillAreaTB : "ll-fillarea-tb",
 		_FillAreaLR : "ll-fillarea-lr",
+		_FormArea : "ll-formarea",
 		_FormDropTree : "ll-formdroptree",
 		_FormField : "ll-formfield",
 		_FormCheck : "ll-formcheck",

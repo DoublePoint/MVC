@@ -1,6 +1,10 @@
 (function($) {
-	var componentTemplate = '<div class="layui-inline">' + '<label class="layui-form-label">{{"&nbsp;&nbsp;"+title+"："}}</label>' + '<div class="layui-input-block">'
-			+ '<input :id="id+guid" type="text" class="layui-input" lay-verify="title" :field="field" :id="id+guid" :placeholder="placeholder">' + ' </div>' + '</div>';
+	var componentTemplate = '<div class="layui-inline">' 
+		+ '<label class="layui-form-label">{{"&nbsp;&nbsp;"+title+"："}}</label>' //
+		+ '<div class="layui-input-block">'//
+		+ '<input :id="id+guid" type="text" class="layui-input" lay-verify="title" :field="field" :id="id+guid" :placeholder="placeholder">' 
+		+ ' </div>' //
+		+ '</div>';
 	_LL_Model.formFieldComponent(_LL_Constant._ConstantComponentMap._FormDate,componentTemplate);
 })(jQuery);
 

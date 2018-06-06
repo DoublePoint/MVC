@@ -12,11 +12,7 @@ function init(response) {
 }
 
 function onClickSave(){
-	var data=ajaxform.collectDataWrap();
-	var addDataWrap =  $.createAjaxDataWrap();
-	var dataList=new Array();
-	dataList[0]=data;
-	addDataWrap.setDataList(dataList);
+	var addDataWrap=ajaxform.collectDataWrap();
 	$.request({
 		url : $$pageContextPath + "/template/sys/menu/add?testtest=111&test=123",
 		data : {

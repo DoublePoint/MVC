@@ -14,6 +14,7 @@
 	'type',// 类型
 	'validtype', // 验证类型
 	'colspan', //横跨列数
+	'rowspan', //横跨行数
 	'placeholder', //占位文字
 	'parentId', 
 	'datasource', //数据源 对某些标签
@@ -124,7 +125,9 @@
 				_RegisterComponent : function() {
 					var domId = this._GetComponentDomId();
 					var formField;
-					if (fieldType == _LL_Constant._ConstantComponentMap._FormField)
+					if (fieldType == _LL_Constant._ConstantComponentMap._FormArea) 
+						formField = new _LL_Model.FormArea(domId);
+					else if (fieldType == _LL_Constant._ConstantComponentMap._FormField)
 						formField = new _LL_Model.FormField(domId);
 					else if (fieldType == _LL_Constant._ConstantComponentMap._FormSelect)
 						formField = new _LL_Model.FormSelect(domId);
@@ -237,6 +240,7 @@
 		this.isChanged = false;
 		this.parentAjaxFormId = "";
 		this.required = false;
+		this.rowspan=1;
 
 		this.addLineStart = function() {
 			this.getRoot().before('<div class="layui-form-item">');

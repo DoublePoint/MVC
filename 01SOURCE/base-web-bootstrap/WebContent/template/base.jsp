@@ -78,6 +78,7 @@
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-ajaxformline.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formfieldbase.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formfield.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/template/js/framework-vue-formarea.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-forminputbutton.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formfileinput.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/template/js/framework-vue-formdate.js" charset="utf-8"></script>
