@@ -110,4 +110,17 @@
 	</mvc:interceptors>
 	  <!-- 拦截器 ↑↑↑↑↑ -->
 	  
+	<!-- 配置RestTemplate 调用RestFul服务相关-->
+    <!--Http client Factory -->
+    <bean id="httpClientFactory"
+        class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+        <property name="connectTimeout" value="10000" />
+        <property name="readTimeout" value="10000" />
+    </bean>
+
+    <!--RestTemplate -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="httpClientFactory" />
+    </bean>
+	  
 </beans>

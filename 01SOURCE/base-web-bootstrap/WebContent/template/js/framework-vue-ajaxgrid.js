@@ -235,8 +235,8 @@ function AjaxGrid(domId) {
 	}
 
 	this.init = function() {
-		this.initStyle();
 		this.initData();
+		this.initStyle();
 		this.initEvent();
 	}
 	this.initData = function() {
@@ -271,18 +271,19 @@ function AjaxGrid(domId) {
 	this.initStyle = function() {
 		// 高度设置为获取父元素的高度
 		var brotherHeight = 0;
-		try {
-			var tb_lr_title=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").children('.panel-heading');
-			if(tb_lr_title.css("display")=="none")
-				brotherHeight=0;
-			else
-				brotherHeight = tb_lr_title.outerHeight(true);
-		} catch (e) {
-			brotherHeight = 0;
-		}
-		var parentHeight = this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").get(0).offsetHeight;
+//		try {
+//			var tb_lr_title=this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").children('.panel-heading');
+//			if(tb_lr_title.css("display")=="none")
+//				brotherHeight=0;
+//			else
+//				brotherHeight = tb_lr_title.outerHeight(true);
+//		} catch (e) {
+//			brotherHeight = 0;
+//		}
+//		var parentHeight = this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").get(0).offsetHeight;
+		var parentHeight = this.getDom().closest(".table-responsive").parent().height();
 		if (parentHeight == 0) {
-			parentHeight = this.getDom().closest(".ll-fill-area-tb,.ll-fill-area-lr").height();
+			parentHeight = 0;
 		}
 		var thisResultHeight = parentHeight - brotherHeight;
 		if (thisResultHeight <= _LL_Constant._ConstantAjaxDataGrid._DEFAULT_MIN_HEIGHT)

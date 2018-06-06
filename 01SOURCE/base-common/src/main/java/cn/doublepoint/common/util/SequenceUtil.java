@@ -36,12 +36,34 @@ public class SequenceUtil extends DataBaseUtil {
 	 * @param queryParamList
 	 * @return
 	 */
+	public static <T extends BaseModel> Long getNextVal(String str) {
+		return getNextVal(str, 1).get(0);
+	}
+
+	/**
+	 * 获取实体信息
+	 * 
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
 	public static <T extends BaseModel> List<Long> getNextVal(Class<T> clazz, int count) {
 		String qualifiedName = clazz.getPackage().getName() + "." + clazz.getName();
-		long currentSequenceNo = getCurrentVal(clazz);
+		return getNextVal(qualifiedName, count);
+	}
+
+	/**
+	 * 获取实体信息
+	 * 
+	 * @param clazz
+	 * @param queryParamList
+	 * @return
+	 */
+	public static List<Long> getNextVal(String str, int count) {
+		long currentSequenceNo = getCurrentVal(str);
 		long arimSequenceNo = currentSequenceNo + count;
 		Sequence sequence = new Sequence();
-		sequence.setEntityCode(qualifiedName);
+		sequence.setEntityCode(str);
 		sequence.setSequenceNo(arimSequenceNo);
 		BaseDaoService daoService = getDaoService();
 		daoService.saveOrUpdate(sequence);
@@ -54,8 +76,12 @@ public class SequenceUtil extends DataBaseUtil {
 	}
 
 	public static <T extends BaseModel> Long getCurrentVal(Class<T> clazz) {
+		return getCurrentVal(getQualifiedName(clazz));
+	}
+
+	public static Long getCurrentVal(String str) {
 		BaseDaoService daoService = getDaoService();
-		Sequence obj = daoService.loadById(Sequence.class, getQualifiedName(clazz));
+		Sequence obj = daoService.loadById(Sequence.class, str);
 		if (obj == null)
 			return 0L;
 		return obj.getSequenceNo();

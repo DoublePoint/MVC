@@ -42,30 +42,22 @@
 					<ll-fillarea-tb height="*" title="代办任务1" showtitle="true">
 						<ll-tabpanel>
 							<ll-tab title="待办任务" active="true">
-								<ll-filllayout> 
-									<ll-fillarea-tb height="*">
-										<ll-ajaxgrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
-											<ll-gridcheck ></ll-gridcheck>
-											<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-											<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
-											<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
-											<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield> 
-										</ll-ajaxgrid>
-									</ll-fillarea-tb>
-								</ll-filllayout>
+								<ll-ajaxgrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
+									<ll-gridcheck ></ll-gridcheck>
+									<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
+									<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
+									<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
+									<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield> 
+								</ll-ajaxgrid>
 							</ll-tab> 
 							<ll-tab title="角色待办">
-								<ll-filllayout> 
-									<ll-fillarea-tb height="*">
-										<ll-ajaxgrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
-											<ll-gridcheck ></ll-gridcheck>
-											<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-											<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
-											<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
-											<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield>
-										</ll-ajaxgrid> 
-									</ll-fillarea-tb>
-								</ll-filllayout>
+								<ll-ajaxgrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
+									<ll-gridcheck ></ll-gridcheck>
+									<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
+									<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
+									<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
+									<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield>
+								</ll-ajaxgrid> 
 							</ll-tab>
 						</ll-tabpanel>
 					</ll-fillarea-tb>

@@ -9,7 +9,7 @@ package cn.doublepoint.common.util;
 
 import java.util.List;
 
-import cn.doublepoint.common.application.template.sys.droplist.CommonDropBeanListService;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.droplist.CommonDropBeanListService;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
 import cn.doublepoint.commonutil.ajaxmodel.DropBean;
 

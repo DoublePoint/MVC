@@ -37,7 +37,7 @@ public class DownloadRecord {
 		this.filePath = filePath;
 		this.ip = request.getRemoteAddr();
 		this.port = request.getRemotePort();
-		this.ua = this.ua = request.getHeader("user-agent");
+		this.ua = request.getHeader("user-agent");
 		this.startTime = new Timestamp(System.currentTimeMillis());
 	}
 

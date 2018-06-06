@@ -377,8 +377,15 @@ function AjaxFormLine() {
 						inputPer += parseInt(lineColproportion[i]);
 					}
 					inputwidthPercent = inputPer / totalWidthPercent;
-				} else
-					return;
+				} else{
+					//此种情况出现在例如有两列时 第而列设置了为两列 则按照一列的取
+					end = lineColproportion.length
+					// 例如1:1:2:2 则label:1 input: 1+2+2
+					for (var i = start + 1; i < end; i++) {
+						inputPer += parseInt(lineColproportion[i]);
+					}
+					inputwidthPercent = inputPer / totalWidthPercent;
+				}
 				var inputLineWidthPercent = labelwidthPercent + inputwidthPercent;// 当前字段占总行的百分比
 				// 对于同一个字段 将label:input:label:input 组装成label:(input+label+input)
 				// 如1:3:1:3-->1:(3+1+3)

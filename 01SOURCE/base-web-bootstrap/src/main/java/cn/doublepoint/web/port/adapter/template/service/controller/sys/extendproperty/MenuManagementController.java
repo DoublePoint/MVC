@@ -122,7 +122,7 @@ public class MenuManagementController extends BaseController {
 		AjaxDataWrap<Menu> addDataWrap = request.getAjaxDataWrap("addDataWrap", Menu.class);
 		if (addDataWrap == null)
 			return null;
-		Menu menu = addDataWrap.getDataList().get(0);
+		Menu menu = addDataWrap.getData();
 		menuService.saveOrUpdate(menu);
 		return new AjaxResponse();
 	}

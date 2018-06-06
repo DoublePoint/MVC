@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.application.template.sys.role.MenuRoleService;
 import cn.doublepoint.common.application.template.sys.role.RoleService;
-import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.common.domain.model.entity.sys.Role;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
