@@ -14,9 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.sys.menuvisitlog.MenuVisitLogService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.entity.sys.MenuVisitLog;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menuvisitlog.MenuVisitLogService;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;

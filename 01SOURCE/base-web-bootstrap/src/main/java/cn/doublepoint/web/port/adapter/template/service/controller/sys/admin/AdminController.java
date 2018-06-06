@@ -16,8 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.sys.login.AdminServiceImpl;
 import cn.doublepoint.common.domain.model.entity.sys.Admin;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.login.AdminService;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.login.AdminServiceImpl;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
@@ -28,7 +29,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 public class AdminController extends BaseController{
 
 	@Autowired
-	AdminServiceImpl adminService;
+	AdminService adminService;
 
 	@RequestMapping("/admin")
 	public String adminJsp(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
@@ -76,14 +77,6 @@ public class AdminController extends BaseController{
 		if (dataWrap == null)
 			return false;
 		return adminService.remove(dataWrap.getDataList());
-	}
-
-	public AdminServiceImpl getAdminService() {
-		return adminService;
-	}
-
-	public void setAdminService(AdminServiceImpl adminService) {
-		this.adminService = adminService;
 	}
 
 }

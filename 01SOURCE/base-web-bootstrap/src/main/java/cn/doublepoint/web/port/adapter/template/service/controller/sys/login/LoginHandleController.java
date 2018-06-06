@@ -11,8 +11,8 @@ package cn.doublepoint.web.port.adapter.template.service.controller.sys.login;
 
 import javax.annotation.Resource;
 
-import cn.doublepoint.common.application.template.sys.login.UserApplicationService;
 import cn.doublepoint.common.domain.model.entity.sys.User;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.login.UserApplicationService;
 
 public class LoginHandleController {
 	

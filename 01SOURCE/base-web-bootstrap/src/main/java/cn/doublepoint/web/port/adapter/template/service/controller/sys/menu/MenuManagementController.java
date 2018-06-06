@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.web.port.adapter.template.service.controller.sys.extendproperty;
+package cn.doublepoint.web.port.adapter.template.service.controller.sys.menu;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;

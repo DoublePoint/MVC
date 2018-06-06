@@ -48,14 +48,5 @@ public interface WorksheetService {
 	 * @param worksheet
 	 * @return
 	 */
-	public boolean saveOrUpdate(Worksheet worksheet) ;
-	
-	/**
-	 * 创建或更新数据
-	 * @param worksheet
-	 * @return
-	 */
-	public boolean saveOrUpdate(List<Worksheet> worksheetList) ;
-	
-	
+	public boolean create(Worksheet worksheet) ;
 }

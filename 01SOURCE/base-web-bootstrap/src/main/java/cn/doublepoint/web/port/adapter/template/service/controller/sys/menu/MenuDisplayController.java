@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.sys.menu.MenuService;
 import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;

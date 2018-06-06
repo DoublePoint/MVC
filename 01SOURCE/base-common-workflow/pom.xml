@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>base-workflow-test</artifactId>
-
-	<parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>base-common-workflow</artifactId>
+  
+  <parent>
 		<groupId>cn.doublepoint.base</groupId>
 		<artifactId>base-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
@@ -11,10 +11,8 @@
 	<properties>
 		<activiti.version>5.22.0</activiti.version>
 	</properties>
-
-	<!-- Modeler模块使用的后台服务都存放在activiti-modeler模块中，在自己的项目中添加依赖： activiti-modeler模块提供模型先关的操作：创建、保存、转换json与xml格式等 activiti-diagram-rest模块用来处理流程图有关的功能：流程图布局（layout）、节点高亮等 -->
+	
 	<dependencies>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -155,17 +153,7 @@
 		<!-- 本地项目 -->
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common</artifactId>
-			<version>${cn.doublepoint.base.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-common-util</artifactId>
-			<version>${cn.doublepoint.base.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common-workflow</artifactId>
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 	</dependencies>

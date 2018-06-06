@@ -11,7 +11,7 @@ import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 
-@Service("worksheetService")
+@Service("llWorksheetService")
 public class WorksheetServiceImpl  implements WorksheetService{
 
 	/**
@@ -65,7 +65,7 @@ public class WorksheetServiceImpl  implements WorksheetService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(Worksheet worksheet) {
+	public boolean create(Worksheet worksheet) {
 		if (StringUtil.isNullOrEmpty(worksheet.getWorksheetNo())){
 			worksheet.setId(SequenceUtil.getNextVal(Worksheet.class));
 			worksheet.setCreateTime(DateTimeUtil.getCurrentDate());
@@ -75,25 +75,6 @@ public class WorksheetServiceImpl  implements WorksheetService{
 		return true;
 	}
 	
-	/**
-	 * 创建或更新数据
-	 * @param worksheetList
-	 * @return
-	 */
-	@Override
-	public boolean saveOrUpdate(List<Worksheet> worksheetList) {
-		worksheetList.stream().forEach(item->{
-			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(Worksheet.class));
-				item.setCreateTime(DateTimeUtil.getCurrentDate());
-			}
-			item.setModifyTime(DateTimeUtil.getCurrentDate());
-		});
-		
-		JPAUtil.saveOrUpdate(worksheetList);
-		return true;
-	}
-
 	@Override
 	public List<Worksheet> findAll(PageInfo pageInfo) {
 		return JPAUtil.load(Worksheet.class,pageInfo);

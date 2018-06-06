@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.application.template.sys.role.MenuRoleService;
-import cn.doublepoint.common.application.template.sys.role.RoleService;
 import cn.doublepoint.common.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.common.domain.model.entity.sys.Role;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.role.MenuRoleService;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.role.RoleService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
