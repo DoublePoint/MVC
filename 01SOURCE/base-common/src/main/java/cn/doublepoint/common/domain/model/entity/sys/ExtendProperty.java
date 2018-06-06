@@ -9,8 +9,13 @@
  */
 package cn.doublepoint.common.domain.model.entity.sys;
 
-import java.util.*;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 @Entity

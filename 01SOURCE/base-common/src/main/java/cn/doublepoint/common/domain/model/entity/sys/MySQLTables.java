@@ -12,6 +12,10 @@ package cn.doublepoint.common.domain.model.entity.sys;
 import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
 
 public class MySQLTables extends BaseEntity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String tableCatalog;
 	private String tableSchema;
 	private String tableName;
