@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
@@ -14,12 +12,12 @@
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 		<!-- 执行完Controller中的方法调用拦截器 HandleMethodInteceptor -->
 		<mvc:return-value-handlers>
-            <bean class="cn.doublepoint.commonutil.interceptor.ControllerReturnIntecerptor"/>
-        </mvc:return-value-handlers>
-        <!-- 自定义参数解析器 -->
-        <mvc:argument-resolvers>
-       	 	<bean class="cn.doublepoint.commonutil.interceptor.AjaxResponseArgumentsResolver"></bean>
-    	</mvc:argument-resolvers>
+			<bean class="cn.doublepoint.commonutil.interceptor.ControllerReturnIntecerptor" />
+		</mvc:return-value-handlers>
+		<!-- 自定义参数解析器 -->
+		<mvc:argument-resolvers>
+			<bean class="cn.doublepoint.commonutil.interceptor.AjaxResponseArgumentsResolver"></bean>
+		</mvc:argument-resolvers>
 		<mvc:message-converters register-defaults="true">
 			<!-- 将Jackson2HttpMessageConverter的默认格式化输出为true -->
 			<!-- 配置Fastjson支持 -->
@@ -56,7 +54,7 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	
+
 	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="mediaTypes">
@@ -82,19 +80,24 @@
 
 	<!-- 支持上传文件 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-	
-	 <!-- 拦截器 ↓↓↓↓↓ -->
+
+	<!-- 拦截器 ↓↓↓↓↓ -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />	
+			<mvc:mapping path="/**" />
 			<bean class="cn.doublepoint.commonutil.interceptor.DataEncapsulateAndDecapsulateIntecerptor">
-				<property name="exceptUrls">  
-                    <list>  
-                       <!--  <value>/template/sys/assistant/zipAndDownload1</value>   -->
-                    </list>  
-                </property>  
+				<property name="exceptUrls">
+					<list>
+						<!-- <value>/template/sys/assistant/zipAndDownload1</value> -->
+					</list>
+				</property>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	  <!-- 拦截器 ↑↑↑↑↑ -->
+	<!-- 拦截器 ↑↑↑↑↑ -->
+	
+	<!--自动扫描包 -->
+	<context:component-scan base-package="cn.doublepoint" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
 </beans>
