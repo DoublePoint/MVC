@@ -126,9 +126,9 @@
 		};
 		this.initOnClick = function() {
 			var treeDom = this;
-			this.setting.callback.onClick = function() {
+			this.setting.callback.onClick = function(event, treeId, treeNode) {
 				if (treeDom.onnodeclick)
-					$._Eval(treeDom.onnodeclick);
+					$._Eval(treeDom.onnodeclick,[event, treeId, treeNode]);
 			}
 		}
 		// 根据数据反选树节点 * srourceField 数据字段名称 * targetField 树节点的字段名称

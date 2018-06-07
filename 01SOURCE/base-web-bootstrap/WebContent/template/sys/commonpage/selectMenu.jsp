@@ -24,7 +24,7 @@
 		<ll:filllayout>
 			<ll:fillareatb height="*">
 				<ll:tree id="treeDemo" showcheckbox="false" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true"
-					showLine="true" onclick="zTreeOnClick()"
+					showLine="true" onnodeclick="zTreeOnClick()"
 				></ll:tree>
 			</ll:fillareatb>
 			<ll:fillareatb height="40" style="align:center">

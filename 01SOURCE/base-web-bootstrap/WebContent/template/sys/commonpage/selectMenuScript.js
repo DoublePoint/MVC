@@ -1,5 +1,5 @@
 function zTreeOnClick(event, treeId, treeNode) {
-	var menuId=treeNode.id;
+	var menuId=treeNode.code;
 	var menuName=treeNode.name;
 	$.close(treeNode);
 };
