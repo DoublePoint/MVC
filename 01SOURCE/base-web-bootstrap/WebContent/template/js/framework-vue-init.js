@@ -27,6 +27,10 @@ function _InitBaseVueComponent() {
 			incrementTotal : function() {
 				this.total += 1
 			}
+		},
+		mounted:function(){
+			var body=$("body");
+			body.show();
 		}
 	});
 }

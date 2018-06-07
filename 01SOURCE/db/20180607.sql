@@ -1,0 +1,1377 @@
+-- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
+--
+-- Host: localhost    Database: test
+-- ------------------------------------------------------
+-- Server version	5.7.17-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `test`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `test` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `test`;
+
+--
+-- Table structure for table `sys_admin`
+--
+
+DROP TABLE IF EXISTS `sys_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_admin` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LOGIN_ACCOUNT_NO` varchar(255) DEFAULT NULL,
+  `LOGIN_PASSWORD` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `ENABLE` varchar(2) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_admin`
+--
+
+LOCK TABLES `sys_admin` WRITE;
+/*!40000 ALTER TABLE `sys_admin` DISABLE KEYS */;
+INSERT INTO `sys_admin` VALUES (1,'2018-05-22 17:26:06','admin','d41d8cd98f00b204e9800998ecf8427e','2018-05-22 17:26:06','0',NULL),(2,'2018-05-22 17:27:27','liulei','c81e728d9d4c2f636f067f89cc14862c','2018-05-22 17:27:27','1',NULL),(3,'2018-05-22 17:28:17','super','c81e728d9d4c2f636f067f89cc14862c','2018-05-22 17:28:17','1',NULL);
+/*!40000 ALTER TABLE `sys_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_admin_login_log`
+--
+
+DROP TABLE IF EXISTS `sys_admin_login_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_admin_login_log` (
+  `ID` bigint(20) NOT NULL,
+  `ADMIN_ID` bigint(20) DEFAULT NULL,
+  `IS_PASSWORD_ERROR` varchar(255) DEFAULT NULL,
+  `LOGIN_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_admin_login_log`
+--
+
+LOCK TABLES `sys_admin_login_log` WRITE;
+/*!40000 ALTER TABLE `sys_admin_login_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_admin_login_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_announcement`
+--
+
+DROP TABLE IF EXISTS `sys_announcement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_announcement` (
+  `ID` bigint(20) NOT NULL,
+  `CONTENT` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_announcement`
+--
+
+LOCK TABLES `sys_announcement` WRITE;
+/*!40000 ALTER TABLE `sys_announcement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_announcement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_announcement_changed`
+--
+
+DROP TABLE IF EXISTS `sys_announcement_changed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_announcement_changed` (
+  `WORKSHEET_NO` varchar(255) NOT NULL,
+  `CONTENT` varchar(255) DEFAULT NULL,
+  `CREATE_ADMIN_ID` bigint(20) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `ID` bigint(20) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`WORKSHEET_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_announcement_changed`
+--
+
+LOCK TABLES `sys_announcement_changed` WRITE;
+/*!40000 ALTER TABLE `sys_announcement_changed` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_announcement_changed` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_code`
+--
+
+DROP TABLE IF EXISTS `sys_code`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_code` (
+  `ID` bigint(20) NOT NULL,
+  `CLASSIFY` varchar(255) DEFAULT NULL,
+  `CODE` varchar(255) DEFAULT NULL,
+  `CODE_NAME` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `DISPLAY_SN` int(11) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `PARENT_ID` varchar(255) DEFAULT NULL,
+  `SCENE1` varchar(255) DEFAULT NULL,
+  `SCENE2` varchar(255) DEFAULT NULL,
+  `SCENE3` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_code`
+--
+
+LOCK TABLES `sys_code` WRITE;
+/*!40000 ALTER TABLE `sys_code` DISABLE KEYS */;
+INSERT INTO `sys_code` VALUES (1,'YesOrNo','1','ÊòØ','2018-06-07 19:24:52',1,'2018-06-07 19:24:52',NULL,'','',''),(2,'YesOrNo','0','Âê¶','2018-06-07 19:24:52',2,'2018-06-07 19:24:52',NULL,'','','');
+/*!40000 ALTER TABLE `sys_code` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_entity_filter`
+--
+
+DROP TABLE IF EXISTS `sys_entity_filter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_entity_filter` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `FILTER` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `USER_ID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_entity_filter`
+--
+
+LOCK TABLES `sys_entity_filter` WRITE;
+/*!40000 ALTER TABLE `sys_entity_filter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_entity_filter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_extend_property`
+--
+
+DROP TABLE IF EXISTS `sys_extend_property`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_extend_property` (
+  `ID` bigint(20) NOT NULL,
+  `CODE` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `QUERY` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_extend_property`
+--
+
+LOCK TABLES `sys_extend_property` WRITE;
+/*!40000 ALTER TABLE `sys_extend_property` DISABLE KEYS */;
+INSERT INTO `sys_extend_property` VALUES (1,'YesOrNo','2018-06-07 19:24:18','2018-06-07 19:24:58','ÊòØÂê¶','SELECT CODE KEY,CODE_NAME VALUE,\'\' FILETER FROM SYS_CODE ORDER BY DISPLAY_SN');
+/*!40000 ALTER TABLE `sys_extend_property` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_menu`
+--
+
+DROP TABLE IF EXISTS `sys_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_menu` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LEVEL` int(11) DEFAULT NULL,
+  `LINK` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `PARENT_ID` bigint(20) DEFAULT NULL,
+  `SN` int(11) DEFAULT NULL,
+  `IS_CROSS_DOMAIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_menu`
+--
+
+LOCK TABLES `sys_menu` WRITE;
+/*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
+INSERT INTO `sys_menu` VALUES (1,'2018-06-07 19:09:29',1,'/template/sys/code/code','2018-06-07 19:21:48','Êò†Â∞Ñ',0,3,''),(6,'2018-04-05 20:09:35',2,'http://localhost:8080/base-workflow-test/template/sys/workflow/process-list','2018-05-30 17:29:31','Â∑•‰ΩúÊµÅÁÆ°ÁêÜ',4,3,'true'),(7,'2018-04-05 20:09:44',2,'',NULL,'ËäÇÁÇπÁÆ°ÁêÜ',4,2,NULL),(8,'2018-04-27 15:33:08',2,'/template/sys/assistant/generateEntity',NULL,'ÂÆû‰ΩìÊò†Â∞ÑÔºàÊï∞ÊçÆÂ∫ìÔºâ',1,1,NULL),(9,'2018-04-09 23:19:03',2,'/template/sys/menu/menu',NULL,'ËèúÂçïÁÆ°ÁêÜ',15,1,NULL),(11,'2018-04-09 23:47:46',2,'/template/sys/role/role',NULL,'ËßíËâ≤ÁÆ°ÁêÜ',15,2,NULL),(12,'2018-04-09 23:48:22',2,'',NULL,'ÊùÉÈôêÁÆ°ÁêÜ',15,3,NULL),(13,'2018-04-09 23:50:10',2,'/template/sys/admin/admin','2018-05-22 14:30:15','Êìç‰ΩúÂëòÁÆ°ÁêÜ',15,4,NULL),(14,'2018-04-09 23:50:19',2,'',NULL,'ÁªÑÁªáÁÆ°ÁêÜ',15,5,NULL),(15,'2018-04-23 17:34:11',1,'','2018-06-07 19:21:57','Á≥ªÁªüÁª¥Êä§',0,1,''),(16,'2018-04-23 17:36:34',2,'/template/sys/config/entityFilterParamConfig',NULL,'ÂÆû‰ΩìËøáÊª§Â≠ó',1,5,NULL),(17,'2018-04-27 15:43:48',2,'/template/sys/assistant/generateEntityOom',NULL,'ÂÆû‰ΩìÊò†Â∞ÑÔºàoomÔºâ',1,0,NULL),(395,'2018-05-30 18:14:11',2,'http://localhost:8080/base-workflow-test/template/sys/workflow/model-list','2018-05-30 18:14:35','Ê®°ÂûãÂàóË°®',4,4,'true'),(396,'2018-05-31 18:24:45',1,'','2018-06-07 19:21:51','‰∏™‰∫∫ËÆæÁΩÆ',0,4,''),(397,'2018-05-31 18:24:55',2,'','2018-05-31 18:25:14','ÂØÜÁ†Å‰øÆÊîπ',396,2,''),(398,'2018-05-31 18:25:06',2,'','2018-05-31 18:25:06','Âü∫Êú¨‰ø°ÊÅØ',396,1,NULL),(401,'2018-06-06 17:25:24',1,'','2018-06-06 17:25:24','Â∑•‰ΩúÊµÅÊµãËØï',0,NULL,NULL),(402,'2018-06-06 17:26:00',2,'/template/sys/workflow/announcement/apply','2018-06-06 18:01:15','ÂÖ¨ÂëäÁî≥ËØ∑ÊµÅÁ®ã',401,1,''),(406,'2018-06-07 19:20:54',2,'/template/sys/code/code','2018-06-07 19:20:54','‰ª£Á†ÅÁÆ°ÁêÜ',15,1,NULL),(407,'2018-06-07 19:22:52',2,'/template/sys/extendproperty/extendproperty','2018-06-07 19:22:52','Êâ©Â±ïÂ±ûÊÄß',15,6,NULL);
+/*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_menu_role`
+--
+
+DROP TABLE IF EXISTS `sys_menu_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_menu_role` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MENU_ID` bigint(20) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `ROLE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_menu_role`
+--
+
+LOCK TABLES `sys_menu_role` WRITE;
+/*!40000 ALTER TABLE `sys_menu_role` DISABLE KEYS */;
+INSERT INTO `sys_menu_role` VALUES (40,'2018-05-22 11:08:38',0,'2018-05-22 11:08:38',1),(41,'2018-05-22 11:08:38',1,'2018-05-22 11:08:38',1),(42,'2018-05-22 11:08:38',17,'2018-05-22 11:08:38',1),(43,'2018-05-22 11:08:38',8,'2018-05-22 11:08:38',1),(44,'2018-05-22 11:08:38',2,'2018-05-22 11:08:38',1),(45,'2018-05-22 11:08:38',3,'2018-05-22 11:08:38',1),(46,'2018-05-22 11:08:38',16,'2018-05-22 11:08:38',1),(47,'2018-05-22 11:08:38',4,'2018-05-22 11:08:38',1),(48,'2018-05-22 11:08:38',5,'2018-05-22 11:08:38',1),(49,'2018-05-22 11:08:38',7,'2018-05-22 11:08:38',1),(50,'2018-05-22 11:08:38',6,'2018-05-22 11:08:38',1),(51,'2018-05-22 11:08:50',0,'2018-05-22 11:08:50',3),(52,'2018-05-22 11:08:50',15,'2018-05-22 11:08:50',3),(53,'2018-05-22 11:08:50',9,'2018-05-22 11:08:50',3);
+/*!40000 ALTER TABLE `sys_menu_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_menu_visit_log`
+--
+
+DROP TABLE IF EXISTS `sys_menu_visit_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_menu_visit_log` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MENU_ID` bigint(20) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `VISIT_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_menu_visit_log`
+--
+
+LOCK TABLES `sys_menu_visit_log` WRITE;
+/*!40000 ALTER TABLE `sys_menu_visit_log` DISABLE KEYS */;
+INSERT INTO `sys_menu_visit_log` VALUES (1,'2018-06-07 13:59:29',402,'2018-06-07 13:59:29','2018-06-07 13:59:28'),(2,'2018-06-07 17:39:01',402,'2018-06-07 17:39:01','2018-06-07 17:39:01'),(3,'2018-06-07 17:39:03',11,'2018-06-07 17:39:03','2018-06-07 17:39:03'),(4,'2018-06-07 17:39:03',9,'2018-06-07 17:39:03','2018-06-07 17:39:03'),(5,'2018-06-07 17:39:07',11,'2018-06-07 17:39:07','2018-06-07 17:39:07'),(6,'2018-06-07 18:00:55',9,'2018-06-07 18:00:55','2018-06-07 18:00:54'),(7,'2018-06-07 18:00:59',9,'2018-06-07 18:00:59','2018-06-07 18:00:59'),(8,'2018-06-07 18:01:01',9,'2018-06-07 18:01:01','2018-06-07 18:01:01'),(9,'2018-06-07 18:01:04',9,'2018-06-07 18:01:04','2018-06-07 18:01:04'),(10,'2018-06-07 18:01:07',9,'2018-06-07 18:01:07','2018-06-07 18:01:07'),(11,'2018-06-07 18:01:09',9,'2018-06-07 18:01:09','2018-06-07 18:01:09'),(12,'2018-06-07 18:01:11',11,'2018-06-07 18:01:11','2018-06-07 18:01:11'),(13,'2018-06-07 18:01:13',11,'2018-06-07 18:01:13','2018-06-07 18:01:13'),(14,'2018-06-07 18:01:14',13,'2018-06-07 18:01:14','2018-06-07 18:01:14'),(15,'2018-06-07 18:01:18',11,'2018-06-07 18:01:18','2018-06-07 18:01:18'),(16,'2018-06-07 18:01:24',13,'2018-06-07 18:01:24','2018-06-07 18:01:24'),(17,'2018-06-07 18:01:27',17,'2018-06-07 18:01:27','2018-06-07 18:01:27'),(18,'2018-06-07 18:01:33',9,'2018-06-07 18:01:33','2018-06-07 18:01:33'),(19,'2018-06-07 18:01:34',11,'2018-06-07 18:01:34','2018-06-07 18:01:34'),(20,'2018-06-07 18:01:37',13,'2018-06-07 18:01:37','2018-06-07 18:01:37'),(21,'2018-06-07 18:01:40',17,'2018-06-07 18:01:40','2018-06-07 18:01:40'),(22,'2018-06-07 18:01:42',8,'2018-06-07 18:01:42','2018-06-07 18:01:42'),(23,'2018-06-07 18:01:44',16,'2018-06-07 18:01:44','2018-06-07 18:01:44'),(24,'2018-06-07 18:01:51',5,'2018-06-07 18:01:51','2018-06-07 18:01:51'),(25,'2018-06-07 18:01:54',6,'2018-06-07 18:01:54','2018-06-07 18:01:54'),(26,'2018-06-07 18:01:55',395,'2018-06-07 18:01:55','2018-06-07 18:01:55'),(27,'2018-06-07 18:01:59',6,'2018-06-07 18:01:59','2018-06-07 18:01:59'),(28,'2018-06-07 18:02:09',402,'2018-06-07 18:02:09','2018-06-07 18:02:09'),(29,'2018-06-07 18:02:28',402,'2018-06-07 18:02:28','2018-06-07 18:02:27'),(30,'2018-06-07 18:03:16',9,'2018-06-07 18:03:16','2018-06-07 18:03:16'),(31,'2018-06-07 18:03:21',13,'2018-06-07 18:03:21','2018-06-07 18:03:21'),(32,'2018-06-07 18:03:37',13,'2018-06-07 18:03:37','2018-06-07 18:03:37'),(33,'2018-06-07 18:03:40',11,'2018-06-07 18:03:40','2018-06-07 18:03:40'),(34,'2018-06-07 18:04:12',402,'2018-06-07 18:04:12','2018-06-07 18:04:11'),(35,'2018-06-07 18:04:21',9,'2018-06-07 18:04:21','2018-06-07 18:04:21'),(36,'2018-06-07 18:04:35',17,'2018-06-07 18:04:35','2018-06-07 18:04:35'),(37,'2018-06-07 18:05:23',17,'2018-06-07 18:05:23','2018-06-07 18:05:23'),(38,'2018-06-07 18:13:39',5,'2018-06-07 18:13:39','2018-06-07 18:13:39'),(39,'2018-06-07 18:13:41',6,'2018-06-07 18:13:41','2018-06-07 18:13:41'),(40,'2018-06-07 18:13:42',395,'2018-06-07 18:13:42','2018-06-07 18:13:42'),(41,'2018-06-07 19:03:35',5,'2018-06-07 19:03:35','2018-06-07 19:03:35'),(42,'2018-06-07 19:03:37',6,'2018-06-07 19:03:37','2018-06-07 19:03:37'),(43,'2018-06-07 19:08:48',9,'2018-06-07 19:08:48','2018-06-07 19:08:48'),(44,'2018-06-07 19:12:40',9,'2018-06-07 19:12:40','2018-06-07 19:12:40'),(45,'2018-06-07 19:17:56',9,'2018-06-07 19:17:56','2018-06-07 19:17:56'),(46,'2018-06-07 19:20:05',9,'2018-06-07 19:20:05','2018-06-07 19:20:05'),(47,'2018-06-07 19:20:18',1,'2018-06-07 19:20:18','2018-06-07 19:20:18'),(48,'2018-06-07 19:20:24',1,'2018-06-07 19:20:24','2018-06-07 19:20:24'),(49,'2018-06-07 19:20:26',1,'2018-06-07 19:20:26','2018-06-07 19:20:26'),(50,'2018-06-07 19:20:28',9,'2018-06-07 19:20:28','2018-06-07 19:20:28'),(51,'2018-06-07 19:21:26',1,'2018-06-07 19:21:26','2018-06-07 19:21:26'),(52,'2018-06-07 19:21:28',1,'2018-06-07 19:21:28','2018-06-07 19:21:28'),(53,'2018-06-07 19:21:37',1,'2018-06-07 19:21:37','2018-06-07 19:21:37'),(54,'2018-06-07 19:21:39',9,'2018-06-07 19:21:39','2018-06-07 19:21:39'),(55,'2018-06-07 19:22:05',9,'2018-06-07 19:22:05','2018-06-07 19:22:05'),(56,'2018-06-07 19:22:59',406,'2018-06-07 19:22:59','2018-06-07 19:22:59'),(57,'2018-06-07 19:23:02',407,'2018-06-07 19:23:02','2018-06-07 19:23:02'),(58,'2018-06-07 19:25:06',407,'2018-06-07 19:25:06','2018-06-07 19:25:06'),(59,'2018-06-07 19:25:10',406,'2018-06-07 19:25:10','2018-06-07 19:25:10'),(60,'2018-06-07 22:45:33',406,'2018-06-07 22:45:33','2018-06-07 22:45:32'),(61,'2018-06-07 22:45:34',9,'2018-06-07 22:45:34','2018-06-07 22:45:34'),(62,'2018-06-07 22:45:36',406,'2018-06-07 22:45:36','2018-06-07 22:45:36'),(63,'2018-06-07 22:45:37',11,'2018-06-07 22:45:37','2018-06-07 22:45:37'),(64,'2018-06-07 22:52:00',11,'2018-06-07 22:52:00','2018-06-07 22:52:00'),(65,'2018-06-07 22:52:03',11,'2018-06-07 22:52:03','2018-06-07 22:52:03'),(66,'2018-06-07 22:53:51',11,'2018-06-07 22:53:51','2018-06-07 22:53:51'),(67,'2018-06-07 22:53:54',11,'2018-06-07 22:53:54','2018-06-07 22:53:54'),(68,'2018-06-07 22:53:58',11,'2018-06-07 22:53:58','2018-06-07 22:53:58'),(69,'2018-06-07 22:55:26',11,'2018-06-07 22:55:26','2018-06-07 22:55:26'),(70,'2018-06-07 22:56:53',9,'2018-06-07 22:56:53','2018-06-07 22:56:53'),(71,'2018-06-07 23:03:10',9,'2018-06-07 23:03:10','2018-06-07 23:03:10'),(72,'2018-06-07 23:03:11',9,'2018-06-07 23:03:11','2018-06-07 23:03:11'),(73,'2018-06-07 23:03:12',9,'2018-06-07 23:03:12','2018-06-07 23:03:12'),(74,'2018-06-07 23:03:14',9,'2018-06-07 23:03:14','2018-06-07 23:03:14'),(75,'2018-06-07 23:03:26',9,'2018-06-07 23:03:26','2018-06-07 23:03:26'),(76,'2018-06-07 23:03:29',9,'2018-06-07 23:03:29','2018-06-07 23:03:29'),(77,'2018-06-07 23:03:32',9,'2018-06-07 23:03:32','2018-06-07 23:03:32'),(78,'2018-06-07 23:15:13',9,'2018-06-07 23:15:13','2018-06-07 23:15:13'),(79,'2018-06-07 23:15:15',406,'2018-06-07 23:15:15','2018-06-07 23:15:15'),(80,'2018-06-07 23:15:17',11,'2018-06-07 23:15:17','2018-06-07 23:15:17'),(81,'2018-06-07 23:15:19',406,'2018-06-07 23:15:19','2018-06-07 23:15:19'),(82,'2018-06-07 23:15:22',11,'2018-06-07 23:15:22','2018-06-07 23:15:22'),(83,'2018-06-07 23:15:24',9,'2018-06-07 23:15:24','2018-06-07 23:15:24'),(84,'2018-06-07 23:15:26',9,'2018-06-07 23:15:26','2018-06-07 23:15:26'),(85,'2018-06-07 23:15:29',9,'2018-06-07 23:15:29','2018-06-07 23:15:29'),(86,'2018-06-07 23:15:31',9,'2018-06-07 23:15:31','2018-06-07 23:15:31'),(87,'2018-06-07 23:15:34',9,'2018-06-07 23:15:34','2018-06-07 23:15:34'),(88,'2018-06-07 23:15:36',9,'2018-06-07 23:15:36','2018-06-07 23:15:36'),(89,'2018-06-07 23:16:09',11,'2018-06-07 23:16:09','2018-06-07 23:16:09'),(90,'2018-06-07 23:16:10',406,'2018-06-07 23:16:10','2018-06-07 23:16:10'),(91,'2018-06-07 23:16:29',407,'2018-06-07 23:16:29','2018-06-07 23:16:29'),(92,'2018-06-07 23:16:43',402,'2018-06-07 23:16:43','2018-06-07 23:16:43'),(93,'2018-05-22 17:17:24',13,'2018-05-22 17:17:24','2018-05-22 17:17:24'),(94,'2018-05-22 17:17:28',13,'2018-05-22 17:17:28','2018-05-22 17:17:28'),(95,'2018-05-22 17:17:30',17,'2018-05-22 17:17:30','2018-05-22 17:17:30'),(96,'2018-05-22 17:17:32',9,'2018-05-22 17:17:32','2018-05-22 17:17:32'),(97,'2018-05-22 17:17:33',11,'2018-05-22 17:17:33','2018-05-22 17:17:33'),(98,'2018-05-22 17:17:34',13,'2018-05-22 17:17:34','2018-05-22 17:17:34'),(99,'2018-05-22 17:17:38',17,'2018-05-22 17:17:38','2018-05-22 17:17:38'),(100,'2018-05-22 17:25:40',13,'2018-05-22 17:25:40','2018-05-22 17:25:40'),(101,'2018-05-22 22:20:40',13,'2018-05-22 22:20:40','2018-05-22 22:20:39'),(102,'2018-05-22 22:29:36',17,'2018-05-22 22:29:36','2018-05-22 22:29:36'),(103,'2018-05-22 23:10:53',9,'2018-05-22 23:10:53','2018-05-22 23:10:50'),(104,'2018-05-22 23:10:59',11,'2018-05-22 23:10:59','2018-05-22 23:10:59'),(105,'2018-05-22 23:11:20',11,'2018-05-22 23:11:20','2018-05-22 23:11:20'),(106,'2018-05-22 23:11:21',9,'2018-05-22 23:11:21','2018-05-22 23:11:21'),(107,'2018-05-23 09:39:48',9,'2018-05-23 09:39:48','2018-05-23 09:39:48'),(108,'2018-05-23 09:39:51',13,'2018-05-23 09:39:51','2018-05-23 09:39:51'),(109,'2018-05-23 09:40:14',13,'2018-05-23 09:40:14','2018-05-23 09:40:14'),(110,'2018-05-23 09:40:47',9,'2018-05-23 09:40:47','2018-05-23 09:40:47'),(111,'2018-05-23 09:40:49',11,'2018-05-23 09:40:49','2018-05-23 09:40:49'),(112,'2018-05-23 09:40:52',13,'2018-05-23 09:40:52','2018-05-23 09:40:52'),(113,'2018-05-23 09:48:53',9,'2018-05-23 09:48:53','2018-05-23 09:48:53'),(114,'2018-05-23 09:54:14',11,'2018-05-23 09:54:14','2018-05-23 09:54:14'),(115,'2018-05-23 09:54:17',13,'2018-05-23 09:54:17','2018-05-23 09:54:17'),(116,'2018-05-23 09:54:21',11,'2018-05-23 09:54:21','2018-05-23 09:54:21'),(117,'2018-05-23 09:54:22',9,'2018-05-23 09:54:22','2018-05-23 09:54:22'),(118,'2018-05-23 15:27:44',13,'2018-05-23 15:27:44','2018-05-23 15:27:44'),(119,'2018-05-23 15:27:45',11,'2018-05-23 15:27:45','2018-05-23 15:27:45'),(120,'2018-05-23 15:28:06',9,'2018-05-23 15:28:06','2018-05-23 15:28:06'),(121,'2018-05-23 15:47:03',9,'2018-05-23 15:47:03','2018-05-23 15:47:03'),(122,'2018-05-23 15:51:10',9,'2018-05-23 15:51:10','2018-05-23 15:51:10'),(123,'2018-05-23 15:54:59',13,'2018-05-23 15:54:59','2018-05-23 15:54:59'),(124,'2018-05-23 15:55:08',11,'2018-05-23 15:55:08','2018-05-23 15:55:08'),(125,'2018-05-23 15:58:02',9,'2018-05-23 15:58:02','2018-05-23 15:58:02'),(126,'2018-05-23 16:21:45',9,'2018-05-23 16:21:45','2018-05-23 16:21:45'),(127,'2018-05-23 16:22:09',13,'2018-05-23 16:22:09','2018-05-23 16:22:09'),(128,'2018-05-23 16:58:13',9,'2018-05-23 16:58:13','2018-05-23 16:58:13'),(129,'2018-05-23 17:00:48',9,'2018-05-23 17:00:48','2018-05-23 17:00:48'),(130,'2018-05-23 17:00:50',11,'2018-05-23 17:00:50','2018-05-23 17:00:50'),(131,'2018-05-23 17:00:52',13,'2018-05-23 17:00:52','2018-05-23 17:00:52'),(132,'2018-05-23 17:00:54',17,'2018-05-23 17:00:54','2018-05-23 17:00:54'),(133,'2018-05-23 17:00:57',9,'2018-05-23 17:00:57','2018-05-23 17:00:57'),(134,'2018-05-23 17:04:29',9,'2018-05-23 17:04:29','2018-05-23 17:04:29'),(135,'2018-05-23 17:05:28',9,'2018-05-23 17:05:28','2018-05-23 17:05:28'),(136,'2018-05-23 17:06:09',9,'2018-05-23 17:06:09','2018-05-23 17:06:09'),(137,'2018-05-23 17:09:20',9,'2018-05-23 17:09:20','2018-05-23 17:09:20'),(138,'2018-05-23 17:24:21',9,'2018-05-23 17:24:21','2018-05-23 17:24:21'),(139,'2018-05-23 17:26:18',17,'2018-05-23 17:26:18','2018-05-23 17:26:18'),(140,'2018-05-23 17:27:06',17,'2018-05-23 17:27:06','2018-05-23 17:27:06'),(141,'2018-05-23 17:27:32',9,'2018-05-23 17:27:32','2018-05-23 17:27:32'),(142,'2018-05-23 17:27:34',17,'2018-05-23 17:27:34','2018-05-23 17:27:34'),(143,'2018-05-23 17:29:12',9,'2018-05-23 17:29:12','2018-05-23 17:29:12'),(144,'2018-05-23 17:29:31',9,'2018-05-23 17:29:31','2018-05-23 17:29:31'),(145,'2018-05-23 17:33:25',9,'2018-05-23 17:33:25','2018-05-23 17:33:25'),(146,'2018-05-23 17:53:12',9,'2018-05-23 17:53:12','2018-05-23 17:53:12'),(147,'2018-05-23 17:53:22',9,'2018-05-23 17:53:22','2018-05-23 17:53:22'),(148,'2018-05-23 17:53:26',17,'2018-05-23 17:53:26','2018-05-23 17:53:26'),(149,'2018-05-23 17:54:23',9,'2018-05-23 17:54:23','2018-05-23 17:54:23'),(150,'2018-05-23 17:54:27',9,'2018-05-23 17:54:27','2018-05-23 17:54:27'),(151,'2018-05-23 17:54:57',17,'2018-05-23 17:54:57','2018-05-23 17:54:57'),(152,'2018-05-23 17:54:58',8,'2018-05-23 17:54:58','2018-05-23 17:54:58'),(153,'2018-05-23 17:55:01',17,'2018-05-23 17:55:01','2018-05-23 17:55:01'),(154,'2018-05-23 17:55:14',17,'2018-05-23 17:55:14','2018-05-23 17:55:14'),(155,'2018-05-25 15:00:47',9,'2018-05-25 15:00:47','2018-05-25 15:00:47'),(156,'2018-05-25 15:00:52',9,'2018-05-25 15:00:52','2018-05-25 15:00:52'),(157,'2018-05-25 15:01:09',9,'2018-05-25 15:01:09','2018-05-25 15:01:09'),(158,'2018-05-25 15:01:11',13,'2018-05-25 15:01:11','2018-05-25 15:01:11'),(159,'2018-05-30 17:29:17',9,'2018-05-30 17:29:17','2018-05-30 17:29:17'),(160,'2018-05-30 17:29:18',9,'2018-05-30 17:29:18','2018-05-30 17:29:18'),(161,'2018-05-30 17:29:41',6,'2018-05-30 17:29:41','2018-05-30 17:29:41'),(162,'2018-05-30 17:47:33',6,'2018-05-30 17:47:33','2018-05-30 17:47:33'),(163,'2018-05-30 17:50:57',6,'2018-05-30 17:50:57','2018-05-30 17:50:57'),(164,'2018-05-30 17:51:09',6,'2018-05-30 17:51:09','2018-05-30 17:51:09'),(165,'2018-05-30 17:51:44',9,'2018-05-30 17:51:44','2018-05-30 17:51:44'),(166,'2018-05-30 17:52:18',5,'2018-05-30 17:52:18','2018-05-30 17:52:17'),(167,'2018-05-30 18:03:03',6,'2018-05-30 18:03:03','2018-05-30 18:03:03'),(168,'2018-05-30 18:03:09',5,'2018-05-30 18:03:09','2018-05-30 18:03:09'),(169,'2018-05-30 18:14:52',395,'2018-05-30 18:14:52','2018-05-30 18:14:52'),(170,'2018-05-30 18:15:12',395,'2018-05-30 18:15:12','2018-05-30 18:15:12'),(171,'2018-05-30 18:16:41',9,'2018-05-30 18:16:41','2018-05-30 18:16:41'),(172,'2018-05-30 18:16:46',5,'2018-05-30 18:16:46','2018-05-30 18:16:46'),(173,'2018-05-30 18:16:49',6,'2018-05-30 18:16:49','2018-05-30 18:16:49'),(174,'2018-05-30 18:16:50',395,'2018-05-30 18:16:50','2018-05-30 18:16:50'),(175,'2018-05-30 18:16:52',5,'2018-05-30 18:16:52','2018-05-30 18:16:52'),(176,'2018-05-30 18:17:27',5,'2018-05-30 18:17:27','2018-05-30 18:17:27'),(177,'2018-05-30 18:17:28',6,'2018-05-30 18:17:28','2018-05-30 18:17:28'),(178,'2018-05-30 18:17:29',395,'2018-05-30 18:17:29','2018-05-30 18:17:29'),(179,'2018-05-30 18:17:30',6,'2018-05-30 18:17:30','2018-05-30 18:17:30'),(180,'2018-05-30 18:17:31',395,'2018-05-30 18:17:31','2018-05-30 18:17:31'),(181,'2018-05-30 18:19:49',395,'2018-05-30 18:19:49','2018-05-30 18:19:48'),(182,'2018-05-30 18:36:38',395,'2018-05-30 18:36:38','2018-05-30 18:36:37'),(183,'2018-05-30 18:59:23',395,'2018-05-30 18:59:23','2018-05-30 18:59:23'),(184,'2018-05-30 19:04:46',395,'2018-05-30 19:04:46','2018-05-30 19:04:46'),(185,'2018-05-30 19:06:20',395,'2018-05-30 19:06:20','2018-05-30 19:06:20'),(186,'2018-05-30 19:07:15',9,'2018-05-30 19:07:15','2018-05-30 19:07:15'),(187,'2018-05-30 19:07:28',395,'2018-05-30 19:07:28','2018-05-30 19:07:28'),(188,'2018-05-30 19:10:30',9,'2018-05-30 19:10:30','2018-05-30 19:10:30'),(189,'2018-05-30 19:10:32',395,'2018-05-30 19:10:32','2018-05-30 19:10:32'),(190,'2018-05-30 19:15:59',5,'2018-05-30 19:15:59','2018-05-30 19:15:59'),(191,'2018-05-30 19:15:59',395,'2018-05-30 19:15:59','2018-05-30 19:15:59'),(192,'2018-05-30 19:16:08',395,'2018-05-30 19:16:08','2018-05-30 19:16:08'),(193,'2018-05-31 11:14:20',17,'2018-05-31 11:14:20','2018-05-31 11:14:20'),(194,'2018-05-31 15:28:19',9,'2018-05-31 15:28:19','2018-05-31 15:28:18'),(195,'2018-05-31 15:46:07',9,'2018-05-31 15:46:07','2018-05-31 15:46:06'),(196,'2018-05-31 15:46:47',9,'2018-05-31 15:46:47','2018-05-31 15:46:47'),(197,'2018-05-31 15:50:33',11,'2018-05-31 15:50:33','2018-05-31 15:50:33'),(198,'2018-05-31 15:50:34',13,'2018-05-31 15:50:34','2018-05-31 15:50:34'),(199,'2018-05-31 15:51:36',5,'2018-05-31 15:51:36','2018-05-31 15:51:36'),(200,'2018-05-31 15:51:56',6,'2018-05-31 15:51:56','2018-05-31 15:51:56'),(201,'2018-05-31 15:51:59',395,'2018-05-31 15:51:59','2018-05-31 15:51:59'),(202,'2018-05-31 18:01:21',9,'2018-05-31 18:01:21','2018-05-31 18:01:20'),(203,'2018-05-31 18:01:21',11,'2018-05-31 18:01:21','2018-05-31 18:01:21'),(204,'2018-05-31 18:01:23',13,'2018-05-31 18:01:23','2018-05-31 18:01:23'),(205,'2018-05-31 18:01:25',17,'2018-05-31 18:01:25','2018-05-31 18:01:25'),(206,'2018-05-31 18:01:27',5,'2018-05-31 18:01:27','2018-05-31 18:01:27'),(207,'2018-05-31 18:01:30',6,'2018-05-31 18:01:30','2018-05-31 18:01:30'),(208,'2018-05-31 18:01:32',395,'2018-05-31 18:01:32','2018-05-31 18:01:32'),(209,'2018-05-31 18:22:21',17,'2018-05-31 18:22:21','2018-05-31 18:22:21'),(210,'2018-05-31 18:22:26',9,'2018-05-31 18:22:26','2018-05-31 18:22:26'),(211,'2018-05-31 18:24:23',13,'2018-05-31 18:24:23','2018-05-31 18:24:23'),(212,'2018-05-31 18:24:27',9,'2018-05-31 18:24:27','2018-05-31 18:24:27'),(213,'2018-05-31 18:25:54',9,'2018-05-31 18:25:54','2018-05-31 18:25:54'),(214,'2018-05-31 18:26:07',11,'2018-05-31 18:26:07','2018-05-31 18:26:07'),(215,'2018-05-31 18:26:39',6,'2018-05-31 18:26:39','2018-05-31 18:26:39'),(216,'2018-05-31 18:39:07',395,'2018-05-31 18:39:07','2018-05-31 18:39:06'),(217,'2018-05-31 18:55:54',395,'2018-05-31 18:55:54','2018-05-31 18:55:54'),(218,'2018-06-02 17:17:14',9,'2018-06-02 17:17:14','2018-06-02 17:17:14'),(219,'2018-06-04 18:28:20',395,'2018-06-04 18:28:20','2018-06-04 18:28:19'),(220,'2018-06-04 18:28:50',395,'2018-06-04 18:28:50','2018-06-04 18:28:50'),(221,'2018-06-04 18:29:10',5,'2018-06-04 18:29:10','2018-06-04 18:29:10'),(222,'2018-06-04 18:29:13',6,'2018-06-04 18:29:13','2018-06-04 18:29:13'),(223,'2018-06-04 18:39:19',9,'2018-06-04 18:39:19','2018-06-04 18:39:18'),(224,'2018-06-04 18:39:20',11,'2018-06-04 18:39:20','2018-06-04 18:39:20'),(225,'2018-06-04 18:39:24',13,'2018-06-04 18:39:24','2018-06-04 18:39:24'),(226,'2018-06-04 18:39:27',17,'2018-06-04 18:39:27','2018-06-04 18:39:27'),(227,'2018-06-04 18:39:29',5,'2018-06-04 18:39:29','2018-06-04 18:39:29'),(228,'2018-06-04 18:39:32',6,'2018-06-04 18:39:32','2018-06-04 18:39:32'),(229,'2018-06-04 18:39:36',395,'2018-06-04 18:39:36','2018-06-04 18:39:36'),(230,'2018-06-04 18:39:54',395,'2018-06-04 18:39:54','2018-06-04 18:39:54'),(231,'2018-06-04 18:41:04',395,'2018-06-04 18:41:04','2018-06-04 18:41:04'),(232,'2018-06-04 18:42:53',395,'2018-06-04 18:42:53','2018-06-04 18:42:53'),(233,'2018-06-04 18:43:46',395,'2018-06-04 18:43:46','2018-06-04 18:43:46'),(234,'2018-06-04 19:13:46',395,'2018-06-04 19:13:46','2018-06-04 19:13:45'),(235,'2018-06-04 19:17:51',395,'2018-06-04 19:17:51','2018-06-04 19:17:50'),(236,'2018-06-04 19:25:09',395,'2018-06-04 19:25:09','2018-06-04 19:25:09'),(237,'2018-06-04 19:52:23',395,'2018-06-04 19:52:23','2018-06-04 19:52:22'),(238,'2018-06-04 19:56:40',6,'2018-06-04 19:56:40','2018-06-04 19:56:40'),(239,'2018-06-04 19:56:41',395,'2018-06-04 19:56:41','2018-06-04 19:56:41'),(240,'2018-06-05 17:52:29',395,'2018-06-05 17:52:29','2018-06-05 17:52:29'),(241,'2018-06-05 17:52:53',5,'2018-06-05 17:52:53','2018-06-05 17:52:53'),(242,'2018-06-05 17:53:03',395,'2018-06-05 17:53:03','2018-06-05 17:53:03'),(243,'2018-06-05 17:53:28',395,'2018-06-05 17:53:28','2018-06-05 17:53:28'),(244,'2018-06-05 17:54:49',6,'2018-06-05 17:54:49','2018-06-05 17:54:48'),(245,'2018-06-05 17:54:50',5,'2018-06-05 17:54:50','2018-06-05 17:54:50'),(246,'2018-06-05 17:54:52',6,'2018-06-05 17:54:52','2018-06-05 17:54:52'),(247,'2018-06-05 17:54:52',395,'2018-06-05 17:54:52','2018-06-05 17:54:52'),(248,'2018-06-06 09:25:37',9,'2018-06-06 09:25:37','2018-06-06 09:25:36'),(249,'2018-06-06 09:25:44',11,'2018-06-06 09:25:44','2018-06-06 09:25:44'),(250,'2018-06-06 09:25:46',13,'2018-06-06 09:25:46','2018-06-06 09:25:46'),(251,'2018-06-06 09:25:48',17,'2018-06-06 09:25:48','2018-06-06 09:25:48'),(252,'2018-06-06 17:17:14',9,'2018-06-06 17:17:14','2018-06-06 17:17:14'),(253,'2018-06-06 17:26:12',402,'2018-06-06 17:26:12','2018-06-06 17:26:12'),(254,'2018-06-06 17:48:46',402,'2018-06-06 17:48:46','2018-06-06 17:48:46'),(255,'2018-06-06 17:49:22',402,'2018-06-06 17:49:22','2018-06-06 17:49:22'),(256,'2018-06-06 17:50:07',402,'2018-06-06 17:50:07','2018-06-06 17:50:07'),(257,'2018-06-06 18:01:01',9,'2018-06-06 18:01:01','2018-06-06 18:01:01'),(258,'2018-06-06 18:01:21',402,'2018-06-06 18:01:21','2018-06-06 18:01:21'),(259,'2018-06-06 18:23:56',402,'2018-06-06 18:23:56','2018-06-06 18:23:56'),(260,'2018-06-06 18:24:35',402,'2018-06-06 18:24:35','2018-06-06 18:24:35'),(261,'2018-06-06 18:29:05',9,'2018-06-06 18:29:05','2018-06-06 18:29:05'),(262,'2018-06-06 18:52:08',17,'2018-06-06 18:52:08','2018-06-06 18:52:07');
+/*!40000 ALTER TABLE `sys_menu_visit_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_permission`
+--
+
+DROP TABLE IF EXISTS `sys_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_permission` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `VALUE` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_permission`
+--
+
+LOCK TABLES `sys_permission` WRITE;
+/*!40000 ALTER TABLE `sys_permission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_role`
+--
+
+DROP TABLE IF EXISTS `sys_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_role` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_role`
+--
+
+LOCK TABLES `sys_role` WRITE;
+/*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
+INSERT INTO `sys_role` VALUES (1,'2018-05-21 17:42:41','2018-05-22 13:50:16','Ë∂ÖÁ∫ßÁÆ°ÁêÜÂëò'),(2,'2018-05-21 17:42:54','2018-05-22 13:50:16','Á≥ªÁªüÁª¥Êä§ÁÆ°ÁêÜÂëò'),(3,'2018-05-21 17:45:12','2018-05-22 13:50:16','Êò†Â∞ÑÁÆ°ÁêÜÂëò'),(4,'2018-05-21 17:45:35','2018-05-22 13:50:16','Â∑•‰ΩúÊµÅÁÆ°ÁêÜÂëò');
+/*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_sequence`
+--
+
+DROP TABLE IF EXISTS `sys_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_sequence` (
+  `ENTITY_CODE` varchar(255) NOT NULL,
+  `SEQUENCE_NO` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ENTITY_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_sequence`
+--
+
+LOCK TABLES `sys_sequence` WRITE;
+/*!40000 ALTER TABLE `sys_sequence` DISABLE KEYS */;
+INSERT INTO `sys_sequence` VALUES ('cn.doublepoint.template.dto.domain.model.entity.sys.cn.doublepoint.template.dto.domain.model.entity.sys.Code',2),('cn.doublepoint.template.dto.domain.model.entity.sys.cn.doublepoint.template.dto.domain.model.entity.sys.ExtendProperty',1),('cn.doublepoint.template.dto.domain.model.entity.sys.cn.doublepoint.template.dto.domain.model.entity.sys.Menu',407),('cn.doublepoint.template.dto.domain.model.entity.sys.cn.doublepoint.template.dto.domain.model.entity.sys.MenuVisitLog',92);
+/*!40000 ALTER TABLE `sys_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_worksheet`
+--
+
+DROP TABLE IF EXISTS `sys_worksheet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_worksheet` (
+  `ID` bigint(20) NOT NULL,
+  `CLASSIFICATION` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `CREATE_USER_ID` bigint(20) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `INSTANCE_ID` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `STATE` varchar(255) DEFAULT NULL,
+  `WORKSHEET_NO` varchar(255) DEFAULT NULL,
+  `CREATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_worksheet`
+--
+
+LOCK TABLES `sys_worksheet` WRITE;
+/*!40000 ALTER TABLE `sys_worksheet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_worksheet` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_worksheet_aduit`
+--
+
+DROP TABLE IF EXISTS `sys_worksheet_aduit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_worksheet_aduit` (
+  `ID` bigint(20) NOT NULL,
+  `ADUIT_RESULT` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `PEACH_NO` int(11) DEFAULT NULL,
+  `REMARK` varchar(255) DEFAULT NULL,
+  `TASK_ID` bigint(20) DEFAULT NULL,
+  `WORKSHEET_NO` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_worksheet_aduit`
+--
+
+LOCK TABLES `sys_worksheet_aduit` WRITE;
+/*!40000 ALTER TABLE `sys_worksheet_aduit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_worksheet_aduit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LOGIN_ACCOUNT_NO` int(11) DEFAULT NULL,
+  `LOGIN_PASSWORD` int(11) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `xtconstant`
+--
+
+DROP TABLE IF EXISTS `xtconstant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xtconstant` (
+  `ÊòØÂê¶Ê†áÂøóY` int(11) NOT NULL,
+  `ÊòØÂê¶Ê†áÂøóX` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ÊòØÂê¶Ê†áÂøóY`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `xtconstant`
+--
+
+LOCK TABLES `xtconstant` WRITE;
+/*!40000 ALTER TABLE `xtconstant` DISABLE KEYS */;
+/*!40000 ALTER TABLE `xtconstant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Current Database: `activiti`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `activiti` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `activiti`;
+
+--
+-- Table structure for table `act_evt_log`
+--
+
+DROP TABLE IF EXISTS `act_evt_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_evt_log` (
+  `LOG_NR_` bigint(20) NOT NULL AUTO_INCREMENT,
+  `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TIME_STAMP_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DATA_` longblob,
+  `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `IS_PROCESSED_` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`LOG_NR_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_evt_log`
+--
+
+LOCK TABLES `act_evt_log` WRITE;
+/*!40000 ALTER TABLE `act_evt_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_evt_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ge_bytearray`
+--
+
+DROP TABLE IF EXISTS `act_ge_bytearray`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ge_bytearray` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `BYTES_` longblob,
+  `GENERATED_` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_FK_BYTEARR_DEPL` (`DEPLOYMENT_ID_`),
+  CONSTRAINT `ACT_FK_BYTEARR_DEPL` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ge_bytearray`
+--
+
+LOCK TABLES `act_ge_bytearray` WRITE;
+/*!40000 ALTER TABLE `act_ge_bytearray` DISABLE KEYS */;
+INSERT INTO `act_ge_bytearray` VALUES ('2502',2,'source',NULL,'{\"resourceId\":\"2501\",\"properties\":{\"process_id\":\"Êú™ÂÆö‰πâ\",\"name\":\"\",\"documentation\":\"\",\"process_author\":\"\",\"process_version\":\"\",\"process_namespace\":\"http://www.activiti.org/processdef\",\"executionlisteners\":\"\",\"eventlisteners\":\"\",\"signaldefinitions\":\"\",\"messagedefinitions\":\"\"},\"stencil\":{\"id\":\"BPMNDiagram\"},\"childShapes\":[{\"resourceId\":\"sid-D4B3B0DC-96EB-4F0A-AAEB-E42161F00C59\",\"properties\":{\"overrideid\":\"XTCDKF\",\"name\":\"ÂºÄÂßã\",\"documentation\":\"\",\"executionlisteners\":\"\",\"initiator\":\"\",\"formkeydefinition\":\"\",\"formproperties\":\"\"},\"stencil\":{\"id\":\"StartNoneEvent\"},\"childShapes\":[],\"outgoing\":[],\"bounds\":{\"lowerRight\":{\"x\":165,\"y\":90},\"upperLeft\":{\"x\":135,\"y\":60}},\"dockers\":[]}],\"bounds\":{\"lowerRight\":{\"x\":1200,\"y\":1050},\"upperLeft\":{\"x\":0,\"y\":0}},\"stencilset\":{\"url\":\"stencilsets/bpmn2.0/bpmn2.0.json\",\"namespace\":\"http://b3mn.org/stencilset/bpmn2.0#\"},\"ssextensions\":[]}',NULL),('5001',1,'source-extra',NULL,'âPNG\r\n\Z\n\0\0\0\rIHDR\0\0\0\◊\0\0\0å\0\0\0\Ô4<Å\0\0\0 cHRM\0\0z&\0\0ÄÑ\0\0˙\0\0\0Ä\Ë\0\0u0\0\0\Í`\0\0:ò\0\0pú∫Q<\0\0\0gAMA\0\0±é|˚Qì\0\0\0sRGB\0Æ\Œ\È\0\0\0bKGD\0ˇ\0ˇ\0ˇ†Ωßì\0\0\0	pHYs\0\0\ƒ\0\0\ƒï+\0\01IDATx\⁄\Ì\›}HUw\«Ò£˜\…j^M7pXk µô\ÊC\"ë≠±π\Z∫ç\r\⁄\Ã\⁄h\ƒu\€ÛèA&\r&\ÏèE\Ïè(&…®ç∫°ïD`23RÑ\ÂC^\ÁÆ—É\”k>\‹Lº¨´w\ﬂ_\ﬁ¿πïZz\Ÿ\Œ}ø\‡Àπ\«˚p\«˝;\Áw~\Á\\M\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0xxa4Ö\ﬂ\Ôèp:ù\€ZZZ∂∏\›\ÓÃûûû˘∑n\›2zΩ^\Õh4˙###\Ô\ƒ\ƒ\ƒt[≠\÷y˘\Á;v\Ï¯çpSÑ\Í¯Ò\„eÖ}}}\∆eÀñi\⁄\‚≈ã5	ì°©Ä\r\r\ri]]]Z{{ª\÷\‹\‹\Ïø:<<\\ZVVvÄpì466æWSS≥\œ\„ÒX6o\ﬁ|7TÉaZ\ÔΩp\·Ç\Êp8F\\˝˝˝ØTTTtÍµù|U0É\ﬁ ∏r\Â ö\ \  è÷≠[g,**\“\‚\„\„5Èç¶˝qqqZnnn∏\…dzº≥≥s{VV÷µ¶¶¶f¬ÖêV]]]\√…ì\'\◊kk÷¨ôQ®&≥\ŸlZff¶©ææ˛EY\ .\„OÑ!IıX*X%%%wè´fCtt¥ñùùm™≠≠}v\È“•]r\\\÷F∏r\«XjWPıX≥¨{,X†•ßßõœû=˚|JJ\ ˜∞õzi∑pæ:òbw0¢∫∫z~~æñîî4\'\€X≤dâVPP`ë\›\ÃoÙ\‘vÑTUUU>44dﬁ∏q\„ún\'//o^TTTBaa\·[Ñ!\—k\…n⁄õj∏\›d2\Õ˘ˆ\Ïv˚B\ÈΩ>$\\\–=5Û\‚˙ı\ÎFu+‘±ó\≈bIê0?M∏†kjJ\”LNœÜ¥¥¥^Yl\"\\\–55Wp˘Ú\ÂA\›fvvv¥,\÷.ËööÑ´FÚÇ)11qæ,2ı\–~FæB∏5ª]ù\Ë\r¶®®®\'d\·•ÁÇÆ©Y\Ìjv{0∂A∏†kã≈ØL###\◊Ëπ†{V´ı\Œ\‡\‡`P∑)\€Û\»\‚&·ÇÆ\…Ò\÷\’+WÆuõNßÛ¢,Z	Ù\ﬁs’©+àÉ©°°¡/ã:\¬]Ûx<_¥∂∂éçéékì^óÀï,\ÀJ\¬]+--Ωh6õ/©KÛÉ°∫∫˙\ÿ\ÿ\ÿXè\√\·∏L∏\nΩ\◊\Œ√á˚Ç\–{\r<x0%,,\ÏkΩ¥\·\¬ïóóW‹æ}˚óSßN\Õ\Èvv\Ôﬁ≠z≠a∑\€\Ì \\•\ﬁ\Î\’\'Nå\»Ò–ú|æ\”\È¸°©©)_z≠\ÌgŒúÒ\È•›∏\ÃSjooLMMΩ|˛¸˘ó\‘=/‘•˘≥•ªªª~◊Æ]\œ\»\√Oé9Ú£û⁄çpaZ\⁄\⁄⁄ú\…\……Ω\ÁŒù{Añ\Ê\ÿ\ÿ\ÿY\È±T∞\‰xnø\√\·ÿß∑6#\\òIZl6\€%	\ÿÉ¡\‡KJJ2?\‰\Ì\’˜\Ï\Ÿ\„8zÙ\Ëzø\ﬂˇ©,˜Í±Ω∏\„.fL]),°*èååLµ\€\Ì\÷+VÃõ\Ê[ΩßOüÆ:t\Ëê\Õ\ÁÛy\’1ñ\Ï\n˛™\◊v\"\\xîêmíêΩo6õ\”dWÒFNN\Œc			Êòòò85ª]M\¬Us;::\\\“\€\\.ó\⁄Ïñ∑ñ˜ˆˆ~ßß¡¬Ö9±u\Î\÷Ecccõdo≠¨Æñä\”\∆/Q≥\€\’$\\5WPMi™\‘\À	b\0\0\0\0¯èò|sy5vü\nˇ8\Áπ0S§\‘\ÌwWÇ®,©<)uÉô\ﬂ\'º˛K)5\‹\ﬁXœëz[™Z\ Osˇ¥wäı{J§J\≈\÷\’L≥‘ìzo &\ÓbÆ®\€ˆ©{™sYoH}&ı≤Tπ‘üRn©\"Ω7\00õT•NoìR7ôWø©f˙™IπØK\rI≠í\Zê\Zñ*ñ˙äpÅ¡âÒ`(âRØMx\Ó\ﬁ˙sR\«=‘ªR\ﬂJ\Ìî: ı≥\‘\‰_è\\E\œhZW†îERUû\À\r¨O¸[ﬂÑ«æ@œï8\·o\ÔH\Ÿ	w\”êPªÄK5\÷ˇ¯ó@^\”k1†Åá°BQ1ç\◊\’JY§∂h\„#Ñ!Öû3•\Œc©ü>©ô\∆k?ê*ìä\‘\∆72&ß=¯º4+Bù\Z	Ãæ\œs\€&≠ßk\„\'ó\'*†	\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\‡\Î/N\Â≤uc4ã\0\0\0\0IENDÆB`Ç',NULL),('5003',1,'Á≥ªÁªüËèúÂçïÂºÄÊîæ.bpmn20.xml','5002','<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:activiti=\"http://activiti.org/bpmn\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" typeLanguage=\"http://www.w3.org/2001/XMLSchema\" expressionLanguage=\"http://www.w3.org/1999/XPath\" targetNamespace=\"http://www.activiti.org/processdef\">\n  <process id=\"Êú™ÂÆö‰πâ\" isExecutable=\"true\">\n    <startEvent id=\"XTCDKF\" name=\"ÂºÄÂßã\"/>\n  </process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_Êú™ÂÆö‰πâ\">\n    <bpmndi:BPMNPlane bpmnElement=\"Êú™ÂÆö‰πâ\" id=\"BPMNPlane_Êú™ÂÆö‰πâ\">\n      <bpmndi:BPMNShape bpmnElement=\"XTCDKF\" id=\"BPMNShape_XTCDKF\">\n        <omgdc:Bounds height=\"30.0\" width=\"30.0\" x=\"135.0\" y=\"60.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</definitions>',0),('5004',1,'Á≥ªÁªüËèúÂçïÂºÄÊîæ.Êú™ÂÆö‰πâ.png','5002','âPNG\r\n\Z\n\0\0\0\rIHDR\0\0\0Ø\0\0\0d\0\0\0Ω`\0\0lIDATx\⁄\Ì\€\ﬂKìa¿q/º\Ëè\Ë\"(®?\√?¢\·tC\«\ÎpjNß&Tıb\"\‚µ0\√\Ë\"D\«Z©X\rì\¬1Y\ŸD\Á\∆nD™≠\ÈÚ\È9ë7\—EÚ˛P\‚˚Åó\›˘\¬\·x8\Ôy\ŒSS\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\00M)u%ì\…fgg_D\"ë£ÆÆÆüœß\‹n∑ÚzΩß\Ì\ÌÌïÅÅÅùâââ9˝\‹$b∏I;??ll\Ï$\n©ôôµ±±°rπú*ó\ÀJ\»o±XTõõõJ\'∑\Í\Ó\Ó>\Ì\È\È…∂∂∂˙â .ÑNRc||¸{ˇØƒ¨V´\Í_•\”iá´Å@\‡ù\À\Â∫A4\·Tµ≠ç\≈b\œ\€\⁄\⁄T<?W\“˛iiiIÜQ¢\n√ë\ƒ][[{\’ˆˆ∂≤B6õU˙°\‰˜˚\Ôa\ÿF*Æ$ÆÙ∞Víøß´ÔóÜÜ/QÜ-=Æ¥\nVU‹øU‡¶¶¶Cù¿∑à6,ù*åééV§«µS\"ë(y<ûWDñYXXx SÖ\„\„ce∑ééé\Ì,´∫2«ïqò∂∂∂*T_XBN\Œ\‰#\Õ\ÃH\Ïº\√(∏\›\ÓkD¶»ëo4\ZUNöûûN\Î\‰ΩKÙaä\Ï*»ëØì\÷\◊◊≥:y\„D¶»íM>üw4yÖBQ\'\Ô—á)≤v∂d\„yüN\ﬁ2—á)≤\÷x\‰ΩD¶477ü:]yK•RÅ\ ”Ç¡`\≈\Èû˜\‡\‡\‡==/L\Z\Z˙\‡Ù¥ayy˘	\”ò699uz\Œ;<<ú`\Œ\”Øwvv˛pÑ≠\‹\ÿ\ÿ¯â6X¢∑∑˜£Sª\r∫eò”â˚í®\√---Ææææ™Ô°Æ∫)∂\ `©@ ê±{üW˙k©∫uuuµDñëT.K\⁄uì\"ì\…\ƒÙ;Ú‹§Ä-º^ØGW\‡oV\ﬂa\€\ﬂ\ﬂO\Ívaóv∂Úx<Ü\\ñ¥™K≈ïƒ≠ØØ]\ÿN\'ö[W\·£\≈\≈≈Ø&>\‚ß¶¶\ÓI´†QÖ£=∞Æò\œtQH•R•Û\ÃqWVV\Í\‰#gÙ∏∏\»$æ-I\ÏÛ˘äëH\‰m2ô\‹\Õ\Âr˘≥eY≤ë]Ö\’\’\’\«###Ou€±#I+’ñ©.K/|UW—êN\ G˙˘,[a≤\÷¯˚wOv\‰»óì3\0\0\0\0\0\0\0\0_¯	4\0Pí+©™ò\0\0\0\0IENDÆB`Ç',1),('5007',1,'Á≥ªÁªüËèúÂçïÂºÄÊîæ.bpmn20.xml','5006','<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:activiti=\"http://activiti.org/bpmn\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" typeLanguage=\"http://www.w3.org/2001/XMLSchema\" expressionLanguage=\"http://www.w3.org/1999/XPath\" targetNamespace=\"http://www.activiti.org/processdef\">\n  <process id=\"Êú™ÂÆö‰πâ\" isExecutable=\"true\">\n    <startEvent id=\"XTCDKF\" name=\"ÂºÄÂßã\"/>\n  </process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_Êú™ÂÆö‰πâ\">\n    <bpmndi:BPMNPlane bpmnElement=\"Êú™ÂÆö‰πâ\" id=\"BPMNPlane_Êú™ÂÆö‰πâ\">\n      <bpmndi:BPMNShape bpmnElement=\"XTCDKF\" id=\"BPMNShape_XTCDKF\">\n        <omgdc:Bounds height=\"30.0\" width=\"30.0\" x=\"135.0\" y=\"60.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</definitions>',0),('5008',1,'Á≥ªÁªüËèúÂçïÂºÄÊîæ.Êú™ÂÆö‰πâ.png','5006','âPNG\r\n\Z\n\0\0\0\rIHDR\0\0\0Ø\0\0\0d\0\0\0Ω`\0\0lIDATx\⁄\Ì\€\ﬂKìa¿q/º\Ëè\Ë\"(®?\√?¢\·tC\«\ÎpjNß&Tıb\"\‚µ0\√\Ë\"D\«Z©X\rì\¬1Y\ŸD\Á\∆nD™≠\ÈÚ\È9ë7\—EÚ˛P\‚˚Åó\›˘\¬\·x8\Ôy\ŒSS\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\00M)u%ì\…fgg_D\"ë£ÆÆÆüœß\‹n∑ÚzΩß\Ì\ÌÌïÅÅÅùâââ9˝\‹$b∏I;??ll\Ï$\n©ôôµ±±°rπú*ó\ÀJ\»o±XTõõõJ\'∑\Í\Ó\Ó>\Ì\È\È…∂∂∂˙â .ÑNRc||¸{ˇØƒ¨V´\Í_•\”iá´Å@\‡ù\À\Â∫A4\·Tµ≠ç\≈b\œ\€\⁄\⁄T<?W\“˛iiiIÜQ¢\n√ë\ƒ][[{\’ˆˆ∂≤B6õU˙°\‰˜˚\Ôa\ÿF*Æ$ÆÙ∞Víøß´ÔóÜÜ/QÜ-=Æ¥\nVU‹øU‡¶¶¶Cù¿∑à6,ù*åééV§«µS\"ë(y<ûWDñYXXx SÖ\„\„ce∑ééé\Ì,´∫2«ïqò∂∂∂*T_XBN\Œ\‰#\Õ\ÃH\Ïº\√(∏\›\ÓkD¶»ëo4\ZUNöûûN\Î\‰ΩKÙaä\Ï*»ëØì\÷\◊◊≥:y\„D¶»íM>üw4yÖBQ\'\Ô—á)≤v∂d\„yüN\ﬁ2—á)≤\÷x\‰ΩD¶477ü:]yK•RÅ\ ”Ç¡`\≈\Èû˜\‡\‡\‡==/L\Z\Z˙\‡Ù¥ayy˘	\”ò699uz\Œ;<<ú`\Œ\”Øwvv˛pÑ≠\‹\ÿ\ÿ¯â6X¢∑∑˜£Sª\r∫eò”â˚í®\√---Ææææ™Ô°Æ∫)∂\ `©@ ê±{üW˙k©∫uuuµDñëT.K\⁄uì\"ì\…\ƒÙ;Ú‹§Ä-º^ØGW\‡oV\ﬂa\€\ﬂ\ﬂO\Ívaóv∂Úx<Ü\\ñ¥™K≈ïƒ≠ØØ]\ÿN\'ö[W\·£\≈\≈≈Ø&>\‚ß¶¶\ÓI´†QÖ£=∞Æò\œtQH•R•Û\ÃqWVV\Í\‰#gÙ∏∏\»$æ-I\ÏÛ˘äëH\‰m2ô\‹\Õ\Âr˘≥eY≤ë]Ö\’\’\’\«###Ou€±#I+’ñ©.K/|UW—êN\ G˙˘,[a≤\÷¯˚wOv\‰»óì3\0\0\0\0\0\0\0\0_¯	4\0Pí+©™ò\0\0\0\0IENDÆB`Ç',1);
+/*!40000 ALTER TABLE `act_ge_bytearray` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ge_property`
+--
+
+DROP TABLE IF EXISTS `act_ge_property`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ge_property` (
+  `NAME_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `VALUE_` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`NAME_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ge_property`
+--
+
+LOCK TABLES `act_ge_property` WRITE;
+/*!40000 ALTER TABLE `act_ge_property` DISABLE KEYS */;
+INSERT INTO `act_ge_property` VALUES ('next.dbid','7501',4),('schema.history','create(5.22.0.0)',1),('schema.version','5.22.0.0',1);
+/*!40000 ALTER TABLE `act_ge_property` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_actinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_actinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_actinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `ACT_ID_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `CALL_PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `START_TIME_` datetime(3) NOT NULL,
+  `END_TIME_` datetime(3) DEFAULT NULL,
+  `DURATION_` bigint(20) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_ACT_INST_START` (`START_TIME_`),
+  KEY `ACT_IDX_HI_ACT_INST_END` (`END_TIME_`),
+  KEY `ACT_IDX_HI_ACT_INST_PROCINST` (`PROC_INST_ID_`,`ACT_ID_`),
+  KEY `ACT_IDX_HI_ACT_INST_EXEC` (`EXECUTION_ID_`,`ACT_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_actinst`
+--
+
+LOCK TABLES `act_hi_actinst` WRITE;
+/*!40000 ALTER TABLE `act_hi_actinst` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_actinst` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_attachment`
+--
+
+DROP TABLE IF EXISTS `act_hi_attachment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_attachment` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `URL_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `CONTENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TIME_` datetime(3) DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_attachment`
+--
+
+LOCK TABLES `act_hi_attachment` WRITE;
+/*!40000 ALTER TABLE `act_hi_attachment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_attachment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_comment`
+--
+
+DROP TABLE IF EXISTS `act_hi_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_comment` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TIME_` datetime(3) NOT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACTION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `MESSAGE_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `FULL_MSG_` longblob,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_comment`
+--
+
+LOCK TABLES `act_hi_comment` WRITE;
+/*!40000 ALTER TABLE `act_hi_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_detail`
+--
+
+DROP TABLE IF EXISTS `act_hi_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_detail` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `VAR_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `TIME_` datetime(3) NOT NULL,
+  `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DOUBLE_` double DEFAULT NULL,
+  `LONG_` bigint(20) DEFAULT NULL,
+  `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_DETAIL_PROC_INST` (`PROC_INST_ID_`),
+  KEY `ACT_IDX_HI_DETAIL_ACT_INST` (`ACT_INST_ID_`),
+  KEY `ACT_IDX_HI_DETAIL_TIME` (`TIME_`),
+  KEY `ACT_IDX_HI_DETAIL_NAME` (`NAME_`),
+  KEY `ACT_IDX_HI_DETAIL_TASK_ID` (`TASK_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_detail`
+--
+
+LOCK TABLES `act_hi_detail` WRITE;
+/*!40000 ALTER TABLE `act_hi_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_identitylink`
+--
+
+DROP TABLE IF EXISTS `act_hi_identitylink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_identitylink` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_IDENT_LNK_USER` (`USER_ID_`),
+  KEY `ACT_IDX_HI_IDENT_LNK_TASK` (`TASK_ID_`),
+  KEY `ACT_IDX_HI_IDENT_LNK_PROCINST` (`PROC_INST_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_identitylink`
+--
+
+LOCK TABLES `act_hi_identitylink` WRITE;
+/*!40000 ALTER TABLE `act_hi_identitylink` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_identitylink` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_procinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_procinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_procinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `START_TIME_` datetime(3) NOT NULL,
+  `END_TIME_` datetime(3) DEFAULT NULL,
+  `DURATION_` bigint(20) DEFAULT NULL,
+  `START_USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `START_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `END_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `SUPER_PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  UNIQUE KEY `PROC_INST_ID_` (`PROC_INST_ID_`),
+  KEY `ACT_IDX_HI_PRO_INST_END` (`END_TIME_`),
+  KEY `ACT_IDX_HI_PRO_I_BUSKEY` (`BUSINESS_KEY_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_procinst`
+--
+
+LOCK TABLES `act_hi_procinst` WRITE;
+/*!40000 ALTER TABLE `act_hi_procinst` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_procinst` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_taskinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_taskinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_taskinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_DEF_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PARENT_TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `START_TIME_` datetime(3) NOT NULL,
+  `CLAIM_TIME_` datetime(3) DEFAULT NULL,
+  `END_TIME_` datetime(3) DEFAULT NULL,
+  `DURATION_` bigint(20) DEFAULT NULL,
+  `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `PRIORITY_` int(11) DEFAULT NULL,
+  `DUE_DATE_` datetime(3) DEFAULT NULL,
+  `FORM_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_TASK_INST_PROCINST` (`PROC_INST_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_taskinst`
+--
+
+LOCK TABLES `act_hi_taskinst` WRITE;
+/*!40000 ALTER TABLE `act_hi_taskinst` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_taskinst` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_varinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_varinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_varinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `VAR_TYPE_` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DOUBLE_` double DEFAULT NULL,
+  `LONG_` bigint(20) DEFAULT NULL,
+  `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `CREATE_TIME_` datetime(3) DEFAULT NULL,
+  `LAST_UPDATED_TIME_` datetime(3) DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_PROCVAR_PROC_INST` (`PROC_INST_ID_`),
+  KEY `ACT_IDX_HI_PROCVAR_NAME_TYPE` (`NAME_`,`VAR_TYPE_`),
+  KEY `ACT_IDX_HI_PROCVAR_TASK_ID` (`TASK_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_hi_varinst`
+--
+
+LOCK TABLES `act_hi_varinst` WRITE;
+/*!40000 ALTER TABLE `act_hi_varinst` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_hi_varinst` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_id_group`
+--
+
+DROP TABLE IF EXISTS `act_id_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_group` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_id_group`
+--
+
+LOCK TABLES `act_id_group` WRITE;
+/*!40000 ALTER TABLE `act_id_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_id_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_id_info`
+--
+
+DROP TABLE IF EXISTS `act_id_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_info` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `USER_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `VALUE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PASSWORD_` longblob,
+  `PARENT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_id_info`
+--
+
+LOCK TABLES `act_id_info` WRITE;
+/*!40000 ALTER TABLE `act_id_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_id_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_id_membership`
+--
+
+DROP TABLE IF EXISTS `act_id_membership`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_membership` (
+  `USER_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `GROUP_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`USER_ID_`,`GROUP_ID_`),
+  KEY `ACT_FK_MEMB_GROUP` (`GROUP_ID_`),
+  CONSTRAINT `ACT_FK_MEMB_GROUP` FOREIGN KEY (`GROUP_ID_`) REFERENCES `act_id_group` (`ID_`),
+  CONSTRAINT `ACT_FK_MEMB_USER` FOREIGN KEY (`USER_ID_`) REFERENCES `act_id_user` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_id_membership`
+--
+
+LOCK TABLES `act_id_membership` WRITE;
+/*!40000 ALTER TABLE `act_id_membership` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_id_membership` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_id_user`
+--
+
+DROP TABLE IF EXISTS `act_id_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_user` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `FIRST_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `LAST_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `EMAIL_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PWD_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PICTURE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_id_user`
+--
+
+LOCK TABLES `act_id_user` WRITE;
+/*!40000 ALTER TABLE `act_id_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_id_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_procdef_info`
+--
+
+DROP TABLE IF EXISTS `act_procdef_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_procdef_info` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `INFO_JSON_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  UNIQUE KEY `ACT_UNIQ_INFO_PROCDEF` (`PROC_DEF_ID_`),
+  KEY `ACT_IDX_INFO_PROCDEF` (`PROC_DEF_ID_`),
+  KEY `ACT_FK_INFO_JSON_BA` (`INFO_JSON_ID_`),
+  CONSTRAINT `ACT_FK_INFO_JSON_BA` FOREIGN KEY (`INFO_JSON_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),
+  CONSTRAINT `ACT_FK_INFO_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_procdef_info`
+--
+
+LOCK TABLES `act_procdef_info` WRITE;
+/*!40000 ALTER TABLE `act_procdef_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_procdef_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_re_deployment`
+--
+
+DROP TABLE IF EXISTS `act_re_deployment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_re_deployment` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `DEPLOY_TIME_` timestamp(3) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_re_deployment`
+--
+
+LOCK TABLES `act_re_deployment` WRITE;
+/*!40000 ALTER TABLE `act_re_deployment` DISABLE KEYS */;
+INSERT INTO `act_re_deployment` VALUES ('5002','Á≥ªÁªüËèúÂçïÂºÄÊîæ',NULL,'','2018-06-04 15:15:17.616'),('5006','Á≥ªÁªüËèúÂçïÂºÄÊîæ',NULL,'','2018-06-04 15:15:52.354');
+/*!40000 ALTER TABLE `act_re_deployment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_re_model`
+--
+
+DROP TABLE IF EXISTS `act_re_model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_re_model` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `LAST_UPDATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `VERSION_` int(11) DEFAULT NULL,
+  `META_INFO_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EDITOR_SOURCE_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EDITOR_SOURCE_EXTRA_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_FK_MODEL_SOURCE` (`EDITOR_SOURCE_VALUE_ID_`),
+  KEY `ACT_FK_MODEL_SOURCE_EXTRA` (`EDITOR_SOURCE_EXTRA_VALUE_ID_`),
+  KEY `ACT_FK_MODEL_DEPLOYMENT` (`DEPLOYMENT_ID_`),
+  CONSTRAINT `ACT_FK_MODEL_DEPLOYMENT` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`),
+  CONSTRAINT `ACT_FK_MODEL_SOURCE` FOREIGN KEY (`EDITOR_SOURCE_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),
+  CONSTRAINT `ACT_FK_MODEL_SOURCE_EXTRA` FOREIGN KEY (`EDITOR_SOURCE_EXTRA_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_re_model`
+--
+
+LOCK TABLES `act_re_model` WRITE;
+/*!40000 ALTER TABLE `act_re_model` DISABLE KEYS */;
+INSERT INTO `act_re_model` VALUES ('2501',4,'Á≥ªÁªüËèúÂçïÂºÄÊîæ','Á≥ªÁªüËèúÂçïÂºÄÊîæ',NULL,'2018-06-04 15:11:13.226','2018-06-04 15:14:42.680',1,'{\"name\":\"Á≥ªÁªüËèúÂçïÂºÄÊîæ\",\"revision\":1,\"description\":\"Á≥ªÁªüËèúÂçïÁî≥ËØ∑ÔºåÂÆ°ÊâπÔºåÂÆåÊàê\"}',NULL,'2502','5001','');
+/*!40000 ALTER TABLE `act_re_model` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_re_procdef`
+--
+
+DROP TABLE IF EXISTS `act_re_procdef`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_re_procdef` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `KEY_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `VERSION_` int(11) NOT NULL,
+  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `RESOURCE_NAME_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DGRM_RESOURCE_NAME_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `HAS_START_FORM_KEY_` tinyint(4) DEFAULT NULL,
+  `HAS_GRAPHICAL_NOTATION_` tinyint(4) DEFAULT NULL,
+  `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  UNIQUE KEY `ACT_UNIQ_PROCDEF` (`KEY_`,`VERSION_`,`TENANT_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_re_procdef`
+--
+
+LOCK TABLES `act_re_procdef` WRITE;
+/*!40000 ALTER TABLE `act_re_procdef` DISABLE KEYS */;
+INSERT INTO `act_re_procdef` VALUES ('Êú™ÂÆö‰πâ:1:5005',1,'http://www.activiti.org/processdef',NULL,'Êú™ÂÆö‰πâ',1,'5002','Á≥ªÁªüËèúÂçïÂºÄÊîæ.bpmn20.xml','Á≥ªÁªüËèúÂçïÂºÄÊîæ.Êú™ÂÆö‰πâ.png',NULL,0,1,1,''),('Êú™ÂÆö‰πâ:2:5009',1,'http://www.activiti.org/processdef',NULL,'Êú™ÂÆö‰πâ',2,'5006','Á≥ªÁªüËèúÂçïÂºÄÊîæ.bpmn20.xml','Á≥ªÁªüËèúÂçïÂºÄÊîæ.Êú™ÂÆö‰πâ.png',NULL,0,1,1,'');
+/*!40000 ALTER TABLE `act_re_procdef` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_event_subscr`
+--
+
+DROP TABLE IF EXISTS `act_ru_event_subscr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_event_subscr` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `EVENT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `EVENT_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACTIVITY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `CONFIGURATION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_EVENT_SUBSCR_CONFIG_` (`CONFIGURATION_`),
+  KEY `ACT_FK_EVENT_EXEC` (`EXECUTION_ID_`),
+  CONSTRAINT `ACT_FK_EVENT_EXEC` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ru_event_subscr`
+--
+
+LOCK TABLES `act_ru_event_subscr` WRITE;
+/*!40000 ALTER TABLE `act_ru_event_subscr` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_ru_event_subscr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_execution`
+--
+
+DROP TABLE IF EXISTS `act_ru_execution`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_execution` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PARENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `SUPER_EXEC_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `IS_ACTIVE_` tinyint(4) DEFAULT NULL,
+  `IS_CONCURRENT_` tinyint(4) DEFAULT NULL,
+  `IS_SCOPE_` tinyint(4) DEFAULT NULL,
+  `IS_EVENT_SCOPE_` tinyint(4) DEFAULT NULL,
+  `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+  `CACHED_ENT_STATE_` int(11) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_EXEC_BUSKEY` (`BUSINESS_KEY_`),
+  KEY `ACT_FK_EXE_PROCINST` (`PROC_INST_ID_`),
+  KEY `ACT_FK_EXE_PARENT` (`PARENT_ID_`),
+  KEY `ACT_FK_EXE_SUPER` (`SUPER_EXEC_`),
+  KEY `ACT_FK_EXE_PROCDEF` (`PROC_DEF_ID_`),
+  CONSTRAINT `ACT_FK_EXE_PARENT` FOREIGN KEY (`PARENT_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_EXE_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`),
+  CONSTRAINT `ACT_FK_EXE_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ACT_FK_EXE_SUPER` FOREIGN KEY (`SUPER_EXEC_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ru_execution`
+--
+
+LOCK TABLES `act_ru_execution` WRITE;
+/*!40000 ALTER TABLE `act_ru_execution` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_ru_execution` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_identitylink`
+--
+
+DROP TABLE IF EXISTS `act_ru_identitylink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_identitylink` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_IDENT_LNK_USER` (`USER_ID_`),
+  KEY `ACT_IDX_IDENT_LNK_GROUP` (`GROUP_ID_`),
+  KEY `ACT_IDX_ATHRZ_PROCEDEF` (`PROC_DEF_ID_`),
+  KEY `ACT_FK_TSKASS_TASK` (`TASK_ID_`),
+  KEY `ACT_FK_IDL_PROCINST` (`PROC_INST_ID_`),
+  CONSTRAINT `ACT_FK_ATHRZ_PROCEDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`),
+  CONSTRAINT `ACT_FK_IDL_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_TSKASS_TASK` FOREIGN KEY (`TASK_ID_`) REFERENCES `act_ru_task` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ru_identitylink`
+--
+
+LOCK TABLES `act_ru_identitylink` WRITE;
+/*!40000 ALTER TABLE `act_ru_identitylink` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_ru_identitylink` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_job`
+--
+
+DROP TABLE IF EXISTS `act_ru_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_job` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `EXCLUSIVE_` tinyint(1) DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `RETRIES_` int(11) DEFAULT NULL,
+  `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
+  `REPEAT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_FK_JOB_EXCEPTION` (`EXCEPTION_STACK_ID_`),
+  CONSTRAINT `ACT_FK_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ru_job`
+--
+
+LOCK TABLES `act_ru_job` WRITE;
+/*!40000 ALTER TABLE `act_ru_job` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_ru_job` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_task`
+--
+
+DROP TABLE IF EXISTS `act_ru_task`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_task` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PARENT_TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_DEF_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DELEGATION_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PRIORITY_` int(11) DEFAULT NULL,
+  `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `DUE_DATE_` datetime(3) DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `FORM_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_TASK_CREATE` (`CREATE_TIME_`),
+  KEY `ACT_FK_TASK_EXE` (`EXECUTION_ID_`),
+  KEY `ACT_FK_TASK_PROCINST` (`PROC_INST_ID_`),
+  KEY `ACT_FK_TASK_PROCDEF` (`PROC_DEF_ID_`),
+  CONSTRAINT `ACT_FK_TASK_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_TASK_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`),
+  CONSTRAINT `ACT_FK_TASK_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ru_task`
+--
+
+LOCK TABLES `act_ru_task` WRITE;
+/*!40000 ALTER TABLE `act_ru_task` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_ru_task` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_variable`
+--
+
+DROP TABLE IF EXISTS `act_ru_variable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_variable` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DOUBLE_` double DEFAULT NULL,
+  `LONG_` bigint(20) DEFAULT NULL,
+  `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_VARIABLE_TASK_ID` (`TASK_ID_`),
+  KEY `ACT_FK_VAR_EXE` (`EXECUTION_ID_`),
+  KEY `ACT_FK_VAR_PROCINST` (`PROC_INST_ID_`),
+  KEY `ACT_FK_VAR_BYTEARRAY` (`BYTEARRAY_ID_`),
+  CONSTRAINT `ACT_FK_VAR_BYTEARRAY` FOREIGN KEY (`BYTEARRAY_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),
+  CONSTRAINT `ACT_FK_VAR_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_VAR_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `act_ru_variable`
+--
+
+LOCK TABLES `act_ru_variable` WRITE;
+/*!40000 ALTER TABLE `act_ru_variable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `act_ru_variable` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-06-07 23:43:20

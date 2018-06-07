@@ -36,7 +36,7 @@
 						<ll:ajaxform id="ajaxform" cols="3" colproportion="2:3:2:3:1:3">
 							<ll:formfield id="name" title="菜单名称" field="name" errmsg="菜单名称不能超过10" maxlen="10"></ll:formfield>
 							<ll:formfield id="fcdmc" title="父菜单名称" field="parentId" errmsg="菜单名称不能超过10" maxlen="10"></ll:formfield>
-							<ll:formtoolbar labelalign="right" colspan="1">
+							<ll:formtoolbar labelalign="right" colspan="1" >
 								<button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width: 100px;">
 									<span class="glyphicon glyphicon-search "></span> 查询
 								</button>  
