@@ -10,8 +10,8 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.menuvisitlog;
 import java.util.List;
 
-import cn.doublepoint.common.domain.model.entity.sys.MenuVisitLog;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.template.dto.domain.model.entity.sys.MenuVisitLog;
 
 
 public interface MenuVisitLogService {

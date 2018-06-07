@@ -11,10 +11,14 @@ package cn.doublepoint.commonutil.persitence.jpa;
 
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedBy;
+
+import com.sun.mail.handlers.text_html;
+
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public interface BaseDaoService {
 
@@ -83,6 +87,7 @@ public interface BaseDaoService {
 	 * @return
 	 */
 	public int executeUpdate(String jpql, QueryParamList queryParamList);
+
 	/**
 	 * 批量更新
 	 * 
@@ -91,17 +96,24 @@ public interface BaseDaoService {
 	 * @return
 	 */
 	public int executeNativeUpdate(String sql, QueryParamList queryParamList);
-	
+
 	/**
 	 * 执行jpql查询
+	 * 
 	 * @param jpql
 	 * @param queryParamList
 	 * @return
 	 */
 	public List<Object> executeQuery(String jpql, QueryParamList queryParamList);
-	
+
+	/**
+	 * 执行sql查询
+	 * 
+	 * @param sql
+	 * @param queryParamList
+	 * @return
+	 */
 	public List<Object> executeNativeQuery(String sql, QueryParamList queryParamList);
-	
 
 	/**
 	 * 查询总数
@@ -121,5 +133,31 @@ public interface BaseDaoService {
 	 */
 	public <T extends BaseModel> long count(Class<T> clazz, QueryParamList queryParamList);
 
-	
+	/**
+	 * 创建实体
+	 * 
+	 * @param t
+	 */
+	public <T extends BaseModel> void create(T t);
+
+	/**
+	 * 创建实体
+	 * 
+	 * @param t
+	 */
+	public <T extends BaseModel> void create(List<T> t);
+
+	/**
+	 * 更新实体
+	 * 
+	 * @param t
+	 */
+	public <T extends BaseModel> void update(T t);
+
+	/**
+	 * 更新实体
+	 * 
+	 * @param t
+	 */
+	public <T extends BaseModel> void update(List<T> t);
 }

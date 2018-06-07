@@ -24,17 +24,17 @@
 </head>
 <body>
 	<form>
-		<ll-filllayout> 
-			<ll-fillarea height="*" > 
-				<ll-tree id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true" showLine="true"></ll-tree> 
-			</ll-fillarea> 
-			<ll-fillarea height="45px">
-				<ll-toolbar>
-					<button class="layui-btn" lay-submit="" lay-filter="demo1" style="margin-top:5px;">立即提交</button>
-					<button type="reset" class="layui-btn layui-btn-primary" style="margin-top:5px;">重置</button>
-				</ll-toolbar>
-			</ll-fillarea> 
-		</ll-filllayout>
+		<ll:filllayout>
+			<ll:fillarea height="*">
+				<ll:tree id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true" showLine="true"></ll:tree>
+			</ll:fillarea>
+			<ll:fillarea height="45px">
+				<ll:toolbar>
+					<button class="layui-btn" lay-submit="" lay-filter="demo1" style="margin-top: 5px;">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary" style="margin-top: 5px;">重置</button>
+				</ll:toolbar>
+			</ll:fillarea>
+		</ll:filllayout>
 	</form>
 	<style>
 .layui-table-view {

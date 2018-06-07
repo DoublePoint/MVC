@@ -33,8 +33,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.log.Log4jUtil;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	private final byte[] body;

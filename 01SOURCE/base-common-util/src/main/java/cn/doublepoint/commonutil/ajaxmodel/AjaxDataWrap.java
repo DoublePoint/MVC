@@ -13,8 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 	

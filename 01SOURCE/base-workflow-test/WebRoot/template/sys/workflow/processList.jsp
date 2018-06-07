@@ -24,35 +24,31 @@
 </head>
 <body>
 	<form>
-		<ll-filllayout> 
-			<ll-fillarea-lr width="*">
-				<ll-filllayout > 
-					<ll-fillarea-tb height="85" showtitle="true" title="查询条件" showborder="false">
-							<ll-ajaxform id="ajaxform" cols="2" colproportion="1:3:3:3"> 
-									<ll-formfield id="key" title="KEY"  field="key"  ></ll-formfield>
-									<ll-formtoolbar labelalign="right" colspan="1">
-										<button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width:100px;">  
-        									<span class="glyphicon glyphicon-search "></span> 查询
-   										</button>  
+		<ll:filllayout>
+			<ll:fillareatb height="85" showtitle="true" title="查询条件" showborder="false">
+				<ll:ajaxform id="ajaxform" cols="2" colproportion="1:3:3:3">
+					<ll:formfield id="key" title="KEY" field="key"></ll:formfield>
+					<ll:formtoolbar labelalign="right" colspan="1">
+						<button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width: 100px;">
+							<span class="glyphicon glyphicon-search "></span> 查询
+						</button>  
    										&nbsp;
-									</ll-formtoolbar>
-							</ll-ajaxform>
-					</ll-fillarea-tb>
-					<ll-fillarea-tb height="*"  showtitle="true" title="流程列表">
-						<ll-ajaxgrid id="ajaxgrid"  onpageclick="retrieve()" > 
-							<ll-gridcheck ></ll-gridcheck>
-							<ll-gridfield field="id" width="120"  title="标识"  ></ll-gridfield>  
-							<ll-gridfield field="deploymentId" width="80"  title="部署Id"  ></ll-gridfield>  
-							<ll-gridfield field="key" width="150"  title="流程名称"  ></ll-gridfield>  
-							<ll-gridfield field="version" width="80"  title="版本"  ></ll-gridfield>  
-							<ll-gridcustom align="center" title="流程图" formatter="customerFunction"></ll-gridcustom>  
-						</ll-ajaxgrid>
-					</ll-fillarea-tb>
-				</ll-filllayout>
-			</ll-fillarea-lr>
-		</ll-filllayout>
+									</ll:formtoolbar>
+				</ll:ajaxform>
+			</ll:fillareatb>
+			<ll:fillareatb height="*" showtitle="true" title="流程列表">
+				<ll:ajaxgrid id="ajaxgrid" onpageclick="retrieve()">
+					<ll:gridcheck></ll:gridcheck>
+					<ll:gridfield field="id" width="120" title="标识"></ll:gridfield>
+					<ll:gridfield field="deploymentId" width="80" title="部署Id"></ll:gridfield>
+					<ll:gridfield field="key" width="150" title="流程名称"></ll:gridfield>
+					<ll:gridfield field="version" width="80" title="版本"></ll:gridfield>
+					<ll:gridcustom align="center" title="流程图" formatter="customerFunction"></ll:gridcustom>
+				</ll:ajaxgrid>
+			</ll:fillareatb>
+		</ll:filllayout>
 	</form>
 	<script type="text/javascript" src="processListScript.js"></script>
-</style>
+	</style>
 </body>
 </html>

@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 import javax.persistence.Id;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class JPAUtil extends DataBaseUtil {
 	/**
@@ -228,6 +228,26 @@ public class JPAUtil extends DataBaseUtil {
 	public static <T extends BaseModel> long count(String jpql, QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
 		return daoService.count(jpql, queryParamList);
+	}
+	
+	public static <T extends BaseModel> void create(T t){
+		BaseDaoService daoService = getDaoService();
+		daoService.create(t);
+	}
+	
+	public static <T extends BaseModel> void create(List<T> list){
+		BaseDaoService daoService = getDaoService();
+		daoService.create(list);
+	}
+	
+	public static <T extends BaseModel> void update(T t){
+		BaseDaoService daoService = getDaoService();
+		daoService.update(t);
+	}
+	
+	public static <T extends BaseModel> void update(List<T> list){
+		BaseDaoService daoService = getDaoService();
+		daoService.update(list);
 	}
 	
 	/**

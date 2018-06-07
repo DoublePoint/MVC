@@ -12,10 +12,10 @@ package cn.doublepoint.common.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.doublepoint.common.domain.model.entity.sys.Sequence;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.persitence.jpa.BaseDaoService;
 import cn.doublepoint.commonutil.persitence.jpa.DataBaseUtil;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Sequence;
 
 public class SequenceUtil extends DataBaseUtil {
 	/**

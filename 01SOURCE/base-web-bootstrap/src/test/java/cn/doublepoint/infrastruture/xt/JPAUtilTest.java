@@ -9,23 +9,11 @@
 */
 package cn.doublepoint.infrastruture.xt;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 
-import cn.doublepoint.common.domain.model.entity.sys.Menu;
-import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
-//import cn.doublepoint.jdbc.util.JDBCUtil;
 
 public class JPAUtilTest extends RepositoryTest {
 

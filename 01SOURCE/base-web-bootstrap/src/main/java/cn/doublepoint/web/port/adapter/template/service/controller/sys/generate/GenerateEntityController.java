@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.entity.EntityFilterQueryService;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
@@ -45,6 +44,7 @@ import cn.doublepoint.generate.GenerateServiceTemplateUtil;
 import cn.doublepoint.generate.GenerateTemplateUtil;
 import cn.doublepoint.generate.domain.model.helper.BaseTemplate;
 import cn.doublepoint.generate.domain.model.helper.TemplateEntityModel;
+import cn.doublepoint.template.dto.domain.model.entity.sys.EntityFilter;
 import freemarker.template.TemplateException;
 
 @Controller

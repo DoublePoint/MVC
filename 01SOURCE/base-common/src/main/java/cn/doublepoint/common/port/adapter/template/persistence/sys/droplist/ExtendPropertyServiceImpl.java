@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.common.domain.model.entity.sys.ExtendProperty;
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
+import cn.doublepoint.template.dto.domain.model.entity.sys.ExtendProperty;
 
 @Service("extendPropertyService")
 public class ExtendPropertyServiceImpl  implements ExtendPropertyService{

@@ -22,4 +22,6 @@ public class XTConstant {
 	public static final String GLY_PASSWORD_ERROR_CODE="L602";//密码错误
 	
 	public static final String GLY_PASSWORD_ERROR_CONTENT="密码错误";//密码错误
+	
+	public static final String SESSION_USER="USER";//SESSION的名称
 }

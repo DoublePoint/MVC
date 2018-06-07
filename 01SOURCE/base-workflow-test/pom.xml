@@ -168,5 +168,11 @@
 			<artifactId>base-common-workflow</artifactId>
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	</dependencies>
 </project>

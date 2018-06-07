@@ -1,8 +1,8 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.workflowtest;
 import java.util.List;
 
-import cn.doublepoint.common.domain.model.entity.sys.AnnouncementChanged;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.template.dto.domain.model.entity.sys.AnnouncementChanged;
 
 
 public interface AnnouncementChangedService {

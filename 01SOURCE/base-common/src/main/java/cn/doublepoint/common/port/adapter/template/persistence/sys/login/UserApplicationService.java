@@ -11,8 +11,8 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.login;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.common.domain.model.entity.sys.User;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.template.dto.domain.model.entity.sys.User;
 
 @Service
 public class UserApplicationService {

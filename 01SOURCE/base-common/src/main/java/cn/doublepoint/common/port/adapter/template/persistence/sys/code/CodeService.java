@@ -1,8 +1,8 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.code;
 import java.util.List;
 
-import cn.doublepoint.common.domain.model.entity.sys.Code;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Code;
 
 
 public interface CodeService {

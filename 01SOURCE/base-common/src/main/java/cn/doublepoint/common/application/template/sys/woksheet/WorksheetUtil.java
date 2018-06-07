@@ -6,89 +6,84 @@
 * 类   说   明 ：
 * 
 * 修   改   人：          修   改   日   期：
-*/ 
+*/
 package cn.doublepoint.common.application.template.sys.woksheet;
 
-import java.util.Date;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Service;
-
-import cn.doublepoint.common.domain.model.entity.sys.Sequence;
-import cn.doublepoint.common.domain.model.entity.sys.Worksheet;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.WorksheetService;
-import cn.doublepoint.common.util.SequenceUtil;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
 
 public class WorksheetUtil {
 	
 	/**
-	 * 创建工作单,并启动工作单，即启动流程
+	 * 创建工作单
+	 * 
 	 * @param worksheetType
 	 * @param userId
-	 * @param remak
-	 * @return
+	 * @param remak 
+	 * @return worksheetNo
 	 */
-	public static String create(String worksheetType,String userId,String remak){
-		WorksheetService worksheetService=getWorksheetService();
-		Worksheet newWroksheet=new Worksheet();
-		newWroksheet.setWorksheetNo(generateWorksheetNo());
-		
-		String worksheetNo="";
-		return worksheetNo;
+	public static String createAndStart(String classification, String createUser, String description) {
+		InstanceService instanceService = getInstanceService();
+		return instanceService.createAndStart(classification, createUser, description);
 	}
-	
+
 	/**
 	 * 传递工作单
-	 * @param worksheetNo
+	 * 
+	 * @param instanceId
 	 * @return
 	 */
-	public static String transmit(String worksheetNo){
-		return worksheetNo;
+	public static void transmit(String instanceId) {
+		InstanceService instanceService = getInstanceService();
+		instanceService.transmit(instanceId);
 	}
-	
+
 	/**
 	 * 回退工作单
+	 * 
 	 * @param worksheetType
 	 * @return
 	 */
-	public static String back(String worksheetNo){
-		return worksheetNo;
+	public static void back(String instanceId) {
+		InstanceService instanceService = getInstanceService();
+		instanceService.back(instanceId);
 	}
-	
+
 	/**
 	 * 作废工作单
+	 * 
 	 * @param worksheetType
 	 * @return
 	 */
-	public static String abolish(String worksheetNo){
-		return worksheetNo;
+	public static void abolish(String instanceId) {
+		InstanceService instanceService = getInstanceService();
+		instanceService.abolish(instanceId);
 	}
-	
+
 	/**
 	 * 挂起工作单
+	 * 
 	 * @param worksheetType
 	 * @return
 	 */
-	public static String suspend(String worksheetNo){
-		return worksheetNo;
+	public static void suspend(String instanceId) {
+		InstanceService instanceService = getInstanceService();
+		instanceService.suspend(instanceId);
 	}
-	
+
 	/**
 	 * 工作单挂起之后若需要激活，调用此方法
+	 * 
 	 * @param worksheetType
 	 * @return
 	 */
-	public static String active(String worksheetType){
-		String worksheetNo="";
-		return worksheetNo;
+	public static void active(String instanceId) {
+		InstanceService instanceService = getInstanceService();
+		instanceService.active(instanceId);
 	}
-	
-	private static WorksheetService getWorksheetService(){
-		return (WorksheetService)ApplicationContextUtil.getBean("llWorksheetService");
+
+	private static InstanceService getInstanceService() {
+		return (InstanceService) ApplicationContextUtil.getBean("instanceService");
 	}
-	
-	private static String generateWorksheetNo(){
-		return SequenceUtil.getNextVal("ll.workflow.worksheetNo").toString();
-	}
+
 }

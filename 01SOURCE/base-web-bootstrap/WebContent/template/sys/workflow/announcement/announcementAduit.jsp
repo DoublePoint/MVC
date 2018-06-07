@@ -24,37 +24,37 @@
 </head>
 <body>
 	<form>
-		<ll-filllayout> 
-			<ll-fillarea-tb showtitle="true" title="工作单信息" showborder="true">
-				<ll-ajaxform id="ajaxform" cols="2" colproportion="2:3:2:3:1:3"> 
-					<ll-formfield title="工作单编号"  field="worksheetNo" ></ll-formfield>
-					<ll-formfield title="工作单名称"  field="name" ></ll-formfield>
-					<ll-formfield title="工作单类别"  field="classification" ></ll-formfield>
-					<ll-formarea title="工作单描述"  field="description" ></ll-formarea>
-					<ll-formfield title="创建时间"  field="classification" ></ll-formfield>
-				</ll-ajaxform>
-			</ll-fillarea-tb>
-			<ll-fillarea-tb showtitle="true" title="审批信息" showborder="true">
-				<ll-ajaxform id="ajaxform" cols="2" colproportion="2:3:2:3:1:3"> 
-					<ll-formfield title="审批信息"  field="name" ></ll-formfield>
-					<ll-formarea title="备注"  field="parentId"  ></ll-formarea>
-					<ll-formfield title="审批日期"  field="name" ></ll-formfield>
-				</ll-ajaxform>
-			</ll-fillarea-tb>
-			<ll-fillarea-tb height="35" > 
-					<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickAdd();">  
-   						<span class="glyphicon glyphicon-plus ll_add_icon"></span> 保存
-					</button>  
-					<button type="button" style="width:70px;" class="btn btn-default btn-sm ll-main" onclick="onClickDelete();">  
-   						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 传递
-					</button>  
-					<button type="button" style="width:70px;" class="btn btn-default btn-sm " onclick="onClickDelete();">  
-   						<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 返回
-					</button>  
-			</ll-fillarea-tb>
-		</ll-filllayout>
+		<ll:filllayout>
+			<ll:fillareatb showtitle="true" title="工作单信息" showborder="true">
+				<ll:ajaxform id="ajaxform" cols="2" colproportion="2:3:2:3:1:3">
+					<ll:formfield title="工作单编号" field="worksheetNo"></ll:formfield>
+					<ll:formfield title="工作单名称" field="name"></ll:formfield>
+					<ll:formfield title="工作单类别" field="classification"></ll:formfield>
+					<ll:formarea title="工作单描述" field="description"></ll:formarea>
+					<ll:formfield title="创建时间" field="classification"></ll:formfield>
+				</ll:ajaxform>
+			</ll:fillareatb>
+			<ll:fillareatb showtitle="true" title="审批信息" showborder="true">
+				<ll:ajaxform id="ajaxform" cols="2" colproportion="2:3:2:3:1:3">
+					<ll:formfield title="审批信息" field="name"></ll:formfield>
+					<ll:formarea title="备注" field="parentId"></ll:formarea>
+					<ll:formfield title="审批日期" field="name"></ll:formfield>
+				</ll:ajaxform>
+			</ll:fillareatb>
+			<ll:fillareatb height="35">
+				<button type="button" style="width: 70px;" class="btn btn-default btn-sm ll-main" onclick="onClickAdd();">
+					<span class="glyphicon glyphicon-plus ll_add_icon"></span> 保存
+				</button>
+				<button type="button" style="width: 70px;" class="btn btn-default btn-sm ll-main" onclick="onClickDelete();">
+					<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 传递
+				</button>
+				<button type="button" style="width: 70px;" class="btn btn-default btn-sm " onclick="onClickDelete();">
+					<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 返回
+				</button>
+			</ll:fillareatb>
+		</ll:filllayout>
 	</form>
 	<script type="text/javascript" src="announcementAduitScript.js"></script>
-</style>
+	</style>
 </body>
 </html>

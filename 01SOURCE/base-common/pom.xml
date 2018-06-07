@@ -72,17 +72,6 @@
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.querydsl</groupId>
-			<artifactId>querydsl-jpa</artifactId>
-			<version>${com.querydsl.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.querydsl</groupId>
-			<artifactId>querydsl-apt</artifactId>
-			<version>${com.querydsl.version}</version>
-			<!-- <scope>provided</scope> -->
-		</dependency>
 	</dependencies>
 
 	<build>

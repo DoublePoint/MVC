@@ -17,8 +17,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.log.Log4jUtil;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class AjaxRequest {
 	

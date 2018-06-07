@@ -18,12 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.domain.model.entity.sys.Code;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.code.CodeService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Code;
 
 @Controller
 @RequestMapping("/template/sys/code")

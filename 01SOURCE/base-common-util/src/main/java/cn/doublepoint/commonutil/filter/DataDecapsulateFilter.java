@@ -23,8 +23,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import cn.doublepoint.commonutil.log.Log4jUtil;
-
 public class DataDecapsulateFilter extends OncePerRequestFilter {
 
 	@Override

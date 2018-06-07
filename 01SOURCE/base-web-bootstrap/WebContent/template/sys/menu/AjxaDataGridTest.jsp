@@ -38,11 +38,11 @@
 
 	<form>
 		<div id="lltestdiv">
-			<ll-ajaxgrid id="lltestdatagrid"
-				datasource="/template/sys/menu/retrieve"> <ll-gridfield
-				field="id" title="菜单标识"></ll-gridfield> <ll-gridfield field="name"
-				title="菜单名称"></ll-gridfield> <ll-gridfield field="sn" title="菜单排序"></ll-gridfield>
-			<ll-gridfield field="link" title="菜单链接"></ll-gridfield> </ll-datagrid>
+			<ll:ajaxgrid id="lltestdatagrid"
+				datasource="/template/sys/menu/retrieve"> <ll:gridfield
+				field="id" title="菜单标识"></ll:gridfield> <ll:gridfield field="name"
+				title="菜单名称"></ll:gridfield> <ll:gridfield field="sn" title="菜单排序"></ll:gridfield>
+			<ll:gridfield field="link" title="菜单链接"></ll:gridfield> </ll:datagrid>
 		</div>
 		<input type="button" value="测试" onclick="clicktest()" />
 	</form>

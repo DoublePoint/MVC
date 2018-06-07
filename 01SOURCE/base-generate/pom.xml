@@ -29,11 +29,6 @@
 			<artifactId>base-common</artifactId>
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common-util</artifactId>
-			<version>${cn.doublepoint.base.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

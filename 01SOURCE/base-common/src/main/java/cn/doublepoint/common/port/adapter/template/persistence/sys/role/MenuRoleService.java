@@ -1,8 +1,8 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 import java.util.List;
 
-import cn.doublepoint.common.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.template.dto.domain.model.entity.sys.MenuRole;
 
 
 public interface MenuRoleService {

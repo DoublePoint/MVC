@@ -24,50 +24,53 @@
 </head>
 <body>
 	<form>
-		<ll-filllayout> 
-			<ll-fillarea-lr width="600px">
-				<ll-filllayout> 
-					<ll-fillarea-tb height="5">
-					</ll-fillarea-tb>
-					<ll-fillarea-tb height="140px" title="代办任务1" showtitle="true">
-							<ll-filllayout> 
-								<ll-fillarea-lr width="300">
-									<ll-card value="150" title="代办任务" url="#" type="info" ></ll-card>
-								</ll-fillarea-lr>
-								<ll-fillarea-lr width="300" style="margin-left:5px">
-									<ll-card value="2" title="新消息" url="#" type="warning" ></ll-card>
-								</ll-fillarea-lr>
-							</ll-filllayout>
-					</ll-fillarea-tb>
-					<ll-fillarea-tb height="*" title="代办任务1" showtitle="true">
-						<ll-tabpanel>
-							<ll-tab title="待办任务" active="true">
-								<ll-ajaxgrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
-									<ll-gridcheck ></ll-gridcheck>
-									<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-									<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
-									<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
-									<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield> 
-								</ll-ajaxgrid>
-							</ll-tab> 
-							<ll-tab title="角色待办">
-								<ll-ajaxgrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieve()" ondblclickrow="dbclickgrid(1)" > 
-									<ll-gridcheck ></ll-gridcheck>
-									<ll-gridfield field="id" title="菜单标识" width="150"></ll-gridfield>
-									<ll-gridfield field="name" title="菜单名称" width="150"  readonly="false" ></ll-gridfield> 
-									<ll-gridfield field="sn" title="菜单排序" width="150"></ll-gridfield> 
-									<ll-gridfield field="link" title="菜单链接"  ></ll-gridfield>
-								</ll-ajaxgrid> 
-							</ll-tab>
-						</ll-tabpanel>
-					</ll-fillarea-tb>
-				</ll-filllayout>
-			</ll-fillarea-lr>
-			<ll-fillarea-lr width="*">
-      			<div class="layui-tab-item layui-show" style="height: 100%; min-width: 700px">
-				</div>
-			</ll-fillarea-lr>
-		</ll-filllayout>
+		<ll:filllayout>
+			<ll:fillarealr width="600px">
+				<ll:filllayout>
+					<ll:fillareatb height="5">
+					</ll:fillareatb>
+					<ll:fillareatb height="140px" title="代办任务1" showtitle="true">
+						<ll:filllayout>
+							<ll:fillarealr width="300">
+								<ll:card value="150" title="代办任务" url="#" type="info"></ll:card>
+							</ll:fillarealr>
+							<ll:fillarealr width="300" style="margin-left:5px">
+								<ll:card value="2" title="新消息" url="#" type="warning"></ll:card>
+							</ll:fillarealr>
+						</ll:filllayout>
+					</ll:fillareatb>
+					<ll:fillareatb height="*" title="代办任务1" showtitle="true">
+						<ll:tabpanel>
+							<ll:tab title="待办任务" active="true">
+								<ll:ajaxgrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieve()"
+									ondblclickrow="dbclickgrid(1)"
+								>
+									<ll:gridcheck></ll:gridcheck>
+									<ll:gridfield field="id" title="菜单标识" width="150"></ll:gridfield>
+									<ll:gridfield field="name" title="菜单名称" width="150" readonly="false"></ll:gridfield>
+									<ll:gridfield field="sn" title="菜单排序" width="150"></ll:gridfield>
+									<ll:gridfield field="link" title="菜单链接"></ll:gridfield>
+								</ll:ajaxgrid>
+							</ll:tab>
+							<ll:tab title="角色待办">
+								<ll:ajaxgrid id="lltestdatagrid2" onrowclick="rowClickTest()" onpageclick="retrieve()"
+									ondblclickrow="dbclickgrid(1)"
+								>
+									<ll:gridcheck></ll:gridcheck>
+									<ll:gridfield field="id" title="菜单标识" width="150"></ll:gridfield>
+									<ll:gridfield field="name" title="菜单名称" width="150" readonly="false"></ll:gridfield>
+									<ll:gridfield field="sn" title="菜单排序" width="150"></ll:gridfield>
+									<ll:gridfield field="link" title="菜单链接"></ll:gridfield>
+								</ll:ajaxgrid>
+							</ll:tab>
+						</ll:tabpanel>
+					</ll:fillareatb>
+				</ll:filllayout>
+			</ll:fillarealr>
+			<ll:fillarealr width="*">
+				<div class="layui-tab-item layui-show" style="height: 100%; min-width: 700px"></div>
+			</ll:fillarealr>
+		</ll:filllayout>
 	</form>
 </body>
 </html>

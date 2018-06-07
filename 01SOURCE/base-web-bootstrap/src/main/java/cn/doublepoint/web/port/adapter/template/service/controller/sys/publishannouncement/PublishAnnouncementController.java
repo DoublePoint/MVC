@@ -14,8 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-import cn.doublepoint.common.domain.model.entity.sys.AnnouncementChanged;
-import cn.doublepoint.common.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.common.application.template.sys.woksheet.WorksheetUtil;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.workflowtest.AnnouncementChangedService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.WorksheetService;
 import cn.doublepoint.common.util.SequenceUtil;
@@ -23,6 +22,8 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
+import cn.doublepoint.template.dto.domain.model.entity.sys.AnnouncementChanged;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 
 @Controller
 @RequestMapping("/template/sys/workflow/announcement")
@@ -46,22 +47,17 @@ public class PublishAnnouncementController extends BaseController{
 		return response;
 	}
 	
-//	@RequestMapping("save")
-//	public boolean save(BodyReaderHttpServletRequestWrapper request){
-////		AjaxDataWrap<Worksheet> sheetWrap=request.getAjaxDataWrap("sheetDataWrap", Worksheet.class);
-////		AjaxDataWrap<AnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",AnnouncementChanged.class);
-////		
-////		//启动流程并返回实例标识
-////		String instanceId = restTemplate.getForObject(
-////                "http://localhost:8080/base-workflow-test/template/sys/workflow/model/{id}",
-////                String.class, "呜呜呜呜");
-////		Worksheet worksheet=sheetWrap.getData();
-////		String worksheetNo=SequenceUtil.getNextVal(clazz)
-////		worksheet.setInstanceId(instanceId);
-////		worksheetService.saveOrUpdate(worksheet);
-////		
-////		AnnouncementChanged announcementChanged=annChangedWrap.getData();
-////		announcementChanged.setWorksheetNo(worksheetNo);
-//
-//	}
+	@RequestMapping("save")
+	public boolean save(BodyReaderHttpServletRequestWrapper request){
+		AjaxDataWrap<Worksheet> sheetWrap=request.getAjaxDataWrap("sheetDataWrap", Worksheet.class);
+		AjaxDataWrap<AnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",AnnouncementChanged.class);
+		
+		Worksheet worksheet=sheetWrap.getData();
+		String worksheetNo=WorksheetUtil.createAndStart(worksheet.getClassification(), "liulei", worksheet.getDescription());
+		
+		AnnouncementChanged changed=annChangedWrap.getData();
+		changed.setWorksheetNo(worksheetNo);
+		announcementChangedService.saveOrUpdate(changed);
+		return true;
+	}
 }

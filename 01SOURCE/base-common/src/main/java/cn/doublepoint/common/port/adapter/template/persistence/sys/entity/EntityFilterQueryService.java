@@ -2,10 +2,10 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.entity;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.common.domain.model.entity.sys.EntityFilter;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.BaseQueryService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.template.dto.domain.model.entity.sys.EntityFilter;
 
 /**
  * 创 建 人： 刘磊

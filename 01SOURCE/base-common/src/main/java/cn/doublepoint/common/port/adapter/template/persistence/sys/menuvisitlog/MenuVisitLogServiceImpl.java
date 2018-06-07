@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.common.domain.model.entity.sys.MenuVisitLog;
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.template.dto.domain.model.entity.sys.MenuVisitLog;
 
 @Service("menuVisitLogService")
 public class MenuVisitLogServiceImpl  implements MenuVisitLogService {

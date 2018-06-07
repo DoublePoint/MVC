@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.domain.model.entity.sys.MenuRole;
-import cn.doublepoint.common.domain.model.entity.sys.Role;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.MenuRoleService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.RoleService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
@@ -28,6 +26,8 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
+import cn.doublepoint.template.dto.domain.model.entity.sys.MenuRole;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Role;
 
 @Controller
 @RequestMapping("/template/sys/role")

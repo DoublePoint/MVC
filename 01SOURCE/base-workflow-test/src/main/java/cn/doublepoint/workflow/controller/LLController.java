@@ -39,13 +39,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import cn.doublepoint.common.domain.model.entity.workflow.VOModel;
-import cn.doublepoint.common.domain.model.entity.workflow.VOProcessDefinition;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.log.Log4jUtil;
+import cn.doublepoint.template.dto.domain.model.entity.workflow.VOModel;
+import cn.doublepoint.template.dto.domain.model.entity.workflow.VOProcessDefinition;
 
 @Controller
 @RequestMapping(value = "/template/sys/workflow")

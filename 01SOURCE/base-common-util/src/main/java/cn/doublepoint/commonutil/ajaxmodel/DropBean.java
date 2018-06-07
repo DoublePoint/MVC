@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.commonutil.ajaxmodel;
 
-import cn.doublepoint.commonutil.domain.model.BaseModel;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class DropBean extends BaseModel{
 	

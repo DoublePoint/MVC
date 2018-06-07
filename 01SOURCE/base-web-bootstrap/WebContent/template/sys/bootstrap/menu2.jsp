@@ -19,7 +19,7 @@
 	
 </head>
 <body><form>
- 	<ll-menu id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=false">
+ 	<ll:menu id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=false">
 	</ll:menu>
 	</form>
           <!-- <script src="${pageContext.request.contextPath}/template/btts_9_sp/assets/js/jquery-1.10.2.js"></script>

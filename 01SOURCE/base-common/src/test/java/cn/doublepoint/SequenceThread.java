@@ -9,8 +9,8 @@
 */
 package cn.doublepoint;
 
-import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.util.SequenceUtil;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
 
 public class SequenceThread extends Thread {

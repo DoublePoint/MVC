@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.doublepoint.common.domain.model.entity.sys.Menu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
@@ -29,6 +28,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
 @Controller
 @RequestMapping("/template/sys/menu")

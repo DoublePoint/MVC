@@ -312,10 +312,10 @@
 				<div class="col-sm-6">
 					<h3 class="h5">Enabled</h3>
 					<input type="radio" name="radio2" checked="checked"
-						data-radio-all-off="true" class="switch-radio2"><input
-						type="radio" name="radio2" data-radio-all-off="true"
+						data-radio-all:off="true" class="switch-radio2"><input
+						type="radio" name="radio2" data-radio-all:off="true"
 						class="switch-radio2"><input type="radio" name="radio2"
-						data-radio-all-off="true" class="switch-radio2">
+						data-radio-all:off="true" class="switch-radio2">
 				</div>
 			</div>
 			<br>

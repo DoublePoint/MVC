@@ -12,9 +12,9 @@ package cn.doublepoint.generate.domain.model.helper;
 import java.util.List;
 
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateTemplateUtil;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class TemplateEntityModel extends BaseModel {
 

@@ -19,10 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
-import cn.doublepoint.commonutil.domain.model.BaseModel;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
+import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 @Service(value = "daoService")
 public class BaseDaoServiceImpl implements BaseDaoService {
@@ -216,6 +216,31 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 		}
 		return count(jpqlFromBuffer.toString(), paramsList);
 	}
+	
+	@Override
+	@Transactional
+	public <T extends BaseModel> void create(T t) {
+		em.persist(t);
+	}
+	
+	@Override
+	@Transactional
+	public <T extends BaseModel> void create(List<T> list) {
+		list.forEach(t->create(t));
+	}
+
+	@Override
+	@Transactional
+	public <T extends BaseModel> void update(T t) {
+		em.merge(t);
+	}
+	
+	@Override
+	@Transactional
+	public <T extends BaseModel> void update(List<T> list) {
+		list.forEach(t->update(t));
+	}
+
 
 	public EntityManager getEm() {
 		return em;
@@ -234,6 +259,5 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	private int getMaxRsults(PageInfo pageInfo) {
 		return (int) pageInfo.getPageSize();
 	}
-
 
 }

@@ -12,7 +12,7 @@ package cn.doublepoint.common.domain.model.viewmodel.sys;
 import java.util.Date;
 import java.util.List;
 
-import cn.doublepoint.commonutil.domain.model.entity.BaseEntity;
+import cn.doublepoint.template.dto.domain.model.entity.BaseEntity;
 
 public class VOMenu extends BaseEntity {
 	/**
