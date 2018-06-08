@@ -287,7 +287,7 @@ public class LLController {
 	 * @param instanceId
 	 * @return
 	 */
-	@RequestMapping("suspend/{instanceId}")
+	@RequestMapping("abolish/{instanceId}")
 	@ResponseBody
 	public String abolish(@PathVariable("instanceId") String instanceId) {
 		try {
@@ -305,12 +305,12 @@ public class LLController {
 	@RequestMapping("start/{instanceId}")
 	@ResponseBody
 	public String start(@PathVariable("instanceId") String instanceId) {
-		try {
-			ActivityImpl endActivity = findActivitiImpl(taskId, "end");  
-	        commitProcess(taskId, null, endActivity.getId());  
-		} catch (Exception e) {
-			return e.toString();
-		}
+//		try {
+//			ActivityImpl endActivity = findActivitiImpl(taskId, "end");  
+//	        commitProcess(taskId, null, endActivity.getId());  
+//		} catch (Exception e) {
+//			return e.toString();
+//		}
 		return "";
 	}
 
