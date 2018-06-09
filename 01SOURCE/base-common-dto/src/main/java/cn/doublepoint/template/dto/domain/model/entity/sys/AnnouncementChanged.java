@@ -47,6 +47,9 @@ public class AnnouncementChanged extends BaseEntity {
 	
 	@Column(name="MODIFY_TIME")
 	private Date modifyTime;//更新时间
+	
+	@Column(name="TITLE")
+	private String title;//标题
 
 	public String getWorksheetNo() {
 		return worksheetNo;
@@ -102,6 +105,16 @@ public class AnnouncementChanged extends BaseEntity {
 	
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+	
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String toString() {

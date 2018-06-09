@@ -34,12 +34,12 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.apache.avalon.framework.activity.Suspendable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -282,6 +282,23 @@ public class LLController {
 		}
 		return "";
 	}
+	 /**
+     * 完成任务
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "transmit/{instanceId}", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public String transmit(@PathVariable("instanceId") String instanceId) {
+        try {
+        	String currentActivityId=runtimeService.createExecutionQuery().processInstanceId(instanceId).singleResult().getActivityId();
+            taskService.complete(currentActivityId);
+            return "success";
+        } catch (Exception e) {
+            return "error";
+        }
+    }
 	/**
 	 * 废除
 	 * @param instanceId
@@ -302,15 +319,10 @@ public class LLController {
 	 * @param instanceId
 	 * @return
 	 */
-	@RequestMapping("start/{instanceId}")
+	@RequestMapping("start/{processDefineKey}")
 	@ResponseBody
-	public String start(@PathVariable("instanceId") String instanceId) {
-//		try {
-//			ActivityImpl endActivity = findActivitiImpl(taskId, "end");  
-//	        commitProcess(taskId, null, endActivity.getId());  
-//		} catch (Exception e) {
-//			return e.toString();
-//		}
+	public String start(@PathVariable("processDefineKey") String processDefineKey) {
+		runtimeService.startProcessInstanceByKey(processDefineKey);
 		return "";
 	}
 

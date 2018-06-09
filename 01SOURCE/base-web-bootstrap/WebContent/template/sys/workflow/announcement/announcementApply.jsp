@@ -26,20 +26,20 @@
 	<form>
 		<ll:filllayout>
 			<ll:fillareatb height="220" showtitle="true" title="工作单信息" showborder="true">
-				<ll:ajaxform id="ajaxform" cols="2" colproportion="1:3:1:3:1:3">
+				<ll:ajaxform id="ajaxformWorksheet" cols="2" colproportion="1:3:1:3:1:3">
 					<ll:formfield title="工作单编号" field="worksheetNo"></ll:formfield>
 					<ll:formfield title="工作单名称" field="name"></ll:formfield>
 					<ll:formfield title="工作单类别" field="classification"></ll:formfield>
-					<ll:formfield title="创建时间" field="classification"></ll:formfield>
+					<ll:formfield title="创建时间" field="createTime"></ll:formfield>
 					<ll:formarea title="工作单描述" field="description" colspan="2" rowspan="2"></ll:formarea>
 				</ll:ajaxform>
 			</ll:fillareatb>
 			<ll:fillareatb height="*" showtitle="true" title="申请信息" showborder="true">
-				<ll:ajaxform id="ajaxform2" cols="2" colproportion="1:3:1:3:1:3">
-					<ll:formfield title="公告名称" field="name"></ll:formfield>
+				<ll:ajaxform id="ajaxformAnnouncement" cols="2" colproportion="1:3:1:3:1:3">
+					<ll:formfield title="公告名称" field="title"></ll:formfield>
 					<ll:formtoolbar labelalign="right" colspan="1">
 					</ll:formtoolbar>
-					<ll:formarea title="公告内容" field="parentId" colspan="2" rowspan="2"></ll:formarea>
+					<ll:formarea title="公告内容" field="content" colspan="2" rowspan="2"></ll:formarea>
 				</ll:ajaxform>
 			</ll:fillareatb>
 			<ll:fillareatb height="35">

@@ -9,6 +9,7 @@
 */
 package cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet;
 
+import org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -28,15 +29,19 @@ public class InstanceServiceImpl implements InstanceService {
 	private final String SHEET_STATE_COMPLETE = "4";// 完成
 	
 	@Autowired
+	private WorksheetService worksheetService;
+	
+	@Autowired
 	RestTemplate restTemplate;
 
 	@Override
 	public String createAndStart(String classification, String createUser, String description) {
 		// 启动流程并返回实例标识
 		String instanceId = restTemplate.getForObject(
-				"http://localhost:8080/base-workflow-test/template/sys/workflow/model/{id}", String.class, "呜呜呜呜");
+				"http://localhost:8080/base-workflow-test/template/sys/workflow/start/WF-00001", String.class);
 		Worksheet worksheet = new Worksheet();
 		worksheet.setInstanceId(instanceId);
+		worksheet.setId(SequenceUtil.getNextVal(Worksheet.class));
 		worksheet.setWorksheetNo(generateWorksheetNo());
 		worksheet.setClassification(classification);
 		worksheet.setDescription(description);
@@ -44,6 +49,7 @@ public class InstanceServiceImpl implements InstanceService {
 		worksheet.setState(SHEET_STATE_RUNNING);
 		worksheet.setCreateTime(DateTimeUtil.getCurrentDate());
 		worksheet.setModifyTime(DateTimeUtil.getCurrentDate());
+		worksheetService.create(worksheet);
 		return worksheet.getWorksheetNo();
 	}
 
