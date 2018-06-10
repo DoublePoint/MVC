@@ -9,6 +9,11 @@
 */
 package cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet;
 
+import java.util.List;
+
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+
 public interface InstanceService {
 
 	/**
@@ -72,4 +77,9 @@ public interface InstanceService {
 	 * @return
 	 */
 	public String generateWorksheetNo();
+	
+	/**
+	 * 获取待办流程
+	 */
+	public List<Worksheet> getPersonalWorksheetList(Worksheet worksheet,PageInfo pageInfo);
 }

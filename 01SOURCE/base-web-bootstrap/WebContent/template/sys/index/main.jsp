@@ -42,14 +42,14 @@
 					<ll:fillareatb height="*" title="代办任务1" showtitle="true">
 						<ll:tabpanel>
 							<ll:tab title="待办任务" active="true">
-								<ll:ajaxgrid id="lltestdatagrid1" onrowclick="rowClickTest()" onpageclick="retrieve()"
+								<ll:ajaxgrid id="ajaxgridPersonal" onrowclick="rowClickTest()" onpageclick="retrieve()"
 									ondblclickrow="dbclickgrid(1)"
 								>
 									<ll:gridcheck></ll:gridcheck>
-									<ll:gridfield field="id" title="菜单标识" width="150"></ll:gridfield>
-									<ll:gridfield field="name" title="菜单名称" width="150" readonly="false"></ll:gridfield>
-									<ll:gridfield field="sn" title="菜单排序" width="150"></ll:gridfield>
-									<ll:gridfield field="link" title="菜单链接"></ll:gridfield>
+									<ll:gridfield field="worksheetNo" title="工作单号" width="150"></ll:gridfield>
+									<ll:gridfield field="name" title="工作单名称" width="150" readonly="false"></ll:gridfield>
+									<ll:gridfield field="classification" title="工作单类别" width="150"></ll:gridfield>
+									<ll:gridfield field="instanceId" title="实例号"></ll:gridfield>
 								</ll:ajaxgrid>
 							</ll:tab>
 							<ll:tab title="角色待办">
@@ -71,6 +71,7 @@
 				<div class="layui-tab-item layui-show" style="height: 100%; min-width: 700px"></div>
 			</ll:fillarealr>
 		</ll:filllayout>
+		<script type="text/javascript" src="mainScript.js"></script>
 	</form>
 </body>
 </html>

@@ -104,7 +104,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 				if (obj == null) {
 					Object wrapObj = map.get(ajaxDataWrapName);
 					if (wrapObj == null)
-						return null;
+						return new AjaxDataWrap<T>();
 					wrapJsonString = String.valueOf(wrapObj);
 					obj = JSON.parseObject(wrapJsonString);
 				}
@@ -117,6 +117,8 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
 		try {
 			AjaxDataWrap<T> dataWrap = mspp.readValue(obj.toJSONString(), type);
+			if(dataWrap==null)
+				dataWrap=new AjaxDataWrap<T>();
 			return dataWrap;
 		} catch (Exception e) {
 			Log4jUtil.error(e);

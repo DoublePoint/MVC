@@ -104,7 +104,7 @@ public interface BaseDaoService {
 	 * @param queryParamList
 	 * @return
 	 */
-	public List<Object> executeQuery(String jpql, QueryParamList queryParamList);
+	public List<Object> executeQuery(String jpql, QueryParamList queryParamList,PageInfo pageInfo);
 
 	/**
 	 * 执行sql查询
@@ -113,7 +113,7 @@ public interface BaseDaoService {
 	 * @param queryParamList
 	 * @return
 	 */
-	public List<Object> executeNativeQuery(String sql, QueryParamList queryParamList);
+	public List<Object> executeNativeQuery(String sql, QueryParamList queryParamList,PageInfo pageInfo);
 
 	/**
 	 * 查询总数

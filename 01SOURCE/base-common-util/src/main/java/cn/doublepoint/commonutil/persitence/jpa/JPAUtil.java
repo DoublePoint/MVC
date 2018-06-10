@@ -283,7 +283,7 @@ public class JPAUtil extends DataBaseUtil {
 	 */
 	public static List<Object> executeQuery(String jpql) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeQuery(jpql, null);
+		return daoService.executeQuery(jpql, null,null);
 	}
 
 	/**
@@ -295,7 +295,19 @@ public class JPAUtil extends DataBaseUtil {
 	 */
 	public static List<Object> executeQuery(String jpql, QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeQuery(jpql, queryParamList);
+		return daoService.executeQuery(jpql, queryParamList,null);
+	}
+	
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static List<Object> executeQuery(String jpql, QueryParamList queryParamList, PageInfo pageInfo) {
+		BaseDaoService daoService = getDaoService();
+		return daoService.executeQuery(jpql, queryParamList,pageInfo);
 	}
 	
 	/**
@@ -331,7 +343,7 @@ public class JPAUtil extends DataBaseUtil {
 	 */
 	public static List<Object> executeNativeQuery(String sql) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeNativeQuery(sql, null);
+		return daoService.executeNativeQuery(sql, null, null);
 	}
 
 	/**
@@ -343,7 +355,7 @@ public class JPAUtil extends DataBaseUtil {
 	 */
 	public static List<Object> executeNativeQuery(String sql, QueryParamList queryParamList) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeNativeQuery(sql, queryParamList);
+		return daoService.executeNativeQuery(sql, queryParamList, null);
 	}
 
 	private static <T extends BaseModel> Object getPrimary(T model) {

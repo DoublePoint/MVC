@@ -48,18 +48,18 @@ public class CommonBeanUtils extends BeanUtils {
 		return list;
 	}
 
-	/**
-	 * 复制PageInfo到Pageable
-	 * 
-	 * @param pageInfo
-	 * @return
-	 */
-	public static PageRequest copyPageInfoToPageable(PageInfo pageInfo) {
-		if(pageInfo==null)
-			return null;
-		PageRequest pageable = new PageRequest(pageInfo.getCurrentPageNum()<=0?(int)pageInfo.getCurrentPageNum():(int)(pageInfo.getCurrentPageNum()-1), (int)(pageInfo.getPageSize()));// 从0开始查询二十条
-		return pageable;
-	}
+//	/**
+//	 * 复制PageInfo到Pageable
+//	 * 
+//	 * @param pageInfo
+//	 * @return
+//	 */
+//	public static PageRequest copyPageInfoToPageable(PageInfo pageInfo) {
+//		if(pageInfo==null)
+//			return null;
+//		PageRequest pageable = new PageRequest(pageInfo.getCurrentPageNum()<=0?(int)pageInfo.getCurrentPageNum():(int)(pageInfo.getCurrentPageNum()-1), (int)(pageInfo.getPageSize()));// 从0开始查询二十条
+//		return pageable;
+//	}
 
 	public static <E> List<E> copyTo(List<?> sourceList, Class<E> targetClass) {
 		if (sourceList == null || sourceList.size() == 0)
@@ -98,40 +98,40 @@ public class CommonBeanUtils extends BeanUtils {
 		 * resList=copyTo(page.getContent(),cla); ajaxDataWrap.setData(resList);
 		 * ajaxDataWrap.setPageInfo(pager); return ajaxDataWrap; }
 		 */
-	/**
-	 * Spring Data Jpa Page转换成AjaxDataWrap
-	 * 
-	 * @param page
-	 * @param cla
-	 * @return
-	 */
-	public static <T, E extends BaseEntity> AjaxDataWrap<E > copyPageToAjaxDataWrap(Page<T> page, Class<E> cla) {
-		AjaxDataWrap<E> ajaxDataWrap = new AjaxDataWrap<E>();
-		PageInfo pageInfo = new PageInfo();
-		if (page != null) {
-			pageInfo.setCurrentPageCount(page.getNumberOfElements());// 本页条数
-			pageInfo.setCurrentPageNum(page.getNumber()+1);//索引页+1 当前是第几页
-			pageInfo.setTotalPageCount(page.getTotalPages());// 总页数
-			pageInfo.setTotalElementCount(page.getTotalElements());// 总条数
-			pageInfo.setPageSize(page.getSize());// 每页条数
-		}
-		List<E> resList = copyTo(page.getContent(), cla);
-		ajaxDataWrap.setDataList(resList);
-		ajaxDataWrap.setPageInfo(pageInfo);
-		return ajaxDataWrap;
-	}
-
-	public static <T extends BaseModel> AjaxDataWrap<T> copyPageToAjaxDataWrap(Page<T> page) {
-		List<T> list = page.getContent();
-		PageInfo pageInfo = new PageInfo();
-		pageInfo.setCurrentPageNum(page.getNumber()+1);//索引页+1 当前是第几页
-		pageInfo.setCurrentPageCount(page.getNumberOfElements());
-		pageInfo.setTotalElementCount(page.getTotalElements());
-		pageInfo.setTotalPageCount(page.getTotalPages());
-		pageInfo.setPageSize(page.getSize());
-		AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<>();
-		ajaxDataWrap.setDataList(list);
-		ajaxDataWrap.setPageInfo(pageInfo);
-		return ajaxDataWrap;
-	}
+//	/**
+//	 * Spring Data Jpa Page转换成AjaxDataWrap
+//	 * 
+//	 * @param page
+//	 * @param cla
+//	 * @return
+//	 */
+//	public static <T, E extends BaseEntity> AjaxDataWrap<E > copyPageToAjaxDataWrap(Page<T> page, Class<E> cla) {
+//		AjaxDataWrap<E> ajaxDataWrap = new AjaxDataWrap<E>();
+//		PageInfo pageInfo = new PageInfo();
+//		if (page != null) {
+//			pageInfo.setCurrentPageCount(page.getNumberOfElements());// 本页条数
+//			pageInfo.setCurrentPageNum(page.getNumber()+1);//索引页+1 当前是第几页
+//			pageInfo.setTotalPageCount(page.getTotalPages());// 总页数
+//			pageInfo.setTotalElementCount(page.getTotalElements());// 总条数
+//			pageInfo.setPageSize(page.getSize());// 每页条数
+//		}
+//		List<E> resList = copyTo(page.getContent(), cla);
+//		ajaxDataWrap.setDataList(resList);
+//		ajaxDataWrap.setPageInfo(pageInfo);
+//		return ajaxDataWrap;
+//	}
+//
+//	public static <T extends BaseModel> AjaxDataWrap<T> copyPageToAjaxDataWrap(Page<T> page) {
+//		List<T> list = page.getContent();
+//		PageInfo pageInfo = new PageInfo();
+//		pageInfo.setCurrentPageNum(page.getNumber()+1);//索引页+1 当前是第几页
+//		pageInfo.setCurrentPageCount(page.getNumberOfElements());
+//		pageInfo.setTotalElementCount(page.getTotalElements());
+//		pageInfo.setTotalPageCount(page.getTotalPages());
+//		pageInfo.setPageSize(page.getSize());
+//		AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<>();
+//		ajaxDataWrap.setDataList(list);
+//		ajaxDataWrap.setPageInfo(pageInfo);
+//		return ajaxDataWrap;
+//	}
 }

@@ -9,15 +9,19 @@
 */
 package cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet;
 
-import org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.Work;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
+import cn.doublepoint.commonutil.StringUtil;
+import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 
 @Service("instanceService")
@@ -112,6 +116,25 @@ public class InstanceServiceImpl implements InstanceService {
 	@Override
 	public String generateWorksheetNo() {
 		return SequenceUtil.getNextVal("ll.workflow.worksheetNo").toString();
+	}
+
+	@Override
+	public List<Worksheet> getPersonalWorksheetList(Worksheet worksheet, PageInfo pageInfo) {
+		StringBuffer sBuffer=new StringBuffer();
+		QueryParamList queryParamList=new QueryParamList();
+		sBuffer.append(" select ws from  Worksheet ws where 1=1");
+		if(worksheet!=null){
+			if(!StringUtil.isNullOrEmpty(worksheet.getWorksheetNo())){
+				sBuffer.append(" ws.worksheetNo=:worksheetNo");
+				queryParamList.addParam("worksheetNo", worksheet.getWorksheetNo());
+			}
+			if(!StringUtil.isNullOrEmpty(worksheet.getState())){
+				sBuffer.append(" ws.state=:state");
+				queryParamList.addParam("state", worksheet.getState());
+			}
+		}
+		List<Object> sourceList=JPAUtil.executeQuery(sBuffer.toString(), queryParamList, pageInfo);
+		return CommonBeanUtils.copyTo(sourceList, Worksheet.class);
 	}
 	
 	

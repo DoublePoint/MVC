@@ -45,7 +45,7 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 			SortParamList sortParamList) {
 		try {
 			String className = clazz.getName();
-			StringBuffer jpqlFromBuffer = new StringBuffer(" FROM " + className + " U WHERE 1=1 ");
+			StringBuffer jpqlFromBuffer = new StringBuffer("SELECT U  FROM " + className + " U WHERE 1=1 ");
 			if (paramsList != null) {
 				paramsList.getParams().stream().forEach(param -> {
 					if (param.getRelation() != QueryParam.RELATION_ISNULL
@@ -69,7 +69,7 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 			}
 
 			StringBuffer queryBuffer = new StringBuffer();
-			queryBuffer.append("SELECT U ").append(jpqlFromBuffer);
+			queryBuffer.append(jpqlFromBuffer);
 			if (sortParamList != null) {
 				queryBuffer.append(" order by ");
 				sortParamList.getParams().stream().forEach(param -> {
@@ -136,12 +136,18 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public  List<Object> executeQuery(String jpql, QueryParamList queryParamList) {
+	public  List<Object> executeQuery(String jpql, QueryParamList queryParamList,PageInfo pageInfo) {
 		Query query = em.createQuery(jpql);
 
 		queryParamList.getParams().stream().forEach(param -> {
 			query.setParameter(param.getName(), param.getValue());
 		});
+		if (pageInfo != null) {
+			long count = count(jpql, queryParamList);
+			pageInfo.setTotalElementCount(count);
+			query.setFirstResult(getFirstResult(pageInfo));
+			query.setMaxResults(getMaxRsults(pageInfo));
+		}
 		List<Object> result = query.getResultList();
 		return result;
 	}
@@ -160,12 +166,19 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public  List<Object> executeNativeQuery(String sql, QueryParamList queryParamList) {
+	public  List<Object> executeNativeQuery(String sql, QueryParamList queryParamList,PageInfo pageInfo) {
 		Query query = em.createNativeQuery(sql);
 		if(queryParamList!=null){
 			queryParamList.getParams().stream().forEach(param -> {
 				query.setParameter(param.getName(), param.getValue());
 			});
+		}
+		
+		if (pageInfo != null) {
+			long count = count(sql, queryParamList);
+			pageInfo.setTotalElementCount(count);
+			query.setFirstResult(getFirstResult(pageInfo));
+			query.setMaxResults(getMaxRsults(pageInfo));
 		}
 		List<Object> result = query.getResultList();
 		return result;
@@ -179,8 +192,8 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	 * @return
 	 */
 	public long count(String jpql, QueryParamList queryParamList) {
-		StringBuffer countBuffer = new StringBuffer("Select count(U)" + jpql);
-		Query countQuery = em.createQuery(countBuffer.toString());
+//		StringBuffer countBuffer = new StringBuffer("Select count(*) FROM (" + jpql).append(")");
+		Query countQuery = em.createQuery(jpql);
 		if (queryParamList != null) {
 			queryParamList.getParams().stream().forEach(param -> {
 				if (param.getRelation() != QueryParam.RELATION_ISNULL
@@ -189,8 +202,8 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 				}
 			});
 		}
-		long count = (long) countQuery.getSingleResult();
-		return count;
+		countQuery.setMaxResults(1);
+		return countQuery.getMaxResults();
 	}
 
 	/**
@@ -202,7 +215,7 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	 */
 	public <T extends BaseModel> long count(Class<T> clazz, QueryParamList paramsList) {
 		String className = clazz.getName();
-		StringBuffer jpqlFromBuffer = new StringBuffer(" FROM " + className + " U WHERE 1=1 ");
+		StringBuffer jpqlFromBuffer = new StringBuffer("SELECT U FROM " + className + " U WHERE 1=1 ");
 		if (paramsList != null) {
 			paramsList.getParams().stream().forEach(param -> {
 				if (param.getRelation() != QueryParam.RELATION_ISNULL
