@@ -9,12 +9,20 @@
 */
 package cn.doublepoint.commonutil.persitence.jpa;
 
+import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.hql.internal.classic.QueryTranslatorImpl;
+import org.springframework.data.web.config.HateoasAwareSpringDataWebConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -192,8 +200,12 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	 * @return
 	 */
 	public long count(String jpql, QueryParamList queryParamList) {
-//		StringBuffer countBuffer = new StringBuffer("Select count(*) FROM (" + jpql).append(")");
-		Query countQuery = em.createQuery(jpql);
+		
+		String sql=JPQLConverterUtil.convertJPQLToSQL(jpql,em);
+		sql=sql.replace("：", ":");
+		StringBuffer countBuffer = new StringBuffer("Select count(1) FROM (" + sql).append(") ll_c_t");
+		Query countQuery = em.createNativeQuery(countBuffer.toString());
+		
 		if (queryParamList != null) {
 			queryParamList.getParams().stream().forEach(param -> {
 				if (param.getRelation() != QueryParam.RELATION_ISNULL
@@ -202,8 +214,10 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 				}
 			});
 		}
-		countQuery.setMaxResults(1);
-		return countQuery.getMaxResults();
+		
+		
+		Object object=countQuery.getSingleResult();
+		return ((BigInteger )object).longValue();
 	}
 
 	/**

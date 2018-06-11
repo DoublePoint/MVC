@@ -125,11 +125,11 @@ public class InstanceServiceImpl implements InstanceService {
 		sBuffer.append(" select ws from  Worksheet ws where 1=1");
 		if(worksheet!=null){
 			if(!StringUtil.isNullOrEmpty(worksheet.getWorksheetNo())){
-				sBuffer.append(" ws.worksheetNo=:worksheetNo");
+				sBuffer.append(" and ws.worksheetNo=:worksheetNo");
 				queryParamList.addParam("worksheetNo", worksheet.getWorksheetNo());
 			}
 			if(!StringUtil.isNullOrEmpty(worksheet.getState())){
-				sBuffer.append(" ws.state=:state");
+				sBuffer.append(" and ws.state=:state");
 				queryParamList.addParam("state", worksheet.getState());
 			}
 		}
