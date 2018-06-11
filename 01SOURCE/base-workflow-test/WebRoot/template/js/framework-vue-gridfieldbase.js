@@ -102,6 +102,12 @@
 				if (i != "getBoostrapField" && i != "domId") {
 					if (this[i]) {
 						field[i] = this[i];
+						if(i=="formatter"){
+							var fieldThis=this;
+							field[i]=function(a,record,b){
+								return $._Eval(fieldThis.formatter,[a,record,b]);
+							}
+						}
 					}
 				}
 			}

@@ -85,3 +85,14 @@ function deploy(modelId){
 		}
 	});
 }
+
+function editModelCustomerFunction(a,record,c){
+	return ' <a href="javascript:edit(\'' + record.id + '\')">' + ' <i class="fa fa-pencil-square-o"></i>' + ' </a>';
+}
+function edit(modelId){
+	$.openTab({
+		title : "Model:"+modelId,
+		content : '<iframe src="' + $$pageContextPath + "/modeler.html?modelId=" + modelId + '"></iframe>',
+		id : modelId
+	});
+}

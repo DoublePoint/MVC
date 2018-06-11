@@ -53,7 +53,7 @@
 						<ll:ajaxgrid id="ajaxgrid" onpageclick="retrieve()">
 							<ll:gridcheck></ll:gridcheck>
 							<ll:gridcustom align="center" width="80" title="部署" formatter="customerFunction"></ll:gridcustom>
-							<ll:gridcustom align="center" width="80" title="编辑" formatter="customerFunction"></ll:gridcustom>
+							<ll:gridcustom align="center" width="80" title="编辑" formatter="editModelCustomerFunction()"></ll:gridcustom>
 							<ll:gridfield field="name" width="150" title="流程名称"></ll:gridfield>
 							<ll:gridfield field="version" width="80" title="版本"></ll:gridfield>
 							<ll:gridfield field="createTime" title="创建时间"></ll:gridfield>

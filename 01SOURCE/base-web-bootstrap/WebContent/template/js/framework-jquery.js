@@ -156,6 +156,8 @@
 		openTab : function(setting){
 			// 新增一个Tab项
 			parent.$element.tabAdd('admin-tab', setting);
+			// 切换到指定Tab项
+			parent.$element.tabChange('admin-tab', setting.id);
 		},
 		close : function(data) {
 			// 弹出窗口的确定的点击

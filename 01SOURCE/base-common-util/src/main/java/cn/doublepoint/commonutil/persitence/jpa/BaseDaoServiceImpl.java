@@ -202,7 +202,6 @@ public class BaseDaoServiceImpl implements BaseDaoService {
 	public long count(String jpql, QueryParamList queryParamList) {
 		
 		String sql=JPQLConverterUtil.convertJPQLToSQL(jpql,em);
-		sql=sql.replace("：", ":");
 		StringBuffer countBuffer = new StringBuffer("Select count(1) FROM (" + sql).append(") ll_c_t");
 		Query countQuery = em.createNativeQuery(countBuffer.toString());
 		
