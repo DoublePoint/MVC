@@ -60,6 +60,5 @@
 		</ll:filllayout>
 	</form>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/admin/adminScript.js"></script>
-	</style>
 </body>
 </html>

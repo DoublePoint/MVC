@@ -68,6 +68,5 @@
 		</ll:filllayout>
 	</form>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/menu/menuScript.js"></script>
-	</style>
 </body>
 </html>
