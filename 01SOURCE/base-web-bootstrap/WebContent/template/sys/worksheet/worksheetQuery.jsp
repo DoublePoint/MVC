@@ -40,6 +40,7 @@
 					<ll:fillareatb height="*" >
 						<ll:ajaxgrid id="ajaxgrid" onpageclick="retrieve()">
 							<ll:gridcheck></ll:gridcheck>
+							<ll:gridselect field="state" readonly="false" width="150" title="当前环节"></ll:gridselect>
 							<ll:gridcustom align="center" width="80" title="流程图"
 								formatter="imageCustomer()"></ll:gridcustom>
 							<ll:gridcustom align="center" width="150" title="工作单编号"

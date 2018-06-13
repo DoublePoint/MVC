@@ -39,6 +39,7 @@ var _LL_Constant = new function() {
 		_GridField : "ll:gridfield",
 		_GridCheck : "ll:gridcheck",
 		_GridCustom : "ll:gridcustom",
+		_GridSelect : "ll:gridselect",
 		_ToolBar : "ll:toolbar",
 		_TabPanel : "ll:tabpanel",
 		_Tab : "ll:tab",
