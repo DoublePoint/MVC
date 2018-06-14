@@ -59,7 +59,9 @@ public class Code extends BaseEntity {
 	
 	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
-
+	
+	@Column(name="ENABLE")
+	private String enable;
 
 	public Long getId() {
 		return id;
@@ -148,6 +150,16 @@ public class Code extends BaseEntity {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+	
+	
+	public String getEnable() {
+		return enable;
+	}
+
+	public void setEnable(String enable) {
+		this.enable = enable;
+	}
+
 	public String toString() {
 		return "Code ["
 		+"id=" + id +","
@@ -160,6 +172,7 @@ public class Code extends BaseEntity {
 		+"scene3=" + scene3 +","
 		+"parentId=" + parentId +","
 		+"createTime=" + createTime +","
+		+"enable=" + enable +","
 		+"modifyTime=" + modifyTime 
 		+"]";
 	}
