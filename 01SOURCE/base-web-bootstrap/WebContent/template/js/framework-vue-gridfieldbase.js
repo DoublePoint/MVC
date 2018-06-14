@@ -5,6 +5,8 @@
 		Vue.component(type, {
 			props : [ 'id', 'radio', 'checkbox', 'field',// 字段名称
 			'title',// 列标题
+			'dropname',//下拉数据源绑定
+			'datasource',//下拉数据源绑定
 			'readonly',// 是否可编辑
 			'titleTooltip', 'class', 'rowspan', 'colspan', 'align', 'halign', 'falign', 'valign', 'width', 'sortable', 'order', 'visible', 'cardVisible', 'switchable',
 					'clickToSelect', 'formatter', 'footerFormatter', 'events', 'sorter', 'sortName', 'cellStyle', 'searchable', 'searchFormatter', 'escape', 'showSelectTitle',

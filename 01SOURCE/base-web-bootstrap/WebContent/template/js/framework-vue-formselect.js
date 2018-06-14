@@ -13,9 +13,6 @@
 		this.clearTimeoutInterval = function() {
 			clearTimeout(this.getTimeoutInterval());
 		}
-		this.getDropName = function() {
-			return this.dropname;
-		}
 		this.getSelect = function() {
 			return this.getInputDom();
 		}
@@ -32,27 +29,43 @@
 
 		this.initData = function() {
 			var formSelect = this;
-			$.ajax({
-				url : $$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + formSelect.getDropName(),
-				type : "POST",
-				contentType : 'application/json;charset=UTF-8',
-				dataType : "json",
-				async : false,
-				data : null,
-				noneSelectedText:"",
-				success : function(ajaxDataWrap) {
-					var dataList = ajaxDataWrap.dataList;
-					formSelect.dropBeanList=dataList;
-					var select = $("#" + formSelect.domId);
-					select.append($("<option>&nbsp;</option>"));
-					for (var i = 0; i < dataList.length; i++) {
-						var dropBean = dataList[i];
-						select.append($("<option value="+dropBean.key+">" + dropBean.value + "</option>"));
+			
+			var requestUrl="";
+			if(!_LL_Model.StringUtil.isNullOrEmpty(this.dropname)){
+				requestUrl=$$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + this.dropname;
+			}
+			else if(!_LL_Model.StringUtil.isNullOrEmpty(this.datasource)){
+				requestUrl=this.datasource;
+			}
+			if(!_LL_Model.StringUtil.isNullOrEmpty(requestUrl)){
+				$.ajax({
+					url : requestUrl,
+					type : "POST",
+					contentType : 'application/json;charset=UTF-8',
+					dataType : "json",
+					async : false,
+					data : null,
+					noneSelectedText:"",
+					success : function(ajaxDataWrap) {
+						var dataList = ajaxDataWrap.dataList;
+						formSelect.dropBeanList=dataList;
+						var select = $("#" + formSelect.domId);
+						select.append($("<option>&nbsp;</option>"));
+						for (var i = 0; i < dataList.length; i++) {
+							var dropBean = dataList[i];
+							select.append($("<option value="+dropBean.key+">" + dropBean.value + "</option>"));
+						}
 					}
-					// select.selectpicker("refresh");
+				});
+			}
+			else {
+				var select = $("#" + formSelect.domId);
+				select.append($("<option>&nbsp;</option>"));
+				for (var i = 0; i < dataList.length; i++) {
+					var dropBean = dataList[i];
+					select.append($("<option value=''></option>"));
 				}
-			});
-
+			}
 		}
 		
 		this.getData = function(){
@@ -62,7 +75,7 @@
 		
 		this.refreshData = function() {
 			var select = $("#" + this.domId);
-			select.append($("<option>" + 5 + "</option>"));
+			select.append($("<option></option>"));
 			select.selectpicker("refresh");
 		}
 		this.setDropName = function(dropname) {

@@ -27,7 +27,6 @@ public class FrameworkCommonPage {
 	@ResponseBody
 	public AjaxDataWrap<DropBean> assistant(@RequestParam(required=false) String dropName) {
 		AjaxDataWrap<DropBean> dataWrap=new AjaxDataWrap<>();
-		cn.doublepoint.common.util.DropBeanUtil.findDropList(dropName);
 		List<DropBean> dropBeans=DropBeanUtil.findDropList(dropName);
 		dataWrap.setDataList(dropBeans);
 		return dataWrap;

@@ -2,6 +2,8 @@
 	_LL_Model.gridFieldComponent(_LL_Constant._ConstantComponentMap._GridSelect);
 	
 	_LL_Model.GridSelect = function(domId) {
+		this.dropname = null;
+		this.datasource = null;
 		_LL_Model.GridFieldBase.call(this);
 		
 		// 构造使用于bootstrap的field
@@ -15,30 +17,55 @@
 				}
 			}
 			var gridField=this;
-			$.ajax({
-				url : $$pageContextPath + "/template/sys/dropdown/datalist?dropName=123",
-				type : "POST",
-				contentType : 'application/json;charset=UTF-8',
-				dataType : "json",
-				async : false,
-				data : null,
-				noneSelectedText:"",
-				success : function(ajaxDataWrap) {
-					field.editable = {
-						type: 'select',
-						showbuttons : false,
-						disabled : gridField.readonly == "false" ? false : true,
-						emptytext : "&nbsp;&nbsp;",
-						mode : "inline",
-						inputclass : "bt-input-class",
-						onblur : "submit",
-						source: [
-				                    {value: 1, text: '男'},
-				                    {value: 2, text: '女'},
-				                ]
+			var requestUrl="";
+			if(!_LL_Model.StringUtil.isNullOrEmpty(this.dropname)){
+				var requestUrl=$$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + this.dropname;
+			}
+			else if(!_LL_Model.StringUtil.isNullOrEmpty(this.datasource)){
+				var requestUrl=this.datasource;
+			}
+			if(!_LL_Model.StringUtil.isNullOrEmpty(requestUrl)){
+				$.ajax({
+					url : requestUrl,
+					type : "POST",
+					contentType : 'application/json;charset=UTF-8',
+					dataType : "json",
+					async : false,
+					data : null,
+					noneSelectedText:"",
+					success : function(ajaxDataWrap) {
+						var dataList = ajaxDataWrap.dataList;
+						var source=new Array();
+						for (var i = 0; i < dataList.length; i++) {
+							var dropBean = dataList[i];
+							source.push({value: dropBean.key, text: dropBean.value});
+						}
+						field.editable = {
+							type: 'select',
+							showbuttons : false,
+							disabled : gridField.readonly == "false" ? false : true,
+							emptytext : "&nbsp;&nbsp;",
+							mode : "inline",
+							inputclass : "bt-input-class",
+							onblur : "submit",
+							source: source
 						};
-				}
-			});
+					}
+				});
+			}
+			else{
+				field.editable = {
+					type: 'select',
+					showbuttons : false,
+					disabled : gridField.readonly == "false" ? false : true,
+					emptytext : "&nbsp;&nbsp;",
+					mode : "inline",
+					inputclass : "bt-input-class",
+					onblur : "submit",
+					source: []
+				};
+			}
+			
 			return field;
 		}
 	};
