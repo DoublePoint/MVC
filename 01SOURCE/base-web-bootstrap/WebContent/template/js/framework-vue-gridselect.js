@@ -30,6 +30,7 @@
 						disabled : gridField.readonly == "false" ? false : true,
 						emptytext : "&nbsp;&nbsp;",
 						mode : "inline",
+						inputclass : "bt-input-class",
 						onblur : "submit",
 						source: [
 				                    {value: 1, text: '男'},

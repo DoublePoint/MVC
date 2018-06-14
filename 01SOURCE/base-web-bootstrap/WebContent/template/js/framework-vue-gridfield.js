@@ -21,6 +21,7 @@
 				disabled : this.readonly == "false" ? false : true,
 				emptytext : "&nbsp;&nbsp;",
 				mode : "inline",
+				inputclass : "bt-input-class",
 				onblur : "submit",
 			};
 			return field;

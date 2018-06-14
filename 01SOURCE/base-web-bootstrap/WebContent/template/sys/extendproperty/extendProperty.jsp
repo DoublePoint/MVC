@@ -58,7 +58,7 @@
 							<ll:gridfield field="code" title="扩展属性代码" width="120" readonly="false"></ll:gridfield>
 							<ll:gridfield field="name" title="扩展属性名称" width="120" readonly="false"></ll:gridfield>
 							<ll:gridfield field="query" title="查询语句" readonly="false"></ll:gridfield>
-							</ll:datagrid>
+						</ll:datagrid>
 					</ll:fillareatb>
 				</ll:filllayout>
 			</ll:fillarealr>

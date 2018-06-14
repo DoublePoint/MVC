@@ -38,7 +38,7 @@
 					var field;
 					if (type == _LL_Constant._ConstantComponentMap._GridField)
 						field = new _LL_Model.GridField(domId);
-					if (type == _LL_Constant._ConstantComponentMap._GridSelect)
+					else if (type == _LL_Constant._ConstantComponentMap._GridSelect)
 						field = new _LL_Model.GridSelect(domId);
 					else
 						field = new _LL_Model.GridFieldBase(domId);
