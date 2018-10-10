@@ -16,7 +16,7 @@ import java.util.List;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
-public class AjaxDataWrap<T extends BaseModel> implements Serializable {
+public class AjaxDataWrap<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private List<T> dataList=new ArrayList<T>();
@@ -37,11 +37,11 @@ public class AjaxDataWrap<T extends BaseModel> implements Serializable {
 	public void setDataList(List<T> dataList) {
 		this.dataList = dataList;
 		
-		if (dataList != null) {
+		/*if (dataList != null) {
 			for (int i = 0; i < dataList.size(); i++) {
 				dataList.get(i).setRowId(i);
 			}
-		}
+		}*/
 	}
 
 	public PageInfo getPageInfo() {

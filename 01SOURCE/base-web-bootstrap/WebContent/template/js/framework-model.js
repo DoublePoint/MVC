@@ -142,6 +142,14 @@ var _LL_Model = new function() {
 			for ( var attrName in response.parameterMap) {
 				this[attrName] = (response.parameterMap)[attrName];
 			}
+			try{
+				for(var i=0;i<this.dataList.length;i++){
+					this.dataList[i].rowId=i+1;
+				}
+			}
+			catch(e){
+				
+			}
 		}
 		
 		this.get = function(field) {

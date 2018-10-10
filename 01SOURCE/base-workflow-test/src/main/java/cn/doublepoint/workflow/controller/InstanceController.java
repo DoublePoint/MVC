@@ -11,6 +11,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.impl.persistence.entity.HistoricTaskInstanceEntity;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.slf4j.Logger;
@@ -19,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 
 /**
  * 流程管理控制器
@@ -47,16 +50,18 @@ public class InstanceController {
 
     @Autowired
     ProcessEngineConfiguration processEngineConfiguration;
-
+    
     @RequestMapping(value = "{instanceId}/history/task")
-    @ResponseBody
-    public void queryBpmnModel(@PathVariable("instanceId") String processInstanceId) {
+    public AjaxResponse queryBpmnModel(AjaxResponse response,@PathVariable("instanceId") String processInstanceId) {
     	List<HistoricTaskInstance> historicTaskList=
     			historyService.createHistoricTaskInstanceQuery()//创建历史任务的查询
     			.processInstanceId(processInstanceId)//使用流程实例Id查询
     			.orderByHistoricTaskInstanceStartTime()
     			.asc()//按照活动开始时间排序
     			.list();
+    	response.setViewName("/sys/workflow/historicTaskList");
+    	AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance >();
+    	dataWrap.setDataList(historicTaskList);
 	      historicTaskList.stream().forEach(task->{
 	    	  System.out.println("taskId:"+task.getId());
 	    	  System.out.println("taskName:"+task.getName());
@@ -68,6 +73,8 @@ public class InstanceController {
 	    	  System.out.println("duration:"+task.getDurationInMillis());
 	    	  System.out.println("--------------------------");
 	      });
+		response.setAjaxParameter("dataWrap", dataWrap);
+		return response;
     }
 
     @Autowired
