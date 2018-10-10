@@ -60,10 +60,6 @@ public class ModelController {
 		return mav;
 	}
 
-	
-
-	
-
 	/**
 	 * 导出model对象为指定类型
 	 *

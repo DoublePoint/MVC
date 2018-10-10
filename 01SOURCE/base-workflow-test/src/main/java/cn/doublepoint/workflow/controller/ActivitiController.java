@@ -57,8 +57,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import cn.doublepoint.workflow.cmd.JumpActivityCmd;
-import cn.doublepoint.workflow.service.WorkflowProcessDefinitionService;
-import cn.doublepoint.workflow.service.WorkflowTraceService;
+//import cn.doublepoint.workflow.service.WorkflowProcessDefinitionService;
+//import cn.doublepoint.workflow.service.WorkflowTraceService;
 import cn.doublepoint.workflow.util.Page;
 import cn.doublepoint.workflow.util.PageUtil;
 import cn.doublepoint.workflow.util.UserUtil;
@@ -75,7 +75,7 @@ public class ActivitiController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected WorkflowProcessDefinitionService workflowProcessDefinitionService;
+//    protected WorkflowProcessDefinitionService workflowProcessDefinitionService;
 
     protected RepositoryService repositoryService;
 
@@ -83,7 +83,7 @@ public class ActivitiController {
 
     protected TaskService taskService;
 
-    protected WorkflowTraceService traceService;
+//    protected WorkflowTraceService traceService;
 
     @Autowired
     ManagementService managementService;
@@ -136,7 +136,7 @@ public class ActivitiController {
      */
     @RequestMapping(value = "/redeploy/all")
     public String redeployAll(@Value("#{APP_PROPERTIES['export.diagram.path']}") String exportDir) throws Exception {
-        workflowProcessDefinitionService.deployAllFromClasspath(exportDir);
+//        workflowProcessDefinitionService.deployAllFromClasspath(exportDir);
         return "redirect:/workflow/process-list";
     }
 
@@ -213,12 +213,12 @@ public class ActivitiController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/process/trace")
-    @ResponseBody
-    public List<Map<String, Object>> traceProcess(@RequestParam("pid") String processInstanceId) throws Exception {
-        List<Map<String, Object>> activityInfos = traceService.traceProcess(processInstanceId);
-        return activityInfos;
-    }
+//    @RequestMapping(value = "/process/trace")
+//    @ResponseBody
+//    public List<Map<String, Object>> traceProcess(@RequestParam("pid") String processInstanceId) throws Exception {
+//        List<Map<String, Object>> activityInfos = traceService.traceProcess(processInstanceId);
+//        return activityInfos;
+//    }
 
     /**
      * 读取带跟踪的图片
@@ -416,11 +416,11 @@ public class ActivitiController {
         return bpmnModel;
     }
 
-    @Autowired
+/*    @Autowired
     public void setWorkflowProcessDefinitionService(WorkflowProcessDefinitionService workflowProcessDefinitionService) {
         this.workflowProcessDefinitionService = workflowProcessDefinitionService;
     }
-
+*/
     @Autowired
     public void setRepositoryService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
@@ -431,10 +431,10 @@ public class ActivitiController {
         this.runtimeService = runtimeService;
     }
 
-    @Autowired
+    /*@Autowired
     public void setTraceService(WorkflowTraceService traceService) {
         this.traceService = traceService;
-    }
+    }*/
 
     @Autowired
     public void setTaskService(TaskService taskService) {
