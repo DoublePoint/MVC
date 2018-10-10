@@ -322,8 +322,8 @@ public class LLController {
 	@RequestMapping("start/{processDefineKey}")
 	@ResponseBody
 	public String start(@PathVariable("processDefineKey") String processDefineKey) {
-		runtimeService.startProcessInstanceByKey(processDefineKey);
-		return "";
+		ProcessInstance pInstance=runtimeService.startProcessInstanceByKey(processDefineKey);
+		return pInstance.getProcessInstanceId();
 	}
 
 	/**
