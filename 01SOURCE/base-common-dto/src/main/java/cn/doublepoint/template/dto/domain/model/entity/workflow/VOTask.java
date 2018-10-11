@@ -10,106 +10,248 @@
 package cn.doublepoint.template.dto.domain.model.entity.workflow;
 
 import java.util.Date;
+import java.util.Map;
 
 import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class VOTask  extends BaseModel {
 
-	/**
-	 * The reason why this task was deleted {'completed' | 'deleted' | any other
-	 * user defined string }.
-	 */
-	private String deleteReason;
-
-	/** Time when the task started. */
-	private Date startTime;
-
-	/** Time when the task was deleted or completed. */
-	private Date endTime;
+	/** DB id of the task. */
+	private String id;
 
 	/**
-	 * Difference between {@link #getEndTimeprivate Long} and {@link #getStartTimeprivate Long} in
-	 * milliseconds.
+	 * Name or title of the task.
 	 */
-	private Long durationInMillis;
+	private String name;
 
 	/**
-	 * Difference between {@link #getEndTimeprivate Long} and {@link #getClaimTimeprivate Long} in
-	 * milliseconds.
+	 * Free text description of the task.
 	 */
-	private Long workTimeInMillis;
+	private String description;
 
-	/** Time when the task was claimed. */
-	private Date claimTime;
+	/**
+	 * Indication of how important/urgent this task is
+	 */
+	private int priority;
 
-	/** Sets an optional localized name for the task. */
-	private String localizedName;
+	/**
+	 * The {@link User.getId userId} of the person that is responsible for this
+	 * task.
+	 */
+	private String owner;
 
-	/** Sets an optional localized description for the task. */
-	private String localizedDescription;
+	/**
+	 * The {@link User.getId userId} of the person to which this task is
+	 * delegated.
+	 */
+	private String assignee;
 
-	public String getDeleteReason() {
-		return deleteReason;
+	/**
+	 * Reference to the process instance or null if it is not related to a process
+	 * instance.
+	 */
+	private String processInstanceId;
+
+	/**
+	 * Reference to the path of execution or null if it is not related to a
+	 * process instance.
+	 */
+	private String executionId;
+
+	/**
+	 * Reference to the process definition or null if it is not related to a
+	 * process.
+	 */
+	private String processDefinitionId;
+
+	/** The date/time when this task was created */
+	private Date createTime;
+
+	/**
+	 * The id of the activity in the process defining this task or null if this is
+	 * not related to a process
+	 */
+	private String taskDefinitionKey;
+
+	/**
+	 * Due date of the task.
+	 */
+	private Date dueDate;
+
+	/**
+	 * The category of the task. This is an optional field and allows to 'tag'
+	 * tasks as belonging to a certain category.
+	 */
+	private String category;
+
+	/**
+	 * The parent task for which this task is a subtask
+	 */
+	private String parentTaskId;
+
+	/**
+	 * The tenant identifier of this task
+	 */
+	private String tenantId;
+
+	/**
+	 * The form key for the user task
+	 */
+	private String formKey;
+
+	/**
+	 * Returns the local task variables if requested in the task query
+	 */
+	Map<String, Object> taskLocalVariables;
+
+	/**
+	 * Returns the process variables if requested in the task query
+	 */
+	Map<String, Object> processVariables;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setDeleteReason(String deleteReason) {
-		this.deleteReason = deleteReason;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public Date getStartTime() {
-		return startTime;
+	public String getName() {
+		return name;
 	}
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Date getEndTime() {
-		return endTime;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Long getDurationInMillis() {
-		return durationInMillis;
+	public int getPriority() {
+		return priority;
 	}
 
-	public void setDurationInMillis(Long durationInMillis) {
-		this.durationInMillis = durationInMillis;
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 
-	public Long getWorkTimeInMillis() {
-		return workTimeInMillis;
+	public String getOwner() {
+		return owner;
 	}
 
-	public void setWorkTimeInMillis(Long workTimeInMillis) {
-		this.workTimeInMillis = workTimeInMillis;
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 
-	public Date getClaimTime() {
-		return claimTime;
+	public String getAssignee() {
+		return assignee;
 	}
 
-	public void setClaimTime(Date claimTime) {
-		this.claimTime = claimTime;
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
 	}
 
-	public String getLocalizedName() {
-		return localizedName;
+	public String getProcessInstanceId() {
+		return processInstanceId;
 	}
 
-	public void setLocalizedName(String localizedName) {
-		this.localizedName = localizedName;
+	public void setProcessInstanceId(String processInstanceId) {
+		this.processInstanceId = processInstanceId;
 	}
 
-	public String getLocalizedDescription() {
-		return localizedDescription;
+	public String getExecutionId() {
+		return executionId;
 	}
 
-	public void setLocalizedDescription(String localizedDescription) {
-		this.localizedDescription = localizedDescription;
+	public void setExecutionId(String executionId) {
+		this.executionId = executionId;
 	}
+
+	public String getProcessDefinitionId() {
+		return processDefinitionId;
+	}
+
+	public void setProcessDefinitionId(String processDefinitionId) {
+		this.processDefinitionId = processDefinitionId;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getTaskDefinitionKey() {
+		return taskDefinitionKey;
+	}
+
+	public void setTaskDefinitionKey(String taskDefinitionKey) {
+		this.taskDefinitionKey = taskDefinitionKey;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getParentTaskId() {
+		return parentTaskId;
+	}
+
+	public void setParentTaskId(String parentTaskId) {
+		this.parentTaskId = parentTaskId;
+	}
+
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public String getFormKey() {
+		return formKey;
+	}
+
+	public void setFormKey(String formKey) {
+		this.formKey = formKey;
+	}
+
+	public Map<String, Object> getTaskLocalVariables() {
+		return taskLocalVariables;
+	}
+
+	public void setTaskLocalVariables(Map<String, Object> taskLocalVariables) {
+		this.taskLocalVariables = taskLocalVariables;
+	}
+
+	public Map<String, Object> getProcessVariables() {
+		return processVariables;
+	}
+
+	public void setProcessVariables(Map<String, Object> processVariables) {
+		this.processVariables = processVariables;
+	}
+	
 	
 }

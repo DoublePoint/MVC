@@ -7,18 +7,28 @@ import java.util.Map;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.ManagementService;
 import org.activiti.engine.ProcessEngineConfiguration;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.impl.persistence.entity.HistoricTaskInstanceEntity;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Task;
 import org.activiti.spring.ProcessEngineFactoryBean;
+import org.aspectj.weaver.ast.Var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 /**
  * 流程管理控制器
@@ -26,14 +36,14 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
  * @author HenryYan
  */
 @Controller
-@RequestMapping(value = "/workflow/instance")
-public class InstanceController {
+@RequestMapping(value = "/workflow/task")
+public class TaskInstanceController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-   /* protected RepositoryService repositoryService;
+    protected RepositoryService repositoryService;
     protected RuntimeService runtimeService;
-    protected TaskService taskService;*/
+    protected TaskService taskService;
     protected HistoryService historyService;
 
     @Autowired
@@ -47,34 +57,21 @@ public class InstanceController {
     @Autowired
     ProcessEngineConfiguration processEngineConfiguration;
     
-    @RequestMapping(value = "{instanceId}/history/task")
-    public AjaxResponse queryBpmnModel(AjaxResponse response,@PathVariable("instanceId") String processInstanceId) {
-    	List<HistoricTaskInstance> historicTaskList=
-    			historyService.createHistoricTaskInstanceQuery()//创建历史任务的查询
-    			.processInstanceId(processInstanceId)//使用流程实例Id查询
-    			.orderByTaskCreateTime()//根据创建时间查询
-    			.asc()//按照活动开始时间排序
-    			.list();
-    	response.setViewName("/sys/workflow/historicTaskList");
-    	AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance >();
-    	dataWrap.setDataList(historicTaskList);
-        historicTaskList.stream().forEach(task->{
-    	  System.out.println("taskId:"+task.getId());
-    	  System.out.println("taskName:"+task.getName());
-    	  System.out.println("processDefinitionId:"+task.getProcessDefinitionId());
-    	  System.out.println("processInstanceId:"+task.getProcessInstanceId());
-    	  System.out.println("assigne:"+task.getAssignee());
-    	  System.out.println("startTime:"+task.getStartTime());
-    	  System.out.println("endTime:"+task.getEndTime());
-    	  System.out.println("duration:"+task.getDurationInMillis());
-    	  System.out.println("--------------------------");
-    	  System.out.println("--------------------------");
-        });
-		response.setAjaxParameter("dataWrap", dataWrap);
-		return response;
+    @RequestMapping(value = "/{taskId}")
+    @ResponseBody
+    public AjaxResponse queryBpmnModel(AjaxResponse response,@PathVariable("taskId") String taskId) {
+    	Task task=taskService.createTaskQuery()
+    			.taskId(taskId)
+    			.singleResult();
+    	AjaxDataWrap<VOTask> dataWrap=new AjaxDataWrap<VOTask>();
+    	VOTask resultTask=new VOTask();
+    	CommonBeanUtils.copyProperties(task, resultTask);
+    	dataWrap.setData(resultTask);
+    	response.setAjaxParameter("dataWrap", dataWrap);
+    	return response;
     }
 
-   /* @Autowired
+    @Autowired
     public void setRepositoryService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
     }
@@ -87,7 +84,7 @@ public class InstanceController {
     @Autowired
     public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
-    }*/
+    }
 
     @Autowired
     public void setHistoryService(HistoryService historyService) {

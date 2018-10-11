@@ -37,6 +37,11 @@ public class WorksheetController {
 		response.setViewName("worksheetQuery");
 		return response;
 	}
+	@RequestMapping("historicTaskList")
+	public AjaxResponse historicTaskList(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+		response.setViewName("historicTaskList");
+		return response;
+	}
 	
 	@RequestMapping("retrieve")
 	@ResponseBody

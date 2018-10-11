@@ -26,22 +26,30 @@
 		<ll:filllayout>
 			<ll:fillarealr width="*">
 				<ll:filllayout>
-					<ll:fillareatb height="85" showtitle="true" title="工作单详情" showborder="false">
-						<ll:ajaxform id="ajaxform" cols="2" colproportion="1:3:3:3">
-							<ll:formfield id="name" title="流程名称" field="name"></ll:formfield>
-							<ll:formtoolbar labelalign="right" colspan="1">
-								<button class="btn btn-info btn-sm ll-main" type="button" onclick="retrieve()" style="width: 100px;">
-									<span class="glyphicon glyphicon-search "></span> 查询
-								</button>  
-   										&nbsp;
-									</ll:formtoolbar>
+					<ll:fillareatb height="125" showtitle="true" title="工作单详情" showborder="false">
+						<ll:ajaxform id="ajaxform" cols="3" colproportion="1:3:3:3:3:3">
+							<ll:formfield title="工作单编号" field="worksheetNo"></ll:formfield>
+							<ll:formfield title="工作单名称" field="name"></ll:formfield>
+							<ll:formfield title="发起人" field="createUser"></ll:formfield>
+							<ll:formfield title="工作单类别" field="classification"></ll:formfield>
+							<ll:formfield title="工作单状态" field="state"></ll:formfield>
+							<ll:formfield title="工作单描述" field="description"></ll:formfield>
 						</ll:ajaxform>
 					</ll:fillareatb>
 					<ll:fillareatb height="*" showtitle="true" title="流程列表">
 						<ll:ajaxgrid id="ajaxgrid" onpageclick="retrieve()">
 							<ll:gridcheck></ll:gridcheck>
-							<ll:gridcustom align="center" width="80" title="详细信息" ></ll:gridcustom>
+							<ll:gridcustom align="center" width="80" title="详细信息"  formatter="customerFunction"></ll:gridcustom>
+							<ll:gridfield field="id" width="150" title="id"></ll:gridfield>
 							<ll:gridfield field="name" width="150" title="环节名称"></ll:gridfield>
+							<ll:gridfield field="owner" width="150" title="Owner"></ll:gridfield>
+							<ll:gridfield field="assignee" width="150" title="Assignee"></ll:gridfield>
+							<ll:gridfield field="processInstanceId" width="150" title="Process Instance Id"></ll:gridfield>
+							<ll:gridfield field="processDefinitionId" width="150" title="Process Definition Id"></ll:gridfield>
+							<ll:gridfield field="processDefinitionKey" width="150" title="Process Definition Key"></ll:gridfield>
+							<ll:gridfield field="deploymentId" width="150" title="Deployment Id"></ll:gridfield>
+							<ll:gridfield field="startTime" width="150" title="Start Time"></ll:gridfield>
+							<ll:gridfield field="endTime" width="150" title="End Time"></ll:gridfield>
 							<ll:gridfield field="startTime" title="创建时间"></ll:gridfield>
 						</ll:ajaxgrid>
 					</ll:fillareatb>
