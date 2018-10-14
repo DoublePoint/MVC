@@ -112,7 +112,7 @@
 			<artifactId>base-generate</artifactId>
 			<version>${cn.doublepoint.base.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

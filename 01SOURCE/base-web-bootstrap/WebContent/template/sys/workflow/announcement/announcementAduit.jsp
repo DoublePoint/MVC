@@ -42,13 +42,13 @@
 				</ll:ajaxform>
 			</ll:fillareatb>
 			<ll:fillareatb height="35">
-				<button type="button" style="width: 70px;" class="btn btn-default btn-sm ll-main" onclick="onClickAdd();">
+				<button type="button" style="width: 70px;" class="btn btn-default btn-sm ll-main" onclick="onClickSave();">
 					<span class="glyphicon glyphicon-plus ll_add_icon"></span> 保存
 				</button>
-				<button type="button" style="width: 70px;" class="btn btn-default btn-sm ll-main" onclick="onClickDelete();">
+				<button type="button" style="width: 70px;" class="btn btn-default btn-sm ll-main" onclick="onClickTransmit();">
 					<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 传递
 				</button>
-				<button type="button" style="width: 70px;" class="btn btn-default btn-sm " onclick="onClickDelete();">
+				<button type="button" style="width: 70px;" class="btn btn-default btn-sm " onclick="onClickBack();">
 					<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 返回
 				</button>
 			</ll:fillareatb>

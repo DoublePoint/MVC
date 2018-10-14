@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
@@ -82,6 +83,14 @@ public class PublishAnnouncementController extends BaseController{
 		changed.setWorksheetNo(worksheetNo);
 		announcementChangedService.saveOrUpdate(changed);
 		response.setAjaxParameter("worksheetNo", worksheetNo);
+		return response;
+	}
+	
+	@RequestMapping("saveAduit/{instanceId}")
+	@ResponseBody
+	public AjaxResponse save(@PathVariable("instanceId") String instanceId, BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+		WorksheetUtil.transmit(instanceId);
+		response.setAjaxParameter("state", "Y");
 		return response;
 	}
 }

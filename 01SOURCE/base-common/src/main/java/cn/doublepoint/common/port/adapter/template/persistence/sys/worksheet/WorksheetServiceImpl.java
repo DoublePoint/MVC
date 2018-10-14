@@ -11,6 +11,7 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 
 @Service("worksheetService")
@@ -26,7 +27,12 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 */
 	@Override
 	public List<Worksheet> find(Worksheet worksheet, PageInfo pageInfo) {
-		return JPAUtil.load(Worksheet.class, pageInfo);
+		QueryParamList params=new QueryParamList();
+		if(worksheet!=null){
+			if(!StringUtil.isNullOrEmpty(worksheet.getWorksheetNo()))
+				params.addParam("worksheetNo", worksheet.getWorksheetNo());
+		}
+		return JPAUtil.load(Worksheet.class,params, pageInfo);
 	}
 
 	/**

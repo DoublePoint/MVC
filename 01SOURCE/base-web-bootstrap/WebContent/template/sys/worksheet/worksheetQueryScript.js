@@ -23,9 +23,16 @@ function retrieveSuccess(response) {
 }
 
 function imageCustomer(a, record, c) {
-	return ' <a href="javascript:maintenceAdmin(\'' + record.id + '\')">' + ' <span class="glyphicon icon-tags" style="color:#15B194;"></span>' + ' </a>';
+	return ' <a href="javascript:maintenceAdmin(' + record.id + ')">' + ' <span class="glyphicon icon-tags" style="color:#15B194;"></span>' + ' </a>';
 }
 
 function sheetCustomer(a, record, c){
-	return ' <a href="javascript:maintenceAdmin(\'' + record.id + '\')">' + record.worksheetNo + ' </a>';
+	return ' <a href="javascript:showHistoricTasks(' + record.instanceId + ')">' + record.worksheetNo + ' </a>';
+}
+function showHistoricTasks(instanceId,worksheetNo){
+	$.openTab({
+		title : "工单历史",
+		content : '<iframe src="http://localhost:8080/base-workflow-test/workflow/instance/'+instanceId+'/history/task/"></iframe>',
+		id : instanceId
+	});
 }

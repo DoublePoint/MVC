@@ -53,6 +53,14 @@
 							<ll:gridfield field="startTime" title="创建时间"></ll:gridfield>
 						</ll:ajaxgrid>
 					</ll:fillareatb>
+					<ll:fillareatb height="35">
+						<button type="button" style="width: 70px;" class="btn btn-default btn-sm " onclick="onClickTransmit();">
+							<span class="glyphicon glyphicon-plus ll_add_icon"></span> 传递
+						</button>
+						<button type="button" style="width: 70px;" class="btn btn-default btn-sm" onclick="onClickRollBack();">
+							<span class="glyphicon glyphicon-trash ll_delete_icon"></span> 回退
+						</button>
+					</ll:fillareatb>
 				</ll:filllayout>
 			</ll:fillarealr>
 		</ll:filllayout>

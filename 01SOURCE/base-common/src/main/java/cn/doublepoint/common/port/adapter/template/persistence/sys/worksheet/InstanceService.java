@@ -13,6 +13,7 @@ import java.util.List;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 public interface InstanceService {
 
@@ -82,4 +83,11 @@ public interface InstanceService {
 	 * 获取待办流程
 	 */
 	public List<Worksheet> getPersonalWorksheetList(Worksheet worksheet,PageInfo pageInfo);
+	
+	/**
+	 * 获取历史任务
+	 * @param instanceId
+	 * @return
+	 */
+	public List<VOTask> getHistoricTasks(String instanceId);
 }

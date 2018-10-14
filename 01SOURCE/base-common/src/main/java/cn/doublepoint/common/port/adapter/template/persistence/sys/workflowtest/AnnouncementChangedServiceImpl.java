@@ -6,9 +6,13 @@ import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
+import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.template.dto.domain.model.entity.sys.AnnouncementChanged;
+import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 
 @Service("announcementChangedService")
 public class AnnouncementChangedServiceImpl  implements AnnouncementChangedService{
@@ -20,7 +24,17 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 */
 	@Override
 	public List<AnnouncementChanged> find(AnnouncementChanged announcementChanged,PageInfo pageInfo) {
-		return JPAUtil.load(AnnouncementChanged.class, pageInfo);
+		StringBuffer stringBuffer=new StringBuffer();
+		stringBuffer.append("select ac from AnnouncementChanged ac where 1=1");
+		QueryParamList params=new QueryParamList();
+		if(announcementChanged!=null){
+			if(!StringUtil.isNullOrEmpty(announcementChanged.getWorksheetNo())){
+				stringBuffer.append(" and ac.worksheetNo=:worksheetNo");
+				params.addParam("worksheetNo", announcementChanged.getWorksheetNo());
+			}
+		}
+		List<Object> sourceList=JPAUtil.executeQuery(stringBuffer.toString(), params,pageInfo);
+		return CommonBeanUtils.copyTo(sourceList, AnnouncementChanged.class);
 	}
 	
 	/**

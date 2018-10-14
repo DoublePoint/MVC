@@ -12,17 +12,23 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.StringUtil;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 @Service("instanceService")
 public class InstanceServiceImpl implements InstanceService {
@@ -41,8 +47,10 @@ public class InstanceServiceImpl implements InstanceService {
 	@Override
 	public String createAndStart(String classification, String createUser, String description) {
 		// 启动流程并返回实例标识
-		String instanceId = restTemplate.getForObject(
-				"http://localhost:8080/base-workflow-test/template/sys/workflow/start/WF-00001", String.class);
+		String instanceId = restTemplate.exchange("http://localhost:8080/base-workflow-test/template/sys/workflow/start/WF-00001", 
+                HttpMethod.GET, 
+                null, 
+                new ParameterizedTypeReference<String>() {}).getBody();
 		Worksheet worksheet = new Worksheet();
 		worksheet.setInstanceId(instanceId);
 		worksheet.setId(SequenceUtil.getNextVal(Worksheet.class));
@@ -66,7 +74,7 @@ public class InstanceServiceImpl implements InstanceService {
 	@Override
 	public void transmit(String instanceId) {
 		restTemplate.getForObject(
-				"http://localhost:8080/base-workflow-test/template/sys/workflow/model/{id}", String.class, "呜呜呜呜");
+				"http://localhost:8080/base-workflow-test/template/sys/workflow/transmit/{id}", String.class,instanceId);
 	}
 
 	/**
@@ -137,5 +145,16 @@ public class InstanceServiceImpl implements InstanceService {
 		return CommonBeanUtils.copyTo(sourceList, Worksheet.class);
 	}
 	
-	
+
+	@Override
+	public List<VOTask> getHistoricTasks(String instanceId){
+		AjaxResponse response= restTemplate.exchange("http://localhost:8080/base-workflow-test/workflow/instance/{id}/history/task", 
+                HttpMethod.GET, 
+                null, 
+                new ParameterizedTypeReference<AjaxResponse>() {},
+                instanceId).getBody();
+		Object object=response.getParameterMap().get("dataWrap");
+		AjaxDataWrap<VOTask> dataWrap=(AjaxDataWrap<VOTask>)object;
+		return dataWrap.getDataList();
+	}
 }

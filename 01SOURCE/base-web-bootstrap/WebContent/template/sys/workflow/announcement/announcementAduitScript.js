@@ -31,7 +31,7 @@ function retrieveSuccess(response){
 function retrieveTree() {
 	treeDemo.render();
 }
-function onClickAdd() {
+function onClickSave() {
 	var nodes = treeDemo.getSelectedNodes();
 	var parentMenuId;
 	if (nodes.length == 0) {
@@ -69,30 +69,22 @@ function onClickAdd() {
 	return false;
 }
 
-function onClickDelete() {
-	$.confirm('确定要删除吗？', function() {
-		var data={
-			deleteDataWrap:lltestdatagrid.collectDataWrap("checked")
-		};
-		$.request({
-			url : $$pageContextPath + "/template/sys/menu/delete",
-			data : data,
-			success : function(response) {
-				var deleteState=response.get("deleteState");
-				if(!deleteState){
-					$.alert("删除失败!");
-					return;
-				}
-				$.tips('删除成功');
+function onClickTransmit() {
+	$.request({
+		url:$$pageContextPath+"/template/sys/workflow/announcement/save",
+		data:{
+			annChangedWrap:ajaxformAnnouncement.collectDataWrap(),
+		},
+		success:function(response){
+			if(response.get("worksheetNo")!=null){
+				worksheetNo=response.get("worksheetNo");
+				$.alert("保存成功。");
 				retrieve();
-				retrieveTree();
-			},
-			error : function() {
-				$.shakeTips('删除失败');
-				return false;
 			}
-		});
-	}, function() {
+			else
+				$.alert("保存失败。")
+		}
+			
 	});
 
 }

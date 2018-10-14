@@ -9,8 +9,11 @@
 */
 package cn.doublepoint.common.application.template.sys.woksheet;
 
+import java.util.List;
+
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
+import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 public class WorksheetUtil {
 	
@@ -80,6 +83,11 @@ public class WorksheetUtil {
 	public static void active(String instanceId) {
 		InstanceService instanceService = getInstanceService();
 		instanceService.active(instanceId);
+	}
+	
+	public static List<VOTask> getHistoricTasks(String instanceId){
+		InstanceService instanceService = getInstanceService();
+		return instanceService.getHistoricTasks(instanceId);
 	}
 
 	private static InstanceService getInstanceService() {

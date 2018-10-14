@@ -1,6 +1,8 @@
+var instanceId;
 function init(response) {
-	var admin = response.get("dataWrap");
-	ajaxgrid.setDataWrap(admin);
+	var dataWrap = response.get("dataWrap");
+	ajaxgrid.setDataWrap(dataWrap);
+	instanceId=response.get("instanceId");
 }
 
 
@@ -9,20 +11,39 @@ function customerFunction(a, record, c) {
 }
 function detail(taskId){
 	$.request({
-		url : $$pageContextPath + "//workflow/task/taskId",
-		type : "POST",
-		contentType : 'application/json;charset=UTF-8',
-		dataType : "json",
-		async : true,
+		url : $$pageContextPath + "/workflow/task/"+taskId,
 		success : function(response){
 			var dataWrap=response.get("dataWrap");
 			var task=dataWrap.data;
-			try{
-				parent.doClickDetail(task);
-			}
-			catch(e){
-				
-			}
+			var form=task.formKey;
+			alert(form)
+		}
+	});
+}
+
+function onClickTransmit(){
+	$.request({
+		url : $$pageContextPath + "/workflow/instance/transmit/"+instanceId,
+		success : function(response){
+			retrieve();
+		}
+	});
+}
+function onClickRollBack(){
+	$.request({
+		url : $$pageContextPath + "/workflow/instance/rollback/"+instanceId,
+		success : function(response){
+			retrieve();
+		}
+	});
+}
+
+function retrieve(){
+	$.request({
+		url : $$pageContextPath + "/workflow/instance/"+instanceId+"/history/task",
+		success : function(response){
+			var dataWrap=response.get("dataWrap");
+			ajaxgrid.setDataWrap(dataWrap);
 		}
 	});
 }

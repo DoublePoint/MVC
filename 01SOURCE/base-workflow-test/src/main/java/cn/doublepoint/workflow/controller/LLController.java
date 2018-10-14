@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.Task;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
@@ -282,23 +283,7 @@ public class LLController {
 		}
 		return "";
 	}
-	 /**
-     * 完成任务
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "transmit/{instanceId}", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
-    public String transmit(@PathVariable("instanceId") String instanceId) {
-        try {
-        	String currentActivityId=runtimeService.createExecutionQuery().processInstanceId(instanceId).singleResult().getActivityId();
-            taskService.complete(currentActivityId);
-            return "success";
-        } catch (Exception e) {
-            return "error";
-        }
-    }
+	 
 	/**
 	 * 废除
 	 * @param instanceId
@@ -321,9 +306,9 @@ public class LLController {
 	 */
 	@RequestMapping("start/{processDefineKey}")
 	@ResponseBody
-	public String start(@PathVariable("processDefineKey") String processDefineKey) {
+	public long start(@PathVariable("processDefineKey") String processDefineKey) {
 		ProcessInstance pInstance=runtimeService.startProcessInstanceByKey(processDefineKey);
-		return pInstance.getProcessInstanceId();
+		return Long.valueOf(pInstance.getProcessInstanceId());
 	}
 
 	/**
