@@ -36,6 +36,12 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
+/**
+ * 1、对于Ajax 数据直接封装到json对象中，对于form.submit由于this.body为空，所以json对象为null
+ * 2、获取参数首先从super.parameter中读取，String和AjaxDataWrap分别转义，再从json对象中取，最后从map中取
+ * @author Administrator
+ *
+ */
 public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	private final byte[] body;
 	private Map<String, Object> map;
@@ -90,40 +96,30 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 * @return
 	 */
 	public <T  extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName, Class<T> clazz) {
-		ObjectMapper mspp = new ObjectMapper();
-		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-		String wrapJsonString = "";
-		JSONObject obj = null;
-		try {
-			if (jsonObject != null)
-				obj = jsonObject.getJSONObject(ajaxDataWrapName);
-		} finally {
-			try {
-				if (obj == null) {
-					Object wrapObj = map.get(ajaxDataWrapName);
-					if (wrapObj == null)
-						return new AjaxDataWrap<T>();
-					wrapJsonString = String.valueOf(wrapObj);
-					obj = JSON.parseObject(wrapJsonString);
-				}
-			} catch (Exception e) {
-				Log4jUtil.error(e);
-			}
-
+		
+		//1.从父中获取
+		String dataWrapJsonString=super.getParameter(ajaxDataWrapName);
+		if(!StringUtil.isNullOrEmpty(dataWrapJsonString)){
+			return translateJsonStringToAjaxDataWrap(dataWrapJsonString, clazz);
 		}
-
-		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
+		
+		//2.从json对象中获取
+		dataWrapJsonString = "";
+		JSONObject obj = null;
+		if (jsonObject != null)
+			obj = jsonObject.getJSONObject(ajaxDataWrapName);
 		try {
-			AjaxDataWrap<T> dataWrap = mspp.readValue(obj.toJSONString(), type);
-			if(dataWrap==null)
-				dataWrap=new AjaxDataWrap<T>();
-			return dataWrap;
+			if (obj == null) {
+				Object wrapObj = map.get(ajaxDataWrapName);
+				if (wrapObj == null)
+					return new AjaxDataWrap<T>();
+				dataWrapJsonString = String.valueOf(wrapObj);
+				obj = JSON.parseObject(dataWrapJsonString);
+			}
 		} catch (Exception e) {
 			Log4jUtil.error(e);
-			return new AjaxDataWrap<T>();
 		}
+		return translateJsonStringToAjaxDataWrap(obj.toJSONString(), clazz);
 	}
 
 	@Override
@@ -181,6 +177,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 	 * 将FomnData类型的数据转换成Json
 	 */
 	private void translateFomrDataToJsonMap() {
+		//方法体参数
 		if (this.body == null)
 			return;
 		String bodyString = new String(body);
@@ -192,6 +189,7 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		}
 
 		try {
+			//地址栏参数
 			String formdataString = URLDecoder.decode(new String(body), "UTF-8");
 			System.out.println(formdataString);
 			String[] strings = formdataString.split("&");
@@ -208,4 +206,19 @@ public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapp
 		}
 	}
 
+	private <T  extends BaseModel> AjaxDataWrap<T> translateJsonStringToAjaxDataWrap(String jsonString,Class clazz){
+		ObjectMapper mspp = new ObjectMapper();
+		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
+		try {
+			AjaxDataWrap<T> dataWrap = mspp.readValue(jsonString, type);
+			if(dataWrap==null)
+				dataWrap=new AjaxDataWrap<T>();
+			return dataWrap;
+		} catch (Exception e) {
+			Log4jUtil.error(e);
+			return new AjaxDataWrap<T>();
+		}
+	}
 }
