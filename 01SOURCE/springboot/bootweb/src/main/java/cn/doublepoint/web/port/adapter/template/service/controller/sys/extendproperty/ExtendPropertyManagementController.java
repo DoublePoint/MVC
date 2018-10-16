@@ -26,7 +26,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.ExtendProperty;
 
 @Controller
-@RequestMapping("/template/sys/extendproperty")
+@RequestMapping("sys/extendproperty")
 public class ExtendPropertyManagementController extends BaseController {
 
 	@Autowired

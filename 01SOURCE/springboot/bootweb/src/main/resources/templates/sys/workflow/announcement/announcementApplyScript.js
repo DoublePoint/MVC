@@ -1,7 +1,7 @@
 var worksheetNo;
 function retrieve() {
 	$.request({
-		url:$$pageContextPath+"/template/sys/workflow/announcement/findWorksheet",
+		url:$$pageContextPath+"sys/workflow/announcement/findWorksheet",
 		data:{
 			worksheetNo:worksheetNo,
 		},
@@ -19,7 +19,7 @@ function retrieve() {
 
 function onClickAdd() {
 	$.request({
-		url:$$pageContextPath+"/template/sys/workflow/announcement/save",
+		url:$$pageContextPath+"sys/workflow/announcement/save",
 		data:{
 			annChangedWrap:ajaxformAnnouncement.collectDataWrap(),
 		},

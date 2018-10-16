@@ -2,7 +2,7 @@ function retrieve() {
 	var worksheetDataWrap = ajaxgrid.collectDataWrap();
 	var queryDataWrap = ajaxform.collectDataWrap();
 	$.request({
-		url : $$pageContextPath + "/template/sys/worksheet/retrieve",
+		url : $$pageContextPath + "sys/worksheet/retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",

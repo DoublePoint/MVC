@@ -40,7 +40,7 @@ function cliLogin() {
 	$.ajax({
 		type : 'post',
 		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
-		url : $$pageContextPath + "/template/sys/menu/add",
+		url : $$pageContextPath + "sys/menu/add",
 		data : "username="+txtUser+"&password="+txtPwd,
 		success : function(data1) {
 			$.tips('保存成功');
@@ -92,7 +92,7 @@ $("#dynamicLogon").click(function() {
 	$.ajax({
 		type : 'post',
 		contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
-		url : $$pageContextPath + "/template/sys/menu/add",
+		url : $$pageContextPath + "sys/menu/add",
 		data : JSON.stringify(data.field) + "",
 		success : function(data1) {
 			$.tips('保存成功');

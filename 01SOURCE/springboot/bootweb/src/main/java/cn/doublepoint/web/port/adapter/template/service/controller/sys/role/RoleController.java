@@ -30,7 +30,7 @@ import cn.doublepoint.template.dto.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Role;
 
 @Controller
-@RequestMapping("/template/sys/role")
+@RequestMapping("sys/role")
 public class RoleController extends BaseController {
 
 	@Autowired

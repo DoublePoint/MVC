@@ -22,10 +22,7 @@ public class PageController extends BaseRequestController{
 	public String hello() {
 		return "sys/index/index.html";
 	}
-	@RequestMapping(value = "/sys/index/main")
-	public String main() {
-		return "sys/index/main.html";
-	}
+	
 	
 	@RequestMapping("sys/login/{actionname}")
 	public String login(@PathVariable String actionname) {

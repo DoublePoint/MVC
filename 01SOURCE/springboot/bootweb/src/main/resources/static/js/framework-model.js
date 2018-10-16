@@ -138,7 +138,10 @@ var _LL_Model = new function() {
 	};
 
 	this.AjaxResponse = function(response) {
-		if (response) {
+		if (response!=null) {
+			if($.isString(response)){
+				response=JSON.parse(response);
+			}
 			for ( var attrName in response.parameterMap) {
 				this[attrName] = (response.parameterMap)[attrName];
 			}

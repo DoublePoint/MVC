@@ -25,7 +25,7 @@ function stepChanging(event, currentIndex, newIndex) {
 			oomName : oomName
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/assistant/generate",
+			url : $$pageContextPath + "sys/assistant/generate",
 			data : data1,
 			success : function(response) {
 				generateDir = response.get("generateDir");
@@ -41,7 +41,7 @@ function customerFunction(a, b, c) {
 function showDetail(tableName) {
 	$.openDialog({
 		type : 2,
-		url : $$pageContextPath + '/template/sys/assistant/generateDetail',
+		url : $$pageContextPath + '/sys/assistant/generateDetail',
 		title : "详细信息",
 		width : 930,
 		height : 630,
@@ -58,7 +58,7 @@ function showDetail(tableName) {
 
 function zipAndDownLoad() {
 	$.formSubmit({
-		url: $$pageContextPath + '/template/sys/assistant/zipAndDownload',
+		url: $$pageContextPath + '/sys/assistant/zipAndDownload',
 		data:{
 			generateDir:generateDir
 		}

@@ -60,7 +60,7 @@ public class GenerateEntityController extends BaseController {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 *//*
-	@RequestMapping("/template/sys/getFileTable")
+	@RequestMapping("sys/getFileTable")
 	@ResponseBody
 	public AjaxResponse getFileTable(HttpServletRequest request, @RequestParam("file") MultipartFile file,AjaxResponse responseData) throws IllegalStateException, IOException {
 		String oomName = UUID.randomUUID() + ".oom";
@@ -82,7 +82,7 @@ public class GenerateEntityController extends BaseController {
 	 * @throws TemplateException
 	 * @throws IOException
 	 *//*
-	@RequestMapping("/template/sys/assistant/generate")
+	@RequestMapping("sys/assistant/generate")
 	@ResponseBody
 	public AjaxResponse generate(HttpServletRequest request,AjaxResponse responseData) throws TemplateException, IOException {
 		
@@ -115,7 +115,7 @@ public class GenerateEntityController extends BaseController {
 	 * @throws TemplateException
 	 * @throws IOException
 	 *//*
-	@RequestMapping("/template/sys/assistant/generateDetail")
+	@RequestMapping("sys/assistant/generateDetail")
 	public AjaxResponse generateDetail(HttpServletRequest request,AjaxResponse responseData) throws TemplateException, IOException {
 		Map<String, String> map = new HashMap<String, String>();
 		getEntityContent(request, map);
@@ -132,7 +132,7 @@ public class GenerateEntityController extends BaseController {
 	 * @param response
 	 * @throws IOException
 	 *//*
-	@RequestMapping("/template/sys/assistant/zipAndDownload")
+	@RequestMapping("sys/assistant/zipAndDownload")
 	public void zipAndDownload1(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String generateDir=request.getParameter("generateDir");
@@ -218,7 +218,7 @@ public class GenerateEntityController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/template/sys/config/entityFilter")
+	@RequestMapping("sys/config/entityFilter")
 	@ResponseBody
 	public AjaxDataWrap<EntityFilter> getEntityFilter(@RequestParam(required = false) String userId) {
 		return efQueryService.findAllEntityFilter(null);

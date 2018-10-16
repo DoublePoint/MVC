@@ -1,4 +1,4 @@
-alert([[@{/}]])
+//alert([[@{/}]])
 function retrieve() {
 	var dataWrap = lltestdatagrid.collectDataWrap();
 	var nodes = treeDemo.getSelectedNodes();
@@ -10,7 +10,7 @@ function retrieve() {
 	formData.data.id=selectNodeCdbs;
 	dataWrap.setData(formData.data);
 	$.request({
-		url : $$pageContextPath + "/template/sys/menu/retrieve",
+		url : $$pageContextPath + "sys/menu/retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -52,7 +52,7 @@ function onClickAdd() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		url : $$pageContextPath + '/template/sys/menu/menuDialog?aaa=2&testParam=321',
+		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
 		data : {
 			ajaxDataWrap:ajaxDataWrap,
 			type:"add",
@@ -76,7 +76,7 @@ function onClickDelete() {
 			deleteDataWrap:lltestdatagrid.collectDataWrap("checked")
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/menu/delete",
+			url : $$pageContextPath + "sys/menu/delete",
 			data : data,
 			success : function(response) {
 				var deleteState=response.get("deleteState");
@@ -118,7 +118,7 @@ function dbclickgrid(para1,data,index){
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=edit',
+		url : $$pageContextPath + '/sys/menu/menuDialog?type=edit',
 		data : {
 			dataWrap:ajaxDataWrap,
 			type:"edit",

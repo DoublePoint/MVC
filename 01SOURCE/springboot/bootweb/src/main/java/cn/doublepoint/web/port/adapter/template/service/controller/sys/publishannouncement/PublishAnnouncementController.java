@@ -30,7 +30,7 @@ import cn.doublepoint.template.dto.domain.model.entity.sys.AnnouncementChanged;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 
 @Controller
-@RequestMapping("/template/sys/workflow/announcement")
+@RequestMapping("sys/workflow/announcement")
 public class PublishAnnouncementController extends BaseController{
 	@Autowired
     private RestTemplate restTemplate;

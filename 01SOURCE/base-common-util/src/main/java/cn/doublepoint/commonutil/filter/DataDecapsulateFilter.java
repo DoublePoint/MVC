@@ -26,12 +26,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Component
-@WebFilter(filterName = "blosTest")
+@WebFilter(filterName = "bootOne")
 public class DataDecapsulateFilter extends OncePerRequestFilter  {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		if(request.getRequestURL().toString().contains(".css")||
+				request.getRequestURL().toString().contains(".js")||
+				request.getRequestURL().toString().contains(".less")||
+				request.getRequestURL().toString().contains(".gif")){
+			filterChain.doFilter(request, response);
+			return;
+		}
 		String contentType = request.getContentType();// 获取请求的content-type
 		if (contentType == null) {
 			doOtherRequest(request,response,filterChain);

@@ -25,7 +25,7 @@ import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 @Controller
-@RequestMapping("/template/sys/worksheet")
+@RequestMapping("sys/worksheet")
 public class WorksheetController {
 	@Autowired
 	private InstanceService instanceService;

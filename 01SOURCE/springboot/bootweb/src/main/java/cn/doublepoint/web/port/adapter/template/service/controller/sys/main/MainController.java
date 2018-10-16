@@ -20,10 +20,9 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
-import cn.doublepoint.web.port.adapter.template.service.controller.sys.workflow.WorksheetController;
 
 @Controller
-@RequestMapping("/template/sys/index")
+@RequestMapping("sys/index")
 public class MainController {
 	@Autowired
 	private InstanceService instanceService;
@@ -37,7 +36,7 @@ public class MainController {
 		
 		worksheetDataWrap.setDataList(list);
 		response.setAjaxParameter("worksheetDataWrap", worksheetDataWrap);
-		response.setViewName("main");
+		response.setViewName("sys/index/main.html");
 		return response;
 	}
 	

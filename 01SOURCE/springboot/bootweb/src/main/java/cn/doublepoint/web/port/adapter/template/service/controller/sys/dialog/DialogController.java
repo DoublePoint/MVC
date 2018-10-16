@@ -18,9 +18,9 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 public class DialogController extends BaseController {
 
 	// 索引页
-	@RequestMapping(value = "/template/sys/dialog/dialog")
+	@RequestMapping(value = "sys/dialog/dialog")
 	public String hello() {
-		return "/template/sys/dialog/dialog";
+		return "sys/dialog/dialog.html";
 	}
 
 }

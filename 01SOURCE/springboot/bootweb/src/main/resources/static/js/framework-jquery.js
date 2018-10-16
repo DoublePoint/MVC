@@ -150,7 +150,7 @@
 			obj.shadeClose = true;
 			obj.maxmin = true;
 			obj.area = [ width, height ];
-			obj.content = $$pageContextPath + "/template/sys/dialog/dialog.jsp";
+			obj.content = $$pageContextPath + "sys/dialog/dialog";
 			parent.$layer.open(obj);
 		},
 		openTab : function(setting){
@@ -410,11 +410,11 @@
 		},
 		// 是否是字符串类型
 		isString : function(obj) {
-			return (typeof obj == 'string') && str.constructor == String;
+			return (typeof obj == 'string') && obj.constructor == String;
 		},
 		// 是否是数值类型
 		isNumber : function(obj) {
-			return (typeof obj == 'number') && str.constructor == String;
+			return (typeof obj == 'number') && obj.constructor == String;
 		},
 		// 是否是对象类型
 		isObject : function(obj) {

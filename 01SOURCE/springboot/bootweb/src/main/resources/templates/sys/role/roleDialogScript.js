@@ -20,7 +20,7 @@ function onClickSave(){
 	dataList[0]=data;
 	addDataWrap.setDataList(dataList);
 	$.request({
-		url : $$pageContextPath + "/template/sys/menu/add?testtest=111&test=123",
+		url : $$pageContextPath + "sys/menu/add?testtest=111&test=123",
 		data : {
 			addDataWrap:addDataWrap
 		},
@@ -41,7 +41,7 @@ function selectParent(){
 		title : "添加菜单",
 		width : 360,
 		height : 430,
-		url : $$pageContextPath + '/template/sys/commonpage/selectMenu.jsp',
+		url : $$pageContextPath + '/sys/commonpage/selectMenu.jsp',
 		yes : function(selectTreeNode) {
 			var menuId=selectTreeNode.id;
 			var menuName=selectTreeNode.name;

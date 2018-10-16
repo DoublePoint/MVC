@@ -46,7 +46,7 @@
 			}
 			else{
 				$.ajax({
-					url : $$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + switchObj.dropname,
+					url : $$pageContextPath + "sys/dropdown/datalist?dropName=" + switchObj.dropname,
 					type : "POST",
 					contentType : 'application/json;charset=UTF-8',
 					dataType : "json",

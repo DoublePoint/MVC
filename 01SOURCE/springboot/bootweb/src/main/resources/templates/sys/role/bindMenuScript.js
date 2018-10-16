@@ -19,7 +19,7 @@ function onOk(){
 	var dataWrap=$.createAjaxDataWrap();
 	dataWrap.dataList=checkNodes;
 	$.request({
-		url:$$pageContextPath+"/template/sys/role/bind-menu",
+		url:$$pageContextPath+"sys/role/bind-menu",
 		data:{
 			dataWrap:dataWrap,
 			roleId:roleId

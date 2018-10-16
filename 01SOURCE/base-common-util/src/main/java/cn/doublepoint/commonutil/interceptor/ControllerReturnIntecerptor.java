@@ -12,16 +12,21 @@ package cn.doublepoint.commonutil.interceptor;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.alibaba.fastjson.JSON;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 
-public class ControllerReturnIntecerptor implements HandlerMethodReturnValueHandler{
+/*<!-- 执行完Controller中的方法调用拦截器 HandleMethodInteceptor -->*/
+
+@Component
+public class ControllerReturnIntecerptor implements HandlerMethodReturnValueHandler,HandlerInterceptor{
 
 	/**
 	 * 该处理程序是否支持给定的方法返回类型(只有返回true才回去调用handleReturnValue)

@@ -23,7 +23,7 @@ import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 import cn.doublepoint.template.dto.domain.model.entity.sys.MenuVisitLog;
 
 @Controller
-@RequestMapping("/template/sys/menu-visit/")
+@RequestMapping("sys/menu-visit/")
 public class MenuVisitController extends BaseController{
 	@Autowired
 	private MenuVisitLogService menuVisitLogService;

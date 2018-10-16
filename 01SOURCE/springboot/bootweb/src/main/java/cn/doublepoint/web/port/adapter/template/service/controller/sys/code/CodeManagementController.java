@@ -26,7 +26,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Code;
 
 @Controller
-@RequestMapping("/template/sys/code")
+@RequestMapping("sys/code")
 public class CodeManagementController extends BaseController {
 
 	@Autowired

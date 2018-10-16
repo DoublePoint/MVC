@@ -19,7 +19,7 @@
 			var gridField=this;
 			var requestUrl="";
 			if(!_LL_Model.StringUtil.isNullOrEmpty(this.dropname)){
-				var requestUrl=$$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + this.dropname;
+				var requestUrl=$$pageContextPath + "sys/dropdown/datalist?dropName=" + this.dropname;
 			}
 			else if(!_LL_Model.StringUtil.isNullOrEmpty(this.datasource)){
 				var requestUrl=this.datasource;

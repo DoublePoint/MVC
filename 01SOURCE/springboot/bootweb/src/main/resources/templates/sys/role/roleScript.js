@@ -2,7 +2,7 @@ function init(response) {
 	// $.ajax({
 	// type : 'post',
 	// contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
-	// url : $$pageContextPath + "/template/sys/role/datalist",
+	// url : $$pageContextPath + "sys/role/datalist",
 	// data : JSON.stringify(data.field) + "",
 	// success : function(ajaxDataWrap) {
 	// if(ajaxDataWrap==null||ajaxDataWrap.dataList==null||ajaxDataWrap.dataList.length==0)
@@ -30,7 +30,7 @@ function retrieve() {
 	dataWrap.setDataList(array);
 
 	$.request({
-		url : $$pageContextPath + "/template/sys/role/search",
+		url : $$pageContextPath + "sys/role/search",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -50,7 +50,7 @@ function retrieve() {
 function onClickSave() {
 	var data = roleAjaxGrid.collectDataWrap("all");
 	$.request({
-		url : $$pageContextPath + "/template/sys/role/save",
+		url : $$pageContextPath + "sys/role/save",
 		data : {
 			dataWrap : data
 		},
@@ -73,7 +73,7 @@ function onClickDelete() {
 			deleteDataWrap : roleAjaxGrid.collectDataWrap("checked")
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/role/delete",
+			url : $$pageContextPath + "sys/role/delete",
 			data : data,
 			success : function(response) {
 				if (!response) {
@@ -107,7 +107,7 @@ function checkMenu(id) {
 		title : "绑定权限",
 		width : 360,
 		height : 430,
-		url : $$pageContextPath + '/template/sys/role/bindMenu',
+		url : $$pageContextPath + '/sys/role/bindMenu',
 		data:{
 			roleId:id
 		}

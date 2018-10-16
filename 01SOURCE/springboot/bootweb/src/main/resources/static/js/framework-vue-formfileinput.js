@@ -17,7 +17,7 @@
 			var fileinput = this;
 			this.getDom().fileinput({
 				// 上传的地址
-				uploadUrl : $$pageContextPath + "/template/sys/getFileTable",
+				uploadUrl : $$pageContextPath + "sys/getFileTable",
 				uploadExtraData : function(previewId, index) {
 					// 注意这里，传参是json格式,后台直接使用对象属性接收，比如employeeCode，我在RatingQuery
 					// 里面直接定义了employeeCode属性，然后最重要的也是

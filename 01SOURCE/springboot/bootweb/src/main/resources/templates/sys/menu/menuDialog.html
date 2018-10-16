@@ -1,27 +1,7 @@
-
-<%
-	/* 
-	 * 创   建   人： 刘磊
-	 * 
-	 * 创   建   时   间 ： 2017年11月16日
-	 * 
-	 * 类   说   明 ：
-	 * 
-	 * ******************修改日志***********************************
-	 * 
-	 * 修改人： 修改日期： 修改内容：
-	 * 
-	 * 修改人： 修改日期： 修改内容：
-	*/
-%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<%@ include file="/template/base.jsp"%>
-<script type="text/javascript" src="menuDialogScript.js"></script>
+<template th:replace="/base.html"></template>
+
 </head>
 <body>
 	<form style="width: 98%;">
@@ -32,7 +12,7 @@
 					<ll:formfield title="菜单链接" field="link" maxlen="200"></ll:formfield>
 					<ll:formfield title="菜单序号" field="sn" validtype="int" errmsg="菜单序号必须为整数"></ll:formfield>
 					<ll:forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="selectParent()"
-						labelprovider="${pageContext.request.contextPath}/template/sys/menu/getMenuName"
+						labelprovider="sys/menu/getMenuName"
 					></ll:forminputbutton>
 				</ll:ajaxform>
 			</ll:fillareatb>
@@ -47,4 +27,5 @@
 			</ll:fillareatb>
 		</ll:filllayout>
 	</form>
+	<script type="text/javascript" th:insert="/sys/menu/menuDialogScript.js"></script>
 </body>

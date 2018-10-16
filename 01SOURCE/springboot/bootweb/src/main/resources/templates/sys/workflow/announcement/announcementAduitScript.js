@@ -9,7 +9,7 @@ function retrieve() {
 	formData.data.id=selectNodeCdbs;
 	dataWrap.setData(formData.data);
 	$.request({
-		url : $$pageContextPath + "/template/sys/menu/retrieve",
+		url : $$pageContextPath + "sys/menu/retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -51,7 +51,7 @@ function onClickSave() {
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		url : $$pageContextPath + '/template/sys/menu/menuDialog?aaa=2&testParam=321',
+		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
 		data : {
 			ajaxDataWrap:ajaxDataWrap,
 			type:"add",
@@ -71,7 +71,7 @@ function onClickSave() {
 
 function onClickTransmit() {
 	$.request({
-		url:$$pageContextPath+"/template/sys/workflow/announcement/save",
+		url:$$pageContextPath+"sys/workflow/announcement/save",
 		data:{
 			annChangedWrap:ajaxformAnnouncement.collectDataWrap(),
 		},
@@ -109,7 +109,7 @@ function dbclickgrid(para1,data,index){
 		closeBtn : 1,
 		shadeClose : true,
 		maxmin : true,
-		url : $$pageContextPath + '/template/sys/menu/menuDialog?type=edit',
+		url : $$pageContextPath + '/sys/menu/menuDialog?type=edit',
 		data : {
 			dataWrap:ajaxDataWrap,
 			type:"edit",

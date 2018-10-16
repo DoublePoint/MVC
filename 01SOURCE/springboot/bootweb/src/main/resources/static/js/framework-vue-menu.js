@@ -71,7 +71,7 @@
 					};
 					dataWrap.dataList[0] = menu;
 					$.request({
-						url : $$pageContextPath + "/template/sys/menu-visit/add-log",
+						url : $$pageContextPath + "sys/menu-visit/add-log",
 						data : {
 							dataWrap : dataWrap
 						}

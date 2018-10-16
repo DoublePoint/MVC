@@ -32,7 +32,7 @@
 			
 			var requestUrl="";
 			if(!_LL_Model.StringUtil.isNullOrEmpty(this.dropname)){
-				requestUrl=$$pageContextPath + "/template/sys/dropdown/datalist?dropName=" + this.dropname;
+				requestUrl=$$pageContextPath + "sys/dropdown/datalist?dropName=" + this.dropname;
 			}
 			else if(!_LL_Model.StringUtil.isNullOrEmpty(this.datasource)){
 				requestUrl=this.datasource;

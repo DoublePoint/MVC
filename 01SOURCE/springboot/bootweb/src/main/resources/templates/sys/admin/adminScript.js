@@ -5,7 +5,7 @@ function retrieve() {
 	array.push(formData);
 	dataWrap.setDataList(array);
 	$.request({
-		url : $$pageContextPath + "/template/sys/admin/retrieve",
+		url : $$pageContextPath + "sys/admin/retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -31,7 +31,7 @@ function onClickDelete() {
 			dataWrap : ajaxgrid.collectDataWrap("checked")
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/admin/delete",
+			url : $$pageContextPath + "sys/admin/delete",
 			data : data,
 			success : function(deleteState) {
 				if (!deleteState) {
@@ -73,7 +73,7 @@ function maintenceAdmin(id) {
 		type = "edit"
 	}
 	$.openDialog({
-		url : $$pageContextPath + '/template/sys/admin/admin-dialog',
+		url : $$pageContextPath + '/sys/admin/admin-dialog',
 		data : {
 			id : id,
 			type : type,

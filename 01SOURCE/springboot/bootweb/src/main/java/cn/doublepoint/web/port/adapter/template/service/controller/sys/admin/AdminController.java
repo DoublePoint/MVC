@@ -24,7 +24,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Admin;
 
 @Controller
-@RequestMapping("/template/sys/admin")
+@RequestMapping("sys/admin")
 public class AdminController extends BaseController{
 
 	@Autowired

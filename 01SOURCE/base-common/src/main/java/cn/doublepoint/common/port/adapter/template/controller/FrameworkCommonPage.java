@@ -23,7 +23,7 @@ import cn.doublepoint.commonutil.ajaxmodel.DropBean;
 @Controller
 public class FrameworkCommonPage {
 
-	@RequestMapping("/template/sys/dropdown/datalist")
+	@RequestMapping("sys/dropdown/datalist")
 	@ResponseBody
 	public AjaxDataWrap<DropBean> assistant(@RequestParam(required=false) String dropName) {
 		AjaxDataWrap<DropBean> dataWrap=new AjaxDataWrap<>();

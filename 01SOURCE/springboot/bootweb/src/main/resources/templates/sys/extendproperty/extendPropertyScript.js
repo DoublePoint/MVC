@@ -16,7 +16,7 @@ function retrieve() {
 	dataWrap.setDataList(array);
 
 	$.request({
-		url : $$pageContextPath + "/template/sys/extendproperty/retrieve",
+		url : $$pageContextPath + "sys/extendproperty/retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -36,7 +36,7 @@ function retrieve() {
 function onClickSave() {
 	var data = ajaxgrid.collectDataWrap("all");
 	$.request({
-		url : $$pageContextPath + "/template/sys/extendproperty/add",
+		url : $$pageContextPath + "sys/extendproperty/add",
 		data : {
 			dataWrap : data
 		},
@@ -59,7 +59,7 @@ function onClickDelete() {
 			deleteDataWrap : ajaxgrid.collectDataWrap("checked")
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/extendproperty/delete",
+			url : $$pageContextPath + "sys/extendproperty/delete",
 			data : data,
 			success : function(response) {
 				if (!response) {
@@ -93,7 +93,7 @@ function checkMenu(id) {
 		title : "绑定权限",
 		width : 360,
 		height : 430,
-		url : $$pageContextPath + '/template/sys/role/bindMenu',
+		url : $$pageContextPath + '/sys/role/bindMenu',
 		data:{
 			roleId:id
 		}
