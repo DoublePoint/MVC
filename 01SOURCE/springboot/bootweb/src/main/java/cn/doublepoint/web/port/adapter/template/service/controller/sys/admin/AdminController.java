@@ -32,7 +32,7 @@ public class AdminController extends BaseController{
 
 	@RequestMapping("/admin")
 	public String adminJsp(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
-		return "admin";
+		return "admin.html";
 	}
 
 	@RequestMapping("/admin-dialog")

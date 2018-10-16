@@ -1,25 +1,8 @@
-
-<%
-	/* 
-	 * 创   建   人： 刘磊
-	 * 
-	 * 创   建   时   间 ： 2017-10-11 下午10:02:29
-	 * 
-	 * 类   说   明 ：
-	 * 
-	 * ******************修改日志***********************************
-	 * 
-	 * 修改人： 修改日期： 修改内容：
-	 * 
-	 * 修改人： 修改日期： 修改内容：
-	*/
-%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<%@ include file="/template/base.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/global.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/layui/css/font-awesome.min.css" />
+<template th:replace="/base.html"></template>
+<link rel="stylesheet" th:href="@{/static/layui/css/global.css}" />
+<link rel="stylesheet" th:href="@{/static/layui/css/font-awesome.min.css}" />
 </head>
 <body class="layui-layout-body">
 	<form>
@@ -44,7 +27,7 @@
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					<ll:menu id="treeDemo" datasource="/template/sys/menu/display?isHasRoot=false">
+					<ll:menu id="treeDemo" th:datasource="@{/sys/menu/display?isHasRoot=false}">
 					</ll:menu>
 				</div>
 			</div>
@@ -58,7 +41,7 @@
 					</ul>
 					<div id="layui-tab-content" class="layui-tab-content" style="min-height: 150px; padding: 0px 0 0 0;">
 						<div class="layui-tab-item layui-show" style="height: 100%; min-width: 700px">
-							<iframe src="${pageContext.request.contextPath}/template/sys/index/main"></iframe>
+							<iframe th:src="@{/sys/index/main}"></iframe>
 						</div>
 					</div>
 				</div>
@@ -73,5 +56,40 @@
 		</div>
 	</form>
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/template/sys/index/indexScript.js"></script>
+<script type="text/javascript" >
+function init(){
+	$('#admin-side-toggle').on('click', function() {
+		var sideWidth = $('#admin-side').width();
+		if (sideWidth === 250) {
+			$('#admin-body').animate({
+				left : '0'
+			}); // admin-footer
+			$('#admin-footer').animate({
+				left : '0'
+			});
+			$('#admin-side').animate({
+				width : '0'
+			});
+		} else {
+			$('#admin-body').animate({
+				left : '250px'
+			});
+			$('#admin-footer').animate({
+				left : '250px'
+			});
+			$('#admin-side').animate({
+				width : '250px'
+			});
+		}
+	});
+}
+
+function windowResize(){
+	if($('#admin-body').css("left")=='0px')
+		$('#admin-footer').css("left","0");
+	else
+		if($('#admin-body').css("left")=='250px')
+			$('#admin-footer').css("left","250px");
+}
+</script>
 </html>

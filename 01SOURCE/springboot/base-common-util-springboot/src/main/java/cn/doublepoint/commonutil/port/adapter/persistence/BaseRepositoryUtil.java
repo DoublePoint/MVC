@@ -17,7 +17,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
-@Service
+
 public interface BaseRepositoryUtil {
 
 	<T extends BaseModel> List<T> executeQuery(String sql, Class<T> clas);

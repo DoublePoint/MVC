@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path: /web
+  port: 8080
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://localhost:3306/test?generateSimpleParameterMetadata=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    # 使用druid数据源
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update #自动更新
+    show-sql: true  #日志中显示sql语句
+  mvc:
+    view:
+      prefix: /template/
+      suffix: .html
+    static-path-pattern: /static/**
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    
+   

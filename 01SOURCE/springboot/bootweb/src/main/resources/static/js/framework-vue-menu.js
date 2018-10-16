@@ -82,7 +82,7 @@
 				var cd = {};
 				var domId = this._GetComponentDomId();
 				$.ajax({
-					url : $$pageContextPath + this.datasource,
+					url : this.datasource,
 					type : "POST",
 					contentType : 'application/json;charset=UTF-8',
 					dataType : "json",

@@ -24,7 +24,7 @@ public class PageController extends BaseRequestController{
 	@RequestMapping(value = "/template/sys/index/{actionname}")
 	public String hello(@PathVariable String actionname) {
 		if(StringUtil.isNullOrEmpty(actionname))
-			return "/template/sys/index/index";
+			return "/template/sys/index/index.jsp";
 		return "/template/sys/index/"+actionname;
 	}
 	@RequestMapping(value = "/index/{actionname}")

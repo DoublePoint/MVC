@@ -36,13 +36,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- 本地项目 -->
-		<dependency>
-			<groupId>cn.doublepoint</groupId>
-			<artifactId>base-common-dto-springboot</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -72,6 +65,13 @@
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		<!-- ============== log end ============== -->
+		
+		<!-- 本地项目 -->
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-common-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

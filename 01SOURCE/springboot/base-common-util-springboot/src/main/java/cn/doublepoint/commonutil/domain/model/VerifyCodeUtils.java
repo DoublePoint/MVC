@@ -1,4 +1,4 @@
-package cn.doublepoint.commonutil.domain.model;
+/*package cn.doublepoint.commonutil.domain.model;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,26 +19,26 @@ import javax.imageio.ImageIO;
 
 public class VerifyCodeUtils {
 
-	 //Ê¹ÓÃµ½Algerian×ÖÌå£¬ÏµÍ³ÀïÃ»ÓÐµÄ»°ÐèÒª°²×°×ÖÌå£¬×ÖÌåÖ»ÏÔÊ¾´óÐ´£¬È¥µôÁË1,0,i,o¼¸¸öÈÝÒ×»ìÏýµÄ×Ö·û
+	 //Ê¹ï¿½Ãµï¿½Algerianï¿½ï¿½ï¿½å£¬ÏµÍ³ï¿½ï¿½Ã»ï¿½ÐµÄ»ï¿½ï¿½ï¿½Òªï¿½ï¿½×°ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ê¾ï¿½ï¿½Ð´ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½1,0,i,oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
     public static final String VERIFY_CODES = "23456789ABMenuEFGHJKLMNPQRSTUVWXYZabcdefghjklmnpqrstuvwxyz";
     private static Random random = new Random();
     
     
-    /**
-     * Ê¹ÓÃÏµÍ³Ä¬ÈÏ×Ö·ûÔ´Éú³ÉÑéÖ¤Âë
-     * @param verifySize    ÑéÖ¤Âë³¤¶È
+    *//**
+     * Ê¹ï¿½ï¿½ÏµÍ³Ä¬ï¿½ï¿½ï¿½Ö·ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
+     * @param verifySize    ï¿½ï¿½Ö¤ï¿½ë³¤ï¿½ï¿½
      * @return
-     */
+     *//*
     public static String generateVerifyCode(int verifySize){
         return generateVerifyCode(verifySize, VERIFY_CODES);
     }
     
-    /**
-     * Ê¹ÓÃÖ¸¶¨Ô´Éú³ÉÑéÖ¤Âë
-     * @param verifySize    ÑéÖ¤Âë³¤¶È
-     * @param sources   ÑéÖ¤Âë×Ö·ûÔ´
+    *//**
+     * Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
+     * @param verifySize    ï¿½ï¿½Ö¤ï¿½ë³¤ï¿½ï¿½
+     * @param sources   ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ö·ï¿½Ô´
      * @return
-     */
+     *//*
     public static String generateVerifyCode(int verifySize, String sources){
         if(sources == null || sources.length() == 0){
             sources = VERIFY_CODES;
@@ -52,44 +52,44 @@ public class VerifyCodeUtils {
         return verifyCode.toString();
     }
     
-    /**
-     * Éú³ÉËæ»úÑéÖ¤ÂëÎÄ¼þ,²¢·µ»ØÑéÖ¤ÂëÖµ
+    *//**
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ä¼ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Öµ
      * @param w
      * @param h
      * @param outputFile
      * @param verifySize
      * @return
      * @throws IOException
-     */
+     *//*
     public static String outputVerifyImage(int w, int h, File outputFile, int verifySize) throws IOException{
         String verifyCode = generateVerifyCode(verifySize);
         outputImage(w, h, outputFile, verifyCode);
         return verifyCode;
     }
     
-    /**
-     * Êä³öËæ»úÑéÖ¤ÂëÍ¼Æ¬Á÷,²¢·µ»ØÑéÖ¤ÂëÖµ
+    *//**
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Í¼Æ¬ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Öµ
      * @param w
      * @param h
      * @param os
      * @param verifySize
      * @return
      * @throws IOException
-     */
+     *//*
     public static String outputVerifyImage(int w, int h, OutputStream os, int verifySize) throws IOException{
         String verifyCode = generateVerifyCode(verifySize);
         outputImage(w, h, os, verifyCode);
         return verifyCode;
     }
     
-    /**
-     * Éú³ÉÖ¸¶¨ÑéÖ¤ÂëÍ¼ÏñÎÄ¼þ
+    *//**
+     * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½
      * @param w
      * @param h
      * @param outputFile
      * @param code
      * @throws IOException
-     */
+     *//*
     public static void outputImage(int w, int h, File outputFile, String code) throws IOException{
         if(outputFile == null){
             return;
@@ -108,14 +108,14 @@ public class VerifyCodeUtils {
         }
     }
     
-    /**
-     * Êä³öÖ¸¶¨ÑéÖ¤ÂëÍ¼Æ¬Á÷
+    *//**
+     * ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Í¼Æ¬ï¿½ï¿½
      * @param w
      * @param h
      * @param os
      * @param code
      * @throws IOException
-     */
+     *//*
     public static void outputImage(int w, int h, OutputStream os, String code) throws IOException{
         int verifySize = code.length();
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -133,16 +133,16 @@ public class VerifyCodeUtils {
         }
         Arrays.sort(fractions);
          
-        g2.setColor(Color.GRAY);// ÉèÖÃ±ß¿òÉ«
+        g2.setColor(Color.GRAY);// ï¿½ï¿½ï¿½Ã±ß¿ï¿½É«
         g2.fillRect(0, 0, w, h);
          
         Color c = getRandColor(200, 250);
-        g2.setColor(c);// ÉèÖÃ±³¾°É«
+        g2.setColor(c);// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½É«
         g2.fillRect(0, 2, w, h-4);
          
-        //»æÖÆ¸ÉÈÅÏß
+        //ï¿½ï¿½ï¿½Æ¸ï¿½ï¿½ï¿½ï¿½ï¿½
         Random random = new Random();
-        g2.setColor(getRandColor(160, 200));// ÉèÖÃÏßÌõµÄÑÕÉ«
+        g2.setColor(getRandColor(160, 200));// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
         for (int i = 0; i < 20; i++) {
             int x = random.nextInt(w - 1);
             int y = random.nextInt(h - 1);
@@ -151,8 +151,8 @@ public class VerifyCodeUtils {
             g2.drawLine(x, y, x + xl + 40, y + yl + 20);
         }
          
-        // Ìí¼ÓÔëµã
-        float yawpRate = 0.05f;// ÔëÉùÂÊ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        float yawpRate = 0.05f;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         int area = (int) (yawpRate * w * h);
         for (int i = 0; i < area; i++) {
             int x = random.nextInt(w);
@@ -161,7 +161,7 @@ public class VerifyCodeUtils {
             image.setRGB(x, y, rgb);
         }
          
-        shear(g2, w, h, c);// Ê¹Í¼Æ¬Å¤Çú
+        shear(g2, w, h, c);// Ê¹Í¼Æ¬Å¤ï¿½ï¿½
  
         g2.setColor(getRandColor(100, 160));
         int fontSize = h-4;
@@ -268,3 +268,4 @@ public class VerifyCodeUtils {
         }
     }
 }
+*/

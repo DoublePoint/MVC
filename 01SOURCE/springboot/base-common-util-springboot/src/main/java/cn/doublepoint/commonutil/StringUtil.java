@@ -9,8 +9,6 @@
 */
 package cn.doublepoint.commonutil;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

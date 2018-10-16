@@ -6,7 +6,7 @@
 * 类   说   明 ：
 * 
 * 修   改   人：          修   改   日   期：
-*/
+*//*
 package cn.doublepoint.web.port.adapter.template.service.controller.sys.generate;
 
 import java.io.BufferedReader;
@@ -54,12 +54,12 @@ public class GenerateEntityController extends BaseController {
 
 	private final String oomDirPath = "oom";
 	
-	/**
+	*//**
 	 * 导入文件 并返回文件中的所有表
 	 * @param request
 	 * @throws IllegalStateException
 	 * @throws IOException
-	 */
+	 *//*
 	@RequestMapping("/template/sys/getFileTable")
 	@ResponseBody
 	public AjaxResponse getFileTable(HttpServletRequest request, @RequestParam("file") MultipartFile file,AjaxResponse responseData) throws IllegalStateException, IOException {
@@ -76,12 +76,12 @@ public class GenerateEntityController extends BaseController {
 	
 	}
 
-	/**
+	*//**
 	 * 生成该实体的各个源文件
 	 * @param request
 	 * @throws TemplateException
 	 * @throws IOException
-	 */
+	 *//*
 	@RequestMapping("/template/sys/assistant/generate")
 	@ResponseBody
 	public AjaxResponse generate(HttpServletRequest request,AjaxResponse responseData) throws TemplateException, IOException {
@@ -108,13 +108,13 @@ public class GenerateEntityController extends BaseController {
 	}
 
 	
-	/**
+	*//**
 	 * 源文件详细信息页面
 	 * @param request
 	 * @return
 	 * @throws TemplateException
 	 * @throws IOException
-	 */
+	 *//*
 	@RequestMapping("/template/sys/assistant/generateDetail")
 	public AjaxResponse generateDetail(HttpServletRequest request,AjaxResponse responseData) throws TemplateException, IOException {
 		Map<String, String> map = new HashMap<String, String>();
@@ -126,12 +126,12 @@ public class GenerateEntityController extends BaseController {
 		return responseData;
 	}
 
-	/**
+	*//**
 	 * 压缩并下载源文件
 	 * @param request
 	 * @param response
 	 * @throws IOException
-	 */
+	 *//*
 	@RequestMapping("/template/sys/assistant/zipAndDownload")
 	public void zipAndDownload1(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -145,12 +145,12 @@ public class GenerateEntityController extends BaseController {
 		DownloadFileUtil.download(response, fileZip, "实体映射包.zip");
 	}
 
-	/**
+	*//**
 	 * 获取EntityContent
 	 * 
 	 * @param request
 	 * @throws IOException
-	 */
+	 *//*
 	@SuppressWarnings("resource")
 	private void getEntityContent(HttpServletRequest request, Map<String, String> map) throws IOException {
 		String generateDir=request.getParameter("generateDir");
@@ -170,12 +170,12 @@ public class GenerateEntityController extends BaseController {
 		}
 	}
 
-	/**
+	*//**
 	 * 获取ServiceContent
 	 * 
 	 * @param request
 	 * @throws IOException
-	 */
+	 *//*
 	@SuppressWarnings("resource")
 	private void getServiceContent(HttpServletRequest request, Map<String, String> map) throws IOException {
 		String generateDir=request.getParameter("generateDir");
@@ -194,12 +194,12 @@ public class GenerateEntityController extends BaseController {
 		}
 	}
 	
-	/**
+	*//**
 	 * 获取ServiceContent
 	 * 
 	 * @param request
 	 * @throws IOException
-	 */
+	 *//*
 	@SuppressWarnings("resource")
 	private void getServiceImplContent(HttpServletRequest request, Map<String, String> map) throws IOException {
 		String generateDir=request.getParameter("generateDir");
@@ -225,12 +225,12 @@ public class GenerateEntityController extends BaseController {
 	}
 
 	
-	/**
+	*//**
 	 * 生成 自动创建实体仓库根文件夹
 	 * 
 	 * @param request
 	 * @return 返回根文件夹路径+名称
-	 */
+	 *//*
 	private String generateDirPath(HttpServletRequest request, String driName) {
 		String tempDir = getTempDir(request);
 		String generateDirPath = tempDir + driName;
@@ -241,25 +241,26 @@ public class GenerateEntityController extends BaseController {
 		return generateDirPath;
 	}
 
-	/**
+	*//**
 	 * 获取缓存文件路径
 	 * 
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	private String getTempDir(HttpServletRequest request) {
 		String tempDir = request.getSession().getServletContext().getRealPath("/uploadTempDirectory/");
 		return tempDir;
 	}
 	
-	/**
+	*//**
 	 * 获取OOm所在文件夹
 	 * 
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	private String getOomDirPath(HttpServletRequest request) {
 		return generateDirPath(request, oomDirPath) + "/";
 	}
 
 }
+*/

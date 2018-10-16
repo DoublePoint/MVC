@@ -56,33 +56,7 @@ function _InitExplorerResizeListener() {
 
 /*-----------添加FormField事件监听---------------*/
 function _InitFormFieldListener() {
-	$form.verify({
-		title : function(value, dom) {
-			var domid = dom.id;
-			if (domid != null) {
-				var formfield = $.getFromLayuiObjectHashMap(domid);
-				if (formfield == null)
-					return;
-				var validtype = formfield.validtype;
-				if (validtype == null)
-					validtype = "";
-				switch (validtype) {
-				case "int":
-					if (!$.isInt(value)) {
-						return formfield.errmsg;
-					}
-					break;
-				default:
-					if (formfield.maxlen != null) {
-						if (value.length > formfield.maxlen) {
-							return formfield.errmsg;
-						}
-					}
-					return;
-				}
-			}
-		}
-	});
+	
 }
 function _InitLayoutAreaCombineListener(){
 	 $(".ll-fill-area-left-right-center .ll-drag-to-left").click(function(){

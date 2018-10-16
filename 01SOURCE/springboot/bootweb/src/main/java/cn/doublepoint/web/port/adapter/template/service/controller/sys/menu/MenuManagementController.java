@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,16 +30,16 @@ import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
 @Controller
-@RequestMapping("/template/sys/menu")
+@RequestMapping("/sys/menu")
 public class MenuManagementController extends BaseController {
 
 	@Autowired
 	MenuService menuService;
 
 	// 菜单页面
-	@RequestMapping("/{actionname}")
-	public String cd(HttpServletRequest request, @PathVariable String actionname) {
-		return "/template/sys/menu/" + actionname;
+	@RequestMapping("/")
+	public String cd(HttpServletRequest request) {
+		return "sys/menu/menu.html";
 	}
 
 	@RequestMapping("/menuDialog")
@@ -56,7 +55,7 @@ public class MenuManagementController extends BaseController {
 				response.setAjaxParameter("parentMenuId", parentMenuId);
 			response.setAjaxParameter("type", type);
 		}
-		response.setViewName("menuDialog");
+		response.setViewName("sys/menu/menuDialog.html");
 		return response;
 	}
 

@@ -38,14 +38,25 @@
 		</dependency>
 		
 		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<!--MySQL Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		
 		<!-- 本地项目 -->
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common-dto-springboot</artifactId>
+			<artifactId>base-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

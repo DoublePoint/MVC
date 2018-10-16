@@ -27,7 +27,7 @@ import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeControl
 import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
 @Controller
-@RequestMapping("/template/sys")
+@RequestMapping("/sys")
 public class MenuDisplayController extends BaseTreeController {
 	// 树根名称
 	private final String rooTreeName = "菜单树";

@@ -1,3 +1,4 @@
+alert([[@{/}]])
 function retrieve() {
 	var dataWrap = lltestdatagrid.collectDataWrap();
 	var nodes = treeDemo.getSelectedNodes();
