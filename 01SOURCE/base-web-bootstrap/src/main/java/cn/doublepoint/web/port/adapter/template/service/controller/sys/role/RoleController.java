@@ -24,7 +24,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.role.RoleServ
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Role;
@@ -44,7 +44,7 @@ public class RoleController extends BaseController {
 	}
 
 	@RequestMapping("/bindMenu")
-	public AjaxResponse bindMenuJsp(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public AjaxResponse bindMenuJsp(HttpServletRequest request, AjaxResponse response) {
 		String roleId = request.getParameter("roleId");
 		response.setViewName("bindMenu");
 		response.setAjaxParameter("roleId", roleId);
@@ -58,7 +58,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("/search")
 	@ResponseBody
-	public AjaxResponse roleDataList(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public AjaxResponse roleDataList(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
 		if (dataWrap == null)
 			return null;
@@ -69,7 +69,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("/save")
 	@ResponseBody
-	public boolean save(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public boolean save(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
 		if (dataWrap == null)
 			return true;
@@ -79,7 +79,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("/bind-menu")
 	@ResponseBody
-	public boolean bindMenu(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public boolean bindMenu(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<TreeNodeBean> dataWrap = request.getAjaxDataWrap("dataWrap", TreeNodeBean.class);
 		String roleId = request.getParameter("roleId");
 		if (dataWrap == null)
@@ -99,7 +99,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public boolean delete(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("deleteDataWrap", Role.class);
 		if (dataWrap == null)
 			return true;

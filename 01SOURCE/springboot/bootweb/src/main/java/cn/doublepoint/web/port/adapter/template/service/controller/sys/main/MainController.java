@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 
 @Controller
@@ -28,10 +27,9 @@ public class MainController {
 	private InstanceService instanceService;
 	
 	@RequestMapping("main")
-	public AjaxResponse hello(BodyReaderHttpServletRequestWrapper request,AjaxResponse response) {
-		AjaxDataWrap<Worksheet> queryDataWrap=request.getAjaxDataWrap("queryDataWrap", Worksheet.class);
-		AjaxDataWrap<Worksheet> worksheetDataWrap=request.getAjaxDataWrap("worksheetDataWrap", Worksheet.class);
-		Worksheet query=queryDataWrap.getData();
+	public AjaxResponse hello(AjaxResponse response) {
+		AjaxDataWrap<Worksheet> worksheetDataWrap=new AjaxDataWrap<Worksheet>();
+		Worksheet query=new Worksheet();
 		List<Worksheet> list=instanceService.getPersonalWorksheetList(query, worksheetDataWrap.getPageInfo());
 		
 		worksheetDataWrap.setDataList(list);

@@ -10,6 +10,7 @@
 package cn.doublepoint.commonutil.ajaxmodel;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
@@ -21,6 +22,10 @@ import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class AjaxRequest {
+	
+	public AjaxRequest(){
+		this.map=new HashMap<String,Object>();
+	}
 	
 	private Map<String,Object> map;
 
@@ -45,13 +50,14 @@ public class AjaxRequest {
 			return new AjaxDataWrap<T>();
 		if(map.get(parameterName)==null)
 			return new AjaxDataWrap<T>();
-		JSONObject obj=(JSONObject)map.get(parameterName);
+		
+		String jsonString=JSONObject.toJSONString(map.get(parameterName));
 		ObjectMapper mspp = new ObjectMapper();
 		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
 		try {
-			AjaxDataWrap<T> dataWrap=mspp.readValue(obj.toJSONString(), type);
+			AjaxDataWrap<T> dataWrap=mspp.readValue(jsonString, type);
 			return dataWrap;
 		} catch (Exception e) {
 			Log4jUtil.error(e);

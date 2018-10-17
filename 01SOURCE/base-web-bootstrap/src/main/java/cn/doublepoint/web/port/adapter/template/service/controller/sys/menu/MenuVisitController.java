@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menuvisitlog.MenuVisitLogService;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 import cn.doublepoint.template.dto.domain.model.entity.sys.MenuVisitLog;
@@ -31,7 +31,7 @@ public class MenuVisitController extends BaseController{
 	// 菜单页面
 	@RequestMapping("add-log")
 	@ResponseBody
-	public void cd(BodyReaderHttpServletRequestWrapper request) {
+	public void cd(HttpServletRequest request) {
 		AjaxDataWrap<Menu> dataWrap=request.getAjaxDataWrap("dataWrap", Menu.class);
 		MenuVisitLog newLog=new MenuVisitLog();
 		newLog.setMenuId(dataWrap.getDataList().get(0).getId());

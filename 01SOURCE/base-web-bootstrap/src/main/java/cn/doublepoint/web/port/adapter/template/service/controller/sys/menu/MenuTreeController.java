@@ -25,7 +25,7 @@ import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
@@ -40,7 +40,7 @@ public class MenuTreeController extends BaseTreeController {
 
 	@RequestMapping("/menu/menu-tree/datalist")
 	@ResponseBody
-	public List<TreeNodeBean> getMenuTree(BodyReaderHttpServletRequestWrapper request, @RequestParam(required = false) Boolean isHasRoot) {
+	public List<TreeNodeBean> getMenuTree(HttpServletRequest request, @RequestParam(required = false) Boolean isHasRoot) {
 		List<TreeNodeBean> returnMenuList2 = new ArrayList<TreeNodeBean>();
 		String codeStr=request.getParameter("code");
 		if (StringUtil.isNullOrEmpty(codeStr)) {

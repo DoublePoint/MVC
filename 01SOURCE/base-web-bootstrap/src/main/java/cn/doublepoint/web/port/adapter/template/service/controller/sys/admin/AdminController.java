@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.login.AdminService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Admin;
 
@@ -31,12 +31,12 @@ public class AdminController extends BaseController{
 	AdminService adminService;
 
 	@RequestMapping("/admin")
-	public String adminJsp(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public String adminJsp(HttpServletRequest request, AjaxResponse response) {
 		return "admin";
 	}
 
 	@RequestMapping("/admin-dialog")
-	public AjaxResponse adminDialog(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public AjaxResponse adminDialog(HttpServletRequest request, AjaxResponse response) {
 		String type = request.getParameter("type");
 		if ("edit".equals(type)) {
 			String id = request.getParameter("id");
@@ -50,7 +50,7 @@ public class AdminController extends BaseController{
 
 	@RequestMapping("/retrieve")
 	@ResponseBody
-	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public AjaxResponse retrieve(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<Admin> dataWrap = request.getAjaxDataWrap("dataWrap", Admin.class);
 		Admin query = dataWrap.getDataList().get(0);
 		List<Admin> resultList = adminService.find(query, dataWrap.getPageInfo());
@@ -62,7 +62,7 @@ public class AdminController extends BaseController{
 
 	@RequestMapping("/save")
 	@ResponseBody
-	public boolean save(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public boolean save(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<Admin> dataWrap = request.getAjaxDataWrap("dataWrap", Admin.class);
 		if (dataWrap == null)
 			return false;
@@ -71,7 +71,7 @@ public class AdminController extends BaseController{
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse response) {
+	public boolean delete(HttpServletRequest request, AjaxResponse response) {
 		AjaxDataWrap<Admin> dataWrap = request.getAjaxDataWrap("dataWrap", Admin.class);
 		if (dataWrap == null)
 			return false;

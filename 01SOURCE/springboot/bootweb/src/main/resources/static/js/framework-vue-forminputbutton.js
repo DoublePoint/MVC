@@ -77,6 +77,7 @@
 			if (labelProvider != null) {
 				$.request({
 					url : labelProvider,
+					dataType:"text",
 					data : {
 						id : fieldKey,
 					},

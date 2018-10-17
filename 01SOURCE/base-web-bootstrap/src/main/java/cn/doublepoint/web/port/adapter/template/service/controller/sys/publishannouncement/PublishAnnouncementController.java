@@ -24,7 +24,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.Wor
 import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.AnnouncementChanged;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
@@ -53,7 +53,7 @@ public class PublishAnnouncementController extends BaseController{
 	
 	@RequestMapping("findWorksheet")
 	@ResponseBody
-	public AjaxResponse findWorksheetAndChange(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse findWorksheetAndChange(HttpServletRequest request,AjaxResponse response){
 		String worksheetNo=request.getParameter("worksheetNo");
 		Worksheet worksheet=worksheetService.getByWorksheetNo(worksheetNo);
 		AjaxDataWrap<Worksheet> worksheetWrap=new AjaxDataWrap<>();
@@ -73,7 +73,7 @@ public class PublishAnnouncementController extends BaseController{
 	
 	@RequestMapping("save")
 	@ResponseBody
-	public AjaxResponse save(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse save(HttpServletRequest request,AjaxResponse response){
 		AjaxDataWrap<AnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",AnnouncementChanged.class);
 		
 		Worksheet worksheet=new Worksheet();
@@ -88,7 +88,7 @@ public class PublishAnnouncementController extends BaseController{
 	
 	@RequestMapping("saveAduit/{instanceId}")
 	@ResponseBody
-	public AjaxResponse save(@PathVariable("instanceId") String instanceId, BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse save(@PathVariable("instanceId") String instanceId, HttpServletRequest request,AjaxResponse response){
 		WorksheetUtil.transmit(instanceId);
 		response.setAjaxParameter("state", "Y");
 		return response;

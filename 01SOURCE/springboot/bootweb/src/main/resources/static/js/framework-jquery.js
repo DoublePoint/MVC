@@ -463,7 +463,7 @@
 							var res = new _LL_Model.AjaxResponse(responseData);
 							successFunction(res);
 						} catch (e) {
-
+							successFunction(responseData);
 						}
 					}
 
@@ -491,10 +491,11 @@
 			settings.type = "POST";
 			if (settings.contentType == null || settings.contentType == "")
 				settings.contentType = 'application/json;charset=UTF-8';
-			settings.dataType = "json";
-			// settings.data =
-			// JSON.stringify($('form').serializeObject(settings.data));
-			settings.data = JSON.stringify(settings.data);
+			if (settings.dataType == null || settings.dataType == "")
+				settings.dataType = "json";
+			var ajaxRequest=new Object();
+			ajaxRequest.map=settings.data;
+			settings.data = JSON.stringify(ajaxRequest);
 			settings.accept = "*/*";
 
 			$.ajax(settings);

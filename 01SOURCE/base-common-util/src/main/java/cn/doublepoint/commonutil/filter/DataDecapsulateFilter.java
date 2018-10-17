@@ -25,8 +25,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-@Component
-@WebFilter(filterName = "bootOne")
+
 public class DataDecapsulateFilter extends OncePerRequestFilter  {
 
 	@Override

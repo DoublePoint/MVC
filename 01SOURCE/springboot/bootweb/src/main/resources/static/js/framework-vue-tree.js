@@ -76,11 +76,12 @@
 			async : {
 				enable : true,
 				url : this.datasource,
+				contentType: "application/json",
 				autoParam : [ "code" ],
-				otherParam : {
+				/*otherParam : {
 					"otherParam" : "zTreeAsyncTest",
 					"otherParam2" : "zTreeAsyncTest",
-				},
+				},*/
 				dataFilter : this.filter
 			},
 			data : {

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.code.CodeService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Code;
 
@@ -40,7 +40,7 @@ public class CodeManagementController extends BaseController {
 
 	@RequestMapping("/retrieve")
 	@ResponseBody
-	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse retrieve(HttpServletRequest request) {
 		AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
 		if (dataWrap == null)
 			return null;
@@ -61,7 +61,7 @@ public class CodeManagementController extends BaseController {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public AjaxResponse add(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse add(HttpServletRequest request) {
 		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
 		if (addDataWrap == null)
 			return null;
@@ -71,7 +71,7 @@ public class CodeManagementController extends BaseController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public AjaxResponse delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse responseData) {
+	public AjaxResponse delete(HttpServletRequest request, AjaxResponse responseData) {
 		AjaxDataWrap<Code> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", Code.class);
 		if (deleteDataWrap == null)
 			return null;

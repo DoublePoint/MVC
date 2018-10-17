@@ -21,7 +21,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.Ins
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.WorksheetService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
@@ -34,12 +34,12 @@ public class WorksheetController {
 	private WorksheetService worksheetService;
 
 	@RequestMapping("query")
-	public AjaxResponse query(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse query(HttpServletRequest request,AjaxResponse response){
 		response.setViewName("worksheetQuery");
 		return response;
 	}
 	@RequestMapping("historicTaskList")
-	public AjaxResponse historicTaskList(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse historicTaskList(HttpServletRequest request,AjaxResponse response){
 		response.setViewName("historicTaskList");
 		List<VOTask> list=instanceService.getHistoricTasks("10001");
 		AjaxDataWrap<VOTask> dataWrap=new AjaxDataWrap<VOTask>();
@@ -50,7 +50,7 @@ public class WorksheetController {
 	
 	@RequestMapping("retrieve")
 	@ResponseBody
-	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse retrieve(HttpServletRequest request,AjaxResponse response){
 		AjaxDataWrap<Worksheet> queryDataWrap=request.getAjaxDataWrap("queryDataWrap", Worksheet.class);
 		AjaxDataWrap<Worksheet> dataWrap=request.getAjaxDataWrap("worksheetDataWrap", Worksheet.class);
 		

@@ -26,7 +26,7 @@ import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
+import cn.doublepoint.commonutil.filter.HttpServletRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
@@ -44,7 +44,7 @@ public class MenuManagementController extends BaseController {
 	}
 
 	@RequestMapping("/menuDialog")
-	public AjaxResponse menuDialog(BodyReaderHttpServletRequestWrapper request, ModelAndView modelAndView,
+	public AjaxResponse menuDialog(HttpServletRequest request, ModelAndView modelAndView,
 			AjaxResponse response) {
 		String type = request.getParameter("type");
 		if ("edit".equals(type)) {
@@ -62,7 +62,7 @@ public class MenuManagementController extends BaseController {
 
 	@RequestMapping("/getMenuName")
 	@ResponseBody
-	public String getMenuName(BodyReaderHttpServletRequestWrapper request) {
+	public String getMenuName(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String menuName = "";
 		try {
@@ -78,7 +78,7 @@ public class MenuManagementController extends BaseController {
 
 	@RequestMapping("/retrieve")
 	@ResponseBody
-	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse retrieve(HttpServletRequest request) {
 		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		if (dataWrap == null)
 			return null;
@@ -99,7 +99,7 @@ public class MenuManagementController extends BaseController {
 
 	@RequestMapping("/datalistajaxdatawrap")
 	@ResponseBody
-	public AjaxDataWrap<Menu> menuDataListDataWrap(BodyReaderHttpServletRequestWrapper request,
+	public AjaxDataWrap<Menu> menuDataListDataWrap(HttpServletRequest request,
 			@RequestBody(required = false) Menu menu) {
 		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		PageInfo pageRequest = new PageInfo(1, 10);
@@ -118,7 +118,7 @@ public class MenuManagementController extends BaseController {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public AjaxResponse add(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse add(HttpServletRequest request) {
 		AjaxDataWrap<Menu> addDataWrap = request.getAjaxDataWrap("addDataWrap", Menu.class);
 		if (addDataWrap == null)
 			return null;
@@ -129,7 +129,7 @@ public class MenuManagementController extends BaseController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public AjaxResponse delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse responseData) {
+	public AjaxResponse delete(HttpServletRequest request, AjaxResponse responseData) {
 		AjaxDataWrap<Menu> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", Menu.class);
 		if (deleteDataWrap == null)
 			return null;

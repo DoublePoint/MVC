@@ -13,14 +13,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.WorksheetService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
 import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
@@ -33,12 +34,12 @@ public class WorksheetController {
 	private WorksheetService worksheetService;
 
 	@RequestMapping("query")
-	public AjaxResponse query(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse query(@RequestBody AjaxRequest request,AjaxResponse response){
 		response.setViewName("worksheetQuery");
 		return response;
 	}
 	@RequestMapping("historicTaskList")
-	public AjaxResponse historicTaskList(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse historicTaskList(@RequestBody AjaxRequest request,AjaxResponse response){
 		response.setViewName("historicTaskList");
 		List<VOTask> list=instanceService.getHistoricTasks("10001");
 		AjaxDataWrap<VOTask> dataWrap=new AjaxDataWrap<VOTask>();
@@ -49,7 +50,7 @@ public class WorksheetController {
 	
 	@RequestMapping("retrieve")
 	@ResponseBody
-	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request,AjaxResponse response){
+	public AjaxResponse retrieve(@RequestBody AjaxRequest request,AjaxResponse response){
 		AjaxDataWrap<Worksheet> queryDataWrap=request.getAjaxDataWrap("queryDataWrap", Worksheet.class);
 		AjaxDataWrap<Worksheet> dataWrap=request.getAjaxDataWrap("worksheetDataWrap", Worksheet.class);
 		

@@ -33,4 +33,5 @@ public class AutoConfiguration {
 		restTemplate.setRequestFactory(factory);
 		return restTemplate;
 	}
+	
 }

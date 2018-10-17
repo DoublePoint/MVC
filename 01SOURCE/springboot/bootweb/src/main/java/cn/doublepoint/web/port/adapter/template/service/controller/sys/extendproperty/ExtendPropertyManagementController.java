@@ -15,13 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.droplist.ExtendPropertyService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.ExtendProperty;
 
@@ -40,7 +41,7 @@ public class ExtendPropertyManagementController extends BaseController {
 
 	@RequestMapping("/retrieve")
 	@ResponseBody
-	public AjaxResponse retrieve(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
 		AjaxDataWrap<ExtendProperty> dataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
 		if (dataWrap == null)
 			return null;
@@ -61,7 +62,7 @@ public class ExtendPropertyManagementController extends BaseController {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public AjaxResponse add(BodyReaderHttpServletRequestWrapper request) {
+	public AjaxResponse add(@RequestBody AjaxRequest request) {
 		AjaxDataWrap<ExtendProperty> addDataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
 		if (addDataWrap == null)
 			return null;
@@ -71,7 +72,7 @@ public class ExtendPropertyManagementController extends BaseController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public AjaxResponse delete(BodyReaderHttpServletRequestWrapper request, AjaxResponse responseData) {
+	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
 		AjaxDataWrap<ExtendProperty> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", ExtendProperty.class);
 		if (deleteDataWrap == null)
 			return null;
