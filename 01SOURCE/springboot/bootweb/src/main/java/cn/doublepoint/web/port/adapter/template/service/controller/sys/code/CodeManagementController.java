@@ -34,9 +34,9 @@ public class CodeManagementController extends BaseController {
 	CodeService service;
 
 	// 菜单页面
-	@RequestMapping("/code")
+	@RequestMapping("/")
 	public String cd(HttpServletRequest request) {
-		return "code";
+		return "sys/code/code.html";
 	}
 
 	@RequestMapping("/retrieve")

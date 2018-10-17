@@ -1,23 +1,20 @@
-
-<%
-	/** 
-	* 创   建   人： 刘磊
-	* 
-	* 创   建   时   间 ：2018年5月19日 
-	* 
-	* 类   说   明 ：
-	* 
-	* 修   改   人：          修   改   日   期：
-	*/
-%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!-- 	/* 
+	 * 创   建   人： 刘磊
+	 * 
+	 * 创   建   时   间 ： 2017-10-11 下午10:02:29
+	 * 
+	 * 类   说   明 ：
+	 * 
+	 * ******************修改日志***********************************
+	 * 
+	 * 修改人： 修改日期： 修改内容：
+	 * 
+	 * 修改人： 修改日期： 修改内容：
+	*/ -->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="/template/base.jsp"%>
-<title>Insert title here</title>
-<script type="text/javascript" src="bindMenuScript.js"></script>
+<template th:replace="/base.html"></template>
+
 </head>
 <body>
 	<form>
@@ -36,5 +33,6 @@
 			</ll:fillareatb>
 		</ll:filllayout>
 	</form>
+	<script type="text/javascript" th:insert="sys/rolw/bindMenuScript.js"></script>
 </body>
 </html>

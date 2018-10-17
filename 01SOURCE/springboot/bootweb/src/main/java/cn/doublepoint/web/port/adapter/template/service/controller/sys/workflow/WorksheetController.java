@@ -34,12 +34,12 @@ public class WorksheetController {
 	private WorksheetService worksheetService;
 
 	@RequestMapping("query")
-	public AjaxResponse query(@RequestBody AjaxRequest request,AjaxResponse response){
-		response.setViewName("worksheetQuery");
+	public AjaxResponse query(AjaxResponse response){
+		response.setViewName("sys/worksheet/worksheetQuery.html");
 		return response;
 	}
 	@RequestMapping("historicTaskList")
-	public AjaxResponse historicTaskList(@RequestBody AjaxRequest request,AjaxResponse response){
+	public AjaxResponse historicTaskList(AjaxResponse response){
 		response.setViewName("historicTaskList");
 		List<VOTask> list=instanceService.getHistoricTasks("10001");
 		AjaxDataWrap<VOTask> dataWrap=new AjaxDataWrap<VOTask>();

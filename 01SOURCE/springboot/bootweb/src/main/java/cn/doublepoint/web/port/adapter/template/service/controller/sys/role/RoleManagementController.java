@@ -13,6 +13,8 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,20 +34,22 @@ import cn.doublepoint.template.dto.domain.model.entity.sys.Role;
 
 @Controller
 @RequestMapping("sys/role")
-public class RoleController extends BaseController {
+public class RoleManagementController extends BaseController {
 
 	@Autowired
 	RoleService roleService;
 	@Autowired
 	MenuRoleService menuRoleService;
 
-	@RequestMapping("/{actionname}")
-	public String role(@PathVariable String actionname) {
-		return actionname;
+	@RequestMapping("/")
+	public AjaxResponse role() {
+		AjaxResponse response=new AjaxResponse();
+		response.setViewName("sys/role/role.html");
+		return response;
 	}
 
 	@RequestMapping("/bindMenu")
-	public AjaxResponse bindMenuJsp(@RequestBody AjaxRequest request, AjaxResponse response) {
+	public AjaxResponse bindMenuJsp(HttpServletRequest request, AjaxResponse response) {
 		String roleId = request.getParameter("roleId");
 		response.setViewName("bindMenu");
 		response.setAjaxParameter("roleId", roleId);
