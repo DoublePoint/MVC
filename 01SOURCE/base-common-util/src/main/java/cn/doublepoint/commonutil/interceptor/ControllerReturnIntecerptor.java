@@ -25,8 +25,12 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 
 /*<!-- 执行完Controller中的方法调用拦截器 HandleMethodInteceptor -->*/
 
+/*@Component
+public class ControllerReturnIntecerptor implements HandlerMethodReturnValueHandler,HandlerInterceptor{*/
 @Component
-public class ControllerReturnIntecerptor implements HandlerMethodReturnValueHandler,HandlerInterceptor{
+public class ControllerReturnIntecerptor implements HandlerMethodReturnValueHandler{
+
+
 
 	/**
 	 * 该处理程序是否支持给定的方法返回类型(只有返回true才回去调用handleReturnValue)
@@ -67,4 +71,6 @@ public class ControllerReturnIntecerptor implements HandlerMethodReturnValueHand
 		return request.getHeader("x-requested-with") != null
 				&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest");
 	}
+	
+
 }
