@@ -19,7 +19,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -79,9 +78,8 @@ public class WebConfiguration {
     @Autowired
     private JpaProperties jpaProperties;
  
-    private Map<String, Object> getVendorProperties() {
-    	 HibernateSettings hibernateSettings = new HibernateSettings();
-         return jpaProperties.getHibernateProperties(hibernateSettings);
+    private Map<String, String> getVendorProperties() {
+         return jpaProperties.getHibernateProperties(dataSource());
     }
  
     @Primary
