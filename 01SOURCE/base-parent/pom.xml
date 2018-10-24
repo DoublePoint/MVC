@@ -9,14 +9,13 @@
 		<mybatis.version>3.2.6</mybatis.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- spring版本号 -->
-		<spring.version>5.0.9.RELEASE</spring.version>
-		<spring.data.jpa.version>1.10.4.RELEASE</spring.data.jpa.version>
+		<spring.version>4.3.7.RELEASE</spring.version>
+		<spring.data.jpa.version>1.11.1.RELEASE</spring.data.jpa.version>
 		<junit.version>4.12-beta-3</junit.version>
 		<jackson.core.version>2.9.2</jackson.core.version>
-		<hibernate.entitymanager.version>4.3.6.Final</hibernate.entitymanager.version>
+		<hibernate.entitymanager.version>5.0.12.Final</hibernate.entitymanager.version>
 		<cn.doublepoint.base.version>0.0.1-SNAPSHOT</cn.doublepoint.base.version>
 		<commons.lang.version>2.3</commons.lang.version>
-		<com.querydsl.version>4.1.4</com.querydsl.version>
 	</properties>
 	<dependencies>
 	</dependencies>

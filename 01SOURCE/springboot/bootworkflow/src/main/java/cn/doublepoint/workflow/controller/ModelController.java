@@ -1,27 +1,16 @@
-package cn.doublepoint.workflow.controller;
+/*package cn.doublepoint.workflow.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.log.Log4jUtil;
 
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +18,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+*//**
  * 流程模型控制器
  *
  * @author liulei
- */
+ *//*
 @Controller
 @RequestMapping(value = "/workflow/model")
 public class ModelController {
@@ -49,9 +37,9 @@ public class ModelController {
 	@Autowired
 	RepositoryService repositoryService;
 
-	/**
+	*//**
 	 * 模型列表
-	 */
+	 *//*
 	@RequestMapping(value = "list")
 	public ModelAndView modelList() {
 		ModelAndView mav = new ModelAndView("workflow/model-list");
@@ -60,14 +48,14 @@ public class ModelController {
 		return mav;
 	}
 
-	/**
+	*//**
 	 * 导出model对象为指定类型
 	 *
 	 * @param modelId
 	 *            模型ID
 	 * @param type
 	 *            导出文件类型(bpmn\json)
-	 */
+	 *//*
 	@RequestMapping(value = "export/{modelId}/{type}")
 	public void export(@PathVariable("modelId") String modelId, @PathVariable("type") String type,
 			HttpServletResponse response) {
@@ -122,3 +110,4 @@ public class ModelController {
 	}
 
 }
+*/

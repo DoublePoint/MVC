@@ -1,7 +1,6 @@
 server:
-  servlet:
-    context-path: /bootworkflow
-  port: 8080
+  context-path: /bootworkflow
+  port: 8081
 spring:
   datasource:
     name: test
@@ -26,5 +25,7 @@ spring:
     mode: HTML5
     encoding: UTF-8
     content-type: text/html
+  activiti:
+    check-process-definitions: false
     
    

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.HistoryService;
-import org.activiti.engine.ManagementService;
+//import org.activiti.engine.ManagementService;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
@@ -14,7 +14,6 @@ import org.activiti.spring.ProcessEngineFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 /**
  * 流程管理控制器
@@ -38,8 +36,8 @@ public class ProcessInstanceController {
 	protected HistoryService historyService;
 	protected TaskService taskService;
 
-	@Autowired
-	ManagementService managementService;
+	/*@Autowired
+	ManagementService managementService;*/
 
 	protected static Map<String, ProcessDefinition> PROCESS_DEFINITION_CACHE = new HashMap<String, ProcessDefinition>();
 

@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("cn.doublepoint")
-/*@EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class,
-		SecurityAutoConfiguration.class })*/
+/*@ComponentScan("cn.doublepoint")*/
 public class BootworkflowApplication {
 
 	public static void main(String[] args) {

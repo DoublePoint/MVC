@@ -6,7 +6,7 @@
 * 类   说   明 ：
 * 
 * 修   改   人：          修   改   日   期：
-*/
+*//*
 package cn.doublepoint.workflow.config;
 
 import java.util.Map;
@@ -22,10 +22,8 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.activiti.spring.SpringProcessEngineConfiguration;
-import org.hibernate.engine.jdbc.spi.ResultSetReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -33,18 +31,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(value = { "org.activiti.conf", "org.activiti.rest.editor", "org.activiti.rest.service" })
+@ComponentScan(value = { "org.activiti.conf", "org.activiti.rest.editor", "org.activiti.rest.service" },
+	excludeFilters={@Filter(type = FilterType.ANNOTATION, value = Controller.class),
+})
 public class WorkflowConfiguration {
 	@Autowired
 	EntityManagerFactoryBuilder builder;
@@ -148,7 +149,7 @@ public class WorkflowConfiguration {
 		return factory.getProcessEngineConfiguration().getManagementService();
 	}
 
-	/*
+	
 	 * <!-- 单例json对象 --><!-- 集成REST服务需要的bean --> <bean id="objectMapper"
 	 * class="com.fasterxml.jackson.databind.ObjectMapper"/> <bean
 	 * id="restResponseFactory"
@@ -156,7 +157,8 @@ public class WorkflowConfiguration {
 	 * id="contentTypeResolver"
 	 * class="org.activiti.rest.common.application.DefaultContentTypeResolver"
 	 * />
-	 */
+	 
 	@Autowired
 	private JpaProperties jpaProperties;
 }
+*/

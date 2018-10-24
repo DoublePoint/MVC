@@ -1,0 +1,459 @@
+@BorderColor: #F2F2F3;
+@BorderWidth: 1px;
+@DragLineBackgroundColor: #F1F1F1;
+@DragLineWidth: 1px;
+@LLLayoutHeaderBackgroundColor: #F2F2F3;
+@MenuBackgroundColor: #253848;
+@MenuItemBackgroundColor: @MenuBackgroundColor;
+@MenuWidth: 250px;
+@PageHeaderBackgroundColor: #253848;
+@PageHeaderFontColor: #FFFFFF;
+@SystemMainColor: #17B294;
+@BorderRadius: 0px;
+html , body , form {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+form form {
+	height: 100%;
+	width: 100%;
+}
+
+.layui-layout-body form {
+	min-width: 1000px;
+}
+
+.layui-col-md0 , .layui-col-md1 , .layui-col-md2 , .layui-col-md3 , .layui-col-md4 , .layui-col-md5 , .layui-col-md6 , .layui-col-md7 , .layui-col-md8 , .layui-col-md9 , .layui-col-md10 , .layui-col-md11 , .layui-col-md12 {
+	height: 100%;
+}
+
+.lllayout {
+	clear: both;
+	overflow: hidden;
+}
+
+.layui-side-scroll {
+	width: @MenuWidth;
+	font-family: "Microsoft YaHei", SimSun, '\5b8b\4f53', sans-serif;
+}
+
+.layui-layout-admin .layui-side {
+	width: @MenuWidth;
+	border-top: 5px solid @SystemMainColor;
+}
+
+.layui-body {
+	left: @MenuWidth;
+}
+
+.layui-footer {
+	left: @MenuWidth;
+}
+
+li {
+	list-style: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.layui-side-scroll {
+	padding: 0px 0;
+	background: @MenuBackgroundColor;
+}
+
+.btn {
+	background-color: @MenuBackgroundColor;
+}
+
+.layui-table-view {
+	margin: 0px;
+}
+
+.inputbutton {
+	height: 38px;
+	width: 38px;
+	text-align: center;
+	line-height: 38px;
+	display: inline-block;
+	margin-left: -38px;
+	top: 0px;
+	position: absolute;
+	background-color: #1EA296;
+	font-weight: bold;
+	color: white;
+	padding: 0px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.layui-laypage {
+	margin: 0px;
+	margin-top: 1px;
+}
+
+.layui-laypage a , .layui-laypage span {
+	margin: 0 -1px 0px 0;
+}
+
+.layui-table-click , .layui-table-hover {
+}
+
+.ztree {
+	overflow: auto;
+	height: 100%;
+	padding: 0;
+}
+
+.layui-form-item {
+	margin: 2px 0 3px 0;
+}
+
+.layui-form .layui-inline {
+	margin: 0 0px;
+}
+
+.layui-form-item:first-child {
+	margin: 0;
+	padding: 5px 0 0px 0;
+}
+
+.layui-input-block > .layui-input {
+	padding-left: 0px;
+	padding-right: 0px;
+	display: inline-block;
+	width: 0;
+}
+
+.layui-inline > .layui-form-label {
+	padding-left: 0px;
+	padding-right: 0px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 0;
+}
+
+.layui-inline > .layui-input-block {
+	margin-left: 0px;
+}
+
+.layui-form {
+	font-size: 0;
+}
+
+.layui-form .layui-form-item:nth-child(n + 2) {
+	margin: 0px 0 0px 0;
+}
+
+.layui-inline , .layoutarea {
+	font-size: 14px;
+}
+
+.layui-body {
+	overflow: hidden;
+}
+
+.layui-form-item {
+	font-size: 16px;
+}
+
+.ll-framework-vue-select dl {
+	max-height: 220px;
+	min-width: 0;
+}
+
+.layui-select-title > input {
+	display: none;
+}
+
+.ll-framework-vue-select dl dd , .ll-framework-vue-select dl dt {
+	line-height: 20px;
+}
+
+.ll-framework-vue-select dl dd.layui-this {
+	background-color: #1AA094;
+}
+
+.ll-framework-vue-select dl {
+	padding: 0px;
+	top: 38px;
+}
+
+.layui-form-select-dl-unselect {
+	display: none;
+}
+
+.layui-form select {
+	border-color: #e6e6e6;
+}
+
+.layui-form select option {
+	background-color: white;
+}
+
+.layui-form select option:hover {
+	background-color: #EEEEEE;
+}
+
+.layui-form select:active , .layui-form select:focus {
+	border-color: -webkit-linear-gradient(left, #e6e6e6, #c9c9c9);
+	border-color: -o-linear-gradient(right, #e6e6e6, #c9c9c9);
+	border-color: -moz-linear-gradient(right, #e6e6e6, #c9c9c9);
+	border-color: linear-gradient(to right, #e6e6e6, #c9c9c9);
+	border-color: #c9c9c9;
+}
+
+.ll-fill-area-lr {
+	width: 0px;
+	height: 100%;
+	display: inline-block;
+	position: absolute;
+	left: 0;
+}
+
+.ll-fill-area-left-right-center {
+	height: 100%;
+	width: @DragLineWidth;
+	display: inline-block;
+	z-index: 100;
+	position: absolute;
+	left: 300px;
+	background-color: @DragLineBackgroundColor;
+	cursor: col-resize;
+}
+
+.ll-drag-to-left {
+	height: 20px;
+	width: 20px;
+	left: -15px;
+	top: 50%;
+	margin-top: -10px;
+	position: relative;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: -20px 0px;
+}
+
+.ll-fill-area-left-right-center:hover .ll-drag-to-right {
+	height: 20px;
+	width: 20px;
+	left: 5px;
+	top: 50%;
+	margin-top: -10px;
+	position: relative;
+	cursor: pointer;
+	background-image: url(../image/togglebar.gif);
+	background-repeat: no-repeat;
+	background-position: -20px -40px;
+}
+
+.layui-tab-title li:first-child i {
+	display: none;
+}
+
+ll-filllayout {
+	display: none;
+}
+
+.llsystitle {
+	color: #FFFFFF;
+}
+
+@color: #ED8E1C;
+.title_value {
+	color: @color;
+}
+
+.layout-area-Border {
+	border-bottom: 1px solid @BorderColor;
+}
+
+.ll-panel {
+	margin-bottom: 0px;
+}
+
+.panel-heading {
+	padding: 5px 10px 5px 10px;
+}
+
+.tab-content {
+	height: 100%;
+	width: 100%;
+	margin-top: -42px;
+	padding-top: 42px;
+}
+
+.wizard > .steps a , .wizard > .steps a:hover , .wizard > .steps a:active {
+	-webkit-border-radius: @BorderRadius ! important;
+	-moz-border-radius: @BorderRadius ! important;
+	border-radius: @BorderRadius ! important;
+}
+
+.wizard > .actions a , .wizard > .actions a:hover , .wizard > .actions a:active {
+	-webkit-border-radius: @BorderRadius ! important;
+	-moz-border-radius: @BorderRadius ! important;
+	border-radius: @BorderRadius ! important;
+}
+
+.bootstrapTable {
+	table-layout: fixed;
+	font-size:14px! important;
+}
+
+.bootstrapTable td {
+	word-break: keep-all;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.bootstrapTable .th-inner {
+	font-size:14px! important;
+	font-weight:bold! important;
+}
+.btn-sm {
+	border-radius: @BorderRadius ! important;
+}
+
+.ll-main {
+	background-color: @SystemMainColor ! important;
+	color: white ! important;
+}
+
+.ll-search {
+}
+
+.ll_add_icon {
+}
+
+.ll_edit_icon {
+}
+
+.ll_delete_icon {
+}
+
+.admin-side-toggle , .admin-side-full {
+	background-color: @SystemMainColor ! important;
+}
+
+.admin-nav-card > .layui-tab-title .layui-this {
+	color: white;
+	background-color: @SystemMainColor ! important;
+}
+
+.sidebar-collapse .nav > li > a {
+	background: @MenuItemBackgroundColor ! important;
+	border-bottom: 1px solid #2F2E31;
+}
+
+.sidebar-collapse .nav > li > a:hover {
+	background-color: black ! important;
+}
+
+.layui-layout-admin .layui-header {
+	background-color: @PageHeaderBackgroundColor ! important;
+}
+
+.panel-info > .panel-heading {
+	background-color: @LLLayoutHeaderBackgroundColor ! important;
+	border-color: @LLLayoutHeaderBackgroundColor ! important;
+}
+
+.bootstrap-switch {
+	border-radius: @BorderRadius ! important;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-off , .bootstrap-switch .bootstrap-switch-handle-on {
+	border-bottom-right-radius: @BorderRadius ! important;
+	border-top-right-radius: @BorderRadius ! important;
+	border-bottom-left-radius: @BorderRadius ! important;
+	border-top-left-radius: @BorderRadius ! important;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-success , .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-success {
+	background: @SystemMainColor ! important;
+}
+
+.mbgc {
+	background-color: @SystemMainColor ! important;
+}
+
+a > .fa {
+	margin-top: 3px ! important;
+}
+
+element.style {
+}
+
+.alert-info , .alert-info a , .bg-info , .bg-info a , .label-info , .label-info a {
+	color: #fff ! important;
+}
+
+.small-box {
+	border-radius: .25rem;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+	position: relative;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.callout , .card , .info-box , .mb-3 , .my-3 , .small-box {
+	margin-bottom: 1rem ! important;
+}
+
+.alert-info , .bg-info , .label-info {
+	background-color: #17a2b8 ! important;
+}
+
+.bg-info {
+	background-color: #d9edf7;
+}
+
+.bg-warning {
+	background-color: #FFF331 ! important;
+}
+
+.small-box > .inner {
+	padding: 10px;
+}
+
+.small-box h3 , .small-box p {
+	z-index: 5;
+}
+
+.small-box h3 {
+	font-size: 38px;
+	font-weight: 700;
+	margin: 0 0 10px 0;
+	white-space: nowrap;
+	padding: 0;
+}
+
+.small-box > .small-box-footer {
+	position: relative;
+	text-align: center;
+	padding: 3px 0;
+	color: #fff;
+	color: rgba(255, 255, 255, .8);
+	display: block;
+	z-index: 10;
+	background: rgba(0, 0, 0, .1);
+	text-decoration: none;
+}
+
+body {
+	display: none;
+}
+
+.editable-container , 
+.editable-container .editableform , 
+.editable-container .editableform .control-group, 
+.editable-container .editableform .bt-input-class , 
+.editable-container .editableform .editable-input {
+	width: 100% ! important;
+}
+

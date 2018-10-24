@@ -57,8 +57,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import cn.doublepoint.workflow.cmd.JumpActivityCmd;
-//import cn.doublepoint.workflow.service.WorkflowProcessDefinitionService;
-//import cn.doublepoint.workflow.service.WorkflowTraceService;
+import cn.doublepoint.workflow.service.WorkflowProcessDefinitionService;
+import cn.doublepoint.workflow.service.WorkflowTraceService;
 import cn.doublepoint.workflow.util.Page;
 import cn.doublepoint.workflow.util.PageUtil;
 import cn.doublepoint.workflow.util.UserUtil;
@@ -105,9 +105,9 @@ public class ActivitiController {
     public ModelAndView processList(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("workflow/process-list");
 
-    /*
-     * 保存两个对象，一个是ProcessDefinition（流程定义），一个是Deployment（流程部署）
-     */
+    
+    /* * 保存两个对象，一个是ProcessDefinition（流程定义），一个是Deployment（流程部署）*/
+     
         List<Object[]> objects = new ArrayList<Object[]>();
 
         Page<Object[]> page = new Page<Object[]>(PageUtil.PAGE_SIZE);
@@ -347,8 +347,8 @@ public class ActivitiController {
     
     /**
      * 待办任务--Portlet
-     *//*
-    @RequestMapping(value = "/task/history/list")
+     */
+   /* @RequestMapping(value = "/task/history/list")
     @ResponseBody
     public List<Map<String, Object>> historyTask(String instanceList) throws Exception {
         User user = UserUtil.getUserFromSession(session);
@@ -451,11 +451,11 @@ public class ActivitiController {
         return bpmnModel;
     }
 
-/*    @Autowired
+   /* @Autowired
     public void setWorkflowProcessDefinitionService(WorkflowProcessDefinitionService workflowProcessDefinitionService) {
         this.workflowProcessDefinitionService = workflowProcessDefinitionService;
-    }
-*/
+    }*/
+
     @Autowired
     public void setRepositoryService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
@@ -465,12 +465,12 @@ public class ActivitiController {
     public void setRuntimeService(RuntimeService runtimeService) {
         this.runtimeService = runtimeService;
     }
-
-    /*@Autowired
+/*
+    @Autowired
     public void setTraceService(WorkflowTraceService traceService) {
         this.traceService = traceService;
-    }*/
-
+    }
+*/
     @Autowired
     public void setTaskService(TaskService taskService) {
         this.taskService = taskService;

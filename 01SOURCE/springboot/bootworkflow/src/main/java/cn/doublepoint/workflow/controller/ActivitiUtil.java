@@ -3,7 +3,7 @@ package cn.doublepoint.workflow.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
- 
+
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.ProcessEngine;
@@ -12,8 +12,6 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.identity.Group;
-import org.activiti.engine.identity.User;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmActivity;
 import org.activiti.engine.impl.pvm.PvmTransition;

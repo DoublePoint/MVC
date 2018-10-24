@@ -1,4 +1,4 @@
-package org.activiti.explorer;
+/*package org.activiti.explorer;
 
 import java.util.List;
 
@@ -72,4 +72,4 @@ public class DispatcherServletConfiguration extends WebMvcConfigurationSupport {
         configurer.favorPathExtension(false);
     }
 
-}
+}*/
