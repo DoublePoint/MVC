@@ -57,7 +57,7 @@ public class ProcessInstanceController {
 	@RequestMapping(value = "{instanceId}/history/task",method={RequestMethod.GET})
 	public AjaxResponse historicTasksGet(AjaxResponse response, @PathVariable("instanceId") String processInstanceId) {
 		List<HistoricTaskInstance> historicTaskList=this.getHistoricTasks(processInstanceId);
-		response.setViewName("/sys/workflow/historicTaskList");
+		response.setViewName("sys/workflow/historicTaskList");
 		AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance>();
 		dataWrap.setDataList(historicTaskList);
 		historicTaskList.stream().forEach(task -> {

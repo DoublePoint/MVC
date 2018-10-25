@@ -34,7 +34,7 @@ public class MainController {
 		
 		worksheetDataWrap.setDataList(list);
 		response.setAjaxParameter("worksheetDataWrap", worksheetDataWrap);
-		response.setViewName("sys/index/main.html");
+		response.setViewName("sys/index/main");
 		return response;
 	}
 	

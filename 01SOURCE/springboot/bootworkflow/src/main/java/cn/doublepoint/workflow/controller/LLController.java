@@ -50,7 +50,6 @@ import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
-import cn.doublepoint.commonutil.filter.BodyReaderHttpServletRequestWrapper;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.template.dto.domain.model.entity.workflow.VOModel;
 import cn.doublepoint.template.dto.domain.model.entity.workflow.VOProcessDefinition;
@@ -120,7 +119,7 @@ public class LLController {
 		return response;
 	}
 
-	@RequestMapping(value = "model-delete")
+	/*@RequestMapping(value = "model-delete")
 	@ResponseBody
 	public AjaxResponse modelDelete(BodyReaderHttpServletRequestWrapper request) {
 		AjaxDataWrap<VOModel> dataWrap = request.getAjaxDataWrap("dataWrap", VOModel.class);
@@ -131,7 +130,7 @@ public class LLController {
 		AjaxResponse response = new AjaxResponse();
 		response.setAjaxParameter("deleteState", true);
 		return response;
-	}
+	}*/
 
 	/**
 	 * 创建模型

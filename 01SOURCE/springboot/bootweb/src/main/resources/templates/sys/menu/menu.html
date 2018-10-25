@@ -13,7 +13,7 @@
 	*/ -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<template th:replace="/base.html"></template>
+<template th:replace="base"></template>
 </head>
 <body>
 	<form>
@@ -60,7 +60,7 @@
 			</ll:fillarealr>
 		</ll:filllayout>
 	</form>
-	<script type="text/javascript" th:insert="/sys/menu/menuScript.js">
+	<script type="text/javascript" th:src="@{/sys/menu/menuScript.js}">
 	
 	</script>
 </body>

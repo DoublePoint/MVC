@@ -20,7 +20,7 @@ public class PageController extends BaseRequestController{
 	// 索引页
 	@RequestMapping(value = "sys/index")
 	public String hello() {
-		return "sys/index/index.html";
+		return "sys/index/index";
 	}
 	
 	

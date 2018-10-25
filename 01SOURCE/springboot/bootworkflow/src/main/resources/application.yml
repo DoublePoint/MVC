@@ -16,7 +16,7 @@ spring:
   mvc:
     view:
       prefix: /template/
-      suffix: .html
+      suffix: .jsp
     static-path-pattern: /static/**
   thymeleaf:
     cache: false

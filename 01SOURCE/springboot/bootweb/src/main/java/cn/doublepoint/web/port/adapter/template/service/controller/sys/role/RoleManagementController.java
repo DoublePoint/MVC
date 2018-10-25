@@ -44,7 +44,7 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/")
 	public AjaxResponse role() {
 		AjaxResponse response=new AjaxResponse();
-		response.setViewName("sys/role/role.html");
+		response.setViewName("sys/role/role");
 		return response;
 	}
 

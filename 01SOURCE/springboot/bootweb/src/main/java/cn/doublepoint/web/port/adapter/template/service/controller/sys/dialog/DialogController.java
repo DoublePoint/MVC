@@ -20,7 +20,7 @@ public class DialogController extends BaseController {
 	// 索引页
 	@RequestMapping(value = "sys/dialog/dialog")
 	public String hello() {
-		return "sys/dialog/dialog.html";
+		return "sys/dialog/dialog";
 	}
 
 }

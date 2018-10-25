@@ -41,7 +41,7 @@ public class MenuManagementController extends BaseController {
 	// 菜单页面
 	@RequestMapping("/")
 	public String cd(HttpServletRequest request) {
-		return "sys/menu/menu.html";
+		return "sys/menu/menu";
 	}
 
 	@RequestMapping("/menuDialog")
@@ -58,7 +58,7 @@ public class MenuManagementController extends BaseController {
 				response.setAjaxParameter("parentMenuId", parentMenuId);
 			response.setAjaxParameter("type", type);
 		}
-		response.setViewName("sys/menu/menuDialog.html");
+		response.setViewName("sys/menu/menuDialog");
 		return response;
 	}
 

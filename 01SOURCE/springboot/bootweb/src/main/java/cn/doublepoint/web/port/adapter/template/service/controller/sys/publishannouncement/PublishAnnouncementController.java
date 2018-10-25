@@ -41,13 +41,13 @@ public class PublishAnnouncementController extends BaseController{
 	
 	@RequestMapping("apply")
 	public AjaxResponse apply(AjaxResponse response) {
-		response.setViewName("sys/workflow/announcement/announcementApply.html");
+		response.setViewName("sys/workflow/announcement/announcementApply");
 		return response;
 	}
 	
 	@RequestMapping("aduit")
 	public AjaxResponse aduit(AjaxResponse response){
-		response.setViewName("sys/workflow/announcement/announcementAduit.html");
+		response.setViewName("sys/workflow/announcement/announcementAduit");
 		return response;
 	}
 	

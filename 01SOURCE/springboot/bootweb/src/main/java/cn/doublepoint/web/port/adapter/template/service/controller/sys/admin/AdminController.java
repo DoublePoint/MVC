@@ -35,7 +35,7 @@ public class AdminController extends BaseController{
 
 	@RequestMapping("/admin")
 	public String adminJsp(HttpServletRequest request, AjaxResponse response) {
-		return "admin.html";
+		return "admin";
 	}
 
 	@RequestMapping("/admin-dialog")
