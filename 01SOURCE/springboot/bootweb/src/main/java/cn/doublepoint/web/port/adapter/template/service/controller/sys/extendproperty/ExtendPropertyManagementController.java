@@ -36,7 +36,7 @@ public class ExtendPropertyManagementController extends BaseController {
 	// 菜单页面
 	@RequestMapping("/")
 	public String cd(HttpServletRequest request) {
-		return "sys/extendproperty/extendProperty";
+		return "sys/extendproperty/extendProperty.html";
 	}
 
 	@RequestMapping("/retrieve")

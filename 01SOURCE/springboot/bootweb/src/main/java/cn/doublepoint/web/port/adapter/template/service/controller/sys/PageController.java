@@ -20,35 +20,35 @@ public class PageController extends BaseRequestController{
 	// 索引页
 	@RequestMapping(value = "sys/index")
 	public String hello() {
-		return "sys/index/index";
+		return "sys/index/index.html";
 	}
 	
 	
 	@RequestMapping("sys/login/{actionname}")
 	public String login(@PathVariable String actionname) {
-		return "sys/login/" + actionname;
+		return "sys/login/" + actionname+".html";
 	}
 	
 	@RequestMapping("sys/register/{actionname}")
 	public String register(@PathVariable String actionname) {
-		return "sys/register/" + actionname;
+		return "sys/register/" + actionname+".html";
 	}
 	
 	@RequestMapping("sys/test/{actionname}")
 	public String test(@PathVariable String actionname) {
-		return "sys/test/" + actionname;
+		return "sys/test/" + actionname+".html";
 	}
 	
 	@RequestMapping("sys/bootstrap/{actionname}")
 	public String bootstrap(@PathVariable String actionname) {
-		return "sys/bootstrap/" + actionname;
+		return "sys/bootstrap/" + actionname+".html";
 	}
 	@RequestMapping("sys/assistant/{actionname}")
 	public String assistant(@PathVariable String actionname) {
-		return "sys/assistant/" + actionname;
+		return "sys/assistant/" + actionname+".html";
 	}
 	@RequestMapping("sys/config/{actionname}")
 	public String config(@PathVariable String actionname) {
-		return "sys/config/" + actionname;
+		return "sys/config/" + actionname+".html";
 	}
 }

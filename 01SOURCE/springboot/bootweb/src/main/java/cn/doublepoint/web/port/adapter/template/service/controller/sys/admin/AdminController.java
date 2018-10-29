@@ -35,7 +35,7 @@ public class AdminController extends BaseController{
 
 	@RequestMapping("/admin")
 	public String adminJsp(HttpServletRequest request, AjaxResponse response) {
-		return "admin";
+		return "admin.html";
 	}
 
 	@RequestMapping("/admin-dialog")
@@ -47,7 +47,7 @@ public class AdminController extends BaseController{
 			response.setAjaxParameter("admin", admin);
 		}
 		response.setAjaxParameter("type", type);
-		response.setViewName("adminDialog");
+		response.setViewName("adminDialog.html");
 		return response;
 	}
 

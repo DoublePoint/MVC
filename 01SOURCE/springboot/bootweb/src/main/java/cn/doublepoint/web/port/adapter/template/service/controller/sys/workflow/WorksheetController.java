@@ -35,7 +35,7 @@ public class WorksheetController {
 
 	@RequestMapping("query")
 	public AjaxResponse query(AjaxResponse response){
-		response.setViewName("sys/worksheet/worksheetQuery");
+		response.setViewName("sys/worksheet/worksheetQuery.html");
 		return response;
 	}
 	@RequestMapping("historicTaskList")

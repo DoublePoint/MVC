@@ -44,14 +44,14 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/")
 	public AjaxResponse role() {
 		AjaxResponse response=new AjaxResponse();
-		response.setViewName("sys/role/role");
+		response.setViewName("sys/role/role.html");
 		return response;
 	}
 
 	@RequestMapping("/bindMenu")
 	public AjaxResponse bindMenuJsp(HttpServletRequest request, AjaxResponse response) {
 		String roleId = request.getParameter("roleId");
-		response.setViewName("bindMenu");
+		response.setViewName("bindMenu.html");
 		response.setAjaxParameter("roleId", roleId);
 		AjaxDataWrap<MenuRole> dataWrap = new AjaxDataWrap<MenuRole>();
 		MenuRole query = new MenuRole();
