@@ -8,7 +8,7 @@ function _InitOpenDialog(responseData) {
 function formSubmit(responseData) {
 	var url = responseData.url;
 	var data = responseData;
-	var form = $("<form>");// 定义一个form表单
+	var form = $("#popWinForm");// 定义一个form表单
 	form.attr("style", "display:none");
 	form.attr("target", "");
 	form.attr("method", "post");
@@ -27,17 +27,4 @@ function formSubmit(responseData) {
 	}
 	$("body").append(form);// 将表单放置在web中
 	form.submit();// 表单提交
-	$("body").remove(form);
-	
-	/*$.request({
-		url : url,
-		type : "POST",
-		contentType : 'application/json;charset=UTF-8',
-		dataType : "json",
-		async : false,
-		data :data,
-		success : function(response){
-			$("body").append(response);
-		}
-	});*/
 }
