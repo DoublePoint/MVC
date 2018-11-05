@@ -1,8 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <template th:replace="/base.html"></template>
-<link rel="stylesheet" th:href="@{/static/layui/css/global.css}" />
-<link rel="stylesheet" th:href="@{/static/layui/css/font-awesome.min.css}" />
+<link rel="stylesheet" th:href="@{/layui/css/global.css}" />
+<link rel="stylesheet" th:href="@{/layui/css/font-awesome.min.css}" />
 </head>
 <body class="layui-layout-body">
 	<form>
@@ -27,7 +27,7 @@
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					<ll:menu id="treeDemo" th:datasource="@{/sys/menu/display?isHasRoot=false}">
+					<ll:menu id="treeDemo" th:attr="datasource=@{/sys/menu/display?isHasRoot=false}">
 					</ll:menu>
 				</div>
 			</div>
