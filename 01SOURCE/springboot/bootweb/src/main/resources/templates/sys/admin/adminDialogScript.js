@@ -38,7 +38,7 @@ function selectParent() {
 		title : "添加菜单",
 		width : 360,
 		height : 430,
-		url : $$pageContextPath + '/sys/commonpage/selectMenu.jsp',
+		url : $$pageContextPath + '/sys/commonpage/selectMenu.html',
 		yes : function(selectTreeNode) {
 			var menuId = selectTreeNode.code;
 			var menuName = selectTreeNode.name;

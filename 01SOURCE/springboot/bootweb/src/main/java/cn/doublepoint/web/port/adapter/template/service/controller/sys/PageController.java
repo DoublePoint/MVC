@@ -47,8 +47,13 @@ public class PageController extends BaseRequestController{
 	public String assistant(@PathVariable String actionname) {
 		return "sys/assistant/" + actionname+".html";
 	}
+
 	@RequestMapping("sys/config/{actionname}")
 	public String config(@PathVariable String actionname) {
 		return "sys/config/" + actionname+".html";
+	}
+	@RequestMapping("sys/commonpage/{actionname}")
+	public String commonpage(@PathVariable String actionname) {
+		return "sys/commonpage/" + actionname+".html";
 	}
 }

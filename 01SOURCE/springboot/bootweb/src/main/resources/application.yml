@@ -13,6 +13,8 @@ spring:
     hibernate:
       ddl-auto: update #自动更新
     show-sql: true  #日志中显示sql语句
+workflow:
+  url: localhost
 #  mvc:
 #    view:
 #      prefix: /template/

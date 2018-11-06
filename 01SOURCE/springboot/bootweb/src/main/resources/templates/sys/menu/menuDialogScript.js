@@ -1,3 +1,4 @@
+
 function init(response) {
 	var type=response.get("type");
 	if(type=="add"){
@@ -33,9 +34,9 @@ function onClickSave(){
 function selectParent(){
 	$.openDialog({
 		title : "添加菜单",
-		width : 360,
+		width : 360 ,
 		height : 430,
-		url : $$pageContextPath + '/sys/commonpage/selectMenu.jsp',
+		url : $$pageContextPath + '/sys/commonpage/selectMenu',
 		yes : function(selectTreeNode) {
 			var menuId=selectTreeNode.id;
 			var menuName=selectTreeNode.name;
