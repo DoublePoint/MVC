@@ -11,11 +11,15 @@ package cn.doublepoint.common.application.template.sys.woksheet;
 
 import java.util.List;
 
+import cn.doublepoint.common.config.WorkflowAutoConfig;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
+import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 public class WorksheetUtil {
+	
+	private static String workflowUrl;
 	
 	/**
 	 * 创建工作单
@@ -92,6 +96,22 @@ public class WorksheetUtil {
 
 	private static InstanceService getInstanceService() {
 		return (InstanceService) ApplicationContextUtil.getBean("instanceService");
+	}
+
+	public static String getWorkflowUrl() {
+		if (cn.doublepoint.commonutil.StringUtil.isNullOrEmpty(workflowUrl)) {
+			try{
+				WorkflowAutoConfig workflowAutoConfig=(WorkflowAutoConfig)ApplicationContextUtil.getBean("workflowAutoConfig");
+				return workflowAutoConfig.getUrl();
+			}catch(Exception e){
+				Log4jUtil.error(e);
+			}
+		}
+		return workflowUrl;
+	}
+
+	public void setWorkflowUrl(String workflowUrl) {
+		WorksheetUtil.workflowUrl = workflowUrl;
 	}
 
 }

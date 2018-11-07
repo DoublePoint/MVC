@@ -18,11 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import cn.doublepoint.common.application.template.sys.woksheet.WorksheetUtil;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
-import cn.doublepoint.commonutil.AjaxDataWrapUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
@@ -42,6 +40,7 @@ public class MenuManagementController extends BaseController {
 	// 菜单页面
 	@RequestMapping("/")
 	public String cd(HttpServletRequest request) {
+		System.out.println(WorksheetUtil.getWorkflowUrl());
 		return "sys/menu/menu.html";
 	}
 
