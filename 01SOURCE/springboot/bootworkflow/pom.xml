@@ -33,6 +33,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -49,6 +50,11 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- 非严格遵循html5格式 -->
+		<dependency>
+		    <groupId>net.sourceforge.nekohtml</groupId>
+		    <artifactId>nekohtml</artifactId>
+		</dependency>
 		<!-- boot-starter -->
 		<dependency>
             <groupId>org.activiti</groupId>
@@ -64,6 +70,12 @@
 
 		
 		<!-- 工作流项目 -->
+		<!-- 工作流Rest -->
+		<dependency>
+		   <groupId>org.activiti</groupId>
+		   <artifactId>activiti-spring-boot-starter-rest-api</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-modeler</artifactId>
@@ -87,12 +99,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>${activiti.version}</version>
-		</dependency>
-		 -->
+
 		<!-- 本地项目 -->
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>

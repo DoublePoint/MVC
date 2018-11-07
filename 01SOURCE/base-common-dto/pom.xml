@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>cn.doublepoint.base</groupId>
-		<artifactId>base-parent</artifactId>
+		<artifactId>base-parent-springboot</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -13,13 +13,11 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.jpa.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.entitymanager.version}</version>
 		</dependency>
 	</dependencies>
 

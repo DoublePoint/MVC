@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.activiti.engine.HistoryService;
 //import org.activiti.engine.ManagementService;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.rest.common.api.DataResponse;
+import org.activiti.rest.service.api.history.HistoricTaskInstanceCollectionResource;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +61,7 @@ public class ProcessInstanceController {
 	@RequestMapping(value = "{instanceId}/history/task",method={RequestMethod.GET})
 	public AjaxResponse historicTasksGet(AjaxResponse response, @PathVariable("instanceId") String processInstanceId) {
 		List<HistoricTaskInstance> historicTaskList=this.getHistoricTasks(processInstanceId);
-		response.setViewName("sys/workflow/historicTaskList");
+		response.setViewName("sys/workflow/historicTaskList.html");
 		AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance>();
 		dataWrap.setDataList(historicTaskList);
 		historicTaskList.stream().forEach(task -> {
@@ -92,6 +96,16 @@ public class ProcessInstanceController {
 		return response;
 	}
 	
+	/**
+	 * 获取流程状态
+	 * @param processInstanceId
+	 * @return
+	 */
+	@RequestMapping(value="{instanceId}/status")
+	@ResponseBody
+	private AjaxResponse getInstanceStatue(@PathVariable("instanceId") String processInstanceId ){
+		return null;
+	}
 
 	private List<HistoricTaskInstance> getHistoricTasks(String processInstanceId){
 		List<HistoricTaskInstance> historicTaskList = historyService.createHistoricTaskInstanceQuery()// 创建历史任务的查询
