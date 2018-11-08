@@ -23,7 +23,7 @@ function detail(taskId){
 
 function onClickTransmit(){
 	$.request({
-		url : $$pageContextPath + "/workflow/instance/transmit/"+instanceId,
+		url : $$pageContextPath + "oll/instance/"+instanceId+"/transmit"+,
 		success : function(response){
 			retrieve();
 		}
@@ -31,7 +31,7 @@ function onClickTransmit(){
 }
 function onClickRollBack(){
 	$.request({
-		url : $$pageContextPath + "/workflow/instance/rollback/"+instanceId,
+		url : $$pageContextPath + "oll/instance/"+instanceId+"/rollback"+,
 		success : function(response){
 			retrieve();
 		}
@@ -40,7 +40,7 @@ function onClickRollBack(){
 
 function retrieve(){
 	$.request({
-		url : $$pageContextPath + "/workflow/instance/"+instanceId+"/history/task",
+		url : $$pageContextPath + "oll/history"+instanceId+"/task",
 		success : function(response){
 			var dataWrap=response.get("dataWrap");
 			ajaxgrid.setDataWrap(dataWrap);

@@ -7,7 +7,7 @@ function retrieve() {
 	var gridWrap = ajaxgrid.collectDataWrap();
 	var formWrap=ajaxform.collectDataWrap();
 	$.request({
-		url : $$pageContextPath + "/template/sys/workflow/model-retrieve",
+		url : $$pageContextPath + "ool/model/model-retrieve",
 		type : "POST",
 		contentType : 'application/json;charset=UTF-8',
 		dataType : "json",
@@ -33,7 +33,7 @@ function onClickAdd() {
 		title : "维护菜单",
 		width : 630,
 		height : 330,
-		url : $$pageContextPath + '/template/sys/workflow/model-add',
+		url : $$pageContextPath + 'ool/model/model-add',
 		data : {},
 		yes : function() {
 			retrieve();
@@ -51,7 +51,7 @@ function onClickDelete() {
 			dataWrap:ajaxgrid.collectDataWrap("checked")
 		};
 		$.request({
-			url : $$pageContextPath + "/template/sys/workflow/model-delete",
+			url : $$pageContextPath + "ool/model/model-delete",
 			data : data,
 			success : function(response) {
 				var deleteState=response.get("deleteState");
@@ -78,7 +78,7 @@ function customerFunction(a, record, c) {
 
 function deploy(modelId){
 	$.request({
-		url:$$pageContextPath+"/template/sys/workflow/model/deploy/"+modelId,
+		url:$$pageContextPath+"ool/model/deploy/"+modelId,
 		success:function(response){
 			var returnMessage=response.get("returnMessage");
 			$.alert(returnMessage);
@@ -92,7 +92,7 @@ function editModelCustomerFunction(a,record,c){
 function edit(modelId){
 	$.openTab({
 		title : "Model:"+modelId,
-		content : '<iframe src="' + $$pageContextPath + "/modeler.html?modelId=" + modelId + '"></iframe>',
+		content : '<iframe src="' + $$pageContextPath + 'modeler.html?modelId=' + modelId + '"></iframe>',
 		id : modelId
 	});
 }

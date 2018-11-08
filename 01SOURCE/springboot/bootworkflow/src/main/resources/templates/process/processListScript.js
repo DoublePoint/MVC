@@ -9,6 +9,6 @@ function customerFunction(a, process, c) {
 
 function showWorkFlowImage(pId){
 	$.openDialog({
-		url:$$pageContextPath+"/template/sys/workflow/resource/processdefine/image?type=image&pdId="+pId
+		url:$$pageContextPath+"/oll/instance/svg?type=image&pdId="+pId
 	});
 }

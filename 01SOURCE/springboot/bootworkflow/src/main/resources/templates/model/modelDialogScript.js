@@ -15,7 +15,7 @@ function onClickSave() {
 	var dataWrap = ajaxform.collectDataWrap();
 	var data=dataWrap.getData();
 	$.request({
-		url : $$pageContextPath + "/template/sys/workflow/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
+		url : $$pageContextPath + "ool/model/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {
 
 		},

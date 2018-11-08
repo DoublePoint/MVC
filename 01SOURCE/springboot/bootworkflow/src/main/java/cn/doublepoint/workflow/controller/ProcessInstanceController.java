@@ -1,20 +1,14 @@
 package cn.doublepoint.workflow.controller;
 
-import java.util.HashMap;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.activiti.engine.HistoryService;
-//import org.activiti.engine.ManagementService;
-import org.activiti.engine.ProcessEngineConfiguration;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.rest.common.api.DataResponse;
-import org.activiti.rest.service.api.history.HistoricTaskInstanceCollectionResource;
-import org.activiti.spring.ProcessEngineFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.workflow.process.VOProcessDefinition;
 
 /**
  * 流程管理控制器
@@ -33,68 +30,13 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
  * @author HenryYan
  */
 @Controller
-@RequestMapping(value = "/workflow/instance")
+@RequestMapping(value = "oll/instance")
 public class ProcessInstanceController {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected HistoryService historyService;
-	protected TaskService taskService;
-
-	/*@Autowired
-	ManagementService managementService;*/
-
-	protected static Map<String, ProcessDefinition> PROCESS_DEFINITION_CACHE = new HashMap<String, ProcessDefinition>();
-
-	@Autowired
-	ProcessEngineFactoryBean processEngine;
-
-	@Autowired
-	ProcessEngineConfiguration processEngineConfiguration;
-
-	/**
-	 * 查询历史任务
-	 * 
-	 * @param response
-	 * @param processInstanceId
-	 * @return
-	 */
-	@RequestMapping(value = "{instanceId}/history/task",method={RequestMethod.GET})
-	public AjaxResponse historicTasksGet(AjaxResponse response, @PathVariable("instanceId") String processInstanceId) {
-		List<HistoricTaskInstance> historicTaskList=this.getHistoricTasks(processInstanceId);
-		response.setViewName("sys/workflow/historicTaskList.html");
-		AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance>();
-		dataWrap.setDataList(historicTaskList);
-		historicTaskList.stream().forEach(task -> {
-			System.out.println("taskId:" + task.getId());
-			System.out.println("taskName:" + task.getName());
-			System.out.println("processDefinitionId:" + task.getProcessDefinitionId());
-			System.out.println("processInstanceId:" + task.getProcessInstanceId());
-			System.out.println("assigne:" + task.getAssignee());
-			System.out.println("startTime:" + task.getStartTime());
-			System.out.println("endTime:" + task.getEndTime());
-			System.out.println("duration:" + task.getDurationInMillis());
-			System.out.println("--------------------------");
-			System.out.println("--------------------------");
-		});
-		response.setAjaxParameter("dataWrap", dataWrap);
-		response.setAjaxParameter("instanceId", processInstanceId);
-		return response;
-	}
 	
-	/**
-	 * 获取历史任务
-	 * @param processInstanceId
-	 * @return
-	 */
-	@RequestMapping(value = "{instanceId}/history/task",method={RequestMethod.POST})
-	@ResponseBody
-	private AjaxResponse historicTasksPost(AjaxResponse response, @PathVariable("instanceId") String processInstanceId){
-		List<HistoricTaskInstance> historicTaskList=this.getHistoricTasks(processInstanceId);
-		AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance>();
-		dataWrap.setDataList(historicTaskList);
-		response.setAjaxParameter("dataWrap", dataWrap);
-		return response;
-	}
+	protected TaskService taskService;
+	protected RepositoryService repositoryService;
 	
 	/**
 	 * 获取流程状态
@@ -106,14 +48,23 @@ public class ProcessInstanceController {
 	private AjaxResponse getInstanceStatue(@PathVariable("instanceId") String processInstanceId ){
 		return null;
 	}
-
-	private List<HistoricTaskInstance> getHistoricTasks(String processInstanceId){
-		List<HistoricTaskInstance> historicTaskList = historyService.createHistoricTaskInstanceQuery()// 创建历史任务的查询
-				.processInstanceId(processInstanceId)// 使用流程实例Id查询
-				.orderByTaskCreateTime()// 根据创建时间查询
-				.asc()// 按照活动开始时间排序
+	
+	/**
+	 * 流程定义列表,流程的所有发布
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "process-list")
+	public AjaxResponse processList(AjaxResponse response) {
+		AjaxDataWrap<VOProcessDefinition> dataWrap = new AjaxDataWrap<VOProcessDefinition>();
+		List<VOProcessDefinition> processDefinitionList = new ArrayList<VOProcessDefinition>();
+		List<ProcessDefinition> source = repositoryService.createProcessDefinitionQuery().orderByDeploymentId().desc()
 				.list();
-		return historicTaskList;
+		processDefinitionList = CommonBeanUtils.copyTo(source, VOProcessDefinition.class);
+		response.setViewName("/process/processList.html");
+		dataWrap.setDataList(processDefinitionList);
+		response.setAjaxParameter("dataWrap", dataWrap);
+		return response;
 	}
 
 	/**
@@ -122,7 +73,7 @@ public class ProcessInstanceController {
 	 * @param instanceId
 	 * @return
 	 */
-	@RequestMapping(value = "transmit/{instanceId}", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "{instanceId}/transmit", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public String transmit(@PathVariable("instanceId") String instanceId) {
 		try {
@@ -142,7 +93,7 @@ public class ProcessInstanceController {
 	 * @param instanceId
 	 * @return
 	 */
-	@RequestMapping(value = "rollback/{instanceId}", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "{instanceId}/rollback", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public String backup(@PathVariable("instanceId") String instanceId) {
 		try {
@@ -153,16 +104,45 @@ public class ProcessInstanceController {
 			return "error";
 		}
 	}
+	
+	/**
+	 * 读取资源，通过流程ID
+	 *
+	 * @param resourceType
+	 *            资源类型(xml|image)
+	 * @param deployId
+	 *            流程实例ID
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/svg")
+	public void loadByDeployId(@RequestParam("type") String resourceType, @RequestParam("pdId") String pdId,
+			HttpServletResponse response) throws Exception {
+		InputStream resourceAsStream = null;
+		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(pdId)
+				.singleResult();
 
-	@Autowired
-	public void setHistoryService(HistoryService historyService) {
-		this.historyService = historyService;
+		String resourceName = "";
+		if (resourceType.equals("image")) {
+			resourceName = processDefinition.getDiagramResourceName();
+		} else if (resourceType.equals("xml")) {
+			resourceName = processDefinition.getResourceName();
+		}
+		resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), resourceName);
+		byte[] b = new byte[1024];
+		int len = -1;
+		while ((len = resourceAsStream.read(b, 0, 1024)) != -1) {
+			response.getOutputStream().write(b, 0, len);
+		}
 	}
 
 	@Autowired
 	public void setTaskService(TaskService taskService) {
 		this.taskService = taskService;
 	}
-	
+	@Autowired
+	public void setRepositoryService(RepositoryService repositoryService) {
+		this.repositoryService = repositoryService;
+	}
 	
 }

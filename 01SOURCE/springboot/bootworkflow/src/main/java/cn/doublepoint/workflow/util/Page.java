@@ -22,7 +22,7 @@ public class Page<T> {
     protected boolean autoCount = true;
 
     // -- 返回结果 --//
-    protected List<T> result = new ArrayList();
+    protected List<T> result = new ArrayList<T>();
     protected long totalCount = -1;
 
     // -- 构造函数 --//

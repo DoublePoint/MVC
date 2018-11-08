@@ -11,14 +11,13 @@ package cn.doublepoint.workflow.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration("workflowAutoConfig")
 /*@PropertySource(value = {"classpath:/application.yml"},
 ignoreResourceNotFound = true,encoding = "utf-8")*/
 public class WorkflowAutoConfig {
 	
-	@Value("${workflow.url}")
+	@Value("${workflow.url:http://localhost}")
 	private String url;
 
 	public String getUrl() {

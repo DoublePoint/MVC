@@ -1,113 +1,166 @@
-/*package cn.doublepoint.workflow.controller;
+package cn.doublepoint.workflow.controller;
 
-import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
-*//**
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.log.Log4jUtil;
+import cn.doublepoint.workflow.process.VOModel;
+
+/**
  * 流程模型控制器
  *
  * @author liulei
- *//*
+ */
 @Controller
-@RequestMapping(value = "/workflow/model")
+@RequestMapping(value = "oll/model")
 public class ModelController {
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-
+	
 	@Autowired
-	RepositoryService repositoryService;
-
-	*//**
+	protected RepositoryService repositoryService;
+	
+	/**
 	 * 模型列表
-	 *//*
-	@RequestMapping(value = "list")
-	public ModelAndView modelList() {
-		ModelAndView mav = new ModelAndView("workflow/model-list");
+	 */
+	@RequestMapping(value = "model-list")
+	public AjaxResponse modelList(AjaxResponse response) {
+		AjaxDataWrap<VOModel> dataWrap = new AjaxDataWrap<VOModel>();
+		List<VOModel> resultList = new ArrayList<VOModel>();
 		List<Model> list = repositoryService.createModelQuery().list();
-		mav.addObject("list", list);
-		return mav;
+		resultList = CommonBeanUtils.copyTo(list, VOModel.class);
+		response.setViewName("/model/modelList.html");
+		dataWrap.setDataList(resultList);
+		response.setAjaxParameter("dataWrap", dataWrap);
+		return response;
 	}
 
-	*//**
-	 * 导出model对象为指定类型
-	 *
-	 * @param modelId
-	 *            模型ID
-	 * @param type
-	 *            导出文件类型(bpmn\json)
-	 *//*
-	@RequestMapping(value = "export/{modelId}/{type}")
-	public void export(@PathVariable("modelId") String modelId, @PathVariable("type") String type,
-			HttpServletResponse response) {
+	/**
+	 * 模型列表
+	 */
+	@RequestMapping(value = "model-retrieve")
+	@ResponseBody
+	public AjaxResponse retrieveModel(AjaxResponse response) {
+		AjaxDataWrap<VOModel> dataWrap = new AjaxDataWrap<VOModel>();
+		List<VOModel> resultList = new ArrayList<VOModel>();
+		List<Model> list = repositoryService.createModelQuery().list();
+		resultList = CommonBeanUtils.copyTo(list, VOModel.class);
+		dataWrap.setDataList(resultList);
+		response.setAjaxParameter("dataWrap", dataWrap);
+		return response;
+	}
+
+	@RequestMapping(value = "model-add")
+	public AjaxResponse modelAdd(AjaxResponse response) {
+		response.setViewName("/model/modelDialog.html");
+		return response;
+	}
+
+	/*@RequestMapping(value = "model-delete")
+	@ResponseBody
+	public AjaxResponse modelDelete(BodyReaderHttpServletRequestWrapper request) {
+		AjaxDataWrap<VOModel> dataWrap = request.getAjaxDataWrap("dataWrap", VOModel.class);
+		List<VOModel> deleteList = dataWrap.getDataList();
+		if (deleteList != null && deleteList.size() > 0) {
+			deleteList.stream().forEach(item -> repositoryService.deleteModel(item.getId()));
+		}
+		AjaxResponse response = new AjaxResponse();
+		response.setAjaxParameter("deleteState", true);
+		return response;
+	}*/
+
+	/**
+	 * 创建模型
+	 */
+	@RequestMapping(value = "model-create")
+	@ResponseBody
+	public AjaxResponse modelCreate(@RequestParam("name") String name, @RequestParam("key") String key,
+			@RequestParam("description") String description, HttpServletRequest request, HttpServletResponse response) {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		ObjectNode editorNode = objectMapper.createObjectNode();
+		editorNode.put("id", "canvas");
+		editorNode.put("resourceId", "canvas");
+		ObjectNode stencilSetNode = objectMapper.createObjectNode();
+		stencilSetNode.put("namespace", "http://b3mn.org/stencilset/bpmn2.0#");
+		editorNode.put("stencilset", stencilSetNode);
+		Model modelData = repositoryService.newModel();
+
+		ObjectNode modelObjectNode = objectMapper.createObjectNode();
+		modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, name);
+		modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, 1);
+		description = StringUtils.defaultString(description);
+		modelObjectNode.put(ModelDataJsonConstants.MODEL_DESCRIPTION, description);
+		modelData.setMetaInfo(modelObjectNode.toString());
+		modelData.setName(name);
+		modelData.setKey(StringUtils.defaultString(key));
+
+		repositoryService.saveModel(modelData);
+		try {
+			repositoryService.addModelEditorSource(modelData.getId(), editorNode.toString().getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			Log4jUtil.error(e);
+			AjaxResponse ajaxResponse = new AjaxResponse();
+			ajaxResponse.setErrorMessage("创建失败。");
+			return ajaxResponse;
+		}
+
+		AjaxResponse ajaxResponse = new AjaxResponse();
+		ajaxResponse.setAjaxParameter("modelId", modelData.getId());
+		return ajaxResponse;
+
+	}
+
+	/**
+	 * 根据Model部署流程
+	 */
+	@RequestMapping(value = "model/deploy/{modelId}")
+	@ResponseBody
+	public AjaxResponse modelDeploy(@PathVariable("modelId") String modelId, RedirectAttributes redirectAttributes) {
+		AjaxResponse response = new AjaxResponse();
 		try {
 			Model modelData = repositoryService.getModel(modelId);
-			BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
-			byte[] modelEditorSource = repositoryService.getModelEditorSource(modelData.getId());
+			ObjectNode modelNode = (ObjectNode) new ObjectMapper()
+					.readTree(repositoryService.getModelEditorSource(modelData.getId()));
+			byte[] bpmnBytes = null;
 
-			JsonNode editorNode = new ObjectMapper().readTree(modelEditorSource);
-			BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
+			BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+			bpmnBytes = new BpmnXMLConverter().convertToXML(model);
 
-			// 处理异常
-			if (bpmnModel.getMainProcess() == null) {
-				response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
-				response.getOutputStream().println("no main process, can't export for type: " + type);
-				response.flushBuffer();
-				return;
-			}
-
-			String filename = "";
-			byte[] exportBytes = null;
-
-			String mainProcessId = bpmnModel.getMainProcess().getId();
-
-			if (type.equals("bpmn")) {
-
-				BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
-				exportBytes = xmlConverter.convertToXML(bpmnModel);
-
-				filename = mainProcessId + ".bpmn20.xml";
-			} else if (type.equals("json")) {
-
-				exportBytes = modelEditorSource;
-				filename = mainProcessId + ".json";
-
-			}
-
-			ByteArrayInputStream in = new ByteArrayInputStream(exportBytes);
-			IOUtils.copy(in, response.getOutputStream());
-
-			response.setHeader("Content-Disposition", "attachment; filename=" + filename);
-			response.flushBuffer();
+			String processName = modelData.getName() + ".bpmn20.xml";
+			Deployment deployment = repositoryService.createDeployment().name(modelData.getName())
+					.addString(processName, new String(bpmnBytes)).deploy();
+			response.setAjaxParameter("returnMessage", "部署成功，部署ID=" + deployment.getId());
 		} catch (Exception e) {
-			logger.error("导出model的xml文件失败：modelId={}, type={}", modelId, type, e);
+			Log4jUtil.error(e);
+			response.setErrorMessage("部署失败。");
 		}
-	}
-
-	@RequestMapping(value = "delete/{modelId}")
-	public String delete(@PathVariable("modelId") String modelId) {
-		repositoryService.deleteModel(modelId);
-		return "redirect:/workflow/model/list";
+		return response;
 	}
 
 }
-*/
