@@ -7,15 +7,15 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.common.application.template.sys.woksheet;
+package cn.doublepoint.workflow.util;
 
 import java.util.List;
 
-import cn.doublepoint.common.config.WorkflowAutoConfig;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
 import cn.doublepoint.commonutil.log.Log4jUtil;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
+import cn.doublepoint.workflow.config.WorkflowAutoConfig;
+import cn.doublepoint.workflow.process.InstanceService;
+import cn.doublepoint.workflow.process.VOTask;
 
 public class WorksheetUtil {
 	

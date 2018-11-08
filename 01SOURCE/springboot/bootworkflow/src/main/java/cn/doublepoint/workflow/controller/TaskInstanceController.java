@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
+import cn.doublepoint.workflow.process.VOTask;
 
 /**
  * 流程管理控制器

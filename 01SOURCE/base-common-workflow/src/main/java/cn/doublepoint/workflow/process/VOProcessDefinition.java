@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.template.dto.domain.model.entity.workflow;
+package cn.doublepoint.workflow.process;
 
 import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 

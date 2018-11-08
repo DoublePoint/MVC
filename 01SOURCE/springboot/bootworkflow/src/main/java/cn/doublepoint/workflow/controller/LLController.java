@@ -51,8 +51,8 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.log.Log4jUtil;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOModel;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOProcessDefinition;
+import cn.doublepoint.workflow.process.VOModel;
+import cn.doublepoint.workflow.process.VOProcessDefinition;
 
 @Controller
 @RequestMapping(value = "/template/sys/workflow")

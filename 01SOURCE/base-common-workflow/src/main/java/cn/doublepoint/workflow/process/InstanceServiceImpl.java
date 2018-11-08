@@ -7,19 +7,23 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet;
+package cn.doublepoint.workflow.process;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import cn.doublepoint.common.util.SequenceUtil;
+import com.alibaba.fastjson.JSONObject;
+
 import cn.doublepoint.commonutil.DateTimeUtil;
+import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
@@ -28,37 +32,46 @@ import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
+import cn.doublepoint.workflow.util.WorksheetUtil;
 
 @Service("instanceService")
 public class InstanceServiceImpl implements InstanceService {
-
-	private final String SHEET_STATE_RUNNING = "1";// 运行
-	private final String SHEET_STATE_SUSPEND = "2";// 挂起
-	private final String SHEET_STATE_ABOLISHED = "3";// 作废
-	private final String SHEET_STATE_COMPLETE = "4";// 完成
 	
+	//启动一个工作流URL
+	private final String START_INSTANCE_URL="/runtime/process-instances";
+
 	@Autowired
 	private WorksheetService worksheetService;
 	
 	@Autowired
 	RestTemplate restTemplate;
 
+	/**
+	 * 启动线程，待成功后创建工作单
+	 */
 	@Override
 	public String createAndStart(String classification, String createUser, String description) {
+		ProcessInstanceCreateRequest request=new ProcessInstanceCreateRequest();
+		request.setProcessDefinitionKey(classification);
+		String  requestString=JSONObject.toJSONString(request);
+		HttpHeaders headers = new HttpHeaders(); 
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestBody=new HttpEntity<>(requestString,headers);
+		
 		// 启动流程并返回实例标识
-		String instanceId = restTemplate.exchange("http://localhost:8080/base-workflow-test/template/sys/workflow/start/WF-00001", 
-                HttpMethod.GET, 
-                null, 
-                new ParameterizedTypeReference<String>() {}).getBody();
+		ProcessInstanceResponse response = restTemplate.exchange(WorksheetUtil.getWorkflowUrl()+START_INSTANCE_URL, 
+                HttpMethod.POST, 
+                requestBody, 
+                new ParameterizedTypeReference<ProcessInstanceResponse>() {}).getBody();
+		
 		Worksheet worksheet = new Worksheet();
-		worksheet.setInstanceId(instanceId);
+		worksheet.setInstanceId(response.getId());
 		worksheet.setId(SequenceUtil.getNextVal(Worksheet.class));
 		worksheet.setWorksheetNo(generateWorksheetNo());
 		worksheet.setClassification(classification);
 		worksheet.setDescription(description);
 		worksheet.setCreateUser(createUser);
-		worksheet.setState(SHEET_STATE_RUNNING);
+		worksheet.setState(WorksheetConstant.SHEET_STATE_RUNNING);
 		worksheet.setCreateTime(DateTimeUtil.getCurrentDate());
 		worksheet.setModifyTime(DateTimeUtil.getCurrentDate());
 		worksheetService.create(worksheet);

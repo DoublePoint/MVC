@@ -20,7 +20,7 @@ import cn.doublepoint.common.config.WorkflowAutoConfig;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
 import cn.doublepoint.commonutil.ApplicationContextUtil;
 import cn.doublepoint.commonutil.log.Log4jUtil;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
+import cn.doublepoint.workflow.process.VOTask;
 
 public class WorksheetUtil {
 	

@@ -28,4 +28,4 @@ spring:
   resources:
     static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 workflow:
-  url: localhost:8082/workflow
+  url: http://localhost:8081/bootworkflow

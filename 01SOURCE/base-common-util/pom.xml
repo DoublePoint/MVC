@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>cn.doublepoint.base</groupId>
-		<artifactId>base-parent</artifactId>
+		<artifactId>base-parent-springboot</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -13,27 +13,23 @@
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
-			<version>1.0</version>
-		</dependency>
+			</dependency>
 
 		<!-- 说明是Spring环境 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+			</dependency>
 		<!-- 方便使用BeanUtil -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+			</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.entitymanager.version}</version>
-		</dependency>
+			</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
 		<dependency>
@@ -46,30 +42,25 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.jpa.version}</version>
-		</dependency>
+			</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		<!-- 为了定义统一异常处理 ↓↓↓↓↓↓ -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
 		</dependency>
 		<!-- 为了定义统一异常处理 ↑↑↑↑↑↑ -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.core.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
@@ -83,7 +74,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.25</version>
 		</dependency>
 		<!-- ============== log end ============== -->
 		<!-- 发送日志到邮箱依赖 -->

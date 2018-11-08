@@ -19,15 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import cn.doublepoint.common.application.template.sys.woksheet.WorksheetUtil;
+import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.workflowtest.AnnouncementChangedService;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.WorksheetService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.template.dto.domain.model.entity.sys.AnnouncementChanged;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.workflow.process.WorksheetService;
+import cn.doublepoint.workflow.util.WorksheetUtil;
 
 @Controller
 @RequestMapping("sys/workflow/announcement")
@@ -77,6 +78,7 @@ public class PublishAnnouncementController extends BaseController{
 		AjaxDataWrap<AnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",AnnouncementChanged.class);
 		
 		Worksheet worksheet=new Worksheet();
+		worksheet.setClassification(XTConstant.WORKFLOW_CLASSIFICATION);
 		String worksheetNo=WorksheetUtil.createAndStart(worksheet.getClassification(), "liulei", worksheet.getDescription());
 		
 		AnnouncementChanged changed=annChangedWrap.getData();

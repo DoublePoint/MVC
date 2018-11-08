@@ -9,12 +9,6 @@
 */
 package cn.doublepoint.common.port.adapter.template.persistence.sys;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class BaseQueryService {
 	
 }

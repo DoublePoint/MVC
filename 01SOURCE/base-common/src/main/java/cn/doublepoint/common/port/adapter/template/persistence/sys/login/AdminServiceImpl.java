@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.common.util.SequenceUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
+import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.encrypt.EncyptUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;

@@ -7,15 +7,18 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.common.config;
+package cn.doublepoint.workflow.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration("workflowAutoConfig")
+/*@PropertySource(value = {"classpath:/application.yml"},
+ignoreResourceNotFound = true,encoding = "utf-8")*/
 public class WorkflowAutoConfig {
 	
-	@Value("workflow.url")
+	@Value("${workflow.url}")
 	private String url;
 
 	public String getUrl() {

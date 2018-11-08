@@ -9,7 +9,7 @@
 */
 package cn.doublepoint;
 
-import cn.doublepoint.common.util.SequenceUtil;
+import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Menu;
 
 

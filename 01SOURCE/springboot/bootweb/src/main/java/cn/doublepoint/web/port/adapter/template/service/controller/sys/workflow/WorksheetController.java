@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.InstanceService;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet.WorksheetService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
+import cn.doublepoint.workflow.process.InstanceService;
+import cn.doublepoint.workflow.process.VOTask;
+import cn.doublepoint.workflow.process.WorksheetService;
 
 @Controller
 @RequestMapping("sys/worksheet")

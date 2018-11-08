@@ -7,13 +7,12 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.common.port.adapter.template.persistence.sys.worksheet;
+package cn.doublepoint.workflow.process;
 
 import java.util.List;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
-import cn.doublepoint.template.dto.domain.model.entity.workflow.VOTask;
 
 public interface InstanceService {
 
