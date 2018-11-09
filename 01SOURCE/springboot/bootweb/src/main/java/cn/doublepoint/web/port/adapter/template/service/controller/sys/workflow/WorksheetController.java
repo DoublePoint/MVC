@@ -21,8 +21,8 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.workflow.domain.model.VOTask;
 import cn.doublepoint.workflow.process.InstanceService;
-import cn.doublepoint.workflow.process.VOTask;
 import cn.doublepoint.workflow.process.WorksheetService;
 
 @Controller

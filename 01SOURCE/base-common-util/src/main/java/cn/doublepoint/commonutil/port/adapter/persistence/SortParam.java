@@ -10,32 +10,29 @@
 package cn.doublepoint.commonutil.port.adapter.persistence;
 
 public class SortParam {
-	public static final String SORT_TYPE_ASCENDING = "ASC";
-	public static final String SORT_TYPE_DESCENDING = "DESC";
 	private String sortProperty;
-	private String sortType = "ASC";
-	private String alias;
+	private String sortType = EnumSortParamType.ASC.toString();
+//	private String alias;
 
-	public String getAlias() {
-		return this.alias;
-	}
-
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
+//	public String getAlias() {
+//		return this.alias;
+//	}
+//
+//	public void setAlias(String alias) {
+//		this.alias = alias;
+//	}
 
 	public SortParam() {
 	}
+	
 
-	public SortParam(String property, String type) {
+	public SortParam(String property) {
 		this.sortProperty = property;
-		this.sortType = type;
 	}
 
-	public SortParam(String property, String type, String alias) {
+	public SortParam(String property, EnumSortParamType type) {
 		this.sortProperty = property;
-		this.sortType = type;
-		this.alias = alias;
+		this.sortType = type.toString();
 	}
 
 	public String getSortProperty() {
@@ -53,4 +50,5 @@ public class SortParam {
 	public void setSortType(String sortType) {
 		this.sortType = sortType;
 	}
+	
 }

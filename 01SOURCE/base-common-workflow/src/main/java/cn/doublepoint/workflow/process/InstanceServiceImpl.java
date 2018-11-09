@@ -32,6 +32,7 @@ import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.workflow.domain.model.VOTask;
 import cn.doublepoint.workflow.util.WorksheetUtil;
 
 @Service("instanceService")

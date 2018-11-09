@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.doublepoint.commonutil.StringUtil;
+
 public class QueryParamList {
 	private List<QueryParam> params = new ArrayList<QueryParam>();
 
@@ -66,7 +68,7 @@ public class QueryParamList {
 	}
 
 	public QueryParam get(String name) {
-		if (null == name) {
+		if (StringUtil.isNullOrEmpty(name)) {
 			return null;
 		}
 		for (QueryParam param : this.params) {
@@ -106,5 +108,7 @@ public class QueryParamList {
 		return paramAndSql;
 	}
 	
-	
+	public boolean hasParam(String name){
+		return this.get(name)!=null;
+	}
 }

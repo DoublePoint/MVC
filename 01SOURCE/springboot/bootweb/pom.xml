@@ -54,6 +54,7 @@
 			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-common-workflow</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 	<build>

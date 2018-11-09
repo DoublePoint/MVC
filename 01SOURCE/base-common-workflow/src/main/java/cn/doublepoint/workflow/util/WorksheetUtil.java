@@ -12,10 +12,14 @@ package cn.doublepoint.workflow.util;
 import java.util.List;
 
 import cn.doublepoint.commonutil.ApplicationContextUtil;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.workflow.config.WorkflowAutoConfig;
+import cn.doublepoint.workflow.domain.model.VOActReModel;
+import cn.doublepoint.workflow.domain.model.VOActReModelQuery;
+import cn.doublepoint.workflow.domain.model.VOTask;
 import cn.doublepoint.workflow.process.InstanceService;
-import cn.doublepoint.workflow.process.VOTask;
+import cn.doublepoint.workflow.process.ModelService;
 
 public class WorksheetUtil {
 	
@@ -89,13 +93,32 @@ public class WorksheetUtil {
 		instanceService.active(instanceId);
 	}
 	
+	/**
+	 * 获取实例历史记录
+	 * @param instanceId
+	 * @return
+	 */
 	public static List<VOTask> getHistoricTasks(String instanceId){
 		InstanceService instanceService = getInstanceService();
 		return instanceService.getHistoricTasks(instanceId);
 	}
 
+	/**
+	 * 查询Model
+	 * @param query
+	 * @return
+	 */
+	public static AjaxDataWrap<VOActReModel> retrieveModel(VOActReModelQuery query){
+		ModelService modelService = getModelService();
+		return modelService.retrieve(query);
+	}
+	
 	private static InstanceService getInstanceService() {
 		return (InstanceService) ApplicationContextUtil.getBean("instanceService");
+	}
+	
+	private static ModelService getModelService() {
+		return (ModelService) ApplicationContextUtil.getBean("llModelService");
 	}
 
 	public static String getWorkflowUrl() {

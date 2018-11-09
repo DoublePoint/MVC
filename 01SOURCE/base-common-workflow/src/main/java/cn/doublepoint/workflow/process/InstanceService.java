@@ -13,6 +13,7 @@ import java.util.List;
 
 import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.template.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.workflow.domain.model.VOTask;
 
 public interface InstanceService {
 

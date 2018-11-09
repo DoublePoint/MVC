@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
-import cn.doublepoint.workflow.process.VOTask;
+import cn.doublepoint.workflow.domain.model.VOTask;
 
 /**
  * 流程管理控制器

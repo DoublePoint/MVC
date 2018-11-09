@@ -12,6 +12,8 @@ package cn.doublepoint.commonutil.port.adapter.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.doublepoint.commonutil.StringUtil;
+
 public class SortParamList {
 	private List<SortParam> params = new ArrayList();
 
@@ -23,19 +25,19 @@ public class SortParamList {
 	}
 	
 	public void addParam(String property) {
-		SortParam sortParam = new SortParam(property, SortParam.SORT_TYPE_ASCENDING);
+		SortParam sortParam = new SortParam(property, EnumSortParamType.ASC);
 		this.params.add(sortParam);
 	}
 
-	public void addParam(String property, String type) {
-		SortParam sortParam = new SortParam(property, type);
+	public void addParam(String property, EnumSortParamType sortParamType) {
+		SortParam sortParam = new SortParam(property, sortParamType);
 		this.params.add(sortParam);
 	}
 
-	public void addParam(String property, String type, String alias) {
-		SortParam sortParam = new SortParam(property, type, alias);
-		this.params.add(sortParam);
-	}
+//	public void addParam(String property, String type, String alias) {
+//		SortParam sortParam = new SortParam(property, type, alias);
+//		this.params.add(sortParam);
+//	}
 
 	public List<SortParam> getParams() {
 		return this.params;
@@ -68,5 +70,17 @@ public class SortParamList {
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 
+	}
+	
+	public SortParam get(String paramName){
+		if (StringUtil.isNullOrEmpty(paramName)) {
+			return null;
+		}
+		for (SortParam param : this.params) {
+			if (paramName.equals(param.getSortProperty())) {
+				return param;
+			}
+		}
+		return null;
 	}
 }
