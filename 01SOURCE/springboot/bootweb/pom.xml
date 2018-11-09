@@ -48,11 +48,11 @@
 		<!-- 本地项目 -->
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common</artifactId>
+			<artifactId>base-common-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common-workflow</artifactId>
+			<artifactId>base-common-web-workflow</artifactId>
 		</dependency>
 		
 	</dependencies>

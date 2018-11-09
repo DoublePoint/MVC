@@ -3,7 +3,7 @@ package cn.doublepoint.workflow.domain.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 /**
  * The primary key class for the act_id_membership database table.

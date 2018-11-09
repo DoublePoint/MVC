@@ -1,8 +1,8 @@
 package cn.doublepoint.workflow.util;
 
-import org.activiti.engine.identity.User;
-
 import javax.servlet.http.HttpSession;
+
+import org.activiti.engine.identity.User;
 
 /**
  * 用户工具类

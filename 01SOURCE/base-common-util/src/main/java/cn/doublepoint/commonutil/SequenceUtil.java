@@ -14,8 +14,8 @@ import java.util.List;
 
 import cn.doublepoint.commonutil.persitence.jpa.BaseDaoService;
 import cn.doublepoint.commonutil.persitence.jpa.DataBaseUtil;
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
-import cn.doublepoint.template.dto.domain.model.entity.sys.Sequence;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.sys.Sequence;
 
 public class SequenceUtil extends DataBaseUtil {
 	/**

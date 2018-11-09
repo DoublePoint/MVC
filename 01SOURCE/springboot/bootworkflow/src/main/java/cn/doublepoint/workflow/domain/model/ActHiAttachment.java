@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 
 /**

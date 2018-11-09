@@ -41,13 +41,13 @@
 			
 			<dependency>
 				<groupId>cn.doublepoint.base</groupId>
-				<artifactId>base-common-workflow</artifactId>
+				<artifactId>base-common-web-workflow</artifactId>
 				<version>${cn.doublepoint.base.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>cn.doublepoint.base</groupId>
-				<artifactId>base-common</artifactId>
+				<artifactId>base-common-web</artifactId>
 				<version>${cn.doublepoint.base.version}</version>
 			</dependency>
 			

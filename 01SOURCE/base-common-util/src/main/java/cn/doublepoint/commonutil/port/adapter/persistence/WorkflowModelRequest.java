@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.commonutil.port.adapter.persistence;
 
-import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 public class WorkflowModelRequest {
 	

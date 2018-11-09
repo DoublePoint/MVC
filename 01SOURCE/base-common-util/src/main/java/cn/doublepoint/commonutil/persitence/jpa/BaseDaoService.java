@@ -11,14 +11,10 @@ package cn.doublepoint.commonutil.persitence.jpa;
 
 import java.util.List;
 
-import org.springframework.data.annotation.CreatedBy;
-
-import com.sun.mail.handlers.text_html;
-
-import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
 import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 public interface BaseDaoService {
 

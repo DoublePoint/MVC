@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 public class AjaxDataWrap<T> implements Serializable {
 	

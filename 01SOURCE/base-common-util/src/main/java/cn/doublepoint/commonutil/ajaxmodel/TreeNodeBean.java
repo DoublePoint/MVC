@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.commonutil.ajaxmodel;
 
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 public  class TreeNodeBean extends BaseModel{
 	

@@ -32,7 +32,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.commonutil.port.adapter.persistence.WorkflowModelRequest;
-import cn.doublepoint.workflow.domain.model.VOActReModel;
+import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 import cn.doublepoint.workflow.service.ModelService;
 
 /**

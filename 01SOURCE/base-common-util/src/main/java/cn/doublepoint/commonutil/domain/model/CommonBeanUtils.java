@@ -13,13 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
-import cn.doublepoint.commonutil.ajaxmodel.PageInfo;
-import cn.doublepoint.template.dto.domain.model.entity.BaseEntity;
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 public class CommonBeanUtils extends BeanUtils {
 
