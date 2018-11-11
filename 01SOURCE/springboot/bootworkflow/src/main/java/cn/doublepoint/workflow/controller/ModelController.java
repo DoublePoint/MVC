@@ -28,10 +28,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.annotation.RequestForm;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.log.Log4jUtil;
-import cn.doublepoint.commonutil.port.adapter.persistence.WorkflowModelRequest;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 import cn.doublepoint.workflow.service.ModelService;
 
@@ -66,8 +67,8 @@ public class ModelController {
 
 	/**
 	 * 模型列表
-	 *//*
-	@RequestMapping(value = "model-retrieve")
+	 */
+	@RequestMapping(value = "/oll/model/model-retrieve")
 	@ResponseBody
 	public AjaxResponse retrieveModel(AjaxResponse response) {
 		AjaxDataWrap<VOActReModel> dataWrap = new AjaxDataWrap<VOActReModel>();
@@ -77,20 +78,20 @@ public class ModelController {
 		dataWrap.setDataList(resultList);
 		response.setAjaxParameter("dataWrap", dataWrap);
 		return response;
-	}*/
+	}
 	
 	/**
 	 * 模型列表
 	 */
-	@RequestMapping(value = "/oll/model/model-retrieve")
-	@ResponseBody
-	public AjaxResponse retrieveModel(AjaxResponse response,@RequestBody WorkflowModelRequest workflowModelRequest) {
-		List<VOActReModel> list=modelService.retrieve(workflowModelRequest);
-		AjaxDataWrap<VOActReModel> dataWrap= new AjaxDataWrap<>();
-		dataWrap.setDataList(list);
-		response.setAjaxParameter("dataWrap", dataWrap);
-		return response;
-	}
+//	@RequestMapping(value = "/oll/model/model-retrieve")
+//	@ResponseBody
+//	public AjaxResponse retrieveModel(AjaxResponse response,@RequestBody WorkflowModelRequest workflowModelRequest) {
+//		List<VOActReModel> list=modelService.retrieve(workflowModelRequest);
+//		AjaxDataWrap<VOActReModel> dataWrap= new AjaxDataWrap<>();
+//		dataWrap.setDataList(list);
+//		response.setAjaxParameter("dataWrap", dataWrap);
+//		return response;
+//	}
 	
 	@RequestMapping(value = "oll/model/model-add")
 	public AjaxResponse modelAdd(AjaxResponse response) {
@@ -98,18 +99,18 @@ public class ModelController {
 		return response;
 	}
 
-	/*@RequestMapping(value = "model-delete")
+	@RequestMapping(value = "oll/model/model-delete")
 	@ResponseBody
-	public AjaxResponse modelDelete(BodyReaderHttpServletRequestWrapper request) {
-		AjaxDataWrap<VOModel> dataWrap = request.getAjaxDataWrap("dataWrap", VOModel.class);
-		List<VOModel> deleteList = dataWrap.getDataList();
+	public AjaxResponse modelDelete(@RequestBody AjaxRequest request) {
+		AjaxDataWrap<VOActReModel> dataWrap = request.getAjaxDataWrap("dataWrap", VOActReModel.class);
+		List<VOActReModel> deleteList = dataWrap.getDataList();
 		if (deleteList != null && deleteList.size() > 0) {
 			deleteList.stream().forEach(item -> repositoryService.deleteModel(item.getId()));
 		}
 		AjaxResponse response = new AjaxResponse();
 		response.setAjaxParameter("deleteState", true);
 		return response;
-	}*/
+	}
 
 	/**
 	 * 创建模型

@@ -1,0 +1,40 @@
+<!-- 	/* 
+	 * 创   建   人： 刘磊
+	 * 
+	 * 创   建   时   间 ： 2017-10-11 下午10:02:29
+	 * 
+	 * 类   说   明 ：
+	 * 
+	 * ******************修改日志***********************************
+	 * 
+	 * 修改人： 修改日期： 修改内容：
+	 * 
+	 * 修改人： 修改日期： 修改内容：
+	*/ -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<template th:replace="/base.html"></template>
+
+</head>
+<body>
+	<form>
+		<ll:filllayout>
+			<ll:fillarealr width="*" height="100%">
+				<ll:tabpanel id="abc">
+					<ll:tab id="tabEntity" active="true" title="实体">
+					</ll:tab>
+					<ll:tab id="tabService" title="服务层（Service）">
+                    	仓库
+                </ll:tab>
+					<ll:tab id="tabServiceImpl" title="服务层（ServiceImpl）">
+                   		 应用层
+                </ll:tab>
+					<ll:tab id="tabApplication" title=" Jsp页面">
+                   		 Jsp页面
+                </ll:tab>
+				</ll:tabpanel>
+			</ll:fillarealr>
+		</ll:filllayout>
+		<script type="text/javascript" th:insert="@{sys/assistant/generateDetailScript.js"></script>
+</body>
+</html>

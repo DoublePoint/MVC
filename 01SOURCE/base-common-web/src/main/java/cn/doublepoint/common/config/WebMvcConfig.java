@@ -9,6 +9,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import cn.doublepoint.commonutil.interceptor.ControllerReturnIntecerptor;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 
+/***
+ * 返回值句柄配置
+ * @author Administrator
+ *
+ */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	

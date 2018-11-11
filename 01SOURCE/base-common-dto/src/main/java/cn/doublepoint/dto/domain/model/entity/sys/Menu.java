@@ -39,8 +39,8 @@ public class Menu extends BaseEntity {
 	@Column(name="PARENT_ID")
 	private Long parentId;
 	
-	@Column(name="LEVEL")
-	private Integer level;
+	@Column(name="LEV")
+	private Integer lev;
 	
 	@Column(name="SN")
 	private Integer sn;
@@ -87,12 +87,12 @@ public class Menu extends BaseEntity {
 		this.parentId = parentId;
 	}
 
-	public Integer getLevel() {
-		return level;
+	public Integer getLev() {
+		return lev;
 	}
 	
-	public void setLevel(Integer level) {
-		this.level = level;
+	public void setLev(Integer lev) {
+		this.lev = lev;
 	}
 
 	public Integer getSn() {
@@ -133,7 +133,7 @@ public class Menu extends BaseEntity {
 		+"name=" + name +","
 		+"link=" + link +","
 		+"parentId=" + parentId +","
-		+"level=" + level +","
+		+"lev=" + lev +","
 		+"sn=" + sn +","
 		+"modifyTime=" + modifyTime +","
 		+"createTime=" + createTime 

@@ -100,10 +100,10 @@
 			<artifactId>base-common-util</artifactId>
 		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
-			<artifactId>base-common-workflow</artifactId>
-		</dependency> -->
+			<artifactId>base-common-web</artifactId>
+		</dependency>
 		
 	</dependencies>
 

@@ -15,7 +15,7 @@ function onClickSave() {
 	var dataWrap = ajaxform.collectDataWrap();
 	var data=dataWrap.getData();
 	$.request({
-		url : $$pageContextPath + "ool/model/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
+		url : $$pageContextPath + "oll/model/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {
 
 		},
@@ -25,7 +25,7 @@ function onClickSave() {
 			$.close();
 			$.openTab({
 				title : "Model:"+modelId,
-				content : '<iframe src="' + $$pageContextPath + "/modeler.html?modelId=" + modelId + '"></iframe>',
+				content : '<iframe src="' + $$pageContextPath + '/modeler.html?modelId=' + modelId + '"></iframe>',
 				id : modelId
 			});
 		},

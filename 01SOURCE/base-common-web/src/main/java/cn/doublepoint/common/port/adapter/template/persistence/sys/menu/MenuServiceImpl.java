@@ -34,7 +34,7 @@ public class MenuServiceImpl implements MenuService{
 	 */
 	public List<Menu> findRootMenu(PageInfo pageInfo) {
 		QueryParamList queryParamList=new QueryParamList();
-		queryParamList.addParam("level", XTConstant.TREE_ROOT_NODE_CJ);
+		queryParamList.addParam("lev", XTConstant.TREE_ROOT_NODE_CJ);
 		SortParamList sortParamList=new SortParamList();
 		sortParamList.addParam("sn");
 		List<Menu> list=JPAUtil.load(Menu.class, queryParamList,sortParamList);
@@ -109,16 +109,16 @@ public class MenuServiceImpl implements MenuService{
 	 */
 	public boolean saveOrUpdate(Menu menu) {
 		if (menu.getParentId() == null) {
-			menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
+			menu.setLev(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 			menu.setParentId(0L);
 		} else {
 			Menu parentCd = getById(Long.valueOf(menu.getParentId()));
 			if(parentCd==null){
-				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
+				menu.setLev(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 				menu.setParentId(0L);
 			}
 			else
-				menu.setLevel(parentCd.getLevel() + 1);
+				menu.setLev(parentCd.getLev() + 1);
 		}
 		if (menu.getId() == null){
 			menu.setId(SequenceUtil.getNextVal(Menu.class));
@@ -137,11 +137,11 @@ public class MenuServiceImpl implements MenuService{
 	public boolean saveOrUpdate(List<Menu> menuList) {
 		menuList.stream().forEach(menu->{
 			if (menu.getParentId() == null) {
-				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
+				menu.setLev(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 				menu.setParentId(0L);
 			} else {
 				Menu parentCd = getById(Long.valueOf(menu.getParentId()));
-				menu.setLevel(parentCd.getLevel() + 1);
+				menu.setLev(parentCd.getLev() + 1);
 			}
 			if (menu.getId() == null){
 				menu.setId(SequenceUtil.getNextVal(Menu.class));
