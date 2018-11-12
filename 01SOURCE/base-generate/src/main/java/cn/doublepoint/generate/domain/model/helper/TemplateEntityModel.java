@@ -12,12 +12,16 @@ package cn.doublepoint.generate.domain.model.helper;
 import java.util.List;
 
 import cn.doublepoint.commonutil.StringUtil;
+import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateTemplateUtil;
-import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 
 public class TemplateEntityModel extends BaseModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String remark;// 实体备注
 	private String type;// 实体类型
 	private String modelExtend;

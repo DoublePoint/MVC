@@ -52,6 +52,10 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>
+			<artifactId>base-common-generate</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.doublepoint.base</groupId>
 			<artifactId>base-common-web-workflow</artifactId>
 		</dependency>
 		

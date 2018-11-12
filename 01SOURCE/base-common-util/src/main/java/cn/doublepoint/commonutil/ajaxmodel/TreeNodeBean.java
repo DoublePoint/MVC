@@ -27,6 +27,7 @@ public  class TreeNodeBean extends BaseModel{
 	private String prop3;
 	private String prop4;
 	private String prop5;
+	private Object nodeBean;
 	
 	public String getCode() {
 		return code;
@@ -82,6 +83,12 @@ public  class TreeNodeBean extends BaseModel{
 	}
 	public void setIsParent(boolean isParent) {
 		this.isParent = isParent;
+	}
+	public Object getNodeBean() {
+		return nodeBean;
+	}
+	public void setNodeBean(Object nodeBean) {
+		this.nodeBean = nodeBean;
 	}
 
 	

@@ -48,7 +48,7 @@ public class SequenceUtil extends DataBaseUtil {
 	 * @return
 	 */
 	public static <T extends BaseModel> List<Long> getNextVal(Class<T> clazz, int count) {
-		String qualifiedName = clazz.getPackage().getName() + "." + clazz.getName();
+		String qualifiedName = clazz.getName();
 		return getNextVal(qualifiedName, count);
 	}
 

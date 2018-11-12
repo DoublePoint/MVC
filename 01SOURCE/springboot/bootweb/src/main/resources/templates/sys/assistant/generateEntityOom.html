@@ -45,7 +45,7 @@
 								maxlen="10"
 							></ll:formselect>
 							<ll:formdroptree id="cdmcId2" colspan="1" title="下拉框" field="" errmsg="菜单名称不能超过10" maxlen="10"
-								datasource="${pageContext.request.contextPath}/template/sys/menu/menu-tree/datalist?isHasRoot=true"
+								datasource="/sys/menu/menu-tree/datalist?isHasRoot=true"
 							></ll:formdroptree>
 						</ll:ajaxform>
 					</ll:fillareatb>
@@ -54,7 +54,7 @@
 			<ll:step title="实体类名过滤">
 				<ll:filllayout>
 					<ll:fillareatb showtitle="true" title="实体类名过滤1" showborder="false">
-						<ll:ajaxgrid datasource="/template/sys/config/entityFilter">
+						<ll:ajaxgrid datasource="/sys/config/entityFilter">
 							<ll:gridcheck></ll:gridcheck>
 							<ll:gridfield field="filter" title="过滤字符串"></ll:gridfield>
 						</ll:ajaxgrid>
@@ -79,6 +79,7 @@
 				>打包并下载</a>
 			</ll:step>
 		</ll:steppanel>
-		<script type="text/javascript" th:insert="@{/sys/admin/assistant/generateEntityOomScript.js"></script>
+	</form>
+	<script type="text/javascript" th:include="@{sys/assistant/generateEntityOomScript.js}"></script>
 </body>
 </html>

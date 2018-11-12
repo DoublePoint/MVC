@@ -62,6 +62,7 @@ public class MenuTreeController extends BaseTreeController {
 					if (!isHasChild(menu.getId()))
 						nodeBean.setIsParent(false);
 					nodeBean.setCode(String.valueOf(menu.getId()));
+					nodeBean.setNodeBean(menu);
 					return nodeBean;
 				}).collect(java.util.stream.Collectors.toList());
 			}
@@ -74,6 +75,7 @@ public class MenuTreeController extends BaseTreeController {
 				if (!isHasChild(menu.getId()))
 					nodeBean.setIsParent(false);
 				nodeBean.setCode(String.valueOf(menu.getId()));
+				nodeBean.setNodeBean(menu);
 				return nodeBean;
 			}).collect(java.util.stream.Collectors.toList());
 		}

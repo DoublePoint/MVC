@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: base-common-workflow
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: cn.doublepoint.base
+Build-Jdk: 1.8.0_25
+Implementation-URL: http://projects.spring.io/spring-boot/base-parent-
+ springboot/base-common-workflow/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

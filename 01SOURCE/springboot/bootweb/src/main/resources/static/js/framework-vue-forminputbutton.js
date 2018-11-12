@@ -52,7 +52,7 @@
 				$._Eval(inpbtn.onclick);
 			});
 		}
-		this.setData = function(aKey, aIsChanged, aValue) {
+		this.setData = function(aKey, aIsChanged) {
 			var arr;
 			try {
 				arr = aKey.split("&");
@@ -63,7 +63,7 @@
 				this.getInputDom().val(arr[0]);
 				this.setInputHiddenDomValue(arr[1]);
 			} else {
-				this.getInputDom().val(aValue);
+				this.getInputDom().val(aKey);
 				this.setInputHiddenDomValue(aKey);
 			}
 			if (this.labelprovider != null) {
@@ -76,7 +76,7 @@
 			var inputButton = this;
 			if (labelProvider != null) {
 				$.request({
-					url : labelProvider,
+					url : $$pageContextPath+labelProvider,
 					dataType:"text",
 					data : {
 						id : fieldKey,

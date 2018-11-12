@@ -1,6 +1,8 @@
 server:
   context-path: /web
   port: 8082
+  tomcat:
+    basedir: /data/apps/temp
 spring:
   datasource:
     name: bootweb
