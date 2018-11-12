@@ -12,7 +12,7 @@
 					<ll:formfield title="菜单链接" field="link" maxlen="200"></ll:formfield>
 					<ll:formfield title="菜单序号" field="sn" validtype="int" errmsg="菜单序号必须为整数"></ll:formfield>
 					<ll:forminputbutton id="inpbtn_sjcdbs" title="上级菜单" field="parentId" onclick="selectParent()"
-						th:labelprovider="@{/sys/menu/getMenuName}"
+						labelprovider="/sys/menu/getMenuName"
 					></ll:forminputbutton>
 				</ll:ajaxform>
 			</ll:fillareatb>

@@ -54,8 +54,9 @@ function FormDropTree(domId) {
 			},
 			async : {
 				enable : true,
+				contentType : "application/json", 
 				showLine : true,
-				url : this.datasource,
+				url : $$pageContextPath+this.datasource,
 				autoParam : [ "id", "name=n", "level=lv" ],
 				otherParam : {
 					"otherParam" : "zTreeAsyncTest"

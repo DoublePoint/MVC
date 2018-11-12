@@ -10,9 +10,9 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
 @Service("worksheetService")
 public class WorksheetServiceImpl implements WorksheetService {

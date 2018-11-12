@@ -9,9 +9,9 @@ import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.dto.domain.model.entity.sys.AnnouncementChanged;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
 @Service("announcementChangedService")
 public class AnnouncementChangedServiceImpl  implements AnnouncementChangedService{

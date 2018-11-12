@@ -136,8 +136,8 @@ function AjaxForm(domId) {
 	this.setData = function(data, isChanged) {
 		// 如果第二个参数为nul,那么设置ajaxform为未更改
 		this.data = data;
-		if (isChanged == null)
-			isChanged = false;
+//		if (isChanged == null)
+//			isChanged = false;
 		var items = this.formItems;
 		for (var i = 0; i < items.length; i++) {
 			var fieldItem = items[i];
@@ -146,7 +146,7 @@ function AjaxForm(domId) {
 			for (fieldName in data) {
 				// 如果字段名称与formfield的filed相同 那么则设置数据
 				if (fieldItem.getField() == fieldName) {
-					fieldItem.setData(data[fieldName], isChanged);
+					fieldItem.setData(data[fieldName]);
 				}
 			}
 		}

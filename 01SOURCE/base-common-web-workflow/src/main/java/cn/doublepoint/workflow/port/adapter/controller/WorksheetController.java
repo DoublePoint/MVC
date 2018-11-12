@@ -55,6 +55,7 @@ public class WorksheetController {
 		AjaxDataWrap<Worksheet> dataWrap=request.getAjaxDataWrap("worksheetDataWrap", Worksheet.class);
 		
 		Worksheet query=queryDataWrap.getData();
+		dataWrap.getPageInfo().setPageSize(10);
 		List<Worksheet> list=worksheetService.find(query, dataWrap.getPageInfo());
 		dataWrap.setDataList(list);
 		response.setAjaxParameter("dataWrap", dataWrap);

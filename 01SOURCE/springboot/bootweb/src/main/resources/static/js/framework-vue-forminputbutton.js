@@ -52,7 +52,7 @@
 				$._Eval(inpbtn.onclick);
 			});
 		}
-		this.setData = function(aKey, aIsChanged) {
+		this.setData = function(aKey) {
 			var arr;
 			try {
 				arr = aKey.split("&");

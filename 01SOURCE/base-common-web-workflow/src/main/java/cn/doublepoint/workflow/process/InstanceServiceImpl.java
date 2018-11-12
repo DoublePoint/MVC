@@ -29,9 +29,9 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOTask;
 import cn.doublepoint.workflow.util.WorksheetUtil;
 
