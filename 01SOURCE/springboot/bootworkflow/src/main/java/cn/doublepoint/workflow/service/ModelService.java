@@ -2,10 +2,10 @@ package cn.doublepoint.workflow.service;
 
 import java.util.List;
 
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
-import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
-import cn.doublepoint.commonutil.port.adapter.persistence.WorkflowModelRequest;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
+import cn.doublepoint.dto.domain.model.vo.query.SortParamList;
+import cn.doublepoint.dto.domain.model.vo.query.WorkflowModelRequest;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 
 public interface ModelService {

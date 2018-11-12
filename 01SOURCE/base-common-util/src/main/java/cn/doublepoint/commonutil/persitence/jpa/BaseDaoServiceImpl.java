@@ -19,11 +19,11 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParam;
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
-import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParam;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
+import cn.doublepoint.dto.domain.model.vo.query.SortParamList;
 
 @Service(value = "daoService")
 public class BaseDaoServiceImpl implements BaseDaoService {

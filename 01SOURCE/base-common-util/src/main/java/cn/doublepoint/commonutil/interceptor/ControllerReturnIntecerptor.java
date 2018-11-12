@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.alibaba.fastjson.JSON;
 

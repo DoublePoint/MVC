@@ -11,10 +11,10 @@ package cn.doublepoint.commonutil.persitence.jpa;
 
 import java.util.List;
 
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
-import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
+import cn.doublepoint.dto.domain.model.vo.query.SortParamList;
 
 public interface BaseDaoService {
 

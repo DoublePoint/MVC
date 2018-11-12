@@ -15,7 +15,7 @@ import java.util.List;
 import cn.doublepoint.dto.util.StringUtil;
 
 public class SortParamList {
-	private List<SortParam> params = new ArrayList();
+	private List<SortParam> params = new ArrayList<SortParam>();
 
 	public void addParam(SortParam param) {
 		if ((param == null) || (param.getSortProperty() == null) || ("".equals(param.getSortProperty()))) {

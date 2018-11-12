@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 import javax.persistence.Id;
 
 import cn.doublepoint.commonutil.log.Log4jUtil;
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
-import cn.doublepoint.commonutil.port.adapter.persistence.SortParamList;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
+import cn.doublepoint.dto.domain.model.vo.query.SortParamList;
 
 public class JPAUtil extends DataBaseUtil {
 	/**

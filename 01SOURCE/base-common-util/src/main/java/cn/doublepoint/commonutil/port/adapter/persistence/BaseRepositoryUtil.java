@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
+import cn.doublepoint.dto.domain.model.vo.query.SortParamList;
 
 @Service
 public interface BaseRepositoryUtil {

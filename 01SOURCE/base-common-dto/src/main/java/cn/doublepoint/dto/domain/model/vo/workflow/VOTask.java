@@ -17,6 +17,11 @@ import cn.doublepoint.dto.domain.model.entity.sys.User;
 
 public class VOTask  extends BaseModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** DB id of the task. */
 	private String id;
 

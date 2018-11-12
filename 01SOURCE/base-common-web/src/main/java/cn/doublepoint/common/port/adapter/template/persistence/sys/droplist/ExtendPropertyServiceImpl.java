@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.commonutil.port.adapter.persistence.QueryParamList;
 import cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
 @Service("extendPropertyService")
 public class ExtendPropertyServiceImpl  implements ExtendPropertyService{

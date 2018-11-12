@@ -13,6 +13,10 @@ import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 public class DropBean extends BaseModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String key;
 	private String value;
 	private String filter;
