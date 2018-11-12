@@ -17,7 +17,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class CommonUtils {
-	private static final long serialVersionUID = 1L;
 	/**
 	 * 获取数据库时间
 	 * @return

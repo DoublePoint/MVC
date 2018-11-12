@@ -20,6 +20,8 @@ import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 public class AjaxDataWrapUtil {
+	
+	@SuppressWarnings("rawtypes")
 	public static <T  extends BaseModel> AjaxDataWrap<T> translateJsonStringToAjaxDataWrap(String jsonString,Class clazz){
 		ObjectMapper mspp = new ObjectMapper();
 		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));

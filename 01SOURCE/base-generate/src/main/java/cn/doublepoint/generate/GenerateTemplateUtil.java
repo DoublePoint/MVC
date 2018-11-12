@@ -389,6 +389,7 @@ public class GenerateTemplateUtil {
 	 * @throws TemplateException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("resource")
 	private static String getRealText(String templateFile, Map<String, Object> templateData)
 			throws TemplateException, IOException {
 		ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:servlet-front.xml");

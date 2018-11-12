@@ -16,8 +16,6 @@ public class GenerateEntityMetaData {
 	
 	private static Map<String, String> fieldTypeMap=new HashMap<String,String>();
 	
-	private static Map<String, String> oomNodeTypeMap=new HashMap<String,String>();
-	
 	/**
 	 * 获取字段类型映射
 	 * @return
@@ -29,15 +27,4 @@ public class GenerateEntityMetaData {
 		return fieldTypeMap;
 	}
 	
-//	public static Map<String, String> getOomNodeTypeMap(){
-//		if(oomNodeTypeMap.keySet().size()>=0){
-//			oomNodeTypeMap.put("String", "String");
-//			oomNodeTypeMap.put("String", "String");
-//			oomNodeTypeMap.put("String", "String");
-//			oomNodeTypeMap.put("String", "String");
-//			oomNodeTypeMap.put("String", "String");
-//			oomNodeTypeMap.put("String", "String");
-//		}
-//		return oomNodeTypeMap;
-//	}
 }
