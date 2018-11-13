@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `act_evt_log`
+--
+
+DROP TABLE IF EXISTS `act_evt_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_evt_log` (
+  `LOG_NR_` bigint(20) NOT NULL AUTO_INCREMENT,
+  `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TIME_STAMP_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DATA_` longblob,
+  `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `IS_PROCESSED_` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`LOG_NR_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_evt_log`
 --
 
@@ -23,6 +47,26 @@ LOCK TABLES `act_evt_log` WRITE;
 /*!40000 ALTER TABLE `act_evt_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_evt_log` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ge_bytearray`
+--
+
+DROP TABLE IF EXISTS `act_ge_bytearray`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ge_bytearray` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `BYTES_` longblob,
+  `GENERATED_` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_FK_BYTEARR_DEPL` (`DEPLOYMENT_ID_`),
+  CONSTRAINT `ACT_FK_BYTEARR_DEPL` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_ge_bytearray`
@@ -35,6 +79,21 @@ INSERT INTO `act_ge_bytearray` VALUES ('10',1,'AnnouncementApply.WF-00001.png','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_ge_property`
+--
+
+DROP TABLE IF EXISTS `act_ge_property`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ge_property` (
+  `NAME_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `VALUE_` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`NAME_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_ge_property`
 --
 
@@ -43,6 +102,36 @@ LOCK TABLES `act_ge_property` WRITE;
 INSERT INTO `act_ge_property` VALUES ('next.dbid','42501',18),('schema.history','create(5.22.0.0)',1),('schema.version','5.22.0.0',1);
 /*!40000 ALTER TABLE `act_ge_property` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_actinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_actinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_actinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `ACT_ID_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `CALL_PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `START_TIME_` datetime(3) NOT NULL,
+  `END_TIME_` datetime(3) DEFAULT NULL,
+  `DURATION_` bigint(20) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_ACT_INST_START` (`START_TIME_`),
+  KEY `ACT_IDX_HI_ACT_INST_END` (`END_TIME_`),
+  KEY `ACT_IDX_HI_ACT_INST_PROCINST` (`PROC_INST_ID_`,`ACT_ID_`),
+  KEY `ACT_IDX_HI_ACT_INST_EXEC` (`EXECUTION_ID_`,`ACT_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_hi_actinst`
@@ -55,6 +144,29 @@ INSERT INTO `act_hi_actinst` VALUES ('10002','WF-00001:1:11','10001','10001','si
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_hi_attachment`
+--
+
+DROP TABLE IF EXISTS `act_hi_attachment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_attachment` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `URL_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `CONTENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TIME_` datetime(3) DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_hi_attachment`
 --
 
@@ -62,6 +174,27 @@ LOCK TABLES `act_hi_attachment` WRITE;
 /*!40000 ALTER TABLE `act_hi_attachment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_hi_attachment` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_comment`
+--
+
+DROP TABLE IF EXISTS `act_hi_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_comment` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TIME_` datetime(3) NOT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACTION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `MESSAGE_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `FULL_MSG_` longblob,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_hi_comment`
@@ -73,6 +206,38 @@ LOCK TABLES `act_hi_comment` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_hi_detail`
+--
+
+DROP TABLE IF EXISTS `act_hi_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_detail` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `VAR_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `TIME_` datetime(3) NOT NULL,
+  `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DOUBLE_` double DEFAULT NULL,
+  `LONG_` bigint(20) DEFAULT NULL,
+  `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_DETAIL_PROC_INST` (`PROC_INST_ID_`),
+  KEY `ACT_IDX_HI_DETAIL_ACT_INST` (`ACT_INST_ID_`),
+  KEY `ACT_IDX_HI_DETAIL_TIME` (`TIME_`),
+  KEY `ACT_IDX_HI_DETAIL_NAME` (`NAME_`),
+  KEY `ACT_IDX_HI_DETAIL_TASK_ID` (`TASK_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_hi_detail`
 --
 
@@ -82,6 +247,27 @@ LOCK TABLES `act_hi_detail` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_hi_identitylink`
+--
+
+DROP TABLE IF EXISTS `act_hi_identitylink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_identitylink` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_IDENT_LNK_USER` (`USER_ID_`),
+  KEY `ACT_IDX_HI_IDENT_LNK_TASK` (`TASK_ID_`),
+  KEY `ACT_IDX_HI_IDENT_LNK_PROCINST` (`PROC_INST_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_hi_identitylink`
 --
 
@@ -89,6 +275,35 @@ LOCK TABLES `act_hi_identitylink` WRITE;
 /*!40000 ALTER TABLE `act_hi_identitylink` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_hi_identitylink` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_procinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_procinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_procinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `START_TIME_` datetime(3) NOT NULL,
+  `END_TIME_` datetime(3) DEFAULT NULL,
+  `DURATION_` bigint(20) DEFAULT NULL,
+  `START_USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `START_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `END_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `SUPER_PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  UNIQUE KEY `PROC_INST_ID_` (`PROC_INST_ID_`),
+  KEY `ACT_IDX_HI_PRO_INST_END` (`END_TIME_`),
+  KEY `ACT_IDX_HI_PRO_I_BUSKEY` (`BUSINESS_KEY_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_hi_procinst`
@@ -101,6 +316,39 @@ INSERT INTO `act_hi_procinst` VALUES ('10001','10001',NULL,'WF-00001:1:11','2018
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_hi_taskinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_taskinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_taskinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_DEF_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PARENT_TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `START_TIME_` datetime(3) NOT NULL,
+  `CLAIM_TIME_` datetime(3) DEFAULT NULL,
+  `END_TIME_` datetime(3) DEFAULT NULL,
+  `DURATION_` bigint(20) DEFAULT NULL,
+  `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `PRIORITY_` int(11) DEFAULT NULL,
+  `DUE_DATE_` datetime(3) DEFAULT NULL,
+  `FORM_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_TASK_INST_PROCINST` (`PROC_INST_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_hi_taskinst`
 --
 
@@ -109,6 +357,35 @@ LOCK TABLES `act_hi_taskinst` WRITE;
 INSERT INTO `act_hi_taskinst` VALUES ('10006','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','10001','10001','申请',NULL,NULL,NULL,NULL,'2018-10-13 22:50:34.107',NULL,'2018-10-13 23:02:11.663',697556,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('12502','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','10001','10001','审批',NULL,NULL,NULL,NULL,'2018-10-13 23:02:12.176',NULL,'2018-10-13 23:02:28.747',16571,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('12510','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','10001','12507','申请',NULL,NULL,NULL,NULL,'2018-10-13 23:03:52.490',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('12512','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','10001','12508','归档',NULL,NULL,NULL,NULL,'2018-10-13 23:03:52.500',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('12516','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','12513','12513','申请',NULL,NULL,NULL,NULL,'2018-10-13 23:05:22.374',NULL,'2018-10-13 23:06:02.538',40164,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('12518','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','12513','12513','审批',NULL,NULL,NULL,NULL,'2018-10-13 23:06:02.551',NULL,'2018-10-13 23:06:17.248',14697,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('12520','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','12513','12513','归档',NULL,NULL,NULL,NULL,'2018-10-13 23:06:18.316',NULL,'2018-10-13 23:06:35.504',17188,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('15','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','12','12','申请',NULL,NULL,NULL,NULL,'2018-10-12 22:30:07.936',NULL,'2018-10-12 23:20:44.286',3036350,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('15004','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','15001','15001','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:18:20.419',NULL,'2018-10-14 11:21:03.636',163217,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('15006','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','15001','15001','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:21:03.796',NULL,'2018-10-14 11:22:03.517',59721,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('15008','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','15001','15001','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:22:03.707',NULL,'2018-10-14 11:22:42.067',38360,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('15010','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','15001','15001','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:22:42.076',NULL,'2018-10-14 11:23:47.434',65358,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('15014','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','15001','15011','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:23:47.454',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('15016','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','15001','15012','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:23:47.462',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('17504','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','17501','17501','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:31:33.952',NULL,'2018-10-14 11:31:59.451',25499,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('17506','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','17501','17501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:31:59.469',NULL,'2018-10-14 11:34:55.889',176420,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('17508','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','17501','17501','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:34:55.900',NULL,'2018-10-14 11:35:37.823',41923,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('17510','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','17501','17501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:35:37.830',NULL,'2018-10-14 11:42:23.135',405305,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('20002','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','17501','17501','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:42:23.245',NULL,'2018-10-14 11:42:51.011',27766,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('20004','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','17501','17501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:42:51.050',NULL,'2018-10-14 11:42:53.650',2600,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('20006','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','17501','17501','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:42:53.710',NULL,'2018-10-14 11:42:55.790',2080,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('20008','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','17501','17501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:42:55.804',NULL,'2018-10-14 11:42:56.604',800,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('20010','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','17501','17501','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:42:56.629',NULL,'2018-10-14 11:42:58.145',1516,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('20012','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','17501','17501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:42:58.179',NULL,'2018-10-14 11:43:01.917',3738,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('20016','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','17501','20013','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:43:01.959',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('20018','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','17501','20014','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:43:01.968',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('20022','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','20019','20019','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:43:41.683',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('20026','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','20023','20023','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:44:02.273',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('20030','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','20027','20027','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:44:45.596',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('22504','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','22501','22501','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:51:10.029',NULL,'2018-10-14 11:53:13.142',123113,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('22506','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','22501','22501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:53:13.158',NULL,'2018-10-14 11:53:13.966',808,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('22508','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','22501','22501','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:53:14.000',NULL,'2018-10-14 11:53:16.536',2536,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('22510','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','22501','22501','审批',NULL,NULL,NULL,NULL,'2018-10-14 11:53:16.572',NULL,'2018-10-14 11:53:18.349',1777,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('22514','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','22501','22511','申请',NULL,NULL,NULL,NULL,'2018-10-14 11:53:18.370',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('22516','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','22501','22512','归档',NULL,NULL,NULL,NULL,'2018-10-14 11:53:18.378',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('25004','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','25001','25001','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:00:07.259',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('25008','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','25005','25005','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:00:25.517',NULL,'2018-10-14 12:07:27.737',422220,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('2502','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','12','12','审批',NULL,NULL,NULL,NULL,'2018-10-12 23:20:44.382',NULL,'2018-10-12 23:24:19.384',215002,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('27502','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','25005','25005','审批',NULL,NULL,NULL,NULL,'2018-10-14 12:07:27.817',NULL,'2018-10-14 17:23:04.839',18937022,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('30004','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','30001','30001','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:10:05.483',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('30008','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','30005','30005','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:10:30.705',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('30012','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','30009','30009','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:12:39.469',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('30016','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','30013','30013','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:20:00.048',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32508','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32503','32503','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:21:48.662',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32510','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32501','32501','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:21:48.662',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32512','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32502','32502','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:21:48.662',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32516','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32513','32513','申请',NULL,NULL,NULL,NULL,'2018-10-14 12:21:59.061',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32518','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','25005','25005','归档',NULL,NULL,NULL,NULL,'2018-10-14 17:23:04.881',NULL,'2018-10-14 17:23:07.841',2960,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('32520','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','25005','25005','审批',NULL,NULL,NULL,NULL,'2018-10-14 17:23:07.849',NULL,'2018-10-14 17:23:12.652',4803,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('32524','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','25005','32521','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:23:12.908',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32526','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','25005','32522','归档',NULL,NULL,NULL,NULL,'2018-10-14 17:23:13.098',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('32530','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32527','32527','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:32:56.179',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32534','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32531','32531','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:33:14.969',NULL,'2018-10-14 18:37:22.141',3847172,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32538','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32535','32535','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:33:44.776',NULL,'2018-10-14 18:33:30.356',3585580,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32542','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32539','32539','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:33:47.240',NULL,'2018-10-14 18:22:00.905',2893665,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32546','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32543','32543','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:33:48.996',NULL,'2018-10-14 18:21:28.682',2859686,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('32550','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32547','32547','申请',NULL,NULL,NULL,NULL,'2018-10-14 17:33:51.323',NULL,'2018-10-14 17:59:06.079',1514756,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35002','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','32547','32547','审批',NULL,NULL,NULL,NULL,'2018-10-14 17:59:06.175',NULL,'2018-10-14 18:00:46.467',100292,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35004','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','32547','32547','归档',NULL,NULL,NULL,NULL,'2018-10-14 18:00:46.482',NULL,'2018-10-14 18:01:16.416',29934,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35006','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','32547','32547','审批',NULL,NULL,NULL,NULL,'2018-10-14 18:01:16.450',NULL,'2018-10-14 18:15:27.157',850707,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35010','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32547','35007','申请',NULL,NULL,NULL,NULL,'2018-10-14 18:15:27.186',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35012','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','32547','35008','归档',NULL,NULL,NULL,NULL,'2018-10-14 18:15:27.198',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35014','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','32543','32543','审批',NULL,NULL,NULL,NULL,'2018-10-14 18:21:28.696',NULL,'2018-10-14 18:21:36.304',7608,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35018','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32543','35015','申请',NULL,NULL,NULL,NULL,'2018-10-14 18:21:36.386',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35020','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','32543','35016','归档',NULL,NULL,NULL,NULL,'2018-10-14 18:21:36.428',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35022','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','32539','32539','审批',NULL,NULL,NULL,NULL,'2018-10-14 18:22:00.919',NULL,'2018-10-14 18:22:05.238',4319,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35026','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32539','35023','申请',NULL,NULL,NULL,NULL,'2018-10-14 18:22:05.252',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35028','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','32539','35024','归档',NULL,NULL,NULL,NULL,'2018-10-14 18:22:05.263',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35030','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','32535','32535','审批',NULL,NULL,NULL,NULL,'2018-10-14 18:33:30.364',NULL,'2018-10-14 18:33:40.629',10265,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35034','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32535','35031','申请',NULL,NULL,NULL,NULL,'2018-10-14 18:33:40.706',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35036','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','32535','35032','归档',NULL,NULL,NULL,NULL,'2018-10-14 18:33:40.735',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35038','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','32531','32531','审批',NULL,NULL,NULL,NULL,'2018-10-14 18:37:22.834',NULL,'2018-10-14 18:37:31.629',8795,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35042','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','32531','35039','申请',NULL,NULL,NULL,NULL,'2018-10-14 18:37:31.643',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35044','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','32531','35040','归档',NULL,NULL,NULL,NULL,'2018-10-14 18:37:31.648',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35048','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','35045','35045','申请',NULL,NULL,NULL,NULL,'2018-10-14 21:47:55.904',NULL,'2018-10-14 21:48:21.703',25799,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35050','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35045','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:21.714',NULL,'2018-10-14 21:48:22.802',1088,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35052','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','35045','35045','归档',NULL,NULL,NULL,NULL,'2018-10-14 21:48:22.811',NULL,'2018-10-14 21:48:30.063',7252,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35060','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35053','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:30.086',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35062','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35054','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:30.093',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35064','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35055','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:30.101',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35066','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35056','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:30.108',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35068','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35057','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:30.118',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35070','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35045','35058','审批',NULL,NULL,NULL,NULL,'2018-10-14 21:48:30.125',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35074','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','35071','35071','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:02:58.263',NULL,'2018-10-14 22:03:23.037',24774,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35076','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35071','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:23.060',NULL,'2018-10-14 22:03:25.326',2266,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35078','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','35071','35071','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:03:25.335',NULL,'2018-10-14 22:03:36.488',11153,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35086','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35079','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:36.503',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35088','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35080','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:36.510',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35090','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35081','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:36.518',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35092','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35082','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:36.525',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35094','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35083','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:36.533',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35096','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35071','35084','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:03:36.541',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35100','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','35097','35097','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:04:01.406',NULL,'2018-10-14 22:04:08.916',7510,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35102','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35097','35097','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:08.925',NULL,'2018-10-14 22:04:09.884',959,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35104','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','35097','35097','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:04:09.900',NULL,'2018-10-14 22:04:10.683',783,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35109','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','35106','35106','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:04:33.174',NULL,'2018-10-14 22:04:40.870',7696,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35111','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35106','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:40.878',NULL,'2018-10-14 22:04:41.376',498,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35113','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','35106','35106','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:04:41.402',NULL,'2018-10-14 22:04:47.281',5879,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35121','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35114','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:47.298',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35123','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35115','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:47.307',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35125','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35116','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:47.314',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35127','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35117','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:47.322',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35129','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35118','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:47.329',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35131','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35106','35119','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:04:47.336',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35135','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','35132','35132','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:05:02.423',NULL,'2018-10-14 22:05:12.220',9797,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35137','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35132','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:12.232',NULL,'2018-10-14 22:05:15.311',3079,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35139','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','35132','35132','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:05:15.319',NULL,'2018-10-14 22:05:20.191',4872,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('35147','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35140','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:20.218',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35149','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35141','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:20.229',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35151','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35142','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:20.237',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35153','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35143','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:20.245',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35155','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35144','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:20.253',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35157','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35132','35145','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:05:20.262',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35161','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','35158','35158','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:14:42.920',NULL,'2018-10-14 22:14:58.140',15220,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('35163','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','35158','35158','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:14:58.215',NULL,'2018-10-14 22:15:01.095',2880,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('35165','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','35158','35158','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:15:01.112',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('37504','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37501','37501','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:21:35.223',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37508','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37505','37505','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:21:51.711',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37512','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37509','37509','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:22:07.173',NULL,'2018-10-14 22:22:17.967',10794,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37514','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37509','37509','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:22:17.981',NULL,'2018-10-14 22:22:19.302',1321,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37516','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','37509','37509','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:22:19.310',NULL,'2018-10-14 22:22:20.294',984,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('37518','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37509','37509','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:22:20.307',NULL,'2018-10-14 22:22:22.128',1821,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37522','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37509','37519','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:22:22.144',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37524','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','37509','37520','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:22:22.153',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('37528','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37525','37525','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:22:38.123',NULL,'2018-10-14 22:22:57.732',19609,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37530','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37525','37525','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:22:58.842',NULL,'2018-10-14 22:23:03.023',4181,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37532','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','37525','37525','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:23:03.541',NULL,'2018-10-14 22:23:23.714',20173,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('37536','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37525','37533','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:23:30.441',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37538','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37525','37534','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:23:30.455',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37542','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37539','37539','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:23:54.401',NULL,'2018-10-14 22:24:21.933',27532,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37544','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37539','37539','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:24:21.954',NULL,'2018-10-14 22:24:23.220',1266,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37546','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','37539','37539','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:24:23.229',NULL,'2018-10-14 22:24:41.201',17972,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('37550','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37539','37547','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:24:41.276',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37552','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37539','37548','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:24:41.289',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37556','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','37553','37553','申请',NULL,NULL,NULL,NULL,'2018-10-14 22:24:49.491',NULL,'2018-10-14 22:24:57.514',8023,'completed',50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('37558','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37553','37553','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:24:57.524',NULL,'2018-10-14 22:24:58.350',826,'completed',50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37560','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','37553','37553','归档',NULL,NULL,NULL,NULL,'2018-10-14 22:24:58.364',NULL,'2018-10-14 22:25:05.303',6939,'completed',50,NULL,'/template/sys/workflow/announcement/complete',NULL,''),('37564','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37553','37561','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:25:05.410',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('37566','WF-00001:1:11','sid-17FA9E7A-D7F7-4E4E-8D13-A57846E035B8','37553','37562','审批',NULL,NULL,NULL,NULL,'2018-10-14 22:25:05.451',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/aduit',NULL,''),('40004','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','40001','40001','申请',NULL,NULL,NULL,NULL,'2018-11-08 21:20:18.309',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('7506','WF-00001:1:11','sid-952D80A5-691E-40D9-A17E-2ED958A17C7A','12','7503','申请',NULL,NULL,NULL,NULL,'2018-10-13 22:24:06.595',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/apply',NULL,''),('7508','WF-00001:1:11','sid-2E8308D6-4EA5-4953-ABD7-78C722B8141E','12','7504','归档',NULL,NULL,NULL,NULL,'2018-10-13 22:24:06.608',NULL,NULL,NULL,NULL,50,NULL,'/template/sys/workflow/announcement/complete',NULL,'');
 /*!40000 ALTER TABLE `act_hi_taskinst` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_hi_varinst`
+--
+
+DROP TABLE IF EXISTS `act_hi_varinst`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_hi_varinst` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `VAR_TYPE_` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DOUBLE_` double DEFAULT NULL,
+  `LONG_` bigint(20) DEFAULT NULL,
+  `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `CREATE_TIME_` datetime(3) DEFAULT NULL,
+  `LAST_UPDATED_TIME_` datetime(3) DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_HI_PROCVAR_PROC_INST` (`PROC_INST_ID_`),
+  KEY `ACT_IDX_HI_PROCVAR_NAME_TYPE` (`NAME_`,`VAR_TYPE_`),
+  KEY `ACT_IDX_HI_PROCVAR_TASK_ID` (`TASK_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_hi_varinst`
@@ -120,6 +397,22 @@ LOCK TABLES `act_hi_varinst` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_id_group`
+--
+
+DROP TABLE IF EXISTS `act_id_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_group` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_id_group`
 --
 
@@ -127,6 +420,26 @@ LOCK TABLES `act_id_group` WRITE;
 /*!40000 ALTER TABLE `act_id_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_id_group` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_id_info`
+--
+
+DROP TABLE IF EXISTS `act_id_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_info` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `USER_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `VALUE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PASSWORD_` longblob,
+  `PARENT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_id_info`
@@ -138,6 +451,23 @@ LOCK TABLES `act_id_info` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_id_membership`
+--
+
+DROP TABLE IF EXISTS `act_id_membership`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_membership` (
+  `USER_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `GROUP_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`USER_ID_`,`GROUP_ID_`),
+  KEY `ACT_FK_MEMB_GROUP` (`GROUP_ID_`),
+  CONSTRAINT `ACT_FK_MEMB_GROUP` FOREIGN KEY (`GROUP_ID_`) REFERENCES `act_id_group` (`ID_`),
+  CONSTRAINT `ACT_FK_MEMB_USER` FOREIGN KEY (`USER_ID_`) REFERENCES `act_id_user` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_id_membership`
 --
 
@@ -145,6 +475,25 @@ LOCK TABLES `act_id_membership` WRITE;
 /*!40000 ALTER TABLE `act_id_membership` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_id_membership` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_id_user`
+--
+
+DROP TABLE IF EXISTS `act_id_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_id_user` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `FIRST_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `LAST_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `EMAIL_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PWD_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PICTURE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_id_user`
@@ -156,6 +505,27 @@ LOCK TABLES `act_id_user` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_procdef_info`
+--
+
+DROP TABLE IF EXISTS `act_procdef_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_procdef_info` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `INFO_JSON_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  UNIQUE KEY `ACT_UNIQ_INFO_PROCDEF` (`PROC_DEF_ID_`),
+  KEY `ACT_IDX_INFO_PROCDEF` (`PROC_DEF_ID_`),
+  KEY `ACT_FK_INFO_JSON_BA` (`INFO_JSON_ID_`),
+  CONSTRAINT `ACT_FK_INFO_JSON_BA` FOREIGN KEY (`INFO_JSON_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),
+  CONSTRAINT `ACT_FK_INFO_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_procdef_info`
 --
 
@@ -163,6 +533,23 @@ LOCK TABLES `act_procdef_info` WRITE;
 /*!40000 ALTER TABLE `act_procdef_info` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_procdef_info` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_re_deployment`
+--
+
+DROP TABLE IF EXISTS `act_re_deployment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_re_deployment` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `DEPLOY_TIME_` timestamp(3) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_re_deployment`
@@ -175,6 +562,37 @@ INSERT INTO `act_re_deployment` VALUES ('4','AnnouncementApply',NULL,'','2018-10
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_re_model`
+--
+
+DROP TABLE IF EXISTS `act_re_model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_re_model` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `LAST_UPDATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `VERSION_` int(11) DEFAULT NULL,
+  `META_INFO_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EDITOR_SOURCE_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EDITOR_SOURCE_EXTRA_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_FK_MODEL_SOURCE` (`EDITOR_SOURCE_VALUE_ID_`),
+  KEY `ACT_FK_MODEL_SOURCE_EXTRA` (`EDITOR_SOURCE_EXTRA_VALUE_ID_`),
+  KEY `ACT_FK_MODEL_DEPLOYMENT` (`DEPLOYMENT_ID_`),
+  CONSTRAINT `ACT_FK_MODEL_DEPLOYMENT` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`),
+  CONSTRAINT `ACT_FK_MODEL_SOURCE` FOREIGN KEY (`EDITOR_SOURCE_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),
+  CONSTRAINT `ACT_FK_MODEL_SOURCE_EXTRA` FOREIGN KEY (`EDITOR_SOURCE_EXTRA_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_re_model`
 --
 
@@ -183,6 +601,33 @@ LOCK TABLES `act_re_model` WRITE;
 INSERT INTO `act_re_model` VALUES ('1',6,'AnnouncementApply','公告申请流程',NULL,'2018-10-12 14:18:22.776','2018-10-12 14:29:08.615',1,'{\"name\":\"AnnouncementApply\",\"revision\":1,\"description\":\"公告申请的相关流程\"}',NULL,'2','3','');
 /*!40000 ALTER TABLE `act_re_model` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_re_procdef`
+--
+
+DROP TABLE IF EXISTS `act_re_procdef`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_re_procdef` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `KEY_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `VERSION_` int(11) NOT NULL,
+  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `RESOURCE_NAME_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DGRM_RESOURCE_NAME_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `HAS_START_FORM_KEY_` tinyint(4) DEFAULT NULL,
+  `HAS_GRAPHICAL_NOTATION_` tinyint(4) DEFAULT NULL,
+  `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  UNIQUE KEY `ACT_UNIQ_PROCDEF` (`KEY_`,`VERSION_`,`TENANT_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_re_procdef`
@@ -195,6 +640,32 @@ INSERT INTO `act_re_procdef` VALUES ('WF-00001:1:11',1,'http://www.activiti.org/
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_ru_event_subscr`
+--
+
+DROP TABLE IF EXISTS `act_ru_event_subscr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_event_subscr` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `EVENT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `EVENT_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACTIVITY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `CONFIGURATION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_EVENT_SUBSCR_CONFIG_` (`CONFIGURATION_`),
+  KEY `ACT_FK_EVENT_EXEC` (`EXECUTION_ID_`),
+  CONSTRAINT `ACT_FK_EVENT_EXEC` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_ru_event_subscr`
 --
 
@@ -202,6 +673,44 @@ LOCK TABLES `act_ru_event_subscr` WRITE;
 /*!40000 ALTER TABLE `act_ru_event_subscr` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_ru_event_subscr` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_execution`
+--
+
+DROP TABLE IF EXISTS `act_ru_execution`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_execution` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PARENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `SUPER_EXEC_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `IS_ACTIVE_` tinyint(4) DEFAULT NULL,
+  `IS_CONCURRENT_` tinyint(4) DEFAULT NULL,
+  `IS_SCOPE_` tinyint(4) DEFAULT NULL,
+  `IS_EVENT_SCOPE_` tinyint(4) DEFAULT NULL,
+  `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+  `CACHED_ENT_STATE_` int(11) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_EXEC_BUSKEY` (`BUSINESS_KEY_`),
+  KEY `ACT_FK_EXE_PROCINST` (`PROC_INST_ID_`),
+  KEY `ACT_FK_EXE_PARENT` (`PARENT_ID_`),
+  KEY `ACT_FK_EXE_SUPER` (`SUPER_EXEC_`),
+  KEY `ACT_FK_EXE_PROCDEF` (`PROC_DEF_ID_`),
+  CONSTRAINT `ACT_FK_EXE_PARENT` FOREIGN KEY (`PARENT_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_EXE_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`),
+  CONSTRAINT `ACT_FK_EXE_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ACT_FK_EXE_SUPER` FOREIGN KEY (`SUPER_EXEC_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_ru_execution`
@@ -214,6 +723,34 @@ INSERT INTO `act_ru_execution` VALUES ('10001',5,'10001',NULL,NULL,'WF-00001:1:1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_ru_identitylink`
+--
+
+DROP TABLE IF EXISTS `act_ru_identitylink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_identitylink` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_IDENT_LNK_USER` (`USER_ID_`),
+  KEY `ACT_IDX_IDENT_LNK_GROUP` (`GROUP_ID_`),
+  KEY `ACT_IDX_ATHRZ_PROCEDEF` (`PROC_DEF_ID_`),
+  KEY `ACT_FK_TSKASS_TASK` (`TASK_ID_`),
+  KEY `ACT_FK_IDL_PROCINST` (`PROC_INST_ID_`),
+  CONSTRAINT `ACT_FK_ATHRZ_PROCEDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`),
+  CONSTRAINT `ACT_FK_IDL_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_TSKASS_TASK` FOREIGN KEY (`TASK_ID_`) REFERENCES `act_ru_task` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_ru_identitylink`
 --
 
@@ -223,6 +760,37 @@ LOCK TABLES `act_ru_identitylink` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_ru_job`
+--
+
+DROP TABLE IF EXISTS `act_ru_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_job` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `EXCLUSIVE_` tinyint(1) DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `RETRIES_` int(11) DEFAULT NULL,
+  `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
+  `REPEAT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_FK_JOB_EXCEPTION` (`EXCEPTION_STACK_ID_`),
+  CONSTRAINT `ACT_FK_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_ru_job`
 --
 
@@ -230,6 +798,44 @@ LOCK TABLES `act_ru_job` WRITE;
 /*!40000 ALTER TABLE `act_ru_job` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_ru_job` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `act_ru_task`
+--
+
+DROP TABLE IF EXISTS `act_ru_task`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_task` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PARENT_TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_DEF_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DELEGATION_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PRIORITY_` int(11) DEFAULT NULL,
+  `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+  `DUE_DATE_` datetime(3) DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `FORM_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_TASK_CREATE` (`CREATE_TIME_`),
+  KEY `ACT_FK_TASK_EXE` (`EXECUTION_ID_`),
+  KEY `ACT_FK_TASK_PROCINST` (`PROC_INST_ID_`),
+  KEY `ACT_FK_TASK_PROCDEF` (`PROC_DEF_ID_`),
+  CONSTRAINT `ACT_FK_TASK_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_TASK_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`),
+  CONSTRAINT `ACT_FK_TASK_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `act_ru_task`
@@ -242,6 +848,37 @@ INSERT INTO `act_ru_task` VALUES ('12510',1,'12507','10001','WF-00001:1:11','申
 UNLOCK TABLES;
 
 --
+-- Table structure for table `act_ru_variable`
+--
+
+DROP TABLE IF EXISTS `act_ru_variable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `act_ru_variable` (
+  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+  `REV_` int(11) DEFAULT NULL,
+  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+  `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `DOUBLE_` double DEFAULT NULL,
+  `LONG_` bigint(20) DEFAULT NULL,
+  `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`ID_`),
+  KEY `ACT_IDX_VARIABLE_TASK_ID` (`TASK_ID_`),
+  KEY `ACT_FK_VAR_EXE` (`EXECUTION_ID_`),
+  KEY `ACT_FK_VAR_PROCINST` (`PROC_INST_ID_`),
+  KEY `ACT_FK_VAR_BYTEARRAY` (`BYTEARRAY_ID_`),
+  CONSTRAINT `ACT_FK_VAR_BYTEARRAY` FOREIGN KEY (`BYTEARRAY_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),
+  CONSTRAINT `ACT_FK_VAR_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`),
+  CONSTRAINT `ACT_FK_VAR_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `act_ru_variable`
 --
 
@@ -249,6 +886,25 @@ LOCK TABLES `act_ru_variable` WRITE;
 /*!40000 ALTER TABLE `act_ru_variable` DISABLE KEYS */;
 /*!40000 ALTER TABLE `act_ru_variable` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_admin`
+--
+
+DROP TABLE IF EXISTS `sys_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_admin` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LOGIN_ACCOUNT_NO` varchar(255) DEFAULT NULL,
+  `LOGIN_PASSWORD` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `ENABLE` varchar(2) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_admin`
@@ -261,6 +917,22 @@ INSERT INTO `sys_admin` VALUES (1,'2018-05-22 17:26:06','admin','d41d8cd98f00b20
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_admin_login_log`
+--
+
+DROP TABLE IF EXISTS `sys_admin_login_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_admin_login_log` (
+  `ID` bigint(20) NOT NULL,
+  `ADMIN_ID` bigint(20) DEFAULT NULL,
+  `IS_PASSWORD_ERROR` varchar(255) DEFAULT NULL,
+  `LOGIN_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_admin_login_log`
 --
 
@@ -270,6 +942,23 @@ LOCK TABLES `sys_admin_login_log` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_announcement`
+--
+
+DROP TABLE IF EXISTS `sys_announcement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_announcement` (
+  `ID` bigint(20) NOT NULL,
+  `CONTENT` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_announcement`
 --
 
@@ -277,6 +966,26 @@ LOCK TABLES `sys_announcement` WRITE;
 /*!40000 ALTER TABLE `sys_announcement` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_announcement` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_announcement_changed`
+--
+
+DROP TABLE IF EXISTS `sys_announcement_changed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_announcement_changed` (
+  `WORKSHEET_NO` varchar(255) NOT NULL,
+  `CONTENT` varchar(255) DEFAULT NULL,
+  `CREATE_ADMIN_ID` bigint(20) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `ID` bigint(20) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  `TITLE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`WORKSHEET_NO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_announcement_changed`
@@ -289,6 +998,30 @@ INSERT INTO `sys_announcement_changed` VALUES ('1',NULL,NULL,'2018-06-09 23:06:5
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_code`
+--
+
+DROP TABLE IF EXISTS `sys_code`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_code` (
+  `ID` bigint(20) NOT NULL,
+  `CLASSIFY` varchar(255) DEFAULT NULL,
+  `CODE` varchar(255) DEFAULT NULL,
+  `CODE_NAME` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `DISPLAY_SN` int(11) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `PARENT_ID` varchar(255) DEFAULT NULL,
+  `SCENE1` varchar(255) DEFAULT NULL,
+  `SCENE2` varchar(255) DEFAULT NULL,
+  `SCENE3` varchar(255) DEFAULT NULL,
+  `ENABLE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_code`
 --
 
@@ -299,6 +1032,23 @@ INSERT INTO `sys_code` VALUES (1,'YesOrNo','1','是','2018-06-07 19:24:52',0,'20
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_entity_filter`
+--
+
+DROP TABLE IF EXISTS `sys_entity_filter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_entity_filter` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `FILTER` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `USER_ID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_entity_filter`
 --
 
@@ -306,6 +1056,24 @@ LOCK TABLES `sys_entity_filter` WRITE;
 /*!40000 ALTER TABLE `sys_entity_filter` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_entity_filter` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_extend_property`
+--
+
+DROP TABLE IF EXISTS `sys_extend_property`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_extend_property` (
+  `ID` bigint(20) NOT NULL,
+  `CODE` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `QUERY` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_extend_property`
@@ -318,6 +1086,27 @@ INSERT INTO `sys_extend_property` VALUES (1,'YesOrNo','2018-06-07 19:24:18','201
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_menu`
+--
+
+DROP TABLE IF EXISTS `sys_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_menu` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LEVEL` int(11) DEFAULT NULL,
+  `LINK` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `PARENT_ID` bigint(20) DEFAULT NULL,
+  `SN` int(11) DEFAULT NULL,
+  `IS_CROSS_DOMAIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_menu`
 --
 
@@ -326,6 +1115,23 @@ LOCK TABLES `sys_menu` WRITE;
 INSERT INTO `sys_menu` VALUES (1,'2018-06-07 19:09:29',1,'sys/code/code','2018-10-16 21:46:12','映射',0,3,''),(4,'2018-06-09 22:45:08',1,'','2018-06-09 22:45:08','工作流管理',0,NULL,NULL),(6,'2018-04-05 20:09:35',2,'http://localhost:8081/bootworkflow/oll/instance/process-list','2018-11-08 22:48:34','工作流管理',4,3,'true'),(7,'2018-04-05 20:09:44',2,'',NULL,'节点管理',4,2,NULL),(8,'2018-04-27 15:33:08',2,'sys/assistant/generateEntity','2018-10-16 21:47:05','实体映射（数据库）',1,1,NULL),(9,'2018-04-09 23:19:03',2,'sys/menu/','2018-10-16 22:03:08','菜单管理',15,1,NULL),(11,'2018-04-09 23:47:46',2,'sys/role/','2018-10-17 22:58:44','角色管理',15,2,NULL),(12,'2018-04-09 23:48:22',2,'',NULL,'权限管理',15,3,NULL),(13,'2018-04-09 23:50:10',2,'sys/admin/','2018-10-17 22:58:54','操作员管理',15,4,NULL),(14,'2018-04-09 23:50:19',2,'',NULL,'组织管理',15,5,NULL),(15,'2018-04-23 17:34:11',1,'','2018-06-07 19:21:57','系统维护',0,1,''),(16,'2018-04-23 17:36:34',2,'sys/config/entityFilterParamConfig','2018-10-16 22:00:39','实体过滤字',1,5,NULL),(17,'2018-04-27 15:43:48',2,'sys/assistant/generateEntityOom','2018-10-16 21:47:12','实体映射（oom）',1,0,NULL),(395,'2018-05-30 18:14:11',2,'http://localhost:8081/bootworkflow/oll/model/model-list','2018-11-08 22:48:39','模型列表',4,4,'true'),(396,'2018-05-31 18:24:45',1,'','2018-06-07 19:21:51','个人设置',0,4,''),(397,'2018-05-31 18:24:55',2,'','2018-05-31 18:25:14','密码修改',396,2,''),(398,'2018-05-31 18:25:06',2,'','2018-05-31 18:25:06','基本信息',396,1,NULL),(401,'2018-06-06 17:25:24',1,'','2018-06-06 17:25:24','工作流测试',0,NULL,NULL),(402,'2018-06-06 17:26:00',2,'sys/workflow/announcement/apply','2018-10-16 21:46:23','公告申请流程',401,1,''),(406,'2018-06-07 19:20:54',2,'sys/code/','2018-10-17 22:58:39','代码管理',15,1,NULL),(407,'2018-06-07 19:22:52',2,'sys/extendproperty/','2018-10-17 22:59:05','扩展属性',15,6,NULL),(409,'2018-06-12 22:49:20',2,'/sys/worksheet/query','2018-11-06 21:24:39','工作单查询',4,1,NULL);
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_menu_role`
+--
+
+DROP TABLE IF EXISTS `sys_menu_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_menu_role` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MENU_ID` bigint(20) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `ROLE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_menu_role`
@@ -338,6 +1144,23 @@ INSERT INTO `sys_menu_role` VALUES (40,'2018-05-22 11:08:38',0,'2018-05-22 11:08
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_menu_visit_log`
+--
+
+DROP TABLE IF EXISTS `sys_menu_visit_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_menu_visit_log` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MENU_ID` bigint(20) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `VISIT_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_menu_visit_log`
 --
 
@@ -348,6 +1171,23 @@ INSERT INTO `sys_menu_visit_log` VALUES (1,'2018-11-12 13:54:13',9,'2018-11-12 1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_permission`
+--
+
+DROP TABLE IF EXISTS `sys_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_permission` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `VALUE` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_permission`
 --
 
@@ -355,6 +1195,22 @@ LOCK TABLES `sys_permission` WRITE;
 /*!40000 ALTER TABLE `sys_permission` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_permission` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_role`
+--
+
+DROP TABLE IF EXISTS `sys_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_role` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_role`
@@ -367,6 +1223,20 @@ INSERT INTO `sys_role` VALUES (1,'2018-09-29 22:13:50','2018-11-06 21:55:14','')
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_sequence`
+--
+
+DROP TABLE IF EXISTS `sys_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_sequence` (
+  `ENTITY_CODE` varchar(255) NOT NULL,
+  `SEQUENCE_NO` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ENTITY_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_sequence`
 --
 
@@ -375,6 +1245,29 @@ LOCK TABLES `sys_sequence` WRITE;
 INSERT INTO `sys_sequence` VALUES ('cn.doublepoint.dto.domain.model.entity.sys.AnnouncementChanged',43),('cn.doublepoint.dto.domain.model.entity.sys.Code',12),('cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty',2),('cn.doublepoint.dto.domain.model.entity.sys.Menu',412),('cn.doublepoint.dto.domain.model.entity.sys.MenuVisitLog',275),('cn.doublepoint.dto.domain.model.entity.sys.Role',2),('cn.doublepoint.dto.domain.model.entity.sys.Worksheet',42),('ll.workflow.worksheetNo',44);
 /*!40000 ALTER TABLE `sys_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_worksheet`
+--
+
+DROP TABLE IF EXISTS `sys_worksheet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_worksheet` (
+  `ID` bigint(20) NOT NULL,
+  `CLASSIFICATION` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `CREATE_USER_ID` bigint(20) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `INSTANCE_ID` varchar(255) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `STATE` varchar(255) DEFAULT NULL,
+  `WORKSHEET_NO` varchar(255) DEFAULT NULL,
+  `CREATE_USER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_worksheet`
@@ -387,6 +1280,26 @@ INSERT INTO `sys_worksheet` VALUES (1,NULL,'2018-06-09 23:29:20',NULL,NULL,'\"\"
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_worksheet_aduit`
+--
+
+DROP TABLE IF EXISTS `sys_worksheet_aduit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_worksheet_aduit` (
+  `ID` bigint(20) NOT NULL,
+  `ADUIT_RESULT` varchar(255) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `PEACH_NO` int(11) DEFAULT NULL,
+  `REMARK` varchar(255) DEFAULT NULL,
+  `TASK_ID` bigint(20) DEFAULT NULL,
+  `WORKSHEET_NO` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `sys_worksheet_aduit`
 --
 
@@ -396,6 +1309,24 @@ LOCK TABLES `sys_worksheet_aduit` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `ID` bigint(20) NOT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LOGIN_ACCOUNT_NO` int(11) DEFAULT NULL,
+  `LOGIN_PASSWORD` int(11) DEFAULT NULL,
+  `MODIFY_TIME` datetime DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `user`
 --
 
@@ -403,6 +1334,20 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `xtconstant`
+--
+
+DROP TABLE IF EXISTS `xtconstant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xtconstant` (
+  `是否标志Y` int(11) NOT NULL,
+  `是否标志X` int(11) DEFAULT NULL,
+  PRIMARY KEY (`是否标志Y`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `xtconstant`
@@ -422,4 +1367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-12 17:25:52
+-- Dump completed on 2018-11-13 17:45:57
