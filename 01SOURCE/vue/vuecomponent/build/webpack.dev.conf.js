@@ -52,11 +52,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    }),
+   /* 注释这个区域的文件 ------------- 开始 */
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'index.html',
+    //   inject: true
+    // }),
+    /* 注释这个区域的文件 ------------- 结束 */
     // copy custom static assets
     new CopyWebpackPlugin([
       {

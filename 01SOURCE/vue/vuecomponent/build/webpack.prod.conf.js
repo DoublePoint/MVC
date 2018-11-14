@@ -11,6 +11,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+
+
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : require('../config/prod.env')
@@ -62,22 +64,24 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : config.build.index,
-      template: 'index.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
-    }),
+    /* 注释这个区域的内容 ---------------------- 开始 */
+    // new HtmlWebpackPlugin({
+    //   filename: process.env.NODE_ENV === 'testing'
+    //     ? 'index.html'
+    //     : config.build.index,
+    //   template: 'index.html',
+    //   inject: true,
+    //   minify: {
+    //     removeComments: true,
+    //     collapseWhitespace: true,
+    //     removeAttributeQuotes: true
+    //     // more options:
+    //     // https://github.com/kangax/html-minifier#options-quick-reference
+    //   },
+    //   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    //   chunksSortMode: 'dependency'
+    // }),
+    /* 注释这个区域的内容 ---------------------- 结束 */
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
@@ -146,4 +150,29 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
+//2018114 liulei加入开始
+const glob = require('glob')
+function getEntries (globPath){
+  const entries = glob.sync(globPath).reduce((result, entry) => {
+    const moduleName = path.basename(path.dirname(entry)) // 获取模块名称
+    result[moduleName] = entry
+    return result
+  }, {})
+  return entries
+}
+const entries = getEntries('./src/templates/**/*.html')   // 获取多页面所有入口文件
+
+function pack (entries, module) {
+  for (const path in entries) {
+    const conf = {
+      filename: `templates/${path}/index.html`,
+      template: entries[path],   // 模板路径
+      inject: true,
+      chunks: ['manifest', 'vendor', path]   // 必须先引入公共依赖
+    }
+    module.plugins.push(new HtmlWebpackPlugin(conf))
+  }
+}
+//2018114 liulei加入开始结束
+pack(entries, webpackConfig)
 module.exports = webpackConfig

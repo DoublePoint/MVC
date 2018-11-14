@@ -1,4 +1,4 @@
-# vuecomponent
+# vuecomponenttest
 
 > A Vue.js project
 
