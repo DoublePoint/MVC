@@ -1,20 +1,18 @@
 <template>
-    <el-table
-      :data="data"
-      style="width: 100%">
+    <el-header>
       <slot></slot>
-     </el-table>
+    </el-header>
 </template>
 
 <script>
 export default {
-  name: "ll-table",
+  name: "ll-header",
   props: {
-    data: {
+    rows: {
       default() {
-        return [];
+        return "";
       },
-      type: Array
+      type: String
     }
   },
   data() {
@@ -25,7 +23,8 @@ export default {
   methods: {},
   mounted() {
     //this.llData = this.data;
-    console.log(this.llData);11
+    console.log(this.llData);
+    11;
   }
 };
 </script>
