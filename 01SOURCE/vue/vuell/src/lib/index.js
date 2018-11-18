@@ -2,6 +2,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import vueTest from './test.vue' // 导入组件
 import vueTable from './table.vue'
+import vueTableColumn from './table-column.vue'
 import vueContainer from './container.vue'
 import vueContainerAside from './container-aside.vue'
 import vueContainerFooter from './container-footer.vue'
@@ -12,6 +13,7 @@ const vt = {
   install(Vue, options) {
     Vue.component(vueTest.name, vueTest) // vuePayKeyboard.name 组件的name属性
     Vue.component(vueTable.name, vueTable)
+    Vue.component(vueTableColumn.name, vueTableColumn)
     Vue.component(vueContainer.name, vueContainer)
     Vue.component(vueContainerAside.name, vueContainerAside)
     Vue.component(vueContainerFooter.name, vueContainerFooter)

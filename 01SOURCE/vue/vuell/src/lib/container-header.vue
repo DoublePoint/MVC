@@ -21,10 +21,12 @@ export default {
     };
   },
   methods: {},
+  created(){
+    
+  },
   mounted() {
     //this.llData = this.data;
     console.log(this.llData);
-    11;
   }
 };
 </script>
