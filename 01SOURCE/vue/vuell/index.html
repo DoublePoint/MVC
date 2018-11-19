@@ -32,14 +32,20 @@
     </ll-container> -->
     <ll-container >
       <ll-header>Header</ll-header>
-      <ll-main>Main</ll-main>
-      <ll-footer>Footer</ll-footer>
+      <ll-container >
+        <ll-aside>
+          <ll-menu :items="items"></ll-menu>
+        </ll-aside>
+        <ll-main>main</ll-main>
+      </ll-container>
+      <ll-footer height="100px">Footer</ll-footer>
     </ll-container>
     <!-- <el-container>
         <el-header>Header</el-header>
         <el-main>Main</el-main>
         <el-footer>Footer</el-footer>
     </el-container> -->
+    
   </div>
 
   <script type="text/javascript">
@@ -66,7 +72,24 @@
             name: "王小虎",
             address: "上海市普陀区金沙江路 1516 弄"
           }
-        ]
+        ],
+        items:[{
+          resourceId:"1",
+          resourceName:"1",
+          children:[{
+            resourceId:"1-1",
+            resourceName:"1-1",
+            children:[{
+              resourceId:"1-1-1",
+              resourceName:"1-1-1",
+              children:[]
+            }]
+          }]
+        },{
+          resourceId:"2",
+          resourceName:"2",
+          children:[]
+        }]
       },
     })
 

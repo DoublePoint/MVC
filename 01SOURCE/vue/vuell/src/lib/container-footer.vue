@@ -1,5 +1,5 @@
 <template>
-    <el-footer>
+    <el-footer :height="height">
       <slot></slot>
     </el-footer>
 </template>
@@ -8,9 +8,9 @@
 export default {
   name: "ll-footer",
   props: {
-    rows: {
+    height: {
       default() {
-        return "";
+        return "60px";
       },
       type: String
     }

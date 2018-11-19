@@ -1,5 +1,5 @@
 <template>
-    <el-container :direction="direction">
+    <el-container style="height: 700px; border: 1px solid #eee" :direction="direction">
       <slot></slot>
     </el-container>
 </template>
@@ -38,6 +38,7 @@ export default {
     }
   },
   created() {
+    //设置
     this.initDirection();
   },
   mounted() {
