@@ -18,7 +18,8 @@
           <ll-menu :items="items"></ll-menu>
         </ll-aside>
         <ll-main>
-          <ll-tab v-model="activeName">
+          <ll-tab :activeName="activeName">
+              <el-tab-pane label="消息中心">消息中心</el-tab-pane>
             <ll-tab-pane label="表格" name="bg">
               <!-- <ll-table :data="tableData">
                 <ll-column prop="date" label="日期" :width="180">

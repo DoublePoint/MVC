@@ -1,5 +1,5 @@
 <template>
-      <el-tab-pane :label="label" :name="name">
+      <el-tab-pane @tabClick="tabPaneClick" :label="label" :name="name">
         <slot></slot>
       </el-tab-pane>
 </template>
@@ -26,7 +26,12 @@ export default {
       //llData: []
     };
   },
-  methods: {},
+  methods: {
+    tabPaneClick(){
+      alert(2);
+      this.$emit("tabPaneCick",this.name);
+    }
+  },
   mounted() {
   }
 };
