@@ -1,5 +1,8 @@
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import './css/base.less'
+import './css/base.css'
+
 import vueTest from './test.vue' // 导入组件
 import vueTable from './table.vue'
 import vueTableColumn from './table-column.vue'
@@ -9,6 +12,8 @@ import vueContainerFooter from './container-footer.vue'
 import vueContainerHeader from './container-header.vue'
 import vueContainerMain from './container-main.vue'
 import vueMenu from './menu.vue'
+import vueTab from './tab.vue'
+import vueTabPane from './tab-pane.vue'
 
 const vt = {
   install(Vue, options) {
@@ -21,6 +26,8 @@ const vt = {
     Vue.component(vueContainerHeader.name, vueContainerHeader)
     Vue.component(vueContainerMain.name, vueContainerMain)
     Vue.component(vueMenu.name, vueMenu)
+    Vue.component(vueTab.name, vueTab)
+    Vue.component(vueTabPane.name, vueTabPane)
     // 类似通过 this.$xxx 方式调用插件的 其实只是挂载到原型上而已
     // Vue.prototype.$xxx  // 最终可以在任何地方通过 this.$xxx 调用
     // 虽然没有明确规定用$开头  但是大家都默认遵守这个规定

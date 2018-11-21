@@ -11,47 +11,37 @@
 
 <body>
   <div id="app">
-    <!-- <vuetest></vuetest> -->
-    <!-- <ll-table :data="tableData">
-      <ll-column prop="date" label="日期" :width="180">
-      </ll-column>
-      <ll-column prop="name" label="姓名" :width="180">
-      </ll-column>
-      <ll-column prop="address" label="地址" > 
-      </ll-column>
-    </ll-table> -->
-    <!-- <ll-container >
-      <ll-aside>left</ll-aside>
-      <ll-main>main</ll-main>
-      <ll-aside>right</ll-aside>
-    </ll-container> -->
-    <!-- <ll-container >
-      <el-header>Header</el-header>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
-    </ll-container> -->
-    <ll-container >
+    <ll-container>
       <ll-header>Header</ll-header>
-      <ll-container >
+      <ll-container>
         <ll-aside>
           <ll-menu :items="items"></ll-menu>
         </ll-aside>
-        <ll-main>main</ll-main>
+        <ll-main>
+          <ll-tab v-model="activeName">
+            <ll-tab-pane label="表格" name="bg">
+              <!-- <ll-table :data="tableData">
+                <ll-column prop="date" label="日期" :width="180">
+                </ll-column>
+                <ll-column prop="name" label="姓名" :width="180">
+                </ll-column>
+                <ll-column prop="address" label="地址">
+                </ll-column>
+              </ll-table> -->
+              用户管理
+            </ll-tab-pane>
+          </ll-tab>
+        </ll-main>
       </ll-container>
       <ll-footer height="100px">Footer</ll-footer>
     </ll-container>
-    <!-- <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
-        <el-footer>Footer</el-footer>
-    </el-container> -->
-    
   </div>
 
   <script type="text/javascript">
     new Vue({
       el: '#app',
       data: {
+        activeName:"bg",
         tableData: [{
             date: "2016-05-02",
             name: "王小虎1",
@@ -73,26 +63,25 @@
             address: "上海市普陀区金沙江路 1516 弄"
           }
         ],
-        items:[{
-          resourceId:"1",
-          resourceName:"1",
-          children:[{
-            resourceId:"1-1",
-            resourceName:"1-1",
-            children:[{
-              resourceId:"1-1-1",
-              resourceName:"1-1-1",
-              children:[]
+        items: [{
+          value: "1",
+          label: "1",
+          children: [{
+            value: "1-1",
+            label: "1-1",
+            children: [{
+              value: "1-1-1",
+              label: "1-1-1",
+              children: []
             }]
           }]
-        },{
-          resourceId:"2",
-          resourceName:"2",
-          children:[]
+        }, {
+          value: "2",
+          label: "2",
+          children: []
         }]
       },
     })
-
   </script>
 </body>
 

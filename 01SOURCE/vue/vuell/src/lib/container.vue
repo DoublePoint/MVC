@@ -8,15 +8,17 @@
 export default {
   name: "ll-container",
   props: {
-    direction: {
-      default() {
-        return "";
-      },
-      type: String
-    }
+    // direction: {
+    //   default() {
+    //     return "";
+    //   },
+    //   type: String
+    // }
   },
   data() {
-    return {};
+    return {
+      direction:""
+    };
   },
   methods: {
     initDirection() {

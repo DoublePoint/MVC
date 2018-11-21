@@ -1,15 +1,17 @@
 <template>
     <div>
-        <template v-for="list in this.items" >  
-            <el-submenu v-if="list.children.length>0" :key="list.resourceId" :index="list.resourceName"  > 
+        <template v-for="item in this.items" >  
+            <!-- if -->
+            <el-submenu v-if="item.children.length>0" :key="item.value" :index="item.label"  > 
                 <template slot="title"  style="padding-left:10px" >
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">{{ list.resourceName}}</span>
+                    <i v-if="item.icon!=null&&item.icon!=''" :class="item.icon"></i>
+                    <span slot="title">{{ item.label}}</span>
                 </template>
-                <ll-menu :items="list.children"></ll-menu> 
+                <ll-menu-item :items="item.children"></ll-menu-item> 
             </el-submenu>
-            <el-menu-item v-else :index="list.resourceName"  :key="list.resourceId" style="padding-left: 50px;">
-                <span>{{list.resourceName}}</span>
+            <!-- else -->
+            <el-menu-item v-else :index="item.label"  :key="item.value" style="padding-left: 50px;">
+                <span>{{item.label}}</span>
             </el-menu-item>
         </template>
     </div>
@@ -24,7 +26,7 @@ export default {
         return [];
       },
       type: Array
-    }
+    },
   },
   data() {
     return {};

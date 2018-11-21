@@ -1,14 +1,20 @@
 <template>
-    <el-main>
-      <slot></slot>
-    </el-main>
+      <el-tab-pane :label="label" :name="name">
+        <slot></slot>
+      </el-tab-pane>
 </template>
 
 <script>
 export default {
-  name: "ll-main",
+  name: "ll-tab-pane",
   props: {
-    rows: {
+    name: {
+      default() {
+        return "";
+      },
+      type: String
+    },
+    label: {
       default() {
         return "";
       },
@@ -22,16 +28,6 @@ export default {
   },
   methods: {},
   mounted() {
-    //this.llData = this.data;
-    console.log(this.llData);
-    11;
   }
 };
 </script>
-
-<style>
-.el-main{
-  padding: 0;
-}
-</style>
-
