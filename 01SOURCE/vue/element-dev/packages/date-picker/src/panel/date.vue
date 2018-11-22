@@ -20,7 +20,7 @@
         <div class="el-picker-panel__body">
           <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
-              <el-input
+              <ll-input
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
@@ -28,7 +28,7 @@
                 @change="handleVisibleDateChange" />
             </span>
             <span class="el-date-picker__editor-wrap" v-clickoutside="handleTimePickClose">
-              <el-input
+              <ll-input
                 ref="input"
                 @focus="timePickerVisible = true"
                 :placeholder="t('el.datepicker.selectTime')"
@@ -121,21 +121,21 @@
       <div
         class="el-picker-panel__footer"
         v-show="footerVisible && currentView === 'date'">
-        <el-button
+        <ll-button
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
           v-show="selectionMode !== 'dates'">
           {{ t('el.datepicker.now') }}
-        </el-button>
-        <el-button
+        </ll-button>
+        <ll-button
           plain
           size="mini"
           class="el-picker-panel__link-btn"
           @click="confirm">
           {{ t('el.datepicker.confirm') }}
-        </el-button>
+        </ll-button>
       </div>
     </div>
   </transition>
@@ -162,8 +162,8 @@
   } from '../util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import LlInput from 'element-ui/packages/input';
+  import LlButton from 'element-ui/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';
@@ -484,7 +484,7 @@
     },
 
     components: {
-      TimePicker, YearTable, MonthTable, DateTable, ElInput, ElButton
+      TimePicker, YearTable, MonthTable, DateTable, LlInput, LlButton
     },
 
     data() {

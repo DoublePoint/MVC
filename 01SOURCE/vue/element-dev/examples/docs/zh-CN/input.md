@@ -188,7 +188,7 @@
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+<ll-input v-model="input" placeholder="请输入内容"></ll-input>
 
 <script>
 export default {
@@ -207,11 +207,11 @@ export default {
 
 :::demo 通过 `disabled` 属性指定是否禁用 input 组件
 ```html
-<el-input
+<ll-input
   placeholder="请输入内容"
   v-model="input1"
   :disabled="true">
-</el-input>
+</ll-input>
 
 <script>
 export default {
@@ -230,11 +230,11 @@ export default {
 :::demo 使用`clearable`属性即可得到一个可清空的输入框
 
 ```html
-<el-input
+<ll-input
   placeholder="请输入内容"
   v-model="input10"
   clearable>
-</el-input>
+</ll-input>
 
 <script>
   export default {
@@ -256,29 +256,29 @@ export default {
 ```html
 <div class="demo-input-suffix">
   属性方式：
-  <el-input
+  <ll-input
     placeholder="请选择日期"
     suffix-icon="el-icon-date"
     v-model="input2">
-  </el-input>
-  <el-input
+  </ll-input>
+  <ll-input
     placeholder="请输入内容"
     prefix-icon="el-icon-search"
     v-model="input21">
-  </el-input>
+  </ll-input>
 </div>
 <div class="demo-input-suffix">
   slot 方式：
-  <el-input
+  <ll-input
     placeholder="请选择日期"
     v-model="input22">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
-  </el-input>
-  <el-input
+  </ll-input>
+  <ll-input
     placeholder="请输入内容"
     v-model="input23">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
-  </el-input>
+  </ll-input>
 </div>
 
 <script>
@@ -302,12 +302,12 @@ export default {
 
 :::demo 文本域高度可通过 `rows` 属性控制
 ```html
-<el-input
+<ll-input
   type="textarea"
   :rows="2"
   placeholder="请输入内容"
   v-model="textarea">
-</el-input>
+</ll-input>
 
 <script>
 export default {
@@ -327,19 +327,19 @@ export default {
 
 :::demo
 ```html
-<el-input
+<ll-input
   type="textarea"
   autosize
   placeholder="请输入内容"
   v-model="textarea2">
-</el-input>
+</ll-input>
 <div style="margin: 20px 0;"></div>
-<el-input
+<ll-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="请输入内容"
   v-model="textarea3">
-</el-input>
+</ll-input>
 
 <script>
 export default {
@@ -361,24 +361,24 @@ export default {
 :::demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
-  <el-input placeholder="请输入内容" v-model="input3">
+  <ll-input placeholder="请输入内容" v-model="input3">
     <template slot="prepend">Http://</template>
-  </el-input>
+  </ll-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input4">
+  <ll-input placeholder="请输入内容" v-model="input4">
     <template slot="append">.com</template>
-  </el-input>
+  </ll-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="餐厅名" value="1"></el-option>
-      <el-option label="订单号" value="2"></el-option>
-      <el-option label="用户电话" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
+  <ll-input placeholder="请输入内容" v-model="input5" class="input-with-select">
+    <ll-select v-model="select" slot="prepend" placeholder="请选择">
+      <ll-option label="餐厅名" value="1"></ll-option>
+      <ll-option label="订单号" value="2"></ll-option>
+      <ll-option label="用户电话" value="3"></ll-option>
+    </ll-select>
+    <ll-button slot="append" icon="el-icon-search"></ll-button>
+  </ll-input>
 </div>
 <style>
   .el-select .el-input {
@@ -408,29 +408,29 @@ export default {
 :::demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
 ```html
 <div class="demo-input-size">
-  <el-input
+  <ll-input
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input6">
-  </el-input>
-  <el-input
+  </ll-input>
+  <ll-input
     size="medium"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input7">
-  </el-input>
-  <el-input
+  </ll-input>
+  <ll-input
     size="small"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input8">
-  </el-input>
-  <el-input
+  </ll-input>
+  <ll-input
     size="mini"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input9">
-  </el-input>
+  </ll-input>
 </div>
 
 <script>
@@ -454,29 +454,29 @@ export default {
 
 :::demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
-<el-row class="demo-autocomplete">
-  <el-col :span="12">
+<ll-row class="demo-autocomplete">
+  <ll-col :span="12">
     <div class="sub-title">激活即列出输入建议</div>
-    <el-autocomplete
+    <ll-autocomplete
       class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
       @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-  <el-col :span="12">
+    ></ll-autocomplete>
+  </ll-col>
+  <ll-col :span="12">
     <div class="sub-title">输入后匹配输入建议</div>
-    <el-autocomplete
+    <ll-autocomplete
       class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
       :trigger-on-focus="false"
       @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-</el-row>
+    ></ll-autocomplete>
+  </ll-col>
+</ll-row>
 <script>
   export default {
     data() {
@@ -568,7 +568,7 @@ export default {
 
 :::demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
 ```html
-<el-autocomplete
+<ll-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
@@ -583,7 +583,7 @@ export default {
     <div class="name">{{ item.value }}</div>
     <span class="addr">{{ item.address }}</span>
   </template>
-</el-autocomplete>
+</ll-autocomplete>
 
 <style>
 .my-autocomplete {
@@ -700,12 +700,12 @@ export default {
 
 :::demo
 ```html
-<el-autocomplete
+<ll-autocomplete
   v-model="state4"
   :fetch-suggestions="querySearchAsync"
   placeholder="请输入内容"
   @select="handleSelect"
-></el-autocomplete>
+></ll-autocomplete>
 <script>
   export default {
     data() {

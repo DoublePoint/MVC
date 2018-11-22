@@ -4,7 +4,7 @@ export default {
     indexPath() {
       const path = [this.index];
       let parent = this.$parent;
-      while (parent.$options.componentName !== 'ElMenu') {
+      while (parent.$options.componentName !== 'LlMenu') {
         if (parent.index) {
           path.unshift(parent.index);
         }
@@ -16,7 +16,7 @@ export default {
       let parent = this.$parent;
       while (
         parent &&
-        ['ElMenu', 'ElSubmenu'].indexOf(parent.$options.componentName) === -1
+        ['LlMenu', 'LlSubmenu'].indexOf(parent.$options.componentName) === -1
       ) {
         parent = parent.$parent;
       }
@@ -31,8 +31,8 @@ export default {
       if (this.rootMenu.collapse) {
         padding = 20;
       } else {
-        while (parent && parent.$options.componentName !== 'ElMenu') {
-          if (parent.$options.componentName === 'ElSubmenu') {
+        while (parent && parent.$options.componentName !== 'LlMenu') {
+          if (parent.$options.componentName === 'LlSubmenu') {
             padding += 20;
           }
           parent = parent.$parent;

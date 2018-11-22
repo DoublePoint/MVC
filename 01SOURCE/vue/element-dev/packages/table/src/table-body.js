@@ -6,7 +6,7 @@ import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
 
 export default {
-  name: 'ElTableBody',
+  name: 'LlTableBody',
 
   mixins: [LayoutObserver],
 

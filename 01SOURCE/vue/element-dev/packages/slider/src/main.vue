@@ -55,12 +55,12 @@
 </template>
 
 <script type="text/babel">
-  import ElInputNumber from 'element-ui/packages/input-number';
+  import LlInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElSlider',
+    name: 'LlSlider',
 
     mixins: [Emitter],
 
@@ -134,7 +134,7 @@
     },
 
     components: {
-      ElInputNumber,
+      LlInputNumber,
       SliderButton
     },
 
@@ -216,7 +216,7 @@
             this.firstValue = val[0];
             this.secondValue = val[1];
             if (this.valueChanged()) {
-              this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
+              this.dispatch('LlFormItem', 'el.form.change', [this.minValue, this.maxValue]);
               this.oldValue = val.slice();
             }
           }
@@ -228,7 +228,7 @@
           } else {
             this.firstValue = val;
             if (this.valueChanged()) {
-              this.dispatch('ElFormItem', 'el.form.change', val);
+              this.dispatch('LlFormItem', 'el.form.change', val);
               this.oldValue = val;
             }
           }

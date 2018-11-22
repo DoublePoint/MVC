@@ -7,7 +7,7 @@
     :aria-expanded="suggestionVisible"
     :aria-owns="id"
   >
-    <el-input
+    <ll-input
       ref="input"
       v-bind="[$props, $attrs]"
       @input="handleChange"
@@ -31,8 +31,8 @@
       <template slot="suffix" v-if="$slots.suffix">
         <slot name="suffix"></slot>
       </template>
-    </el-input>
-    <el-autocomplete-suggestions
+    </ll-input>
+    <ll-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
@@ -53,31 +53,31 @@
           {{ item[valueKey] }}
         </slot>
       </li>
-    </el-autocomplete-suggestions>
+    </ll-autocomplete-suggestions>
   </div>
 </template>
 <script>
   import debounce from 'throttle-debounce/debounce';
-  import ElInput from 'element-ui/packages/input';
+  import LlInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
+  import LlAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import { generateId } from 'element-ui/src/utils/util';
   import Focus from 'element-ui/src/mixins/focus';
 
   export default {
-    name: 'ElAutocomplete',
+    name: 'LlAutocomplete',
 
     mixins: [Emitter, Focus('input'), Migrating],
 
     inheritAttrs: false,
 
-    componentName: 'ElAutocomplete',
+    componentName: 'LlAutocomplete',
 
     components: {
-      ElInput,
-      ElAutocompleteSuggestions
+      LlInput,
+      LlAutocompleteSuggestions
     },
 
     directives: { Clickoutside },
@@ -149,7 +149,7 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
+        this.broadcast('LlAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
       }
     },
     methods: {

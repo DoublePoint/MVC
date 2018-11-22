@@ -10,7 +10,7 @@
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
-        <el-tag
+        <ll-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
@@ -18,18 +18,18 @@
           @close="deleteTag($event, selected[0])"
           disable-transitions>
           <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
-        </el-tag>
-        <el-tag
+        </ll-tag>
+        <ll-tag
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
           type="info"
           disable-transitions>
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
-        </el-tag>
+        </ll-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
-        <el-tag
+        <ll-tag
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!selectDisabled"
@@ -39,7 +39,7 @@
           @close="deleteTag($event, item)"
           disable-transitions>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
-        </el-tag>
+        </ll-tag>
       </transition-group>
 
       <input
@@ -67,7 +67,7 @@
         :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
-    <el-input
+    <ll-input
       ref="reference"
       v-model="selectedLabel"
       type="text"
@@ -98,36 +98,36 @@
         <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
-    </el-input>
+    </ll-input>
     <transition
       name="el-zoom-in-top"
       @before-enter="handleMenuEnter"
       @after-leave="doDestroy">
-      <el-select-menu
+      <ll-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
-        <el-scrollbar
+        <ll-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
-          <el-option
+          <ll-option
             :value="query"
             created
             v-if="showNewOption">
-          </el-option>
+          </ll-option>
           <slot></slot>
-        </el-scrollbar>
+        </ll-scrollbar>
         <p
           class="el-select-dropdown__empty"
           v-if="emptyText &&
             (!allowCreate || loading || (allowCreate && options.length === 0 ))">
           {{ emptyText }}
         </p>
-      </el-select-menu>
+      </ll-select-menu>
     </transition>
   </div>
 </template>
@@ -136,11 +136,11 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import Focus from 'element-ui/src/mixins/focus';
   import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElSelectMenu from './select-dropdown.vue';
-  import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import LlInput from 'element-ui/packages/input';
+  import LlSelectMenu from './select-dropdown.vue';
+  import LlOption from './option.vue';
+  import LlTag from 'element-ui/packages/tag';
+  import LlScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
@@ -154,9 +154,9 @@
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
 
-    name: 'ElSelect',
+    name: 'LlSelect',
 
-    componentName: 'ElSelect',
+    componentName: 'LlSelect',
 
     inject: {
       elForm: {
@@ -239,11 +239,11 @@
     },
 
     components: {
-      ElInput,
-      ElSelectMenu,
-      ElOption,
-      ElTag,
-      ElScrollbar
+      LlInput,
+      LlSelectMenu,
+      LlOption,
+      LlTag,
+      LlScrollbar
     },
 
     directives: { Clickoutside },
@@ -361,13 +361,13 @@
           this.inputLength = 20;
         }
         if (!valueEquals(val, oldVal)) {
-          this.dispatch('ElFormItem', 'el.form.change', val);
+          this.dispatch('LlFormItem', 'el.form.change', val);
         }
       },
 
       visible(val) {
         if (!val) {
-          this.broadcast('ElSelectDropdown', 'destroyPopper');
+          this.broadcast('LlSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
           }
@@ -396,7 +396,7 @@
             }
           }
         } else {
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          this.broadcast('LlSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
             this.handleQueryChange(this.query);
@@ -404,10 +404,10 @@
               this.$refs.input.focus();
             } else {
               if (!this.remote) {
-                this.broadcast('ElOption', 'queryChange', '');
-                this.broadcast('ElOptionGroup', 'queryChange');
+                this.broadcast('LlOption', 'queryChange', '');
+                this.broadcast('LlOptionGroup', 'queryChange');
               }
-              this.broadcast('ElInput', 'inputSelect');
+              this.broadcast('LlInput', 'inputSelect');
             }
           }
         }
@@ -417,7 +417,7 @@
       options() {
         if (this.$isServer) return;
         this.$nextTick(() => {
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          this.broadcast('LlSelectDropdown', 'updatePopper');
         });
         if (this.multiple) {
           this.resetInputHeight();
@@ -454,7 +454,7 @@
         }
         this.previousQuery = val;
         this.$nextTick(() => {
-          if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
+          if (this.visible) this.broadcast('LlSelectDropdown', 'updatePopper');
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
@@ -468,11 +468,11 @@
           this.remoteMethod(val);
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
-          this.broadcast('ElOptionGroup', 'queryChange');
+          this.broadcast('LlOptionGroup', 'queryChange');
         } else {
           this.filteredOptionsCount = this.optionsCount;
-          this.broadcast('ElOption', 'queryChange', val);
-          this.broadcast('ElOptionGroup', 'queryChange');
+          this.broadcast('LlOption', 'queryChange', val);
+          this.broadcast('LlOptionGroup', 'queryChange');
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
@@ -642,7 +642,7 @@
               sizeInMap
             ) + 'px';
           if (this.visible && this.emptyText !== false) {
-            this.broadcast('ElSelectDropdown', 'updatePopper');
+            this.broadcast('LlSelectDropdown', 'updatePopper');
           }
         });
       },

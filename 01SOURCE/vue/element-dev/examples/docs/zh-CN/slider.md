@@ -62,23 +62,23 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-slider v-model="value1"></el-slider>
+    <ll-slider v-model="value1"></ll-slider>
   </div>
   <div class="block">
     <span class="demonstration">自定义初始值</span>
-    <el-slider v-model="value2"></el-slider>
+    <ll-slider v-model="value2"></ll-slider>
   </div>
   <div class="block">
     <span class="demonstration">隐藏 Tooltip</span>
-    <el-slider v-model="value3" :show-tooltip="false"></el-slider>
+    <ll-slider v-model="value3" :show-tooltip="false"></ll-slider>
   </div>
   <div class="block">
     <span class="demonstration">格式化 Tooltip</span>
-    <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
+    <ll-slider v-model="value4" :format-tooltip="formatTooltip"></ll-slider>
   </div>
   <div class="block">
     <span class="demonstration">禁用</span>
-    <el-slider v-model="value5" disabled></el-slider>
+    <ll-slider v-model="value5" disabled></ll-slider>
   </div>
 </template>
 
@@ -112,18 +112,18 @@
 <template>
   <div class="block">
     <span class="demonstration">不显示间断点</span>
-    <el-slider
+    <ll-slider
       v-model="value6"
       :step="10">
-    </el-slider>
+    </ll-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
-    <el-slider
+    <ll-slider
       v-model="value7"
       :step="10"
       show-stops>
-    </el-slider>
+    </ll-slider>
   </div>
 </template>
 
@@ -148,10 +148,10 @@
 ```html
 <template>
   <div class="block">
-    <el-slider
+    <ll-slider
       v-model="value8"
       show-input>
-    </el-slider>
+    </ll-slider>
   </div>
 </template>
 
@@ -175,12 +175,12 @@
 ```html
 <template>
   <div class="block">
-    <el-slider
+    <ll-slider
       v-model="value9"
       range
       show-stops
       :max="10">
-    </el-slider>
+    </ll-slider>
   </div>
 </template>
 
@@ -202,11 +202,11 @@
 ```html
 <template>
   <div class="block">
-    <el-slider
+    <ll-slider
       v-model="value10"
       vertical
       height="200px">
-    </el-slider>
+    </ll-slider>
   </div>
 </template>
 

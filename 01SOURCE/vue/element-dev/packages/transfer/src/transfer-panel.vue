@@ -1,17 +1,17 @@
 <template>
   <div class="el-transfer-panel">
     <p class="el-transfer-panel__header">
-      <el-checkbox
+      <ll-checkbox
         v-model="allChecked"
         @change="handleAllCheckedChange"
         :indeterminate="isIndeterminate">
         {{ title }}
         <span>{{ checkedSummary }}</span>
-      </el-checkbox>
+      </ll-checkbox>
     </p>
     
     <div :class="['el-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
-      <el-input
+      <ll-input
         class="el-transfer-panel__filter"
         v-model="query"
         size="small"
@@ -23,21 +23,21 @@
           :class="['el-input__icon', 'el-icon-' + inputIcon]"
           @click="clearQuery"
         ></i>
-      </el-input>
-      <el-checkbox-group
+      </ll-input>
+      <ll-checkbox-group
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
         class="el-transfer-panel__list">
-        <el-checkbox
+        <ll-checkbox
           class="el-transfer-panel__item"
           :label="item[keyProp]"
           :disabled="item[disabledProp]"
           :key="item[keyProp]"
           v-for="item in filteredData">
           <option-content :option="item"></option-content>
-        </el-checkbox>
-      </el-checkbox-group>
+        </ll-checkbox>
+      </ll-checkbox-group>
       <p
         class="el-transfer-panel__empty"
         v-show="hasNoMatch">{{ t('el.transfer.noMatch') }}</p>
@@ -52,29 +52,29 @@
 </template>
 
 <script>
-  import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElInput from 'element-ui/packages/input';
+  import LlCheckboxGroup from 'element-ui/packages/checkbox-group';
+  import LlCheckbox from 'element-ui/packages/checkbox';
+  import LlInput from 'element-ui/packages/input';
   import Locale from 'element-ui/src/mixins/locale';
 
   export default {
     mixins: [Locale],
 
-    name: 'ElTransferPanel',
+    name: 'LlTransferPanel',
 
-    componentName: 'ElTransferPanel',
+    componentName: 'LlTransferPanel',
 
     components: {
-      ElCheckboxGroup,
-      ElCheckbox,
-      ElInput,
+      LlCheckboxGroup,
+      LlCheckbox,
+      LlInput,
       OptionContent: {
         props: {
           option: Object
         },
         render(h) {
           const getParent = vm => {
-            if (vm.$options.componentName === 'ElTransferPanel') {
+            if (vm.$options.componentName === 'LlTransferPanel') {
               return vm;
             } else if (vm.$parent) {
               return getParent(vm.$parent);

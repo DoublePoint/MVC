@@ -18,20 +18,20 @@
           <ll-menu :items="items"></ll-menu>
         </ll-aside>
         <ll-main>
-          <ll-tab :activeName="activeName">
-              <el-tab-pane label="消息中心">消息中心</el-tab-pane>
+          <ll-tabs :activeName="activeName">
+              <ll-tab-pane label="消息中心">消息中心</ll-tab-pane>
             <ll-tab-pane label="表格" name="bg">
-              <!-- <ll-table :data="tableData">
-                <ll-column prop="date" label="日期" :width="180">
-                </ll-column>
-                <ll-column prop="name" label="姓名" :width="180">
-                </ll-column>
-                <ll-column prop="address" label="地址">
-                </ll-column>
-              </ll-table> -->
+              <ll-table :data="tableData">
+                <ll-table-column prop="date" label="日期" :width="180">
+                </ll-table-column>
+                <ll-table-column prop="name" label="姓名" :width="180">
+                </ll-table-column>
+                <ll-table-column prop="address" label="地址">
+                </ll-table-column>
+              </ll-table> 
               用户管理
             </ll-tab-pane>
-          </ll-tab>
+          </ll-tabs>
         </ll-main>
       </ll-container>
       <ll-footer height="100px">Footer</ll-footer>

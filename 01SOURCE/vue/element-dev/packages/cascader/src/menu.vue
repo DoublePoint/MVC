@@ -28,7 +28,7 @@
   };
 
   export default {
-    name: 'ElCascaderMenu',
+    name: 'LlCascaderMenu',
 
     data() {
       return {

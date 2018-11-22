@@ -2,22 +2,22 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
-  import ElButton from 'element-ui/packages/button';
-  import ElButtonGroup from 'element-ui/packages/button-group';
+  import LlButton from 'element-ui/packages/button';
+  import LlButtonGroup from 'element-ui/packages/button-group';
   import { generateId } from 'element-ui/src/utils/util';
 
   export default {
-    name: 'ElDropdown',
+    name: 'LlDropdown',
 
-    componentName: 'ElDropdown',
+    componentName: 'LlDropdown',
 
     mixins: [Emitter, Migrating],
 
     directives: { Clickoutside },
 
     components: {
-      ElButton,
-      ElButtonGroup
+      LlButton,
+      LlButtonGroup
     },
 
     provide() {

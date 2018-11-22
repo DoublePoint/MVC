@@ -41,9 +41,9 @@
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
 
   export default {
-    name: 'ElFormItem',
+    name: 'LlFormItem',
 
-    componentName: 'ElFormItem',
+    componentName: 'LlFormItem',
 
     mixins: [emitter],
 
@@ -116,8 +116,8 @@
       form() {
         let parent = this.$parent;
         let parentName = parent.$options.componentName;
-        while (parentName !== 'ElForm') {
-          if (parentName === 'ElFormItem') {
+        while (parentName !== 'LlForm') {
+          if (parentName === 'LlFormItem') {
             this.isNested = true;
           }
           parent = parent.$parent;
@@ -227,7 +227,7 @@
           prop.o[prop.k] = this.initialValue;
         }
 
-        this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
+        this.broadcast('LlTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
         let formRules = this.form.rules;
@@ -265,7 +265,7 @@
     },
     mounted() {
       if (this.prop) {
-        this.dispatch('ElForm', 'el.form.addField', [this]);
+        this.dispatch('LlForm', 'el.form.addField', [this]);
 
         let initialValue = this.fieldValue;
         if (Array.isArray(initialValue)) {
@@ -284,7 +284,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('ElForm', 'el.form.removeField', [this]);
+      this.dispatch('LlForm', 'el.form.removeField', [this]);
     }
   };
 </script>

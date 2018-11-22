@@ -6,14 +6,14 @@
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
       <div class="el-table-filter__content">
-        <el-scrollbar wrap-class="el-table-filter__wrap">
-          <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
-            <el-checkbox
+        <ll-scrollbar wrap-class="el-table-filter__wrap">
+          <ll-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
+            <ll-checkbox
               v-for="filter in filters"
               :key="filter.value"
-              :label="filter.value">{{ filter.text }}</el-checkbox>
-          </el-checkbox-group>
-        </el-scrollbar>
+              :label="filter.value">{{ filter.text }}</ll-checkbox>
+          </ll-checkbox-group>
+        </ll-scrollbar>
       </div>
       <div class="el-table-filter__bottom">
         <button @click="handleConfirm"
@@ -52,7 +52,7 @@
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
 
   export default {
-    name: 'ElTableFilterPanel',
+    name: 'LlTableFilterPanel',
 
     mixins: [Popper, Locale],
 

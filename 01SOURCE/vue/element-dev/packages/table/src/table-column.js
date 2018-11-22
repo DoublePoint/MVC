@@ -137,7 +137,7 @@ const parseMinWidth = (minWidth) => {
 };
 
 export default {
-  name: 'ElTableColumn',
+  name: 'LlTableColumn',
 
   props: {
     type: {

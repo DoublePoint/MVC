@@ -105,9 +105,9 @@
   import { isKorean } from 'element-ui/src/utils/shared';
 
   export default {
-    name: 'ElInput',
+    name: 'LlInput',
 
-    componentName: 'ElInput',
+    componentName: 'LlInput',
 
     mixins: [emitter, Migrating],
 
@@ -240,7 +240,7 @@
         this.focused = false;
         this.$emit('blur', event);
         if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+          this.dispatch('LlFormItem', 'el.form.blur', [this.currentValue]);
         }
       },
       select() {
@@ -295,7 +295,7 @@
         if (this.isOnComposition) return;
         this.$nextTick(this.resizeTextarea);
         if (this.validateEvent && this.currentValue === this.value) {
-          this.dispatch('ElFormItem', 'el.form.change', [value]);
+          this.dispatch('LlFormItem', 'el.form.change', [value]);
         }
       },
       calcIconOffset(place) {

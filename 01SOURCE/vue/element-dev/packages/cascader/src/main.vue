@@ -17,7 +17,7 @@
     v-clickoutside="handleClickoutside"
     @keydown="handleKeydown"
   >
-    <el-input
+    <ll-input
       ref="input"
       :readonly="readonly"
       :placeholder="currentLabels.length ? undefined : placeholder"
@@ -46,7 +46,7 @@
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>
-    </el-input>
+    </ll-input>
     <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
@@ -63,8 +63,8 @@
 
 <script>
 import Vue from 'vue';
-import ElCascaderMenu from './menu';
-import ElInput from 'element-ui/packages/input';
+import LlCascaderMenu from './menu';
+import LlInput from 'element-ui/packages/input';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import emitter from 'element-ui/src/mixins/emitter';
@@ -91,7 +91,7 @@ const popperMixin = {
 };
 
 export default {
-  name: 'ElCascader',
+  name: 'LlCascader',
 
   directives: { Clickoutside },
 
@@ -107,7 +107,7 @@ export default {
   },
 
   components: {
-    ElInput
+    LlInput
   },
 
   props: {
@@ -237,7 +237,7 @@ export default {
       this.currentValue = value;
     },
     currentValue(value) {
-      this.dispatch('ElFormItem', 'el.form.change', [value]);
+      this.dispatch('LlFormItem', 'el.form.change', [value]);
     },
     currentLabels(value) {
       const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
@@ -257,7 +257,7 @@ export default {
 
   methods: {
     initMenu() {
-      this.menu = new Vue(ElCascaderMenu).$mount();
+      this.menu = new Vue(LlCascaderMenu).$mount();
       this.menu.options = this.options;
       this.menu.props = this.props;
       this.menu.expandTrigger = this.expandTrigger;

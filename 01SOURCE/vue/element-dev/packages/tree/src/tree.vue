@@ -9,7 +9,7 @@
     }"
     role="tree"
   >
-    <el-tree-node
+    <ll-tree-node
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
@@ -17,7 +17,7 @@
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
-    </el-tree-node>
+    </ll-tree-node>
     <div class="el-tree__empty-block" v-if="isEmpty">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
     </div>
@@ -32,18 +32,18 @@
 <script>
   import TreeStore from './model/tree-store';
   import { getNodeKey, findNearestComponent } from './model/util';
-  import ElTreeNode from './tree-node.vue';
+  import LlTreeNode from './tree-node.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from 'element-ui/src/mixins/emitter';
   import { addClass, removeClass } from 'element-ui/src/utils/dom';
 
   export default {
-    name: 'ElTree',
+    name: 'LlTree',
 
     mixins: [emitter],
 
     components: {
-      ElTreeNode
+      LlTreeNode
     },
 
     data() {
@@ -270,7 +270,7 @@
       },
 
       handleNodeExpand(nodeData, node, instance) {
-        this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.broadcast('LlTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
       },
 
@@ -358,7 +358,7 @@
       });
 
       this.$on('tree-node-drag-over', (event, treeNode) => {
-        const dropNode = findNearestComponent(event.target, 'ElTreeNode');
+        const dropNode = findNearestComponent(event.target, 'LlTreeNode');
         const oldDropNode = dragState.dropNode;
         if (oldDropNode && oldDropNode !== dropNode) {
           removeClass(oldDropNode.$el, 'is-drop-inner');

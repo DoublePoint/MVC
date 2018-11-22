@@ -14,7 +14,7 @@
     @mouseleave="onMouseLeave"
   >
     <el-tooltip
-      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse && $slots.title"
+      v-if="parentMenu.$options.componentName === 'LlMenu' && rootMenu.collapse && $slots.title"
       effect="dark"
       placement="right">
       <div slot="content"><slot name="title"></slot></div>
@@ -34,9 +34,9 @@
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElMenuItem',
+    name: 'LlMenuItem',
 
-    componentName: 'ElMenuItem',
+    componentName: 'LlMenuItem',
 
     mixins: [Menu, Emitter],
 
@@ -95,7 +95,7 @@
       },
       handleClick() {
         if (!this.disabled) {
-          this.dispatch('ElMenu', 'item-click', this);
+          this.dispatch('LlMenu', 'item-click', this);
           this.$emit('click', this);
         }
       }

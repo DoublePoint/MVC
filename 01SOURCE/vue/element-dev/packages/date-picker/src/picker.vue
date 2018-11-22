@@ -1,5 +1,5 @@
 <template>
-  <el-input
+  <ll-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly || type === 'dates'"
@@ -30,7 +30,7 @@
       :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger">
     </i>
-  </el-input>
+  </ll-input>
   <div
     class="el-date-editor el-range-editor el-input__inner"
     :class="[
@@ -89,7 +89,7 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
-import ElInput from 'element-ui/packages/input';
+import LlInput from 'element-ui/packages/input';
 import merge from 'element-ui/src/utils/merge';
 
 const NewPopper = {
@@ -389,7 +389,7 @@ export default {
     unlinkPanels: Boolean
   },
 
-  components: { ElInput },
+  components: { LlInput },
 
   directives: { Clickoutside },
 
@@ -413,7 +413,7 @@ export default {
         this.hidePicker();
         this.emitChange(this.value);
         this.userInput = null;
-        this.dispatch('ElFormItem', 'el.form.blur');
+        this.dispatch('LlFormItem', 'el.form.blur');
         this.$emit('blur', this);
         this.blur();
       }
@@ -434,7 +434,7 @@ export default {
     },
     value(val, oldVal) {
       if (!valueEquals(val, oldVal) && !this.pickerVisible) {
-        this.dispatch('ElFormItem', 'el.form.change', val);
+        this.dispatch('LlFormItem', 'el.form.change', val);
       }
     }
   },
@@ -897,7 +897,7 @@ export default {
       // determine user real change only
       if (!valueEquals(val, this.valueOnOpen)) {
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
+        this.dispatch('LlFormItem', 'el.form.change', val);
         this.valueOnOpen = val;
       }
     },

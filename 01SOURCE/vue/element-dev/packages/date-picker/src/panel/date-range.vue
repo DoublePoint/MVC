@@ -21,7 +21,7 @@
           <div class="el-date-range-picker__time-header" v-if="showTime">
             <span class="el-date-range-picker__editors-wrap">
               <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
+                <ll-input
                   size="small"
                   :disabled="rangeState.selecting"
                   ref="minInput"
@@ -32,7 +32,7 @@
                   @change.native="handleDateChange($event, 'min')" />
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMinTimeClose">
-                <el-input
+                <ll-input
                   size="small"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
@@ -52,7 +52,7 @@
             <span class="el-icon-arrow-right"></span>
             <span class="el-date-range-picker__editors-wrap is-right">
               <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
+                <ll-input
                   size="small"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endDate')"
@@ -63,7 +63,7 @@
                   @change.native="handleDateChange($event, 'max')" />
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMaxTimeClose">
-                <el-input
+                <ll-input
                   size="small"
                   :disabled="rangeState.selecting"
                   ref="maxInput"
@@ -164,21 +164,21 @@
         </div>
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
-        <el-button
+        <ll-button
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
           @click="handleClear">
           {{ t('el.datepicker.clear') }}
-        </el-button>
-        <el-button
+        </ll-button>
+        <ll-button
           plain
           size="mini"
           class="el-picker-panel__link-btn"
           :disabled="btnDisabled"
           @click="handleConfirm(false)">
           {{ t('el.datepicker.confirm') }}
-        </el-button>
+        </ll-button>
       </div>
     </div>
   </transition>
@@ -203,8 +203,8 @@
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import LlInput from 'element-ui/packages/input';
+  import LlButton from 'element-ui/packages/button';
 
   const advanceDate = (date, amount) => {
     return new Date(new Date(date).getTime() + amount);
@@ -635,6 +635,6 @@
       }
     },
 
-    components: { TimePicker, DateTable, ElInput, ElButton }
+    components: { TimePicker, DateTable, LlInput, LlButton }
   };
 </script>

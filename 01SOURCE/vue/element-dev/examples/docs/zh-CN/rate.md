@@ -48,14 +48,14 @@
 ``` html
 <div class="block">
   <span class="demonstration">默认不区分颜色</span>
-  <el-rate v-model="value1"></el-rate>
+  <ll-rate v-model="value1"></ll-rate>
 </div>
 <div class="block">
   <span class="demonstration">区分颜色</span>
-  <el-rate
+  <ll-rate
     v-model="value2"
     :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
-  </el-rate>
+  </ll-rate>
 </div>
 
 <script>
@@ -77,10 +77,10 @@
 
 :::demo 为组件设置 `show-text` 属性会在右侧显示辅助文字。通过设置 `texts` 可以为每一个分值指定对应的辅助文字。`texts` 为一个数组，长度应等于最大值 `max`。
 ``` html
-<el-rate
+<ll-rate
   v-model="value3"
   show-text>
-</el-rate>
+</ll-rate>
 
 <script>
   export default {
@@ -100,12 +100,12 @@
 
 :::demo 设置`icon-classes`属性可以自定义对应 3 个不同分段的图标。本例还使用`void-icon-class`指定了未选中时的图标类名。
 ``` html
-<el-rate
+<ll-rate
   v-model="value4"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
-</el-rate>
+</ll-rate>
 
 <script>
   export default {
@@ -125,13 +125,13 @@
 
 :::demo 为组件设置 `disabled` 属性表示组件为只读，支持小数分值。此时若设置 `show-score`，则会在右侧显示目前的分值。可以提供 `score-template` 作为显示模板，模板为一个包含了 `{value}` 的字符串，`{value}` 会被解析为分值。
 ``` html
-<el-rate
+<ll-rate
   v-model="value5"
   disabled
   show-score
   text-color="#ff9900"
   score-template="{value}">
-</el-rate>
+</ll-rate>
 
 <script>
   export default {

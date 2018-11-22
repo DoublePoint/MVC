@@ -35,12 +35,12 @@
       </label>
       <i class="el-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
       <i class="el-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
-      <el-progress
+      <ll-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
         :stroke-width="listType === 'picture-card' ? 6 : 2"
         :percentage="parsePercentage(file.percentage)">
-      </el-progress>
+      </ll-progress>
       <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
         <span
           class="el-upload-list__item-preview"
@@ -62,11 +62,11 @@
 </template>
 <script>
   import Locale from 'element-ui/src/mixins/locale';
-  import ElProgress from 'element-ui/packages/progress';
+  import LlProgress from 'element-ui/packages/progress';
 
   export default {
 
-    name: 'ElUploadList',
+    name: 'LlUploadList',
 
     mixins: [Locale],
 
@@ -75,7 +75,7 @@
         focusing: false
       };
     },
-    components: { ElProgress },
+    components: { LlProgress },
 
     props: {
       files: {

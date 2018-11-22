@@ -38,7 +38,7 @@
 </template>
 <script>
   export default {
-    name: 'ElProgress',
+    name: 'LlProgress',
     props: {
       type: {
         type: String,

@@ -17,9 +17,9 @@
     DOWN: 40
   });
   export default {
-    name: 'ElRadioGroup',
+    name: 'LlRadioGroup',
 
-    componentName: 'ElRadioGroup',
+    componentName: 'LlRadioGroup',
 
     inject: {
       elFormItem: {
@@ -99,7 +99,7 @@
     },
     watch: {
       value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', [this.value]);
+        this.dispatch('LlFormItem', 'el.form.change', [this.value]);
       }
     }
   };

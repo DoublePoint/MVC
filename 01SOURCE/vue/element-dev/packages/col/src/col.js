@@ -1,5 +1,5 @@
 export default {
-  name: 'ElCol',
+  name: 'LlCol',
 
   props: {
     span: {
@@ -23,7 +23,7 @@ export default {
   computed: {
     gutter() {
       let parent = this.$parent;
-      while (parent && parent.$options.componentName !== 'ElRow') {
+      while (parent && parent.$options.componentName !== 'LlRow') {
         parent = parent.$parent;
       }
       return parent ? parent.gutter : 0;

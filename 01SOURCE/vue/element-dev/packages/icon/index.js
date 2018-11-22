@@ -1,8 +1,8 @@
-import ElIcon from './src/icon.vue';
+import LlIcon from './src/icon.vue';
 
 /* istanbul ignore next */
-ElIcon.install = function(Vue) {
-  Vue.component(ElIcon.name, ElIcon);
+LlIcon.install = function(Vue) {
+  Vue.component(LlIcon.name, LlIcon);
 };
 
-export default ElIcon;
+export default LlIcon;

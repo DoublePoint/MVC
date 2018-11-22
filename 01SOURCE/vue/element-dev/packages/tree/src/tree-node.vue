@@ -34,7 +34,7 @@
         ]"
       >
       </span>
-      <el-checkbox
+      <ll-checkbox
         v-if="showCheckbox"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
@@ -42,14 +42,14 @@
         @click.native.stop
         @change="handleCheckChange"
       >
-      </el-checkbox>
+      </ll-checkbox>
       <span
         v-if="node.loading"
         class="el-tree-node__loading-icon el-icon-loading">
       </span>
       <node-content :node="node"></node-content>
     </div>
-    <el-collapse-transition>
+    <ll-collapse-transition>
       <div
         class="el-tree-node__children"
         v-if="!renderAfterExpand || childNodeRendered"
@@ -57,29 +57,29 @@
         role="group"
         :aria-expanded="expanded"
       >
-        <el-tree-node
+        <ll-tree-node
           :render-content="renderContent"
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
-        </el-tree-node>
+        </ll-tree-node>
       </div>
-    </el-collapse-transition>
+    </ll-collapse-transition>
   </div>
 </template>
 
 <script type="text/jsx">
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import LlCollapseTransition from 'element-ui/src/transitions/collapse-transition';
+  import LlCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
   import { getNodeKey } from './model/util';
 
   export default {
-    name: 'ElTreeNode',
+    name: 'LlTreeNode',
 
-    componentName: 'ElTreeNode',
+    componentName: 'LlTreeNode',
 
     mixins: [emitter],
 
@@ -98,8 +98,8 @@
     },
 
     components: {
-      ElCollapseTransition,
-      ElCheckbox,
+      LlCollapseTransition,
+      LlCheckbox,
       NodeContent: {
         props: {
           node: {
@@ -212,7 +212,7 @@
       },
 
       handleChildNodeExpand(nodeData, node, instance) {
-        this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.broadcast('LlTreeNode', 'tree-node-expand', node);
         this.tree.$emit('node-expand', nodeData, node, instance);
       },
 

@@ -6,9 +6,9 @@
 
 <script>
   export default {
-    name: 'ElHeader',
+    name: 'LlHeader',
 
-    componentName: 'ElHeader',
+    componentName: 'LlHeader',
 
     props: {
       height: {

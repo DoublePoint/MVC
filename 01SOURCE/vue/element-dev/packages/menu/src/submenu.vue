@@ -21,9 +21,9 @@
   };
 
   export default {
-    name: 'ElSubmenu',
+    name: 'LlSubmenu',
 
-    componentName: 'ElSubmenu',
+    componentName: 'LlSubmenu',
 
     mixins: [menuMixin, Emitter, poperMixins],
 
@@ -137,7 +137,7 @@
         let isFirstLevel = true;
         let parent = this.$parent;
         while (parent && parent !== this.rootMenu) {
-          if (['ElSubmenu', 'ElMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
+          if (['LlSubmenu', 'LlMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
             isFirstLevel = false;
             break;
           } else {
@@ -176,7 +176,7 @@
         ) {
           return;
         }
-        this.dispatch('ElMenu', 'submenu-click', this);
+        this.dispatch('LlMenu', 'submenu-click', this);
       },
       handleMouseenter() {
         const { rootMenu, disabled } = this;
@@ -187,7 +187,7 @@
         ) {
           return;
         }
-        this.dispatch('ElSubmenu', 'mouse-enter-child');
+        this.dispatch('LlSubmenu', 'mouse-enter-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
@@ -201,7 +201,7 @@
         ) {
           return;
         }
-        this.dispatch('ElSubmenu', 'mouse-leave-child');
+        this.dispatch('LlSubmenu', 'mouse-leave-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           !this.mouseInChild && this.rootMenu.closeMenu(this.index);

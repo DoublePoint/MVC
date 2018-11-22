@@ -176,7 +176,7 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__sizes">
-            <el-select
+            <ll-select
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
               size="mini"
@@ -190,7 +190,7 @@ export default {
                   </el-option>
                 )
               }
-            </el-select>
+            </ll-select>
           </span>
         );
       },

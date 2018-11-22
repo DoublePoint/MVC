@@ -228,7 +228,7 @@
   let tableIdSeed = 1;
 
   export default {
-    name: 'ElTable',
+    name: 'LlTable',
 
     mixins: [Locale, Migrating],
 

@@ -11,28 +11,28 @@
       <predefine v-if="predefine" :color="color" :colors="predefine"></predefine>
       <div class="el-color-dropdown__btns">
         <span class="el-color-dropdown__value">
-          <el-input
+          <ll-input
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
             @blur="handleConfirm"
             :validate-event="false"
             size="mini">
-          </el-input>
+          </ll-input>
         </span>
-        <el-button
+        <ll-button
           size="mini"
           type="text"
           class="el-color-dropdown__link-btn"
           @click="$emit('clear')">
           {{ t('el.colorpicker.clear') }}
-        </el-button>
-        <el-button
+        </ll-button>
+        <ll-button
           plain
           size="mini"
           class="el-color-dropdown__btn"
           @click="confirmValue">
           {{ t('el.colorpicker.confirm') }}
-        </el-button>
+        </ll-button>
       </div>
     </div>
   </transition>
@@ -45,8 +45,8 @@
   import Predefine from './predefine';
   import Popper from 'element-ui/src/utils/vue-popper';
   import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import LlInput from 'element-ui/packages/input';
+  import LlButton from 'element-ui/packages/button';
 
   export default {
     name: 'el-color-picker-dropdown',
@@ -57,8 +57,8 @@
       SvPanel,
       HueSlider,
       AlphaSlider,
-      ElInput,
-      ElButton,
+      LlInput,
+      LlButton,
       Predefine
     },
 
