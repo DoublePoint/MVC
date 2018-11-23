@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: 'ElStep',
+  name: 'LlStep',
 
   props: {
     title: String,

@@ -40,7 +40,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElDialog',
+    name: 'LlDialog',
 
     mixins: [Popup, emitter, Migrating],
 
@@ -170,8 +170,8 @@
         }
       },
       updatePopper() {
-        this.broadcast('ElSelectDropdown', 'updatePopper');
-        this.broadcast('ElDropdownMenu', 'updatePopper');
+        this.broadcast('LlSelectDropdown', 'updatePopper');
+        this.broadcast('LlDropdownMenu', 'updatePopper');
       },
       afterEnter() {
         this.$emit('opened');

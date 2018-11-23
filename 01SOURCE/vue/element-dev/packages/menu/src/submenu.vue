@@ -66,7 +66,7 @@
             this.updatePopper();
           });
         }
-      }
+      },
     },
     computed: {
       // popper option
@@ -78,6 +78,13 @@
       menuTransitionName() {
         return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
       },
+      /** add by liulei 2018-11-23 start */
+      llCollapse() {
+        this.handleCollapseToggle(this.$store.state.llCollapse);
+        console.log('this.$store.state.menuCollapse:' + this.$store.state.menuCollapse);
+        return this.$store.state.menuCollapse;
+      },
+      /** add by liulei 2018-11-23 start */
       opened() {
         return this.rootMenu.openedMenus.indexOf(this.index) > -1;
       },
@@ -226,6 +233,7 @@
         this.referenceElm = this.$el;
         this.popperElm = this.$refs.menu;
         this.updatePlacement();
+        alert(1)
       }
     },
     created() {

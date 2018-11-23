@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: 'ElCard',
+    name: 'LlCard',
     props: {
       header: {},
       bodyStyle: {},

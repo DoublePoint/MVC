@@ -22,18 +22,18 @@
       <transition name="text-slide">
         <span v-show="hovering">{{ controlText }}</span>
       </transition>
-      <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
+      <ll-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
         <transition name="text-slide">
-          <el-button
+          <ll-button
             v-show="hovering || isExpanded"
             size="small"
             type="text"
             class="control-button"
             @click.stop="goJsfiddle">
             {{ langConfig['button-text'] }}
-          </el-button>
+          </ll-button>
         </transition>
-      </el-tooltip>
+      </ll-tooltip>
     </div>
   </div>
 </template>

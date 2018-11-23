@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'ElBadge',
+  name: 'LlBadge',
 
   props: {
     value: {},

@@ -5,9 +5,9 @@
 </template>
 <script>
   export default {
-    name: 'ElCollapse',
+    name: 'LlCollapse',
 
-    componentName: 'ElCollapse',
+    componentName: 'LlCollapse',
 
     props: {
       accordion: Boolean,

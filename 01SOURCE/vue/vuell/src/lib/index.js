@@ -4,14 +4,14 @@ import './css/base.less'
 import './css/base.css'
 
 import vueTest from './test.vue' // 导入组件
-// import vueTable from './table.vue'
-// import vueTableColumn from './table-column.vue'
-import vueContainer from './container.vue'
-import vueContainerAside from './container-aside.vue'
-import vueContainerFooter from './container-footer.vue'
-import vueContainerHeader from './container-header.vue'
-import vueContainerMain from './container-main.vue'
-import vueMenu from './menu.vue'
+// // import vueTable from './table.vue'
+// // import vueTableColumn from './table-column.vue'
+// import vueContainer from './container.vue'
+// import vueContainerAside from './container-aside.vue'
+// import vueContainerFooter from './container-footer.vue'
+// import vueContainerHeader from './container-header.vue'
+// import vueContainerMain from './container-main.vue'
+import vueMenu from './menu/menu.vue'
 // import vueTab from './tab.vue'
 // import vueTabPane from './tab-pane.vue'
 
@@ -20,11 +20,11 @@ const vt = {
     Vue.component(vueTest.name, vueTest) // vuePayKeyboard.name 组件的name属性
     // Vue.component(vueTable.name, vueTable)
     // Vue.component(vueTableColumn.name, vueTableColumn)
-    Vue.component(vueContainer.name, vueContainer)
-    Vue.component(vueContainerAside.name, vueContainerAside)
-    Vue.component(vueContainerFooter.name, vueContainerFooter)
-    Vue.component(vueContainerHeader.name, vueContainerHeader)
-    Vue.component(vueContainerMain.name, vueContainerMain)
+    // Vue.component(vueContainer.name, vueContainer)
+    // Vue.component(vueContainerAside.name, vueContainerAside)
+    // Vue.component(vueContainerFooter.name, vueContainerFooter)
+    // Vue.component(vueContainerHeader.name, vueContainerHeader)
+    // Vue.component(vueContainerMain.name, vueContainerMain)
     Vue.component(vueMenu.name, vueMenu)
     // Vue.component(vueTab.name, vueTab)
     // Vue.component(vueTabPane.name, vueTabPane)
@@ -33,6 +33,8 @@ const vt = {
     // 虽然没有明确规定用$开头  但是大家都默认遵守这个规定
   }
 }
+
+
 Vue.use(ElementUI)
 Vue.use(vt)
 export default vt // 导出.

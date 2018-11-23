@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "element-ui": "^2.4.10",
-    "vue": "^2.5.11"
+    "vue": "^2.5.11",
+    "vuex": "^3.0.1"
   },
   "browserslist": [
     "> 1%",

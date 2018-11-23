@@ -54,7 +54,7 @@ import throttle from 'throttle-debounce/throttle';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {
-  name: 'ElCarousel',
+  name: 'LlCarousel',
 
   props: {
     initialIndex: {
@@ -163,7 +163,7 @@ export default {
     },
 
     updateItems() {
-      this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
+      this.items = this.$children.filter(child => child.$options.name === 'LlCarouselItem');
     },
 
     resetItemPosition(oldIndex) {

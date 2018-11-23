@@ -1,12 +1,12 @@
 import Pager from './pager.vue';
-import ElSelect from 'element-ui/packages/select';
-import ElOption from 'element-ui/packages/option';
-import ElInput from 'element-ui/packages/input';
+import LlSelect from 'element-ui/packages/select';
+import LlOption from 'element-ui/packages/option';
+import LlInput from 'element-ui/packages/input';
 import Locale from 'element-ui/src/mixins/locale';
 import { valueEquals } from 'element-ui/src/utils/util';
 
 export default {
-  name: 'ElPagination',
+  name: 'LlPagination',
 
   props: {
     pageSize: {
@@ -184,10 +184,10 @@ export default {
               disabled={ this.$parent.disabled }>
               {
                 this.pageSizes.map(item =>
-                  <el-option
+                  <ll-option
                     value={ item }
                     label={ item + this.t('el.pagination.pagesize') }>
-                  </el-option>
+                  </ll-option>
                 )
               }
             </ll-select>
@@ -196,8 +196,8 @@ export default {
       },
 
       components: {
-        ElSelect,
-        ElOption
+        LlSelect,
+        LlOption
       },
 
       methods: {
@@ -221,7 +221,7 @@ export default {
         };
       },
 
-      components: { ElInput },
+      components: { LlInput },
 
       watch: {
         '$parent.internalPageSize'() {
@@ -272,7 +272,7 @@ export default {
         return (
           <span class="el-pagination__jump">
             { this.t('el.pagination.goto') }
-            <el-input
+            <ll-input
               class="el-pagination__editor is-in-pagination"
               min={ 1 }
               max={ this.$parent.internalPageCount }

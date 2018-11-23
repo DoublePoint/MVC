@@ -137,9 +137,9 @@
 <template>
   <div class="page-changelog">
     <div class="heading">
-      <el-button class="fr">
+      <ll-button class="fr">
         <a href="https://github.com/ElemeFE/element/releases" target="_blank">GitHub Releases</a>
-      </el-button>
+      </ll-button>
       <%= 1 >
     </div>
     <ul class="timeline" ref="timeline">

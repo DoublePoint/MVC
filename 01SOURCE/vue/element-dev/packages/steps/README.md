@@ -12,20 +12,20 @@ npm i element-steps -D
 ## Usage
 ```javascript
 import Vue from 'vue'
-import ElStep from 'element-steps'
+import LlStep from 'element-steps'
 import 'element-theme-chalk/dist/step.css'
 
-Vue.use(ElStep)
+Vue.use(LlStep)
 ```
 
 or
 
 ```javascript
 import Vue from 'vue'
-import { ElSteps, ElStep } from 'element-steps'
+import { LlSteps, LlStep } from 'element-steps'
 
-Vue.component('el-steps', ElSteps)
-Vue.component('el-step', ElStep)
+Vue.component('el-steps', LlSteps)
+Vue.component('el-step', LlStep)
 ```
 
 ### Steps Attributes
@@ -44,7 +44,7 @@ Vue.component('el-step', ElStep)
 |---------- |-------- |---------- |-------------  |-------- |
 | title | 标题 | string | — | — |
 | description | 描述性文字 | string | — | — |
-| icon | 图标 | Element Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
+| icon | 图标 | Llement Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
 
 ### Step Slot
 | name | 说明  |

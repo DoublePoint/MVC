@@ -25,9 +25,9 @@
 
       if (this.collapseTransition) {
         return (
-          <el-menu-collapse-transition>
+          <ll-menu-collapse-transition>
             { component }
-          </el-menu-collapse-transition>
+          </ll-menu-collapse-transition>
         );
       } else {
         return component;
@@ -45,7 +45,7 @@
     },
 
     components: {
-      'el-menu-collapse-transition': {
+      'll-menu-collapse-transition': {
         functional: true,
         render(createElement, context) {
           const data = {

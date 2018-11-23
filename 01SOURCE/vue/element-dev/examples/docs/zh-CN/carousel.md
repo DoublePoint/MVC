@@ -72,19 +72,19 @@
 <template>
   <div class="block">
     <span class="demonstration">默认 Hover 指示器触发</span>
-    <el-carousel height="150px">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <ll-carousel height="150px">
+      <ll-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+      </ll-carousel-item>
+    </ll-carousel>
   </div>
   <div class="block">
     <span class="demonstration">Click 指示器触发</span>
-    <el-carousel trigger="click" height="150px">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <ll-carousel trigger="click" height="150px">
+      <ll-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+      </ll-carousel-item>
+    </ll-carousel>
   </div>
 </template>
 
@@ -115,11 +115,11 @@
 :::demo `indicator-position`属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为`outside`则会显示在外部；设置为`none`则不会显示指示器。
 ```html
 <template>
-  <el-carousel indicator-position="outside">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <ll-carousel indicator-position="outside">
+    <ll-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </ll-carousel-item>
+  </ll-carousel>
 </template>
 
 <style>
@@ -148,11 +148,11 @@
 :::demo `arrow`属性定义了切换箭头的显示时机。默认情况下，切换箭头只有在鼠标 hover 到走马灯上时才会显示；若将`arrow`设置为`always`，则会一直显示；设置为`never`，则会一直隐藏。
 ```html
 <template>
-  <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <ll-carousel :interval="5000" arrow="always">
+    <ll-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </ll-carousel-item>
+  </ll-carousel>
 </template>
 
 <style>
@@ -181,11 +181,11 @@
 :::demo 将`type`属性设置为`card`即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，可以通过直接点击两侧的幻灯片进行切换。
 ```html
 <template>
-  <el-carousel :interval="4000" type="card" height="200px">
-    <el-carousel-item v-for="item in 6" :key="item">
+  <ll-carousel :interval="4000" type="card" height="200px">
+    <ll-carousel-item v-for="item in 6" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </ll-carousel-item>
+  </ll-carousel>
 </template>
 
 <style>
