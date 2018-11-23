@@ -66,7 +66,7 @@
             this.updatePopper();
           });
         }
-      },
+      }
     },
     computed: {
       // popper option
@@ -233,7 +233,7 @@
         this.referenceElm = this.$el;
         this.popperElm = this.$refs.menu;
         this.updatePlacement();
-        alert(1)
+        alert(1);
       }
     },
     created() {
