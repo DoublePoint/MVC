@@ -1,2 +1,0 @@
-webpackJsonp([1],{ZAOA:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t("7+uW"),i={render:function(){var e=this.$createElement;return(this._self._c||e)("div",{attrs:{id:"two"}},[this._v("\n  "+this._s(this.msg)+"\n")])},staticRenderFns:[]},s=t("VU/8")({name:"two",data:function(){return{msg:"I am one"}}},i,!1,null,null,null).exports;r.a.config.productionTip=!1,new r.a({el:"#two",render:function(e){return e(s)}})}},["ZAOA"]);
-//# sourceMappingURL=two.a66149806a1e4949e6ae.js.map

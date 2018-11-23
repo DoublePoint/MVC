@@ -16,53 +16,22 @@
       <ll-header style="background-color:#eee;">Header</ll-header>
       <ll-container>
         <ll-aside width="200px">
-          <!-- <ll-nav-menu :items="items" style="height: 100%;width: 199px;" :collapse="true" background-color="#545c64" text-color="#fff"></ll-nav-menu> -->
-          <ll-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-            <ll-radio-button :label="false">展开</ll-radio-button>
-            <ll-radio-button :label="true">收起</ll-radio-button>
-          </ll-radio-group>
-          <ll-nav-menu :items="items" style="height: 100%;width: 199px;" :collapse="isCollapse" background-color="#545c64"
+          <ll-nav-menu :items="items" style="height: 100%;width: 199px;" mode="horizontal" background-color="#545c64"
             text-color="#fff"></ll-nav-menu>
-          <!-- <ll-menu default-active="1-4-1" class="el-menu-vertical-demo" 
-            :collapse="isCollapse">
-            <ll-submenu index="1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">导航一</span>
-              </template>
-              <ll-menu-item-group>
-                <span slot="title">分组一</span>
-                <ll-menu-item index="1-1">选项1</ll-menu-item>
-                <ll-menu-item index="1-2">选项2</ll-menu-item>
-              </ll-menu-item-group>
-              <ll-menu-item-group title="分组2">
-                <ll-menu-item index="1-3">选项3</ll-menu-item>
-              </ll-menu-item-group>
-              <ll-submenu index="1-4">
-                <span slot="title">选项4</span>
-                <ll-menu-item index="1-4-1">选项1</ll-menu-item>
-              </ll-submenu>
-            </ll-submenu>
-            <ll-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              <span slot="title">导航二</span>
-            </ll-menu-item>
-            <ll-menu-item index="3" disabled>
-              <i class="el-icon-document"></i>
-              <span slot="title">导航三</span>
-            </ll-menu-item>
-            <ll-menu-item index="4">
-              <i class="el-icon-setting"></i>
-              <span slot="title">导航四</span>
-            </ll-menu-item>
-          </ll-menu> -->
         </ll-aside>
         <ll-main style="padding: 0 0 0 0px;">
           <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
             <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name" :closable="item.closable==null?false:item.closable"
-              style="height: 100%;overflow: hidden;">
-              <iframe style="height: 100%;width: 100%;" frameborder='0' th:src="@{/sys/index/main}"></iframe>
-              <!-- {{item.title}} -->
+              style="height: 100%;overflow: auto;">
+              <iframe v-if="index==0" style="height: 100%;width: 100%;display:block" src="./templates/index.1.html" frameborder='0' th:src="@{/sys/index/main}"></iframe>
+              <ll-table v-if="index==1" :data="tableData">
+                <ll-table-column prop="date" label="日期" :width="180">
+                </ll-table-column>
+                <ll-table-column prop="name" label="姓名" :width="180">
+                </ll-table-column>
+                <ll-table-column prop="address" label="地址">
+                </ll-table-column>
+              </ll-table>
             </ll-tab-pane>
           </ll-tabs>
           <!-- <ll-tabs v-model="editableTabsValue2" :activeName="activeName" type="card" class="ll-tabs" closable @tab-remove="removeTab">

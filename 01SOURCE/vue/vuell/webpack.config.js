@@ -53,7 +53,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|eot|woff|woff2|ttf)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          // name: '[name].[ext]?[hash]'
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
     ]

@@ -23,7 +23,7 @@ top-container {
 .el-tabs__content {
   height: calc(100% - 41px);
   box-sizing: border-box;
-  overflow: auto;
+  overflow: hidden;
   -moz-box-sizing: border-box;
   /* Firefox */
   -webkit-box-sizing: border-box;

@@ -9,25 +9,25 @@
 </template>
 
 <script>
-import Vuex from 'vuex'
-Vue.use(Vuex)
+// import Vuex from 'vuex'
+// Vue.use(Vuex)
 import menuItem from "./menu-item.vue"; //引进菜单模板
-const store = new Vuex.Store({
-  state: {
-    menuCollapse: false
-  },
-  mutations: {
-    setMenuCollapseFalse(state) {
-      state.menuCollapse=false;
-    },
-    setMenuCollapseTrue(state) {
-      state.menuCollapse=true;
-    }
-  }
-});
+// const store = new Vuex.Store({
+//   state: {
+//     menuCollapse: false
+//   },
+//   mutations: {
+//     setMenuCollapseFalse(state) {
+//       state.menuCollapse=false;
+//     },
+//     setMenuCollapseTrue(state) {
+//       state.menuCollapse=true;
+//     }
+//   }
+// });
 export default {
   name: "LlNavMenu",
-  store,
+  // store,
   components: {
     "LlNavMenuItem": menuItem //使用菜单组件
   },
@@ -51,9 +51,6 @@ export default {
       type:String
     },
     collapse:{
-      default(){
-        return true
-      },
       type:Boolean
     }
   },
