@@ -22,6 +22,8 @@ public class VOMenu extends BaseEntity {
 
 	private Long id;
 	
+	private String menuIndex;
+	
 	private String name;
 	
 	private String link;
@@ -120,6 +122,14 @@ public class VOMenu extends BaseEntity {
 
 	public void setChildrenMenuList(List<VOMenu> childrenMenuList) {
 		this.childrenMenuList = childrenMenuList;
+	}
+	
+	public String getMenuIndex() {
+		return menuIndex;
+	}
+
+	public void setMenuIndex(String menuIndex) {
+		this.menuIndex = menuIndex;
 	}
 
 	public String toString() {

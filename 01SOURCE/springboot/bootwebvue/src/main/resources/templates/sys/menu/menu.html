@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <template th:replace="/base.html"></template>
+</head>
+
+<body>
+  <div id="app" style="height: 100%;width: 100%;">
+    <ll-container style="height: 100%; ">
+        <ll-aside width="200px" style="background-color:#545c64">
+          
+        </ll-aside>
+        <ll-container style="height: 100%; ">
+        	<ll-header style="background-color:#eee;">
+        		<ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
+			</ll-header>
+	        <ll-main style="padding: 0 0 0 0px;">
+	          	<ll-table :data="tableData">
+					<ll-table-column prop="id" label="菜单标识" :width="150"></ll-table-column>
+					<ll-table-column prop="name" label="菜单名称" :width="150" ></ll-table-column>
+					<ll-table-column prop="sn" label="菜单排序" :width="150"></ll-table-column>
+					<ll-table-column prop="link" label="菜单链接"></ll-table-column>
+				</ll-table>
+	        </ll-main>
+		</ll-container>
+    </ll-container>
+  </div>
+
+  <script type="text/javascript">
+  var dataWrap=ajaxResponse.get("dataWrap");
+  
+     var vm=new Vue({
+      el: '#app',
+      data: {
+    	  tableData:[],
+      },
+      methods:{
+    	  retrieve(){
+    		  $.request({
+    				url : $$pageContextPath + "sys/menu/retrieve",
+    				type : "POST",
+    				contentType : 'application/json;charset=UTF-8',
+    				dataType : "json",
+    				async : false,
+    				data :{
+    				},
+    				success : function(response){
+    					var dataWrap=response.get("dataWrap");
+    					if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
+    						alert("未查询到任何数据!");
+    					vm.$set(vm.$data,"tableData",dataWrap.dataList);
+    					vm.tableData;
+    				}
+    			});
+    	  }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

@@ -15,23 +15,24 @@
     <ll-container style="height: 100%; ">
       <ll-header style="background-color:#eee;">Header</ll-header>
       <ll-container>
-        <ll-aside width="200px">
-          <ll-nav-menu :items="items" style="height: 100%;width: 199px;" mode="horizontal" background-color="#545c64"
+        <ll-aside width="200px" style="background-color:#545c64">
+          <ll-nav-menu :items="items" @select="menuSelect" :id-alias="idAlias" :labe-alias="labelAlias" child-alias="children" style="width: 200px;" mode="horizontal" background-color="#545c64"
             text-color="#fff"></ll-nav-menu>
         </ll-aside>
         <ll-main style="padding: 0 0 0 0px;">
           <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
             <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name" :closable="item.closable==null?false:item.closable"
               style="height: 100%;overflow: auto;">
-              <iframe v-if="index==0" style="height: 100%;width: 100%;display:block" src="./templates/index.1.html" frameborder='0' th:src="@{/sys/index/main}"></iframe>
-              <ll-table v-if="index==1" :data="tableData">
-                <ll-table-column prop="date" label="日期" :width="180">
-                </ll-table-column>
-                <ll-table-column prop="name" label="姓名" :width="180">
-                </ll-table-column>
-                <ll-table-column prop="address" label="地址">
-                </ll-table-column>
-              </ll-table>
+                <iframe v-if="index==0" style="height: 100%;width: 100%;display:block" src="./templates/index.1.html" frameborder='0' th:src="@{/sys/index/main}"></iframe>
+                <ll-table v-else-if="index==1" :data="tableData">
+                  <ll-table-column prop="date" label="日期" :width="180">
+                  </ll-table-column>
+                  <ll-table-column prop="name" label="姓名" :width="180">
+                  </ll-table-column>
+                  <ll-table-column prop="address" label="地址">
+                  </ll-table-column>
+                </ll-table>
+                <iframe v-else style="height: 100%;width: 100%;display:block" src="./templates/index.1.html" frameborder='0' th:src="@{/sys/index/main}"></iframe>
             </ll-tab-pane>
           </ll-tabs>
           <!-- <ll-tabs v-model="editableTabsValue2" :activeName="activeName" type="card" class="ll-tabs" closable @tab-remove="removeTab">
@@ -58,6 +59,13 @@
     new Vue({
       el: '#app',
       methods: {
+        menuSelect(index, indexPath, item){
+          if(!this.tabs.find(a=>a.name==item.label))
+          this.tabs.push({
+            name: item.label,
+            title: item.label,
+          });
+        },
         handleOpen(key, keyPath) {
           console.log(key, keyPath);
         },
@@ -110,11 +118,6 @@
             address: "上海市普陀区金沙江路 1518 弄"
           },
           {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
             date: "2016-05-01",
             name: "王小虎",
             address: "上海市普陀区金沙江路 1519 弄"
@@ -129,347 +132,9 @@
             name: "王小虎",
             address: "上海市普陀区金沙江路 1517 弄"
           },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄"
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄"
-          }
         ],
+        idAlias:"value",
+        labelAlias:"label",
         items: [{
           value: "1",
           label: "系统管理",
@@ -480,6 +145,13 @@
             icon: "el-icon-document",
             children: [{
               value: "1-1-1",
+              label: "菜单查询",
+              icon: "el-icon-setting",
+              children: []
+            },
+            
+            {
+              value: "1-1-2",
               label: "菜单查询",
               icon: "el-icon-setting",
               children: []

@@ -9,51 +9,110 @@
 */
 package cn.doublepoint.common.port.adapter.template.controller;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
+import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Controller
-public class PageController extends BaseRequestController{
+public class PageController extends BaseRequestController {
+	@Resource
+	MenuService menuService;
+
 	// 索引页
 	@RequestMapping(value = "sys/index")
-	public String hello() {
-		return "sys/index/index.html";
+	public AjaxResponse hello(AjaxResponse response, @RequestParam(required = false) Boolean isHasRoot) {
+		String rooTreeName = "菜单树";
+		List<VOMenu> returnMenuList;
+		if (isHasRoot != null && isHasRoot.booleanValue()) {
+			VOMenu rootCd = new VOMenu();
+			rootCd.setName(rooTreeName);
+			returnMenuList = new ArrayList<VOMenu>();
+			List<VOMenu> childrenMenuList = getChildrenMenuList(null);
+			rootCd.setChildrenMenuList(childrenMenuList);
+			returnMenuList.add(rootCd);
+		} else {
+			returnMenuList = getChildrenMenuList(null);
+		}
+		AjaxDataWrap<VOMenu> dataWrap = new AjaxDataWrap<>();
+		dataWrap.setDataList(returnMenuList);
+		response.setAjaxParameter("dataWrap", dataWrap);
+		response.setViewName("sys/index/index.html");
+		return response;
 	}
-	
-	
+
+	private List<VOMenu> getChildrenMenuList(VOMenu cd) {
+		PageInfo pageRequest = new PageInfo(1, 999999);
+		List<VOMenu> menuList;
+		if (cd == null || cd.getId() == null)
+			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
+		else {
+			Menu query = new Menu();
+			query.setId(cd.getId());
+			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
+		}
+		if (menuList == null) {
+			return null;
+		} else {
+			for (int i = 0; i < menuList.size(); i++) {
+				menuList.get(i).setChildrenMenuList(getChildrenMenuList(menuList.get(i)));
+			}
+		}
+		return menuList.stream().map(i -> {
+			i.setMenuIndex(i.getId().toString());
+			return i;
+		}).collect(Collectors.toList());
+	}
+
 	@RequestMapping("sys/login/{actionname}")
 	public String login(@PathVariable String actionname) {
-		return "sys/login/" + actionname+".html";
+		return "sys/login/" + actionname + ".html";
 	}
-	
+
 	@RequestMapping("sys/register/{actionname}")
 	public String register(@PathVariable String actionname) {
-		return "sys/register/" + actionname+".html";
+		return "sys/register/" + actionname + ".html";
 	}
-	
+
 	@RequestMapping("sys/test/{actionname}")
 	public String test(@PathVariable String actionname) {
-		return "sys/test/" + actionname+".html";
+		return "sys/test/" + actionname + ".html";
 	}
-	
+
 	@RequestMapping("sys/bootstrap/{actionname}")
 	public String bootstrap(@PathVariable String actionname) {
-		return "sys/bootstrap/" + actionname+".html";
+		return "sys/bootstrap/" + actionname + ".html";
 	}
+
 	@RequestMapping("sys/assistant/{actionname}")
 	public String assistant(@PathVariable String actionname) {
-		return "sys/assistant/" + actionname+".html";
+		return "sys/assistant/" + actionname + ".html";
 	}
 
 	@RequestMapping("sys/config/{actionname}")
 	public String config(@PathVariable String actionname) {
-		return "sys/config/" + actionname+".html";
+		return "sys/config/" + actionname + ".html";
 	}
+
 	@RequestMapping("sys/commonpage/{actionname}")
 	public String commonpage(@PathVariable String actionname) {
-		return "sys/commonpage/" + actionname+".html";
+		return "sys/commonpage/" + actionname + ".html";
 	}
 }

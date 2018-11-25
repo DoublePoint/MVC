@@ -81,15 +81,17 @@ public class MenuManagementController extends BaseController {
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
 		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
-		if (dataWrap == null)
-			return null;
 		Menu menuQuery = null;
 		if (dataWrap.getData()!=null) {
 			menuQuery = dataWrap.getData();
+			if (menuQuery != null) {
+				List<Menu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
+				dataWrap.setDataList(list);
+			}
 		}
-
-		if (menuQuery != null) {
-			List<Menu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
+		else{
+			List<Menu> list = menuService.findAll(new PageInfo());
+			dataWrap=new AjaxDataWrap<>();
 			dataWrap.setDataList(list);
 		}
 

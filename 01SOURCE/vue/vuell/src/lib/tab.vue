@@ -26,11 +26,9 @@ export default {
   },
   methods: {
     tabClick(val){
-      alert(3);
       this.$emit('tab-click',val);
     },
     cc(){
-      alert("cc");
     }
   },
   mounted() {

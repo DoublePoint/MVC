@@ -3,8 +3,10 @@
         :collapse="collapse"
         :background-color="backgroundColor"
         :text-color="textColor"
+        @select="select"
+        @itemClick="itemClick"
         unique-opened >       
-        <ll-nav-menu-item :items="items"></ll-nav-menu-item>
+        <ll-nav-menu-item :items="items" :idAlias="idAlias" :labelAlias="labelAlias" :childAlias="childAlias"></ll-nav-menu-item>
     </ll-menu>
 </template>
 
@@ -38,6 +40,24 @@ export default {
       },
       type: Array
     },
+    idAlias: {
+      default(){
+        return "id"
+      },
+      type:String
+    },
+    labelAlias: {
+      default(){
+        return "label"
+      },
+      type:String
+    },
+    childAlias: {
+      default(){
+        return "children"
+      },
+      type:String
+    },
     backgroundColor: {
       default(){
         return "#EEE"
@@ -59,8 +79,12 @@ export default {
     };
   },
   methods: {
-    toggleClick() {
+    select(index, indexPath, item) {
       //菜单展开功能
+      this.$emit("select",index, indexPath, item.route);
+    },
+    itemClick(index, indexPath, item){
+      alert(2)
     }
   },
   watch:{
@@ -79,7 +103,7 @@ export default {
 </script>
 
 <style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
+  .el-menu {
+    border-right: 0; 
   }
 </style>

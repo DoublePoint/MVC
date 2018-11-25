@@ -14,7 +14,6 @@ import vueTest from './test.vue' // 导入组件
 import vueMenu from './menu/menu.vue'
 // import vueTab from './tab.vue'
 // import vueTabPane from './tab-pane.vue'
-
 const vt = {
   install(Vue, options) {
     Vue.component(vueTest.name, vueTest) // vuePayKeyboard.name 组件的name属性

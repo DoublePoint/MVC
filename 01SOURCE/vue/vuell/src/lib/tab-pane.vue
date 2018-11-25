@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     tabPaneClick(){
-      alert(2);
       this.$emit("tabPaneCick",this.name);
     }
   },
