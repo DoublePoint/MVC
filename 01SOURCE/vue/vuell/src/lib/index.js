@@ -2,6 +2,7 @@
 import $request from './js/request.js'
 
 import ElementUI from 'element-ui'
+import resource from 'vue-resource'
 import 'element-ui/lib/theme-chalk/index.css'
 import './css/base.less'
 import './css/base.css'
