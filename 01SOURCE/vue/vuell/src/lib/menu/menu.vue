@@ -6,68 +6,40 @@
         @select="select"
         @itemClick="itemClick"
         unique-opened >       
-        <ll-nav-menu-item :items="items" :idAlias="idAlias" :labelAlias="labelAlias" :childAlias="childAlias"></ll-nav-menu-item>
+        <ll-nav-menu-item :items="items" :props="props"></ll-nav-menu-item>
     </ll-menu>
 </template>
 
 <script>
-// import Vuex from 'vuex'
-// Vue.use(Vuex)
 import menuItem from "./menu-item.vue"; //引进菜单模板
-// const store = new Vuex.Store({
-//   state: {
-//     menuCollapse: false
-//   },
-//   mutations: {
-//     setMenuCollapseFalse(state) {
-//       state.menuCollapse=false;
-//     },
-//     setMenuCollapseTrue(state) {
-//       state.menuCollapse=true;
-//     }
-//   }
-// });
+
 export default {
   name: "LlNavMenu",
-  // store,
   components: {
     "LlNavMenuItem": menuItem //使用菜单组件
   },
   props: {
     items: {
-      default() {
-        return [];
-      },
+      default: [],
       type: Array
     },
-    idAlias: {
+    props:{
       default(){
-        return "id"
+        return{
+          childAlias: "children",
+          idAlias: "id",
+          labelAlias: "label",
+          iconAlias: "icon",
+        }
       },
-      type:String
-    },
-    labelAlias: {
-      default(){
-        return "label"
-      },
-      type:String
-    },
-    childAlias: {
-      default(){
-        return "children"
-      },
-      type:String
+      type:Object
     },
     backgroundColor: {
-      default(){
-        return "#EEE"
-      },
+      default: "#EEE",
       type:String
     },
     textColor: {
-      default(){
-        return "#FFF"
-      },
+      default: "#FFF",
       type:String
     },
     collapse:{

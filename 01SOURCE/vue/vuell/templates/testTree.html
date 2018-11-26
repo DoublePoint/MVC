@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>vueplugin2</title>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script src="../dist/vueplugins.js"></script>
+  <link href="../src/lib/css/base.css">
+  </link>
+</head>
+
+<body>
+  <div id="app" style="height: 100%;width: 100%;">
+    <ll-nav-tree :items="data" :props="defaultProps" accordion @node-click="handleNodeClick">
+    </ll-nav-tree>
+  </div>
+</body>
+<script type="text/javascript">
+   
+  new Vue({
+    el: '#app',
+    data: {
+        data: [{
+          label: '一级 1',
+          children: [{
+            label: '二级 1-1',
+            children: [{
+              label: '三级 1-1-1'
+            }]
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1',
+            children: [{
+              label: '三级 2-1-1'
+            }]
+          }, {
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1',
+            children: [{
+              label: '三级 3-1-1'
+            }]
+          }, {
+            label: '二级 3-2',
+            children: [{
+              label: '三级 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  })
+</script>
+</html>
