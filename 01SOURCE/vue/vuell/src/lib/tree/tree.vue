@@ -1,5 +1,6 @@
 <template>
-    <ll-tree :data="items" :props="props" accordion @node-click="handleNodeClick" :load="load">
+    <ll-tree :data="items" :props="props" accordion @node-click="handleNodeClick" :load="load"
+      :lazy="lazy">
     </ll-tree>
 </template>
 
@@ -22,6 +23,15 @@ export default {
       },
       type:Object
     },
+    expandLevel:{
+      default:3,
+      type:Number
+    },
+    lazy:{
+      default:true,
+      type:Boolean
+    },
+    datasource:String
   },
   data() {
     return {
@@ -32,9 +42,24 @@ export default {
         this.$emit("node-click",nodeData,node);
     },
     load(node, resolve){
-        if(node[childAlias]!=null&&node[childAlias].length>0){
-
+      if(this.datasource==null||this.datasource=="")
+        throw new Error("ll:prop 'datasource' must not be null",'tree.vue');
+      if(node.data[this.props.childAlias]!=null&&node.data[this.props.childAlias].length>0)
+        return;
+      this.$request.request({
+        url:this.datasource,
+        params:{
+          code:0
+        },
+        body:{
+          code:0
         }
+      },function(response){
+        var data=response.data;
+        resolve(data);
+      },function(response){
+        throw new Error("ll:ajax error:"+response,'tree.vue');
+      })
     }
   },
   watch:{

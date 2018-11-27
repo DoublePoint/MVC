@@ -22,8 +22,6 @@ const request={
             // 响应错误回调
             errorFunction(response)
         });
-        
-        console.log(vue.$http);
     }
 }
 
