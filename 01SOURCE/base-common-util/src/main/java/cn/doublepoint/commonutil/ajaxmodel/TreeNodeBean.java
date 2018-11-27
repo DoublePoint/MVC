@@ -21,7 +21,7 @@ public  class TreeNodeBean extends BaseModel{
 	private String code;
 	private String title;
 	private String name;
-	private boolean isParent=true;
+	private boolean isLeaf;
 	private String prop1;
 	private String prop2;
 	private String prop3;
@@ -78,11 +78,12 @@ public  class TreeNodeBean extends BaseModel{
 	public void setProp5(String prop5) {
 		this.prop5 = prop5;
 	}
-	public boolean getIsParent() {
-		return isParent;
+	
+	public boolean getIsLeaf() {
+		return isLeaf;
 	}
-	public void setIsParent(boolean isParent) {
-		this.isParent = isParent;
+	public void setIsLeaf(boolean isLeaf) {
+		this.isLeaf = isLeaf;
 	}
 	public Object getNodeBean() {
 		return nodeBean;

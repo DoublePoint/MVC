@@ -9,15 +9,41 @@
 <body>
   <div id="app" style="height: 100%;width: 100%;">
     <ll-container style="height: 100%; ">
-        <ll-aside width="200px" style="background-color:#545c64">
-          
+        <ll-aside width="150px" >
+          <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
+    	  </ll-nav-tree>
         </ll-aside>
         <ll-container style="height: 100%; ">
-        	<ll-header style="background-color:#eee;">
-        		<ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
+        	<ll-header height="40" style="background-color:#eee;">
+	        	<ll-form ref="form" :model="form" label-width="80px" :inline="true" class="demo-dynamic">
+				  <ll-form-item label="菜单名称">
+				    <ll-input v-model="form.name"></ll-input>
+				  </ll-form-item>
+				  <ll-form-item label="菜单序号">
+				    <ll-input v-model="form.name"></ll-input>
+				  </ll-form-item>
+				  <ll-form-item label="链接名称">
+				    <ll-input v-model="form.name"></ll-input> 
+				  </ll-form-item>
+				  <ll-form-item label="菜单名称">
+				    <ll-date-picker type="date" placeholder="选择日期" ></ll-date-picker>
+				  </ll-form-item>
+				  <ll-form-item label="菜单序号">
+				    <ll-input v-model="form.name"></ll-input>
+				  </ll-form-item>
+				  <ll-form-item label="链接名称">
+				    <ll-input v-model="form.name"></ll-input> 
+				  </ll-form-item>
+				  <ll-form-item >
+				  	<ll-button type="primary" >提交</ll-button>
+				    <ll-button >新增域名</ll-button>
+				    <ll-button >重置</ll-button>
+				    <ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
+				  </ll-form-item>
+				 </ll-form>
 			</ll-header>
-	        <ll-main style="padding: 0 0 0 0px;">
-	          	<ll-table :data="tableData">
+	        <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+	          	<ll-table :data="tableData" height="100%">
 					<ll-table-column prop="id" label="菜单标识" :width="150"></ll-table-column>
 					<ll-table-column prop="name" label="菜单名称" :width="150" ></ll-table-column>
 					<ll-table-column prop="sn" label="菜单排序" :width="150"></ll-table-column>
@@ -35,6 +61,16 @@
       el: '#app',
       data: {
     	  tableData:[],
+    	  form:{
+    		  name:"123"
+    	  },
+    	  datasource:$$pageContextPath+"sys/menu/menu-tree/datalist",
+          data: [],
+          defaultProps: {
+            children: 'children',
+            label: 'name',
+            isLeaf:'isLeaf'
+          }
       },
       methods:{
     	  retrieve(){
@@ -54,6 +90,9 @@
     					vm.tableData;
     				}
     			});
+    	  },
+    	  handleNodeClick(nodeData,node) {
+    		  
     	  }
       }
     });

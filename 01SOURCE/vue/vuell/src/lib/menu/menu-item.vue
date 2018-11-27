@@ -2,16 +2,16 @@
     <div>
         <template v-for="item in this.items" >  
             <!-- if -->
-            <ll-submenu v-if="item[props.childAlias]!=null&&item[props.childAlias].length>0" :key="item[props.idAlias]" :index="item[props.idAlias]"  > 
+            <ll-submenu v-if="item[props.children]!=null&&item[props.children].length>0" :key="item[props.id]" :index="item[props.id]"  > 
                 <template slot="title"  style="padding-left:10px" >
-                    <i v-if="item[props.iconAlias]!=null&&item[props.iconAlias]!=''" :class="item[props.iconAlias]"></i>
-                    <span slot="title">{{item[props.labelAlias]}}</span>
+                    <i v-if="item[props.icon]!=null&&item[props.icon]!=''" :class="item[props.icon]"></i>
+                    <span slot="title">{{item[props.label]}}</span>
                 </template>
-                <ll-nav-menu-item  :props="props" :items="item[props.childAlias]"></ll-nav-menu-item> 
+                <ll-nav-menu-item  :props="props" :items="item[props.children]"></ll-nav-menu-item> 
             </ll-submenu>
             <!-- else -->
-            <ll-menu-item v-else :index="item[props.idAlias]" :route="item"  :key="item[props.idAlias]" >
-                <span>{{item[props.labelAlias]}}</span>
+            <ll-menu-item v-else :index="item[props.id]" :route="item"  :key="item[props.id]" >
+                <span>{{item[props.label]}}</span>
             </ll-menu-item>
         </template>
     </div>
@@ -34,10 +34,10 @@ export default {
     props:{
       default() {
         return {
-          childAlias: String,
-          idAlias: String,
-          labelAlias: String,
-          iconAlias: String,
+          children: String,
+          id: String,
+          label: String,
+          icon: String,
         }
       },
       type: Object

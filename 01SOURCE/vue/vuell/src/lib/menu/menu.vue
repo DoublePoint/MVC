@@ -26,10 +26,10 @@ export default {
     props:{
       default(){
         return{
-          childAlias: "children",
-          idAlias: "id",
-          labelAlias: "label",
-          iconAlias: "icon",
+          children: "children",
+          id: "id",
+          label: "label",
+          icon: "icon",
         }
       },
       type:Object

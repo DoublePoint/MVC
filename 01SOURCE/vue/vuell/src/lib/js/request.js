@@ -3,10 +3,10 @@ const request={
         var vue=new Vue();
         if(options.method==null)
             options.method="post";
-        if(options.body!=null){
+        if(options.data!=null){
             //var ajaxRequest=new Object();
 			//ajaxRequest.map=options.body;
-			options.data = JSON.stringify(options.body);
+			options.data = JSON.stringify(options.data);
         }
         // options.headers={
         //     "Content-Type":"application/json",

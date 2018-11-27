@@ -33,47 +33,42 @@ import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 @Controller
 @RequestMapping("sys")
 public class MenuTreeController extends BaseTreeController {
-	// 树根名称
-	private final String rooTreeName = "菜单树";
 
 	@Resource
 	MenuService menuService;
 
 	@RequestMapping("/menu/menu-tree/datalist")
 	@ResponseBody
-	public List<TreeNodeBean> getMenuTree(@RequestBody(required=false)Map<String, Object> map,
+	public List<TreeNodeBean> getMenuTree(@RequestBody(required=false)TreeNodeBean node,
 			@RequestParam(required = false) Boolean isHasRoot) {
-		String codeStr=null;
-//		if(map.get("code")!=null)
-		 codeStr="0";
+		Long code=null;
+		if(node!=null&&node.getCode()!=null)
+			code=Long.valueOf(node.getCode());
 		List<TreeNodeBean> returnMenuList2 = new ArrayList<TreeNodeBean>();
-		if (StringUtil.isNullOrEmpty(codeStr)) {
-			if (isHasRoot != null && isHasRoot.booleanValue()) {
-				TreeNodeBean treeNode = new TreeNodeBean();
-				treeNode.setName(rooTreeName);
-				treeNode.setCode("0");
-				treeNode.setIsParent(true);
-				returnMenuList2.add(treeNode);
-			} else {
-				List<VOMenu> menus = getChildrenMenuList(0L);
-				returnMenuList2 = menus.stream().map(menu -> {
-					TreeNodeBean nodeBean = new TreeNodeBean();
-					nodeBean.setName(menu.getName());
-					if (!isHasChild(menu.getId()))
-						nodeBean.setIsParent(false);
-					nodeBean.setCode(String.valueOf(menu.getId()));
-					nodeBean.setNodeBean(menu);
-					return nodeBean;
-				}).collect(java.util.stream.Collectors.toList());
-			}
+		if (code==null) {
+			List<VOMenu> menus = getChildrenMenuList(0L);
+			returnMenuList2 = menus.stream().map(menu -> {
+				TreeNodeBean nodeBean = new TreeNodeBean();
+				nodeBean.setName(menu.getName());
+				if (!isHasChild(menu.getId()))
+					nodeBean.setIsLeaf(true);
+				else {
+					nodeBean.setIsLeaf(false);
+				}
+				nodeBean.setCode(String.valueOf(menu.getId()));
+				nodeBean.setNodeBean(menu);
+				return nodeBean;
+			}).collect(java.util.stream.Collectors.toList());
 		} else {
-			Long code = Long.valueOf(codeStr);
 			List<VOMenu> menus = getChildrenMenuList(code);
 			returnMenuList2 = menus.stream().map(menu -> {
 				TreeNodeBean nodeBean = new TreeNodeBean();
 				nodeBean.setName(menu.getName());
 				if (!isHasChild(menu.getId()))
-					nodeBean.setIsParent(false);
+					nodeBean.setIsLeaf(true);
+				else {
+					nodeBean.setIsLeaf(false);
+				}
 				nodeBean.setCode(String.valueOf(menu.getId()));
 				nodeBean.setNodeBean(menu);
 				return nodeBean;

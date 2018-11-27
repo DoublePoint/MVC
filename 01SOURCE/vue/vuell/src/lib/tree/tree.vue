@@ -15,18 +15,18 @@ export default {
     props:{
       default(){
         return{
-          childAlias: String,
-          idAlias: String,
-          labelAlias: String,
-          iconAlias: String,
+          label: String,
+          children: String,
+          disabled: String,
+          isLeaf: String
         }
       },
       type:Object
     },
-    expandLevel:{
-      default:3,
-      type:Number
-    },
+    // expandLevel:{
+    //   default:3,
+    //   type:Number
+    // },
     lazy:{
       default:true,
       type:Boolean
@@ -44,16 +44,16 @@ export default {
     load(node, resolve){
       if(this.datasource==null||this.datasource=="")
         throw new Error("ll:prop 'datasource' must not be null",'tree.vue');
-      if(node.data[this.props.childAlias]!=null&&node.data[this.props.childAlias].length>0)
+      var nodeData=node.data;
+      if(nodeData[this.props.children]!=null&&nodeData[this.props.children].length>0)
         return;
+      if(node.level==0){
+        nodeData=null;
+      }
+      
       this.$request.request({
         url:this.datasource,
-        params:{
-          code:0
-        },
-        body:{
-          code:0
-        }
+        data:nodeData
       },function(response){
         var data=response.data;
         resolve(data);

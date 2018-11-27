@@ -12,7 +12,7 @@
       <ll-header style="background-color:#eee;">Header</ll-header>
       <ll-container>
         <ll-aside width="200px" style="background-color:#545c64">
-          <ll-nav-menu :items="items" @select="menuSelect" id-alias="menuIndex" label-alias="name" child-alias="childrenMenuList" style="width: 199px;" mode="horizontal" background-color="#545c64"
+          <ll-nav-menu :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;" mode="horizontal" background-color="#545c64"
             text-color="#fff"></ll-nav-menu>
         </ll-aside>
         <ll-main style="padding: 0 0 0 0px;">
@@ -76,6 +76,11 @@
         activeTab: "首页",
         pageContextPath:$$pageContextPath,
         isCollapse: true,
+        menuProp:{
+        	id:"menuIndex",
+        	label:"name",
+        	children:"childrenMenuList"
+        },
         tabs: [{
           name: "首页",
           title: "首页",
