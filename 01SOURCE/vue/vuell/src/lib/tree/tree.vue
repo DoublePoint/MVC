@@ -30,7 +30,6 @@ export default {
   methods: {
     handleNodeClick(nodeData,node) {
         this.$emit("node-click",nodeData,node);
-        this.$request.request();
     },
     load(node, resolve){
         if(node[childAlias]!=null&&node[childAlias].length>0){

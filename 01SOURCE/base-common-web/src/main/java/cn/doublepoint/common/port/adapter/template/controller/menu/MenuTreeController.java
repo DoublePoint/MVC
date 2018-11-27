@@ -44,8 +44,8 @@ public class MenuTreeController extends BaseTreeController {
 	public List<TreeNodeBean> getMenuTree(@RequestBody(required=false)Map<String, Object> map,
 			@RequestParam(required = false) Boolean isHasRoot) {
 		String codeStr=null;
-		if(map.get("code")!=null)
-		 codeStr=map.get("code").toString();
+//		if(map.get("code")!=null)
+		 codeStr="0";
 		List<TreeNodeBean> returnMenuList2 = new ArrayList<TreeNodeBean>();
 		if (StringUtil.isNullOrEmpty(codeStr)) {
 			if (isHasRoot != null && isHasRoot.booleanValue()) {

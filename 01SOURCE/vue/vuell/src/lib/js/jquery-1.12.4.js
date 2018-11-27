@@ -12,7 +12,6 @@
  * Date: 2016-05-20T17:17Z
  */
 
- var lljquery;
 ((function( global, factory ) {
 
 	if ( typeof module === "object" && typeof module.exports === "object" ) {

@@ -1,6 +1,6 @@
 server:
   context-path: /web
-  port: 8082
+  port: 8083
   tomcat:
     basedir: /data/apps/temp
 spring:
