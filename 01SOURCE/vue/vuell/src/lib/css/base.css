@@ -34,3 +34,21 @@ top-container {
 .el-tabs__header{
   margin: 0 0 0px;
 }
+
+.el-form-item{
+  width:100%;
+}
+.el-form-item__content{
+  width:-webkit-calc(100% - 100px); 
+  width:-moz-calc(100% - 100px); 
+  width:calc(100% - 100px); 
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.el-input__inner{
+  height:30px;
+  line-height: 30px;
+}
+.el-form-item{
+  margin-bottom: 15px;
+}

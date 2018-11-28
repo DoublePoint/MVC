@@ -11,43 +11,45 @@
 </head>
 
 <body>
-  <div id="app" style="height: 100%;width: 100%;">
-    <ll-form :model="ruleForm" :rules="rules" ref="ruleForm" :inline="true" label-width="100px" class="demo-ruleForm">
-        <ll-col :span="12">
+  <div id="app" style="height: 100%;width: 100%;overflow:hidden;">
+    <ll-form :model="ruleForm" status-icon="true" :rules="rules" ref="ruleForm" label-width="100px" style="width:98%" class="demo-ruleForm" >
+      <ll-col :span="8">
+        <ll-form-item label="活动名称" prop="name">
+          <ll-input v-model="ruleForm.name"></ll-input>
+        </ll-form-item>
+      </ll-col>
+      <ll-col :span="8">
+        <ll-form-item label="活动区域" prop="region" >
+          <ll-select style="width:100%;" value=""  v-model="ruleForm.region" placeholder="请选择活动区域">
+            <ll-option label="区域一" value="shanghai"></ll-option>
+            <ll-option label="区域二" value="beijing"></ll-option>
+          </ll-select>
+        </ll-form-item>
+      </ll-col>
+      <ll-col :span="8">
+        <ll-form-item label="即时配送" prop="delivery">
+          <ll-switch ></ll-switch>
+        </ll-form-item>
+      </ll-col>
+      <ll-col :span="8">
           <ll-form-item label="活动名称" prop="name">
             <ll-input v-model="ruleForm.name"></ll-input>
           </ll-form-item>
         </ll-col>
-        <ll-col :span="12">
-          <ll-form-item label="活动区域" prop="region">
-            <ll-select style="width:100%;" v-model="ruleForm.region" placeholder="请选择活动区域">
-              <ll-option label="区域一" value="shanghai"></ll-option>
-              <ll-option label="区域二" value="beijing"></ll-option>
-            </ll-select>
-          </ll-form-item>
-        </ll-col>
-        <ll-col :span="12">
-          <ll-form-item label="活动时间" required>
-            <ll-col :span="11">
-              <ll-form-item prop="date1">
-                <ll-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></ll-date-picker>
-              </ll-form-item>
-            </ll-col>
-            <ll-col class="line" :span="2">-</ll-col>
-            <ll-col :span="11">
-              <ll-form-item prop="date2">
-                <ll-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></ll-time-picker>
-              </ll-form-item>
-            </ll-col>
-          </ll-form-item>
-        </ll-col>
-        <ll-col :span="12">
-          <ll-form-item label="即时配送" prop="delivery">
-            <ll-switch v-model="ruleForm.delivery"></ll-switch>
-          </ll-form-item>
-        </ll-col>
-        <ll-col :span="12">
-          <ll-form-item label="活动性质" prop="type">
+      <ll-col :span="8">
+        <ll-form-item label="活动时间" required>
+          <ll-col :span="11">
+            <ll-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></ll-date-picker>
+          </ll-col>
+          <ll-col :span="2" style="text-align: center;">-</ll-col>
+          <ll-col :span="11">
+            <ll-time-picker type="fixed-time" placeholder="选择时间"  style="width: 100%;"></ll-time-picker>
+          </ll-col>
+        </ll-form-item>
+      </ll-col>
+        <ll-col :span="8"></ll-col>
+        <ll-col :span="16">
+          <ll-form-item label="活动性质">
             <ll-checkbox-group v-model="ruleForm.type">
               <ll-checkbox label="美食/餐厅线上活动" name="type"></ll-checkbox>
               <ll-checkbox label="地推活动" name="type"></ll-checkbox>
@@ -56,81 +58,67 @@
             </ll-checkbox-group>
           </ll-form-item>
         </ll-col>
-        <ll-col :span="12">
-          <ll-form-item label="特殊资源" prop="resource">
-            <ll-radio-group v-model="ruleForm.resource">
-              <ll-radio label="线上品牌商赞助"></ll-radio>
-              <ll-radio label="线下场地免费"></ll-radio>
-            </ll-radio-group>
-          </ll-form-item>
-          <ll-form-item label="活动形式" prop="desc">
-            <ll-input type="textarea" v-model="ruleForm.desc"></ll-input>
-          </ll-form-item>
-          <ll-form-item>
-            <ll-button type="primary" @click="submitForm('ruleForm')">立即创建</ll-button>
-            <ll-button @click="resetForm('ruleForm')">重置</ll-button>
-          </ll-form-item>
-      </ll-col>
     </ll-form>
-    
+
   </div>
 </body>
 <script type="text/javascript">
-   var vm=new Vue({
+  var vm = new Vue({
     el: '#app',
     data() {
-          return {
-            ruleForm: {
-              name: '',
-              region: '',
-              date1: '',
-              date2: '',
-              delivery: false,
-              type: [],
-              resource: '',
-              desc: ''
-            },
-            rules: {
-              name: [
-                { required: true, message: '请输入活动名称', trigger: 'blur' },
-                { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-              ],
-              region: [
-                { required: true, message: '请选择活动区域', trigger: 'change' }
-              ],
-              date1: [
-                { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-              ],
-              date2: [
-                { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-              ],
-              type: [
-                { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-              ],
-              resource: [
-                { required: true, message: '请选择活动资源', trigger: 'change' }
-              ],
-              desc: [
-                { required: true, message: '请填写活动形式', trigger: 'blur' }
-              ]
-            }
-          };
+      return {
+        ruleForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         },
-        methods: {
-          submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-              if (valid) {
-                alert('submit!');
-              } else {
-                console.log('error submit!!');
-                return false;
-              }
-            });
-          },
-          resetForm(formName) {
-            this.$refs[formName].resetFields();
-          }
+        rules: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          region: [
+            { required: true, message: '请选择活动区域', trigger: 'change' }
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date2: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
+          ],
+          desc: [
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          ]
         }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
   })
 </script>
+
 </html>
