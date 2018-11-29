@@ -4,28 +4,25 @@
 <head>
   <meta charset="utf-8">
   <title>vueplugin2</title>
-  <script src="../node_modules/vue/dist/vue.js"></script>
-  <script src="../dist/vueplugins.js"></script>
-  <link href="../src/lib/css/base.css">
-  </link>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../dist/vueplugins.js"></script>
 </head>
 
 <body>
   <div id="app" style="height: 100%;width: 100%;">
     <ll-grid :data="tableData" :data-wrap="dataWrap" @current-change="currentChange">
-      <ll-grid-column prop="date" label="日期" :width="180">
-          
+      <ll-grid-column prop="date" label="日期" :width="180" :readonly="true">
       </ll-grid-column>
       <ll-grid-column prop="name" label="姓名" :width="180">
       </ll-grid-column>
       <ll-grid-column prop="address" label="地址" :width="180">
       </ll-grid-column>
-      <ll-grid-column
-      align="right" :width="180">
-      <template scope="scope">
-          <span v-if="!(scope.row.editFlag==null?false:scope.row.editFlag)"  @click="handleEdit(scope.row)">{{ scope.row.name }}</span>
+      <ll-grid-column  :sortable="false" label="地址" 
+       :width="180">
+      <template slot="content" slot-scope="scope">
+          <span v-if="!(scope.row.editFlag==null?false:scope.row.editFlag)"  @click="handleEdit(scope.row)">{{ scope.row.name+"1" }}</span>
           <span v-if="(scope.row.editFlag==null?false:scope.row.editFlag)" class="cell-edit-input"><ll-input ref="llHiddenInput"  v-model="scope.row.name" placeholder="请输入内容" @blur="handleSave(scope.row)"></ll-input></span>
-          </template>
+      </template>
     </ll-grid-column>
       
     </ll-grid>
@@ -90,17 +87,17 @@
       currentChange(){
         console.log(this.dataWrap);
       },
-      // handleEdit:function(row,refIndex){
-      //   console.log(row)
-      //   this.$set(row, "editFlag", true);
-      //   setTimeout(() => {
-      //     this.$refs.llHiddenInput.focus();
-      //   }, 300);
-      // },
-      // handleSave:function(row){
-      //   console.log(row)
-      //   this.$set(row, "editFlag", false);
-      // },
+      handleEdit:function(row,refIndex){
+        console.log(row)
+        this.$set(row, "editFlag", true);
+        setTimeout(() => {
+          this.$refs.llHiddenInput.focus();
+        }, 300);
+      },
+      handleSave:function(row){
+        console.log(row)
+        this.$set(row, "editFlag", false);
+      },
     }
   })
 </script>

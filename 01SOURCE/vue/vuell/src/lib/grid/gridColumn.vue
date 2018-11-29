@@ -1,20 +1,17 @@
 <template>
-  <ll-table-column :prop="prop" :label="label" :width="width" :align="align">
-    <slot :row="scope"></slot>
-    <template scope="scope">
-      <span
-        v-if="!(scope.row.editFlag==null?false:scope.row.editFlag)"
-        @click="handleEdit(scope.row)"
-      >{{ scope.row[prop] }}</span>
-      <span v-if="(scope.row.editFlag==null?false:scope.row.editFlag)" class="cell-edit-input">
-        <ll-input
-          ref="llHiddenInput"
-          v-model="scope.row[prop]"
-          placeholder="请输入内容"
-          @blur="handleSave(scope.row)"
-        ></ll-input>
-      </span>
+  <ll-table-column :prop="prop" :label="label" :width="width" :align="align" :sortable="sortable">
+    <!-- <template slot-scope="scope">
+      <span v-if="!(scope.row.editFlag==null?false:scope.row.editFlag)"  @click="handleEdit(scope.row)">{{ scope.row[prop] }}</span>
+      <span v-if="(scope.row.editFlag==null?false:scope.row.editFlag)" class="cell-edit-input"><ll-input ref="llHiddenInput"  v-model="scope.row[prop]" placeholder="请输入内容1" @blur="handleSave(scope.row)"></ll-input></span>
+      <slot  :row="scope.row" ></slot>
+    </template> -->
+    <template slot="header" slot-scope="scope">
+      <slot name="header"></slot>
     </template>
+    <template slot-scope="scope">
+      <slot :row="scope.row"></slot>
+    </template>
+    <slot></slot>
   </ll-table-column>
 </template>
 
@@ -32,7 +29,14 @@ export default {
       default:"left",
       type:String
     },
-    
+    readonly:{
+      default:true,
+      type:Boolean
+    },
+    sortable:{
+      default:true,
+      type:Boolean
+    }
   },
   methods: {
     currentChange(currPage) {
