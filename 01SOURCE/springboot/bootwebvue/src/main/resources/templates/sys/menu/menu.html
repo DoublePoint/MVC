@@ -2,102 +2,188 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <template th:replace="/base.html"></template>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
 </head>
 
 <body>
-  <div id="app" style="height: 100%;width: 100%;">
-    <ll-container style="height: 100%; ">
-        <ll-aside width="150px" >
-          <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
-    	  </ll-nav-tree>
-        </ll-aside>
+    <div id="app" style="height: 100%;width: 100%;">
         <ll-container style="height: 100%; ">
-        	<ll-header height="40" style="background-color:#eee;">
-	        	<ll-form ref="form" :model="form" label-width="80px" :inline="true" class="demo-dynamic">
-				  <ll-form-item label="菜单名称">
-				    <ll-input v-model="form.name"></ll-input>
-				  </ll-form-item>
-				  <ll-form-item label="菜单序号">
-				    <ll-input v-model="form.name"></ll-input>
-				  </ll-form-item>
-				  <ll-form-item label="链接名称">
-				    <ll-input v-model="form.name"></ll-input> 
-				  </ll-form-item>
-				  <ll-form-item label="菜单名称">
-				    <ll-date-picker type="date" placeholder="选择日期" ></ll-date-picker>
-				  </ll-form-item>
-				  <ll-form-item label="菜单序号">
-				    <ll-input v-model="form.name"></ll-input>
-				  </ll-form-item>
-				  <ll-form-item label="链接名称">
-				    <ll-input v-model="form.name"></ll-input> 
-				  </ll-form-item>
-				  <ll-form-item >
-				  	<ll-button type="primary" >提交</ll-button>
-				    <ll-button >新增域名</ll-button>
-				    <ll-button >重置</ll-button>
-				    <ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
-				  </ll-form-item>
-				 </ll-form>
-			</ll-header>
-	        <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
-	          	<ll-table :data="tableData" height="100%">
-					<ll-table-column prop="id" label="菜单标识" :width="150"></ll-table-column>
-					<ll-table-column prop="name" label="菜单名称" :width="150" ></ll-table-column>
-					<ll-table-column prop="sn" label="菜单排序" :width="150"></ll-table-column>
-					<ll-table-column prop="link" label="菜单链接"></ll-table-column>
-				</ll-table>
-	        </ll-main>
-		</ll-container>
-    </ll-container>
-  </div>
+            <ll-aside width="200px" style="border-right:1px solid #eee;">
+                <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
+                </ll-nav-tree>
+            </ll-aside>
+            <ll-container style="height: 100%; ">
+                <ll-header height="40" >
+                	<ll-card class="box-card">
+                		<div slot="header" class="clearfix">
+						    <span>查询条件</span>
+						</div>
+	                    <ll-form :model="ruleForm" :status-icon="true" :rules="rules" ref="ruleForm" label-width="100px"
+	                        style="width:100%">
+	                        <ll-col :span="8">
+	                            <ll-form-item label="活动名称" prop="name">
+	                                <ll-input v-model="ruleForm.name"></ll-input>
+	                            </ll-form-item>
+	                        </ll-col>
+	                        <ll-col :span="8">
+	                        	<ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
+	                        </ll-col>
+	                    </ll-form>
+	                </ll-card>
+                </ll-header>
+                <ll-container style="height: 100%; ">
+                	<ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+	                    <ll-table :data="tableData" height="100%" border highlight-current-row >
+	                    	<ll-table-column type="expand">
+						      <template slot-scope="props">
+						        <ll-form label-position="left" inline class="demo-table-expand">
+						          <ll-form-item label="菜单标识">
+						            <span>{{ props.row.id }}</span>
+						          </ll-form-item>
+						          <ll-form-item label="菜单名称">
+						            <span>{{ props.row.name }}</span>
+						          </ll-form-item>
+						          <ll-form-item label="菜单排序">
+						            <span>{{ props.row.sn }}</span>
+						          </ll-form-item>
+						          <ll-form-item label="菜单链接">
+						            <span>{{ props.row.link }}</span>
+						          </ll-form-item>
+						        </ll-form>
+						      </template>
+						    </ll-table-column>
+	                        <ll-table-column prop="id" label="菜单标识" :width="150" sortable header-align="center"></ll-table-column>
+	                        <ll-table-column prop="name" label="菜单名称" :width="150" sortable header-align="center"></ll-table-column>
+	                        <ll-table-column prop="sn" label="菜单排序" :width="150" sortable header-align="center"></ll-table-column>
+	                        <ll-table-column prop="link" label="菜单链接" :width="300" sortable header-align="center"></ll-table-column>
+	                    </ll-table>
+                    </ll-main>
+                    <ll-footer height="30">
+	                    <ll-pagination
+						  background
+						  layout="prev, pager, next"
+						  :total="1000">
+						</ll-pagination>
+                	</ll-footer>
+                </ll-container>
+            </ll-container>
+        </ll-container>
+    </div>
 
-  <script type="text/javascript">
-  var dataWrap=ajaxResponse.get("dataWrap");
-  
-     var vm=new Vue({
-      el: '#app',
-      data: {
-    	  tableData:[],
-    	  form:{
-    		  name:"123"
-    	  },
-    	  datasource:$$pageContextPath+"sys/menu/menu-tree/datalist",
-          data: [],
-          defaultProps: {
-            children: 'children',
-            label: 'name',
-            isLeaf:'isLeaf'
-          }
-      },
-      methods:{
-    	  retrieve(){
-    		  $.request({
-    				url : $$pageContextPath + "sys/menu/retrieve",
-    				type : "POST",
-    				contentType : 'application/json;charset=UTF-8',
-    				dataType : "json",
-    				async : false,
-    				data :{
-    				},
-    				success : function(response){
-    					var dataWrap=response.get("dataWrap");
-    					if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
-    						alert("未查询到任何数据!");
-    					vm.$set(vm.$data,"tableData",dataWrap.dataList);
-    					vm.tableData;
-    				}
-    			});
-    	  },
-    	  handleNodeClick(nodeData,node) {
-    		  
-    	  }
-      }
-    });
+    <script type="text/javascript">
+        var dataWrap = ajaxResponse.get("dataWrap");
 
-  </script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                tableData: [],
+                form: {
+                    name: "123"
+                },
+                datasource: $$pageContextPath + "sys/menu/menu-tree/datalist",
+                data: [],
+                defaultProps: {
+                    children: 'children',
+                    label: 'name',
+                    isLeaf: 'isLeaf'
+                },
+                ruleForm: {
+                    name: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+                },
+                rules: {
+                    name: [{
+                            required: true,
+                            message: '请输入活动名称',
+                            trigger: 'blur'
+                        },
+                        {
+                            min: 3,
+                            max: 5,
+                            message: '长度在 3 到 5 个字符',
+                            trigger: 'blur'
+                        }
+                    ],
+                    region: [{
+                        required: true,
+                        message: '请选择活动区域',
+                        trigger: 'change'
+                    }],
+                    date1: [{
+                        type: 'date',
+                        required: true,
+                        message: '请选择日期',
+                        trigger: 'change'
+                    }],
+                    date2: [{
+                        type: 'date',
+                        required: true,
+                        message: '请选择时间',
+                        trigger: 'change'
+                    }],
+                    type: [{
+                        type: 'array',
+                        required: true,
+                        message: '请至少选择一个活动性质',
+                        trigger: 'change'
+                    }],
+                    resource: [{
+                        required: true,
+                        message: '请选择活动资源',
+                        trigger: 'change'
+                    }],
+                    desc: [{
+                        required: true,
+                        message: '请填写活动形式',
+                        trigger: 'blur'
+                    }]
+                }
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            alert('submit!');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                },
+                retrieve() {
+                    $.request({
+                        url: $$pageContextPath + "sys/menu/retrieve",
+                        type: "POST",
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType: "json",
+                        async: false,
+                        data: {},
+                        success: function (response) {
+                            var dataWrap = response.get("dataWrap");
+                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
+                                0)
+                                alert("未查询到任何数据!");
+                            vm.$set(vm.$data, "tableData", dataWrap.dataList);
+                            vm.tableData;
+                        }
+                    });
+                },
+                handleNodeClick(nodeData, node) {
+
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

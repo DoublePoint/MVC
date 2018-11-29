@@ -11,7 +11,6 @@ package cn.doublepoint.common.port.adapter.template.controller.menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
-import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;

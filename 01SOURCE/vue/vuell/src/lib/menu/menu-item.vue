@@ -45,6 +45,7 @@ export default {
     
   },
   computed:{
+    
     //  isCollapse () {
     //     return this.$store.state.menuCollapse;
     // }
@@ -54,7 +55,11 @@ export default {
   },
   methods: {},
   
-  created() {},
-  mounted() {}
+  created() {
+    
+  },
+  mounted() {
+    console.log("---------------------------------"+this.$parent);
+  }
 };
 </script>

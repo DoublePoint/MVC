@@ -6,13 +6,11 @@
   <title>vueplugin2</title>
   <script src="../node_modules/vue/dist/vue.js"></script>
   <script src="../dist/vueplugins.js"></script>
-  <link href="../src/lib/css/base.css">
-  </link>
 </head>
 
 <body>
-  <div id="app" style="height: 100%;width: 100%;overflow:hidden;">
-    <ll-form :model="ruleForm" status-icon="true" :rules="rules" ref="ruleForm" label-width="100px" style="width:98%" class="demo-ruleForm" >
+  <div id="app" >
+    <ll-form :model="ruleForm" :status-icon="true" :rules="rules" ref="ruleForm" label-width="100px" style="width:100%" >
       <ll-col :span="8">
         <ll-form-item label="活动名称" prop="name">
           <ll-input v-model="ruleForm.name"></ll-input>
