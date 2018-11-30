@@ -1,0 +1,14 @@
+【1】v-cloak 能够解决值闪烁的问题
+【2】v-text={{msg}}
+【3】v-html
+【4】v-bind vue中提供的用于绑定属性的指令，内可含表达式
+			v-bind: 等同于 缩写是：
+			v-bind中会把属性当做变量
+【5】v-on: 绑定事件
+			v-on中会把属性直接理解为变量 缩写是@
+【6】@click.stop 阻止冒泡 默认：先内按钮外div -->只按钮
+【7】@click.prevent 阻止默认行为 例如超链接的点击
+【8】@click.capture 从外到里
+【9】@click.self 只有点击本身才会触发
+【10】@click.once 只触发一次
+.self 与 .stop的区别是 .self只阻止自己的冒泡行为不会阻止其他节点的冒泡行为，stop阻止所有的冒泡行为
