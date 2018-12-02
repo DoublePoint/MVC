@@ -7,7 +7,7 @@
                     <i v-if="item[props.icon]!=null&&item[props.icon]!=''" :class="item[props.icon]"></i>
                     <span slot="title">{{item[props.label]}}</span>
                 </template>
-                <ll-nav-menu-item  :props="props" :items="item[props.children]"></ll-nav-menu-item> 
+                <ll-nav-menu-item  :props="props" @testclick="testclick" :items="item[props.children]"></ll-nav-menu-item> 
             </ll-submenu>
             <!-- else -->
             <ll-menu-item v-else :index="item[props.id]" :route="item"  :key="item[props.id]" >
