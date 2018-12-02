@@ -11,7 +11,7 @@
             </ll-submenu>
             <!-- else -->
             <ll-menu-item v-else :index="item[props.id]" :route="item"  :key="item[props.id]" >
-                <span>{{item[props.label]}}</span>
+                <span @mouseenter="testclick">{{item[props.label]}}</span>
             </ll-menu-item>
         </template>
     </div>
@@ -53,7 +53,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    testclick(){
+      this.$emit('testclick')
+    }
+  },
   
   created() {
     

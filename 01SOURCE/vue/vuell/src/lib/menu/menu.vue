@@ -6,7 +6,7 @@
         @select="select"
         @itemClick="itemClick"
         unique-opened >       
-        <ll-nav-menu-item :items="items" :props="props"></ll-nav-menu-item>
+        <ll-nav-menu-item @testclick="itemClick" :items="items" :props="props"></ll-nav-menu-item>
     </ll-menu>
 </template>
 

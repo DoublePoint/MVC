@@ -11,3 +11,17 @@
 【8】@click.capture 从外到里
 【9】@click.self 只有点击本身才会触发
 【10】@click.once 只触发一次
+		.self 与 .stop的区别是 .self只阻止自己的冒泡行为不会阻止其他节点的冒泡行为，stop阻止所有的冒泡行为
+【11】v-for的四种 普通数组/对象数组/对象/数字
+		对于数字v-form="item in 10"
+		组件中使用v-for循环的时候应该加上key属性，用来绑定组件的唯一性
+【12】v-for中的items可以绑定函数
+【13】v-focus 自动获取指令
+【14】生命周期
+				beforeCreate:仅仅是创建了默认的实力的数据以及时间，自定义的data以及么method中的数据都还没有被初始化，因此这些属性都还为undefined
+				
+				created:将data以及method绑定到实例中
+				
+				beforeMount:data属性更新之前调用，此时获取的数据还是旧数据
+				
+				mounted：data属性更新之后执行，此时获取的数据是新数据
