@@ -39,3 +39,4 @@
 		1、html-webpack-plugin 
 			在内存中生成HTML页面的插件
 			url-loader 内部包含file-loader?limit=7631  <limit则转
+			&name=[hash]-[name].[ext]
