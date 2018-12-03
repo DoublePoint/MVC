@@ -25,3 +25,17 @@
 				beforeMount:data属性更新之前调用，此时获取的数据还是旧数据
 				
 				mounted：data属性更新之后执行，此时获取的数据是新数据
+【15】animated 动画类
+【16】watch属性的第一个参数为newVal,第二个参数为oldVal
+【17】计算属性的求职结果，会被缓存起来，方便下次使用
+【18】webpack 要打包的文件路径 输出的文件路径
+【19】只有安装到全局 -g 的工具，才能在powershell中运行
+【20】webpack-dev-server --open --port --hot
+		--open 打开浏览器
+		--port打开关口
+		--hot 打补丁 不需要重新编译所有文件
+		--contentBase 默认路径
+【21】webpack-plugins的作用
+		1、html-webpack-plugin 
+			在内存中生成HTML页面的插件
+			
