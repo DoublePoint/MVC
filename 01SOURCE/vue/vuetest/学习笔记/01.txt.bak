@@ -39,3 +39,12 @@
 		1、html-webpack-plugin 
 			在内存中生成HTML页面的插件
 			url-loader 内部包含file-loader?limit=7631  <limit则转
+			&name=[hash]-[name].[ext]
+【22】resolve:{  //与output同一级别
+	alias:{
+		'vue$','vue/dist.js'
+	}
+}			
+【23】export default 一个文件中只有一个
+			export 可以有多个
+			起别名可用as 

@@ -1,7 +1,7 @@
 <template>
   <ll-container style="height: 100%; ">
     <ll-main style="height: 100%; ">
-      <ll-table :data="wrap" height="100%" border highlight-current-row>
+      <ll-table :data="wrap" height="100%" border highlight-current-row  @cell-click="testCellClick">
         <slot ></slot> 
       </ll-table>
     </ll-main>
@@ -44,6 +44,10 @@ export default {
       this.dataWrap.pageInfo.currentPageNum=currPage;
       this.$emit("current-change", currPage);
     },
+    testCellClick(){
+      // alert(123)
+      this.$emit("cell-click", 2);
+    }
   },
   computed: {
     wrap: function() {
