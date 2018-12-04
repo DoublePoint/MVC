@@ -17,13 +17,13 @@
       <slot :row="scope.row">
         <div style="width:100%;height:100%;margin:0;padding:0" v-if="isReadonly(scope.row,scope.$index)" 
           @click="handleEdit(scope.row,prop,scope.$index)">
-            <span
-        >{{ scope.row[prop]}}</span>
+            <span >{{ scope.row[prop]}}</span>
         </div>
         <!-- <span v-if="(scope.row[prop].editFlag==null?readonly:scope.row[prop].editFlag)" class="cell-edit-input"><ll-input ref="llHiddenInput"  v-model="scope.row[prop]" placeholder="请输入内容" @blur="handleSave(scope.row,prop)"></ll-input></span> -->
         <span v-if="!(isReadonly(scope.row,scope.$index))" class="cell-edit-input">
           <ll-input
-            :ref="'llHiddenInput'"
+            ref="llHiddenInput"
+            :key="prop+scope.$index"
             v-model="scope.row[prop]"
             placeholder="请输入内容"
             @blur="handleSave(scope.row,prop)"
@@ -95,10 +95,11 @@ export default {
     },
     handleEdit: function(row, prop, index) {
       this.currentEditIndex = index;
-      if(this.$refs["llHiddenInput"])
-        setTimeout(() => {
-          this.$refs["llHiddenInput"].focus();
-        }, 300);
+      setTimeout(() => {
+        // console.log(this.$refs.llHiddenInput)
+        if(this.$refs.llHiddenInput)
+          this.$refs.llHiddenInput.focus();
+      }, 200);
     },
     handleSave: function(row, prop) {
       this.currentEditIndex = -1;
@@ -119,7 +120,8 @@ export default {
       return this.dataWrap.dataList;
     }
   },
-  watch: {}
+  watch: {},
+
 };
 </script>
 
