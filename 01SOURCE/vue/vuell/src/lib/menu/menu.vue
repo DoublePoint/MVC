@@ -3,6 +3,7 @@
         :collapse="collapse"
         :background-color="backgroundColor"
         :text-color="textColor"
+        :mode="mode"
         @select="select"
         @itemClick="itemClick"
         unique-opened >       
@@ -35,7 +36,7 @@ export default {
       type:Object
     },
     backgroundColor: {
-      default: "#EEE",
+      default: "#272b2e;",
       type:String
     },
     textColor: {
@@ -44,7 +45,11 @@ export default {
     },
     collapse:{
       type:Boolean
-    }
+    },
+    mode:{
+      default: "vertical",
+      type:String
+    },
   },
   data() {
     return {
