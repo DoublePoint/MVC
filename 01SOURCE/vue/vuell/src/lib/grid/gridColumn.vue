@@ -1,25 +1,11 @@
 <template>
   <ll-table-column :prop="prop" :label="label" :width="width" :align="align" :sortable="sortable">
-    <!-- <template slot-scope="scope">
-      <span v-if="!(scope.row.editFlag==null?false:scope.row.editFlag)"  @click="handleEdit(scope.row)">{{ scope.row[prop] }}</span>
-      <span v-if="(scope.row.editFlag==null?false:scope.row.editFlag)" class="cell-edit-input"><ll-input ref="llHiddenInput"  v-model="scope.row[prop]" placeholder="请输入内容1" @blur="handleSave(scope.row)"></ll-input></span>
-      <slot  :row="scope.row" ></slot>
-    </template>-->
-    <!-- <template slot="header" slot-scope="scope">
-      <slot v-if="istemplate" name="header"></slot>
-      <slot>{{scope.row[label]}}</slot>
-    </template>-->
-    <!-- <template v-if="istemplate" slot-scope="scope">
-      <slot :row="scope.row"></slot>
-      <slot>{{scope.row[prop]}}</slot>
-    </template>-->
     <template slot-scope="scope">
       <slot :row="scope.row">
         <div style="width:100%;height:100%;margin:0;padding:0" v-if="isReadonly(scope.row,scope.$index)" 
           @click="handleEdit(scope.row,prop,scope.$index)">
             <span >{{ scope.row[prop]}}</span>
         </div>
-        <!-- <span v-if="(scope.row[prop].editFlag==null?readonly:scope.row[prop].editFlag)" class="cell-edit-input"><ll-input ref="llHiddenInput"  v-model="scope.row[prop]" placeholder="请输入内容" @blur="handleSave(scope.row,prop)"></ll-input></span> -->
         <span v-if="!(isReadonly(scope.row,scope.$index))" class="cell-edit-input">
           <ll-input
             ref="llHiddenInput"
