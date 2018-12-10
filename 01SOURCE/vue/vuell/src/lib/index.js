@@ -4,7 +4,8 @@ import $request from './js/request.js'
 import ElementUI from 'element-ui'
 import resource from 'vue-resource'
 import 'element-ui/lib/theme-chalk/index.css'
-import baseCss from  './css/base.css'
+import './css/base.css'
+import './css/base.less'
 
 import vueTest from './test.vue' // 导入组件
 import vueMenu from './menu/menu.vue'

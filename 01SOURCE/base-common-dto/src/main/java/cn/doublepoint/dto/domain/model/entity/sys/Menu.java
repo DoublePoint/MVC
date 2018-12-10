@@ -48,6 +48,9 @@ public class Menu extends BaseEntity {
 	@Column(name="IS_CROSS_DOMAIN")
 	private String isCrossDomain;
 	
+	@Column(name="ICON")
+	private String icon;
+	
 	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 	
@@ -127,6 +130,15 @@ public class Menu extends BaseEntity {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 	public String toString() {
 		return "Menu ["
 		+"id=" + id +","

@@ -11,6 +11,8 @@
         layout="prev, pager, next"
         :current-page="dataWrap.pageInfo.currentPageNum"
         :total="dataWrap.pageInfo.totalElementCount"
+        :page-size="dataWrap.pageInfo.pageSize"
+        :page-sizes="pageSizes"
         @current-change="currentChange"
       ></ll-pagination>
     </ll-footer>
@@ -32,12 +34,16 @@ export default {
     dataWrap: {
       type: Object
     },
-    data: {
-      default() {
-        return [];
-      },
-      type: Array
+    pageSizes:{
+      type:Array,
+      default:[10, 20, 30, 40, 50, 100]
     }
+    // data: {
+    //   default() {
+    //     return [];
+    //   },
+    //   type: Array
+    // }
   },
   methods: {
     currentChange(currPage) {

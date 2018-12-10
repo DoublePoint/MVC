@@ -11,8 +11,8 @@
     <ll-container style="height: 100%; ">
       <ll-header style="background-color:#eee;">Header</ll-header>
       <ll-container>
-        <ll-aside width="200px" style="background-color:#545c64">
-          <ll-nav-menu :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;" mode="horizontal" background-color="#545c64"
+        <ll-aside width="200px" style="background-color:#272b2e">
+          <ll-nav-menu :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;" background-color="#272b2e" 
             text-color="#fff"></ll-nav-menu>
         </ll-aside>
         <ll-main style="padding: 0 0 0 0px;">
@@ -42,6 +42,7 @@
                closable:true,
                link: item.link
              });
+             this.activeTab = item.name;
         },
         handleTabsEdit(targetName, action) {
           if (action === 'add') {

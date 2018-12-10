@@ -65,9 +65,10 @@ top-container {
   border: 0px; 
   background: #ebeef5;
 }
-.el-table td, .el-table th {
-  padding: 8px 0;
-}
+
 .el-table td .cell{
   white-space: nowrap;
+}
+.el-tabs--card>.el-tabs__header{
+  border-bottom: 1px solid #e4e7ed;
 }

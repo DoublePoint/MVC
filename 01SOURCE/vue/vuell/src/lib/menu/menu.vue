@@ -61,7 +61,7 @@ export default {
       this.$emit("select",index, indexPath, item.route);
     },
     itemClick(index, indexPath, item){
-      alert(2)
+      // alert(2)
     }
   },
   watch:{

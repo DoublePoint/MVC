@@ -4,13 +4,14 @@
             <!-- if -->
             <ll-submenu v-if="item[props.children]!=null&&item[props.children].length>0" :key="item[props.id]" :index="item[props.id]"  > 
                 <template slot="title"  style="padding-left:10px" >
-                    <i v-if="item[props.icon]!=null&&item[props.icon]!=''" :class="item[props.icon]"></i>
+                    <i v-if="item[props.icon]!=null&&item[props.icon]!=''" class="menu-icon" :class="item[props.icon]"></i>
                     <span slot="title">{{item[props.label]}}</span>
                 </template>
                 <ll-nav-menu-item  :props="props" @testclick="testclick" :items="item[props.children]"></ll-nav-menu-item> 
             </ll-submenu>
             <!-- else -->
             <ll-menu-item v-else :index="item[props.id]" :route="item"  :key="item[props.id]" >
+                <i v-if="item[props.icon]!=null&&item[props.icon]!=''"  class="menu-icon" :class="item[props.icon]"></i>
                 <span @mouseenter="testclick">{{item[props.label]}}</span>
             </ll-menu-item>
         </template>
@@ -67,3 +68,9 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped>
+.menu-icon{
+  color:#FFFFFF;
+}
+</style>

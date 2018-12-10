@@ -10,10 +10,19 @@
 
 <body>
   <div id="app" style="height: 100%;width: 100%;">
-    <ll-grid :data="tableData" :data-wrap="dataWrap" @current-change="currentChange" @cell-click="testCellClick">
-      <ll-grid-column prop="date" label="日期" :width="180" :readonly="true">
+    <ll-grid :data-wrap="dataWrap" @current-change="currentChange" @cell-click="testCellClick">
+      <ll-table-column
+      type="selection"
+      width="55">
+    </ll-table-column>
+      <ll-grid-column prop="date" type="date" label="日期" :width="180" >
+         <!-- :readonly="true" -->
       </ll-grid-column>
-      <ll-grid-column prop="name" label="姓名" :width="180">
+      <!-- <ll-grid-column prop="name" label="姓名" :width="180">
+      </ll-grid-column> -->
+      <ll-grid-column type="select" prop="name" label="姓名" :width="180">
+      </ll-grid-column>
+      <ll-grid-column type="tree" prop="name" label="姓名" :width="180">
       </ll-grid-column>
       <ll-grid-column prop="address" label="地址" :width="180">
       </ll-grid-column>
@@ -67,6 +76,7 @@
         pageInfo:{
           currentPageNum:1,
           totalElementCount:1000,
+          pageSize:20
         }
       },
       tableData: [{
@@ -97,18 +107,18 @@
     },
     methods:{
       currentChange(){
-        console.log(this.dataWrap);
+        // console.log(this.dataWrap);
       },
       handleEdit:function(row,refIndex){
-        console.log(row)
-        this.$set(row, "editFlag", true);
-        setTimeout(() => {
-          this.$refs.llHiddenInput.focus();
-        }, 300);
+        // console.log(row)
+        // this.$set(row, "editFlag", true);
+        // setTimeout(() => {
+        //   this.$refs.llHiddenInput.focus();
+        // }, 300);
       },
       handleSave:function(row){
-        console.log(row)
-        this.$set(row, "editFlag", false);
+        // console.log(row)
+        // this.$set(row, "editFlag", false);
       },
       testCellClick(){
         // alert("testCellClick")
