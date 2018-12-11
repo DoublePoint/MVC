@@ -10,8 +10,13 @@
     <div id="app" style="height: 100%;width: 100%;">
         <ll-container style="height: 100%; ">
             <ll-aside width="200px" style="border-right:1px solid #eee;">
-                <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
-                </ll-nav-tree>
+                <ll-card class="box-card" style="height:100%;">
+                    <div slot="header" class="clearfix">
+                        <span class="ll-main-title">菜单树</span>
+                    </div>
+                    <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
+                    </ll-nav-tree>
+                </ll-card>
             </ll-aside>
             <ll-container style="height: 100%; ">
                 <ll-header height="40">
@@ -27,7 +32,9 @@
                                 </ll-form-item>
                             </ll-col>
                             <ll-col :span="8">
-                                <ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
+                               <ll-form-item>
+                                <ll-button type="primary" size="mini" @click="retrieve">查询</ll-button>
+                               </ll-form-item>
                             </ll-col>
                         </ll-form>
                     </ll-card>
@@ -37,21 +44,23 @@
                         <ll-card class="box-card" style="height:100%;">
                             <div slot="header" class="clearfix">
                                 <ll-row>
-                                  <ll-col :span="6">
-                                  	<span class="ll-main-span" style="marign-right:100px;">菜单列表</span>
-                                  </ll-col>
-                                  <ll-col :span="18">
-									<ll-button type="primary" icon="el-icon-plus" circle size="mini"></ll-button>
-									<ll-button type="danger" icon="el-icon-delete" circle size="mini"></ll-button>
-								  </ll-col>
-								</ll-row>
-                            </div> 
-                            <ll-grid :data-wrap="dataWrap" :readonly="true">
+                                    <ll-col :span="6">
+                                        <span class="ll-main-span" style="marign-right:100px;">菜单列表</span>
+                                    </ll-col>
+                                    <ll-col :span="18">
+                                        <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px"
+                                            title="添加"></ll-button>
+                                        <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px"
+                                            title="删除"></ll-button>
+                                    </ll-col>
+                                </ll-row>
+                            </div>
+                            <ll-grid :data-wrap="dataWrap" :readonly="true" @current-change="retrieve">
                                 <ll-table-column type="selection" width="55">
                                 </ll-table-column>
                                 </ll-grid-column>
                                 <ll-grid-column prop="id" label="菜单标识" :width="180">
-                                </ll-grid-column> 
+                                </ll-grid-column>
                                 <ll-grid-column prop="name" label="菜单名称" :width="180">
                                 </ll-grid-column>
                                 <ll-grid-column prop="sn" label="菜单排序" :width="180">
@@ -59,7 +68,7 @@
                                 <ll-grid-column prop="link" label="菜单链接" :width="280">
                                 </ll-grid-column>
                             </ll-grid>
-                       </ll-card>
+                        </ll-card>
                     </ll-main>
                 </ll-container>
             </ll-container>
@@ -158,11 +167,9 @@
                 retrieve() {
                     $.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
-                        type: "POST",
-                        contentType: 'application/json;charset=UTF-8',
-                        dataType: "json",
-                        async: false,
-                        data: {},
+                        data: {
+                        	dataWrap:this.dataWrap
+                        },
                         success: function (response) {
                             var dataWrap = response.get("dataWrap");
                             if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
@@ -173,9 +180,24 @@
                     });
                 },
                 handleNodeClick(nodeData, node) {
-                	
-					console.log(nodeData)
-					console.log(node)
+                	$.request({
+                        url: $$pageContextPath + "sys/menu/retrieve",
+                        type: "POST",
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType: "json",
+                        async: false,
+                        data: {
+                        	dataWrap:this.dataWrap,
+                        	parentId:nodeData.nodeBean.id
+                        },
+                        success: function (response) {
+                            var dataWrap = response.get("dataWrap");
+                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
+                                0)
+                                alert("未查询到任何数据!");
+                            vm.$set(vm.$data, "dataWrap", dataWrap);
+                        }
+                    });
                 }
             }
         });

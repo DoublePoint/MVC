@@ -17,6 +17,9 @@
         </ll-aside>
         <ll-main style="padding: 0 0 0 0px;">
           <ll-tabs v-model="activeTab" type="card" class="ll-tabs"  @edit="handleTabsEdit">
+            <ll-tab-pane name="首页" :closable="false" style="height: 100%;overflow: auto;">
+              <span slot="label"><i class="fa fa-home fa-fw"></i>首页</span> 
+            </ll-tab-pane>
             <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name" :closable="item.closable==null?false:item.closable"
               style="height: 100%;overflow: auto;">
               <iframe :src="pageContextPath+item.link" style="height: 100%;width: 100%;display:block" frameborder='0' ></iframe>
@@ -83,10 +86,7 @@
         	children:"childrenMenuList",
         	icon:"icon"
         },
-        tabs: [{
-          name: "首页",
-          title: "首页",
-        }],
+        tabs: [],
         tableData: [{
             date: "2016-05-02",
             name: "王小虎1",

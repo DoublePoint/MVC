@@ -11,27 +11,31 @@
 
 <body>
   <div id="app" style="height: 100%;width: 100%;">
-    <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
-    </ll-nav-tree>
+    <ll-card class="box-card"  style="height:100%;">
+      <div slot="header" class="clearfix">
+        <span class="ll-main-title">查询条件</span>
+      </div>
+      <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
+      </ll-nav-tree>
+    </ll-card>
   </div>
 </body>
 <script type="text/javascript">
-   
-  var vm=new Vue({
+  var vm = new Vue({
     el: '#app',
     data: {
-        datasource:"http://localhost:8083/web/sys/menu/menu-tree/datalist",
-        data: [{
-          name: '菜单树',
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'name',
-          isLeaf:'isLeaf'
-        }
+      datasource: "http://localhost:8083/web/sys/menu/menu-tree/datalist",
+      data: [{
+        name: '菜单树',
+      }],
+      defaultProps: {
+        children: 'children',
+        label: 'name',
+        isLeaf: 'isLeaf'
+      }
     },
     methods: {
-      handleNodeClick(nodeData,node) {
+      handleNodeClick(nodeData, node) {
         // this.$request.request({
         //   url:"http://localhost:8083/web/sys/menu/menu-tree/datalist",
         //   params:{
@@ -42,12 +46,15 @@
         //   }
         // },function(response){
         //   //vm.$set(nodeData,"children",response.body);
-          
+
         // },function(response){
 
         // })
+        alert(1);
       }
     }
   })
+
 </script>
+
 </html>

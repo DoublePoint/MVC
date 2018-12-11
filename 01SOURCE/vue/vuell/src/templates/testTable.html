@@ -12,10 +12,6 @@
   <div id="app" style="height: 100%;width: 100%;">
     <ll-container style="height: 100%; ">
       <ll-header height="40">
-        <ll-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span class="ll-main-title">查询条件</span>
-          </div>
           <ll-form :status-icon="true" ref="ruleForm" label-width="100px" style="width:100%">
             <ll-col :span="8">
               <ll-form-item label="活动名称" prop="name">
@@ -23,7 +19,9 @@
               </ll-form-item>
             </ll-col>
             <ll-col :span="8">
-              <ll-button icon="el-icon-search" circle></ll-button>
+                <ll-form-item >
+                    <ll-button type="primary" size="mini" >主要按钮</ll-button>
+                </ll-form-item>
             </ll-col>
           </ll-form>
         </ll-card>
@@ -35,8 +33,8 @@
               <ll-row>
                 <ll-col :span="18">
                   <span class="ll-main-title">菜单列表&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <ll-button type="primary" icon="el-icon-plus" circle size="mini"></ll-button>
-                  <ll-button type="danger" icon="el-icon-delete" circle size="mini"></ll-button>
+                  <ll-button type="primary" icon="el-icon-plus" class="ll-button-micro" circle size="mini"></ll-button>
+                  <ll-button type="danger" icon="el-icon-delete" class="ll-button-micro" circle size="mini"></ll-button>
                 </ll-col>
               </ll-row>
             </div>
