@@ -12,7 +12,7 @@ module.exports = {
   // 因为我们要打包的插件在lib里面 所以稍稍改一下
   entry: './src/lib/index.js', // 注释掉原有的
   output: {
-    path: path.resolve(__dirname, './dist'), 
+    path: path.resolve(__dirname, '../../springboot/bootwebvue/src/main/resources/static/js'), 
     publicPath: '/dist/',
    // filename: 'build.js' // 打包后输出的文件名
     filename: 'vueplugins.js', // 我们可不想打包后叫build.js 多low啊 起一个与项目相对应的
