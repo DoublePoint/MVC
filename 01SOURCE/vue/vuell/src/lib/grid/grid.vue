@@ -1,7 +1,8 @@
 <template>
   <ll-container style="height: 100%; ">
     <ll-main style="height: 100%; ">
-      <ll-table :data="wrap" height="100%" border highlight-current-row  @cell-click="testCellClick">
+      <ll-table :data="wrap" height="100%" border highlight-current-row  
+        @cell-click="cellClick">
         <slot ></slot> 
       </ll-table>
     </ll-main>
@@ -9,9 +10,9 @@
       <ll-pagination
         background
         layout="prev, pager, next"
-        :current-page="dataWrap.pageInfo.currentPageNum"
-        :total="dataWrap.pageInfo.totalElementCount"
-        :page-size="dataWrap.pageInfo.pageSize"
+        :current-page="dataWrap==null?0:dataWrap.pageInfo.currentPageNum"
+        :total="dataWrap==null?0:dataWrap.pageInfo.totalElementCount"
+        :page-size="dataWrap==null?10:dataWrap.pageInfo.pageSize"
         :page-sizes="pageSizes"
         @current-change="currentChange"
       ></ll-pagination>
@@ -36,27 +37,24 @@ export default {
     },
     pageSizes:{
       type:Array,
-      default:[10, 20, 30, 40, 50, 100]
+      default(){
+        return [10, 20, 30, 40, 50, 100];
+      }
     }
-    // data: {
-    //   default() {
-    //     return [];
-    //   },
-    //   type: Array
-    // }
   },
   methods: {
     currentChange(currPage) {
+      if(!this.dataWrap||!this.dataWrap.pageInfo) return 0;
       this.dataWrap.pageInfo.currentPageNum=currPage;
       this.$emit("current-change", currPage);
     },
-    testCellClick(){
-      // alert(123)
+    cellClick(){
       this.$emit("cell-click", 2);
     }
   },
   computed: {
     wrap: function() {
+      if(!this.dataWrap) return [];
       return this.dataWrap.dataList;
     }
   },

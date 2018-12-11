@@ -90,9 +90,11 @@ public class MenuManagementController extends BaseController {
 			}
 		}
 		else{
-			List<Menu> list = menuService.findAll(new PageInfo());
+			PageInfo pageInfo=new PageInfo(1,10); 
+			List<Menu> list = menuService.findAll(pageInfo);
 			dataWrap=new AjaxDataWrap<>();
 			dataWrap.setDataList(list);
+			dataWrap.setPageInfo(pageInfo);
 		}
 
 		AjaxResponse ajaxResponse = new AjaxResponse();

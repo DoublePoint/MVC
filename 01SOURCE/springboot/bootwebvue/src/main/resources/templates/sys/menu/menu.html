@@ -14,58 +14,51 @@
                 </ll-nav-tree>
             </ll-aside>
             <ll-container style="height: 100%; ">
-                <ll-header height="40" >
-                	<ll-card class="box-card">
-                		<div slot="header" class="clearfix">
-						    <span>查询条件</span>
-						</div>
-	                    <ll-form :model="ruleForm" :status-icon="true" :rules="rules" ref="ruleForm" label-width="100px"
-	                        style="width:100%">
-	                        <ll-col :span="8">
-	                            <ll-form-item label="活动名称" prop="name">
-	                                <ll-input v-model="ruleForm.name"></ll-input>
-	                            </ll-form-item>
-	                        </ll-col>
-	                        <ll-col :span="8">
-	                        	<ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
-	                        </ll-col>
-	                    </ll-form>
-	                </ll-card>
+                <ll-header height="40">
+                    <ll-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>查询条件</span>
+                        </div>
+                        <ll-form :model="ruleForm" :status-icon="true" :rules="rules" ref="ruleForm" label-width="100px"
+                            style="width:100%">
+                            <ll-col :span="8">
+                                <ll-form-item label="活动名称" prop="name">
+                                    <ll-input v-model="ruleForm.name"></ll-input>
+                                </ll-form-item>
+                            </ll-col>
+                            <ll-col :span="8">
+                                <ll-button icon="el-icon-search" circle @click="retrieve"></ll-button>
+                            </ll-col>
+                        </ll-form>
+                    </ll-card>
                 </ll-header>
                 <ll-container style="height: 100%; ">
-                	<ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
-	                    <ll-table :data="tableData" height="100%" border highlight-current-row >
-	                    	<ll-table-column type="expand">
-						      <template slot-scope="props">
-						        <ll-form label-position="left" inline class="demo-table-expand">
-						          <ll-form-item label="菜单标识">
-						            <span>{{ props.row.id }}</span>
-						          </ll-form-item>
-						          <ll-form-item label="菜单名称">
-						            <span>{{ props.row.name }}</span>
-						          </ll-form-item>
-						          <ll-form-item label="菜单排序">
-						            <span>{{ props.row.sn }}</span>
-						          </ll-form-item>
-						          <ll-form-item label="菜单链接">
-						            <span>{{ props.row.link }}</span>
-						          </ll-form-item>
-						        </ll-form>
-						      </template>
-						    </ll-table-column>
-	                        <ll-table-column prop="id" label="菜单标识" :width="150" sortable header-align="center"></ll-table-column>
-	                        <ll-table-column prop="name" label="菜单名称" :width="150" sortable header-align="center"></ll-table-column>
-	                        <ll-table-column prop="sn" label="菜单排序" :width="150" sortable header-align="center"></ll-table-column>
-	                        <ll-table-column prop="link" label="菜单链接" :width="300" sortable header-align="center"></ll-table-column>
-	                    </ll-table>
+                    <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+                        <ll-card class="box-card" style="height:100%;">
+                            <div slot="header" class="clearfix">
+                                <ll-row>
+                                  <ll-col :span="18">
+                                  		<span class="ll-main-span">菜单列表</span>
+									  <ll-button type="primary" icon="el-icon-plus" circle size="mini"></ll-button>
+									  <ll-button type="danger" icon="el-icon-delete" circle size="mini"></ll-button>
+								  </ll-col>
+								</ll-row>
+                            </div> 
+                            <ll-grid :data-wrap="dataWrap" :readonly="true">
+                                <ll-table-column type="selection" width="55">
+                                </ll-table-column>
+                                </ll-grid-column>
+                                <ll-grid-column prop="id" label="菜单标识" :width="180">
+                                </ll-grid-column> 
+                                <ll-grid-column prop="name" label="菜单名称" :width="180">
+                                </ll-grid-column>
+                                <ll-grid-column prop="sn" label="菜单排序" :width="180">
+                                </ll-grid-column>
+                                <ll-grid-column prop="link" label="菜单链接" :width="280">
+                                </ll-grid-column>
+                            </ll-grid>
+                       </ll-card>
                     </ll-main>
-                    <ll-footer height="30">
-	                    <ll-pagination
-						  background
-						  layout="prev, pager, next"
-						  :total="1000">
-						</ll-pagination>
-                	</ll-footer>
                 </ll-container>
             </ll-container>
         </ll-container>
@@ -77,7 +70,7 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                tableData: [],
+                dataWrap: dataWrap,
                 form: {
                     name: "123"
                 },
@@ -173,13 +166,14 @@
                             if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
                                 0)
                                 alert("未查询到任何数据!");
-                            vm.$set(vm.$data, "tableData", dataWrap.dataList);
-                            vm.tableData;
+                            vm.$set(vm.$data, "dataWrap", dataWrap);
                         }
                     });
                 },
                 handleNodeClick(nodeData, node) {
-
+                	
+					console.log(nodeData)
+					console.log(node)
                 }
             }
         });

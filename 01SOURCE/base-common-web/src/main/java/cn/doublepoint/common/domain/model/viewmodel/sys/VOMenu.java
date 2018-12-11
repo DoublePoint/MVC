@@ -39,6 +39,8 @@ public class VOMenu extends BaseEntity {
 	private Date createTime;
 	
 	private String isCrossDomain;
+	
+	private String icon;
 
 	private List<VOMenu> childrenMenuList;
 
@@ -130,6 +132,14 @@ public class VOMenu extends BaseEntity {
 
 	public void setMenuIndex(String menuIndex) {
 		this.menuIndex = menuIndex;
+	}
+	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 	public String toString() {

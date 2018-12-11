@@ -10,120 +10,145 @@
 
 <body>
   <div id="app" style="height: 100%;width: 100%;">
-    <ll-grid :data-wrap="dataWrap" @current-change="currentChange" @cell-click="testCellClick">
-      <ll-table-column
-      type="selection"
-      width="55">
-    </ll-table-column>
-      <ll-grid-column prop="date" type="date" label="日期" :width="180" >
-         <!-- :readonly="true" -->
-      </ll-grid-column>
-      <!-- <ll-grid-column prop="name" label="姓名" :width="180">
-      </ll-grid-column> -->
-      <ll-grid-column type="select" prop="name" label="姓名" :width="180">
-      </ll-grid-column>
-      <ll-grid-column type="tree" prop="name" label="姓名" :width="180">
-      </ll-grid-column>
-      <ll-grid-column prop="address" label="地址" :width="180">
-      </ll-grid-column>
-      <ll-grid-column  :sortable="false" label="地址" :istemplate="true"
-       :width="180">
-        <template slot-scope="scope"   >
-            
-        </template>
-        <template slot="header" slot-scope="scope">
-            <ll-input 
-              size="mini"
-              placeholder="输入关键字搜索"/>
-          </template>
-    </ll-grid-column>
-      
-    </ll-grid>
+    <ll-container style="height: 100%; ">
+      <ll-header height="40">
+        <ll-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span class="ll-main-title">查询条件</span>
+          </div>
+          <ll-form :status-icon="true" ref="ruleForm" label-width="100px" style="width:100%">
+            <ll-col :span="8">
+              <ll-form-item label="活动名称" prop="name">
+                <ll-input></ll-input>
+              </ll-form-item>
+            </ll-col>
+            <ll-col :span="8">
+              <ll-button icon="el-icon-search" circle></ll-button>
+            </ll-col>
+          </ll-form>
+        </ll-card>
+      </ll-header>
+      <ll-container style="height: 100%; ">
+        <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+          <ll-card class="box-card" style="height:100%;">
+            <div slot="header" class="clearfix">
+              <ll-row>
+                <ll-col :span="18">
+                  <span class="ll-main-title">菜单列表&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <ll-button type="primary" icon="el-icon-plus" circle size="mini"></ll-button>
+                  <ll-button type="danger" icon="el-icon-delete" circle size="mini"></ll-button>
+                </ll-col>
+              </ll-row>
+            </div>
+            <ll-grid :data-wrap="dataWrap" @current-change="currentChange" @cell-click="testCellClick">
+              <ll-table-column type="selection" width="55">
+              </ll-table-column>
+              <ll-grid-column prop="date" type="date" label="日期" :width="180">
+              </ll-grid-column>
+              <ll-grid-column type="select" prop="name" label="姓名" :width="180">
+              </ll-grid-column>
+              <ll-grid-column type="tree" prop="name" label="姓名" :width="180">
+              </ll-grid-column>
+              <ll-grid-column prop="address" label="地址" :width="180">
+              </ll-grid-column>
+              <ll-grid-column :sortable="false" label="地址" :istemplate="true" :width="180">
+                <template slot-scope="scope">
+                </template>
+                <template slot="header" slot-scope="scope">
+                  <ll-input size="mini" placeholder="输入关键字搜索" />
+                </template>
+              </ll-grid-column>
+            </ll-grid>
+          </ll-card>
+        </ll-main>
+      </ll-container>
+    </ll-container>
   </div>
 </body>
 <script type="text/javascript">
-   
   new Vue({
     el: '#app',
     data: {
-      inputColumn1:"",
-      dataWrap:{
-        dataList:[{
-          date: "2016-05-02",
-          name: "王小虎1",
-          address: "上海市普陀区金沙江路 1518 弄",
-          editFlag:false
+      inputColumn1: "",
+      dataWrap: null,
+      dataWrap2: {
+        dataList: [{
+            date: "2016-05-02",
+            name: "王小虎1",
+            address: "上海市普陀区金沙江路 1518 弄",
+            editFlag: false
           },
           {
             date: "2016-05-01",
             name: "王小虎",
             address: "上海市普陀区金沙江路 1519 弄",
-          editFlag:true
+            editFlag: true
           },
           {
             date: "2016-05-03",
             name: "王小虎",
             address: "上海市普陀区金沙江路 1516 弄",
-          editFlag:true
+            editFlag: true
           },
           {
             date: "2016-05-04",
             name: "王小虎",
             address: "上海市普陀区金沙江路 1517 弄",
-          editFlag:true
+            editFlag: true
           },
         ],
-        pageInfo:{
-          currentPageNum:1,
-          totalElementCount:1000,
-          pageSize:20
+        pageInfo: {
+          currentPageNum: 1,
+          totalElementCount: 1000,
+          pageSize: 20
         }
       },
       tableData: [{
           date: "2016-05-02",
           name: "王小虎1",
           address: "上海市普陀区金沙江路 1518 弄",
-          editFlag:true
+          editFlag: true
         },
         {
           date: "2016-05-01",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1519 弄",
-          editFlag:true
+          editFlag: true
         },
         {
           date: "2016-05-03",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1516 弄",
-          editFlag:true
+          editFlag: true
         },
         {
           date: "2016-05-04",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1517 弄",
-          editFlag:true
+          editFlag: true
         },
       ],
     },
-    methods:{
-      currentChange(){
+    methods: {
+      currentChange() {
         // console.log(this.dataWrap);
       },
-      handleEdit:function(row,refIndex){
+      handleEdit: function (row, refIndex) {
         // console.log(row)
         // this.$set(row, "editFlag", true);
         // setTimeout(() => {
         //   this.$refs.llHiddenInput.focus();
         // }, 300);
       },
-      handleSave:function(row){
+      handleSave: function (row) {
         // console.log(row)
         // this.$set(row, "editFlag", false);
       },
-      testCellClick(){
+      testCellClick() {
         // alert("testCellClick")
       }
     }
   })
 </script>
+
 </html>

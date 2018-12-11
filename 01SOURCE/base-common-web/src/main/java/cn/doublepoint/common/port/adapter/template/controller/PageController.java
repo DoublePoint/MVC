@@ -9,8 +9,6 @@
 */
 package cn.doublepoint.common.port.adapter.template.controller;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
