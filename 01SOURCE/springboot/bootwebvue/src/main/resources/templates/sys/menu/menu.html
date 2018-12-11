@@ -17,7 +17,7 @@
                 <ll-header height="40">
                     <ll-card class="box-card">
                         <div slot="header" class="clearfix">
-                            <span>查询条件</span>
+                            <span class="ll-main-span">查询条件</span>
                         </div>
                         <ll-form :model="ruleForm" :status-icon="true" :rules="rules" ref="ruleForm" label-width="100px"
                             style="width:100%">
@@ -37,10 +37,12 @@
                         <ll-card class="box-card" style="height:100%;">
                             <div slot="header" class="clearfix">
                                 <ll-row>
+                                  <ll-col :span="6">
+                                  	<span class="ll-main-span" style="marign-right:100px;">菜单列表</span>
+                                  </ll-col>
                                   <ll-col :span="18">
-                                  		<span class="ll-main-span">菜单列表</span>
-									  <ll-button type="primary" icon="el-icon-plus" circle size="mini"></ll-button>
-									  <ll-button type="danger" icon="el-icon-delete" circle size="mini"></ll-button>
+									<ll-button type="primary" icon="el-icon-plus" circle size="mini"></ll-button>
+									<ll-button type="danger" icon="el-icon-delete" circle size="mini"></ll-button>
 								  </ll-col>
 								</ll-row>
                             </div> 
