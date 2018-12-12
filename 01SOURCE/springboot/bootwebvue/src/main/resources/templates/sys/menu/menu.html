@@ -48,7 +48,7 @@
                                         <span class="ll-main-span" style="marign-right:100px;">菜单列表</span>
                                     </ll-col>
                                     <ll-col :span="18">
-                                        <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px"
+                                        <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px" @click="add"
                                             title="添加"></ll-button>
                                         <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px"
                                             title="删除"></ll-button>
@@ -58,6 +58,14 @@
                             <ll-grid :data-wrap="dataWrap" :readonly="true" @current-change="retrieve">
                                 <ll-table-column type="selection" width="55">
                                 </ll-table-column>
+                                <ll-grid-column prop="id" label="启用" :width="80">
+                                	<template slot-scope="scope">
+                                		<ll-switch
+                                		  v-model="scope.row.enable"
+										  active-color="#13ce66"
+										  inactive-color="#ff4949">
+										</ll-switch>
+							      </template>
                                 </ll-grid-column>
                                 <ll-grid-column prop="id" label="菜单标识" :width="180">
                                 </ll-grid-column>
@@ -94,13 +102,6 @@
                 },
                 ruleForm: {
                     name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
                 },
                 rules: {
                     name: [{
@@ -115,39 +116,6 @@
                             trigger: 'blur'
                         }
                     ],
-                    region: [{
-                        required: true,
-                        message: '请选择活动区域',
-                        trigger: 'change'
-                    }],
-                    date1: [{
-                        type: 'date',
-                        required: true,
-                        message: '请选择日期',
-                        trigger: 'change'
-                    }],
-                    date2: [{
-                        type: 'date',
-                        required: true,
-                        message: '请选择时间',
-                        trigger: 'change'
-                    }],
-                    type: [{
-                        type: 'array',
-                        required: true,
-                        message: '请至少选择一个活动性质',
-                        trigger: 'change'
-                    }],
-                    resource: [{
-                        required: true,
-                        message: '请选择活动资源',
-                        trigger: 'change'
-                    }],
-                    desc: [{
-                        required: true,
-                        message: '请填写活动形式',
-                        trigger: 'blur'
-                    }]
                 }
             },
             methods: {
@@ -174,7 +142,7 @@
                             var dataWrap = response.get("dataWrap");
                             if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
                                 0)
-                                alert("未查询到任何数据!");
+                                vm.$alert("未查询到任何数据!");
                             vm.$set(vm.$data, "dataWrap", dataWrap);
                         }
                     });
@@ -194,10 +162,23 @@
                             var dataWrap = response.get("dataWrap");
                             if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
                                 0)
-                                alert("未查询到任何数据!");
+                            	vm.$alert('这是一段内容', '标题名称', {
+                                    confirmButtonText: '确定',
+                                    callback: action => {
+                                      
+                                    }
+                                  });
                             vm.$set(vm.$data, "dataWrap", dataWrap);
                         }
                     });
+                },
+                add(){
+                	$.openTab({
+                        name: "addMenu",
+                        title: "添加菜单",
+                        closable:true,
+                        link: "/sys/menu/menuDialog"
+                   });
                 }
             }
         });

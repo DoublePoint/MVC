@@ -57,7 +57,9 @@ public class Menu extends BaseEntity {
 	@Column(name="CREATE_TIME")
 	private Date createTime;
 
-
+	@Column(name="ENABLE")
+	private Boolean enable;
+	
 	public Long getId() {
 		return id;
 	}
@@ -151,4 +153,14 @@ public class Menu extends BaseEntity {
 		+"createTime=" + createTime 
 		+"]";
 	}
+
+	public Boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
+	}
+	
+	
 }

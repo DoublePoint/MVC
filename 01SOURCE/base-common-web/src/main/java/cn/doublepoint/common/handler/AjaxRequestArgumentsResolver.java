@@ -34,8 +34,12 @@ public class AjaxRequestArgumentsResolver implements HandlerMethodArgumentResolv
     @Override
     public AjaxRequest resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-    	String _hiddenRequestData=webRequest.getParameter("_hiddenRequestData");
-    	AjaxRequest request=JSONObject.parseObject(_hiddenRequestData, AjaxRequest.class);
-    	return request;
+    	try {
+    		String _hiddenRequestData=webRequest.getParameter("_hiddenRequestData");
+        	AjaxRequest request=JSONObject.parseObject(_hiddenRequestData, AjaxRequest.class);
+        	return request==null?new AjaxRequest():request;
+		} catch (Exception e) {
+			return new AjaxRequest();
+		}
     }
 }

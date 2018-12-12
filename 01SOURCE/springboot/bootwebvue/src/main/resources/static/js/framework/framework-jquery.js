@@ -11,7 +11,6 @@
 				$.alert("frameworl-jquery.js-22");
 				return false;
 			}
-
 		},
 		// 根据函数名进行方法调用
 		_Eval : function(func, paramArr) {
@@ -66,9 +65,7 @@
 		
 		openTab : function(setting){
 			// 新增一个Tab项
-			parent.$element.tabAdd('admin-tab', setting);
-			// 切换到指定Tab项
-			parent.$element.tabChange('admin-tab', setting.id);
+			parent.vm.addTab(setting);
 		},
 		
 		getRequestParam : function(paramName) {
@@ -128,18 +125,37 @@
 			var pageinfo = new _LL_Model._PageInfo();
 			return pageinfo;
 		},
-		alert:function(text){
-			alert(text)
+		alert:function(text,title,callback){
+			if(!title)
+				title="提示";
+			if(!callback)
+				callback=function(){
+					
+				}
+			if(parent)
+				parent.vm.$alert(text,title, {
+			          confirmButtonText: '确定',
+			          callback: function(){
+			        	  
+			          }
+			        }); 
+			else{
+				var vm=new Vue();
+				vm.$alert(text,title, {
+			          confirmButtonText: '确定',
+			          callback: function(){
+			        	  
+			          }
+			        }); 
+			}
 		},
 		// 重新封装Ajax请求
 		request : function(settings) {
-			
 			if (settings == null)
 				return;
 
 			// 封装操作成功函数
 			var successFunction = settings.success;
-
 			settings.success = function(responseData) {
 				if (successFunction != null) {
 					if (typeof (responseData) == 'string' || typeof (responseData) == 'boolean') {
@@ -185,10 +201,7 @@
 			ajaxRequest.map=settings.data;
 			settings.data = JSON.stringify(ajaxRequest);
 			settings.accept = "*/*";
-
 			$.ajax(settings);
 		},
-		
 	});
-
 })(jQuery);
