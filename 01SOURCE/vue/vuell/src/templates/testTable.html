@@ -20,7 +20,7 @@
             </ll-col>
             <ll-col :span="8">
                 <ll-form-item >
-                    <ll-button type="primary" size="mini" >主要按钮</ll-button>
+                    <ll-button type="primary" size="mini" @click="testAlertMessage" >主要按钮</ll-button>
                 </ll-form-item>
             </ll-col>
           </ll-form>
@@ -144,6 +144,9 @@
       },
       testCellClick() {
         // alert("testCellClick")
+      },
+      testAlertMessage(){
+        this.$alert('这是一条消息提示2',{});
       }
     }
   })

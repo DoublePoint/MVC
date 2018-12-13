@@ -162,12 +162,32 @@
                             var dataWrap = response.get("dataWrap");
                             if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
                                 0)
-                            	vm.$alert('这是一段内容', '标题名称', {
+                            	$.alert('这是一段内容', '标题名称', {
                                     confirmButtonText: '确定',
                                     callback: action => {
                                       
                                     }
                                   });
+                            alert(3)
+                        	$.openDialog({
+                        		type : 2,
+                        		title : "维护菜单",
+                        		width : 630,
+                        		height : 330,
+                        		shade : 0.4,
+                        		closeBtn : 1,
+                        		shadeClose : true,
+                        		maxmin : true,
+                        		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                        		data : {
+                        			
+                        		},
+                        		yes : function() {
+                        		},
+                        		cancel : function() {
+
+                        		}
+                        	});
                             vm.$set(vm.$data, "dataWrap", dataWrap);
                         }
                     });

@@ -149,6 +149,67 @@
 			        }); 
 			}
 		},
+		openDialog : function(obj) {
+			/* title */
+			var title = obj.title;
+			if (title == null || title == "")
+				title = "弹窗 ";
+			else
+				title = title + "&nbsp;&nbsp;";
+			obj.title = title;
+
+			// 存储弹出窗口的传递值
+			var _DialogData = obj.data == null ? {} : obj.data;
+			_DialogData.url = obj.url;
+			var showTimes = 1;
+			// 重新封装success方法
+			obj.success = function(layero, index) {
+				if (showTimes != 1)
+					return;
+
+				var jspParams = $.createJspParams();
+				jspParams.setParentDialogDiv(layero);
+				if (obj.yes != null) {
+					if (typeof obj.yes === "function")
+						jspParams._DialogYesFunction = obj.yes;
+					else
+						jspParams.setDialogYesFunctionName(obj.yes);
+				}
+				parent.addLayerDialogMap(index, jspParams);
+				// 执行该方法的是子页面
+
+				showTimes++;
+				var iframeWin = parent.window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+				try {
+					iframeWin._InitOpenDialog(_DialogData);
+				} catch (e) {
+
+				}
+			}
+			var width = obj.width;
+			var height = obj.height;
+			if (width == null)
+				width = "630px";
+			else if (("" + width).indexOf("px") == -1) {
+				width = obj.width + "px";
+			}
+			if (height == null)
+				height = "330px";
+			else if (("" + height).indexOf("px") == -1) {
+				height = obj.height + "px";
+			}
+			obj.type = 2;
+			obj.shade = 0.4;
+			obj.closeBtn = 1;
+			obj.shadeClose = true;
+			obj.maxmin = true;
+			obj.area = [ width, height ];
+			obj.content = $$pageContextPath + "sys/dialog/dialog";
+			if(parent)
+				parent.layer.open(obj);
+			else
+				layer.open(obj);
+		},
 		// 重新封装Ajax请求
 		request : function(settings) {
 			if (settings == null)
