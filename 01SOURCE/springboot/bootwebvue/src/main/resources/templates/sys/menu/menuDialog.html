@@ -10,32 +10,27 @@
     <div id="app" style="height: 100%;width: 100%;">
         <ll-container style="height: 100%; ">
             <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
-            	<ll-card class="box-card" style="height:100%;">
-                    <div slot="header" class="clearfix">
-                        <span class="ll-main-title">菜单详情</span>
-                    </div>
-	                <ll-form id="ajaxform" cols="1" colproportion="1:5" showchanged="True" label-width="100px" style="width:60%;">
-	                    <ll-form-item label="名称">
-	                        <ll-input v-model="form.name"></ll-input>
-	                    </ll-form-item>
-	                    <ll-form-item label="链接">
-	                        <ll-input v-model="form.link"></ll-input>
-	                    </ll-form-item>
-	                    <ll-form-item label="序号">
-	                        <ll-input v-model="form.sn"></ll-input>
-	                    </ll-form-item>
-	                    <ll-form-item label="图标">
-	                        <ll-input v-model="form.icon"></ll-input>
-	                    </ll-form-item>
-	                    <ll-form-item label="上级菜单">
-	                        <!-- <ll-input v-model="form.parentId"></ll-input> -->
-	                        <ll-cascader
-							  :options="options"
-							  change-on-select
-							></ll-cascader>
-	                    </ll-form-item>
-	                </ll-form>
-                </ll-card>
+                <ll-form id="ajaxform" cols="1" colproportion="1:5" showchanged="True" label-width="100px" style="width:60%;">
+                    <ll-form-item label="名称">
+                        <ll-input v-model="form.name"></ll-input>
+                    </ll-form-item>
+                    <ll-form-item label="链接">
+                        <ll-input v-model="form.link"></ll-input>
+                    </ll-form-item>
+                    <ll-form-item label="序号">
+                        <ll-input v-model="form.sn"></ll-input>
+                    </ll-form-item>
+                    <ll-form-item label="图标">
+                        <ll-input v-model="form.icon"></ll-input>
+                    </ll-form-item>
+                    <ll-form-item label="上级菜单">
+                        <!-- <ll-input v-model="form.parentId"></ll-input> -->
+                        <ll-cascader
+						  :options="options"
+						  change-on-select
+						></ll-cascader>
+                    </ll-form-item>
+                </ll-form>
             </ll-main>
             <ll-footer>
             	<ll-form id="ajaxform" cols="1" colproportion="1:5" showchanged="True" label-width="100px" style="width:60%;">
@@ -49,17 +44,25 @@
 
     </div>
     <script type="text/javascript">
-        var dataWrap = ajaxResponse.get("dataWrap");
-
+        
+        var type = ajaxResponse.get("type");
+        
+        var formData={
+                name: '',
+                link: '',
+                sn: '',
+                icon:'',
+                parentId: '',
+        };
+        if(type=="edit"){
+        	var dataWrap = ajaxResponse.get("dataWrap");
+        	formData=dataWrap.data;
+        }
+        	
         var vm = new Vue({
             el: '#app',
             data: {
-                form: {
-                    name: '',
-                    link: '',
-                    sn: '',
-                    parentId: '',
-                },
+                form: formData,
                 options: [{
                     value: 'zhinan',
                     label: '指南',

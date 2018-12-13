@@ -156,7 +156,7 @@ data: [{
   },
   methods: {
     isReadonly(row,prop, index) {
-      console.log("执行了isReadonly方法 prop="+prop+" index="+index+" this.currentEditIndex="+this.currentEditIndex);
+      // console.log("执行了isReadonly方法 prop="+prop+" index="+index+" this.currentEditIndex="+this.currentEditIndex);
       if (prop + index != this.currentEditIndex) return true;
       var i = this.editIndexArray.findIndex(item => {
         return item.rowNum == index;
@@ -175,7 +175,7 @@ data: [{
       this.$emit("current-change", currPage);
     },
     handleEdit: function(row, prop, index) {
-      console.log("handleEdit"+prop)
+      // console.log("handleEdit"+prop)
       this.currentEditIndex = prop+index;
       setTimeout(() => {
         // console.log(this.$refs.llGridColumnInput)
@@ -188,7 +188,7 @@ data: [{
       },200);
     },
     handleSelectBlur: function(val){
-      console.log("handleSelectBlur")
+      // console.log("handleSelectBlur")
       //代表隐藏
       if(!val){
         // alert("false")
@@ -196,18 +196,18 @@ data: [{
       }
     },
     handleNodeClick(data) {
-        console.log(data);
+        // console.log(data);
       },
     //设置某行可被编辑
     setReadonly(isReadonly) {}
   },
   beforeMount: function() {
     // console.log("beforeMount----");
-    console.log(this.$scopedSlots);
+    // console.log(this.$scopedSlots);
   },
   created: function() {
     // console.log("created----");
-    console.log(this.$scopedSlots);
+    // console.log(this.$scopedSlots);
   },
   computed: {
     wrap: function() {

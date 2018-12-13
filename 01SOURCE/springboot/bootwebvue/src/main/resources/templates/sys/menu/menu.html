@@ -55,7 +55,9 @@
                                     </ll-col>
                                 </ll-row>
                             </div>
-                            <ll-grid :data-wrap="dataWrap" :readonly="true" @current-change="retrieve">
+                            <ll-grid :data-wrap="dataWrap" :readonly="true" 
+                            		@current-change="retrieve" 
+                            		@row-dblclick="rowDblcick">
                                 <ll-table-column type="selection" width="55">
                                 </ll-table-column>
                                 <ll-grid-column prop="id" label="启用" :width="80">
@@ -160,45 +162,43 @@
                         },
                         success: function (response) {
                             var dataWrap = response.get("dataWrap");
-                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
-                                0)
-                            	$.alert('这是一段内容', '标题名称', {
-                                    confirmButtonText: '确定',
-                                    callback: action => {
-                                      
-                                    }
-                                  });
-                            alert(3)
-                        	$.openDialog({
-                        		type : 2,
-                        		title : "维护菜单",
-                        		width : 630,
-                        		height : 330,
-                        		shade : 0.4,
-                        		closeBtn : 1,
-                        		shadeClose : true,
-                        		maxmin : true,
-                        		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
-                        		data : {
-                        			
-                        		},
-                        		yes : function() {
-                        		},
-                        		cancel : function() {
-
-                        		}
-                        	});
+                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==0){
+                            	$.msg('未查询到任何数据');
+                            }
                             vm.$set(vm.$data, "dataWrap", dataWrap);
                         }
                     });
                 },
                 add(){
-                	$.openTab({
-                        name: "addMenu",
-                        title: "添加菜单",
-                        closable:true,
-                        link: "/sys/menu/menuDialog"
-                   });
+                	$.openDialog({
+                		title : "维护菜单",
+                		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                		data : {
+                			
+                		},
+                		yes : function() {
+                		},
+                		cancel : function() {
+
+                		}
+                	});
+                },
+                rowDblcick(row){
+                	var dataWrap=$.createAjaxDataWrap();
+                	dataWrap.setData(row);
+                	$.openDialog({
+                		title : "维护菜单",
+                		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                		data : {
+                			dataWrap:dataWrap,
+                			type:"edit"
+                		},
+                		yes : function() {
+                		},
+                		cancel : function() {
+
+                		}
+                	});
                 }
             }
         });

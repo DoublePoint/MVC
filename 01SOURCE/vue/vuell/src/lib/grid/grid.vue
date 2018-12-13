@@ -2,6 +2,7 @@
   <ll-container style="height: 100%; ">
     <ll-main style="height: 100%; ">
       <ll-table :data="wrap" height="100%" border highlight-current-row  
+        @row-dblclick="rowDblclick"
         @cell-click="cellClick">
         <slot ></slot> 
       </ll-table>
@@ -48,8 +49,11 @@ export default {
       this.dataWrap.pageInfo.currentPageNum=currPage;
       this.$emit("current-change", currPage);
     },
-    cellClick(){
-      this.$emit("cell-click", 2);
+    cellClick(row, column, cell, event){
+      this.$emit("cell-click", row, column, cell, event);
+    },
+    rowDblclick(row, event){
+      this.$emit("row-dblclick", row, event);
     }
   },
   computed: {

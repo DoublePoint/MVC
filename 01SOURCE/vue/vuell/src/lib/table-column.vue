@@ -33,7 +33,7 @@ export default {
   methods: {},
   mounted() {
     //this.llData = this.data;
-    console.log(this.llData);11
+    // console.log(this.llData);11
   }
 };
 </script>

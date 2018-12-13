@@ -1,8 +1,5 @@
 function _InitOpenDialog(responseData) {
 	formSubmit(responseData);
-//	document.getElementById("popWinForm").setAttribute("action",responseData.url);
-//	jq12("#hiddenResponseData").val(JSON.stringify(responseData));
-//	document.forms[0].submit() ; 
 }
 
 function formSubmit(responseData) {

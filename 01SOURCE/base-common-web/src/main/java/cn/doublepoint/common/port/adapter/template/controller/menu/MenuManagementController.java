@@ -54,8 +54,8 @@ public class MenuManagementController extends BaseController {
 			String parentMenuId = request.getParameter("parentMenuId");
 			if (!StringUtil.isNullOrEmpty(parentMenuId))
 				response.setAjaxParameter("parentMenuId", parentMenuId);
-			response.setAjaxParameter("type", type);
 		}
+		response.setAjaxParameter("type", type);
 		response.setViewName("sys/menu/menuDialog.html");
 		return response;
 	}

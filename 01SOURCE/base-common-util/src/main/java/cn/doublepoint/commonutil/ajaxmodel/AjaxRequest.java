@@ -37,6 +37,10 @@ public class AjaxRequest {
 		this.map = map;
 	}
 	
+	public Object getMap(String key) {
+		return map.get(key);
+	}
+	
 	public String getParameter(String parameterName){
 		if(map==null)
 			return null;

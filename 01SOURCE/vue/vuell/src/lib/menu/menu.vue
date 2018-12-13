@@ -67,11 +67,11 @@ export default {
   watch:{
     collapse(value){
       if(value){
-        console.log('setMenuCollapseTrue')
+        // console.log('setMenuCollapseTrue')
         store.commit('setMenuCollapseTrue')
       }
       else{
-        console.log('setMenuCollapseFalse')
+        // console.log('setMenuCollapseFalse')
         store.commit('setMenuCollapseFalse')
       }
     }

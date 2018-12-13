@@ -44,8 +44,8 @@ export default {
     this.initDirection();
   },
   mounted() {
-    console.log(this.llData);
-    console.log(this.$slots);
+    // console.log(this.llData);
+    // console.log(this.$slots);
   }
 };
 </script>

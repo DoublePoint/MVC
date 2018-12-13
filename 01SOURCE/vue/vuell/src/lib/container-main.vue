@@ -23,7 +23,7 @@ export default {
   methods: {},
   mounted() {
     //this.llData = this.data;
-    console.log(this.llData);
+    // console.log(this.llData);
     11;
   }
 };

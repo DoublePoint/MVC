@@ -24,7 +24,7 @@ export default {
   },
   methods: {},
   mounted() {
-    console.log(this.llData);
+    // console.log(this.llData);
   }
 };
 </script>
