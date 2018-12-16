@@ -12,27 +12,27 @@
   <div id="app" style="height: 100%;width: 100%;">
     <ll-collapse v-model="activeName" accordion>
       <ll-collapse-item title="一致性 Consistency" name="1" style="height:100%;">
-        <ll-grid :data-wrap="dataWrap" style="height:500px;" @current-change="currentChange" @cell-click="testCellClick">
+        <ll-table-zz :data-wrap="dataWrap" style="height:500px;" @current-change="currentChange" @cell-click="testCellClick">
           <ll-table-column type="selection" width="55">
           </ll-table-column>
-          <ll-grid-column prop="date" type="date" label="日期" :width="180">
-          </ll-grid-column>
-          <ll-grid-column type="select" prop="name" label="姓名" :width="180">
-          </ll-grid-column>
-          <ll-grid-column type="tree" prop="name" label="姓名" :width="180">
-          </ll-grid-column>
-          <ll-grid-column prop="address" label="地址" :width="180">
-          </ll-grid-column>
-          <ll-grid-column :sortable="false" label="地址" :istemplate="true" :width="180">
+          <ll-table-column-zz prop="date" type="date" label="日期" :width="180">
+          </ll-table-column-zz>
+          <ll-table-column-zz type="select" prop="name" label="姓名" :width="180">
+          </ll-table-column-zz>
+          <ll-table-column-zz type="tree" prop="name" label="姓名" :width="180">
+          </ll-table-column-zz>
+          <ll-table-column-zz prop="address" label="地址" :width="180">
+          </ll-table-column-zz>
+          <ll-table-column-zz :sortable="false" label="地址" :istemplate="true" :width="180">
             <template slot-scope="scope">
 
             </template>
             <template slot="header" slot-scope="scope">
               <ll-input size="mini" placeholder="输入关键字搜索" />
             </template>
-          </ll-grid-column>
+          </ll-table-column-zz>
 
-        </ll-grid>
+        </ll-table-zz>
       </ll-collapse-item>
       <ll-collapse-item title="反馈 Feedback" name="2">
         <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>

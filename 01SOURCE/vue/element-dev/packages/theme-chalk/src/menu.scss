@@ -51,6 +51,7 @@
 
   @include m(horizontal) {
     border-right: none;
+    & > .ll-menu-div > .el-menu-item,
     & > .el-menu-item {
       float: left;
       height: 60px;
@@ -69,6 +70,7 @@
         background-color: #fff;
       }
     }
+    & > .ll-menu-div > .el-submenu,
     & > .el-submenu {
       float: left;
 
@@ -124,6 +126,7 @@
       outline: none;
       color: $--color-text-primary;
     }
+    & > .ll-menu-div > .el-menu-item.is-active ,
     & > .el-menu-item.is-active {
       border-bottom: 2px solid $--color-primary;
       color: $--color-text-primary;
@@ -132,7 +135,9 @@
   @include m(collapse) {
     width: 64px;
 
+    > .ll-menu-div > .el-menu-item,
     > .el-menu-item,
+    > .ll-menu-div > .el-submenu > .el-submenu__title,
     > .el-submenu > .el-submenu__title {
       [class^="el-icon-"] {
         margin: 0;
@@ -151,7 +156,7 @@
         display: inline-block;
       }
     }
-
+    > .ll-menu-div > .el-menu-item.is-active i ,
     > .el-menu-item.is-active i {
       color: inherit;
     }

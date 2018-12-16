@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>vueplugin2</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../dist/vueplugins.js"></script>
+</head>
+
+<body>
+  <div id="app" style="height: 100%;width: 100%;">
+    <ll-drop-tree-zz :datasource="datasource" v-model="selectValue"></ll-drop-tree-zz>
+  </div>
+</body>
+<script type="text/javascript">
+  var vm=new Vue({
+    el: '#app',
+    data: {
+      datasource: "http://localhost:8083/web/sys/menu/menu-tree/datalist",
+      selectValue:""
+    },
+    methods: {}
+  })
+</script>
+
+</html>

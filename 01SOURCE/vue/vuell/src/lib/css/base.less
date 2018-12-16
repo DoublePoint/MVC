@@ -1,4 +1,19 @@
 @baseColor: #409EFF;
+@lineHeight: 30px;
+
+.el-menu--collapse>div>.el-menu-item [class^=el-icon-], .el-menu--collapse>div>.el-submenu>.el-submenu__title [class^=el-icon-] {
+  margin: 0;
+  vertical-align: middle;
+  width: 24px;
+  text-align: center;
+}
+.el-menu--collapse>div>.el-menu-item span, .el-menu--collapse>div>.el-submenu>.el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
+}
 
 .el-table {
   th {
@@ -72,7 +87,7 @@
 }
 .el-input__inner{
   height:30px;
-  line-height: 30px;
+  line-height: @lineHeight;
 }
 .el-form--label-top .el-form-item__label {
   padding: 0 0 0px; 
@@ -99,4 +114,8 @@
 }
 .ll-main-span{
     font-size: 14px;
+}
+
+.el-input__icon{
+  line-height: @lineHeight;
 }

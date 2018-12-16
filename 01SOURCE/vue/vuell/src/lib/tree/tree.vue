@@ -1,5 +1,8 @@
 <template>
     <ll-tree :data="items" :props="props" accordion @node-click="handleNodeClick" :load="load"
+      :expand-on-click-node="false"
+      ref="tree"
+      node-key="code"
       :lazy="lazy">
     </ll-tree>
 </template>
@@ -7,7 +10,7 @@
 <script>
 
 export default {
-  name: "LlNavTree",
+  name: "LlTreeZz",
   props: {
     items: {
       type: Array
@@ -60,6 +63,9 @@ export default {
       },function(response){
         throw new Error("ll:ajax error:"+response,'tree.vue');
       })
+    },
+    getNode(node){
+      return this.$refs["tree"].getNode(node);
     }
   },
   watch:{
