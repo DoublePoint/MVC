@@ -24,11 +24,11 @@
                         <ll-input v-model="form.icon"></ll-input>
                     </ll-form-item>
                     <ll-form-item label="上级菜单">
-                        <!-- <ll-input v-model="form.parentId"></ll-input> -->
-                        <ll-cascader
+                        <ll-drop-tree-zz :datasource="datasource" v-model="form.parentId"></ll-drop-tree-zz>
+                        <!-- <ll-cascader
 						  :options="options"
 						  change-on-select
-						></ll-cascader>
+						></ll-cascader> -->
                     </ll-form-item>
                 </ll-form>
             </ll-main>
@@ -48,11 +48,11 @@
         var type = ajaxResponse.get("type");
         
         var formData={
-                name: '',
-                link: '',
-                sn: '',
-                icon:'',
-                parentId: '',
+            name: '',
+            link: '',
+            sn: '',
+            icon:'',
+            parentId: '',
         };
         if(type=="edit"){
         	var dataWrap = ajaxResponse.get("dataWrap");
@@ -63,6 +63,7 @@
             el: '#app',
             data: {
                 form: formData,
+                datasource: $$pageContextPath + "sys/menu/menu-tree/datalist",
                 options: [{
                     value: 'zhinan',
                     label: '指南',
