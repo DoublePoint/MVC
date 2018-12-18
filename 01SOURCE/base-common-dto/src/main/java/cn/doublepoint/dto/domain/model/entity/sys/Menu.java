@@ -58,7 +58,7 @@ public class Menu extends BaseEntity {
 	private Date createTime;
 
 	@Column(name="ENABLE")
-	private Boolean enable;
+	private String enable;
 	
 	public Long getId() {
 		return id;
@@ -154,11 +154,11 @@ public class Menu extends BaseEntity {
 		+"]";
 	}
 
-	public Boolean getEnable() {
+	public String getEnable() {
 		return enable;
 	}
 
-	public void setEnable(Boolean enable) {
+	public void setEnable(String enable) {
 		this.enable = enable;
 	}
 	

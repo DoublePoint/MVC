@@ -9,11 +9,16 @@
 <body>
     <div id="app" style="height: 100%;width: 100%;">
         <ll-container style="height: 100%; ">
-            <ll-header style="background-color:#eee;">Header</ll-header>
+            <ll-header style="background-color:#eee;">
+            	<ll-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+		          <ll-radio-button :label="false">展开</ll-radio-button>
+		          <ll-radio-button :label="true">收起</ll-radio-button>
+		        </ll-radio-group>
+            </ll-header>
             <ll-container>
-                <ll-aside width="200px" style="background-color:#272b2e">
-                    <ll-nav-menu :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
-                        background-color="#272b2e" text-color="#fff"></ll-nav-menu>
+                <ll-aside :width="style.asideWidth"  style="background-color:#272b2e">
+                    <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
+                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#272b2e" text-color="#fff"></ll-menu-zz>
                 </ll-aside>
                 <ll-main style="padding: 0 0 0 0px;">
                     <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
@@ -83,7 +88,7 @@
             data: {
                 activeTab: "首页",
                 pageContextPath: $$pageContextPath,
-                isCollapse: true,
+                isCollapse: false,
                 menuProp: {
                     id: "menuIndex",
                     label: "name",
@@ -92,8 +97,21 @@
                 },
                 tabs: [],
                 items: dataWrap.dataList,
-            },
-        });
+                style:{
+                    asideWidth:"200px"
+                }
+              },
+              watch:{
+                isCollapse(newVal, oldVal){
+                  if(newVal){
+                    vm.style.asideWidth="80px";
+                  }
+                  else{
+                	  vm.style.asideWidth="200px";
+                  }
+                }
+              }
+            })
     </script>
 </body>
 

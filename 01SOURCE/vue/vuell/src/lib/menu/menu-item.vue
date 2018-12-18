@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ll-menu-div">
         <template v-for="item in this.items" >  
             <!-- if -->
             <ll-submenu v-if="item[props.children]!=null&&item[props.children].length>0" :key="item[props.id]" :index="item[props.id]"  > 
@@ -7,7 +7,7 @@
                     <i v-if="item[props.icon]!=null&&item[props.icon]!=''" class="menu-icon" :class="item[props.icon]"></i>
                     <span slot="title">{{item[props.label]}}</span>
                 </template>
-                <ll-nav-menu-item  :props="props" @testclick="testclick" :items="item[props.children]"></ll-nav-menu-item> 
+                <ll-menu-item-zz  :props="props" @testclick="testclick" :items="item[props.children]"></ll-menu-item-zz> 
             </ll-submenu>
             <!-- else -->
             <ll-menu-item v-else :index="item[props.id]" :route="item"  :key="item[props.id]" >
@@ -21,9 +21,9 @@
 <script>
 import menuItem from "./menu-item.vue"; //引进菜单模板
 export default {
-  name: "LlNavMenuItem",
+  name: "LlMenuItemZz",
   components: {
-    "LlNavMenuItem": menuItem //使用菜单组件
+    "LlMenuItemZz": menuItem //使用菜单组件
   },
   props: {
     items: {

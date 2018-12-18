@@ -33,7 +33,7 @@ const store = new Vuex.Store({
   }
 })
 export default {
-  name: "LlGrid",
+  name: "LlTableZz",
   props: {
     border: {
       type: Boolean,
@@ -51,8 +51,13 @@ export default {
       default(){
         return [10, 20, 30, 40, 50, 100];
       }
-    }
+    },
+    readonly: {
+      default: true,
+      type: Boolean
+    },
   },
+  
   methods: {
     currentChange(currPage) {
       if(!this.dataWrap||!this.dataWrap.pageInfo) return 0;

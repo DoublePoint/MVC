@@ -7,7 +7,7 @@
         @select="select"
         @itemClick="itemClick"
         unique-opened >       
-        <ll-nav-menu-item @testclick="itemClick" :items="items" :props="props"></ll-nav-menu-item>
+        <ll-menu-item-zz @testclick="itemClick" :items="items" :props="props"></ll-menu-item-zz>
     </ll-menu>
 </template>
 
@@ -15,9 +15,9 @@
 import menuItem from "./menu-item.vue"; //引进菜单模板
 
 export default {
-  name: "LlNavMenu",
+  name: "LlMenuZz",
   components: {
-    "LlNavMenuItem": menuItem //使用菜单组件
+    "LlMenuItemZz": menuItem //使用菜单组件
   },
   props: {
     items: {
@@ -68,11 +68,11 @@ export default {
     collapse(value){
       if(value){
         // console.log('setMenuCollapseTrue')
-        store.commit('setMenuCollapseTrue')
+        // store.commit('setMenuCollapseTrue')
       }
       else{
         // console.log('setMenuCollapseFalse')
-        store.commit('setMenuCollapseFalse')
+        // store.commit('setMenuCollapseFalse')
       }
     }
   }

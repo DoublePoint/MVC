@@ -14,8 +14,8 @@
                     <div slot="header" class="clearfix">
                         <span class="ll-main-title">菜单树</span>
                     </div>
-                    <ll-nav-tree :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
-                    </ll-nav-tree>
+                    <ll-tree-zz :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
+                    </ll-tree-zz>
                 </ll-card>
             </ll-aside>
             <ll-container style="height: 100%; ">
@@ -55,29 +55,31 @@
                                     </ll-col>
                                 </ll-row>
                             </div>
-                            <ll-grid :data-wrap="dataWrap" :readonly="true" 
+                            <ll-table-zz :data-wrap="dataWrap" :readonly="true" 
                             		@current-change="retrieve" 
                             		@row-dblclick="rowDblcick">
                                 <ll-table-column type="selection" width="55">
                                 </ll-table-column>
-                                <ll-grid-column prop="id" label="启用" :width="80">
+                                <ll-table-column-zz prop="id" label="启用" :width="80">
                                 	<template slot-scope="scope">
                                 		<ll-switch
                                 		  v-model="scope.row.enable"
 										  active-color="#13ce66"
+										  active-value="1"
+    									  inactive-value="0"
 										  inactive-color="#ff4949">
 										</ll-switch>
 							      </template>
-                                </ll-grid-column>
-                                <ll-grid-column prop="id" label="菜单标识" :width="180">
-                                </ll-grid-column>
-                                <ll-grid-column prop="name" label="菜单名称" :width="180">
-                                </ll-grid-column>
-                                <ll-grid-column prop="sn" label="菜单排序" :width="180">
-                                </ll-grid-column>
-                                <ll-grid-column prop="link" label="菜单链接" :width="280">
-                                </ll-grid-column>
-                            </ll-grid>
+                                </ll-table-column-zz>
+                                <ll-table-column-zz prop="id" label="菜单标识" :width="180">
+                                </ll-table-column-zz>
+                                <ll-table-column-zz prop="name" label="菜单名称" :width="180">
+                                </ll-table-column-zz>
+                                <ll-table-column-zz prop="sn" label="菜单排序" :width="180">
+                                </ll-table-column-zz>
+                                <ll-table-column-zz prop="link" label="菜单链接" :width="280">
+                                </ll-table-column-zz>
+                            </ll-table-zz>
                         </ll-card>
                     </ll-main>
                 </ll-container>
@@ -92,9 +94,6 @@
             el: '#app',
             data: {
                 dataWrap: dataWrap,
-                form: {
-                    name: "123"
-                },
                 datasource: $$pageContextPath + "sys/menu/menu-tree/datalist",
                 data: [],
                 defaultProps: {
@@ -135,10 +134,12 @@
                     this.$refs[formName].resetFields();
                 },
                 retrieve() {
+                	var dataWrap=$.createAjaxDataWrap();
+                	dataWrap.setData(this.ruleForm);
                     $.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
                         data: {
-                        	dataWrap:this.dataWrap
+                        	dataWrap:dataWrap
                         },
                         success: function (response) {
                             var dataWrap = response.get("dataWrap");

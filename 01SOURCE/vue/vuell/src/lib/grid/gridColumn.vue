@@ -54,11 +54,12 @@
 
 <script>
 export default {
-  name: "LlGridColumn",
+  name: "LlTableColumnZz",
   data() {
     return {
       editIndexArray: [],
       currentEditIndex: "-1",
+      parent:null,
       options: [
         {
           value: "选项1",
@@ -155,7 +156,21 @@ data: [{
     }
   },
   methods: {
+    owner: function(){
+      if(this.parent)
+        return this.parent;
+      var parent=this.$parent;
+      while(parent&&parent.$options.name!== 'LlTableZz'){
+        parent=parent.$parent;
+      }
+      this.parent=parent;
+      console.log(parent)
+      return parent;
+    },
     isReadonly(row,prop, index) {
+      //如果父为readonly则子元素也为readonly
+      if(this.owner().readonly)
+          return true;
       // console.log("执行了isReadonly方法 prop="+prop+" index="+index+" this.currentEditIndex="+this.currentEditIndex);
       if (prop + index != this.currentEditIndex) return true;
       var i = this.editIndexArray.findIndex(item => {
@@ -212,7 +227,8 @@ data: [{
   computed: {
     wrap: function() {
       return this.dataWrap.dataList;
-    }
+    },
+    
   },
   watch: {}
 };
