@@ -72,17 +72,16 @@ export default {
     };
   },
   watch: {
-    // 如果 `question` 发生改变，这个函数就会运行
+    // 如果 `value` 发生改变，这个函数就会运行
     value: function (newValue, oldValue) {
-      if(!this.items)
-        return;
       var targetNode = this.$refs["tree"].getNode(newValue);
-      if(!targetNode){
-        
-      }
-      else{
-        this.selectLabel = targetNode.label;
-      }
+        if(!targetNode){
+          this.getLabel();
+        }
+        else{
+          this.selectLabel = targetNode.label;
+        }
+      
     }
   },
   methods: {
@@ -93,6 +92,24 @@ export default {
     },
     showPopover() {
       this.suffixIcon="el-icon-caret-top"
+    },
+    getLabel(){
+      var _this = this 
+      if(this.labelDatasource!=null){
+          this.$request.request({
+            url:this.labelDatasource,
+            data:{
+              
+            },
+            params:{
+              code:this.value
+            }
+          },function(response){
+            _this.selectLabel= response.bodyText;
+          },function(response){
+            throw new Error("ll:ajax error:"+response);
+          })
+      }
     },
     hidePopover() {
       this.suffixIcon="el-icon-caret-bottom"
