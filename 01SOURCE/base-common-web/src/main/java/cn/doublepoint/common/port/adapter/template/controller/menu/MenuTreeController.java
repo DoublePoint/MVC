@@ -38,8 +38,13 @@ public class MenuTreeController extends BaseTreeController {
 	@RequestMapping("/menu/label")
 	@ResponseBody
 	public String getMenuTree(@RequestParam(required=true)String code) {
-		Menu menu = menuService.getById(Long.valueOf(code));
-		return menu.getName();
+		try{
+			Menu menu = menuService.getById(Long.valueOf(code));
+			return menu.getName();
+		}
+		catch(Exception e){
+			return code;
+		}
 	}
 
 	@RequestMapping("/menu/menu-tree/datalist")

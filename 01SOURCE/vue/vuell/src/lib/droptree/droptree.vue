@@ -114,6 +114,9 @@ export default {
     hidePopover() {
       this.suffixIcon="el-icon-caret-bottom"
     },
+  },
+  created(){
+    this.getLabel();
   }
 };
 </script>

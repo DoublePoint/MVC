@@ -24,11 +24,7 @@
                         <ll-input v-model="form.icon"></ll-input>
                     </ll-form-item>
                     <ll-form-item label="上级菜单">
-                        <ll-drop-tree-zz :datasource="datasource" v-model="form.parentId"></ll-drop-tree-zz>
-                        <!-- <ll-cascader
-						  :options="options"
-						  change-on-select
-						></ll-cascader> -->
+                        <ll-drop-tree-zz :datasource="datasource" :label-datasource="labelDatasource" v-model="form.parentId"></ll-drop-tree-zz>
                     </ll-form-item>
                 </ll-form>
             </ll-main>
@@ -41,10 +37,8 @@
             	</ll-form>
             </ll-footer>
         </ll-container>
-
     </div>
     <script type="text/javascript">
-        
         var type = ajaxResponse.get("type");
         
         var formData={
@@ -64,6 +58,7 @@
             data: {
                 form: formData,
                 datasource: $$pageContextPath + "sys/menu/menu-tree/datalist",
+                labelDatasource: $$pageContextPath + "sys/menu/label",
                 options: [{
                     value: 'zhinan',
                     label: '指南',
