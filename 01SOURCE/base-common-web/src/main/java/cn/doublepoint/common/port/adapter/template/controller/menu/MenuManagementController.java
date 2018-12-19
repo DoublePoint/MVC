@@ -118,7 +118,7 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Menu> addDataWrap = request.getAjaxDataWrap("addDataWrap", Menu.class);
+		AjaxDataWrap<Menu> addDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		if (addDataWrap == null)
 			return null;
 		Menu menu = addDataWrap.getData();

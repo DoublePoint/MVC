@@ -45,6 +45,9 @@ export default {
         this.$emit("node-click",nodeData,node);
     },
     load(node, resolve){
+       if (node.level === 0) {
+          return resolve([{ name: '菜单树' }]);
+        }
       if(this.datasource==null||this.datasource=="")
         throw new Error("ll:prop 'datasource' must not be null",'tree.vue');
       var nodeData=node.data;

@@ -3,12 +3,12 @@
         doResponse: function(responseData) {
             try {
                 if (responseData.errorMessage != null && responseData.errorMessage != "") {
-                    $.alert(responseData.errorMessage);
+                    $.error(responseData.errorMessage);
                     return false;
                 }
                 return true;
             } catch(e) {
-                $.alert("frameworl-jquery.js-22");
+                $.error("frameworl-jquery.js-22");
                 return false;
             }
         },
@@ -136,47 +136,66 @@
                 });
             }
         },
-        msg: function(msgg, isShowClose) {
+        msg: function(msgg, isShowClose,duration) {
             if (!isShowClose) {
                 isShowClose = false;
             }
+            if (!duration) {
+            	duration = 3000;
+            }
             parent.___vm=parent.$.createVue();
-            parent.vm.$message({
+            parent.___vm.$message({
                 showClose: isShowClose,
-                message: msgg
+                message: msgg,
+                duration:duration
             });
         },
         createVue:function(){
         	return new Vue();
         },
-        success: function(msg, isShowClose) {
+        success: function(msg, isShowClose,duration) {
             if (!isShowClose) {
                 isShowClose = false;
+            }
+            if (!duration) {
+            	duration = 3000;
             }
             parent.___vm=new Vue();
             parent.___vm.$message({
                 showClose: isShowClose,
-                message: msg
+                message: msg,
+                type: 'success',
+                duration:duration
             });
         },
-        warning: function(msg, isShowClose) {
+        warning: function(msg, isShowClose,duration) {
             if (!isShowClose) {
                 isShowClose = false;
+            }
+            if (!duration) {
+            	duration = 3000;
             }
             parent.___vm=new Vue();
             parent.___vm.$message({
                 showClose: isShowClose,
-                message: msg
+                message: msg,
+                type: 'warning',
+                duration:duration
             });
         },
-        error: function(msg, isShowClose) {
+        error: function(msg, isShowClose,duration) {
             if (!isShowClose) {
                 isShowClose = true;
             }
+            if (!duration) {
+            	duration = 0;
+            }
             parent.___vm=new Vue();
             parent.___vm.$message({
                 showClose: isShowClose,
-                message: '这是一条消息提示'
+                message: msg,
+                type: 'error',
+                duration:duration
             });
         },
         openDialog: function(obj) {

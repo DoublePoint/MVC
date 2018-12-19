@@ -24,7 +24,7 @@
   var vm = new Vue({
     el: '#app',
     data: {
-      datasource: "http://localhost:8083/web/sys/menu/menu-tree/datalist",
+      datasource: "http://localhost:8083/web/sys/menu-tree/menus",
       data: [{
         name: '菜单树',
       }],
@@ -36,21 +36,7 @@
     },
     methods: {
       handleNodeClick(nodeData, node) {
-        // this.$request.request({
-        //   url:"http://localhost:8083/web/sys/menu/menu-tree/datalist",
-        //   params:{
-        //     code:0
-        //   },
-        //   body:{
-        //     code:0
-        //   }
-        // },function(response){
-        //   //vm.$set(nodeData,"children",response.body);
-
-        // },function(response){
-
-        // })
-        alert(1);
+        
       }
     }
   })

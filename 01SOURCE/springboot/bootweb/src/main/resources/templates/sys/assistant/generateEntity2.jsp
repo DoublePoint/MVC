@@ -94,7 +94,7 @@
 											<ll:formfield id="fcdmc" title="SuperClass"  field="parentId" errmsg="菜单名称不能超过10" maxlen="10" ></ll:formfield>
 											<ll:formdate title="创建时间" field="createTime" ></ll:formdate>
 											<ll:formselect id="selectCdmcId" dropname="YesOrNo" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" ></ll:formselect>
-											<ll:formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="${pageContext.request.contextPath}/template/sys/menu/menu-tree/datalist?isHasRoot=true"></ll:formdroptree>
+											<ll:formdroptree id="cdmcId2" colspan="1" title="下拉框"  field="" errmsg="菜单名称不能超过10" maxlen="10" datasource="${pageContext.request.contextPath}/template/sys/menu-tree/menus?isHasRoot=true"></ll:formdroptree>
 											<ll:formtoolbar labelalign="right" colspan="1">
 											 	<input type="button" class="btn btn-info btn-sm " onclick="retrieve()"  value="查询"/>
 											 	&nbsp;&nbsp;

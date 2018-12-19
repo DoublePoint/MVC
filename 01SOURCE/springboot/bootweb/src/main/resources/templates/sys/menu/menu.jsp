@@ -26,7 +26,7 @@
 	<form>
 		<ll:filllayout>
 			<ll:fillarealr width="200px">
-				<ll:tree id="treeDemo" datasource="/template/sys/menu/menu-tree/datalist?isHasRoot=true" showLine="true"
+				<ll:tree id="treeDemo" datasource="/template/sys/menu-tree/menus?isHasRoot=true" showLine="true"
 					onnodeclick="zTreeOnClick()"
 				></ll:tree>
 			</ll:fillarealr>

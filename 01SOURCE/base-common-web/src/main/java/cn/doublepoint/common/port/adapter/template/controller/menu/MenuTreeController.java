@@ -47,7 +47,7 @@ public class MenuTreeController extends BaseTreeController {
 		}
 	}
 
-	@RequestMapping("/menu/menu-tree/datalist")
+	@RequestMapping("/menu-tree/menus")
 	@ResponseBody
 	public List<TreeNodeBean> getMenuTree(@RequestBody(required=false)TreeNodeBean node,
 			@RequestParam(required = false) Boolean isHasRoot) {
