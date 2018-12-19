@@ -7,7 +7,7 @@
           v-if="isReadonly(scope.row,prop,scope.$index)"
           @click="handleEdit(scope.row,prop,scope.$index)"
         >
-          <span>{{ scope.row[prop]}}</span>
+          <span style="display: inline-block;min-width: 1px;">{{ scope.row[prop]}}</span>
         </div>
         <span v-if="!(isReadonly(scope.row,prop,scope.$index))" class="cell-edit-input">
           <ll-input
@@ -16,14 +16,14 @@
             :key="prop+scope.$index"
             v-model="scope.row[prop]"
             placeholder="请输入内容"
-            @blur="handleSave(scope.row,prop)"
+            @blur="clearEditIndex(scope.row,prop)"
           ></ll-input>
           <ll-select 
             v-model="scope.row[prop]" 
             filterable
             v-if="type=='select'" 
             @visible-change="handleSelectBlur"
-             @blur="handleSave(scope.row,prop)"
+            @blur="clearEditIndex(scope.row,prop)"
             ref="llGridColumnInput" 
             placeholder="请选择" >
             <ll-option
@@ -38,7 +38,7 @@
               v-if="type=='date'" 
               v-model="scope.row[prop]"
               editable
-              @blur="handleSave(scope.row,prop)"
+              @blur="clearEditIndex(scope.row,prop)"
               ref="llGridColumnInput"
               type="date"
               placeholder="选择日期">
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       editIndexArray: [],
-      currentEditIndex: "-1",
+      // currentEditIndex: "-1",
       parent:null,
       options: [
         {
@@ -172,7 +172,8 @@ data: [{
       if(this.owner().readonly)
           return true;
       // console.log("执行了isReadonly方法 prop="+prop+" index="+index+" this.currentEditIndex="+this.currentEditIndex);
-      if (prop + index != this.currentEditIndex) return true;
+      //if (prop + index != this.currentEditIndex) return true;
+      if (prop + index != this.owner().currentEditPropIndex) return true;
       var i = this.editIndexArray.findIndex(item => {
         return item.rowNum == index;
       });
@@ -180,7 +181,8 @@ data: [{
       if (i != -1)
         //表示存在该单元格的readonly数据
         readonly = this.editIndexArray[i].readonly;
-      else readonly = this.readonly;
+      else 
+        readonly = this.readonly;
       //如果readonly=false 并且是当前的索引可以被编辑
       if (!readonly) return false;
       return true;
@@ -191,23 +193,23 @@ data: [{
     },
     handleEdit: function(row, prop, index) {
       // console.log("handleEdit"+prop)
-      this.currentEditIndex = prop+index;
+      this.owner().currentEditPropIndex = prop+index;
       setTimeout(() => {
         // console.log(this.$refs.llGridColumnInput)
         if (this.$refs.llGridColumnInput) this.$refs.llGridColumnInput.focus();
       }, 200);
     },
-    handleSave: function(row, prop) {
-      setTimeout(() => {
-        this.currentEditIndex = "-1";
-      },200);
+    clearEditIndex: function(row, prop) {
+      // setTimeout(() => {
+        this.owner().currentEditPropIndex = "-1";
+      // },200);
     },
     handleSelectBlur: function(val){
       // console.log("handleSelectBlur")
       //代表隐藏
       if(!val){
         // alert("false")
-        this.handleSave();
+        this.clearEditIndex();
       }
     },
     handleNodeClick(data) {

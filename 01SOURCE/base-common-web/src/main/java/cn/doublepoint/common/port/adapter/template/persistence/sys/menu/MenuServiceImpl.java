@@ -136,7 +136,7 @@ public class MenuServiceImpl implements MenuService{
 	 */
 	public boolean saveOrUpdate(List<Menu> menuList) {
 		menuList.stream().forEach(menu->{
-			if (menu.getParentId() == null) {
+			if (menu.getParentId() == null||menu.getParentId() == 0) {
 				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 				menu.setParentId(0L);
 			} else {

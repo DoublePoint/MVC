@@ -27,7 +27,6 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.annotation.RequestForm;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.dto.domain.model.entity.sys.Menu;
-import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Controller
 @RequestMapping("/sys/menu")
@@ -96,23 +95,13 @@ public class MenuManagementController extends BaseController {
 		return ajaxResponse;
 	}
 
-	@RequestMapping("/datalistajaxdatawrap")
+	@RequestMapping("/save")
 	@ResponseBody
-	public AjaxDataWrap<Menu> menuDataListDataWrap(@RequestBody AjaxRequest request,
-			@RequestBody(required = false) Menu menu) {
+	public AjaxResponse menuDataListDataWrap(@RequestBody AjaxRequest request) {
 		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
-		PageInfo pageRequest = new PageInfo(1, 10);
-		AjaxDataWrap<Menu> ajaxDataWrap = new AjaxDataWrap<Menu>();
-		if (menu == null || menu.getId() == null || "".equals(menu.getId())) {
-			ajaxDataWrap.setDataList(menuService.findAll(pageRequest));
-		} else {
-			Menu menuQuery = new Menu();
-			menuQuery.setId(menu.getId());
-			List<Menu> list = menuService.findChildrenMenu(menuQuery, pageRequest);
-			dataWrap.setDataList(list);
-		}
-
-		return ajaxDataWrap;
+		List<Menu> list = dataWrap.getDataList();
+		menuService.saveOrUpdate(list);
+		return new AjaxResponse();
 	}
 
 	@RequestMapping("/add")

@@ -74,4 +74,10 @@ public interface MenuService {
 	 */
 	public boolean saveOrUpdate(Menu menu) ;
 
+	/**
+	 * 创建或更新菜单
+	 * @param menu
+	 * @return
+	 */
+	public boolean saveOrUpdate(List<Menu> menuList) ;
 }

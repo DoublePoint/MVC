@@ -122,11 +122,13 @@
             if (!title) title = "提示";
             if (!callback) callback = function() {
             }
-            if (parent) parent.vm.$alert(text, title, {
-                confirmButtonText: '确定',
-                callback: function() {
-                }
-            });
+            if (parent) {
+            	parent.vm.$alert(text, title, {
+	                confirmButtonText: '确定',
+	                callback: function() {
+	                }
+            	});
+            }
             else {
                 var vm = new Vue();
                 vm.$alert(text, title, {
@@ -160,7 +162,7 @@
             if (!duration) {
             	duration = 3000;
             }
-            parent.___vm=new Vue();
+            parent.___vm=parent.$.createVue();
             parent.___vm.$message({
                 showClose: isShowClose,
                 message: msg,
@@ -175,7 +177,7 @@
             if (!duration) {
             	duration = 3000;
             }
-            parent.___vm=new Vue();
+            parent.___vm=parent.$.createVue();
             parent.___vm.$message({
                 showClose: isShowClose,
                 message: msg,
@@ -190,7 +192,7 @@
             if (!duration) {
             	duration = 0;
             }
-            parent.___vm=new Vue();
+            parent.___vm=parent.$.createVue();
             parent.___vm.$message({
                 showClose: isShowClose,
                 message: msg,
@@ -235,6 +237,7 @@
             obj.maxmin = true;
             obj.area = [width, height];
             obj.content = $$pageContextPath + "sys/dialog/dialog";
+            obj.zIndex =1999;
             parent.layer.open(obj);
         },
         // 重新封装Ajax请求

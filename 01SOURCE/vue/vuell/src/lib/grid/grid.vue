@@ -48,7 +48,12 @@ export default {
       type: Boolean
     },
   },
-  
+  data(){
+    return{
+      //当前编辑的属性为prop+index
+      currentEditPropIndex:"-1"
+    };
+  },
   methods: {
     currentChange(currPage) {
       if(!this.dataWrap||!this.dataWrap.pageInfo) return 0;

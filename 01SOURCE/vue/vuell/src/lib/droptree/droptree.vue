@@ -116,7 +116,7 @@ export default {
     },
   },
   created(){
-    this.getLabel();
+     this.getLabel();
   }
 };
 </script>

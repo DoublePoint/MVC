@@ -47,15 +47,18 @@
                                     <ll-col :span="6">
                                         <span class="ll-main-span" style="marign-right:100px;">菜单列表</span>
                                     </ll-col>
-                                    <ll-col :span="18">
+                                    <ll-col :span="18" align="right">
                                         <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px" @click="add"
                                             title="添加"></ll-button>
-                                        <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px"
+                                        <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px" @click="del"
                                             title="删除"></ll-button>
+                                        <ll-button type="success" icon="el-icon-check" circle size="mini" style="padding: 3px" @click="save"
+                                            title="保存"></ll-button>
+                                            
                                     </ll-col>
                                 </ll-row>
                             </div>
-                            <ll-table-zz :data-wrap="dataWrap" :readonly="true" 
+                            <ll-table-zz :data-wrap="dataWrap" :readonly="false" 
                             		@current-change="retrieve" 
                             		@row-dblclick="rowDblcick">
                                 <ll-table-column type="selection" width="55">
@@ -200,6 +203,21 @@
 
                 		}
                 	});
+                },
+                del(){
+                	
+                },
+                save(){
+                	$.request({
+                        url: $$pageContextPath + "sys/menu/save",
+                        data: {
+                        	dataWrap:this.dataWrap,
+                        },
+                        success: function (response) {
+                            $.success("保存成功");
+                            vm.retrieve();
+                        }
+                    });
                 }
             }
         });

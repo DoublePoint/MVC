@@ -32,7 +32,7 @@
             	<ll-form id="ajaxform" cols="1" colproportion="1:5" showchanged="True" label-width="100px" style="width:60%;">
             		<ll-form-item>
 					   <ll-button type="primary" @click="save">保存</ll-button>
-				  	   <ll-button type="text">重置</ll-button>
+				  	   <ll-button type="text" @click="reset">重置</ll-button>
 				  </ll-form-item>
             	</ll-form>
             </ll-footer>
@@ -73,6 +73,20 @@
                             $.success("保存成功");
                         }
                     });
+            	},
+            	reset:function(){
+            		$.openDialog({
+                		title : "维护菜单",
+                		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                		data : {
+                			
+                		},
+                		yes : function() {
+                		},
+                		cancel : function() {
+
+                		}
+                	});
             	}
             }
         });
