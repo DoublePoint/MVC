@@ -100,7 +100,9 @@ export default {
           return val;
         }
       }
-        return val
+      else if("droptree"==this.type){
+         this.$refs("droptree").getLabel();
+      }
       return val;
     },
     owner: function(){
@@ -111,15 +113,12 @@ export default {
         parent=parent.$parent;
       }
       this.parent=parent;
-      console.log(parent)
       return parent;
     },
     isReadonly(row,prop, index) {
       //如果父为readonly则子元素也为readonly
       if(this.owner().readonly)
           return true;
-      // console.log("执行了isReadonly方法 prop="+prop+" index="+index+" this.currentEditIndex="+this.currentEditIndex);
-      //if (prop + index != this.currentEditIndex) return true;
       if (prop + index != this.owner().currentEditPropIndex) return true;
       var i = this.editIndexArray.findIndex(item => {
         return item.rowNum == index;
@@ -139,29 +138,22 @@ export default {
       this.$emit("current-change", currPage);
     },
     handleEdit: function(row, prop, index) {
-      console.log(this.scope)
       this.owner().currentEditPropIndex = prop+index;
       setTimeout(() => {
         if (this.$refs.llGridColumnInput) this.$refs.llGridColumnInput.focus();
       }, 200);
     },
     clearEditIndex: function(row, prop) {
-      // setTimeout(() => {
-        this.owner().currentEditPropIndex = "-1";
-      // },200);
+      this.owner().currentEditPropIndex = "-1";
     },
     handleSelectBlur: function(val){
-      // console.log("handleSelectBlur")
       //代表隐藏
       if(!val){
-        // alert("false")
         this.clearEditIndex();
       }
     },
     handleNodeClick(data) {
-        // console.log(data);
-        //console.log(this.scope)
-      },
+    },
     //设置某行可被编辑
     setReadonly(isReadonly) {
 
@@ -172,12 +164,8 @@ export default {
     }
   },
   beforeMount: function() {
-    // console.log("beforeMount----");
-    // console.log(this.$scopedSlots);
   },
   created: function() {
-    // console.log("created----");
-    // console.log(this.$scopedSlots);
   },
   computed: {
     wrap: function() {
