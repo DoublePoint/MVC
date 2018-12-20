@@ -7,7 +7,7 @@
           v-if="isReadonly(scope.row,prop,scope.$index)"
           @click="handleEdit(scope.row,prop,scope.$index)"
         >
-          <span style="display: inline-block;min-width: 1px;">{{ scope.row[prop]}}</span>
+          <span  style="display: inline-block;min-width: 1px;">{{ scope.row[prop]}}</span>
         </div>
         <span v-if="!(isReadonly(scope.row,prop,scope.$index))" class="cell-edit-input">
           <ll-input
@@ -15,15 +15,14 @@
             ref="llGridColumnInput"
             :key="prop+scope.$index"
             v-model="scope.row[prop]"
+            @change="valueChange(scope.row)"
             placeholder="请输入内容"
-            @blur="clearEditIndex(scope.row,prop)"
           ></ll-input>
           <ll-select 
             v-model="scope.row[prop]" 
             filterable
             v-if="type=='select'" 
             @visible-change="handleSelectBlur"
-            @blur="clearEditIndex(scope.row,prop)"
             ref="llGridColumnInput" 
             placeholder="请选择" >
             <ll-option
@@ -38,7 +37,6 @@
               v-if="type=='date'" 
               v-model="scope.row[prop]"
               editable
-              @blur="clearEditIndex(scope.row,prop)"
               ref="llGridColumnInput"
               type="date"
               placeholder="选择日期">
@@ -192,10 +190,9 @@ data: [{
       this.$emit("current-change", currPage);
     },
     handleEdit: function(row, prop, index) {
-      // console.log("handleEdit"+prop)
+      console.log(this.scope)
       this.owner().currentEditPropIndex = prop+index;
       setTimeout(() => {
-        // console.log(this.$refs.llGridColumnInput)
         if (this.$refs.llGridColumnInput) this.$refs.llGridColumnInput.focus();
       }, 200);
     },
@@ -214,9 +211,16 @@ data: [{
     },
     handleNodeClick(data) {
         // console.log(data);
+        //console.log(this.scope)
       },
     //设置某行可被编辑
-    setReadonly(isReadonly) {}
+    setReadonly(isReadonly) {
+
+    },
+    valueChange(row){
+      this.owner().addUpdateRow(row);
+      console.log("addUpdatedRow")
+    }
   },
   beforeMount: function() {
     // console.log("beforeMount----");
