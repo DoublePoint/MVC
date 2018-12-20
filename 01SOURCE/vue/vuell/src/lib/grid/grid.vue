@@ -12,7 +12,7 @@
     </ll-main>
     <ll-footer height="30">
       <ll-pagination
-        background
+        
         layout="prev, pager, next"
         :current-page="dataWrap==null?0:dataWrap.pageInfo.currentPageNum"
         :total="dataWrap==null?0:dataWrap.pageInfo.totalElementCount"

@@ -59,10 +59,11 @@
                                 </ll-row>
                             </div>
                             <ll-table-zz :data-wrap="dataWrap" :readonly="false" 
+                            		ref="tableMenu"
                             		@current-change="retrieve" 
                             		@row-dblclick="rowDblcick">
-                                <ll-table-column type="selection" width="55">
-                                </ll-table-column>
+                                <ll-table-column-zz type="selection" width="55">
+                                </ll-table-column-zz>
                                 <ll-table-column-zz prop="id" label="启用" :width="80">
                                 	<template slot-scope="scope">
                                 		<ll-switch
@@ -208,10 +209,13 @@
                 	
                 },
                 save(){
+                	var dataWrap=$.createAjaxDataWrap();
+                	var dataList = vm.$refs["tableMenu"].getUpdatedRows();
+                	dataWrap.dataList=dataList;
                 	$.request({
                         url: $$pageContextPath + "sys/menu/save",
                         data: {
-                        	dataWrap:this.dataWrap,
+                        	dataWrap:dataWrap,
                         },
                         success: function (response) {
                             $.success("保存成功");

@@ -1,20 +1,35 @@
 <template>
-  <ll-table-column :prop="prop" :label="label" :width="width" :align="align" :sortable="sortable">
+  
+  <ll-table-column v-if="type=='selection'" type="selection" width="55">
+  </ll-table-column>
+  <ll-table-column v-else-if="type=='switch'" prop="id" label="启用" :width="80">
+      <template slot-scope="scope">
+        <ll-switch
+          v-model="scope.row.enable"
+          active-color="#13ce66"
+          active-value="1"
+            inactive-value="0"
+          inactive-color="#ff4949">
+			  </ll-switch>
+			</template>
+  </ll-table-column>
+  <ll-table-column v-else :prop="prop" :label="label" :width="width" :align="align" :sortable="sortable">
     <template slot-scope="scope">
       <slot :row="scope.row">
         <div
           style="width:100%;height:100%;margin:0;padding:0"
-          v-if="isReadonly(scope.row,prop,scope.$index)"
-          @click="handleEdit(scope.row,prop,scope.$index)"
+          v-if="isReadonly(scope.row,prop,scope.row.rowId)"
+          @click="handleEdit(scope.row,prop,scope.row.rowId)"
         >
           <span  style="display: inline-block;min-width: 1px;">{{ format(scope.row[prop])}}</span>
         </div>
-        <span v-if="!(isReadonly(scope.row,prop,scope.$index))" class="cell-edit-input">
+        <span v-if="!(isReadonly(scope.row,prop,scope.row.rowId))" class="cell-edit-input">
           <ll-input
             v-if="type=='input'"
             ref="llGridColumnInput"
-            :key="prop+scope.$index"
+            :key="prop+scope.row.rowId"
             v-model="scope.row[prop]"
+            @blur="clearEditIndex"
             @change="valueChange(scope.row)"
             placeholder="请输入内容"
           ></ll-input>
