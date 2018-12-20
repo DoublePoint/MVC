@@ -17,9 +17,7 @@
           </ll-table-column>
           <ll-table-column-zz prop="date" type="date" label="日期" :width="180">
           </ll-table-column-zz>
-          <ll-table-column-zz type="select" prop="name" label="姓名" :width="180">
-          </ll-table-column-zz>
-          <ll-table-column-zz type="tree" prop="name" label="姓名" :width="180">
+          <ll-table-column-zz type="select" prop="name" label="姓名" :width="180" :items="items">
           </ll-table-column-zz>
           <ll-table-column-zz prop="address" label="地址" :width="180">
           </ll-table-column-zz>
@@ -56,32 +54,34 @@
     data: {
       activeName: "1",
       inputColumn1: "",
+      datasource: "http://localhost:8083/web/sys/menu-tree/menus",
+      labelDatasource: "http://localhost:8083/web/sys/menu/label",
       dataWrap: {
         dataList: [{
             rowId:1,
             date: "2016-05-02",
-            name: "王小虎1",
+            name: "选项1",
             address: "上海市普陀区金沙江路 1518 弄",
             editFlag: false
           },
           {
             rowId:2,
             date: "2016-05-01",
-            name: "王小虎",
+            name: "选项1",
             address: "上海市普陀区金沙江路 1519 弄",
             editFlag: true
           },
           {
             rowId:3,
             date: "2016-05-03",
-            name: "王小虎",
+            name: "选项2",
             address: "上海市普陀区金沙江路 1516 弄",
             editFlag: true
           },
           {
             rowId:4,
             date: "2016-05-04",
-            name: "王小虎",
+            name: "选项3",
             address: "上海市普陀区金沙江路 1517 弄",
             editFlag: true
           },
@@ -91,7 +91,29 @@
           totalElementCount: 1000,
           pageSize: 20
         }
-      }
+      },
+      items: [
+        {
+          value: "选项1",
+          label: "黄金糕"
+        },
+        {
+          value: "选项2",
+          label: "双皮奶"
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎"
+        },
+        {
+          value: "选项4",
+          label: "龙须面"
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭"
+        }
+      ],
     },
     methods: {
       currentChange() {

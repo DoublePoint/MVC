@@ -7,7 +7,7 @@
           v-if="isReadonly(scope.row,prop,scope.$index)"
           @click="handleEdit(scope.row,prop,scope.$index)"
         >
-          <span  style="display: inline-block;min-width: 1px;">{{ scope.row[prop]}}</span>
+          <span  style="display: inline-block;min-width: 1px;">{{ format(scope.row[prop])}}</span>
         </div>
         <span v-if="!(isReadonly(scope.row,prop,scope.$index))" class="cell-edit-input">
           <ll-input
@@ -24,23 +24,17 @@
             v-if="type=='select'" 
             @visible-change="handleSelectBlur"
             ref="llGridColumnInput" 
+            @change="valueChange(scope.row)"
             placeholder="请选择" >
             <ll-option
-              v-for="item in options"
+              v-for="item in items"
               :key="item.value"
               :label="item.label"
               :value="item.value"
             ></ll-option>
           </ll-select>
-          <ll-tree  v-if="type=='tree'" :data="data" :props="defaultProps" @node-click="handleNodeClick"></ll-tree>
-           <ll-date-picker
-              v-if="type=='date'" 
-              v-model="scope.row[prop]"
-              editable
-              ref="llGridColumnInput"
-              type="date"
-              placeholder="选择日期">
-            </ll-date-picker>
+          <ll-drop-tree-zz v-if="type=='tree'" :datasource="datasource" v-model="scope.row[prop]" :label-datasource="labelDatasource"></ll-drop-tree-zz>
+          
         </span>
       </slot>
     </template>
@@ -56,81 +50,12 @@ export default {
   data() {
     return {
       editIndexArray: [],
-      // currentEditIndex: "-1",
       parent:null,
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
       value: "",
-
-data: [{
-          label: '一级 1',
-          children: [{
-            label: '二级 1-1',
-            children: [{
-              label: '三级 1-1-1'
-            }]
-          }]
-        }, {
-          label: '一级 2',
-          children: [{
-            label: '二级 2-1',
-            children: [{
-              label: '三级 2-1-1'
-            }]
-          }, {
-            label: '二级 2-2',
-            children: [{
-              label: '三级 2-2-1'
-            }]
-          }]
-        }, {
-          label: '一级 3',
-          children: [{
-            label: '二级 3-1',
-            children: [{
-              label: '三级 3-1-1'
-            }]
-          }, {
-            label: '二级 3-2',
-            children: [{
-              label: '三级 3-2-1'
-            }]
-          }]
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        },
-        value1:"2018/12/07"
-
     };
   },
   props: {
     prop: String,
-    istemplate: {
-      default: false,
-      type: Boolean
-    },
     label: String,
     width: {
       default: 100,
@@ -151,9 +76,33 @@ data: [{
     type: {
       default: "input",
       type: String
-    }
+    },
+    items:{
+      default(){
+        return []
+      },
+      type:Array
+    },
+
+    // vue
+    datasource: String,
+    labelDatasource: String,
   },
   methods: {
+    format(val){
+      if("select"==this.type){
+        try{
+          var index = this.items.findIndex(i=>{return i.value==val})
+          if(index!=-1)
+              return this.items[index].label;
+        }
+        catch(e){
+          return val;
+        }
+      }
+        return val
+      return val;
+    },
     owner: function(){
       if(this.parent)
         return this.parent;

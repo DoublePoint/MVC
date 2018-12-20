@@ -93,7 +93,7 @@ export default {
     showPopover() {
       this.suffixIcon="el-icon-caret-top"
     },
-    getLabel(){
+    getLabel(successfunc){
       var _this = this 
       if(this.labelDatasource!=null){
           this.$request.request({
@@ -106,6 +106,13 @@ export default {
             }
           },function(response){
             _this.selectLabel= response.bodyText;
+            try{
+              if(successfunc!=null)
+                successfunc(response);
+            }
+            catch(e){
+              
+            }
           },function(response){
             throw new Error("ll:ajax error:"+response);
           })
