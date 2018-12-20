@@ -2,14 +2,15 @@
   
   <ll-table-column v-if="type=='selection'" type="selection" width="55">
   </ll-table-column>
-  <ll-table-column v-else-if="type=='switch'" prop="id" label="启用" :width="80">
+  <ll-table-column v-else-if="type=='switch'" :prop="prop" :label="label" :width="width">
       <template slot-scope="scope">
         <ll-switch
-          v-model="scope.row.enable"
-          active-color="#13ce66"
-          active-value="1"
-            inactive-value="0"
-          inactive-color="#ff4949">
+          v-model="scope.row[prop]"
+          :active-color="activeColor"
+          :inactive-color="inactiveColor"
+          :active-value="activeValue"
+          :inactive-value="inactiveValue"
+          @change="valueChange(scope.row)">
 			  </ll-switch>
 			</template>
   </ll-table-column>
@@ -102,6 +103,25 @@ export default {
     // vue
     datasource: String,
     labelDatasource: String,
+
+    //switch
+    activeColor:{
+      default:"#13ce66",
+      type:String
+    },
+    activeValue:{
+      default:"1",
+      type:String
+    },
+    inactiveValue:{
+      default:"0",
+      type:String
+    },
+    inactiveColor:{
+      default:"#ff4949",
+      type:String
+    },
+    
   },
   methods: {
     format(val){

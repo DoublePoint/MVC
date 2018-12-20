@@ -62,10 +62,10 @@
                             		ref="tableMenu"
                             		@current-change="retrieve" 
                             		@row-dblclick="rowDblcick">
-                                <ll-table-column-zz type="selection" width="55">
+                                <ll-table-column-zz type="selection" :width="55">
                                 </ll-table-column-zz>
-                                <ll-table-column-zz prop="id" label="启用" :width="80">
-                                	<template slot-scope="scope">
+                                <ll-table-column-zz type="switch" prop="enable" label="启用" :width="80">
+                                	<!-- <template slot-scope="scope">
                                 		<ll-switch
                                 		  v-model="scope.row.enable"
 										  active-color="#13ce66"
@@ -73,7 +73,7 @@
     									  inactive-value="0"
 										  inactive-color="#ff4949">
 										</ll-switch>
-							      </template>
+							      </template> -->
                                 </ll-table-column-zz>
                                 <ll-table-column-zz prop="id" label="菜单标识" :width="180">
                                 </ll-table-column-zz>

@@ -15,6 +15,17 @@
         <ll-table-zz ref="tablezz" :data-wrap="dataWrap" style="height:500px;" @current-change="currentChange" @cell-click="testCellClick" :readonly="false">
           <ll-table-column type="selection" width="55">
           </ll-table-column>
+          <ll-table-column-zz type="switch" prop="enable1" label="启用" :width="80">
+            <!-- <template slot-scope="scope">
+              <ll-switch
+                v-model="scope.row.enable1"
+active-color="#13ce66"
+active-value="1"
+  inactive-value="0"
+inactive-color="#ff4949">
+</ll-switch>
+</template> -->
+          </ll-table-column-zz>
           <ll-table-column-zz prop="date" type="date" label="日期" :width="180">
           </ll-table-column-zz>
           <ll-table-column-zz type="select" prop="name" label="姓名" :width="180" :items="items">
@@ -59,6 +70,7 @@
       dataWrap: {
         dataList: [{
             rowId:1,
+            enable1:"1",
             date: "2016-05-02",
             name: "选项1",
             address: "上海市普陀区金沙江路 1518 弄",
@@ -66,6 +78,7 @@
           },
           {
             rowId:2,
+            enable1:"0",
             date: "2016-05-01",
             name: "选项1",
             address: "上海市普陀区金沙江路 1519 弄",
@@ -73,6 +86,7 @@
           },
           {
             rowId:3,
+            enable1:"1",
             date: "2016-05-03",
             name: "选项2",
             address: "上海市普陀区金沙江路 1516 弄",
@@ -80,6 +94,7 @@
           },
           {
             rowId:4,
+            enable1:"0",
             date: "2016-05-04",
             name: "选项3",
             address: "上海市普陀区金沙江路 1517 弄",
