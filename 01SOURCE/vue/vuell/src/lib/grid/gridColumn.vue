@@ -2,7 +2,9 @@
   
   <ll-table-column v-if="type=='selection'" type="selection" width="55">
   </ll-table-column>
-  <ll-table-column v-else-if="type=='switch'" :prop="prop" :label="label" :width="width">
+  <ll-table-column v-else-if="type=='index'" type="index" width="50"  :sortable="sortable">
+  </ll-table-column>
+  <ll-table-column v-else-if="type=='switch'" :prop="prop" :label="label" :width="width" :sortable="sortable">
       <template slot-scope="scope">
         <ll-switch
           v-model="scope.row[prop]"
@@ -106,7 +108,6 @@ export default {
 
     //switch
     activeColor:{
-      default:"#13ce66",
       type:String
     },
     activeValue:{
@@ -118,7 +119,6 @@ export default {
       type:String
     },
     inactiveColor:{
-      default:"#ff4949",
       type:String
     },
     

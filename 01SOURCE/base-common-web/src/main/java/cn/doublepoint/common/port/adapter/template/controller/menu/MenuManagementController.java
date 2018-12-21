@@ -118,7 +118,7 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<Menu> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", Menu.class);
+		AjaxDataWrap<Menu> deleteDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
 		if (deleteDataWrap == null)
 			return null;
 		List<Menu> menuList = deleteDataWrap.getDataList();

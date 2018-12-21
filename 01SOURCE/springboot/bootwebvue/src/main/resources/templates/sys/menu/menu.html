@@ -11,9 +11,6 @@
         <ll-container style="height: 100%; ">
             <ll-aside width="200px" style="border-right:1px solid #eee;">
                 <ll-card class="box-card" style="height:100%;">
-                    <div slot="header" class="clearfix">
-                        <span class="ll-main-title">菜单树</span>
-                    </div>
                     <ll-tree-zz :items="data" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
                     </ll-tree-zz>
                 </ll-card>
@@ -163,7 +160,7 @@
                         async: false,
                         data: {
                         	dataWrap:this.dataWrap,
-                        	parentId:nodeData.nodeBean.id
+                        	parentId:nodeData.nodeBean==null?0:nodeData.nodeBean.id
                         },
                         success: function (response) {
                             var dataWrap = response.get("dataWrap");
@@ -178,13 +175,13 @@
                 	$.openDialog({
                 		title : "维护菜单",
                 		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                		height:440,
+                		width:630,
                 		data : {
-                			
                 		},
                 		yes : function() {
                 		},
                 		cancel : function() {
-
                 		}
                 	});
                 },
@@ -193,6 +190,8 @@
                 	dataWrap.setData(row);
                 	$.openDialog({
                 		title : "维护菜单",
+                		height:440,
+                		width:630,
                 		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
                 		data : {
                 			dataWrap:dataWrap,
@@ -206,6 +205,21 @@
                 	});
                 },
                 del(){
+                	$.confirm("确定删除吗?",function(){
+                		var dataWrap=$.createAjaxDataWrap();
+                    	var dataList = vm.$refs["tableMenu"].getSelectedRows();
+                    	dataWrap.dataList=dataList;
+                    	$.request({
+                            url: $$pageContextPath + "sys/menu/delete",
+                            data: {
+                            	dataWrap:dataWrap,
+                            },
+                            success: function (response) {
+                                $.success("删除成功");
+                                vm.retrieve();
+                            }
+                        });
+                	});
                 	
                 },
                 save(){

@@ -218,7 +218,7 @@
                     iframeWin._InitOpenDialog(_DialogData);
                 } catch(e) {
 
-}
+                }
             }
             var width = obj.width;
             var height = obj.height;
@@ -239,6 +239,17 @@
             obj.content = $$pageContextPath + "sys/dialog/dialog";
             obj.zIndex =1999;
             parent.layer.open(obj);
+        },
+        confirm:function(msg,func1,func2){
+        	var	btn=["确定","取消"]
+        	parent.layer.confirm(msg,btn,function(index){
+        		parent.layer.close(index);
+        		if(func1!=null)
+        			func1();
+        	},function(){
+        		if(func2!=null)
+        			func2();
+        	})
         },
         // 重新封装Ajax请求
         request: function(settings) {

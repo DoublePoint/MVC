@@ -10,7 +10,7 @@
     <div id="app" style="height: 100%;width: 100%;">
         <ll-container style="height: 100%; ">
             <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
-                <ll-form id="ajaxform" cols="1" colproportion="1:5" showchanged="True" label-width="100px" style="width:60%;">
+                <ll-form id="ajaxform" cols="1" colproportion="1:5" showchanged="True" label-width="100px" style="width:80%;">
                     <ll-form-item label="名称">
                         <ll-input v-model="form.name"></ll-input>
                     </ll-form-item>
@@ -25,6 +25,9 @@
                     </ll-form-item>
                     <ll-form-item label="上级菜单">
                         <ll-drop-tree-zz :datasource="datasource" :label-datasource="labelDatasource" v-model="form.parentId"></ll-drop-tree-zz>
+                    </ll-form-item>
+                    <ll-form-item label="开启">
+                        <ll-switch v-model="form.enable" active-value="1" inactive-value="0"></ll-switch>
                     </ll-form-item>
                 </ll-form>
             </ll-main>
@@ -47,6 +50,7 @@
             sn: '',
             icon:'',
             parentId: '',
+            enable:"1"
         };
         if(type=="edit"){
         	var dataWrap = ajaxResponse.get("dataWrap");
