@@ -1,3 +1,10 @@
+import _  from 'underscore' 
+
+// Import Underscore.string to separate object, because there are conflict functions (include, reverse, contains)
+import _str from 'underscore.string' 
+
+_.str=_str
+_.mixin(_.str.exports());
 
 import $request from './js/request.js'
 
@@ -25,6 +32,7 @@ const vt = {
     Vue.component(vueGridColumn.name, vueGridColumn)
     Vue.component(vueDropTree.name,vueDropTree)
     Vue.prototype.$request = $request;
+    Vue.prototype.$_ = _;
   }
 }
 

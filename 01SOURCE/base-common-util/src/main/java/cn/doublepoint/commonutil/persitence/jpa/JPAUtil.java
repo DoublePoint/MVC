@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import javax.persistence.Id;
 
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
@@ -206,6 +207,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.count(clazz, queryParamList);
 	}
+
 	/**
 	 * 查询总数
 	 * 
@@ -217,7 +219,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.count(jpql, null);
 	}
-	
+
 	/**
 	 * 查询总数
 	 * 
@@ -229,27 +231,27 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.count(jpql, queryParamList);
 	}
-	
-	public static <T extends BaseModel> void create(T t){
+
+	public static <T extends BaseModel> void create(T t) {
 		BaseDaoService daoService = getDaoService();
 		daoService.create(t);
 	}
-	
-	public static <T extends BaseModel> void create(List<T> list){
+
+	public static <T extends BaseModel> void create(List<T> list) {
 		BaseDaoService daoService = getDaoService();
 		daoService.create(list);
 	}
-	
-	public static <T extends BaseModel> void update(T t){
+
+	public static <T extends BaseModel> void update(T t) {
 		BaseDaoService daoService = getDaoService();
 		daoService.update(t);
 	}
-	
-	public static <T extends BaseModel> void update(List<T> list){
+
+	public static <T extends BaseModel> void update(List<T> list) {
 		BaseDaoService daoService = getDaoService();
 		daoService.update(list);
 	}
-	
+
 	/**
 	 * 执行更新或删除语句
 	 * 
@@ -261,7 +263,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeUpdate(jpql, null);
 	}
-	
+
 	/**
 	 * 执行更新或删除语句
 	 * 
@@ -273,7 +275,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeUpdate(jpql, queryParamList);
 	}
-	
+
 	/**
 	 * JPQL方式执行更新或删除语句
 	 * 
@@ -282,8 +284,7 @@ public class JPAUtil extends DataBaseUtil {
 	 * @return
 	 */
 	public static List<Object> executeQuery(String jpql) {
-		BaseDaoService daoService = getDaoService();
-		return daoService.executeQuery(jpql, null,null);
+		return executeQuery(jpql, null, null);
 	}
 
 	/**
@@ -294,10 +295,20 @@ public class JPAUtil extends DataBaseUtil {
 	 * @return
 	 */
 	public static List<Object> executeQuery(String jpql, QueryParamList queryParamList) {
-		BaseDaoService daoService = getDaoService();
-		return daoService.executeQuery(jpql, queryParamList,null);
+		return executeQuery(jpql, queryParamList, null);
 	}
-	
+
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static List<Object> executeQuery(String jpql, PageInfo pageInfo) {
+		return executeQuery(jpql, null, pageInfo);
+	}
+
 	/**
 	 * JPQL方式执行查询
 	 * 
@@ -307,9 +318,56 @@ public class JPAUtil extends DataBaseUtil {
 	 */
 	public static List<Object> executeQuery(String jpql, QueryParamList queryParamList, PageInfo pageInfo) {
 		BaseDaoService daoService = getDaoService();
-		return daoService.executeQuery(jpql, queryParamList,pageInfo);
+		return daoService.executeQuery(jpql, queryParamList, pageInfo);
 	}
-	
+
+	/**
+	 * JPQL方式执行更新或删除语句
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T> List<T> executeQueryModel(String jpql, Class<T> clazz) {
+		return executeQueryModel(jpql, null, null, clazz);
+	}
+
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T> List<T> executeQueryModel(String jpql, QueryParamList queryParamList, Class<T> clazz) {
+		return executeQueryModel(jpql, queryParamList, null, clazz);
+	}
+
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T> List<T> executeQueryModel(String jpql, PageInfo pageInfo, Class<T> clazz) {
+		return executeQueryModel(jpql, null, pageInfo, clazz);
+	}
+
+	/**
+	 * JPQL方式执行查询
+	 * 
+	 * @param jpql
+	 * @param queryParamList
+	 * @return
+	 */
+	public static <T> List<T> executeQueryModel(String jpql, QueryParamList queryParamList, PageInfo pageInfo,
+			Class<T> clazz) {
+		BaseDaoService daoService = getDaoService();
+		List<Object> objects = daoService.executeQuery(jpql, queryParamList, pageInfo);
+		return CommonBeanUtils.copyTo(objects, clazz);
+	}
+
 	/**
 	 * 执行更新或删除语句
 	 * 
@@ -321,7 +379,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeNativeUpdate(sql, null);
 	}
-	
+
 	/**
 	 * 执行更新或删除语句
 	 * 
@@ -333,7 +391,7 @@ public class JPAUtil extends DataBaseUtil {
 		BaseDaoService daoService = getDaoService();
 		return daoService.executeNativeUpdate(sql, queryParamList);
 	}
-	
+
 	/**
 	 * JPQL方式执行更新或删除语句
 	 * 

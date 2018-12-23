@@ -150,30 +150,56 @@ export default {
       this.parent=parent;
       return parent;
     },
-    isReadonly(row,prop, index) {
+    isReadonly(row , prop ,index) {
       //如果父为readonly则子元素也为readonly
       if(this.owner().readonly)
-          return true;
-      if (prop + index != this.owner().currentEditPropIndex) return true;
-      var i = this.editIndexArray.findIndex(item => {
-        return item.rowNum == index;
-      });
-      var readonly;
-      if (i != -1)
-        //表示存在该单元格的readonly数据
-        readonly = this.editIndexArray[i].readonly;
-      else 
-        readonly = this.readonly;
-      //如果readonly=false 并且是当前的索引可以被编辑
-      if (!readonly) return false;
-      return true;
+        return true;
+      if (row.rowId + "-" +prop != this.owner().currentEditPropIndex) 
+        return true;
+      var propReadonly = this.owner().getRowReadonly(row,prop);
+      if(propReadonly == null){
+        var rowReadonly = this.owner().getRowReadonly(row);
+        var columnReadonly = this.readonly;
+        //只要有一个为true的则为true,否则为false
+        var rowNull = rowReadonly == null;
+        var colNull = columnReadonly == null;
+        if(rowNull && colNull)
+          propReadonly = null;
+        else if(rowNull && !colNull)
+          propReadonly = columnReadonly;
+        else if (colNull && !rowNull)
+          propReadonly = rowReadonly;
+        else {
+          if(rowReadonly||columnReadonly)
+            propReadonly = true;
+          else 
+            propReadonly = false;
+        }
+      }
+      if(propReadonly == null)
+        propReadonly = this.owner().readonly
+      if(propReadonly == null)
+        return true;
+      return propReadonly;
+      // var i = this.editIndexArray.findIndex(item => {
+      //   return item.rowNum == index;
+      // });
+      // var readonly;
+      // if (i != -1)
+      //   //表示存在该单元格的readonly数据
+      //   readonly = this.editIndexArray[i].readonly;
+      // else 
+      //   readonly = this.readonly;
+      // //如果readonly=false 并且是当前的索引可以被编辑
+      // if (!readonly) return false;
+      // return true;
     },
     currentChange(currPage) {
       this.dataWrap.pageInfo.currentPageNum = currPage;
       this.$emit("current-change", currPage);
     },
     handleEdit: function(row, prop, index) {
-      this.owner().currentEditPropIndex = prop+index;
+      this.owner().currentEditPropIndex = row.rowId + "-" +prop;
       setTimeout(() => {
         if (this.$refs.llGridColumnInput) this.$refs.llGridColumnInput.focus();
       }, 200);

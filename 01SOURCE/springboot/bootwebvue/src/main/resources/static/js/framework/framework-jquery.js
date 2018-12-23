@@ -82,7 +82,13 @@
         createAjaxDataWrap: function(name) {
             return new _LL_Model._AjaxDataWrap();
         },
-        _Clone: function clone(obj) {
+        
+        createNewRow:function(rowId){
+        	var obj = {};
+        	obj.rowId = $.generateUUID();
+        	return obj;
+        },
+        _clone: function clone(obj) {
             // Handle the 3 simple types, and null or undefined
             if (null == obj || "object" != typeof obj) return obj;
 

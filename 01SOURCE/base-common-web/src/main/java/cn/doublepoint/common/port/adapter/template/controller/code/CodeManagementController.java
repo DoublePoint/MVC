@@ -39,46 +39,137 @@ public class CodeManagementController extends BaseController {
 		return "sys/code/code.html";
 	}
 
-	@RequestMapping("/retrieve")
+	/**
+	 * 查询详细信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/retrieve-detail")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
 		AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
 		if (dataWrap == null)
 			return null;
-		Code menuQuery = null;
-		if (dataWrap.getDataList() != null && dataWrap.getDataList().size() > 0) {
-			menuQuery = dataWrap.getDataList().get(0);
-		}
+		Code menuQuery = dataWrap.getData();
+		List<Code> list = service.findByClassify(menuQuery.getClassify());
+		dataWrap.setDataList(list);
 
-		if (menuQuery != null) {
-			List<Code> list = service.find(menuQuery, dataWrap.getPageInfo());
-			dataWrap.setDataList(list);
-		}
+		AjaxResponse ajaxResponse = new AjaxResponse();
+		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		return ajaxResponse;
+	}
+	
+	/**
+	 * 查询代码类别
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/retrieve-classify")
+	@ResponseBody
+	public AjaxResponse retrieveClassify(@RequestBody AjaxRequest request) {
+		AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+		if (dataWrap == null)
+			return null;
+		Code menuQuery = dataWrap.getData();
+		List<Code> list = service.findClassify(menuQuery, dataWrap.getPageInfo());
+		dataWrap.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
 		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
 		return ajaxResponse;
 	}
 
-	@RequestMapping("/add")
+	/**
+	 * 主保存
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/save-main")
 	@ResponseBody
-	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
-		if (addDataWrap == null)
-			return null;
-		service.saveOrUpdate(addDataWrap.getDataList());
+	public AjaxResponse save(@RequestBody AjaxRequest request) {
+//		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("addDataWrap", Code.class);
+		AjaxDataWrap<Code> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Code.class);
+//		if (addDataWrap != null){
+//			service.saveOrUpdate(addDataWrap.getDataList());
+//		}
+		if(updateDataWrap != null){
+			service.updateByClassify(updateDataWrap.getDataList());
+		}
 		return new AjaxResponse();
 	}
 
-	@RequestMapping("/delete")
+	/**
+	 * 详情保存
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/save-detail")
+	@ResponseBody
+	public AjaxResponse saveDetail(@RequestBody AjaxRequest request){
+		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("addDataWrap", Code.class);
+		AjaxDataWrap<Code> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Code.class);
+		if (addDataWrap != null){
+			service.saveOrUpdate(addDataWrap.getDataList());
+			service.saveOrUpdate(updateDataWrap.getDataList());
+		}
+		return new AjaxResponse();
+	}
+	/**
+	 * 删除明细信息
+	 * @param request
+	 * @param responseData
+	 * @return
+	 */
+	@RequestMapping("/delete-detail")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<Code> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", Code.class);
+		AjaxDataWrap<Code> deleteDataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
 		if (deleteDataWrap == null)
 			return null;
 		List<Code> menuList = deleteDataWrap.getDataList();
 		service.remove(menuList);
 		responseData.setAjaxParameter("deleteState", true);
+		return responseData;
+	}
+	
+	/**
+	 * 根据代码类别删除
+	 * @param request
+	 * @param responseData
+	 * @return
+	 */
+	@RequestMapping("delete-by-classify")
+	@ResponseBody
+	public AjaxResponse deleteByClassify(@RequestBody AjaxRequest request, AjaxResponse responseData) {
+		AjaxDataWrap<Code> deleteDataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+		if (deleteDataWrap == null)
+			return null;
+		List<Code> menuList = deleteDataWrap.getDataList();
+		service.removeByClassify(menuList);
+		responseData.setAjaxParameter("deleteState", true);
+		return responseData;
+	}
+	
+	/**
+	 * 根据代码类别更新
+	 * @param request
+	 * @param responseData
+	 * @return
+	 */
+	@RequestMapping("update-by-classify")
+	@ResponseBody
+	public AjaxResponse updateByClassify(@RequestBody AjaxRequest request, AjaxResponse responseData) {
+		try{
+			AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+			if (dataWrap == null)
+				return null;
+			Code code = dataWrap.getData();
+			service.updateByClassify(code);
+		}
+		catch(Exception e){
+			responseData.setErrorMessage("更新失败");
+		}
+		
 		return responseData;
 	}
 }

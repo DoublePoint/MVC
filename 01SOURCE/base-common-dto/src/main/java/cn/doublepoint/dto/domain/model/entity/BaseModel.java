@@ -16,13 +16,13 @@ public class BaseModel implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public int rowId=-1;
+	public String rowId;
 
-	public int getRowId() {
+	public String getRowId() {
 		return rowId;
 	}
 
-	public void setRowId(int rowId) {
+	public void setRowId(String rowId) {
 		this.rowId = rowId;
 	}
 	

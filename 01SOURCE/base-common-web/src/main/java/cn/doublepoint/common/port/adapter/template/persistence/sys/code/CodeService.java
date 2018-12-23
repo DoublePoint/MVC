@@ -15,11 +15,25 @@ public interface CodeService {
 	public List<Code> findAll(PageInfo pageInfo);
 	
 	/**
+	 * 
+	 * @param code
+	 * @param pageInfo
+	 * @return
+	 */
+	public List<Code> findClassify(Code code,PageInfo pageInfo) ;
+
+	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return 
 	 */
 	public List<Code> find(Code code,PageInfo pageInfo) ;
+	/**
+	 * 根据查询条件以及分页信息，查询所有数据
+	 * 
+	 * @return 
+	 */
+	public List<Code> findByClassify(String classify) ;
 	
 	/**
 	 * 根据Id获取数据
@@ -34,6 +48,13 @@ public interface CodeService {
 	 * @return
 	 */
 	public boolean remove(Code code);
+	
+	/**
+	 * 根据classify进行删除
+	 * @param codeList
+	 * @return
+	 */
+	public boolean removeByClassify(List<Code> codeList);
 	
 	
 	/**
@@ -57,4 +78,18 @@ public interface CodeService {
 	 */
 	public boolean saveOrUpdate(List<Code> codeList) ;
 
+	/**
+	 * 更新classify
+	 * @param oldClassify
+	 * @param newClassify
+	 * @return
+	 */
+	public boolean updateByClassify(Code code);
+	/**
+	 * 更新classify
+	 * @param oldClassify
+	 * @param newClassify
+	 * @return
+	 */
+	public boolean updateByClassify(List<Code> codeList);
 }

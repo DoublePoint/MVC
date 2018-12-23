@@ -12,7 +12,10 @@
   <div id="app" style="height: 100%;width: 100%;">
     <ll-collapse v-model="activeName" accordion>
       <ll-collapse-item title="一致性 Consistency" name="1" style="height:100%;">
-        <ll-table-zz ref="tablezz" :data-wrap="dataWrap" style="height:500px;" @current-change="currentChange" @cell-click="testCellClick" :readonly="false">
+        <ll-button type="primary" size="mini" @click="setRowReadonly" >主要按钮</ll-button>
+        <ll-table-zz ref="tablezz" :data-wrap="dataWrap" style="height:500px;" 
+          @span-method="spanMethod"
+          @current-change="currentChange" @cell-click="testCellClick" :readonly="false">
           <ll-table-column type="selection" width="55">
           </ll-table-column>
           <ll-table-column-zz type="switch" prop="enable1" label="启用" :width="80">
@@ -21,7 +24,7 @@
           </ll-table-column-zz>
           <ll-table-column-zz type="select" prop="name" label="姓名" :width="180" :items="items">
           </ll-table-column-zz>
-          <ll-table-column-zz prop="address" label="地址" :width="180">
+          <ll-table-column-zz prop="address" label="地址" :width="180" :readonly="false">
           </ll-table-column-zz>
           <ll-table-column-zz :sortable="false" label="地址" :istemplate="true" :width="180">
             <template slot-scope="scope">
@@ -51,6 +54,7 @@
   </div>
 </body>
 <script type="text/javascript">
+  var readonly=true;
   var vm = new Vue({
     el: '#app',
     data: {
@@ -122,6 +126,10 @@
       ],
     },
     methods: {
+      spanMethod(obj){
+        //console.log("-----spanmethod")
+        //console.log(obj)
+      },
       currentChange() {
         // console.log(this.dataWrap);
       },
@@ -138,6 +146,14 @@
       },
       testCellClick() {
         // alert("testCellClick")
+      },
+      setRowReadonly(){
+        if(readonly)
+          readonly=false;
+        else
+          readonly=true;
+          // console.log(readonly);
+        this.$refs["tablezz"].setRowReadonly(this.dataWrap.dataList[0],"address",readonly);
       }
     }
   })
