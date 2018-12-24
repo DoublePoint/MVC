@@ -108,10 +108,8 @@ public class CodeManagementController extends BaseController {
 	public AjaxResponse saveDetail(@RequestBody AjaxRequest request){
 		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("addDataWrap", Code.class);
 		AjaxDataWrap<Code> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Code.class);
-		if (addDataWrap != null){
-			service.saveOrUpdate(addDataWrap.getDataList());
-			service.saveOrUpdate(updateDataWrap.getDataList());
-		}
+		service.saveOrUpdate(addDataWrap.getDataList());
+		service.saveOrUpdate(updateDataWrap.getDataList());
 		return new AjaxResponse();
 	}
 	/**

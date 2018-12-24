@@ -136,11 +136,15 @@ public class CodeServiceImpl  implements CodeService{
 		sBuilder.append("select c from Code c where 1=1 ");
 		if (!StringUtil.isNullOrEmpty(code.getCode())) {
 			sBuilder.append(" and c.code like :code");
-			paramList.addParam("code", "%" + code.getCode() + "%", QueryParam.RELATION_LIKE);
+			paramList.addParam("code", "%" + code.getCode() + "%");
 		}
 		if (!StringUtil.isNullOrEmpty(code.getClassify())) {
-			sBuilder.append(" and c.classify = :classify");
-			paramList.addParam("classify", code.getClassify());
+			sBuilder.append(" and c.classify like :classify");
+			paramList.addParam("classify", "%"+code.getClassify()+"%");
+		}
+		if (!StringUtil.isNullOrEmpty(code.getCodeName())) {
+			sBuilder.append(" and c.codeName like :codeName");
+			paramList.addParam("codeName", "%"+code.getCodeName()+"%");
 		}
 		sBuilder.append(" group by c.classify");
 		List<Code> objcts = JPAUtil.executeQueryModel(sBuilder.toString(), paramList, Code.class);

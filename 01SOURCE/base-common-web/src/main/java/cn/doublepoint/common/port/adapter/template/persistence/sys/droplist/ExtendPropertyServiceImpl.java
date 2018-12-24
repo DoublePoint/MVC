@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
+import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
+import cn.doublepoint.dto.domain.model.vo.query.QueryParam;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
 @Service("extendPropertyService")
@@ -21,7 +23,20 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 */
 	@Override
 	public List<ExtendProperty> find(ExtendProperty extendProperty,PageInfo pageInfo) {
-		return JPAUtil.load(ExtendProperty.class, pageInfo);
+		QueryParamList queryParamList = new QueryParamList();
+		if(!StringUtil.isNullOrEmpty(extendProperty.getCode()))
+		{
+			queryParamList.addParam("code", "%"+extendProperty.getCode()+"%", QueryParam.RELATION_LIKE);
+		}
+		if(!StringUtil.isNullOrEmpty(extendProperty.getName()))
+		{
+			queryParamList.addParam("name", "%"+extendProperty.getName()+"%", QueryParam.RELATION_LIKE);
+		}
+		if(!StringUtil.isNullOrEmpty(extendProperty.getQuery()))
+		{
+			queryParamList.addParam("query","%"+extendProperty.getQuery()+"%", QueryParam.RELATION_LIKE);
+		}
+		return JPAUtil.load(ExtendProperty.class,queryParamList, pageInfo);
 	}
 	
 	/**

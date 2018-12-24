@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div id="app" style="height: 100%;width: 100%;">
+    <div id="app" style="height: 100%;width: 100%;" v-cloak>
         <ll-container style="height: 100%; ">
             <ll-header height="40">
                 <ll-card class="box-card">
@@ -81,7 +81,7 @@
                                 </ll-col>
                             </ll-row>
                         </div>
-                        <ll-table-zz :data-wrap="dataWrapDetail" :readonly="false" ref="tableDetail" @current-change="retrieve">
+                        <ll-table-zz :data-wrap="dataWrapDetail" :readonly="false" ref="tableDetail" @current-change="retrieve" :show-pager="false">
                             <ll-table-column-zz type="selection" :width="55">
                             </ll-table-column-zz>
                             <ll-table-column-zz prop="code" label="代码" :width="150">
@@ -164,6 +164,8 @@
                 retrieve() {
                     var dataWrap = $.createAjaxDataWrap();
                     dataWrap.setData(this.form);
+                    if(this.dataWrapMain!=null&&!this.$_.isUndefined(this.dataWrapMain.pageInfo))
+                    	dataWrap.pageInfo=this.dataWrapMain.pageInfo;
 
                     $.request({
                         url: $$pageContextPath + "sys/code/retrieve-classify",

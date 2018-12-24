@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+</head>
+<body>
+	<div id="app" style="height: 100%;width: 100%;" v-cloak>
+		<ll-container style="height: 100%; ">
+            <ll-header height="40">
+                <ll-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span class="ll-main-span">查询条件</span>
+                    </div>
+                    <ll-form :model="form" :status-icon="true" ref="form" label-width="100px" style="width:100%">
+                        <ll-col :span="6">
+                            <ll-form-item label="属性代码" prop="code">
+                                <ll-input v-model="form.code"></ll-input>
+                            </ll-form-item>
+                        </ll-col>
+                        <ll-col :span="6">
+                            <ll-form-item label="属性名称" prop="name">
+                                <ll-input v-model="form.name"></ll-input>
+                            </ll-form-item>
+                        </ll-col>
+                        <ll-col :span="6">
+                            <ll-form-item label="查询语句" prop="query">
+                                <ll-input v-model="form.query"></ll-input>
+                            </ll-form-item>
+                        </ll-col>
+                        <ll-col :span="6">
+                            <ll-form-item>
+                                <ll-button type="primary" size="mini" @click="retrieve">查询</ll-button>
+                            </ll-form-item>
+                        </ll-col>
+                    </ll-form>
+                </ll-card>
+            </ll-header>
+            <ll-main style="padding: 0 0 0 0px;" style="height: 100%;">
+            	<ll-card class="box-card" style="height:100%;">
+                    <div slot="header" class="clearfix">
+                        <ll-row>
+                            <ll-col :span="6">
+                                <span class="ll-main-span" style="marign-right:100px;">编码列表</span>
+                            </ll-col>
+                            <ll-col :span="18" align="right">
+                                <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px"
+                                    @click="add" title="添加"></ll-button>
+                                <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px"
+                                    @click="del" title="删除"></ll-button>
+                                <ll-button type="success" icon="el-icon-check" circle size="mini" style="padding: 3px"
+                                    @click="save" title="保存"></ll-button>
+
+                            </ll-col>
+                        </ll-row>
+                    </div>
+                    <ll-table-zz :data-wrap="dataWrap" :readonly="false" ref="tableMain" @current-change="retrieve">
+                        <ll-table-column-zz type="selection" :width="55">
+                        </ll-table-column-zz>
+                        <ll-table-column-zz prop="code" label="扩展属性代码" :width="150">
+                        </ll-table-column-zz>
+                        <ll-table-column-zz prop="name" label="扩展属性名称" :width="150">
+                        </ll-table-column-zz>
+                        <ll-table-column-zz prop="query" label="查询语句" :width="320">
+                        </ll-table-column-zz>
+                    </ll-table-zz>
+                </ll-card>
+            </ll-main>
+        </ll-container>
+	</div>
+</body>
+<script type="text/javascript">
+var dataWrap = ajaxResponse.get("dataWrap");
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+        dataWrap: dataWrap,
+        datasource: $$pageContextPath + "sys/menu-tree/menus",
+        data: [],
+        form: {
+            name: '',
+            code:'',
+            query:''
+        },
+    },
+    methods: {
+        retrieve() {
+        	var dataWrap=$.createAjaxDataWrap();
+        	dataWrap.setData(this.form);
+        	if(this.dataWrapMain!=null&&!this.$_.isUndefined(this.dataWrapMain.pageInfo))
+            	dataWrap.pageInfo=this.dataWrapMain.pageInfo;
+            $.request({
+            	url : $$pageContextPath + "sys/extendproperty/retrieve",
+                data: {
+                	dataWrap:dataWrap
+                },
+                success: function (response) {
+                    var dataWrap = response.get("dataWrap");
+                    if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
+                        0)
+                        $.msg("未查询到任何数据!");
+                    vm.$set(vm.$data, "dataWrap", dataWrap);
+                }
+            });
+        },
+        del(){
+        	$.confirm("确定删除吗?",function(){
+        		var dataWrap=$.createAjaxDataWrap();
+            	var dataList = vm.$refs["tableMain"].getSelectedRows();
+            	dataWrap.dataList=dataList;
+            	$.request({
+            		url : $$pageContextPath + "sys/extendproperty/delete",
+                    data: {
+                    	dataWrap:dataWrap,
+                    },
+                    success: function (response) {
+                        $.success("删除成功");
+                        vm.retrieve();
+                    }
+                });
+        	});
+        	
+        },
+        save(){
+            var addDataWrap = $.createAjaxDataWrap();
+            var updateDataWrap = $.createAjaxDataWrap();
+            var addDataList = this.$refs.tableMain.getAddedRows();
+            var updateDataList = this.$refs.tableMain.getUpdatedRows();
+            addDataWrap.dataList = addDataList;
+            updateDataWrap.dataList = updateDataList;
+            $.request({
+            	url : $$pageContextPath + "sys/extendproperty/save",
+                data: {
+                	addDataWrap: addDataWrap,
+                	updateDataWrap: updateDataWrap
+                },
+                success: function (response) {
+                    if (response) {
+                        vm.retrieve();
+                        $.success('保存成功');
+                    } else {
+                        $.error('保存失败');
+                    }
+                },
+                error: function (ecx) {
+                    $.error('保存失败');
+                    return false;
+                }
+            });
+        },
+        add() {
+			var newRow = $.createNewRow();
+			this.$refs.tableMain.addRow(newRow);
+        },
+    }
+});
+</script>
+</html>

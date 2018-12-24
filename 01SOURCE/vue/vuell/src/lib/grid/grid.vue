@@ -18,7 +18,7 @@
         <slot></slot>
       </ll-table>
     </ll-main>
-    <ll-footer height="30">
+    <ll-footer height="30" v-if="showPager">
       <ll-pagination
         layout="prev, pager, next"
         :current-page="dataWrap==null?0:dataWrap.pageInfo.currentPageNum"
@@ -59,6 +59,10 @@ export default {
     rowKey: {
       default: "rowId",
       type: String
+    },
+    showPager:{
+      default:true,
+      type:Boolean
     }
   },
   data() {
@@ -134,6 +138,7 @@ export default {
       if(this.dataWrap==null ||this.$_.isUndefined(this.dataWrap) )
         this.dataWrap={};
       if(this.dataWrap.dataList==null||this.$_.isUndefined(this.dataWrap.dataList))
+        this.dataWrap.dataList=[];
       this.dataWrap.dataList.push(row);
     },
     setRowReadonly(row, prop, readonly) {

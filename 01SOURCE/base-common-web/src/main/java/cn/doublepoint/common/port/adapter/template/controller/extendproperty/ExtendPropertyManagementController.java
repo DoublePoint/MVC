@@ -43,37 +43,28 @@ public class ExtendPropertyManagementController extends BaseController {
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
 		AjaxDataWrap<ExtendProperty> dataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
-		if (dataWrap == null)
-			return null;
-		ExtendProperty menuQuery = null;
-		if (dataWrap.getDataList() != null && dataWrap.getDataList().size() > 0) {
-			menuQuery = dataWrap.getDataList().get(0);
-		}
-
-		if (menuQuery != null) {
-			List<ExtendProperty> list = service.find(menuQuery, dataWrap.getPageInfo());
-			dataWrap.setDataList(list);
-		}
-
+		ExtendProperty menuQuery = dataWrap.getData();
+		List<ExtendProperty> list = service.find(menuQuery, dataWrap.getPageInfo());
+		dataWrap.setDataList(list);
 		AjaxResponse ajaxResponse = new AjaxResponse();
 		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
 		return ajaxResponse;
 	}
 
-	@RequestMapping("/add")
+	@RequestMapping("/save")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<ExtendProperty> addDataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
-		if (addDataWrap == null)
-			return null;
+		AjaxDataWrap<ExtendProperty> addDataWrap = request.getAjaxDataWrap("addDataWrap", ExtendProperty.class);
+		AjaxDataWrap<ExtendProperty> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", ExtendProperty.class);
 		service.saveOrUpdate(addDataWrap.getDataList());
+		service.saveOrUpdate(updateDataWrap.getDataList());
 		return new AjaxResponse();
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<ExtendProperty> deleteDataWrap = request.getAjaxDataWrap("deleteDataWrap", ExtendProperty.class);
+		AjaxDataWrap<ExtendProperty> deleteDataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
 		if (deleteDataWrap == null)
 			return null;
 		List<ExtendProperty> menuList = deleteDataWrap.getDataList();

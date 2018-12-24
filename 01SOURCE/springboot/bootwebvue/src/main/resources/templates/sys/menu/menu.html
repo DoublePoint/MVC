@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div id="app" style="height: 100%;width: 100%;">
+    <div id="app" style="height: 100%;width: 100%;" v-cloak>
         <ll-container style="height: 100%; ">
             <ll-aside width="200px" style="border-right:1px solid #eee;">
                 <ll-card class="box-card" style="height:100%;">
@@ -21,11 +21,11 @@
                         <div slot="header" class="clearfix">
                             <span class="ll-main-span">查询条件</span>
                         </div>
-                        <ll-form :model="ruleForm" :status-icon="true" :rules="rules" ref="ruleForm" label-width="100px"
+                        <ll-form :model="menuForm" :status-icon="true"  ref="menuForm" label-width="100px"
                             style="width:100%">
                             <ll-col :span="8">
-                                <ll-form-item label="活动名称" prop="name">
-                                    <ll-input v-model="ruleForm.name"></ll-input>
+                                <ll-form-item label="菜单名称" prop="name">
+                                    <ll-input v-model="menuForm.name"></ll-input>
                                 </ll-form-item>
                             </ll-col>
                             <ll-col :span="8">
@@ -102,29 +102,14 @@
                     label: 'name',
                     isLeaf: 'isLeaf'
                 },
-                ruleForm: {
+                menuForm: {
                     name: '',
                 },
-                rules: {
-                    name: [{
-                            required: true,
-                            message: '请输入活动名称',
-                            trigger: 'blur'
-                        },
-                        {
-                            min: 3,
-                            max: 5,
-                            message: '长度在 3 到 5 个字符',
-                            trigger: 'blur'
-                        }
-                    ],
-                }
             },
             methods: {
-
                 retrieve() {
                 	var dataWrap=$.createAjaxDataWrap();
-                	dataWrap.setData(this.ruleForm);
+                	dataWrap.setData(this.menuForm);
                     $.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
                         data: {
