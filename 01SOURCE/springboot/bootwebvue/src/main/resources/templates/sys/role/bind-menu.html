@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+</head>
+
+<body>
+    <div id="app" style="height: 100%;width: 100%;" v-cloak>
+        <ll-container style="height: 100%; ">
+            <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+                <ll-tree-zz :props="defaultProps" :datasource="datasource" accordion show-checkbox>
+                </ll-tree-zz>
+            </ll-main>
+            <ll-footer>
+                <ll-form id="ajaxform" cols="1"  label-width="100px" >
+                    <ll-form-item>
+                        <ll-button type="primary" @click="save">保存</ll-button>
+                        <ll-button type="text" @click="reset">重置</ll-button>
+                    </ll-form-item>
+                </ll-form>
+            </ll-footer>
+        </ll-container>
+    </div>
+</body>
+<script type="text/javascript">
+    var dataWrap = ajaxResponse.get("dataWrap");
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            datasource: $$pageContextPath + "sys/menu-tree/menus",
+            defaultProps: {
+                children: 'children',
+                label: 'name',
+                isLeaf: 'isLeaf'
+            },
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+</html>

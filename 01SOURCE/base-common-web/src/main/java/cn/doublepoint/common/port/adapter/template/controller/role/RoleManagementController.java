@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,20 +48,19 @@ public class RoleManagementController extends BaseController {
 		return response;
 	}
 
-	@RequestMapping("/bindMenu")
-	public AjaxResponse bindMenuJsp(HttpServletRequest request, AjaxResponse response) {
-		String roleId = request.getParameter("roleId");
-		response.setViewName("bindMenu.html");
+	@RequestMapping("/{roleId}/bind-menu")
+	public AjaxResponse bindMenuJsp(@PathVariable Long roleId, AjaxResponse response) {
+		response.setViewName("/sys/role/bind-menu.html");
 		response.setAjaxParameter("roleId", roleId);
 		AjaxDataWrap<MenuRole> dataWrap = new AjaxDataWrap<MenuRole>();
 		MenuRole query = new MenuRole();
-		query.setRoleId(Long.valueOf(roleId));
+		query.setRoleId(roleId);
 		dataWrap.setDataList(menuRoleService.find(query, null));
 		response.setAjaxParameter("dataWrap", dataWrap);
 		return response;
 	}
 
-	@RequestMapping("/search")
+	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse roleDataList(@RequestBody AjaxRequest request, AjaxResponse response) {
 		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
@@ -81,7 +81,7 @@ public class RoleManagementController extends BaseController {
 		return true;
 	}
 
-	@RequestMapping("/bind-menu")
+	@RequestMapping("/menu/binding")
 	@ResponseBody
 	public boolean bindMenu(@RequestBody AjaxRequest request, AjaxResponse response) {
 		AjaxDataWrap<TreeNodeBean> dataWrap = request.getAjaxDataWrap("dataWrap", TreeNodeBean.class);
@@ -110,22 +110,6 @@ public class RoleManagementController extends BaseController {
 
 		roleService.remove(dataWrap.getDataList());
 		return true;
-	}
-
-	public RoleService getRoleService() {
-		return roleService;
-	}
-
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
-	}
-
-	public MenuRoleService getMenuRoleService() {
-		return menuRoleService;
-	}
-
-	public void setMenuRoleService(MenuRoleService menuRoleService) {
-		this.menuRoleService = menuRoleService;
 	}
 
 }

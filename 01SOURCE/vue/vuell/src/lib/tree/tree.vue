@@ -3,6 +3,7 @@
       :expand-on-click-node="false"
       ref="tree"
       node-key="code"
+      :show-checkbox="showCheckbox"
       :lazy="lazy">
     </ll-tree>
 </template>
@@ -34,7 +35,11 @@ export default {
       default:true,
       type:Boolean
     },
-    datasource:String
+    datasource:String,
+    showCheckbox:{
+      default:false,
+      type:Boolean
+    }
   },
   data() {
     return {
