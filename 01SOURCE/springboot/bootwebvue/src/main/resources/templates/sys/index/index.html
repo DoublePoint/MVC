@@ -43,7 +43,7 @@
         var vm = new Vue({
             el: '#app',
             methods: {
-                menuSelect(index, indexPath, item) {
+                menuSelect:function(index, indexPath, item) {
                     this.addTab({
                         name: item.name,
                         title: item.name,
@@ -51,12 +51,12 @@
                         link: item.link
                     });
                 },
-                addTab(setting) {
+                addTab:function(setting) {
                     if (!this.tabs.find(a => a.name == setting.name))
                         this.tabs.push(setting);
                     this.activeTab = setting.name;
                 },
-                handleTabsEdit(targetName, action) {
+                handleTabsEdit:function(targetName, action) {
                     if (action === 'add') {
                         let newTabName = ++this.tabIndex + '';
                         this.editableTabs.push({

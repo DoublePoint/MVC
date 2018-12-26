@@ -5,6 +5,11 @@
       node-key="code"
       :show-checkbox="showCheckbox"
       :lazy="lazy">
+      <span slot-scope="{ node, data }" style="display:inline-block;width:100%;">
+          <slot :node="node" :data="data">
+            <span class="el-tree-node__label">{{ node.label }}</span>
+          </slot>
+      </span>
     </ll-tree>
 </template>
 
@@ -83,5 +88,5 @@ export default {
 </script>
 
 <style>
- 
+  
 </style>

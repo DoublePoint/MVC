@@ -11,13 +11,26 @@
 
 <body>
   <div id="app" style="height: 100%;width: 100%;">
-    <ll-card class="box-card"  style="height:100%;">
+    <ll-card class="box-card" style="height:100%;">
       <div slot="header" class="clearfix">
         <span class="ll-main-title">查询条件</span>
       </div>
-      <ll-tree-zz :items="data" :props="defaultProps" 
-      show-checkbox
-      :datasource="datasource" accordion @node-click="handleNodeClick">
+      <ll-tree-zz :items="data" :props="defaultProps" show-checkbox :datasource="datasource" accordion @node-click="handleNodeClick">
+        <span slot-scope="{ node, data }" style="
+        flex: 1;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        justify-content: space-between;
+        padding-right: 8px;">
+            <span >{{ node.label }}</span>
+            <span >
+                <ll-checkbox-group v-model="checkList">
+                    <ll-checkbox label="读"></ll-checkbox>
+                    <ll-checkbox label="写"></ll-checkbox>
+                </ll-checkbox-group>
+            </span>
+        </span>
       </ll-tree-zz>
     </ll-card>
   </div>
@@ -34,15 +47,21 @@
         children: 'children',
         label: 'name',
         isLeaf: 'isLeaf'
-      }
+      },
+      checkList:""
     },
     methods: {
       handleNodeClick(nodeData, node) {
-        
+
       }
     }
   })
 
 </script>
 
+<style>
+  .el-tree-node__label .el-checkbox-group{
+    display:inline-block;
+  }
+</style>
 </html>

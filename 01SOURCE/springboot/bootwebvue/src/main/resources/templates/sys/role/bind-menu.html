@@ -10,11 +10,22 @@
     <div id="app" style="height: 100%;width: 100%;" v-cloak>
         <ll-container style="height: 100%; ">
             <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
-                <ll-tree-zz :props="defaultProps" :datasource="datasource" accordion show-checkbox>
+                <ll-tree-zz ref="tree" :props="defaultProps" :datasource="datasource" accordion show-checkbox>
+                    <span slot-scope="{ node, data }" class="custome_tree_node">
+                        <span>{{ node.label }}</span>
+                        <span>
+	                        <span>
+	                            <ll-checkbox-group v-model="data.prop6" @change="groupChange(data)">
+	                                <ll-checkbox label="0" :key="0">读</ll-checkbox>
+	                                <ll-checkbox label="1" :key="1">写</ll-checkbox>
+	                            </ll-checkbox-group>
+	                        </span>
+                        </span>
+                    </span>
                 </ll-tree-zz>
             </ll-main>
             <ll-footer>
-                <ll-form id="ajaxform" cols="1"  label-width="100px" >
+                <ll-form id="ajaxform" cols="1" label-width="100px">
                     <ll-form-item>
                         <ll-button type="primary" @click="save">保存</ll-button>
                         <ll-button type="text" @click="reset">重置</ll-button>
@@ -36,11 +47,33 @@
                 label: 'name',
                 isLeaf: 'isLeaf'
             },
+            readList:[],
+            writeList:{}
         },
         methods: {
-
+			save:function(){
+				
+			},
+			reset:function(){
+				
+			},
+			groupChange(a,b,c){
+				console.log(a)
+				console.log(b)
+				console.log(c)
+			}
         }
     });
 </script>
+<style>
+    .custome_tree_node {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        justify-content: space-between;
+        padding-right: 8px;
+    }
+</style>
 
 </html>
