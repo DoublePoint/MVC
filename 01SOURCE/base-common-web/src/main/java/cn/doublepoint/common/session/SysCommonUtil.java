@@ -44,4 +44,18 @@ public final class SysCommonUtil {
         session.removeAttribute(XTConstant.SESSION_USER);
         session.invalidate();
     }
+
+    public static String getDefaultRecordString(Object obj,String defaultVal){
+    	return (String)(obj!=null?obj.toString():defaultVal);
+    }
+    public static Long getDefaultRecordLong(Object obj,Long defaultVal){
+    	if(obj!=null)
+    		return Long.valueOf(obj.toString());
+    	return defaultVal;
+    }
+    public static Integer getDefaultRecordInteger(Object obj,Integer defaultVal){
+    	if(obj!=null)
+    		return Integer.valueOf(obj.toString());
+    	return defaultVal;
+    }
 }

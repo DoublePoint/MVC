@@ -9,8 +9,6 @@
 */
 package cn.doublepoint.common.port.adapter.template.controller.role;
 
-import static java.util.stream.Collectors.toList;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +23,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.role.RoleServ
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
 import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.dto.domain.model.entity.sys.Role;
 
@@ -78,23 +74,22 @@ public class RoleManagementController extends BaseController {
 		return true;
 	}
 
-	@RequestMapping("/menu/binding")
+	@RequestMapping("/{roleId}/binding")
 	@ResponseBody
-	public boolean bindMenu(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<TreeNodeBean> dataWrap = request.getAjaxDataWrap("dataWrap", TreeNodeBean.class);
-		String roleId = request.getParameter("roleId");
+	public boolean bindMenu(@PathVariable Long roleId,@RequestBody AjaxRequest request, AjaxResponse response) {
+		AjaxDataWrap<MenuRole> dataWrap = request.getAjaxDataWrap("dataWrap", MenuRole.class);
 		if (dataWrap == null)
 			return true;
-		List<TreeNodeBean> menus = dataWrap.getDataList();
-		if (menus == null)
-			return false;
-		List<MenuRole> list = menus.stream().map(menu -> {
-			MenuRole mRole = new MenuRole();
-			mRole.setMenuId(Long.valueOf(menu.getCode()));
-			mRole.setRoleId(Long.valueOf(roleId));
-			return mRole;
-		}).collect(toList());
-		menuRoleService.saveOrUpdate(list);
+		List<MenuRole> menus = dataWrap.getDataList();
+//		if (menus == null)
+//			return false;
+//		List<MenuRole> list = menus.stream().map(menu -> {
+//			MenuRole mRole = new MenuRole();
+//			mRole.setMenuId(Long.valueOf(menu.getCode()));
+//			mRole.setRoleId(roleId);
+//			return mRole;
+//		}).collect(toList());
+		menuRoleService.saveOrUpdate(menus);
 		return true;
 	}
 

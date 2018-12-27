@@ -16,8 +16,8 @@
                         <span>
 	                        <span>
 	                            <ll-checkbox-group v-model="data.prop6" @change="groupChange(data)">
-	                                <ll-checkbox label="1" :key="1">读</ll-checkbox>
-	                                <ll-checkbox label="2" :key="2">写</ll-checkbox>
+	                                <ll-checkbox :label="1" :key="data.code+'1'">读</ll-checkbox>
+	                                <ll-checkbox :label="2" :key="data.code+'2'">写</ll-checkbox>
 	                            </ll-checkbox-group>
 	                        </span>
                         </span>
@@ -41,7 +41,7 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            datasource: $$pageContextPath + "sys/menu-tree/menus",
+            datasource: $$pageContextPath + "sys/menu-tree/menu-role?roleId="+roleId,
             defaultProps: {
                 children: 'children',
                 label: 'name',
@@ -54,7 +54,7 @@
 				var dataWrap=$.createAjaxDataWrap();
             	dataWrap.setDataList(this.updateList);
                 $.request({
-                    url: $$pageContextPath + "sys/role/"+roleId+"save",
+                    url: $$pageContextPath + "sys/role/"+roleId+"/binding",
                     data: {
                     	dataWrap:dataWrap
                     },
@@ -71,25 +71,23 @@
 				
 			},
 			groupChange(data,b,c){
-				console.log(data);
-				console.log(this.updateList)
+				var menuRole = data.nodeBean;
+				var newMenuRole;
+				newMenuRole={
+					id:menuRole.id,
+					menuId:data.code,
+					roleId:roleId,
+					permission:_.reduce(data.prop6, function(memo, num){ return memo + num; }, 0)
+				}
 				var index = this.$_.findIndex(this.updateList,function(i){
-					return i.menuId==data.code;
+					return i.menuId == data.code;
 				})
 				if(index==-1){
-					this.updateList.push({
-						menuId:data.code,
-						roleId:roleId,
-						roleNum:_.reduce(data.prop6, function(memo, num){ return memo + num; }, 0)
-					});
-				}else{
-					this.updateList[index] = {
-						menuId:data.code,
-						roleId:roleId,
-						roleNum:_.reduce(data.prop6, function(memo, num){ return memo + num; }, 0)
-					};
+					this.updateList.push(newMenuRole);
 				}
-				 
+				else{
+					this.updateList[index] = newMenuRole;
+				}
 			}
         }
     });

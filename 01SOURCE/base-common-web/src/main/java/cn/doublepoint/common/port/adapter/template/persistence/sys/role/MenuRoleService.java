@@ -1,6 +1,8 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 import java.util.List;
 
+import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenuRole;
+import cn.doublepoint.dto.domain.model.entity.sys.Menu;
 import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
@@ -63,5 +65,20 @@ public interface MenuRoleService {
 	 * @return
 	 */
 	public boolean removeByRoleId(Long roleId);
+	
+	/**
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	public List<VOMenuRole> getMenuRole(Long roleId) ;
+	
+	/**
+	 * 
+	 * @param roleId
+	 * @param query
+	 * @return
+	 */
+	public List<VOMenuRole> findChildrenMenuRole(Long roleId , Menu query);
 
 }

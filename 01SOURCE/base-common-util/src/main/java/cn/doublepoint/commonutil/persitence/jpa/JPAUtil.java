@@ -371,7 +371,7 @@ public class JPAUtil extends DataBaseUtil {
 	/**
 	 * 执行更新或删除语句
 	 * 
-	 * @param jpql
+	 * @param SQL
 	 * @param queryParamList
 	 * @return
 	 */
@@ -383,7 +383,7 @@ public class JPAUtil extends DataBaseUtil {
 	/**
 	 * 执行更新或删除语句
 	 * 
-	 * @param jpql
+	 * @param SQL
 	 * @param queryParamList
 	 * @return
 	 */
@@ -393,9 +393,9 @@ public class JPAUtil extends DataBaseUtil {
 	}
 
 	/**
-	 * JPQL方式执行更新或删除语句
+	 * SQL方式执行更新或删除语句
 	 * 
-	 * @param jpql
+	 * @param SQL
 	 * @param queryParamList
 	 * @return
 	 */
@@ -405,7 +405,7 @@ public class JPAUtil extends DataBaseUtil {
 	}
 
 	/**
-	 * JPQL方式执行查询
+	 * SQL方式执行查询
 	 * 
 	 * @param jpql
 	 * @param queryParamList

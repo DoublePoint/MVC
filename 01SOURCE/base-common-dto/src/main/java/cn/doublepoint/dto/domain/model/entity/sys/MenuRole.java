@@ -16,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.engine.transaction.jta.platform.internal.BitronixJtaPlatform;
+
 import cn.doublepoint.dto.domain.model.entity.BaseEntity;
 
 @Entity
@@ -41,6 +43,9 @@ public class MenuRole extends BaseEntity {
 	
 	@Column(name="MENU_ID")
 	private Long menuId;//菜单标识
+	
+	@Column(name="PERMISSION")
+	private Integer permission; //权限代码
 
 	public Long getId() {
 		return id;
@@ -80,6 +85,14 @@ public class MenuRole extends BaseEntity {
 	
 	public void setMenuId(Long menuId) {
 		this.menuId = menuId;
+	}
+	
+	public Integer getPermission() {
+		return permission;
+	}
+
+	public void setPermission(Integer permission) {
+		this.permission = permission;
 	}
 
 	public String toString() {
