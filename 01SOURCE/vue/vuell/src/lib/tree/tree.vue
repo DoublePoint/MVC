@@ -56,7 +56,19 @@ export default {
     },
     load(node, resolve){
        if (node.level === 0) {
-          return resolve([{ name: '菜单树' }]);
+         var menu = {
+           	code:"",
+            title:"",
+            name:"",
+            isLeaf:false,
+            prop1:"",
+            prop2:"",
+            prop3:"",
+            prop4:"",
+            prop5:"",
+            prop6:[]
+         };
+         return resolve([{ name: '菜单树' }]);
         }
       if(this.datasource==null||this.datasource=="")
         throw new Error("ll:prop 'datasource' must not be null",'tree.vue');

@@ -13,8 +13,6 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +27,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
+import cn.doublepoint.dto.domain.model.entity.sys.Menu;
 import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
 import cn.doublepoint.dto.domain.model.entity.sys.Role;
 
@@ -71,13 +70,11 @@ public class RoleManagementController extends BaseController {
 		return response;
 	}
 
-	@RequestMapping("/save")
+	@RequestMapping("/{roleId}/save")
 	@ResponseBody
-	public boolean save(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
-		if (dataWrap == null)
-			return true;
-		roleService.saveOrUpdate(dataWrap.getDataList());
+	public boolean save(@PathVariable Long roleId,@RequestBody AjaxRequest request, AjaxResponse response) {
+		AjaxDataWrap<MenuRole> dataWrap = request.getAjaxDataWrap("dataWrap", MenuRole.class);
+		menuRoleService.saveOrUpdate(dataWrap.getDataList());
 		return true;
 	}
 
