@@ -23,7 +23,7 @@ import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Controller
@@ -59,7 +59,7 @@ public class MenuDisplayController extends BaseTreeController {
 		if (cd == null||cd.getId()==null)
 			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
 		else{
-			Menu query=new Menu();
+			SysMenu query=new SysMenu();
 			query.setId(cd.getId());
 			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		}

@@ -13,8 +13,8 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
-import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
@@ -27,13 +27,13 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public List<MenuRole> find(MenuRole menuRole, PageInfo pageInfo) {
+	public List<SysMenuRole> find(SysMenuRole menuRole, PageInfo pageInfo) {
 		QueryParamList queryParamList=new QueryParamList();
 		if (menuRole != null) {
 			if(menuRole.getRoleId()!=null)
 				queryParamList.addParam("roleId",menuRole.getRoleId());
 		}
-		return JPAUtil.load(MenuRole.class,queryParamList, pageInfo);
+		return JPAUtil.load(SysMenuRole.class,queryParamList, pageInfo);
 	}
 
 	/**
@@ -43,8 +43,8 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public MenuRole getById(long id) {
-		return JPAUtil.loadById(MenuRole.class, id);
+	public SysMenuRole getById(Integer id) {
+		return JPAUtil.loadById(SysMenuRole.class, id);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public boolean remove(MenuRole menuRole) {
+	public boolean remove(SysMenuRole menuRole) {
 		JPAUtil.remove(menuRole);
 		return true;
 	}
@@ -66,7 +66,7 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<MenuRole> menuRoleList) {
+	public boolean remove(List<SysMenuRole> menuRoleList) {
 		menuRoleList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -80,10 +80,10 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(MenuRole menuRole) {
+	public boolean saveOrUpdate(SysMenuRole menuRole) {
 		
 		if (menuRole.getId() == null) {
-			menuRole.setId(SequenceUtil.getNextVal(MenuRole.class));
+			menuRole.setId(SequenceUtil.getNextVal(SysMenuRole.class));
 			menuRole.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		menuRole.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -98,12 +98,12 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(List<MenuRole> menuRoleList) {
+	public boolean saveOrUpdate(List<SysMenuRole> menuRoleList) {
 		menuRoleList.stream().forEach(item -> {
-			MenuRole mRole = this.getByRoleIdAndMenuId(item.getRoleId(), item.getMenuId());
+			SysMenuRole mRole = this.getByRoleIdAndMenuId(item.getRoleId(), item.getMenuId());
 			if(mRole == null){
 				if(item.getId()==null){
-					item.setId(SequenceUtil.getNextVal(MenuRole.class));
+					item.setId(SequenceUtil.getNextVal(SysMenuRole.class));
 				}
 			}
 			else{
@@ -120,8 +120,8 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	}
 
 	@Override
-	public List<MenuRole> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(MenuRole.class, pageInfo);
+	public List<SysMenuRole> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysMenuRole.class, pageInfo);
 	}
 
 	/**
@@ -131,9 +131,9 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public boolean removeByRoleId(Long roleId) {
+	public boolean removeByRoleId(Integer roleId) {
 		StringBuffer jpql = new StringBuffer();
-		jpql.append(" delete from MenuRole mr where mr.roleId=:roleId");
+		jpql.append(" delete from SysMenuRole mr where mr.roleId=:roleId");
 		QueryParamList queryParamList = new QueryParamList();
 		queryParamList.addParam("roleId", roleId);
 		int i = JPAUtil.executeUpdate(jpql.toString(), queryParamList);
@@ -147,7 +147,7 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public List<VOMenuRole> getMenuRole(Long roleId) {
+	public List<VOMenuRole> getMenuRole(Integer roleId) {
 		return null;
 	}
 	
@@ -158,7 +158,7 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return 最底层菜单列表
 	 */
 	@Override
-	public List<VOMenuRole> findChildrenMenuRole(Long roleId , Menu query) {
+	public List<VOMenuRole> findChildrenMenuRole(Integer roleId , SysMenu query) {
 		QueryParamList paramList=new QueryParamList();
 		StringBuffer jpql = new StringBuffer();
 		jpql.append(" select m.name,m.id mid,mr.id mrid,mr.role_id,mr.permission from sys_Menu m left join (select * from sys_Menu_Role r where r.role_id=:roleId) mr on m.id = mr.menu_Id where 1=1 ");
@@ -180,9 +180,9 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 			Object[] arr = (Object[]) i;
 			int index=0; 
 			String name=SysCommonUtil.getDefaultRecordString(arr[index++], "");
-			Long menu_id=SysCommonUtil.getDefaultRecordLong(arr[index++],  null);
-			Long id=SysCommonUtil.getDefaultRecordLong(arr[index++],  null);
-			Long role_id=SysCommonUtil.getDefaultRecordLong(arr[index++], null);
+			Integer menu_id=SysCommonUtil.getDefaultRecordInteger(arr[index++],  null);
+			Integer id=SysCommonUtil.getDefaultRecordInteger(arr[index++],  null);
+			Integer role_id=SysCommonUtil.getDefaultRecordInteger(arr[index++], null);
 			Integer permission=SysCommonUtil.getDefaultRecordInteger(arr[index++], new Integer(0));
 			
 			VOMenuRole res = new VOMenuRole();
@@ -221,7 +221,7 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public List<String> getRightList(MenuRole mRole){
+	public List<String> getRightList(SysMenuRole mRole){
 		List<String> list = new ArrayList<String>();
 		if(isHasWriteRight(mRole.getPermission()))
 			list.add(String.valueOf(XTConstant.PROPERTY_RIGHT_WRITE));
@@ -252,11 +252,11 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public MenuRole getByRoleIdAndMenuId(Long roleId,Long menuId){
+	public SysMenuRole getByRoleIdAndMenuId(Integer roleId,Integer menuId){
 		QueryParamList paramList = new QueryParamList();
 		paramList.addParam("roleId",roleId);
 		paramList.addParam("menuId",menuId);
-		List<MenuRole> list = JPAUtil.load(MenuRole.class, paramList);
+		List<SysMenuRole> list = JPAUtil.load(SysMenuRole.class, paramList);
 		if(list.size()>0)
 			return list.get(0);
 		return null;
@@ -269,10 +269,10 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 * @return
 	 */
 	@Override
-	public boolean isExistByRoleId(Long roleId){
+	public boolean isExistByRoleId(Integer roleId){
 		QueryParamList paramList = new QueryParamList();
 		paramList.addParam("roleId",roleId);
-		long count = JPAUtil.count(MenuRole.class, paramList);
+		long count = JPAUtil.count(SysMenuRole.class, paramList);
 		return count>0;
 	}
 	

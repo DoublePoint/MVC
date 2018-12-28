@@ -24,7 +24,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.Code;
+import cn.doublepoint.dto.domain.model.entity.sys.SysCode;
 
 @Controller
 @RequestMapping("sys/code")
@@ -47,11 +47,11 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/retrieve-detail")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+		AjaxDataWrap<SysCode> dataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
 		if (dataWrap == null)
 			return null;
-		Code menuQuery = dataWrap.getData();
-		List<Code> list = service.findByClassify(menuQuery.getClassify());
+		SysCode menuQuery = dataWrap.getData();
+		List<SysCode> list = service.findByClassify(menuQuery.getClassify());
 		dataWrap.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
@@ -67,11 +67,11 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/retrieve-classify")
 	@ResponseBody
 	public AjaxResponse retrieveClassify(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+		AjaxDataWrap<SysCode> dataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
 		if (dataWrap == null)
 			return null;
-		Code menuQuery = dataWrap.getData();
-		List<Code> list = service.findClassify(menuQuery, dataWrap.getPageInfo());
+		SysCode menuQuery = dataWrap.getData();
+		List<SysCode> list = service.findClassify(menuQuery, dataWrap.getPageInfo());
 		dataWrap.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
@@ -87,8 +87,8 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/save-main")
 	@ResponseBody
 	public AjaxResponse save(@RequestBody AjaxRequest request) {
-//		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("addDataWrap", Code.class);
-		AjaxDataWrap<Code> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Code.class);
+//		AjaxDataWrap<SysCode> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysCode.class);
+		AjaxDataWrap<SysCode> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysCode.class);
 //		if (addDataWrap != null){
 //			service.saveOrUpdate(addDataWrap.getDataList());
 //		}
@@ -106,8 +106,8 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/save-detail")
 	@ResponseBody
 	public AjaxResponse saveDetail(@RequestBody AjaxRequest request){
-		AjaxDataWrap<Code> addDataWrap = request.getAjaxDataWrap("addDataWrap", Code.class);
-		AjaxDataWrap<Code> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Code.class);
+		AjaxDataWrap<SysCode> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysCode.class);
+		AjaxDataWrap<SysCode> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysCode.class);
 		service.saveOrUpdate(addDataWrap.getDataList());
 		service.saveOrUpdate(updateDataWrap.getDataList());
 		return new AjaxResponse();
@@ -121,10 +121,10 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/delete-detail")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<Code> deleteDataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+		AjaxDataWrap<SysCode> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
 		if (deleteDataWrap == null)
 			return null;
-		List<Code> menuList = deleteDataWrap.getDataList();
+		List<SysCode> menuList = deleteDataWrap.getDataList();
 		service.remove(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;
@@ -139,10 +139,10 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("delete-by-classify")
 	@ResponseBody
 	public AjaxResponse deleteByClassify(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<Code> deleteDataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+		AjaxDataWrap<SysCode> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
 		if (deleteDataWrap == null)
 			return null;
-		List<Code> menuList = deleteDataWrap.getDataList();
+		List<SysCode> menuList = deleteDataWrap.getDataList();
 		service.removeByClassify(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;
@@ -158,10 +158,10 @@ public class CodeManagementController extends BaseController {
 	@ResponseBody
 	public AjaxResponse updateByClassify(@RequestBody AjaxRequest request, AjaxResponse responseData) {
 		try{
-			AjaxDataWrap<Code> dataWrap = request.getAjaxDataWrap("dataWrap", Code.class);
+			AjaxDataWrap<SysCode> dataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
 			if (dataWrap == null)
 				return null;
-			Code code = dataWrap.getData();
+			SysCode code = dataWrap.getData();
 			service.updateByClassify(code);
 		}
 		catch(Exception e){

@@ -9,7 +9,7 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.Code;
+import cn.doublepoint.dto.domain.model.entity.sys.SysCode;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParam;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
@@ -24,9 +24,9 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return 
 	 */
 	@Override
-	public List<Code> find(Code code,PageInfo pageInfo) {
+	public List<SysCode> find(SysCode code,PageInfo pageInfo) {
 		if(code==null)
-			return JPAUtil.load(Code.class, pageInfo);
+			return JPAUtil.load(SysCode.class, pageInfo);
 		QueryParamList queryParamList = new QueryParamList();
 		if(!StringUtil.isNullOrEmpty(code.getCode()))
 		{
@@ -37,7 +37,7 @@ public class CodeServiceImpl  implements CodeService{
 			queryParamList.addParam("classify", code.getClassify());
 		}
 		
-		return JPAUtil.load(Code.class, queryParamList,pageInfo);
+		return JPAUtil.load(SysCode.class, queryParamList,pageInfo);
 	}
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
@@ -45,12 +45,12 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return 
 	 */
 	@Override
-	public List<Code> findByClassify(String classify) {
+	public List<SysCode> findByClassify(String classify) {
 		QueryParamList queryParamList = new QueryParamList();
 		queryParamList.addParam("classify", classify);
 		SortParamList sortParamList=new SortParamList();
 		sortParamList.addParam("displaySn");
-		return JPAUtil.load(Code.class, queryParamList,sortParamList);
+		return JPAUtil.load(SysCode.class, queryParamList,sortParamList);
 	}
 	
 	/**
@@ -59,8 +59,8 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return
 	 */
 	@Override
-	public Code getById(long id){
-		return JPAUtil.loadById(Code.class, id);
+	public SysCode getById(long id){
+		return JPAUtil.loadById(SysCode.class, id);
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(Code code){
+	public boolean remove(SysCode code){
 		JPAUtil.remove(code);
 		return true;
 	}
@@ -81,7 +81,7 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<Code> codeList){
+	public boolean remove(List<SysCode> codeList){
 		codeList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -94,9 +94,9 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(Code code) {
+	public boolean saveOrUpdate(SysCode code) {
 		if (code.getId() == null){
-			code.setId(SequenceUtil.getNextVal(Code.class));
+			code.setId(SequenceUtil.getNextVal(SysCode.class));
 			code.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		code.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -110,10 +110,10 @@ public class CodeServiceImpl  implements CodeService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(List<Code> codeList) {
+	public boolean saveOrUpdate(List<SysCode> codeList) {
 		codeList.stream().forEach(item->{
 			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(Code.class));
+				item.setId(SequenceUtil.getNextVal(SysCode.class));
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			}
 			item.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -124,15 +124,15 @@ public class CodeServiceImpl  implements CodeService{
 	}
 
 	@Override
-	public List<Code> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(Code.class,pageInfo);
+	public List<SysCode> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysCode.class,pageInfo);
 	}
 
 	@Override
-	public List<Code> findClassify(Code code, PageInfo pageInfo) {
+	public List<SysCode> findClassify(SysCode code, PageInfo pageInfo) {
 		StringBuilder sBuilder = new StringBuilder();
 		QueryParamList paramList = new QueryParamList();
-		sBuilder.append("select c from Code c where 1=1 ");
+		sBuilder.append("select c from SysCode c where 1=1 ");
 		if (!StringUtil.isNullOrEmpty(code.getCode())) {
 			sBuilder.append(" and c.code like :code");
 			paramList.addParam("code", "%" + code.getCode() + "%");
@@ -146,17 +146,17 @@ public class CodeServiceImpl  implements CodeService{
 			paramList.addParam("codeName", "%"+code.getCodeName()+"%");
 		}
 		sBuilder.append(" group by c.classify");
-		List<Code> objcts = JPAUtil.executeQueryModel(sBuilder.toString(), paramList, Code.class);
+		List<SysCode> objcts = JPAUtil.executeQueryModel(sBuilder.toString(), paramList, SysCode.class);
 		return objcts;
 	}
 	/**
 	 * 根据classify进行删除
 	 */
 	@Override
-	public boolean removeByClassify(List<Code> codeList) {
+	public boolean removeByClassify(List<SysCode> codeList) {
 		StringBuilder sBuilder = new StringBuilder();
 		QueryParamList paramList = new QueryParamList();
-		sBuilder.append("delete from Code c where c.classify in :classifys ");
+		sBuilder.append("delete from SysCode c where c.classify in :classifys ");
 		List<String> classifys = codeList.stream().map(i->i.getClassify()).collect(Collectors.toList());
 		paramList.addParam("classifys", classifys);
 		JPAUtil.executeUpdate(sBuilder.toString(),paramList);
@@ -164,20 +164,20 @@ public class CodeServiceImpl  implements CodeService{
 	}
 
 	@Override
-	public boolean updateByClassify(Code code) {
+	public boolean updateByClassify(SysCode code) {
 		if(code == null)
 			return true;
-		String oldClassify = JPAUtil.loadById(Code.class,code.getId()).getClassify();
+		String oldClassify = JPAUtil.loadById(SysCode.class,code.getId()).getClassify();
 		StringBuilder sBuilder = new StringBuilder();
 		QueryParamList paramList = new QueryParamList();
-		sBuilder.append("update Code c set c.classify=:newClassify where c.classify=:oldClassify");
+		sBuilder.append("update SysCode c set c.classify=:newClassify where c.classify=:oldClassify");
 		paramList.addParam("newClassify", code.getClassify());
 		paramList.addParam("oldClassify",oldClassify);
 		JPAUtil.executeUpdate(sBuilder.toString(),paramList);
 		return true;
 	}
 	@Override
-	public boolean updateByClassify(List<Code> codeList) {
+	public boolean updateByClassify(List<SysCode> codeList) {
 		if(codeList==null)
 			return true;
 		codeList.stream().forEach(this::updateByClassify);

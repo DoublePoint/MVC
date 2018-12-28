@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>vueplugin2</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../dist/vueplugins.js"></script>
+  </link>
+</head>
+
+<body>
+  <div id="app" style="height: 100%;width: 100%;" v-cloak>
+      <ll-container style="height: 100%; ">
+          <ll-aside width="200px" style="border-right:1px solid #eee;">
+              <ll-steps direction="vertical" :active="activeStep">
+                  <ll-step title="步骤 1"></ll-step>
+                  <ll-step title="步骤 2"></ll-step>
+                  <ll-step title="步骤 3"></ll-step>
+                  <ll-step title="步骤 4"></ll-step>
+                  <ll-step title="步骤 5"></ll-step>
+                  <ll-step title="步骤6" description="这是一段很长很长很长的描述性文字"></ll-step>
+              </ll-steps>
+          </ll-aside>
+          <ll-container style="height: 100%; ">
+              <ll-card v-show="activeStep==1">
+                  <div slot="header" class="clearfix">
+                      <span>卡片名称</span>
+                  </div>
+                  <div v-for="o in 4" :key="o" class="text item">
+                      {{'列表内容 ' + o }}
+                  </div>
+              </ll-card>
+              <ll-card class="box-card" v-show="activeStep==2">
+                  <div slot="header" class="clearfix">
+                      <span>卡片名称</span>
+                      <ll-button style="float: right; padding: 3px 0" type="text">操作按钮</ll-button>
+                  </div>
+                  <div v-for="o in 4" :key="o" class="text item">
+                      {{'列表内容 ' + o }}
+                  </div>
+              </ll-card>
+              <ll-card class="box-card" v-show="activeStep==3">
+                  <div slot="header" class="clearfix">
+                      <span>卡片名称</span>
+                      <ll-button style="float: right; padding: 3px 0" type="text">操作按钮</ll-button>
+                  </div>
+                  <div v-for="o in 4" :key="o" class="text item">
+                      {{'列表内容 ' + o }}
+                  </div>
+              </ll-card>
+              <ll-card class="box-card" v-show="activeStep==4">
+                  <div slot="header" class="clearfix">
+                      <span>卡片名称</span>
+                      <ll-button style="float: right; padding: 3px 0" type="text">操作按钮</ll-button>
+                  </div>
+                  <div v-for="o in 4" :key="o" class="text item">
+                      {{'列表内容 ' + o }}
+                  </div>
+              </ll-card>
+          </ll-container>
+      </ll-container>
+  </div>
+
+  <script type="text/javascript">
+      var vm = new Vue({
+          el: '#app',
+          data: {
+            	activeStep:1,
+          },
+      });
+  </script>
+</body>
+
+</html>

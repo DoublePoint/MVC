@@ -20,7 +20,7 @@ public class VOMenu extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Integer id;
 	
 	private String menuIndex;
 	
@@ -44,11 +44,11 @@ public class VOMenu extends BaseEntity {
 
 	private List<VOMenu> childrenMenuList;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

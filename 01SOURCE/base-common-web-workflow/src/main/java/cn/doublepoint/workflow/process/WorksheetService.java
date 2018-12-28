@@ -2,7 +2,7 @@ package cn.doublepoint.workflow.process;
 
 import java.util.List;
 
-import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 public interface WorksheetService {
@@ -12,14 +12,14 @@ public interface WorksheetService {
 	 * 
 	 * @return 工作单基本信息
 	 */
-	public List<Worksheet> findAll(PageInfo pageInfo);
+	public List<SysWorksheet> findAll(PageInfo pageInfo);
 
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return
 	 */
-	public List<Worksheet> find(Worksheet worksheet, PageInfo pageInfo);
+	public List<SysWorksheet> find(SysWorksheet worksheet, PageInfo pageInfo);
 
 	/**
 	 * 根据Id获取数据
@@ -27,7 +27,7 @@ public interface WorksheetService {
 	 * @param id
 	 * @return
 	 */
-	public Worksheet getById(long id);
+	public SysWorksheet getById(long id);
 
 	/**
 	 * 根据Id获取数据
@@ -35,7 +35,7 @@ public interface WorksheetService {
 	 * @param id
 	 * @return
 	 */
-	public Worksheet getByWorksheetNo(String worksheetNo);
+	public SysWorksheet getByWorksheetNo(String worksheetNo);
 
 	/**
 	 * 根据工作单编号获取实例标识
@@ -51,7 +51,7 @@ public interface WorksheetService {
 	 * @param worksheet
 	 * @return
 	 */
-	public boolean remove(Worksheet worksheet);
+	public boolean remove(SysWorksheet worksheet);
 
 	/**
 	 * 移除
@@ -59,7 +59,7 @@ public interface WorksheetService {
 	 * @param worksheetList
 	 * @return
 	 */
-	public boolean remove(List<Worksheet> worksheetList);
+	public boolean remove(List<SysWorksheet> worksheetList);
 
 	/**
 	 * 创建或更新数据
@@ -67,6 +67,6 @@ public interface WorksheetService {
 	 * @param worksheet
 	 * @return
 	 */
-	public boolean create(Worksheet worksheet);
+	public boolean create(SysWorksheet worksheet);
 
 }

@@ -26,7 +26,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.annotation.RequestForm;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 
 @Controller
 @RequestMapping("/sys/menu")
@@ -47,7 +47,7 @@ public class MenuManagementController extends BaseController {
 	public AjaxResponse menuDialog(@RequestForm(name = "requestForm") AjaxRequest request,AjaxResponse response) {
 		String type=request.getParameter("type");
 		if ("edit".equals(type)) {
-			AjaxDataWrap<Menu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
+			AjaxDataWrap<SysMenu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
 			response.setAjaxParameter("dataWrap", ajaxDataWrap);
 		} else {
 			String parentMenuId = request.getParameter("parentMenuId");
@@ -66,7 +66,7 @@ public class MenuManagementController extends BaseController {
 		String id = request.getParameter("id");
 		String menuName = "";
 		try {
-			Menu menu = menuService.getById(Long.valueOf(id));
+			SysMenu menu = menuService.getById(Long.valueOf(id));
 			if (menu != null) {
 				menuName = menu.getName();
 			}
@@ -79,15 +79,15 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
-		Menu menuQuery = dataWrap.getData();
+		AjaxDataWrap<SysMenu> dataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
+		SysMenu menuQuery = dataWrap.getData();
 		if (menuQuery==null) {
-			menuQuery=new Menu();
+			menuQuery=new SysMenu();
 		}
 		if(!StringUtil.isNullOrEmpty(request.getParameter("parentId"))){
-			menuQuery.setId(Long.valueOf(request.getParameter("parentId")));
+			menuQuery.setId(Integer.valueOf(request.getParameter("parentId")));
 		}
-		List<Menu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
+		List<SysMenu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
 		dataWrap.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
@@ -98,8 +98,8 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/save")
 	@ResponseBody
 	public AjaxResponse menuDataListDataWrap(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Menu> dataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
-		List<Menu> list = dataWrap.getDataList();
+		AjaxDataWrap<SysMenu> dataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
+		List<SysMenu> list = dataWrap.getDataList();
 		menuService.saveOrUpdate(list);
 		return new AjaxResponse();
 	}
@@ -107,10 +107,10 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Menu> addDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
+		AjaxDataWrap<SysMenu> addDataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
 		if (addDataWrap == null)
 			return null;
-		Menu menu = addDataWrap.getData();
+		SysMenu menu = addDataWrap.getData();
 		menuService.saveOrUpdate(menu);
 		return new AjaxResponse();
 	}
@@ -118,10 +118,10 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<Menu> deleteDataWrap = request.getAjaxDataWrap("dataWrap", Menu.class);
+		AjaxDataWrap<SysMenu> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
 		if (deleteDataWrap == null)
 			return null;
-		List<Menu> menuList = deleteDataWrap.getDataList();
+		List<SysMenu> menuList = deleteDataWrap.getDataList();
 		menuService.removeMenu(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;

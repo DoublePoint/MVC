@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOTask;
 import cn.doublepoint.workflow.process.InstanceService;
 import cn.doublepoint.workflow.process.WorksheetService;
@@ -51,12 +51,12 @@ public class WorksheetController {
 	@RequestMapping("retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request,AjaxResponse response){
-		AjaxDataWrap<Worksheet> queryDataWrap=request.getAjaxDataWrap("queryDataWrap", Worksheet.class);
-		AjaxDataWrap<Worksheet> dataWrap=request.getAjaxDataWrap("worksheetDataWrap", Worksheet.class);
+		AjaxDataWrap<SysWorksheet> queryDataWrap=request.getAjaxDataWrap("queryDataWrap", SysWorksheet.class);
+		AjaxDataWrap<SysWorksheet> dataWrap=request.getAjaxDataWrap("worksheetDataWrap", SysWorksheet.class);
 		
-		Worksheet query=queryDataWrap.getData();
+		SysWorksheet query=queryDataWrap.getData();
 		dataWrap.getPageInfo().setPageSize(10);
-		List<Worksheet> list=worksheetService.find(query, dataWrap.getPageInfo());
+		List<SysWorksheet> list=worksheetService.find(query, dataWrap.getPageInfo());
 		dataWrap.setDataList(list);
 		response.setAjaxParameter("dataWrap", dataWrap);
 		return response;

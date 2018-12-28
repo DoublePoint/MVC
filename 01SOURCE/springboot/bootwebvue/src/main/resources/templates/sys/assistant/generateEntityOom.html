@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+</head>
+
+<body>
+    <div id="app" style="height: 100%;width: 100%;" v-cloak>
+        <ll-container style="height: 100%; ">
+            <ll-aside width="200px" style="border-right:1px solid #eee;">
+                <ll-steps direction="vertical" :active="activeStep">
+                    <ll-step title="步骤 1"></ll-step>
+                    <ll-step title="步骤 2"></ll-step>
+                    <ll-step title="步骤 3"></ll-step>
+                    <ll-step title="步骤 4"></ll-step>
+                    <ll-step title="步骤 5"></ll-step>
+                    <ll-step title="步骤6" description="这是一段很长很长很长的描述性文字"></ll-step>
+                </ll-steps>
+            </ll-aside>
+            <ll-container style="height: 100%; ">
+                <ll-card v-show="activeStep==1">
+                    <div slot="header" class="clearfix">
+                        <span>卡片名称</span>
+                    </div>
+                    <div v-for="o in 4" :key="o" class="text item">
+                        {{'列表内容 ' + o }}
+                    </div>
+                </ll-card>
+                <ll-card class="box-card" v-show="activeStep==2">
+                    <div slot="header" class="clearfix">
+                        <span>卡片名称</span>
+                        <ll-button style="float: right; padding: 3px 0" type="text">操作按钮</ll-button>
+                    </div>
+                    <div v-for="o in 4" :key="o" class="text item">
+                        {{'列表内容 ' + o }}
+                    </div>
+                </ll-card>
+                <ll-card class="box-card" v-show="activeStep==3">
+                    <div slot="header" class="clearfix">
+                        <span>卡片名称</span>
+                        <ll-button style="float: right; padding: 3px 0" type="text">操作按钮</ll-button>
+                    </div>
+                    <div v-for="o in 4" :key="o" class="text item">
+                        {{'列表内容 ' + o }}
+                    </div>
+                </ll-card>
+                <ll-card class="box-card" v-show="activeStep==4">
+                    <div slot="header" class="clearfix">
+                        <span>卡片名称</span>
+                        <ll-button style="float: right; padding: 3px 0" type="text">操作按钮</ll-button>
+                    </div>
+                    <div v-for="o in 4" :key="o" class="text item">
+                        {{'列表内容 ' + o }}
+                    </div>
+                </ll-card>
+            </ll-container>
+        </ll-container>
+    </div>
+
+    <script type="text/javascript">
+        var dataWrap = ajaxResponse.get("dataWrap");
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            	activeStep:1,
+                dataWrap: dataWrap,
+                datasource: $$pageContextPath + "sys/menu-tree/menus",
+                data: [],
+                defaultProps: {
+                    children: 'children',
+                    label: 'name',
+                    isLeaf: 'isLeaf'
+                },
+                menuForm: {
+                    name: '',
+                },
+            },
+            methods: {
+                retrieve: function () {
+                    var dataWrap = $.createAjaxDataWrap();
+                    dataWrap.setData(this.menuForm);
+                    $.request({
+                        url: $$pageContextPath + "sys/menu/retrieve",
+                        data: {
+                            dataWrap: dataWrap
+                        },
+                        success: function (response) {
+                            var dataWrap = response.get("dataWrap");
+                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList
+                                .length ==
+                                0)
+                                vm.$alert("未查询到任何数据!");
+                            vm.$set(vm.$data, "dataWrap", dataWrap);
+                        }
+                    });
+                },
+                handleNodeClick: function (nodeData, node) {
+                    $.request({
+                        url: $$pageContextPath + "sys/menu/retrieve",
+                        type: "POST",
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType: "json",
+                        async: false,
+                        data: {
+                            dataWrap: this.dataWrap,
+                            parentId: nodeData.nodeBean == null ? 0 : nodeData.nodeBean.id
+                        },
+                        success: function (response) {
+                            var dataWrap = response.get("dataWrap");
+                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList
+                                .length == 0) {
+                                $.msg('未查询到任何数据');
+                            }
+                            vm.$set(vm.$data, "dataWrap", dataWrap);
+                        }
+                    });
+                },
+                add: function () {
+                    $.openDialog({
+                        title: "维护菜单",
+                        url: $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                        height: 440,
+                        width: 630,
+                        data: {},
+                        yes: function () {},
+                        cancel: function () {}
+                    });
+                },
+                rowDblcick: function (row) {
+                    var dataWrap = $.createAjaxDataWrap();
+                    dataWrap.setData(row);
+                    $.openDialog({
+                        title: "维护菜单",
+                        height: 440,
+                        width: 630,
+                        url: $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
+                        data: {
+                            dataWrap: dataWrap,
+                            type: "edit"
+                        },
+                        yes: function () {},
+                        cancel: function () {
+
+                        }
+                    });
+                },
+                del: function () {
+                    $.confirm("确定删除吗?", function () {
+                        var dataWrap = $.createAjaxDataWrap();
+                        var dataList = vm.$refs["tableMenu"].getSelectedRows();
+                        dataWrap.dataList = dataList;
+                        $.request({
+                            url: $$pageContextPath + "sys/menu/delete",
+                            data: {
+                                dataWrap: dataWrap,
+                            },
+                            success: function (response) {
+                                $.success("删除成功");
+                                vm.retrieve();
+                            }
+                        });
+                    });
+
+                },
+                save: function () {
+                    var dataWrap = $.createAjaxDataWrap();
+                    var dataList = vm.$refs["tableMenu"].getUpdatedRows();
+                    dataWrap.dataList = dataList;
+                    $.request({
+                        url: $$pageContextPath + "sys/menu/save",
+                        data: {
+                            dataWrap: dataWrap,
+                        },
+                        success: function (response) {
+                            $.success("保存成功");
+                            vm.retrieve();
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

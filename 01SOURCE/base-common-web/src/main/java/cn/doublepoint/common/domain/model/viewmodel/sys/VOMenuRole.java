@@ -19,33 +19,33 @@ public class VOMenuRole extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Long id;//关联标识
+	private Integer id;//关联标识
 	
-	private Long roleId;//角色标识
+	private Integer roleId;//角色标识
 	
 	private Date createTime;//创建时间
 	
 	private Date modifyTime;//更新时间
 	
-	private Long menuId;//菜单标识
+	private Integer menuId;//菜单标识
 	
 	private String menuName;
 	
 	private Integer permission; //权限代码
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 	
-	public void setRoleId(Long roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
@@ -65,11 +65,11 @@ public class VOMenuRole extends BaseEntity {
 		this.modifyTime = modifyTime;
 	}
 
-	public Long getMenuId() {
+	public Integer getMenuId() {
 		return menuId;
 	}
 	
-	public void setMenuId(Long menuId) {
+	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
 	}
 	

@@ -26,7 +26,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Controller
@@ -62,7 +62,7 @@ public class PageController extends BaseRequestController {
 		if (cd == null || cd.getId() == null)
 			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
 		else {
-			Menu query = new Menu();
+			SysMenu query = new SysMenu();
 			query.setId(cd.getId());
 			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		}

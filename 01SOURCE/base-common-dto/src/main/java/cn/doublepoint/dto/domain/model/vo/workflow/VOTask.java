@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.Map;
 
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
-import cn.doublepoint.dto.domain.model.entity.sys.User;
 
 public class VOTask  extends BaseModel {
 

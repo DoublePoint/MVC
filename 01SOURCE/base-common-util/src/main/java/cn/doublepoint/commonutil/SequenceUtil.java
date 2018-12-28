@@ -15,7 +15,7 @@ import java.util.List;
 import cn.doublepoint.commonutil.persitence.jpa.BaseDaoService;
 import cn.doublepoint.commonutil.persitence.jpa.DataBaseUtil;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
-import cn.doublepoint.dto.domain.model.entity.sys.Sequence;
+import cn.doublepoint.dto.domain.model.entity.sys.SysSequence;
 
 public class SequenceUtil extends DataBaseUtil {
 	/**
@@ -25,7 +25,7 @@ public class SequenceUtil extends DataBaseUtil {
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> Long getNextVal(Class<T> clazz) {
+	public static <T extends BaseModel> Integer getNextVal(Class<T> clazz) {
 		return getNextVal(clazz, 1).get(0);
 	}
 
@@ -36,7 +36,7 @@ public class SequenceUtil extends DataBaseUtil {
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> Long getNextVal(String str) {
+	public static <T extends BaseModel> Integer getNextVal(String str) {
 		return getNextVal(str, 1).get(0);
 	}
 
@@ -47,7 +47,7 @@ public class SequenceUtil extends DataBaseUtil {
 	 * @param queryParamList
 	 * @return
 	 */
-	public static <T extends BaseModel> List<Long> getNextVal(Class<T> clazz, int count) {
+	public static <T extends BaseModel> List<Integer> getNextVal(Class<T> clazz, int count) {
 		String qualifiedName = clazz.getName();
 		return getNextVal(qualifiedName, count);
 	}
@@ -59,31 +59,31 @@ public class SequenceUtil extends DataBaseUtil {
 	 * @param queryParamList
 	 * @return
 	 */
-	public static List<Long> getNextVal(String str, int count) {
-		long currentSequenceNo = getCurrentVal(str);
-		long arimSequenceNo = currentSequenceNo + count;
-		Sequence sequence = new Sequence();
+	public static List<Integer> getNextVal(String str, int count) {
+		int currentSequenceNo = getCurrentVal(str);
+		Integer arimSequenceNo = currentSequenceNo + count;
+		SysSequence sequence = new SysSequence();
 		sequence.setEntityCode(str);
 		sequence.setSequenceNo(arimSequenceNo);
 		BaseDaoService daoService = getDaoService();
 		daoService.saveOrUpdate(sequence);
 
-		List<Long> seqList = new ArrayList<>();
+		List<Integer> seqList = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			seqList.add(currentSequenceNo + i + 1);
 		}
 		return seqList;
 	}
 
-	public static <T extends BaseModel> Long getCurrentVal(Class<T> clazz) {
+	public static <T extends BaseModel> Integer getCurrentVal(Class<T> clazz) {
 		return getCurrentVal(getQualifiedName(clazz));
 	}
 
-	public static Long getCurrentVal(String str) {
+	public static Integer getCurrentVal(String str) {
 		BaseDaoService daoService = getDaoService();
-		Sequence obj = daoService.loadById(Sequence.class, str);
+		SysSequence obj = daoService.loadById(SysSequence.class, str);
 		if (obj == null)
-			return 0L;
+			return 0;
 		return obj.getSequenceNo();
 	}
 

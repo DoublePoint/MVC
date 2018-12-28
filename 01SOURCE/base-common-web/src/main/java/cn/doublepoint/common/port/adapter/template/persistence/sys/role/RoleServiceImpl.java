@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.Role;
+import cn.doublepoint.dto.domain.model.entity.sys.SysRole;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Service("roleService")
@@ -22,8 +22,8 @@ public class RoleServiceImpl  implements RoleService{
 	 * @return 
 	 */
 	@Override
-	public List<Role> find(Role role,PageInfo pageInfo) {
-		return JPAUtil.load(Role.class, pageInfo);
+	public List<SysRole> find(SysRole role,PageInfo pageInfo) {
+		return JPAUtil.load(SysRole.class, pageInfo);
 	}
 	
 	/**
@@ -32,8 +32,8 @@ public class RoleServiceImpl  implements RoleService{
 	 * @return
 	 */
 	@Override
-	public Role getById(long id){
-		return JPAUtil.loadById(Role.class, id);
+	public SysRole getById(long id){
+		return JPAUtil.loadById(SysRole.class, id);
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class RoleServiceImpl  implements RoleService{
 	 * @throws Exception 
 	 */
 	@Override
-	public boolean remove(Role role) throws Exception{
+	public boolean remove(SysRole role) throws Exception{
 		if(menuRoleService.isExistByRoleId(role.getId())){
 			throw new Exception("已经存在关联的");
 		}
@@ -58,10 +58,10 @@ public class RoleServiceImpl  implements RoleService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<Role> roleList) throws Exception{
+	public boolean remove(List<SysRole> roleList) throws Exception{
 		if(roleList==null || roleList.size()>0)
 			return true;
-		for (Role role : roleList) {
+		for (SysRole role : roleList) {
 			remove(role);
 		}
 		return true;
@@ -73,9 +73,9 @@ public class RoleServiceImpl  implements RoleService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(Role role) {
+	public boolean saveOrUpdate(SysRole role) {
 		if (role.getId() == null){
-			role.setId(SequenceUtil.getNextVal(Role.class));
+			role.setId(SequenceUtil.getNextVal(SysRole.class));
 			role.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		role.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -89,10 +89,10 @@ public class RoleServiceImpl  implements RoleService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(List<Role> roleList) {
+	public boolean saveOrUpdate(List<SysRole> roleList) {
 		roleList.stream().forEach(item->{
 			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(Role.class));
+				item.setId(SequenceUtil.getNextVal(SysRole.class));
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			}
 			item.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -103,7 +103,7 @@ public class RoleServiceImpl  implements RoleService{
 	}
 
 	@Override
-	public List<Role> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(Role.class,pageInfo);
+	public List<SysRole> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysRole.class,pageInfo);
 	}
 }

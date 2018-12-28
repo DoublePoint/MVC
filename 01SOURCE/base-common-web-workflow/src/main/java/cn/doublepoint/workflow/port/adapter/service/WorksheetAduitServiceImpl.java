@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.WorksheetAduit;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheetAduit;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Service("worksheetAduitService")
@@ -19,8 +19,8 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	 * @return 
 	 */
 	@Override
-	public List<WorksheetAduit> find(WorksheetAduit worksheetAduit,PageInfo pageInfo) {
-		return JPAUtil.load(WorksheetAduit.class, pageInfo); 
+	public List<SysWorksheetAduit> find(SysWorksheetAduit worksheetAduit,PageInfo pageInfo) {
+		return JPAUtil.load(SysWorksheetAduit.class, pageInfo); 
 	}
 	
 	/**
@@ -29,8 +29,8 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	 * @return
 	 */
 	@Override
-	public WorksheetAduit getById(long id){
-		return JPAUtil.loadById(WorksheetAduit.class, id);
+	public SysWorksheetAduit getById(long id){
+		return JPAUtil.loadById(SysWorksheetAduit.class, id);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(WorksheetAduit worksheetAduit){
+	public boolean remove(SysWorksheetAduit worksheetAduit){
 		JPAUtil.remove(worksheetAduit);
 		return true;
 	}
@@ -51,7 +51,7 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<WorksheetAduit> worksheetAduitList){
+	public boolean remove(List<SysWorksheetAduit> worksheetAduitList){
 		worksheetAduitList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -64,9 +64,9 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(WorksheetAduit worksheetAduit) {
+	public boolean saveOrUpdate(SysWorksheetAduit worksheetAduit) {
 		if (worksheetAduit.getId() == null){
-			worksheetAduit.setId(SequenceUtil.getNextVal(WorksheetAduit.class));
+			worksheetAduit.setId(SequenceUtil.getNextVal(SysWorksheetAduit.class));
 			worksheetAduit.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		worksheetAduit.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -80,10 +80,10 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(List<WorksheetAduit> worksheetAduitList) {
+	public boolean saveOrUpdate(List<SysWorksheetAduit> worksheetAduitList) {
 		worksheetAduitList.stream().forEach(item->{
 			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(WorksheetAduit.class));
+				item.setId(SequenceUtil.getNextVal(SysWorksheetAduit.class));
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			}
 			item.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -94,7 +94,7 @@ public class WorksheetAduitServiceImpl  implements WorksheetAduitService{
 	}
 
 	@Override
-	public List<WorksheetAduit> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(WorksheetAduit.class,pageInfo);
+	public List<SysWorksheetAduit> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysWorksheetAduit.class,pageInfo);
 	}
 }

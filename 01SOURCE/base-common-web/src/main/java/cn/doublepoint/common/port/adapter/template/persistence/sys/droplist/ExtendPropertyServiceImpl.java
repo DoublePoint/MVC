@@ -8,7 +8,7 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty;
+import cn.doublepoint.dto.domain.model.entity.sys.SysExtendProperty;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParam;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
@@ -22,7 +22,7 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return 
 	 */
 	@Override
-	public List<ExtendProperty> find(ExtendProperty extendProperty,PageInfo pageInfo) {
+	public List<SysExtendProperty> find(SysExtendProperty extendProperty,PageInfo pageInfo) {
 		QueryParamList queryParamList = new QueryParamList();
 		if(!StringUtil.isNullOrEmpty(extendProperty.getCode()))
 		{
@@ -36,7 +36,7 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 		{
 			queryParamList.addParam("query","%"+extendProperty.getQuery()+"%", QueryParam.RELATION_LIKE);
 		}
-		return JPAUtil.load(ExtendProperty.class,queryParamList, pageInfo);
+		return JPAUtil.load(SysExtendProperty.class,queryParamList, pageInfo);
 	}
 	
 	/**
@@ -45,10 +45,10 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return 
 	 */
 	@Override
-	public ExtendProperty findByCode(String code) {
+	public SysExtendProperty findByCode(String code) {
 		QueryParamList queryParamList=new QueryParamList();
 		queryParamList.addParam("code", code);
-		List<ExtendProperty> list=JPAUtil.load(ExtendProperty.class, queryParamList);
+		List<SysExtendProperty> list=JPAUtil.load(SysExtendProperty.class, queryParamList);
 		if(list==null||list.size()==0)
 			return null;
 		return list.get(0);
@@ -60,8 +60,8 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return
 	 */
 	@Override
-	public ExtendProperty getById(long id){
-		return JPAUtil.loadById(ExtendProperty.class, id);
+	public SysExtendProperty getById(long id){
+		return JPAUtil.loadById(SysExtendProperty.class, id);
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(ExtendProperty extendProperty){
+	public boolean remove(SysExtendProperty extendProperty){
 		JPAUtil.remove(extendProperty);
 		return true;
 	}
@@ -82,7 +82,7 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<ExtendProperty> extendPropertyList){
+	public boolean remove(List<SysExtendProperty> extendPropertyList){
 		extendPropertyList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -95,9 +95,9 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(ExtendProperty extendProperty) {
+	public boolean saveOrUpdate(SysExtendProperty extendProperty) {
 		if (extendProperty.getId() == null){
-			extendProperty.setId(SequenceUtil.getNextVal(ExtendProperty.class));
+			extendProperty.setId(SequenceUtil.getNextVal(SysExtendProperty.class));
 			extendProperty.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		extendProperty.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -111,10 +111,10 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(List<ExtendProperty> extendPropertyList) {
+	public boolean saveOrUpdate(List<SysExtendProperty> extendPropertyList) {
 		extendPropertyList.stream().forEach(item->{
 			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(ExtendProperty.class));
+				item.setId(SequenceUtil.getNextVal(SysExtendProperty.class));
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			}
 			item.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -125,7 +125,7 @@ public class ExtendPropertyServiceImpl  implements ExtendPropertyService{
 	}
 
 	@Override
-	public List<ExtendProperty> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(ExtendProperty.class,pageInfo);
+	public List<SysExtendProperty> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysExtendProperty.class,pageInfo);
 	}
 }

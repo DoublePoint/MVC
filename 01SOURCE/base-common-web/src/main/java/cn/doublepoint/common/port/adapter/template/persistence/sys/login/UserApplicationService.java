@@ -12,17 +12,17 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.login;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
-import cn.doublepoint.dto.domain.model.entity.sys.User;
+import cn.doublepoint.dto.domain.model.entity.sys.SysUser;
 
 @Service
 public class UserApplicationService {
 
-	public AjaxDataWrap<User> validateGLY(User queryUser) {
-		AjaxDataWrap<User> ajaxDataWrap = new AjaxDataWrap<>();
+	public AjaxDataWrap<SysUser> validateGLY(SysUser queryUser) {
+		AjaxDataWrap<SysUser> ajaxDataWrap = new AjaxDataWrap<>();
 
 //		QUser query = QUser.user;
 //		Predicate predicate = query.loginAccountNo.eq(queryUser.getLoginAccountNo());
-//		User gly = repository.findOne(predicate);
+//		SysUser gly = repository.findOne(predicate);
 //
 //		if (gly == null) {
 //			ajaxDataWrap.setError(XTConstant.GLY_NAME_NULL_CODE, XTConstant.GLY_NAME_NULL_CONTENT);

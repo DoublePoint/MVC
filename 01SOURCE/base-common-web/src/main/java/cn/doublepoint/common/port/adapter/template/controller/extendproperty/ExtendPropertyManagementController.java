@@ -24,7 +24,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty;
+import cn.doublepoint.dto.domain.model.entity.sys.SysExtendProperty;
 
 @Controller
 @RequestMapping("sys/extendproperty")
@@ -42,9 +42,9 @@ public class ExtendPropertyManagementController extends BaseController {
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<ExtendProperty> dataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
-		ExtendProperty menuQuery = dataWrap.getData();
-		List<ExtendProperty> list = service.find(menuQuery, dataWrap.getPageInfo());
+		AjaxDataWrap<SysExtendProperty> dataWrap = request.getAjaxDataWrap("dataWrap", SysExtendProperty.class);
+		SysExtendProperty menuQuery = dataWrap.getData();
+		List<SysExtendProperty> list = service.find(menuQuery, dataWrap.getPageInfo());
 		dataWrap.setDataList(list);
 		AjaxResponse ajaxResponse = new AjaxResponse();
 		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
@@ -54,8 +54,8 @@ public class ExtendPropertyManagementController extends BaseController {
 	@RequestMapping("/save")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<ExtendProperty> addDataWrap = request.getAjaxDataWrap("addDataWrap", ExtendProperty.class);
-		AjaxDataWrap<ExtendProperty> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", ExtendProperty.class);
+		AjaxDataWrap<SysExtendProperty> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysExtendProperty.class);
+		AjaxDataWrap<SysExtendProperty> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysExtendProperty.class);
 		service.saveOrUpdate(addDataWrap.getDataList());
 		service.saveOrUpdate(updateDataWrap.getDataList());
 		return new AjaxResponse();
@@ -64,10 +64,10 @@ public class ExtendPropertyManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<ExtendProperty> deleteDataWrap = request.getAjaxDataWrap("dataWrap", ExtendProperty.class);
+		AjaxDataWrap<SysExtendProperty> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysExtendProperty.class);
 		if (deleteDataWrap == null)
 			return null;
-		List<ExtendProperty> menuList = deleteDataWrap.getDataList();
+		List<SysExtendProperty> menuList = deleteDataWrap.getDataList();
 		service.remove(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;

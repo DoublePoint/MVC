@@ -7,7 +7,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import cn.doublepoint.common.constant.XTConstant;
-import cn.doublepoint.dto.domain.model.entity.sys.User;
+import cn.doublepoint.dto.domain.model.entity.sys.SysUser;
 
 public final class SysCommonUtil {
 
@@ -31,11 +31,11 @@ public final class SysCommonUtil {
      * @param session
      * @return user
      */
-    public static User getUser() {
-        return (User) getSession().getAttribute(XTConstant.SESSION_USER);
+    public static SysUser getUser() {
+        return (SysUser) getSession().getAttribute(XTConstant.SESSION_USER);
     }
 
-    public static void setUser(User user) {
+    public static void setUser(SysUser user) {
         getSession().setAttribute(XTConstant.SESSION_USER, user);
     }
 

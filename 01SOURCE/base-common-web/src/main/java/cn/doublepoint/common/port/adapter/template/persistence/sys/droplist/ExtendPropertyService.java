@@ -2,7 +2,7 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.droplist;
 
 import java.util.List;
 
-import cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty;
+import cn.doublepoint.dto.domain.model.entity.sys.SysExtendProperty;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 public interface ExtendPropertyService {
@@ -12,14 +12,14 @@ public interface ExtendPropertyService {
 	 * 
 	 * @return 扩展属性定义
 	 */
-	public List<ExtendProperty> findAll(PageInfo pageInfo);
+	public List<SysExtendProperty> findAll(PageInfo pageInfo);
 
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return
 	 */
-	public List<ExtendProperty> find(ExtendProperty extendProperty, PageInfo pageInfo);
+	public List<SysExtendProperty> find(SysExtendProperty extendProperty, PageInfo pageInfo);
 
 	/**
 	 * 根据扩展属性代码查询扩展属性
@@ -27,7 +27,7 @@ public interface ExtendPropertyService {
 	 * @param code
 	 * @return
 	 */
-	public ExtendProperty findByCode(String code);
+	public SysExtendProperty findByCode(String code);
 
 	/**
 	 * 根据Id获取数据
@@ -35,7 +35,7 @@ public interface ExtendPropertyService {
 	 * @param id
 	 * @return
 	 */
-	public ExtendProperty getById(long id);
+	public SysExtendProperty getById(long id);
 
 	/**
 	 * 移除
@@ -43,7 +43,7 @@ public interface ExtendPropertyService {
 	 * @param extendProperty
 	 * @return
 	 */
-	public boolean remove(ExtendProperty extendProperty);
+	public boolean remove(SysExtendProperty extendProperty);
 
 	/**
 	 * 移除
@@ -51,7 +51,7 @@ public interface ExtendPropertyService {
 	 * @param extendPropertyList
 	 * @return
 	 */
-	public boolean remove(List<ExtendProperty> extendPropertyList);
+	public boolean remove(List<SysExtendProperty> extendPropertyList);
 
 	/**
 	 * 创建或更新数据
@@ -59,7 +59,7 @@ public interface ExtendPropertyService {
 	 * @param extendProperty
 	 * @return
 	 */
-	public boolean saveOrUpdate(ExtendProperty extendProperty);
+	public boolean saveOrUpdate(SysExtendProperty extendProperty);
 
 	/**
 	 * 创建或更新数据
@@ -67,5 +67,5 @@ public interface ExtendPropertyService {
 	 * @param extendProperty
 	 * @return
 	 */
-	public boolean saveOrUpdate(List<ExtendProperty> extendPropertyList);
+	public boolean saveOrUpdate(List<SysExtendProperty> extendPropertyList);
 }

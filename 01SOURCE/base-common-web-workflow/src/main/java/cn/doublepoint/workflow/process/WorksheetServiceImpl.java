@@ -10,7 +10,7 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
@@ -26,13 +26,13 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 * @return
 	 */
 	@Override
-	public List<Worksheet> find(Worksheet worksheet, PageInfo pageInfo) {
+	public List<SysWorksheet> find(SysWorksheet worksheet, PageInfo pageInfo) {
 		QueryParamList params=new QueryParamList();
 		if(worksheet!=null){
 			if(!StringUtil.isNullOrEmpty(worksheet.getWorksheetNo()))
 				params.addParam("worksheetNo", worksheet.getWorksheetNo());
 		}
-		return JPAUtil.load(Worksheet.class,params, pageInfo);
+		return JPAUtil.load(SysWorksheet.class,params, pageInfo);
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 * @return
 	 */
 	@Override
-	public Worksheet getById(long id) {
-		return JPAUtil.loadById(Worksheet.class, id);
+	public SysWorksheet getById(long id) {
+		return JPAUtil.loadById(SysWorksheet.class, id);
 	}
 	
 	
@@ -55,7 +55,7 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 * @return
 	 */
 	@Override
-	public boolean remove(Worksheet worksheet) {
+	public boolean remove(SysWorksheet worksheet) {
 		JPAUtil.remove(worksheet);
 		return true;
 	}
@@ -67,7 +67,7 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<Worksheet> worksheetList) {
+	public boolean remove(List<SysWorksheet> worksheetList) {
 		worksheetList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -81,9 +81,9 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 * @return
 	 */
 	@Override
-	public boolean create(Worksheet worksheet) {
+	public boolean create(SysWorksheet worksheet) {
 		if (StringUtil.isNullOrEmpty(worksheet.getWorksheetNo())) {
-			worksheet.setId(SequenceUtil.getNextVal(Worksheet.class));
+			worksheet.setId(SequenceUtil.getNextVal(SysWorksheet.class));
 			worksheet.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		worksheet.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -92,8 +92,8 @@ public class WorksheetServiceImpl implements WorksheetService {
 	}
 
 	@Override
-	public List<Worksheet> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(Worksheet.class, pageInfo);
+	public List<SysWorksheet> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysWorksheet.class, pageInfo);
 	}
 
 	/**
@@ -102,10 +102,10 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 * @return
 	 */
 	@Override
-	public Worksheet getByWorksheetNo(String worksheetNo){
-		Worksheet query=new Worksheet();
+	public SysWorksheet getByWorksheetNo(String worksheetNo){
+		SysWorksheet query=new SysWorksheet();
 		query.setWorksheetNo(worksheetNo);
-		List<Worksheet> list=find(query, null);
+		List<SysWorksheet> list=find(query, null);
 		if(list==null||list.size()>0)
 			return list.get(0);
 		return null;
@@ -118,7 +118,7 @@ public class WorksheetServiceImpl implements WorksheetService {
 	 */
 	@Override
 	public String getInstanceIdByWorksheetNo(String worksheetNo){
-		Worksheet worksheet=getByWorksheetNo(worksheetNo);
+		SysWorksheet worksheet=getByWorksheetNo(worksheetNo);
 		return worksheet.getInstanceId();
 	}
 }

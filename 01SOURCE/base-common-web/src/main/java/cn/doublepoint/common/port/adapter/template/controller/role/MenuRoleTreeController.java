@@ -25,7 +25,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuServ
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.MenuRoleService;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 
 @Controller
 @RequestMapping("sys")
@@ -40,13 +40,13 @@ public class MenuRoleTreeController extends BaseTreeController {
 	@ResponseBody
 	public List<TreeNodeBean> getMenuTree(@RequestBody(required=false)TreeNodeBean node,
 			@RequestParam(required = false) Boolean isHasRoot,
-			@RequestParam Long roleId) {
-		Long code=null;
+			@RequestParam Integer roleId) {
+		Integer code=null;
 		if(node!=null&&node.getCode()!=null)
-			code=Long.valueOf(node.getCode());
+			code=Integer.valueOf(node.getCode());
 		List<TreeNodeBean> returnMenuList2 = new ArrayList<TreeNodeBean>();
 		if (code==null) {
-			List<VOMenuRole> menus = getChildrenMenuRoleList(roleId,0L);
+			List<VOMenuRole> menus = getChildrenMenuRoleList(roleId,0);
 			returnMenuList2 = menus.stream().map(menu -> {
 				TreeNodeBean nodeBean = new TreeNodeBean();
 				nodeBean.setName(menu.getMenuName());
@@ -79,12 +79,12 @@ public class MenuRoleTreeController extends BaseTreeController {
 		return returnMenuList2;
 	}
 
-	private boolean isHasChild(Long id) {
+	private boolean isHasChild(Integer id) {
 		return menuService.getChildrenCount(id) > 0;
 	}
 
-	private List<VOMenuRole> getChildrenMenuRoleList(Long roleId,Long parentMenuId) {
-		Menu query = new Menu();
+	private List<VOMenuRole> getChildrenMenuRoleList(Integer roleId,Integer parentMenuId) {
+		SysMenu query = new SysMenu();
 		query.setId(parentMenuId);
 		return menuRoleService.findChildrenMenuRole(roleId, query);
 	}

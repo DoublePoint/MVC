@@ -29,7 +29,7 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOTask;
@@ -51,7 +51,7 @@ public class InstanceServiceImpl implements InstanceService {
 	 * 启动线程，待成功后创建工作单
 	 */
 	@Override
-	public String createAndStart(String classification, String createUser, String description) {
+	public String createAndStart(String classification, Integer createUser, String description) {
 		ProcessInstanceCreateRequest request=new ProcessInstanceCreateRequest();
 		request.setProcessDefinitionKey(classification);
 		String  requestString=JSONObject.toJSONString(request);
@@ -65,13 +65,13 @@ public class InstanceServiceImpl implements InstanceService {
                 requestBody, 
                 new ParameterizedTypeReference<ProcessInstanceResponse>() {}).getBody();
 		
-		Worksheet worksheet = new Worksheet();
+		SysWorksheet worksheet = new SysWorksheet();
 		worksheet.setInstanceId(response.getId());
-		worksheet.setId(SequenceUtil.getNextVal(Worksheet.class));
+		worksheet.setId(SequenceUtil.getNextVal(SysWorksheet.class));
 		worksheet.setWorksheetNo(generateWorksheetNo());
 		worksheet.setClassification(classification);
 		worksheet.setDescription(description);
-		worksheet.setCreateUser(createUser);
+		worksheet.setCreateUserId(createUser);
 		worksheet.setState(WorksheetConstant.SHEET_STATE_RUNNING);
 		worksheet.setCreateTime(DateTimeUtil.getCurrentDate());
 		worksheet.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -141,10 +141,10 @@ public class InstanceServiceImpl implements InstanceService {
 	}
 
 	@Override
-	public List<Worksheet> getPersonalWorksheetList(Worksheet worksheet, PageInfo pageInfo) {
+	public List<SysWorksheet> getPersonalWorksheetList(SysWorksheet worksheet, PageInfo pageInfo) {
 		StringBuffer sBuffer=new StringBuffer();
 		QueryParamList queryParamList=new QueryParamList();
-		sBuffer.append(" select ws from  Worksheet ws where 1=1");
+		sBuffer.append(" select ws from  SysWorksheet ws where 1=1");
 		if(worksheet!=null){
 			if(!StringUtil.isNullOrEmpty(worksheet.getWorksheetNo())){
 				sBuffer.append(" and ws.worksheetNo=:worksheetNo");
@@ -156,7 +156,7 @@ public class InstanceServiceImpl implements InstanceService {
 			}
 		}
 		List<Object> sourceList=JPAUtil.executeQuery(sBuffer.toString(), queryParamList, pageInfo);
-		return CommonBeanUtils.copyTo(sourceList, Worksheet.class);
+		return CommonBeanUtils.copyTo(sourceList, SysWorksheet.class);
 	}
 	
 

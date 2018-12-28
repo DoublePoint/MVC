@@ -11,7 +11,7 @@ package cn.doublepoint.workflow.process;
 
 import java.util.List;
 
-import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOTask;
 
@@ -25,7 +25,7 @@ public interface InstanceService {
 	 * @param description
 	 * @return
 	 */
-	public String createAndStart(String classification, String createUser, String description);
+	public String createAndStart(String classification, Integer createUser, String description);
 
 	/**
 	 * 传递工作单
@@ -82,7 +82,7 @@ public interface InstanceService {
 	/**
 	 * 获取待办流程
 	 */
-	public List<Worksheet> getPersonalWorksheetList(Worksheet worksheet,PageInfo pageInfo);
+	public List<SysWorksheet> getPersonalWorksheetList(SysWorksheet worksheet,PageInfo pageInfo);
 	
 	/**
 	 * 获取历史任务

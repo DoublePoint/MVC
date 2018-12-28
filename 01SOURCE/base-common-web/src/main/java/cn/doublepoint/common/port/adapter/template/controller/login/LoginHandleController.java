@@ -12,13 +12,13 @@ package cn.doublepoint.common.port.adapter.template.controller.login;
 import javax.annotation.Resource;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.login.UserApplicationService;
-import cn.doublepoint.dto.domain.model.entity.sys.User;
+import cn.doublepoint.dto.domain.model.entity.sys.SysUser;
 
 public class LoginHandleController {
 	
 	@Resource
 	UserApplicationService userApplicationService;
-	public String figureUser(User user){
+	public String figureUser(SysUser user){
 		
 		return "";
 	}

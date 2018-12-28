@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="base-common-dto">
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdmin</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdminLoginLog</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncement</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncementChanged</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysCode</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysEntityFilter</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysExtendProperty</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenu</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenuVisitLog</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysPermission</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysRole</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysSequence</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysUser</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysWorksheetAduit</class>
+	</persistence-unit>
+</persistence>

@@ -9,7 +9,7 @@ import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.AnnouncementChanged;
+import cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncementChanged;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
@@ -22,9 +22,9 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 * @return 
 	 */
 	@Override
-	public List<AnnouncementChanged> find(AnnouncementChanged announcementChanged,PageInfo pageInfo) {
+	public List<SysAnnouncementChanged> find(SysAnnouncementChanged announcementChanged,PageInfo pageInfo) {
 		StringBuffer stringBuffer=new StringBuffer();
-		stringBuffer.append("select ac from AnnouncementChanged ac where 1=1");
+		stringBuffer.append("select ac from SysAnnouncementChanged ac where 1=1");
 		QueryParamList params=new QueryParamList();
 		if(announcementChanged!=null){
 			if(!StringUtil.isNullOrEmpty(announcementChanged.getWorksheetNo())){
@@ -33,7 +33,7 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 			}
 		}
 		List<Object> sourceList=JPAUtil.executeQuery(stringBuffer.toString(), params,pageInfo);
-		return CommonBeanUtils.copyTo(sourceList, AnnouncementChanged.class);
+		return CommonBeanUtils.copyTo(sourceList, SysAnnouncementChanged.class);
 	}
 	
 	/**
@@ -42,8 +42,8 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 * @return
 	 */
 	@Override
-	public AnnouncementChanged getById(long id){
-		return JPAUtil.loadById(AnnouncementChanged.class, id);
+	public SysAnnouncementChanged getById(long id){
+		return JPAUtil.loadById(SysAnnouncementChanged.class, id);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 * @return
 	 */
 	@Override
-	public boolean remove(AnnouncementChanged announcementChanged){
+	public boolean remove(SysAnnouncementChanged announcementChanged){
 		JPAUtil.remove(announcementChanged);
 		return true;
 	}
@@ -64,7 +64,7 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<AnnouncementChanged> announcementChangedList){
+	public boolean remove(List<SysAnnouncementChanged> announcementChangedList){
 		announcementChangedList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -77,9 +77,9 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(AnnouncementChanged announcementChanged) {
+	public boolean saveOrUpdate(SysAnnouncementChanged announcementChanged) {
 		if (announcementChanged.getId() == null){
-			announcementChanged.setId(SequenceUtil.getNextVal(AnnouncementChanged.class));
+			announcementChanged.setId(SequenceUtil.getNextVal(SysAnnouncementChanged.class));
 			announcementChanged.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		announcementChanged.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -93,10 +93,10 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	 * @return
 	 */
 	@Override
-	public boolean saveOrUpdate(List<AnnouncementChanged> announcementChangedList) {
+	public boolean saveOrUpdate(List<SysAnnouncementChanged> announcementChangedList) {
 		announcementChangedList.stream().forEach(item->{
 			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(AnnouncementChanged.class));
+				item.setId(SequenceUtil.getNextVal(SysAnnouncementChanged.class));
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			}
 			item.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -107,7 +107,7 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 	}
 
 	@Override
-	public List<AnnouncementChanged> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(AnnouncementChanged.class,pageInfo);
+	public List<SysAnnouncementChanged> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysAnnouncementChanged.class,pageInfo);
 	}
 }

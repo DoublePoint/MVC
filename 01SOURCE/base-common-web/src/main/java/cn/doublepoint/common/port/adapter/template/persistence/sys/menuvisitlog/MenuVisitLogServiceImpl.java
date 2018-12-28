@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.MenuVisitLog;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenuVisitLog;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Service("menuVisitLogService")
@@ -18,8 +18,8 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	 * 
 	 * @return 
 	 */
-	public List<MenuVisitLog> find(MenuVisitLog menuVisitLog,PageInfo pageInfo) {
-		return JPAUtil.load(MenuVisitLog.class, pageInfo);
+	public List<SysMenuVisitLog> find(SysMenuVisitLog menuVisitLog,PageInfo pageInfo) {
+		return JPAUtil.load(SysMenuVisitLog.class, pageInfo);
 	}
 	
 	/**
@@ -27,8 +27,8 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	 * @param id
 	 * @return
 	 */
-	public MenuVisitLog getById(long id){
-		return JPAUtil.loadById(MenuVisitLog.class, id);
+	public SysMenuVisitLog getById(long id){
+		return JPAUtil.loadById(SysMenuVisitLog.class, id);
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	 * @param menuVisitLog
 	 * @return
 	 */
-	public boolean remove(MenuVisitLog menuVisitLog){
+	public boolean remove(SysMenuVisitLog menuVisitLog){
 		JPAUtil.remove(menuVisitLog);
 		return true;
 	}
@@ -47,7 +47,7 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	 * @param menuVisitLogList
 	 * @return
 	 */
-	public boolean remove(List<MenuVisitLog> menuVisitLogList){
+	public boolean remove(List<SysMenuVisitLog> menuVisitLogList){
 		menuVisitLogList.stream().forEach(item -> {
 			JPAUtil.remove(item);
 		});
@@ -59,9 +59,9 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	 * @param menuVisitLog
 	 * @return
 	 */
-	public boolean saveOrUpdate(MenuVisitLog menuVisitLog) {
+	public boolean saveOrUpdate(SysMenuVisitLog menuVisitLog) {
 		if (menuVisitLog.getId() == null){
-			menuVisitLog.setId(SequenceUtil.getNextVal(MenuVisitLog.class));
+			menuVisitLog.setId(SequenceUtil.getNextVal(SysMenuVisitLog.class));
 			menuVisitLog.setCreateTime(DateTimeUtil.getCurrentDate());
 		}
 		menuVisitLog.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -74,10 +74,10 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	 * @param menuVisitLogList
 	 * @return
 	 */
-	public boolean saveOrUpdate(List<MenuVisitLog> menuVisitLogList) {
+	public boolean saveOrUpdate(List<SysMenuVisitLog> menuVisitLogList) {
 		menuVisitLogList.stream().forEach(item->{
 			if (item.getId() == null){
-				item.setId(SequenceUtil.getNextVal(MenuVisitLog.class));
+				item.setId(SequenceUtil.getNextVal(SysMenuVisitLog.class));
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			}
 			item.setModifyTime(DateTimeUtil.getCurrentDate());
@@ -88,8 +88,8 @@ public class MenuVisitLogServiceImpl  implements MenuVisitLogService {
 	}
 
 	@Override
-	public List<MenuVisitLog> findAll(PageInfo pageInfo) {
-		return JPAUtil.load(MenuVisitLog.class,pageInfo);
+	public List<SysMenuVisitLog> findAll(PageInfo pageInfo) {
+		return JPAUtil.load(SysMenuVisitLog.class,pageInfo);
 	}
 
 }

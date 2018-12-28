@@ -20,8 +20,8 @@ import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
-import cn.doublepoint.dto.domain.model.entity.sys.MenuVisitLog;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenuVisitLog;
 
 @Controller
 @RequestMapping("sys/menu-visit/")
@@ -33,8 +33,8 @@ public class MenuVisitController extends BaseController{
 	@RequestMapping("add-log")
 	@ResponseBody
 	public void cd(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<Menu> dataWrap=request.getAjaxDataWrap("dataWrap", Menu.class);
-		MenuVisitLog newLog=new MenuVisitLog();
+		AjaxDataWrap<SysMenu> dataWrap=request.getAjaxDataWrap("dataWrap", SysMenu.class);
+		SysMenuVisitLog newLog=new SysMenuVisitLog();
 		newLog.setMenuId(dataWrap.getDataList().get(0).getId());
 		newLog.setVisitTime(DateTimeUtil.getCurrentDate());
 		menuVisitLogService.saveOrUpdate(newLog);

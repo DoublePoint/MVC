@@ -41,7 +41,7 @@ import cn.doublepoint.commonutil.file.DownloadFileUtil;
 import cn.doublepoint.commonutil.file.ZipUtil;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.EntityFilter;
+import cn.doublepoint.dto.domain.model.entity.sys.SysEntityFilter;
 import cn.doublepoint.generate.EGenerateType;
 import cn.doublepoint.generate.GenerateEntityTemplateUtil;
 import cn.doublepoint.generate.GenerateServiceImplTemplateUtil;
@@ -225,7 +225,7 @@ public class GenerateEntityController extends BaseController {
 
 	@RequestMapping("sys/config/entityFilter")
 	@ResponseBody
-	public AjaxDataWrap<EntityFilter> getEntityFilter(@RequestParam(required = false) String userId) {
+	public AjaxDataWrap<SysEntityFilter> getEntityFilter(@RequestParam(required = false) String userId) {
 		return efQueryService.findAllEntityFilter(null);
 	}
 

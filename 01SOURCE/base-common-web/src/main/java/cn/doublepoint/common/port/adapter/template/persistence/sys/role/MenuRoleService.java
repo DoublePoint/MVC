@@ -2,8 +2,8 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 import java.util.List;
 
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenuRole;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
-import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 
@@ -14,28 +14,28 @@ public interface MenuRoleService {
 	 * 
 	 * @return 权限菜单关联
 	 */
-	public List<MenuRole> findAll(PageInfo pageInfo);
+	public List<SysMenuRole> findAll(PageInfo pageInfo);
 	
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return 
 	 */
-	public List<MenuRole> find(MenuRole menuRole,PageInfo pageInfo) ;
+	public List<SysMenuRole> find(SysMenuRole menuRole,PageInfo pageInfo) ;
 	
 	/**
 	 * 根据Id获取数据
 	 * @param id
 	 * @return
 	 */
-	public MenuRole getById(long id);
+	public SysMenuRole getById(Integer id);
 	
 	/**
 	 * 移除
 	 * @param menuRole
 	 * @return
 	 */
-	public boolean remove(MenuRole menuRole);
+	public boolean remove(SysMenuRole menuRole);
 	
 	
 	/**
@@ -43,35 +43,35 @@ public interface MenuRoleService {
 	 * @param menuRoleList
 	 * @return
 	 */
-	public boolean remove(List<MenuRole> menuRoleList);
+	public boolean remove(List<SysMenuRole> menuRoleList);
 	
 	/**
 	 * 创建或更新数据
 	 * @param menuRole
 	 * @return
 	 */
-	public boolean saveOrUpdate(MenuRole menuRole) ;
+	public boolean saveOrUpdate(SysMenuRole menuRole) ;
 	
 	/**
 	 * 创建或更新数据
 	 * @param menuRole
 	 * @return
 	 */
-	public boolean saveOrUpdate(List<MenuRole> menuRoleList) ;
+	public boolean saveOrUpdate(List<SysMenuRole> menuRoleList) ;
 	
 	/**
 	 * 根据roleId删除菜单角色绑定
 	 * @param roleId
 	 * @return
 	 */
-	public boolean removeByRoleId(Long roleId);
+	public boolean removeByRoleId(Integer roleId);
 	
 	/**
 	 * 
 	 * @param roleId
 	 * @return
 	 */
-	public List<VOMenuRole> getMenuRole(Long roleId) ;
+	public List<VOMenuRole> getMenuRole(Integer roleId) ;
 	
 	/**
 	 * 
@@ -79,7 +79,7 @@ public interface MenuRoleService {
 	 * @param query
 	 * @return
 	 */
-	public List<VOMenuRole> findChildrenMenuRole(Long roleId , Menu query);
+	public List<VOMenuRole> findChildrenMenuRole(Integer roleId , SysMenu query);
 	
 	/**
 	 * 判断是否有写权限
@@ -106,7 +106,7 @@ public interface MenuRoleService {
      * @param mRole
      * @return
      */
-    public List<String> getRightList(MenuRole mRole);
+    public List<String> getRightList(SysMenuRole mRole);
 
     /**
      * 根据roleId以及menuId获取数据
@@ -114,12 +114,12 @@ public interface MenuRoleService {
      * @param menuId
      * @return
      */
-    public MenuRole getByRoleIdAndMenuId(Long roleId,Long menuId);
+    public SysMenuRole getByRoleIdAndMenuId(Integer roleId,Integer menuId);
     
     /**
      * 根据角色判断是否查询当前角色关联
      * @param roleId
      * @return
      */
-    public boolean isExistByRoleId(Long roleId);
+    public boolean isExistByRoleId(Integer roleId);
 }

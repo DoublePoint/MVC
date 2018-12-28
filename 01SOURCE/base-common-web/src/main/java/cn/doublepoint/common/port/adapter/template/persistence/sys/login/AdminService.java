@@ -1,7 +1,7 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.login;
 import java.util.List;
 
-import cn.doublepoint.dto.domain.model.entity.sys.Admin;
+import cn.doublepoint.dto.domain.model.entity.sys.SysAdmin;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 
@@ -12,28 +12,28 @@ public interface AdminService {
 	 * 
 	 * @return 系统管理员
 	 */
-	public List<Admin> findAll(PageInfo pageInfo);
+	public List<SysAdmin> findAll(PageInfo pageInfo);
 	
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
 	 * @return 
 	 */
-	public List<Admin> find(Admin admin,PageInfo pageInfo) ;
+	public List<SysAdmin> find(SysAdmin admin,PageInfo pageInfo) ;
 	
 	/**
 	 * 根据Id获取数据
 	 * @param id
 	 * @return
 	 */
-	public Admin getById(long id);
+	public SysAdmin getById(long id);
 	
 	/**
 	 * 移除
 	 * @param admin
 	 * @return
 	 */
-	public boolean remove(Admin admin);
+	public boolean remove(SysAdmin admin);
 	
 	
 	/**
@@ -41,20 +41,20 @@ public interface AdminService {
 	 * @param adminList
 	 * @return
 	 */
-	public boolean remove(List<Admin> adminList);
+	public boolean remove(List<SysAdmin> adminList);
 	
 	/**
 	 * 创建或更新数据
 	 * @param admin
 	 * @return
 	 */
-	public boolean saveOrUpdate(Admin admin) ;
+	public boolean saveOrUpdate(SysAdmin admin) ;
 	
 	/**
 	 * 创建或更新数据
 	 * @param admin
 	 * @return
 	 */
-	public boolean saveOrUpdate(List<Admin> adminList) ;
+	public boolean saveOrUpdate(List<SysAdmin> adminList) ;
 
 }

@@ -24,27 +24,27 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.Admin;
+import cn.doublepoint.dto.domain.model.entity.sys.SysAdmin;
 
 @Controller
-@RequestMapping("sys/admin")
+@RequestMapping("sys/SysAdmin")
 public class AdminController extends BaseController{
 
 	@Autowired
 	AdminService adminService;
 
-	@RequestMapping("/admin")
+	@RequestMapping("/SysAdmin")
 	public String adminJsp(HttpServletRequest request, AjaxResponse response) {
-		return "admin.html";
+		return "SysAdmin.html";
 	}
 
-	@RequestMapping("/admin-dialog")
+	@RequestMapping("/SysAdmin-dialog")
 	public AjaxResponse adminDialog(HttpServletRequest request, AjaxResponse response) {
 		String type = request.getParameter("type");
 		if ("edit".equals(type)) {
 			String id = request.getParameter("id");
-			Admin admin = adminService.getById(Long.valueOf(id));
-			response.setAjaxParameter("admin", admin);
+			SysAdmin SysAdmin = adminService.getById(Long.valueOf(id));
+			response.setAjaxParameter("SysAdmin", SysAdmin);
 		}
 		response.setAjaxParameter("type", type);
 		response.setViewName("adminDialog.html");
@@ -54,9 +54,9 @@ public class AdminController extends BaseController{
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Admin> dataWrap = request.getAjaxDataWrap("dataWrap", Admin.class);
-		Admin query = dataWrap.getDataList().get(0);
-		List<Admin> resultList = adminService.find(query, dataWrap.getPageInfo());
+		AjaxDataWrap<SysAdmin> dataWrap = request.getAjaxDataWrap("dataWrap", SysAdmin.class);
+		SysAdmin query = dataWrap.getDataList().get(0);
+		List<SysAdmin> resultList = adminService.find(query, dataWrap.getPageInfo());
 		dataWrap.setDataList(resultList);
 		response.setAjaxParameter("dataWrap", dataWrap);
 		response.setViewName("adminDialog");
@@ -66,7 +66,7 @@ public class AdminController extends BaseController{
 	@RequestMapping("/save")
 	@ResponseBody
 	public boolean save(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Admin> dataWrap = request.getAjaxDataWrap("dataWrap", Admin.class);
+		AjaxDataWrap<SysAdmin> dataWrap = request.getAjaxDataWrap("dataWrap", SysAdmin.class);
 		if (dataWrap == null)
 			return false;
 		return adminService.saveOrUpdate(dataWrap.getDataList());
@@ -75,7 +75,7 @@ public class AdminController extends BaseController{
 	@RequestMapping("/delete")
 	@ResponseBody
 	public boolean delete(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Admin> dataWrap = request.getAjaxDataWrap("dataWrap", Admin.class);
+		AjaxDataWrap<SysAdmin> dataWrap = request.getAjaxDataWrap("dataWrap", SysAdmin.class);
 		if (dataWrap == null)
 			return false;
 		return adminService.remove(dataWrap.getDataList());

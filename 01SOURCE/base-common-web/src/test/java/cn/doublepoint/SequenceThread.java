@@ -10,13 +10,13 @@
 package cn.doublepoint;
 
 import cn.doublepoint.commonutil.SequenceUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 
 
 public class SequenceThread extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println(SequenceUtil.getNextVal(Menu.class));
+		System.out.println(SequenceUtil.getNextVal(SysMenu.class));
 	}
 }

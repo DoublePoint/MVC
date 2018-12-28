@@ -7,7 +7,7 @@
 * 
 * 修   改   人：          修   改   日   期：
 */
-package cn.doublepoint.dto.domain.model.entity.sys;
+package cn.doublepoint.dto.domain.model.vo;
 
 import cn.doublepoint.dto.domain.model.entity.BaseEntity;
 

@@ -25,7 +25,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuServ
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
-import cn.doublepoint.dto.domain.model.entity.sys.Menu;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Controller
@@ -39,7 +39,7 @@ public class MenuTreeController extends BaseTreeController {
 	@ResponseBody
 	public String getMenuTree(@RequestParam(required=true)String code) {
 		try{
-			Menu menu = menuService.getById(Long.valueOf(code));
+			SysMenu menu = menuService.getById(Long.valueOf(code));
 			return menu.getName();
 		}
 		catch(Exception e){
@@ -51,12 +51,12 @@ public class MenuTreeController extends BaseTreeController {
 	@ResponseBody
 	public List<TreeNodeBean> getMenuTree(@RequestBody(required=false)TreeNodeBean node,
 			@RequestParam(required = false) Boolean isHasRoot) {
-		Long code=null;
+		Integer code=null;
 		if(node!=null&&node.getCode()!=null)
-			code=Long.valueOf(node.getCode());
+			code=Integer.valueOf(node.getCode());
 		List<TreeNodeBean> returnMenuList2 = new ArrayList<TreeNodeBean>();
 		if (code==null) {
-			List<VOMenu> menus = getChildrenMenuList(0L);
+			List<VOMenu> menus = getChildrenMenuList(0);
 			returnMenuList2 = menus.stream().map(menu -> {
 				TreeNodeBean nodeBean = new TreeNodeBean();
 				nodeBean.setName(menu.getName());
@@ -87,14 +87,14 @@ public class MenuTreeController extends BaseTreeController {
 		return returnMenuList2;
 	}
 
-	private boolean isHasChild(Long id) {
+	private boolean isHasChild(Integer id) {
 		return menuService.getChildrenCount(id) > 0;
 	}
 
-	private List<VOMenu> getChildrenMenuList(Long id) {
+	private List<VOMenu> getChildrenMenuList(Integer id) {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
-		Menu query = new Menu();
+		SysMenu query = new SysMenu();
 		query.setId(id);
 		menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		return menuList;

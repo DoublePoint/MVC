@@ -23,8 +23,8 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.AnnouncementChanged;
-import cn.doublepoint.dto.domain.model.entity.sys.Worksheet;
+import cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncementChanged;
+import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.workflow.constant.WorkflowConstant;
 import cn.doublepoint.workflow.port.adapter.service.AnnouncementChangedService;
 import cn.doublepoint.workflow.process.WorksheetService;
@@ -56,15 +56,15 @@ public class PublishAnnouncementController extends BaseController{
 	@ResponseBody
 	public AjaxResponse findWorksheetAndChange(@RequestBody AjaxRequest request,AjaxResponse response){
 		String worksheetNo=request.getParameter("worksheetNo");
-		Worksheet worksheet=worksheetService.getByWorksheetNo(worksheetNo);
-		AjaxDataWrap<Worksheet> worksheetWrap=new AjaxDataWrap<>();
+		SysWorksheet worksheet=worksheetService.getByWorksheetNo(worksheetNo);
+		AjaxDataWrap<SysWorksheet> worksheetWrap=new AjaxDataWrap<>();
 		worksheetWrap.setData(worksheet);
 		
-		AjaxDataWrap<AnnouncementChanged> annChangedWrap=new AjaxDataWrap<AnnouncementChanged>();
+		AjaxDataWrap<SysAnnouncementChanged> annChangedWrap=new AjaxDataWrap<SysAnnouncementChanged>();
 		
-		AnnouncementChanged query=new AnnouncementChanged();
+		SysAnnouncementChanged query=new SysAnnouncementChanged();
 		query.setWorksheetNo(worksheetNo);
-		List<AnnouncementChanged> list=announcementChangedService.find(query, null);
+		List<SysAnnouncementChanged> list=announcementChangedService.find(query, null);
 		if(list!=null&&list.size()>0){
 			annChangedWrap.setData(list.get(0));
 			response.setAjaxParameter("annChangedWrap", annChangedWrap);
@@ -75,13 +75,13 @@ public class PublishAnnouncementController extends BaseController{
 	@RequestMapping("save")
 	@ResponseBody
 	public AjaxResponse save(@RequestBody AjaxRequest request,AjaxResponse response){
-		AjaxDataWrap<AnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",AnnouncementChanged.class);
+		AjaxDataWrap<SysAnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",SysAnnouncementChanged.class);
 		
-		Worksheet worksheet=new Worksheet();
+		SysWorksheet worksheet=new SysWorksheet();
 		worksheet.setClassification(WorkflowConstant.WORKFLOW_CLASSIFICATION);
-		String worksheetNo=WorksheetUtil.createAndStart(worksheet.getClassification(), "liulei", worksheet.getDescription());
+		String worksheetNo=WorksheetUtil.createAndStart(worksheet.getClassification(), 123, worksheet.getDescription());
 		
-		AnnouncementChanged changed=annChangedWrap.getData();
+		SysAnnouncementChanged changed=annChangedWrap.getData();
 		changed.setWorksheetNo(worksheetNo);
 		announcementChangedService.saveOrUpdate(changed);
 		response.setAjaxParameter("worksheetNo", worksheetNo);

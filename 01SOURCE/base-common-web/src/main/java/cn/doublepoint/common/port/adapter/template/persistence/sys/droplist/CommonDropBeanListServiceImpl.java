@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import cn.doublepoint.commonutil.ajaxmodel.DropBean;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
-import cn.doublepoint.dto.domain.model.entity.sys.ExtendProperty;
+import cn.doublepoint.dto.domain.model.entity.sys.SysExtendProperty;
 
 @Service("commonDropBeanListService")
 public class CommonDropBeanListServiceImpl implements CommonDropBeanListService {
@@ -23,7 +23,7 @@ public class CommonDropBeanListServiceImpl implements CommonDropBeanListService 
 	 * @return
 	 */
 	public List<DropBean> findDropList(String dropName) {
-		ExtendProperty extPro =extendPropertyService.findByCode(dropName);
+		SysExtendProperty extPro =extendPropertyService.findByCode(dropName);
 		if(extPro==null)
 			return null;
 		try {

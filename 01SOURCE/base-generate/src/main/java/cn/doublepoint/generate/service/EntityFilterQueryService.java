@@ -3,7 +3,7 @@ package cn.doublepoint.generate.service;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
-import cn.doublepoint.dto.domain.model.entity.sys.EntityFilter;
+import cn.doublepoint.dto.domain.model.entity.sys.SysEntityFilter;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.service.BaseQueryService;
 
@@ -24,7 +24,7 @@ public class EntityFilterQueryService extends BaseQueryService{
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<EntityFilter> findAllEntityFilter(PageInfo pageInfo) {
+	public AjaxDataWrap<SysEntityFilter> findAllEntityFilter(PageInfo pageInfo) {
 		return null;
 	}
 	/**
@@ -32,7 +32,7 @@ public class EntityFilterQueryService extends BaseQueryService{
 	 * 
 	 * @return 最底层菜单列表
 	 */
-	public AjaxDataWrap<EntityFilter> findAllEntityFilter(EntityFilter menu,PageInfo pageInfo) {
+	public AjaxDataWrap<SysEntityFilter> findAllEntityFilter(SysEntityFilter menu,PageInfo pageInfo) {
 		return null;
 	}
 

@@ -24,8 +24,8 @@ import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
-import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
-import cn.doublepoint.dto.domain.model.entity.sys.Role;
+import cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole;
+import cn.doublepoint.dto.domain.model.entity.sys.SysRole;
 
 @Controller
 @RequestMapping("sys/role")
@@ -44,11 +44,11 @@ public class RoleManagementController extends BaseController {
 	}
 
 	@RequestMapping("/{roleId}/bind-menu")
-	public AjaxResponse bindMenuJsp(@PathVariable Long roleId, AjaxResponse response) {
+	public AjaxResponse bindMenuJsp(@PathVariable Integer roleId, AjaxResponse response) {
 		response.setViewName("/sys/role/bind-menu.html");
 		response.setAjaxParameter("roleId", roleId);
-		AjaxDataWrap<MenuRole> dataWrap = new AjaxDataWrap<MenuRole>();
-		MenuRole query = new MenuRole();
+		AjaxDataWrap<SysMenuRole> dataWrap = new AjaxDataWrap<SysMenuRole>();
+		SysMenuRole query = new SysMenuRole();
 		query.setRoleId(roleId);
 		dataWrap.setDataList(menuRoleService.find(query, null));
 		response.setAjaxParameter("dataWrap", dataWrap);
@@ -58,7 +58,7 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse roleDataList(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
+		AjaxDataWrap<SysRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysRole.class);
 		if (dataWrap == null)
 			return null;
 		dataWrap.setDataList(roleService.findAll(dataWrap.getPageInfo()));
@@ -69,8 +69,8 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/save")
 	@ResponseBody
 	public boolean save(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Role> addDataWrap = request.getAjaxDataWrap("addDataWrap", Role.class);
-		AjaxDataWrap<Role> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Role.class);
+		AjaxDataWrap<SysRole> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysRole.class);
+		AjaxDataWrap<SysRole> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysRole.class);
 		roleService.saveOrUpdate(addDataWrap.getDataList());
 		roleService.saveOrUpdate(updateDataWrap.getDataList());
 		return true;
@@ -79,10 +79,10 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/{roleId}/binding")
 	@ResponseBody
 	public boolean bindMenu(@PathVariable Long roleId,@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<MenuRole> dataWrap = request.getAjaxDataWrap("dataWrap", MenuRole.class);
+		AjaxDataWrap<SysMenuRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysMenuRole.class);
 		if (dataWrap == null)
 			return true;
-		List<MenuRole> menus = dataWrap.getDataList();
+		List<SysMenuRole> menus = dataWrap.getDataList();
 		menuRoleService.saveOrUpdate(menus);
 		return true;
 	}
@@ -90,7 +90,7 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public boolean delete(@RequestBody AjaxRequest request, AjaxResponse response) throws Exception {
-		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
+		AjaxDataWrap<SysRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysRole.class);
 		if (dataWrap == null)
 			return true;
 		roleService.remove(dataWrap.getDataList());
