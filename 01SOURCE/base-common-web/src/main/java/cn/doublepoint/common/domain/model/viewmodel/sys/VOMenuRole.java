@@ -11,13 +11,6 @@ package cn.doublepoint.common.domain.model.viewmodel.sys;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.engine.transaction.jta.platform.internal.BitronixJtaPlatform;
-
 import cn.doublepoint.dto.domain.model.entity.BaseEntity;
 
 public class VOMenuRole extends BaseEntity {
@@ -39,7 +32,7 @@ public class VOMenuRole extends BaseEntity {
 	private String menuName;
 	
 	private Integer permission; //权限代码
-
+	
 	public Long getId() {
 		return id;
 	}

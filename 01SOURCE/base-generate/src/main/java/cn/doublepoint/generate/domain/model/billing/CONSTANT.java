@@ -16,4 +16,5 @@ public class CONSTANT {
 	public static final String CLASS_TYPE_ENTITY = "Entity";
 	public static final String CLASS_TYPE_ENUM = "Enum";
 	public static final String CLASS_TYPE_VALUEOBJECT = "ValueObject";
+	
 }

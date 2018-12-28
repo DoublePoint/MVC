@@ -13,7 +13,6 @@ import cn.doublepoint.dto.domain.model.entity.sys.Code;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParam;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
-import cn.doublepoint.dto.domain.model.vo.query.SortParam;
 import cn.doublepoint.dto.domain.model.vo.query.SortParamList;
 
 @Service("codeService")

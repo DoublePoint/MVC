@@ -12,8 +12,6 @@ package cn.doublepoint.commonutil.ajaxmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.boot.jaxb.hbm.spi.PluralAttributeInfoPrimitiveArrayAdapter;
-
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
 public  class TreeNodeBean extends BaseModel{
@@ -32,7 +30,7 @@ public  class TreeNodeBean extends BaseModel{
 	private String prop3;
 	private String prop4;
 	private String prop5;
-	private List<String> prop6=new ArrayList<>();
+	private List<String> prop6=new ArrayList<String>();
 	private Object nodeBean;
 	
 	public String getCode() {

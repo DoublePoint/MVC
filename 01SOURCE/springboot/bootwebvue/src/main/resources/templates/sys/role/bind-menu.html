@@ -15,9 +15,9 @@
                         <span>{{ node.label }}</span>
                         <span>
 	                        <span>
-	                            <ll-checkbox-group v-model="data.prop6" @change="groupChange(data)">
-	                                <ll-checkbox :label="1" :key="data.code+'1'">读</ll-checkbox>
-	                                <ll-checkbox :label="2" :key="data.code+'2'">写</ll-checkbox>
+	                            <ll-checkbox-group ref="checkBoxGroup" v-model="data.prop6" @change="groupChange(data)">
+	                                <ll-checkbox :label="'1'" :key="data.code+'1'">读</ll-checkbox>
+	                                <ll-checkbox :label="'2'" :key="data.code+'2'">写</ll-checkbox>
 	                            </ll-checkbox-group>
 	                        </span>
                         </span>
@@ -28,7 +28,7 @@
                 <ll-form id="ajaxform" cols="1" label-width="100px">
                     <ll-form-item>
                         <ll-button type="primary" @click="save">保存</ll-button>
-                        <ll-button type="text" @click="reset">重置</ll-button>
+                        <ll-button type="text" @click="canc">取消</ll-button>
                     </ll-form-item>
                 </ll-form>
             </ll-footer>
@@ -59,16 +59,18 @@
                     	dataWrap:dataWrap
                     },
                     success: function (response) {
-                        var dataWrap = response.get("dataWrap");
-                        if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
-                            0)
-                            vm.$alert("未查询到任何数据!");
-                        vm.$set(vm.$data, "dataWrap", dataWrap);
+                       if(response==true){
+                    	   $.success("保存成功");
+                    	   $.close();
+                       }
+                       else
+                    	   $.error("绑定失败");
                     }
                 });
 			},
-			reset:function(){
-				
+			canc:function(){
+
+         	   $.close();
 			},
 			groupChange(data,b,c){
 				var menuRole = data.nodeBean;
@@ -77,7 +79,7 @@
 					id:menuRole.id,
 					menuId:data.code,
 					roleId:roleId,
-					permission:_.reduce(data.prop6, function(memo, num){ return memo + num; }, 0)
+					permission:_.reduce(data.prop6, function(memo, num){ return vm.$_.toNumber(memo) + vm.$_.toNumber(num); }, 0)
 				}
 				var index = this.$_.findIndex(this.updateList,function(i){
 					return i.menuId == data.code;

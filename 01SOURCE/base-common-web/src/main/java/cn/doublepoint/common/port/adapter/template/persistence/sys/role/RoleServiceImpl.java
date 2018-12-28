@@ -2,6 +2,7 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.commonutil.DateTimeUtil;
@@ -13,6 +14,8 @@ import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 @Service("roleService")
 public class RoleServiceImpl  implements RoleService{
 
+	@Autowired
+	MenuRoleService menuRoleService;
 	/**
 	 * 根据查询条件以及分页信息，查询所有数据
 	 * 
@@ -37,9 +40,13 @@ public class RoleServiceImpl  implements RoleService{
 	 * 移除
 	 * @param role
 	 * @return
+	 * @throws Exception 
 	 */
 	@Override
-	public boolean remove(Role role){
+	public boolean remove(Role role) throws Exception{
+		if(menuRoleService.isExistByRoleId(role.getId())){
+			throw new Exception("已经存在关联的");
+		}
 		JPAUtil.remove(role);
 		return true;
 	}
@@ -51,10 +58,12 @@ public class RoleServiceImpl  implements RoleService{
 	 * @return
 	 */
 	@Override
-	public boolean remove(List<Role> roleList){
-		roleList.stream().forEach(item -> {
-			JPAUtil.remove(item);
-		});
+	public boolean remove(List<Role> roleList) throws Exception{
+		if(roleList==null || roleList.size()>0)
+			return true;
+		for (Role role : roleList) {
+			remove(role);
+		}
 		return true;
 	}
 	

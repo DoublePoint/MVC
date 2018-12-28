@@ -33,7 +33,7 @@ public interface RoleService {
 	 * @param role
 	 * @return
 	 */
-	public boolean remove(Role role);
+	public boolean remove(Role role)  throws Exception;
 	
 	
 	/**
@@ -41,7 +41,7 @@ public interface RoleService {
 	 * @param roleList
 	 * @return
 	 */
-	public boolean remove(List<Role> roleList);
+	public boolean remove(List<Role> roleList)  throws Exception;
 	
 	/**
 	 * 创建或更新数据

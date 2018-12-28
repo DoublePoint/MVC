@@ -246,6 +246,19 @@
             obj.zIndex =1999;
             parent.layer.open(obj);
         },
+        close:function(){
+        	//当你在iframe页面关闭自身时
+        	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        	parent.layer.close(index); //再执行关闭   
+        },
+        showLoadding:function(){
+        	parent.layer.load(1, {
+        		  shade: [0.1,'#fff'] //0.1透明度的白色背景
+        		});
+        },
+        closeLoadding:function(){
+        	parent.layer.closeAll('loading'); //关闭加载层
+        },
         confirm:function(msg,func1,func2){
         	var	btn=["确定","取消"]
         	parent.layer.confirm(msg,btn,function(index){
@@ -264,6 +277,7 @@
             // 封装操作成功函数
             var successFunction = settings.success;
             settings.success = function(responseData) {
+            	$.closeLoadding();
                 if (successFunction != null) {
                     if (typeof(responseData) == 'string' || typeof(responseData) == 'boolean') {
                         successFunction(responseData);
@@ -285,6 +299,7 @@
             var errorFunction = settings.error;
 
             settings.error = function(responseData) {
+            	$.closeLoadding();
                 if (errorFunction != null) {
                     if (typeof(responseData) == 'string') {
                         errorFunction(responseData);
@@ -305,6 +320,7 @@
             ajaxRequest.map = settings.data;
             settings.data = JSON.stringify(ajaxRequest);
             settings.accept = "*/*";
+            $.showLoadding();
             $.ajax(settings);
         },
     });

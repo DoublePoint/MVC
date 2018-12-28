@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenuRole;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.MenuRoleService;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.dto.domain.model.entity.sys.Menu;
-import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 @Controller
 @RequestMapping("sys")
@@ -60,6 +57,7 @@ public class MenuRoleTreeController extends BaseTreeController {
 				}
 				nodeBean.setCode(String.valueOf(menu.getMenuId()));
 				nodeBean.setNodeBean(menu);
+				nodeBean.setProp6(menuRoleService.getRightList(menu));
 				return nodeBean;
 			}).collect(java.util.stream.Collectors.toList());
 		} else {
@@ -74,6 +72,7 @@ public class MenuRoleTreeController extends BaseTreeController {
 				}
 				nodeBean.setCode(String.valueOf(menu.getMenuId()));
 				nodeBean.setNodeBean(menu);
+				nodeBean.setProp6(menuRoleService.getRightList(menu));
 				return nodeBean;
 			}).collect(java.util.stream.Collectors.toList());
 		}

@@ -51,9 +51,6 @@ export default {
     labelDatasource: String,
     value: "",
     items:{
-      default(){
-        return [];
-      },
       type: Array
     }
   },

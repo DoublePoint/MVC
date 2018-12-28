@@ -16,17 +16,22 @@
 		        </ll-radio-group>
             </ll-header>
             <ll-container>
-                <ll-aside :width="style.asideWidth"  style="background-color:#272b2e">
+                <ll-aside :width="style.asideWidth"  style="background-color:#19233C">
                     <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
-                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#272b2e" text-color="#fff"></ll-menu-zz>
+                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#19233C" text-color="#fff"></ll-menu-zz>
                 </ll-aside>
                 <ll-main style="padding: 0 0 0 0px;">
                     <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
                         <ll-tab-pane name="首页" :closable="false" style="height: 100%;overflow: auto;">
-                            <span slot="label"><i class="fa fa-home fa-fw"></i>首页</span>
+                            <template slot="label">
+				                <span @contextmenu.prevent="rightClick($event)" style="position:relative;line-height: 40px;display:inline-block;"><i class="fa fa-home fa-fw"></i>首页</span>
+				            </template>
                         </ll-tab-pane>
                         <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name"
                             :closable="item.closable==null?false:item.closable" style="height: 100%;overflow: auto;">
+                            <template slot="label">
+				                <span @contextmenu.prevent="rightClick($event)" style="position:relative;line-height: 40px;display:inline-block;">{{item.title}}</span>
+				            </template>
                             <iframe :src="pageContextPath+item.link" style="height: 100%;width: 100%;display:block"
                                 frameborder='0'></iframe>
                         </ll-tab-pane>
@@ -35,6 +40,26 @@
             </ll-container>
             <ll-footer style="height: 25px;background-color:#272b2e;color:#fff;line-height:25px;">997820126@qq.com</ll-footer>
         </ll-container>
+        
+        <div style="z-index:100;position:absolute;padding:20px;" :style="{left:menuX+'px',top:menuY+'px'}" v-show="rightMenuVisible" @mouseleave ="rightMenuVisible=false;">
+        <ll-menu default-active="2"  
+        background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+            <ll-menu-item index="2">
+              <i class="el-icon-menu"></i>
+              <span slot="title">关闭当前</span>
+            </ll-menu-item>
+            <ll-menu-item index="3" >
+              <i class="el-icon-document"></i>
+              <span slot="title">关闭右侧</span>
+            </ll-menu-item>
+            <ll-menu-item index="4">
+              <i class="el-icon-setting"></i>
+              <span slot="title">关闭所有</span>
+            </ll-menu-item>
+          </ll-menu>
+    </div>
     </div>
 
     <script type="text/javascript">
@@ -43,6 +68,11 @@
         var vm = new Vue({
             el: '#app',
             methods: {
+            	 rightClick(eve) {
+                     this.menuX=eve.clientX-20;
+                     this.menuY=eve.clientY-20;
+                     this.rightMenuVisible = true;
+                   },
                 menuSelect:function(index, indexPath, item) {
                     this.addTab({
                         name: item.name,
@@ -89,6 +119,9 @@
                 activeTab: "首页",
                 pageContextPath: $$pageContextPath,
                 isCollapse: false,
+                rightMenuVisible: false,
+                menuX:0,
+                menuY:0,
                 menuProp: {
                     id: "menuIndex",
                     label: "name",

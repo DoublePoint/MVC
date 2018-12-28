@@ -66,11 +66,13 @@ public class RoleManagementController extends BaseController {
 		return response;
 	}
 
-	@RequestMapping("/{roleId}/save")
+	@RequestMapping("/save")
 	@ResponseBody
-	public boolean save(@PathVariable Long roleId,@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<MenuRole> dataWrap = request.getAjaxDataWrap("dataWrap", MenuRole.class);
-		menuRoleService.saveOrUpdate(dataWrap.getDataList());
+	public boolean save(@RequestBody AjaxRequest request, AjaxResponse response) {
+		AjaxDataWrap<Role> addDataWrap = request.getAjaxDataWrap("addDataWrap", Role.class);
+		AjaxDataWrap<Role> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", Role.class);
+		roleService.saveOrUpdate(addDataWrap.getDataList());
+		roleService.saveOrUpdate(updateDataWrap.getDataList());
 		return true;
 	}
 
@@ -81,25 +83,16 @@ public class RoleManagementController extends BaseController {
 		if (dataWrap == null)
 			return true;
 		List<MenuRole> menus = dataWrap.getDataList();
-//		if (menus == null)
-//			return false;
-//		List<MenuRole> list = menus.stream().map(menu -> {
-//			MenuRole mRole = new MenuRole();
-//			mRole.setMenuId(Long.valueOf(menu.getCode()));
-//			mRole.setRoleId(roleId);
-//			return mRole;
-//		}).collect(toList());
 		menuRoleService.saveOrUpdate(menus);
 		return true;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public boolean delete(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("deleteDataWrap", Role.class);
+	public boolean delete(@RequestBody AjaxRequest request, AjaxResponse response) throws Exception {
+		AjaxDataWrap<Role> dataWrap = request.getAjaxDataWrap("dataWrap", Role.class);
 		if (dataWrap == null)
 			return true;
-
 		roleService.remove(dataWrap.getDataList());
 		return true;
 	}

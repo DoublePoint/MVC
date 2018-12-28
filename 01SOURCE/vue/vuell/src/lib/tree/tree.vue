@@ -24,10 +24,19 @@ export default {
     props:{
       default(){
         return{
-          label: String,
-          children: String,
+          label: {
+            default:"name",
+            type: String
+          },
+          children: {
+            default:"children",
+            type: String
+          },
           disabled: String,
-          isLeaf: String
+          isLeaf: {
+            default:"children",
+            type: isLeaf
+          }
         }
       },
       type:Object
@@ -44,19 +53,9 @@ export default {
     showCheckbox:{
       default:false,
       type:Boolean
-    }
-  },
-  data() {
-    return {
-    };
-  },
-  methods: {
-    handleNodeClick(nodeData,node) {
-        this.$emit("node-click",nodeData,node);
     },
-    load(node, resolve){
-       if (node.level === 0) {
-         var menu = {
+    root(){
+      return  menu = {
            	code:"",
             title:"",
             name:"",
@@ -68,16 +67,28 @@ export default {
             prop5:"",
             prop6:[]
          };
-         return resolve([{ name: '菜单树' }]);
-        }
+    }
+  },
+  data() {
+    return {
+    };
+  },
+  methods: {
+    handleNodeClick(nodeData,node) {
+        this.$emit("node-click",nodeData,node);
+    },
+    load(node, resolve){
+      // if (node.level === 0) {
+      //    return resolve([{ name: '菜单树' }]);
+      // }
       if(this.datasource==null||this.datasource=="")
         throw new Error("ll:prop 'datasource' must not be null",'tree.vue');
       var nodeData=node.data;
-      if(nodeData[this.props.children]!=null&&nodeData[this.props.children].length>0)
-        return;
-      if(node.level==0){
-        nodeData=null;
+      if(nodeData!=null){
+        if(nodeData[this.props.children]!=null&&nodeData[this.props.children].length>0)
+          return;
       }
+      
       
       this.$request.request({
         url:this.datasource,

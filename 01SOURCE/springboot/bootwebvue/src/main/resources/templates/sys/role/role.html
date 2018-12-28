@@ -15,11 +15,6 @@
                     </div>
                     <ll-form :model="form" :status-icon="true" ref="form" label-width="100px" style="width:100%">
                         <ll-col :span="6">
-                            <ll-form-item label="角色标识" prop="id">
-                                <ll-input v-model="form.id"></ll-input>
-                            </ll-form-item>
-                        </ll-col>
-                        <ll-col :span="6">
                             <ll-form-item label="角色名称" prop="name">
                                 <ll-input v-model="form.name"></ll-input>
                             </ll-form-item>
@@ -52,9 +47,9 @@
                     <ll-table-zz :data-wrap="dataWrap" :readonly="false" ref="tableMain" @current-change="retrieve">
                         <ll-table-column-zz type="selection" :width="55">
                         </ll-table-column-zz>
-                        <ll-table-column-zz :sortable="false" label="绑定菜单" :istemplate="true" :width="180">
+                        <ll-table-column-zz :sortable="false" label="绑定菜单" :istemplate="true" :width="70" >
 				            <template slot-scope="scope">
-								 <ll-button size="mini" @click="showBindMenuDialog(scope.row)">绑定菜单</ll-button>
+								 <ll-button size="mini" @click="showBindMenuDialog(scope.row)" plain type="primary"><i class="fa fa-handshake-o" aria-hidden="true"></i></ll-button>
 				            </template>
 					    </ll-table-column-zz>
                         <ll-table-column-zz prop="id" label="角色代码" :width="150">

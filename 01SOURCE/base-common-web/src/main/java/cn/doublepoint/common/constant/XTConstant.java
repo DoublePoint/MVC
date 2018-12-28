@@ -26,4 +26,6 @@ public class XTConstant {
 	public static final String SESSION_USER="USER";//SESSION的名称
 	
 
+	public static final int PROPERTY_RIGHT_WRITE = 2; //写权限
+	public static final int PROPERTY_RIGHT_READ = 1;//读权限
 }

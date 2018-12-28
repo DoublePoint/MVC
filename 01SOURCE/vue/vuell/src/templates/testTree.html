@@ -15,12 +15,11 @@
       <div slot="header" class="clearfix">
         <span class="ll-main-title">查询条件</span>
       </div>
-      <ll-tree-zz :items="data" :props="defaultProps" show-checkbox :datasource="datasource" accordion @node-click="handleNodeClick">
+      <ll-tree-zz ref="tree" :items="data" :props="defaultProps" show-checkbox :datasource="datasource" accordion @node-click="handleNodeClick">
         <span slot-scope="{ node, data }" style="
         flex: 1;
         display: flex;
         align-items: center;
-        font-size: 14px;
         justify-content: space-between;
         padding-right: 8px;">
             <span >{{ node.label }}</span>
@@ -40,9 +39,7 @@
     el: '#app',
     data: {
       datasource: "http://localhost:8083/web/sys/menu-tree/menus",
-      data: [{
-        name: '菜单树',
-      }],
+      data: null,
       defaultProps: {
         children: 'children',
         label: 'name',

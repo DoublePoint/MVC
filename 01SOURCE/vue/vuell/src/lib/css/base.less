@@ -1,5 +1,6 @@
 @baseColor: #409EFF;
 @lineHeight: 30px;
+@baseFontSize:12px;
 
 .el-menu--collapse>div>.el-menu-item [class^=el-icon-], .el-menu--collapse>div>.el-submenu>.el-submenu__title [class^=el-icon-] {
   margin: 0;
@@ -107,12 +108,21 @@
 }
 
 .ll-main-title{
-  font-size: 14px;
+  font-size: @baseFontSize;
 }
 .ll-main-span{
-    font-size: 14px;
+  font-size: @baseFontSize;
 }
-
+.menuitem span{
+  font-size: @baseFontSize;
+}
+[class^="el-"]{
+  font-size: @baseFontSize;
+}
 .el-input__icon{
   line-height: @lineHeight;
+}
+.menu-icon{
+  color:#8D99b0!important;
+  font-size: 14px;
 }

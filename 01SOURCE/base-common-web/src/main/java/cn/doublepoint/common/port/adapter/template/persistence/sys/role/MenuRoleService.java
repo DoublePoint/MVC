@@ -80,5 +80,46 @@ public interface MenuRoleService {
 	 * @return
 	 */
 	public List<VOMenuRole> findChildrenMenuRole(Long roleId , Menu query);
+	
+	/**
+	 * 判断是否有写权限
+	 * @param a
+	 * @return
+	 */
+    public boolean isHasWriteRight(Integer a);
+	
+	/**
+	 * 判断是否有读权限
+	 * @param a
+	 * @return
+	 */
+    public boolean isHasReadRight(Integer a);
 
+    /**
+     * 获取权限值列表
+     * @param mRole
+     * @return
+     */
+    public List<String> getRightList(VOMenuRole mRole);
+    /**
+     * 获取权限值列表
+     * @param mRole
+     * @return
+     */
+    public List<String> getRightList(MenuRole mRole);
+
+    /**
+     * 根据roleId以及menuId获取数据
+     * @param roleId
+     * @param menuId
+     * @return
+     */
+    public MenuRole getByRoleIdAndMenuId(Long roleId,Long menuId);
+    
+    /**
+     * 根据角色判断是否查询当前角色关联
+     * @param roleId
+     * @return
+     */
+    public boolean isExistByRoleId(Long roleId);
 }

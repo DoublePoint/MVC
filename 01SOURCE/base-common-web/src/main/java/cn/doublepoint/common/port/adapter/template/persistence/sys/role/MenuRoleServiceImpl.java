@@ -1,16 +1,17 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.role;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import cn.doublepoint.common.constant.XTConstant;
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenuRole;
 import cn.doublepoint.common.session.SysCommonUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.dto.domain.model.entity.sys.Menu;
 import cn.doublepoint.dto.domain.model.entity.sys.MenuRole;
@@ -80,6 +81,7 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 */
 	@Override
 	public boolean saveOrUpdate(MenuRole menuRole) {
+		
 		if (menuRole.getId() == null) {
 			menuRole.setId(SequenceUtil.getNextVal(MenuRole.class));
 			menuRole.setCreateTime(DateTimeUtil.getCurrentDate());
@@ -97,32 +99,20 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 	 */
 	@Override
 	public boolean saveOrUpdate(List<MenuRole> menuRoleList) {
-		
 		menuRoleList.stream().forEach(item -> {
-			if(item.getId()==null){
-				item.setId(SequenceUtil.getNextVal(MenuRole.class));
+			MenuRole mRole = this.getByRoleIdAndMenuId(item.getRoleId(), item.getMenuId());
+			if(mRole == null){
+				if(item.getId()==null){
+					item.setId(SequenceUtil.getNextVal(MenuRole.class));
+				}
+			}
+			else{
+				item.setId(mRole.getId());
 			}
 			if(item.getCreateTime()==null)
 				item.setCreateTime(DateTimeUtil.getCurrentDate());
 			if(item.getModifyTime()==null)
 				item.setModifyTime(DateTimeUtil.getCurrentDate());
-//			QueryParamList params = new QueryParamList();
-//			StringBuffer sBuffer= new StringBuffer();
-//			sBuffer.append("update MenuRole mr set mr.permission = :permission where roleId=:roleId ");
-//			sBuffer.append(" and menuId = :menuId");
-//			
-//			params.addParam("permission", item.getPermission());
-//			params.addParam("menuId", item.getMenuId());
-//			params.addParam("roleId", item.getRoleId());
-			
-//			JPAUtil.executeUpdate(sBuffer.toString(),params);
-
-		
-//			if (item.getId() == null) {
-//				item.setId(SequenceUtil.getNextVal(MenuRole.class));
-//				item.setCreateTime(DateTimeUtil.getCurrentDate());
-//			}
-//			item.setModifyTime(DateTimeUtil.getCurrentDate());
 		});
 
 		JPAUtil.saveOrUpdate(menuRoleList);
@@ -204,4 +194,87 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 			return res;
 		}).collect(Collectors.toList());
 	}
+	
+	/**
+	 * 判断是否有写权限
+	 * @param a
+	 * @return
+	 */
+	@Override
+    public  boolean isHasWriteRight(Integer a){
+    	return ((a.intValue())&XTConstant.PROPERTY_RIGHT_WRITE)==XTConstant.PROPERTY_RIGHT_WRITE;
+    }
+	
+	/**
+	 * 判断是否有写权限
+	 * @param a
+	 * @return
+	 */
+	@Override
+    public boolean isHasReadRight(Integer a){
+    	return ((a.intValue())&XTConstant.PROPERTY_RIGHT_READ)==XTConstant.PROPERTY_RIGHT_READ;
+    }
+	
+	/**
+	 * 获取权限值列表
+	 * @param mRole
+	 * @return
+	 */
+	@Override
+	public List<String> getRightList(MenuRole mRole){
+		List<String> list = new ArrayList<String>();
+		if(isHasWriteRight(mRole.getPermission()))
+			list.add(String.valueOf(XTConstant.PROPERTY_RIGHT_WRITE));
+		if(isHasReadRight(mRole.getPermission()))
+			list.add(String.valueOf(XTConstant.PROPERTY_RIGHT_READ));
+		return list;
+	}
+	
+	/**
+	 * 获取权限值列表
+	 * @param mRole
+	 * @return
+	 */
+	@Override
+	public List<String> getRightList(VOMenuRole mRole){
+		List<String> list = new ArrayList<String>();
+		if(isHasWriteRight(mRole.getPermission()))
+			list.add(String.valueOf(XTConstant.PROPERTY_RIGHT_WRITE));
+		if(isHasReadRight(mRole.getPermission()))
+			list.add(String.valueOf(XTConstant.PROPERTY_RIGHT_READ));
+		return list;
+	}
+	
+	/**
+	 * 根据roleid以及menuid获取数据
+	 * @param roleId
+	 * @param menuId
+	 * @return
+	 */
+	@Override
+	public MenuRole getByRoleIdAndMenuId(Long roleId,Long menuId){
+		QueryParamList paramList = new QueryParamList();
+		paramList.addParam("roleId",roleId);
+		paramList.addParam("menuId",menuId);
+		List<MenuRole> list = JPAUtil.load(MenuRole.class, paramList);
+		if(list.size()>0)
+			return list.get(0);
+		return null;
+	}
+	
+	/**
+	 * 根据roleid获取数据
+	 * @param roleId
+	 * @param menuId
+	 * @return
+	 */
+	@Override
+	public boolean isExistByRoleId(Long roleId){
+		QueryParamList paramList = new QueryParamList();
+		paramList.addParam("roleId",roleId);
+		long count = JPAUtil.count(MenuRole.class, paramList);
+		return count>0;
+	}
+	
+	
 }
