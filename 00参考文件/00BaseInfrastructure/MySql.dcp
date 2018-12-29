@@ -1,0 +1,9 @@
+[ConnectionProfile]
+ConnectionType=JDBC
+Dbms=MySQL
+DisableBind=0
+Driver=com.mysql.jdbc.Driver
+JarFiles=D:\.m2\repository\mysql\mysql-connector-java\5.1.27\mysql-connector-java-5.1.27.jar
+LogId=root
+TrimSpaces=0
+URL=jdbc:mysql://localhost:3306/bootweb
