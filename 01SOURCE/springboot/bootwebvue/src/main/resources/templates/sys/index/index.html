@@ -16,12 +16,14 @@
 		        </ll-radio-group>
             </ll-header>
             <ll-container>
+            	<ll-scrollbar>
 	                <ll-aside :width="style.asideWidth"  style="background-color:#19233C">
 	                	
 		                    <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
 		                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#19233C" text-color="#fff"></ll-menu-zz>
 	                	
 	                </ll-aside>
+	                </ll-scrollbar>
                 <ll-main style="padding: 0 0 0 0px;">
                     <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
                         <ll-tab-pane name="首页" :closable="false" style="height: 100%;overflow: auto;">
@@ -153,5 +155,10 @@
             })
     </script>
 </body>
-
+<style>
+.el-scrollbar__wrap{
+	overflow-x:hidden;
+	background-color:#19233C;
+}
+</style>
 </html>
