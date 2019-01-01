@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="base-common-dto">
-		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdmin</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdminLoginLog</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncement</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncementChanged</class>
@@ -18,5 +17,7 @@
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysWorksheetAduit</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysDepartment</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdmin</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdminRole</class>
 	</persistence-unit>
 </persistence>

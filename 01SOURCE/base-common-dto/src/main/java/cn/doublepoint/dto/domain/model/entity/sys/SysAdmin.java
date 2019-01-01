@@ -22,6 +22,9 @@ public class SysAdmin extends cn.doublepoint.dto.domain.model.entity.BaseEntity 
 	@Column(name="CREATE_TIME")
 	private Date createTime;
 
+	@Column(name="DEPARTMENT_ID")
+	private Integer departmentId;
+
 	private String enable;
 
 	@Column(name="LOGIN_ACCOUNT_NO")
@@ -54,6 +57,14 @@ public class SysAdmin extends cn.doublepoint.dto.domain.model.entity.BaseEntity 
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Integer getDepartmentId() {
+		return this.departmentId;
+	}
+
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	public String getEnable() {

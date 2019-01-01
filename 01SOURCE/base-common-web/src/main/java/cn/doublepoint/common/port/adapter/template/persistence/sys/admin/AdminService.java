@@ -1,4 +1,4 @@
-package cn.doublepoint.common.port.adapter.template.persistence.sys.login;
+package cn.doublepoint.common.port.adapter.template.persistence.sys.admin;
 import java.util.List;
 
 import cn.doublepoint.dto.domain.model.entity.sys.SysAdmin;

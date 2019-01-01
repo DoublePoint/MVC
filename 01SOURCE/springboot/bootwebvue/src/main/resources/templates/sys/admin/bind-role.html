@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+</head>
+<body>
+	<div id="app" style="height: 100%;width: 100%;" v-cloak>
+	 <ll-container style="height: 100%; ">
+            <ll-aside width="260px" style="border-right:1px solid #eee;">
+                <ll-card class="box-card" style="height:100%;">
+                	<div slot="header" class="clearfix">
+                            <span class="ll-main-span">绑定角色</span>
+                    </div>
+                    <ll-table-zz :data-wrap="roleDataWrap" :readonly="false" ref="tableRole" @current-change="retrieve">
+                        <ll-table-column-zz type="selection" :width="55">
+                        </ll-table-column-zz>
+                        <ll-table-column-zz prop="id" label="角色代码" :width="100">
+                        </ll-table-column-zz>
+                        <ll-table-column-zz prop="name" label="角色名称" :width="100">
+                        </ll-table-column-zz>
+                    </ll-table-zz>
+                </ll-card>
+            </ll-aside>
+            <ll-container style="height: 100%; ">
+            	<ll-aside width="100px" style="border-right:1px solid #eee;">
+	                <div class="el-transfer__buttons">
+	                	<ll-button type="primary" icon="el-icon-edit" size="small"  circle class="el-transfer__button"></ll-button>
+  						<ll-button type="success" icon="el-icon-check" size="small"  circle class="el-transfer__button"></ll-button>
+	                </div>
+	            </ll-aside>
+	            <ll-main style="height: 100%;width:260px; vertical-align: middle; ">
+	            	
+                    <ll-card class="box-card" style="height:100%;">
+                    	<div slot="header" class="clearfix">
+                            <span class="ll-main-span">已经绑定的角色</span>
+                    	</div>
+	                    <ll-table-zz :data-wrap="roleAdminDataWrap" :readonly="false" ref="tableRoleAdmin" @current-change="retrieve">
+	                        <ll-table-column-zz type="selection" :width="55">
+	                        </ll-table-column-zz>
+	                        <ll-table-column-zz prop="id" label="角色代码" :width="100">
+	                        </ll-table-column-zz>
+	                        <ll-table-column-zz prop="name" label="角色名称" :width="100">
+	                        </ll-table-column-zz>
+                    	</ll-table-zz>
+	                </ll-card>
+	            </ll-main>
+            </ll-container>
+	</div>
+<script type="text/javascript">
+var roleDataWrap = ajaxResponse.get("roleDataWrap");
+var roleAdminDataWrap = ajaxResponse.get("roleAdminDataWrap");
+var vm = new Vue({
+    el: '#app',
+    data: {
+    	roleDataWrap: roleDataWrap,
+    	roleAdminDataWrap: roleAdminDataWrap
+    },
+    methods:{
+    	retrieve:function(){
+    		
+    	}
+    }
+});
+</script>
+</body>
