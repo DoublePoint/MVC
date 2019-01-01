@@ -51,7 +51,7 @@ public interface MenuService {
 	 * @param id
 	 * @return
 	 */
-	public SysMenu getById(long id);
+	public SysMenu getById(Integer id);
 	
 	/**
 	 * 获取子节点数目

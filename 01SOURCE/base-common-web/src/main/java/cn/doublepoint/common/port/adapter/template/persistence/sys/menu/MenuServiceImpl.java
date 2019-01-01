@@ -85,7 +85,7 @@ public class MenuServiceImpl implements MenuService{
 	 * @param id
 	 * @return
 	 */
-	public SysMenu getById(long id){
+	public SysMenu getById(Integer id){
 		return JPAUtil.loadById(SysMenu.class, id);
 	}
 
@@ -112,7 +112,7 @@ public class MenuServiceImpl implements MenuService{
 			menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 			menu.setParentId(0);
 		} else {
-			SysMenu parentCd = getById(Long.valueOf(menu.getParentId()));
+			SysMenu parentCd = getById(menu.getParentId());
 			if(parentCd==null){
 				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 				menu.setParentId(0);
@@ -140,7 +140,7 @@ public class MenuServiceImpl implements MenuService{
 				menu.setLevel(Integer.valueOf(XTConstant.TREE_ROOT_NODE_CJ));
 				menu.setParentId(0);
 			} else {
-				SysMenu parentCd = getById(Long.valueOf(menu.getParentId()));
+				SysMenu parentCd = getById(menu.getParentId());
 				menu.setLevel(parentCd.getLevel() + 1);
 			}
 			if (menu.getId() == null){

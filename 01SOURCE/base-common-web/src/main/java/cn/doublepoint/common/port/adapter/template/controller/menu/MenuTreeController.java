@@ -39,7 +39,7 @@ public class MenuTreeController extends BaseTreeController {
 	@ResponseBody
 	public String getMenuTree(@RequestParam(required=true)String code) {
 		try{
-			SysMenu menu = menuService.getById(Long.valueOf(code));
+			SysMenu menu = menuService.getById(Integer.valueOf(code));
 			return menu.getName();
 		}
 		catch(Exception e){

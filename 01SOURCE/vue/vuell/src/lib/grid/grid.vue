@@ -32,6 +32,7 @@
 </template>
 
 <script>
+
 export default {
   name: "LlTableZz",
   props: {
@@ -111,7 +112,7 @@ export default {
       }
     },
     spanMethod({ row, column, rowIndex, columnIndex }) {
-      console.log("-----------span-method");
+      //console.log("-----------span-method");
       this.$emit("span-method", { row, column, rowIndex, columnIndex });
     },
 

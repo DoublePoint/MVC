@@ -81,7 +81,7 @@
       /** add by liulei 2018-11-23 start */
       llCollapse() {
         this.handleCollapseToggle(this.$store.state.llCollapse);
-        console.log('this.$store.state.menuCollapse:' + this.$store.state.menuCollapse);
+        //console.log('this.$store.state.menuCollapse:' + this.$store.state.menuCollapse);
         return this.$store.state.menuCollapse;
       },
       /** add by liulei 2018-11-23 start */

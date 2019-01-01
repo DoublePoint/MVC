@@ -17,5 +17,6 @@
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysUser</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysWorksheetAduit</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysDepartment</class>
 	</persistence-unit>
 </persistence>

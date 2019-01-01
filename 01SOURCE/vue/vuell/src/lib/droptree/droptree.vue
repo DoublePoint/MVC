@@ -15,21 +15,23 @@
       :datasource="datasource"  
       accordion
       @node-click="handleNodeClick"
+      @current-change="currentChange"
     ></ll-tree-zz>
     <!-- <ll-button slot="reference">click 激活</ll-button> -->
-    <ll-input slot="reference" :suffix-icon="suffixIcon" v-model="value"
+    <ll-input ref="input" slot="reference" :suffix-icon="suffixIcon" v-model="selectLabel"
       :readonly="true">
-       <template slot="append">{{selectLabel}}</template>
+       <!-- <template slot="append">{{selectLabel}}</template> -->
     </ll-input>
   </ll-popover>
 </template>
 
 <script>
+
 export default {
   name: "LlDropTreeZz",
   model: {
     prop: 'value',
-    event: 'change1'
+    event: 'node-click'
   },
   props: {
     props: {
@@ -63,17 +65,20 @@ export default {
         label: "name",
         isLeaf: "isLeaf"
       },
-      selectLabel:"",
       suffixIcon: "el-icon-caret-bottom",
-      visible:false
+      visible:false,
+      selectLabel:""
     };
+  },
+  computed:{
+    
   },
   watch: {
     // 如果 `value` 发生改变，这个函数就会运行
     value: function (newValue, oldValue) {
       var targetNode = this.$refs["tree"].getNode(newValue);
         if(!targetNode){
-          this.getLabel();
+          this.getShowValue();
         }
         else{
           this.selectLabel = targetNode.label;
@@ -82,15 +87,21 @@ export default {
     }
   },
   methods: {
+    focus(){
+      this.$refs.input.focus();
+    },
     handleNodeClick(data) {
       this.selectLabel=data.name;
       this.visible=false;
-      this.$emit('change1', data.code)
+      //this.value=data.code;
+      this.$emit('node-click', data.code)
     },
     showPopover() {
       this.suffixIcon="el-icon-caret-top"
     },
-    getLabel(successfunc){
+    getShowValue(successfunc){
+      if(!this.$_.isBlank(this.selectLabel))
+        return this.selectLabel;
       var _this = this 
       if(this.labelDatasource!=null){
           this.$request.request({
@@ -116,11 +127,15 @@ export default {
       }
     },
     hidePopover() {
-      this.suffixIcon="el-icon-caret-bottom"
+      this.suffixIcon="el-icon-caret-bottom";
+      this.$emit("hide-droptree");
     },
+    currentChange(nodeData,node){
+      this.$emit("current-change",nodeData,node)
+    }
   },
   created(){
-     this.getLabel();
+     this.getShowValue();
   }
 };
 </script>

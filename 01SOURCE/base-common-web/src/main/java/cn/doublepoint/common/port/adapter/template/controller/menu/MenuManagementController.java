@@ -66,7 +66,7 @@ public class MenuManagementController extends BaseController {
 		String id = request.getParameter("id");
 		String menuName = "";
 		try {
-			SysMenu menu = menuService.getById(Long.valueOf(id));
+			SysMenu menu = menuService.getById(Integer.valueOf(id));
 			if (menu != null) {
 				menuName = menu.getName();
 			}

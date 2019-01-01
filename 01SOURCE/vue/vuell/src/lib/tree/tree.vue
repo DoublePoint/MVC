@@ -4,6 +4,7 @@
       ref="tree"
       node-key="code"
       :show-checkbox="showCheckbox"
+      @current-change="currentChange"
       :lazy="lazy">
       <span slot-scope="{ node, data }" style="display:inline-block;width:100%;">
           <slot :node="node" :data="data">
@@ -102,6 +103,12 @@ export default {
     },
     getNode(node){
       return this.$refs["tree"].getNode(node);
+    },
+    getCurrentNode(){
+      return this.$refs.tree.getCurrentNode();
+    },
+    currentChange(nodeData,node){
+      this.$emit("current-change",nodeData,node)
     }
   },
   watch:{

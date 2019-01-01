@@ -1,6 +1,5 @@
 <template>
-  
-  <ll-table-column v-if="type=='selection'" type="selection" width="55">
+  <ll-table-column  v-if="type=='selection'" type="selection" width="55">
   </ll-table-column>
   <ll-table-column v-else-if="type=='index'" type="index" width="50"  :sortable="sortable">
   </ll-table-column>
@@ -16,7 +15,8 @@
 			  </ll-switch>
 			</template>
   </ll-table-column>
-  <ll-table-column v-else :prop="prop" :label="label" :width="width" :align="align" :sortable="sortable">
+
+  <ll-table-column  v-else :prop="prop" :label="label" :width="width" :align="align" :sortable="sortable">
     <template slot-scope="scope">
       <slot :row="scope.row">
         <div
@@ -24,7 +24,13 @@
           v-if="isReadonly(scope.row,prop,scope.row.rowId)"
           @click="handleEdit(scope.row,prop,scope.row.rowId)"
         >
-          <span  style="display: inline-block;min-width: 1px;">{{ format(scope.row[prop])}}</span>
+          <ll-table-cell-zz  
+            v-if="type=='droptree'||type=='select'"
+            :label-datasource="labelDatasource"
+            v-model="scope.row[prop]"
+            ></ll-table-cell-zz>
+          <span v-else  style="display: inline-block;min-width: 1px;">{{scope.row[prop]}}</span>
+          
         </div>
         <span v-if="!(isReadonly(scope.row,prop,scope.row.rowId))" class="cell-edit-input">
           <ll-input
@@ -51,8 +57,27 @@
               :value="item.value"
             ></ll-option>
           </ll-select>
-          <ll-drop-tree-zz v-if="type=='tree'" :datasource="datasource" v-model="scope.row[prop]" :label-datasource="labelDatasource"></ll-drop-tree-zz>
-          
+          <ll-drop-tree-zz 
+            @node-click="treeNodeClick"
+            v-if="type=='droptree'" 
+            ref="llGridColumnInput" 
+            @hide-droptree="handleHideDropTree"
+            :datasource="datasource" 
+            v-model="scope.row[prop]" 
+            @current-change="valueChange(scope.row)"
+            :label-datasource="labelDatasource"
+            ></ll-drop-tree-zz>
+            <div >
+          <ll-date-picker
+            style="width:100%;"
+            v-if="type=='date'" 
+            
+            v-model="scope.row[prop]" 
+            type="date"
+             @change="valueChange(scope.row)"
+            placeholder="选择日期">
+          </ll-date-picker>
+          </div>
         </span>
       </slot>
     </template>
@@ -63,13 +88,18 @@
 </template>
 
 <script>
+import LlTableCellZz from './gridCell'
 export default {
   name: "LlTableColumnZz",
+  components:{
+    LlTableCellZz
+  },
   data() {
     return {
       editIndexArray: [],
       parent:null,
       value: "",
+      isClearEditIndexArray:false
     };
   },
   props: {
@@ -124,21 +154,8 @@ export default {
     
   },
   methods: {
-    format(val){
-      if("select"==this.type){
-        try{
-          var index = this.items.findIndex(i=>{return i.value==val})
-          if(index!=-1)
-              return this.items[index].label;
-        }
-        catch(e){
-          return val;
-        }
-      }
-      else if("droptree"==this.type){
-         this.$refs("droptree").getLabel();
-      }
-      return val;
+    treeNodeClick:function(){
+      this.clearEditIndex();
     },
     owner: function(){
       if(this.parent)
@@ -181,18 +198,6 @@ export default {
       if(propReadonly == null)
         return true;
       return propReadonly;
-      // var i = this.editIndexArray.findIndex(item => {
-      //   return item.rowNum == index;
-      // });
-      // var readonly;
-      // if (i != -1)
-      //   //表示存在该单元格的readonly数据
-      //   readonly = this.editIndexArray[i].readonly;
-      // else 
-      //   readonly = this.readonly;
-      // //如果readonly=false 并且是当前的索引可以被编辑
-      // if (!readonly) return false;
-      // return true;
     },
     currentChange(currPage) {
       this.dataWrap.pageInfo.currentPageNum = currPage;
@@ -201,7 +206,8 @@ export default {
     handleEdit: function(row, prop, index) {
       this.owner().currentEditPropIndex = row.rowId + "-" +prop;
       setTimeout(() => {
-        if (this.$refs.llGridColumnInput) this.$refs.llGridColumnInput.focus();
+        if (this.$refs.llGridColumnInput) 
+          this.$refs.llGridColumnInput.focus();
       }, 200);
     },
     clearEditIndex: function(row, prop) {
@@ -213,6 +219,9 @@ export default {
         this.clearEditIndex();
       }
     },
+    handleHideDropTree(){
+      this.clearEditIndex();
+    },
     handleNodeClick(data) {
     },
     //设置某行可被编辑
@@ -221,12 +230,50 @@ export default {
     },
     valueChange(row){
       this.owner().addUpdateRow(row);
-      console.log("addUpdatedRow")
+      this.clearEditIndex();
+      //console.log("valueChange")
+    },
+    dateHidden(){
+      this.clearEditIndex();
     }
   },
   beforeMount: function() {
   },
   created: function() {
+    var _this = this;
+    document.onmousedown =function (ev){
+      var  obj = ev.srcElement ? ev.srcElement : ev.target;
+      var parentElement = obj.parentElement;
+      // el-picker-panel el-date-picker el-popper
+      // //console.log(_this);
+      var isExists = false;
+      while(parentElement!=null
+        &&parentElement.nodeName!="BODY"
+        &&(parentElement.className==""
+          ||!_this.$_.str.include(parentElement.className,'el-picker-panel')
+          ||!_this.$_.str.include(parentElement.className,'el-date-picker')
+          ||!_this.$_.str.include(parentElement.className,'el-popper'))
+        &&(parentElement.className==""
+          ||parentElement.className!='el-table__body')  
+          ){
+          parentElement=parentElement.parentElement;
+          // //console.log(parentElement)
+          // //console.log(parentElement.nodeName)
+          //console.log("classnae:--- "+parentElement.className)
+          
+        }
+      if(parentElement==null||parentElement.nodeName=="BODY"){
+        isExists=false;
+        //console.log("清")
+        _this.isClearEditIndexArray=true;
+      }
+      else{
+        //console.log("不清")
+        _this.isClearEditIndexArray=false;
+      }
+      // //console.log("mousedown")
+      // //console.log(ev);
+    }
   },
   computed: {
     wrap: function() {

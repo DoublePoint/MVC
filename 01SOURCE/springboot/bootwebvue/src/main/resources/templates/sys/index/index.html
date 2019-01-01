@@ -16,10 +16,12 @@
 		        </ll-radio-group>
             </ll-header>
             <ll-container>
-                <ll-aside :width="style.asideWidth"  style="background-color:#19233C">
-                    <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
-                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#19233C" text-color="#fff"></ll-menu-zz>
-                </ll-aside>
+	                <ll-aside :width="style.asideWidth"  style="background-color:#19233C">
+	                	
+		                    <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
+		                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#19233C" text-color="#fff"></ll-menu-zz>
+	                	
+	                </ll-aside>
                 <ll-main style="padding: 0 0 0 0px;">
                     <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
                         <ll-tab-pane name="首页" :closable="false" style="height: 100%;overflow: auto;">
@@ -68,11 +70,11 @@
         var vm = new Vue({
             el: '#app',
             methods: {
-            	 rightClick(eve) {
-                     this.menuX=eve.clientX-20;
-                     this.menuY=eve.clientY-20;
-                     this.rightMenuVisible = true;
-                   },
+	           rightClick:function(eve) {
+                   this.menuX=eve.clientX-20;
+                   this.menuY=eve.clientY-20;
+                   this.rightMenuVisible = true;
+	            },
                 menuSelect:function(index, indexPath, item) {
                     this.addTab({
                         name: item.name,
@@ -82,13 +84,17 @@
                     });
                 },
                 addTab:function(setting) {
-                    if (!this.tabs.find(a => a.name == setting.name))
+                	var index = this.$_.findIndex(this.tabs,{
+                		  name: setting.name
+                	})
+                    if(index==-1)
+                	/* if (!this.tabs.find(a => a.name == setting.name)) */
                         this.tabs.push(setting);
                     this.activeTab = setting.name;
                 },
-                handleTabsEdit:function(targetName, action) {
-                    if (action === 'add') {
-                        let newTabName = ++this.tabIndex + '';
+                 handleTabsEdit:function(targetName, action) {
+                	 /*   if (action === 'add') {
+                        var newTabName = ++this.tabIndex + '';
                         this.editableTabs.push({
                             title: 'New Tab',
                             name: newTabName,
@@ -112,8 +118,8 @@
 
                         this.activeTab = activeName;
                         this.tabs = tabs.filter(tab => tab.name !== targetName);
-                    }
-                }
+                    }*/
+                } 
             },
             data: {
                 activeTab: "首页",
@@ -135,7 +141,7 @@
                 }
               },
               watch:{
-                isCollapse(newVal, oldVal){
+                isCollapse:function(newVal, oldVal){
                   if(newVal){
                     vm.style.asideWidth="80px";
                   }
