@@ -63,6 +63,10 @@
             </ll-menu-item>
             <ll-menu-item index="4" >
               <i class="el-icon-setting"></i>
+              <span slot="title">关闭其他</span>
+            </ll-menu-item>
+            <ll-menu-item index="5" >
+              <i class="el-icon-setting"></i>
               <span slot="title">关闭所有</span>
             </ll-menu-item>
           </ll-menu>
@@ -150,7 +154,7 @@
                 },
                 closeOther:function(){
                 	if(rightMenuTabIndex == "首页"){
-                		this.activeTab="首页";
+                		this.closeAll();
                 		return;
                 	}
                 	var tabs = this.tabs;
@@ -170,7 +174,7 @@
                 	});
                 	
                 	var activeTabItem = this.$_.find(this.tabs,function(item){
-                		item.name= activeName;
+                		return item.name == activeName;
                 	})
                 	if(this.$_.isUndefined(activeTabItem))
                 		this.activeTab = rightMenuTabName;
@@ -189,7 +193,7 @@
                 	});
                 	
                 	var activeTabItem = this.$_.find(this.tabs,function(item){
-                		item.name= activeName;
+                		return item.name == activeName;
                 	})
                 	if(this.$_.isUndefined(activeTabItem))
                 		this.activeTab = rightMenuTabName;
@@ -213,6 +217,9 @@
                 		this.closeRight();
                 	}
                 	else if(index == 4){
+                		this.closeOther();
+                	}
+                	else if(index == 5){
                 		this.closeAll();
                 	}
                 	

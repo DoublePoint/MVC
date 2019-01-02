@@ -10,13 +10,13 @@
     <div id="app" style="height: 100%;width: 100%;" v-cloak>
         <ll-container style="height: 100%; ">
             <ll-aside width="200px" style="border-right:1px solid #eee;">
-                <ll-steps direction="vertical" :active="activeStep">
-                    <ll-step title="步骤 1"></ll-step>
-                    <ll-step title="步骤 2"></ll-step>
-                    <ll-step title="步骤 3"></ll-step>
-                    <ll-step title="步骤 4"></ll-step>
+                <ll-steps direction="vertical" :active="activeStep" style='overflow:hidden;'>
+                    <ll-step title="选择Table"></ll-step>
+                    <ll-step title="实体字段映射"></ll-step>
+                    <ll-step title="字段类型映射"></ll-step>
+                    <ll-step title="生成内容"></ll-step>
                     <ll-step title="步骤 5"></ll-step>
-                    <ll-step title="步骤6" description="这是一段很长很长很长的描述性文字"></ll-step>
+                    <ll-step title="步骤6" ></ll-step>
                 </ll-steps>
             </ll-aside>
             <ll-container style="height: 100%; ">

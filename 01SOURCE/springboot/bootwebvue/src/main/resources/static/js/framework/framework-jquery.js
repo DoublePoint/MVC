@@ -155,6 +155,7 @@
             parent.___vm.$message({
                 showClose: isShowClose,
                 message: msgg,
+                customClass:"llMsgCustomer",
                 duration:duration
             });
         },
@@ -172,6 +173,7 @@
             parent.___vm.$message({
                 showClose: isShowClose,
                 message: msg,
+                customClass:"llMsgCustomer",
                 type: 'success',
                 duration:duration
             });
@@ -187,6 +189,7 @@
             parent.___vm.$message({
                 showClose: isShowClose,
                 message: msg,
+                customClass:"llMsgCustomer",
                 type: 'warning',
                 duration:duration
             });
@@ -203,6 +206,7 @@
                 showClose: isShowClose,
                 message: msg,
                 type: 'error',
+                customClass:"llMsgCustomer",
                 duration:duration
             });
         },
