@@ -60,7 +60,7 @@
                             		@current-change="retrieve" >
                                 <ll-table-column-zz type="selection" :width="55">
                                 </ll-table-column-zz>
-		                        <ll-table-column-zz :sortable="false" label="绑定菜单" :istemplate="true" :width="70" >
+		                        <ll-table-column-zz :sortable="false" label="角色" :width="70" >
 						            <template slot-scope="scope">
 										 <ll-button size="mini" @click="showBindRolesDialog(scope.row)" plain type="primary"><i class="fa fa-handshake-o" aria-hidden="true"></i></ll-button>
 						            </template>
@@ -73,7 +73,7 @@
                                 	:datasource="datasource" 
                                 	:label-datasource="labelDatasource"  
                                 	prop="departmentId" 
-                                	label="上级部门" :width="280">
+                                	label="部门" :width="280">
                             </ll-table-zz>
                         </ll-card>
                     </ll-main>
@@ -103,8 +103,10 @@
             },
             methods: {
                 retrieve:function() {
-                	var dataWrap=$.createAjaxDataWrap();
-                	dataWrap.setData(this.queryForm);
+                	var dataWrap=this.dataWrap;
+                	if(dataWrap==null)
+                		dataWrap=$.createAjaxDataWrap();
+                	dataWrap.data=this.menuForm;
                     $.request({
                         url: $$pageContextPath + "sys/admin/retrieve",
                         data: {
@@ -199,7 +201,7 @@
                 		title : "菜单",
                 		url : $$pageContextPath + '/sys/admin/bind-role',
                 		height:440,
-                		width:630,
+                		width:730,
                 		data:{
                 			id:admin
                 		},

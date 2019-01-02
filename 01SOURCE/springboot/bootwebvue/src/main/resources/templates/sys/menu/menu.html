@@ -108,8 +108,10 @@
             },
             methods: {
                 retrieve:function() {
-                	var dataWrap=$.createAjaxDataWrap();
-                	dataWrap.setData(this.menuForm);
+                	var dataWrap=this.dataWrap;
+                	if(dataWrap==null)
+                		dataWrap=$.createAjaxDataWrap();
+                	dataWrap.data=this.menuForm;
                     $.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
                         data: {

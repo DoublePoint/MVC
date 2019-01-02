@@ -1,13 +1,18 @@
 package cn.doublepoint.common.port.adapter.template.persistence.sys.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import cn.doublepoint.common.domain.model.viewmodel.sys.VOAdminRole;
+import cn.doublepoint.common.session.SysCommonUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.dto.domain.model.entity.sys.SysAdminRole;
+import cn.doublepoint.dto.domain.model.entity.sys.SysRole;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
 
@@ -28,10 +33,36 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	 * 
 	 * @return 最底层管理员权限列表
 	 */
-	public List<SysAdminRole> findRolesByAdminId(Integer adminId,PageInfo pageInfo) {
+	public List<VOAdminRole> findRolesByAdminId(Integer adminId,PageInfo pageInfo) {
+		List<VOAdminRole> resultList=new ArrayList<>();
+		
 		QueryParamList paramList=new QueryParamList();
 		paramList.addParam("adminId",adminId);
-		return JPAUtil.load(SysAdminRole.class, paramList, pageInfo);
+		
+		List<Object> list = JPAUtil.executeQuery("select a,r.name from SysAdminRole a,SysRole r where r.id=a.roleId and a.adminId = :adminId ",paramList);
+		if(list.size()>0){
+			list.stream().forEach(item->{
+				Object[] arr = (Object[]) item;
+				VOAdminRole adminRole = new VOAdminRole();
+				CommonBeanUtils.copyProperties((SysAdminRole)arr[0],adminRole);
+				adminRole.setRoleName(SysCommonUtil.getDefaultRecordString(arr[1], ""));
+				resultList.add(adminRole);
+			});
+			
+		}
+		return resultList;
+	}
+	/**
+	 * 查询非该管理员拥有的权限
+	 * 
+	 * @return 最底层管理员权限列表
+	 */
+	@Override
+	public List<SysRole> findRolesNotAdminId(Integer adminId) {
+		QueryParamList paramList=new QueryParamList();
+		paramList.addParam("adminId",adminId);
+		List<SysRole> list = JPAUtil.executeQueryModel("select r from SysRole r where not exists (select a.id from SysAdminRole a where r.id=a.roleId and a.adminId = :adminId)",paramList,SysRole.class);
+		return list;
 	}
 
 	/**
@@ -95,6 +126,14 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		});
 		
 		JPAUtil.saveOrUpdate(adminRoleList);
+		return true;
+	}
+
+	@Override
+	public boolean removeByAdminId(Integer adminId) {
+		QueryParamList paramList = new QueryParamList();
+		paramList.addParam("adminId",adminId);
+		JPAUtil.executeUpdate("	DELETE FROM SysAdminRole ar where ar.adminId=:adminId",paramList);
 		return true;
 	}
 

@@ -10,6 +10,7 @@
 package cn.doublepoint.commonutil.persitence.jpa;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -365,6 +366,8 @@ public class JPAUtil extends DataBaseUtil {
 			Class<T> clazz) {
 		BaseDaoService daoService = getDaoService();
 		List<Object> objects = daoService.executeQuery(jpql, queryParamList, pageInfo);
+		if(objects.size()==0)
+			return new ArrayList<T>();
 		return CommonBeanUtils.copyTo(objects, clazz);
 	}
 

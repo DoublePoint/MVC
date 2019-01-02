@@ -27,10 +27,12 @@ public class AdminServiceImpl  implements AdminService{
 	@Override
 	public List<SysAdmin> find(SysAdmin admin,PageInfo pageInfo) {
 		QueryParamList paramList=new QueryParamList();
-		if(admin.getDepartmentId()!=null)
-			paramList.addParam("departmentId",admin.getDepartmentId());
-		if(!StringUtil.isNullOrEmpty(admin.getLoginAccountNo())){
-			paramList.addParam("loginAccountNo","%"+admin.getLoginAccountNo()+"%",QueryParam.RELATION_LIKE);
+		if(admin!=null){
+			if(admin.getDepartmentId()!=null)
+				paramList.addParam("departmentId",admin.getDepartmentId());
+			if(!StringUtil.isNullOrEmpty(admin.getLoginAccountNo())){
+				paramList.addParam("loginAccountNo","%"+admin.getLoginAccountNo()+"%",QueryParam.RELATION_LIKE);
+			}
 		}
 		SortParamList sortParamList=new SortParamList();
 		sortParamList.addParam("createTime",EnumSortParamType.DESC);

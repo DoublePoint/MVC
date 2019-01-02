@@ -4,7 +4,7 @@ var _LL_Model = new function() {
 		this.currentPageCount = 0;
 		this.totalElementCount = 0;
 		this.totalPageCount = 1;
-		this.pageSize = 100;
+		this.pageSize = 20;
 		this.sort = null;
 		this.parse = function(jsonObjectPageInfo) {
 			if (jsonObjectPageInfo == null)

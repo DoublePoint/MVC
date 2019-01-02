@@ -145,6 +145,9 @@
                 	if(currentTreeNode != null){
                 		newRow.parentId = currentTreeNode.code;
                 	}
+                	else{
+                		newRow.parentId = "";
+                	}
                 	
 					this.$refs.tableDepartment.addRow(newRow);
                 },

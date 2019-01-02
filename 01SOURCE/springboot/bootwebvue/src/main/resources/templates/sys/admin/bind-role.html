@@ -6,14 +6,15 @@
     <template th:replace="/base.html"></template>
 </head>
 <body>
-	<div id="app" style="height: 100%;width: 100%;" v-cloak>
-	 <ll-container style="height: 100%; ">
-            <ll-aside width="260px" style="border-right:1px solid #eee;">
+	<div id="app" style="height: 100%;width: 100%;display:table;'" >
+	 <ll-container style="height: 100%;" v-cloak>
+	 	<ll-container style="height: 100%; ">
+            <ll-aside width="300px" style="border-right:1px solid #eee;margin-left:10px;">
                 <ll-card class="box-card" style="height:100%;">
                 	<div slot="header" class="clearfix">
                             <span class="ll-main-span">绑定角色</span>
                     </div>
-                    <ll-table-zz :data-wrap="roleDataWrap" :readonly="false" ref="tableRole" @current-change="retrieve">
+                    <ll-table-zz ref="tableRole" :show-pager="false" v-model="roleDataWrap" :readonly="false" @current-change="retrieve">
                         <ll-table-column-zz type="selection" :width="55">
                         </ll-table-column-zz>
                         <ll-table-column-zz prop="id" label="角色代码" :width="100">
@@ -25,32 +26,45 @@
             </ll-aside>
             <ll-container style="height: 100%; ">
             	<ll-aside width="100px" style="border-right:1px solid #eee;">
-	                <div class="el-transfer__buttons">
-	                	<ll-button type="primary" icon="el-icon-edit" size="small"  circle class="el-transfer__button"></ll-button>
-  						<ll-button type="success" icon="el-icon-check" size="small"  circle class="el-transfer__button"></ll-button>
+	                <div class="el-transfer__buttons vertical-align" >
+	                	<ll-button type="primary" icon="el-icon-d-arrow-right" size="small" @click="toAdminRoleAll"  circle style="margin: 5px 0;"></ll-button>
+	                	<ll-button type="primary" icon="el-icon-arrow-right" size="small" @click="toAdminRole" circle  style="margin: 5px 0;"></ll-button>
+  						<ll-button type="success" icon="el-icon-arrow-left" size="small" @click="toRole" circle  style="margin: 5px 0;"></ll-button>
+  						<ll-button type="success" icon="el-icon-d-arrow-left" size="small" @click="toRoleAll" circle  style="margin: 5px 0;"></ll-button>
 	                </div>
 	            </ll-aside>
-	            <ll-main style="height: 100%;width:260px; vertical-align: middle; ">
+	            <ll-main style="height: 100%;width:140px; vertical-align: middle; margin-right:10px;">
 	            	
                     <ll-card class="box-card" style="height:100%;">
                     	<div slot="header" class="clearfix">
                             <span class="ll-main-span">已经绑定的角色</span>
                     	</div>
-	                    <ll-table-zz :data-wrap="roleAdminDataWrap" :readonly="false" ref="tableRoleAdmin" @current-change="retrieve">
+	                    <ll-table-zz ref="tableRoleAdmin" :show-pager="false"  v-model="roleAdminDataWrap" :readonly="false"  @current-change="retrieve">
 	                        <ll-table-column-zz type="selection" :width="55">
 	                        </ll-table-column-zz>
-	                        <ll-table-column-zz prop="id" label="角色代码" :width="100">
+	                        <ll-table-column-zz prop="roleId" label="角色代码" :width="100">
 	                        </ll-table-column-zz>
-	                        <ll-table-column-zz prop="name" label="角色名称" :width="100">
+	                        <ll-table-column-zz prop="roleName" label="角色名称" :width="100">
 	                        </ll-table-column-zz>
                     	</ll-table-zz>
 	                </ll-card>
 	            </ll-main>
+	           </ll-container>
+	           </ll-container>
+	           <ll-footer>
+            	<ll-form label-width="100px" style="width:60%;">
+            		<ll-form-item>
+					   <ll-button type="primary" @click="save">保存</ll-button>
+				  	   <ll-button type="text" @click="reset">重置</ll-button>
+				  </ll-form-item>
+            	</ll-form>
+            </ll-footer>
             </ll-container>
 	</div>
 <script type="text/javascript">
 var roleDataWrap = ajaxResponse.get("roleDataWrap");
 var roleAdminDataWrap = ajaxResponse.get("roleAdminDataWrap");
+var adminId = ajaxResponse.get("adminId")
 var vm = new Vue({
     el: '#app',
     data: {
@@ -60,6 +74,78 @@ var vm = new Vue({
     methods:{
     	retrieve:function(){
     		
+    	},
+    	save :function(){
+        	$.request({
+                url: $$pageContextPath + "sys/admin/"+ adminId +"/admin-role",
+                data: {
+                	dataWrap: this.roleAdminDataWrap,
+                },
+                success: function (response) {
+                    $.success("保存成功");
+                }
+            });
+    	},
+    	reset :function(){
+    		
+    	},
+    	toAdminRoleAll:function(){
+    		for(var i=0;i<this.roleDataWrap.dataList.length;i++){
+    			var newRoleRow = this.roleToAdminRole(this.roleDataWrap.dataList[i]);
+    			this.$refs.tableRoleAdmin.addRow(newRoleRow);
+    		}
+
+            vm.$set(vm.$data, "roleDataWrap",$.createAjaxDataWrap());
+    		
+    	},
+    	toAdminRole:function(){
+    		var dataList = this.$refs.tableRole.getSelectedRows();
+    		if(dataList.length==0){
+    			$.warning("请选择一条数据")
+    			return;
+    		}
+    		for(var i=0;i<dataList.length;i++){
+    			var newRoleRow = this.roleToAdminRole(dataList[i]);
+    			this.$refs.tableRoleAdmin.addRow(newRoleRow);
+    		}
+    		
+    		var roleDataList = this.$_.difference(this.roleDataWrap.dataList,dataList);
+    		vm.$set(vm.roleDataWrap, "dataList", roleDataList);
+    	},
+    	toRole:function(){
+    		var dataList = this.$refs.tableRoleAdmin.getSelectedRows();
+    		if(dataList.length==0){
+    			$.warning("请选择一条数据")
+    			return;
+    		}
+    		for(var i=0;i<dataList.length;i++){
+    			var newRoleRow = this.adminRoleToRole(dataList[i]);
+    			this.$refs.tableRole.addRow(newRoleRow);
+    		}
+    		
+    		var roleAdminDataList = this.$_.difference(this.roleAdminDataWrap.dataList,dataList);
+    		vm.$set(vm.roleAdminDataWrap, "dataList", roleAdminDataList);
+    	},
+    	toRoleAll:function(){
+    		for(var i=0;i<this.roleAdminDataWrap.dataList.length;i++){
+    			var newRoleRow = this.adminRoleToRole(this.roleAdminDataWrap.dataList[i]);
+    			this.$refs.tableRole.addRow(newRoleRow);
+    		}
+            vm.$set(vm.$data, "roleAdminDataWrap",$.createAjaxDataWrap());
+    	},
+    	adminRoleToRole:function(adminRole){
+    		var newRoleRow = $.createNewRow();
+			newRoleRow.id = adminRole.roleId;
+			newRoleRow.name = adminRole.roleName;
+			return newRoleRow;
+    	},
+    	roleToAdminRole:function(role){
+    		var newAdminRoleRow = $.createNewRow();
+			newAdminRoleRow.adminId = adminId;
+			newAdminRoleRow.roleId = role.id;
+			newAdminRoleRow.roleName = role.name;
+			
+			return newAdminRoleRow;
     	}
     }
 });

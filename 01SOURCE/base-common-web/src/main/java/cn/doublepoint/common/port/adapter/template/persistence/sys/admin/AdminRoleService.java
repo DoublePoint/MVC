@@ -11,19 +11,20 @@ package cn.doublepoint.common.port.adapter.template.persistence.sys.admin;
 
 import java.util.List;
 
+import cn.doublepoint.common.domain.model.viewmodel.sys.VOAdminRole;
 import cn.doublepoint.dto.domain.model.entity.sys.SysAdminRole;
+import cn.doublepoint.dto.domain.model.entity.sys.SysRole;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
 
 public interface AdminRoleService {
-
 	/**
 	 * 查询所有管理员权限
 	 * 
 	 * @return 最底层管理员权限列表
 	 */
-	public List<SysAdminRole> findRolesByAdminId(Integer adminId,PageInfo pageInfo) ;
-
+	public List<VOAdminRole> findRolesByAdminId(Integer adminId,PageInfo pageInfo) ;
+	
 	/**
 	 * 查询所有管理员权限
 	 * 
@@ -58,4 +59,18 @@ public interface AdminRoleService {
 	 * @return
 	 */
 	public boolean saveOrUpdate(List<SysAdminRole> menuList) ;
+	
+	/**
+	 * 根据adminId删除数据
+	 * @param adminId
+	 * @return
+	 */
+	public boolean removeByAdminId(Integer adminId);
+	
+	/**
+	 * 查询非该管理员拥有的权限
+	 * 
+	 * @return 最底层管理员权限列表
+	 */
+	public List<SysRole> findRolesNotAdminId(Integer adminId);
 }

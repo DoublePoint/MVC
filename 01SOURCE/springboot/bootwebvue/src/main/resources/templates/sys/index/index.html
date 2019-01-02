@@ -18,23 +18,21 @@
             <ll-container>
             	<ll-scrollbar>
 	                <ll-aside :width="style.asideWidth"  style="background-color:#19233C">
-	                	
-		                    <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
-		                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#19233C" text-color="#fff"></ll-menu-zz>
-	                	
+	                    <ll-menu-zz :items="items" @select="menuSelect" :props="menuProp" style="width: 199px;"
+	                         :collapse="isCollapse" :style="{width: style.asideWidth}" background-color="#19233C" text-color="#fff"></ll-menu-zz>
 	                </ll-aside>
 	                </ll-scrollbar>
                 <ll-main style="padding: 0 0 0 0px;">
                     <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
                         <ll-tab-pane name="首页" :closable="false" style="height: 100%;overflow: auto;">
                             <template slot="label">
-				                <span @contextmenu.prevent="rightClick($event)" style="position:relative;line-height: 40px;display:inline-block;"><i class="fa fa-home fa-fw"></i>首页</span>
+				                <span @contextmenu.prevent="rightClick($event,'首页','首页')" style="position:relative;line-height: 40px;display:inline-block;"><i class="fa fa-home fa-fw"></i>首页</span>
 				            </template>
                         </ll-tab-pane>
                         <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name"
                             :closable="item.closable==null?false:item.closable" style="height: 100%;overflow: auto;">
                             <template slot="label">
-				                <span @contextmenu.prevent="rightClick($event)" style="position:relative;line-height: 40px;display:inline-block;">{{item.title}}</span>
+				                <span @contextmenu.prevent="rightClick($event,item.tabIndex,item.name)" style="position:relative;line-height: 40px;display:inline-block;">{{item.title}}</span>
 				            </template>
                             <iframe :src="pageContextPath+item.link" style="height: 100%;width: 100%;display:block"
                                 frameborder='0'></iframe>
@@ -49,16 +47,21 @@
         <ll-menu default-active="2"  
         background-color="#545c64"
           text-color="#fff"
+          @select="closeMenu" 
           active-text-color="#ffd04b">
-            <ll-menu-item index="2">
+            <ll-menu-item index="1" >
               <i class="el-icon-menu"></i>
               <span slot="title">关闭当前</span>
             </ll-menu-item>
-            <ll-menu-item index="3" >
+            <ll-menu-item index="2"  >
+              <i class="el-icon-document"></i>
+              <span slot="title">关闭左侧</span>
+            </ll-menu-item>
+            <ll-menu-item index="3"  >
               <i class="el-icon-document"></i>
               <span slot="title">关闭右侧</span>
             </ll-menu-item>
-            <ll-menu-item index="4">
+            <ll-menu-item index="4" >
               <i class="el-icon-setting"></i>
               <span slot="title">关闭所有</span>
             </ll-menu-item>
@@ -68,17 +71,21 @@
 
     <script type="text/javascript">
         var dataWrap = ajaxResponse.get("dataWrap");
-
+		var rightMenuTabIndex="首页";
+		var rightMenuTabName="";
         var vm = new Vue({
             el: '#app',
             methods: {
-	           rightClick:function(eve) {
+	           rightClick:function(eve,index,name) {
                    this.menuX=eve.clientX-20;
                    this.menuY=eve.clientY-20;
                    this.rightMenuVisible = true;
+                   rightMenuTabIndex = index;
+                   rightMenuTabName = name;
 	            },
                 menuSelect:function(index, indexPath, item) {
                     this.addTab({
+                    	tabIndex:this.$_.uniqueId(),
                         name: item.name,
                         title: item.name,
                         closable: true,
@@ -95,15 +102,6 @@
                     this.activeTab = setting.name;
                 },
                  handleTabsEdit:function(targetName, action) {
-                	 /*   if (action === 'add') {
-                        var newTabName = ++this.tabIndex + '';
-                        this.editableTabs.push({
-                            title: 'New Tab',
-                            name: newTabName,
-                            content: 'New Tab content'
-                        });
-                        this.activeTab = newTabName;
-                    }
                     if (action === 'remove') {
                         let tabs = this.tabs;
                         let activeName = this.activeTab;
@@ -120,8 +118,106 @@
 
                         this.activeTab = activeName;
                         this.tabs = tabs.filter(tab => tab.name !== targetName);
-                    }*/
-                } 
+                        if(this.tabs==null||this.tabs.length==0){
+                        	this.activeTab="首页";
+                        }
+                    }
+                },
+                closeCurrent:function(){
+                	if(rightMenuTabIndex == "首页"){
+                		return;
+                	}
+                	var tabs = this.tabs;
+                    var activeName = this.activeTab;
+                    
+                    if(rightMenuTabName==activeName){
+                    	var nextTab = this.$_.find(tabs, function(tab){ return tab.tabIndex > rightMenuTabIndex  ; });
+                    	if(!this.$_.isUndefined(nextTab))
+                    		this.activeTab = nextTab.name;
+                    	else {
+                    		var lastTab = this.$_.find(tabs, function(tab,index){ 
+                    			return tab.tabIndex < rightMenuTabIndex && (tabs.length-2==index||tabs[index+2].tabIndex>rightMenuTabIndex); 
+                    		});
+                        	if(!this.$_.isUndefined(lastTab))
+                        		this.activeTab = lastTab.name;
+                    	}
+                    }
+                    
+                	this.tabs = tabs.filter(tab => tab.tabIndex !== rightMenuTabIndex);
+                    if(this.tabs==null||this.tabs.length==0){
+                    	this.activeTab="首页";
+                    }
+                },
+                closeOther:function(){
+                	if(rightMenuTabIndex == "首页"){
+                		this.activeTab="首页";
+                		return;
+                	}
+                	var tabs = this.tabs;
+                    var activeName = this.activeTab;
+                	this.tabs = tabs.filter(tab => tab.tabIndex == rightMenuTabIndex);
+                	this.activeTab = rightMenuTabName;
+                },
+                closeRight:function(){
+                	if(rightMenuTabIndex == "首页"){
+                		this.closeAll();
+                		return;
+                	}
+                	var tabs = this.tabs;
+                    var activeName = this.activeTab;
+                    this.tabs = this.$_.filter(tabs,function(tab){
+                		return tab.tabIndex < rightMenuTabIndex || tab.tabIndex == rightMenuTabIndex
+                	});
+                	
+                	var activeTabItem = this.$_.find(this.tabs,function(item){
+                		item.name= activeName;
+                	})
+                	if(this.$_.isUndefined(activeTabItem))
+                		this.activeTab = rightMenuTabName;
+                	else if(this.tabs==null||this.tabs.length==0){
+                    	this.activeTab="首页";
+                    }
+                },
+                closeLeft:function(){
+                	if(rightMenuTabIndex == "首页"){
+                		return;
+                	}
+                	var tabs = this.tabs;
+                    var activeName = this.activeTab;
+                	this.tabs = this.$_.filter(tabs,function(tab){
+                		return tab.tabIndex > rightMenuTabIndex || tab.tabIndex == rightMenuTabIndex;
+                	});
+                	
+                	var activeTabItem = this.$_.find(this.tabs,function(item){
+                		item.name= activeName;
+                	})
+                	if(this.$_.isUndefined(activeTabItem))
+                		this.activeTab = rightMenuTabName;
+                	else if(this.tabs==null||this.tabs.length==0){
+                    	this.activeTab="首页";
+                    }
+                },
+                closeAll:function(){
+                	this.tabs=[];
+                	this.activeTab="首页";
+                	return;
+                },
+                closeMenu:function(index){
+                	if(index == 1){
+                		this.closeCurrent();
+                	}
+                	else if(index == 2){
+                		this.closeLeft();
+                	}
+                	else if(index == 3){
+                		this.closeRight();
+                	}
+                	else if(index == 4){
+                		this.closeAll();
+                	}
+                	
+                	this.rightMenuVisible=false;
+                }
             },
             data: {
                 activeTab: "首页",

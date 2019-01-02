@@ -35,6 +35,11 @@
 
 export default {
   name: "LlTableZz",
+  model:{},
+  model: {
+    prop: 'dataWrap',
+    event: 'wrap-change'
+  },
   props: {
     border: {
       type: Boolean,
@@ -141,6 +146,7 @@ export default {
       if(this.dataWrap.dataList==null||this.$_.isUndefined(this.dataWrap.dataList))
         this.dataWrap.dataList=[];
       this.dataWrap.dataList.push(row);
+      this.$emit("wrap-change",this.dataWrap);
     },
     setRowReadonly(row, prop, readonly) {
       if (readonly == null) readonly = true;

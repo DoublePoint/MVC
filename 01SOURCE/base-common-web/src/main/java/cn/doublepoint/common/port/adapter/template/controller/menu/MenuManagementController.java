@@ -42,8 +42,6 @@ public class MenuManagementController extends BaseController {
 	}
 
 	@RequestMapping("/menuDialog")
-/*	public AjaxResponse menuDialog(@RequestBody AjaxRequest request, ModelAndView modelAndView,
-			AjaxResponse response) {*/
 	public AjaxResponse menuDialog(@RequestForm(name = "requestForm") AjaxRequest request,AjaxResponse response) {
 		String type=request.getParameter("type");
 		if ("edit".equals(type)) {
