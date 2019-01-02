@@ -29,7 +29,7 @@
 				                <span @contextmenu.prevent="rightClick($event,'首页','首页')" style="position:relative;line-height: 40px;display:inline-block;"><i class="fa fa-home fa-fw"></i>首页</span>
 				            </template>
                         </ll-tab-pane>
-                        <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name"
+                        <ll-tab-pane :key="item.tabIndex" v-for="(item, index) in tabs" :label="item.title" :name="item.name"
                             :closable="item.closable==null?false:item.closable" style="height: 100%;overflow: auto;">
                             <template slot="label">
 				                <span @contextmenu.prevent="rightClick($event,item.tabIndex,item.name)" style="position:relative;line-height: 40px;display:inline-block;">{{item.title}}</span>
