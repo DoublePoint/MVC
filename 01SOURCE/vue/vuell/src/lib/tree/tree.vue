@@ -6,9 +6,9 @@
       :show-checkbox="showCheckbox"
       @current-change="currentChange"
       :lazy="lazy">
-      <span slot-scope="{ node, data }" style="display:inline-block;width:100%;">
-          <slot :node="node" :data="data">
-            <span class="el-tree-node__label">{{ node.label }}</span>
+      <span slot-scope="scope" style="display:inline-block;width:100%;">
+          <slot :node="scope.node" :data="scope.data">
+            <span class="el-tree-node__label">{{ scope.node.label }}</span>
           </slot>
       </span>
     </ll-tree>
@@ -85,6 +85,9 @@ export default {
       if(this.datasource==null||this.datasource=="")
         throw new Error("ll:prop 'datasource' must not be null",'tree.vue');
       var nodeData=node.data;
+      console.log(nodeData)
+       if(this.$_.isUndefined(nodeData))
+         nodeData=null;
       if(nodeData!=null){
         if(nodeData[this.props.children]!=null&&nodeData[this.props.children].length>0)
           return;

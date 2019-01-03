@@ -8,78 +8,88 @@
 
 <body>
     <div id="app" style="height: 100%;width: 100%;" v-cloak>
-        <ll-container style="height: 100%; ">
-            <ll-aside width="200px" style="border-right:1px solid #eee;">
-                <ll-card class="box-card" style="height:100%;">
-                    <ll-tree-zz ref="depTree" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
-                    </ll-tree-zz>
-                </ll-card>
-            </ll-aside>
-            <ll-container style="height: 100%; ">
-                <ll-header height="40">
-                    <ll-card class="box-card">
-                        <div slot="header" class="clearfix">
-                            <span class="ll-main-span">查询条件</span>
-                        </div>
-                        <ll-form :model="queryForm" :status-icon="true"  ref="queryForm" label-width="100px"
-                            style="width:100%">
-                            <ll-col :span="8">
-                                <ll-form-item label="部门名称" prop="name">
-                                    <ll-input v-model="queryForm.name"></ll-input>
-                                </ll-form-item>
-                            </ll-col>
-                            <ll-col :span="8">
-                               <ll-form-item>
-                                <ll-button type="primary" size="mini" @click="retrieve">查询</ll-button>
-                               </ll-form-item>
-                            </ll-col>
-                        </ll-form>
-                    </ll-card>
-                </ll-header>
-                <ll-container style="height: 100%; ">
-                    <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
-                        <ll-card class="box-card" style="height:100%;">
-                            <div slot="header" class="clearfix">
-                                <ll-row>
-                                    <ll-col :span="6">
-                                        <span class="ll-main-span" style="marign-right:100px;">管理员列表</span>
-                                    </ll-col>
-                                    <ll-col :span="18" align="right">
-                                        <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px" @click="add"
-                                            title="添加"></ll-button>
-                                        <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px" @click="del"
-                                            title="删除"></ll-button>
-                                        <ll-button type="success" icon="el-icon-check" circle size="mini" style="padding: 3px" @click="save"
-                                            title="保存"></ll-button>
-                                            
-                                    </ll-col>
-                                </ll-row>
-                            </div>
-                            <ll-table-zz :data-wrap="dataWrap" :readonly="false" 
-                            		ref="tableAdmin"
-                            		@current-change="retrieve" >
-                                <ll-table-column-zz type="selection" :width="55">
-                                </ll-table-column-zz>
-		                        <ll-table-column-zz :sortable="false" label="角色" :width="70" >
-						            <template slot-scope="scope">
-										 <ll-button size="mini" @click="showBindRolesDialog(scope.row)" plain type="primary"><i class="fa fa-handshake-o" aria-hidden="true"></i></ll-button>
-						            </template>
-							    </ll-table-column-zz>
-                                </ll-table-column-zz>
-                                <ll-table-column-zz prop="loginAccountNo" label="登陆账号" :width="180">
-                                </ll-table-column-zz>
-                                <ll-table-column-zz 
-                                	type="droptree"  
-                                	:datasource="datasource" 
-                                	:label-datasource="labelDatasource"  
-                                	prop="departmentId" 
-                                	label="部门" :width="280">
-                            </ll-table-zz>
-                        </ll-card>
-                    </ll-main>
-                </ll-container>
-            </ll-container>
-        </ll-container>
+    	<ll-tabs type="border-card"  class="ll-tabs"  v-model="activeTabKey">
+		  <ll-tab-pane label="管理员管理" :lazy="true" name="list">
+				<ll-container style="height: 100%; ">
+		            <ll-aside width="200px" style="border-right:1px solid #eee;">
+		                <ll-card class="box-card" style="height:100%;">
+		                    <ll-tree-zz ref="depTree" :props="defaultProps" :datasource="datasource" accordion @node-click="handleNodeClick">
+		                    </ll-tree-zz>
+		                </ll-card>
+		            </ll-aside>
+		            <ll-container style="height: 100%; ">
+		                <ll-header height="40">
+		                    <ll-card class="box-card">
+		                        <div slot="header" class="clearfix">
+		                            <span class="ll-main-span">查询条件</span>
+		                        </div>
+		                        <ll-form :model="queryForm" :status-icon="true"  ref="queryForm" label-width="100px"
+		                            style="width:100%">
+		                            <ll-col :span="8">
+		                                <ll-form-item label="部门名称" prop="name">
+		                                    <ll-input v-model="queryForm.name"></ll-input>
+		                                </ll-form-item>
+		                            </ll-col>
+		                            <ll-col :span="8">
+		                               <ll-form-item>
+		                                <ll-button type="primary" size="mini" @click="retrieve">查询</ll-button>
+		                               </ll-form-item>
+		                            </ll-col>
+		                        </ll-form>
+		                    </ll-card>
+		                </ll-header>
+		                <ll-container style="height: 100%; ">
+		                    <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+		                        <ll-card class="box-card" style="height:100%;">
+		                            <div slot="header" class="clearfix">
+		                                <ll-row>
+		                                    <ll-col :span="6">
+		                                        <span class="ll-main-span" style="marign-right:100px;">管理员列表</span>
+		                                    </ll-col>
+		                                    <ll-col :span="18" align="right">
+		                                        <ll-button type="primary" icon="el-icon-plus" circle size="mini" style="padding: 3px" @click="add"
+		                                            title="添加"></ll-button>
+		                                        <ll-button type="danger" icon="el-icon-delete" circle size="mini" style="padding: 3px" @click="del"
+		                                            title="删除"></ll-button>
+		                                        <ll-button type="success" icon="el-icon-check" circle size="mini" style="padding: 3px" @click="save"
+		                                            title="保存"></ll-button>
+		                                            
+		                                    </ll-col>
+		                                </ll-row>
+		                            </div>
+		                            <ll-table-zz :data-wrap="dataWrap" 
+		                            	:readonly="false" 
+		                            	ref="tableAdmin"
+                            			@row-dblclick="rowDblcick"	
+		                            	@current-change="retrieve" >
+		                                <ll-table-column-zz type="selection" :width="55">
+		                                </ll-table-column-zz>
+				                        <ll-table-column-zz :sortable="false" label="角色" :width="70" >
+								            <template slot-scope="scope">
+												 <ll-button size="mini" @click="showBindRolesDialog(scope.row)" plain type="primary"><i class="fa fa-handshake-o" aria-hidden="true"></i></ll-button>
+								            </template>
+									    </ll-table-column-zz>
+		                                </ll-table-column-zz>
+		                                <ll-table-column-zz prop="loginAccountNo" label="登陆账号" :width="180">
+		                                </ll-table-column-zz>
+		                                <ll-table-column-zz 
+		                                	type="droptree"  
+		                                	:datasource="datasource" 
+		                                	:label-datasource="labelDatasource"  
+		                                	prop="departmentId" 
+		                                	label="部门" :width="280">
+		                            </ll-table-zz>
+		                        </ll-card>
+		                    </ll-main>
+		                </ll-container>
+		            </ll-container>
+		        </ll-container>
+		  </ll-tab-pane>
+		  <ll-tab-pane label="管理员详情" :lazy="true" name="detail">
+		  	<iframe :src="detailPagePath"  style="height: 100%;width: 100%;display:block"  frameborder='0'></iframe>
+      	  </ll-tab-pane>
+		</ll-tabs>
+        
     </div>
 
     <script type="text/javascript">
@@ -89,9 +99,11 @@
             el: '#app',
             data: {
                 dataWrap: dataWrap,
+                pageContextPath:$$pageContextPath,
                 datasource: $$pageContextPath + "sys/department-tree/departments",
                 labelDatasource: $$pageContextPath + "sys/department/label",
                 data: [],
+                activeTabKey:"list",
                 defaultProps: {
                     children: 'children',
                     label: 'name',
@@ -100,7 +112,9 @@
                 queryForm: {
                     name: '',
                 },
+                detailPagePath:""
             },
+            
             methods: {
                 retrieve:function() {
                 	var dataWrap=this.dataWrap;
@@ -195,7 +209,7 @@
                         }
                     });
                 },
-                showBindRolesDialog(row){
+                showBindRolesDialog:function(row){
                 	var admin = row.id;
                 	$.openDialog({
                 		title : "菜单",
@@ -210,6 +224,10 @@
                 		cancel : function() {
                 		}
                 	});
+                },
+                rowDblcick:function(row){
+                	this.detailPagePath = $$pageContextPath + 'sys/admin/'+row.id+'/detail';
+                	this.activeTabKey="detail";
                 }
             }
         });

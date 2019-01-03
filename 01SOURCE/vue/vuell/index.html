@@ -28,7 +28,7 @@
         </ll-aside>
         <ll-main style="padding: 0 0 0 0px;">
           <ll-tabs v-model="activeTab" type="card" class="ll-tabs" @edit="handleTabsEdit">
-            <ll-tab-pane :key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name" :closable="item.closable==null?false:item.closable"
+            <ll-tab-pane :lazy="true":key="item.name" v-for="(item, index) in tabs" :label="item.title" :name="item.name" :closable="item.closable==null?false:item.closable"
               style="height: 100%;overflow: auto;">
               <template slot="label">
                 <span @contextmenu.prevent="rightClick($event)" style="position:relative;line-height: 40px;display:inline-block;">{{item.title}}</span>

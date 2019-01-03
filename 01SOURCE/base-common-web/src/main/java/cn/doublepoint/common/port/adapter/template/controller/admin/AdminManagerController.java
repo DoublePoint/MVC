@@ -49,6 +49,16 @@ public class AdminManagerController extends BaseController{
 	public String adminJsp(HttpServletRequest request, AjaxResponse response) {
 		return "sys/admin/admin.html";
 	}
+	@RequestMapping("/{adminId}/detail")
+	public AjaxResponse detail(@RequestForm AjaxRequest request,@PathVariable Integer adminId, AjaxResponse response) {
+		SysAdmin admin = adminService.getById(adminId);
+		AjaxDataWrap<SysAdmin> dataWrap = new AjaxDataWrap<SysAdmin>();
+		dataWrap.setData(admin);
+		response.setAjaxParameter("dataWrap", dataWrap);
+		response.setAjaxParameter("pageType", "modify");
+		response.setViewName("sys/admin/detail.html");
+		return response;
+	}
 
 	@RequestMapping("/bind-role")
 	public AjaxResponse adminDialog(@RequestForm AjaxRequest request, AjaxResponse response) {

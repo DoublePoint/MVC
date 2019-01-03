@@ -15,16 +15,11 @@
       <div slot="header" class="clearfix">
         <span class="ll-main-title">查询条件</span>
       </div>
-      <ll-tree-zz ref="tree" :items="data" :props="defaultProps" show-checkbox :datasource="datasource" accordion @node-click="handleNodeClick">
-        <span slot-scope="{ node, data }" style="
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-right: 8px;">
-            <span >{{ node.label }}</span>
+      <ll-tree-zz ref="tree"  :props="defaultProps" show-checkbox :datasource="datasource" accordion @node-click="handleNodeClick">
+        <span slot-scope="scope" style=" flex: 1; display: flex; align-items: center; justify-content: space-between; padding-right: 8px;">
+            <span >{{ scope.node.label }}</span>
             <span >
-                <ll-checkbox-group v-model="checkList"  @change="groupChange(data)">
+                <ll-checkbox-group v-model="checkList"  @change="groupChange(scope.data)">
                     <ll-checkbox label="读"></ll-checkbox>
                     <ll-checkbox label="写"></ll-checkbox>
                 </ll-checkbox-group>
@@ -49,10 +44,10 @@
       updateList:[]
     },
     methods: {
-      handleNodeClick(nodeData, node) {
+      handleNodeClick:function(nodeData, node) {
 
       },
-			groupChange(a,b,c){
+			groupChange:function(a,b,c){
         console.log(a)
 				var item = this.$_.find(this.updateList,function(){
 					return item.code==a.code;

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+</head>
+
+<body>
+    <div id="app" style="height: 100%;width: 100%;" v-cloak>
+         <ll-container style="height: 100%; ">
+            <ll-main style="padding: 0 0 0 0px;" style="height: 100%; ">
+    	<ll-form label-width="100px" style="width:40%;">
+             <ll-form-item label="名称">
+                 <ll-input v-model="form.name"></ll-input>
+             </ll-form-item>
+             <ll-form-item label="登录账号">
+                 <ll-input v-model="form.loginAccountNo"></ll-input>
+             </ll-form-item>
+             <ll-form-item label="密码">
+                 <ll-input v-model="form.loginPassword"></ll-input>
+             </ll-form-item>
+             <ll-form-item label="性别">
+             		<ll-radio v-model="form.gender" label="1">男</ll-radio>
+  					<ll-radio v-model="form.gender" label="0">女</ll-radio>
+             </ll-form-item>
+             <ll-form-item label="地址">
+                 <ll-input v-model="form.address"></ll-input>
+             </ll-form-item>
+             <ll-form-item label="开启">
+                 <ll-switch v-model="form.enable" active-value="1" inactive-value="0"></ll-switch>
+             </ll-form-item>
+             <ll-form-item label="备注">
+                 <ll-input v-model="form.remark" type="textarea" :autosize="{ minRows: 3, maxRows: 4}"></ll-input>
+             </ll-form-item>
+            </ll-form>
+            </ll-main>
+            <ll-footer>
+            	<ll-form label-width="100px" style="width:60%;">
+            		<ll-form-item>
+					   <ll-button type="primary" @click="save">保存</ll-button>
+				  </ll-form-item>
+            	</ll-form>
+            </ll-footer>
+        </ll-container>
+    </div>
+
+    <script type="text/javascript">
+        var dataWrap = ajaxResponse.get("dataWrap");
+        var pageType = ajaxResponse.get("pageType");
+        var formData;
+        if(pageType=="modify"){
+        	if(dataWrap!=null)
+        		formData=dataWrap.data;
+        }
+        else{
+        	formData={
+               enable:"1",
+               gender:"1"
+            };
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                form: formData,
+            },
+            methods: {
+                save:function(){
+                	var addDataWrap = $.createAjaxDataWrap();
+                    var updateDataWrap = $.createAjaxDataWrap();
+                    var addDataList = this.$refs.tableAdmin.getAddedRows();
+                    var updateDataList = this.$refs.tableAdmin.getUpdatedRows();
+                    addDataWrap.dataList = addDataList;
+                    updateDataWrap.dataList = updateDataList;
+                	$.request({
+                        url: $$pageContextPath + "sys/admin/save",
+                        data: {
+                        	addDataWrap: addDataWrap,
+                        	updateDataWrap: updateDataWrap
+                        },
+                        success: function (response) {
+                            $.success("保存成功");
+                            var currentTreeNode = vm.$refs.depTree.getCurrentNode();
+                            if(currentTreeNode != null)
+                            	vm.handleNodeClick(currentTreeNode);
+                            else
+                            	vm.retrieve();
+                        }
+                    });
+                },
+                showBindRolesDialog(row){
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>

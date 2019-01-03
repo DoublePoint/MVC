@@ -8,7 +8,6 @@
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysEntityFilter</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysExtendProperty</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenu</class>
-		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenuVisitLog</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysPermission</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysRole</class>
@@ -19,5 +18,6 @@
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysDepartment</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdmin</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdminRole</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole</class>
 	</persistence-unit>
 </persistence>

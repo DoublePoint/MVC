@@ -78,7 +78,7 @@ var vm = new Vue({
         },
     },
     methods: {
-        retrieve() {
+        retrieve:function() {
         	var dataWrap=$.createAjaxDataWrap();
         	dataWrap.setData(this.form);
         	if(this.dataWrapMain!=null&&!this.$_.isUndefined(this.dataWrapMain.pageInfo))
@@ -97,7 +97,7 @@ var vm = new Vue({
                 }
             });
         },
-        del(){
+        del:function(){
         	$.confirm("确定删除吗?",function(){
         		var dataWrap=$.createAjaxDataWrap();
             	var dataList = vm.$refs["tableMain"].getSelectedRows();
@@ -115,7 +115,7 @@ var vm = new Vue({
         	});
         	
         },
-        save(){
+        save:function(){
             var addDataWrap = $.createAjaxDataWrap();
             var updateDataWrap = $.createAjaxDataWrap();
             var addDataList = this.$refs.tableMain.getAddedRows();
@@ -142,11 +142,11 @@ var vm = new Vue({
                 }
             });
         },
-        add() {
+        add:function() {
 			var newRow = $.createNewRow();
 			this.$refs.tableMain.addRow(newRow);
         },
-        showBindMenuDialog(row){
+        showBindMenuDialog:function(row){
         	var roleId = row.id;
         	$.openDialog({
         		title : "菜单",

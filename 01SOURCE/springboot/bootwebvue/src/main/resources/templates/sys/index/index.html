@@ -107,21 +107,32 @@
                 },
                  handleTabsEdit:function(targetName, action) {
                     if (action === 'remove') {
-                        let tabs = this.tabs;
-                        let activeName = this.activeTab;
+                        var tabs = this.tabs;
+                        var activeName = this.activeTab;
                         if (activeName === targetName) {
-                            tabs.forEach((tab, index) => {
+                            /* tabs.forEach((tab, index) => {
                                 if (tab.name === targetName) {
                                     let nextTab = tabs[index + 1] || tabs[index - 1];
                                     if (nextTab) {
                                         activeName = nextTab.name;
                                     }
                                 }
-                            });
+                            }); */
+                            this.$_.each(tabs,function(tab, index){
+                        		if (tab.name === targetName) {
+                                    var nextTab = tabs[index + 1] || tabs[index - 1];
+                                    if (nextTab) {
+                                        activeName = nextTab.name;
+                                    }
+                                }
+                        	})
                         }
 
                         this.activeTab = activeName;
-                        this.tabs = tabs.filter(tab => tab.name !== targetName);
+                        //this.tabs = tabs.filter(tab => tab.name !== targetName);
+                        this.tabs = this.$_.filter(tabs,function(tab){
+                    		return tab.name == targetName;
+                    	})
                         if(this.tabs==null||this.tabs.length==0){
                         	this.activeTab="首页";
                         }
@@ -147,7 +158,10 @@
                     	}
                     }
                     
-                	this.tabs = tabs.filter(tab => tab.tabIndex !== rightMenuTabIndex);
+                	//this.tabs = tabs.filter(tab => tab.tabIndex !== rightMenuTabIndex);
+                	this.tabs = this.$_.filter(tabs,function(tab){
+                		return tab.tabIndex == rightMenuTabIndex;
+                	})
                     if(this.tabs==null||this.tabs.length==0){
                     	this.activeTab="首页";
                     }
@@ -159,7 +173,10 @@
                 	}
                 	var tabs = this.tabs;
                     var activeName = this.activeTab;
-                	this.tabs = tabs.filter(tab => tab.tabIndex == rightMenuTabIndex);
+                    //this.tabs = tabs.filter(tab => tab.tabIndex == rightMenuTabIndex);
+                	this.tabs = this.$_.filter(tabs,function(tab){
+                		return tab.tabIndex == rightMenuTabIndex;
+                	})
                 	this.activeTab = rightMenuTabName;
                 },
                 closeRight:function(){

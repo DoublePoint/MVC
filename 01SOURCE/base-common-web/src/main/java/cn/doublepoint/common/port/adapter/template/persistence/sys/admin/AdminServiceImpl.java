@@ -45,7 +45,7 @@ public class AdminServiceImpl  implements AdminService{
 	 * @return
 	 */
 	@Override
-	public SysAdmin getById(long id){
+	public SysAdmin getById(Integer id){
 		return JPAUtil.loadById(SysAdmin.class, id);
 	}
 	
@@ -57,6 +57,11 @@ public class AdminServiceImpl  implements AdminService{
 	@Override
 	public boolean remove(SysAdmin admin){
 		JPAUtil.remove(admin);
+		
+		//delete by adminId
+		QueryParamList paramList = new QueryParamList();
+		paramList.addParam("adminId", admin.getId());
+		JPAUtil.executeUpdate("delete from SysAdminRole where adminId = :adminId",paramList);
 		return true;
 	}
 	
@@ -68,9 +73,7 @@ public class AdminServiceImpl  implements AdminService{
 	 */
 	@Override
 	public boolean remove(List<SysAdmin> adminList){
-		adminList.stream().forEach(item -> {
-			JPAUtil.remove(item);
-		});
+		adminList.stream().forEach(this::remove);
 		return true;
 	}
 	

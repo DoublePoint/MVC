@@ -136,13 +136,13 @@
                 }
             },
             methods: {
-            	currentRowChange(currentRow){
+            	currentRowChange:function(currentRow){
             		this.currentRow = currentRow;
             	},
-            	rowClickMain(row){
+            	rowClickMain:function(row){
             		this.retrieveDetail(row);
             	},
-            	retrieveDetail(row){
+            	retrieveDetail:function(row){
             		var dataWrap=$.createAjaxDataWrap();
             		var data={};
             		data.classify=row.classify;
@@ -158,10 +158,10 @@
                         }
                     });
             	},
-                resetForm(formName) {
+                resetForm:function(formName) {
                     this.$refs[formName].resetFields();
                 },
-                retrieve() {
+                retrieve:function() {
                     var dataWrap = $.createAjaxDataWrap();
                     dataWrap.setData(this.form);
                     if(this.dataWrapMain!=null&&!this.$_.isUndefined(this.dataWrapMain.pageInfo))
@@ -184,11 +184,11 @@
                         }
                     });
                 },
-                addClassify() {
+                addClassify:function() {
 					var newRow = $.createNewRow();
 					this.$refs.tableMain.addRow(newRow);
                 },
-                addDetail() {
+                addDetail:function() {
                 	if(this.$_.isEmpty(this.currentRow)){
                 		$.error("选择分类")
                 		return;
@@ -201,7 +201,7 @@
 					newRow.classify = this.currentRow.classify;
 					this.$refs.tableDetail.addRow(newRow);
                 },
-                delClassify() {
+                delClassify:function() {
                     $.confirm("确定删除吗?", function () {
                         var dataWrap = $.createAjaxDataWrap();
                         var dataList = vm.$refs["tableMain"].getSelectedRows();
@@ -229,7 +229,7 @@
 
                 },
 
-                delDetail() {
+                delDetail:function() {
                     $.confirm("确定删除吗?", function () {
                         var dataWrap = $.createAjaxDataWrap();
                         var dataList = vm.$refs["tableDetail"].getSelectedRows();
@@ -255,7 +255,7 @@
                     });
 
                 },
-                saveClassify() {
+                saveClassify:function() {
                     //var addDataWrap = $.createAjaxDataWrap();
                     var updateDataWrap = $.createAjaxDataWrap();
                     var updateDataList = vm.$refs["tableMain"].getUpdatedRows();
@@ -282,7 +282,7 @@
                         }
                     });
                 },
-                saveDetail() {
+                saveDetail:function() {
                     var addDataWrap = $.createAjaxDataWrap();
                     var updateDataWrap = $.createAjaxDataWrap();
                     var addDataList = this.$refs.tableDetail.getAddedRows();

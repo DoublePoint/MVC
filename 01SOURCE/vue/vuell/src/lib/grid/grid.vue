@@ -131,8 +131,8 @@ export default {
       return this.addedRows;
     },
     addUpdateRow(row) {
-      var index = this.updatedRows.findIndex(i => i.rowId == row.rowId);
-      var indexAdded = this.addedRows.findIndex(i => i.rowId == row.rowId);
+      var index = this.$_.findIndex(this.updatedRows,function(i){return  i.rowId == row.rowId;});
+      var indexAdded = this.$_.findIndex(this.addedRows,function(i){return i.rowId == row.rowId});
       if (index == -1 && indexAdded == -1) {
         this.updatedRows.push(row);
       }
@@ -151,14 +151,14 @@ export default {
     setRowReadonly(row, prop, readonly) {
       if (readonly == null) readonly = true;
       if (this.$_.isBlank(prop) || this.$_.isUndefined(prop)) {
-        var index = this.rowsReadonly.findIndex(i => i.rowId == row.rowId);
+        var index = this.$_.findIndex(this.rowsReadonly,function(i){return i.rowId == row.rowId;} );
         if (index == -1) {
           this.rowsReadonly.push({ rowId: row.rowId, readonly: readonly });
         } else {
           this.rowsReadonly[index].readonly = readonly;
         }
       } else {
-        var index = this.rowsReadonly.findIndex(i => i.rowId == row.rowId);
+        var index = this.$_.findIndex(this.rowsReadonly,function(i){return i.rowId == row.rowId;});
         if (index == -1) {
           this.rowsReadonly.push({
             rowId: row.rowId,
@@ -169,7 +169,7 @@ export default {
           if (props == null || this.$_.isUndefined(props))
             props.push({ prop: prop, readonly: readonly });
           else {
-            var index = props.findIndex(i => i.prop == prop);
+            var index = this.$_.findIndex(props,function(i) {return i.prop == prop});
             if (index == -1) {
               props.push({ prop: prop, readonly: readonly });
             } else {
@@ -180,7 +180,7 @@ export default {
       }
     },
     getRowReadonly(row, prop) {
-      var index = this.rowsReadonly.findIndex(i => i.rowId == row.rowId);
+      var index = this.$_.findIndex(this.rowsReadonly,function(i){return i.rowId == row.rowId;});
       if (this.$_.isBlank(prop) || this.$_.isUndefined(prop)) {
         if (index == -1) {
           return null;
@@ -193,7 +193,7 @@ export default {
         } else {
           var props = this.rowsReadonly[index].props;
           if (props == null || this.$_.isUndefined(props)) return null;
-          var index2 = props.findIndex(i => i.prop == prop);
+          var index2 = this.$_.findIndex(props,function(i) {return i.prop == prop});
           if (index2 == -1) {
             return null;
           } else {

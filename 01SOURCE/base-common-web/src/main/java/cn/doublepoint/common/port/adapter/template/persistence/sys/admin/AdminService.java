@@ -26,7 +26,7 @@ public interface AdminService {
 	 * @param id
 	 * @return
 	 */
-	public SysAdmin getById(long id);
+	public SysAdmin getById(Integer id);
 	
 	/**
 	 * 移除
