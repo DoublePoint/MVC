@@ -4,10 +4,10 @@ function init(response) {
 	// contentType : 'application/json;charset=UTF-8',// 关键是要加上这行
 	// url : $$pageContextPath + "sys/role/datalist",
 	// data : JSON.stringify(data.field) + "",
-	// success : function(ajaxDataWrap) {
-	// if(ajaxDataWrap==null||ajaxDataWrap.dataList==null||ajaxDataWrap.dataList.length==0)
+	// success : function(ajaxDataPacket) {
+	// if(ajaxDataPacket==null||ajaxDataPacket.dataList==null||ajaxDataPacket.dataList.length==0)
 	// $.shakeTips("未查询到任何数据!",2000);
-	// roleAjaxGrid.setDataWrap(ajaxDataWrap);
+	// roleAjaxGrid.setDataPacket(ajaxDataPacket);
 	// },
 	// error : function(ecx) {
 	// $.shakeTips('保存失败');
@@ -22,12 +22,12 @@ function addNewRecord() {
 }
 
 function retrieve() {
-	var dataWrap = roleAjaxGrid.collectDataWrap();
+	var dataPacket = roleAjaxGrid.collectDataPacket();
 
-	var formData = ajaxform.collectDataWrap();
+	var formData = ajaxform.collectDataPacket();
 	var array = [];
 	array.push(formData);
-	dataWrap.setDataList(array);
+	dataPacket.setDataList(array);
 
 	$.request({
 		url : $$pageContextPath + "sys/role/search",
@@ -36,23 +36,23 @@ function retrieve() {
 		dataType : "json",
 		async : false,
 		data : {
-			dataWrap : dataWrap
+			dataPacket : dataPacket
 		},
 		success : function(response) {
-			var dataWrap = response.get("dataWrap");
-			if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length == 0)
+			var dataPacket = response.get("dataPacket");
+			if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length == 0)
 				$.shakeTips("未查询到任何数据!", 2000);
-			roleAjaxGrid.setDataWrap(dataWrap);
+			roleAjaxGrid.setDataPacket(dataPacket);
 		}
 	});
 }
 
 function onClickSave() {
-	var data = roleAjaxGrid.collectDataWrap("all");
+	var data = roleAjaxGrid.collectDataPacket("all");
 	$.request({
 		url : $$pageContextPath + "sys/role/save",
 		data : {
-			dataWrap : data
+			dataPacket : data
 		},
 		success : function(response) {
 			if (response){
@@ -70,7 +70,7 @@ function onClickSave() {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			deleteDataWrap : roleAjaxGrid.collectDataWrap("checked")
+			deleteDataPacket : roleAjaxGrid.collectDataPacket("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "sys/role/delete",

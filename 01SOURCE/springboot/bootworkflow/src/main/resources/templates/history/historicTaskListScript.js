@@ -1,7 +1,7 @@
 var instanceId;
 function init(response) {
-	var dataWrap = response.get("dataWrap");
-	ajaxgrid.setDataWrap(dataWrap);
+	var dataPacket = response.get("dataPacket");
+	ajaxgrid.setDataPacket(dataPacket);
 	instanceId=response.get("instanceId");
 }
 
@@ -13,8 +13,8 @@ function detail(taskId){
 	$.request({
 		url : $$pageContextPath + "/workflow/task/"+taskId,
 		success : function(response){
-			var dataWrap=response.get("dataWrap");
-			var task=dataWrap.data;
+			var dataPacket=response.get("dataPacket");
+			var task=dataPacket.data;
 			var form=task.formKey;
 			alert(form)
 		}
@@ -42,8 +42,8 @@ function retrieve(){
 	$.request({
 		url : $$pageContextPath + "oll/history"+instanceId+"/task",
 		success : function(response){
-			var dataWrap=response.get("dataWrap");
-			ajaxgrid.setDataWrap(dataWrap);
+			var dataPacket=response.get("dataPacket");
+			ajaxgrid.setDataPacket(dataPacket);
 		}
 	});
 }

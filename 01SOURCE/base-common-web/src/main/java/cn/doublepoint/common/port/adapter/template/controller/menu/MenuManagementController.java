@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.annotation.RequestForm;
@@ -45,8 +45,8 @@ public class MenuManagementController extends BaseController {
 	public AjaxResponse menuDialog(@RequestForm(name = "requestForm") AjaxRequest request,AjaxResponse response) {
 		String type=request.getParameter("type");
 		if ("edit".equals(type)) {
-			AjaxDataWrap<SysMenu> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
-			response.setAjaxParameter("dataWrap", ajaxDataWrap);
+			AjaxDataPacket<SysMenu> ajaxDataPacket = request.getAjaxDataPacket("dataPacket", SysMenu.class);
+			response.setAjaxParameter("dataPacket", ajaxDataPacket);
 		} else {
 			String parentMenuId = request.getParameter("parentMenuId");
 			if (!StringUtil.isNullOrEmpty(parentMenuId))
@@ -77,27 +77,27 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysMenu> dataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
-		SysMenu menuQuery = dataWrap.getData();
+		AjaxDataPacket<SysMenu> dataPacket = request.getAjaxDataPacket("dataPacket", SysMenu.class);
+		SysMenu menuQuery = dataPacket.getData();
 		if (menuQuery==null) {
 			menuQuery=new SysMenu();
 		}
 		if(!StringUtil.isNullOrEmpty(request.getParameter("parentId"))){
 			menuQuery.setId(Integer.valueOf(request.getParameter("parentId")));
 		}
-		List<SysMenu> list = menuService.findChildrenMenu(menuQuery, dataWrap.getPageInfo());
-		dataWrap.setDataList(list);
+		List<SysMenu> list = menuService.findChildrenMenu(menuQuery, dataPacket.getPageInfo());
+		dataPacket.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
-		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		ajaxResponse.setAjaxParameter("dataPacket", dataPacket);
 		return ajaxResponse;
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
-	public AjaxResponse menuDataListDataWrap(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysMenu> dataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
-		List<SysMenu> list = dataWrap.getDataList();
+	public AjaxResponse menuDataListDataPacket(@RequestBody AjaxRequest request) {
+		AjaxDataPacket<SysMenu> dataPacket = request.getAjaxDataPacket("dataPacket", SysMenu.class);
+		List<SysMenu> list = dataPacket.getDataList();
 		menuService.saveOrUpdate(list);
 		return new AjaxResponse();
 	}
@@ -105,10 +105,10 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysMenu> addDataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
-		if (addDataWrap == null)
+		AjaxDataPacket<SysMenu> addDataPacket = request.getAjaxDataPacket("dataPacket", SysMenu.class);
+		if (addDataPacket == null)
 			return null;
-		SysMenu menu = addDataWrap.getData();
+		SysMenu menu = addDataPacket.getData();
 		menuService.saveOrUpdate(menu);
 		return new AjaxResponse();
 	}
@@ -116,10 +116,10 @@ public class MenuManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<SysMenu> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysMenu.class);
-		if (deleteDataWrap == null)
+		AjaxDataPacket<SysMenu> deleteDataPacket = request.getAjaxDataPacket("dataPacket", SysMenu.class);
+		if (deleteDataPacket == null)
 			return null;
-		List<SysMenu> menuList = deleteDataWrap.getDataList();
+		List<SysMenu> menuList = deleteDataPacket.getDataList();
 		menuService.removeMenu(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;

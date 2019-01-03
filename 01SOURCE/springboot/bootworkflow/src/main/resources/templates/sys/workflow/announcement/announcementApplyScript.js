@@ -6,12 +6,12 @@ function retrieve() {
 			worksheetNo:worksheetNo,
 		},
 		success:function(response){
-			var annChangedWrap=response.get("annChangedWrap");
-			if(annChangedWrap!=null)
-				ajaxformWorksheet.setData(annChangedWrap.data);
-			var worksheetWrap=response.get("worksheetWrap");
-			if(worksheetWrap!=null)
-				ajaxformAnnouncement.setData(annChangedWrap.data);
+			var annChangedPacket=response.get("annChangedPacket");
+			if(annChangedPacket!=null)
+				ajaxformWorksheet.setData(annChangedPacket.data);
+			var worksheetPacket=response.get("worksheetPacket");
+			if(worksheetPacket!=null)
+				ajaxformAnnouncement.setData(annChangedPacket.data);
 		}
 			
 	});
@@ -21,7 +21,7 @@ function onClickAdd() {
 	$.request({
 		url:$$pageContextPath+"sys/workflow/announcement/save",
 		data:{
-			annChangedWrap:ajaxformAnnouncement.collectDataWrap(),
+			annChangedPacket:ajaxformAnnouncement.collectDataPacket(),
 		},
 		success:function(response){
 			if(response.get("worksheetNo")!=null){

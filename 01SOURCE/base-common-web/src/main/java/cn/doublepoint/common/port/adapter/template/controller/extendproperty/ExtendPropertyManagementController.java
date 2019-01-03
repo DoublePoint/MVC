@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.droplist.ExtendPropertyService;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
@@ -42,32 +42,32 @@ public class ExtendPropertyManagementController extends BaseController {
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysExtendProperty> dataWrap = request.getAjaxDataWrap("dataWrap", SysExtendProperty.class);
-		SysExtendProperty menuQuery = dataWrap.getData();
-		List<SysExtendProperty> list = service.find(menuQuery, dataWrap.getPageInfo());
-		dataWrap.setDataList(list);
+		AjaxDataPacket<SysExtendProperty> dataPacket = request.getAjaxDataPacket("dataPacket", SysExtendProperty.class);
+		SysExtendProperty menuQuery = dataPacket.getData();
+		List<SysExtendProperty> list = service.find(menuQuery, dataPacket.getPageInfo());
+		dataPacket.setDataList(list);
 		AjaxResponse ajaxResponse = new AjaxResponse();
-		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		ajaxResponse.setAjaxParameter("dataPacket", dataPacket);
 		return ajaxResponse;
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysExtendProperty> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysExtendProperty.class);
-		AjaxDataWrap<SysExtendProperty> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysExtendProperty.class);
-		service.saveOrUpdate(addDataWrap.getDataList());
-		service.saveOrUpdate(updateDataWrap.getDataList());
+		AjaxDataPacket<SysExtendProperty> addDataPacket = request.getAjaxDataPacket("addDataPacket", SysExtendProperty.class);
+		AjaxDataPacket<SysExtendProperty> updateDataPacket = request.getAjaxDataPacket("updateDataPacket", SysExtendProperty.class);
+		service.saveOrUpdate(addDataPacket.getDataList());
+		service.saveOrUpdate(updateDataPacket.getDataList());
 		return new AjaxResponse();
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<SysExtendProperty> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysExtendProperty.class);
-		if (deleteDataWrap == null)
+		AjaxDataPacket<SysExtendProperty> deleteDataPacket = request.getAjaxDataPacket("dataPacket", SysExtendProperty.class);
+		if (deleteDataPacket == null)
 			return null;
-		List<SysExtendProperty> menuList = deleteDataWrap.getDataList();
+		List<SysExtendProperty> menuList = deleteDataPacket.getDataList();
 		service.remove(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;

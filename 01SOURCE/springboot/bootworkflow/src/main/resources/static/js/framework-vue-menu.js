@@ -65,15 +65,15 @@
 					}
 					// 切换到指定Tab项
 					$element.tabChange('admin-tab', $(this).text());
-					var dataWrap = $.createAjaxDataWrap();
+					var dataPacket = $.createAjaxDataPacket();
 					var menu = {
 						id : $(this).attr("menuId")
 					};
-					dataWrap.dataList[0] = menu;
+					dataPacket.dataList[0] = menu;
 					$.request({
 						url : $$pageContextPath + "sys/menu-visit/add-log",
 						data : {
-							dataWrap : dataWrap
+							dataPacket : dataPacket
 						}
 					});
 				});

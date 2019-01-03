@@ -1,6 +1,6 @@
 function init(response) {
-	var admin = response.get("dataWrap");
-	ajaxgrid.setDataWrap(admin);
+	var admin = response.get("dataPacket");
+	ajaxgrid.setDataPacket(admin);
 }
 
 
@@ -15,8 +15,8 @@ function detail(taskId){
 		dataType : "json",
 		async : true,
 		success : function(response){
-			var dataWrap=response.get("dataWrap");
-			var task=dataWrap.data;
+			var dataPacket=response.get("dataPacket");
+			var task=dataPacket.data;
 			var form=task.formKey;
 			alert(form)
 		}

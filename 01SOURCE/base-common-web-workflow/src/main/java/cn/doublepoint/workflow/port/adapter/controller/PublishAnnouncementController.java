@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
@@ -57,17 +57,17 @@ public class PublishAnnouncementController extends BaseController{
 	public AjaxResponse findWorksheetAndChange(@RequestBody AjaxRequest request,AjaxResponse response){
 		String worksheetNo=request.getParameter("worksheetNo");
 		SysWorksheet worksheet=worksheetService.getByWorksheetNo(worksheetNo);
-		AjaxDataWrap<SysWorksheet> worksheetWrap=new AjaxDataWrap<>();
-		worksheetWrap.setData(worksheet);
+		AjaxDataPacket<SysWorksheet> worksheetPacket=new AjaxDataPacket<>();
+		worksheetPacket.setData(worksheet);
 		
-		AjaxDataWrap<SysAnnouncementChanged> annChangedWrap=new AjaxDataWrap<SysAnnouncementChanged>();
+		AjaxDataPacket<SysAnnouncementChanged> annChangedPacket=new AjaxDataPacket<SysAnnouncementChanged>();
 		
 		SysAnnouncementChanged query=new SysAnnouncementChanged();
 		query.setWorksheetNo(worksheetNo);
 		List<SysAnnouncementChanged> list=announcementChangedService.find(query, null);
 		if(list!=null&&list.size()>0){
-			annChangedWrap.setData(list.get(0));
-			response.setAjaxParameter("annChangedWrap", annChangedWrap);
+			annChangedPacket.setData(list.get(0));
+			response.setAjaxParameter("annChangedPacket", annChangedPacket);
 		}
 		return response;
 	}
@@ -75,13 +75,13 @@ public class PublishAnnouncementController extends BaseController{
 	@RequestMapping("save")
 	@ResponseBody
 	public AjaxResponse save(@RequestBody AjaxRequest request,AjaxResponse response){
-		AjaxDataWrap<SysAnnouncementChanged> annChangedWrap=request.getAjaxDataWrap("annChangedWrap",SysAnnouncementChanged.class);
+		AjaxDataPacket<SysAnnouncementChanged> annChangedPacket=request.getAjaxDataPacket("annChangedPacket",SysAnnouncementChanged.class);
 		
 		SysWorksheet worksheet=new SysWorksheet();
 		worksheet.setClassification(WorkflowConstant.WORKFLOW_CLASSIFICATION);
 		String worksheetNo=WorksheetUtil.createAndStart(worksheet.getClassification(), 123, worksheet.getDescription());
 		
-		SysAnnouncementChanged changed=annChangedWrap.getData();
+		SysAnnouncementChanged changed=annChangedPacket.getData();
 		changed.setWorksheetNo(worksheetNo);
 		announcementChangedService.saveOrUpdate(changed);
 		response.setAjaxParameter("worksheetNo", worksheetNo);

@@ -1,4 +1,4 @@
 function init(response){
-	var worksheetDataWrap=response.get("worksheetDataWrap");
-	ajaxgridPersonal.setDataWrap(worksheetDataWrap);
+	var worksheetDataPacket=response.get("worksheetDataPacket");
+	ajaxgridPersonal.setDataPacket(worksheetDataPacket);
 }

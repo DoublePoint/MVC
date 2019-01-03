@@ -56,7 +56,7 @@
                                 </ll-col>
                             </ll-row>
                         </div>
-                        <ll-table-zz :data-wrap="dataWrapMain" :readonly="false" ref="tableMain" @current-row-change="currentRowChange" @current-change="retrieve" @row-click="rowClickMain">
+                        <ll-table-zz :data-wrap="dataPacketMain" :readonly="false" ref="tableMain" @current-row-change="currentRowChange" @current-change="retrieve" @row-click="rowClickMain">
                             <ll-table-column-zz type="selection" :width="55">
                             </ll-table-column-zz>
                             <ll-table-column-zz prop="classify" label="代码分类" :width="150">
@@ -81,7 +81,7 @@
                                 </ll-col>
                             </ll-row>
                         </div>
-                        <ll-table-zz :data-wrap="dataWrapDetail" :readonly="false" ref="tableDetail" @current-change="retrieve" :show-pager="false">
+                        <ll-table-zz :data-wrap="dataPacketDetail" :readonly="false" ref="tableDetail" @current-change="retrieve" :show-pager="false">
                             <ll-table-column-zz type="selection" :width="55">
                             </ll-table-column-zz>
                             <ll-table-column-zz prop="code" label="代码" :width="150">
@@ -107,8 +107,8 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                dataWrapMain: null,
-                dataWrapDetail: null,
+                dataPacketMain: null,
+                dataPacketDetail: null,
                 currentRow:{},
                 datasource: $$pageContextPath + "sys/menu-tree/menus",
                 data: [],
@@ -143,18 +143,18 @@
             		this.retrieveDetail(row);
             	},
             	retrieveDetail:function(row){
-            		var dataWrap=$.createAjaxDataWrap();
+            		var dataPacket=$.createAjaxDataPacket();
             		var data={};
             		data.classify=row.classify;
-                	dataWrap.setData(data);
+                	dataPacket.setData(data);
                 	$.request({
                         url: $$pageContextPath + "sys/code/retrieve-detail",
                         data: {
-                            dataWrap: dataWrap
+                            dataPacket: dataPacket
                         },
                         success: function (response) {
-                            var dataWrap = response.get("dataWrap");
-                            vm.$set(vm.$data, "dataWrapDetail", dataWrap);
+                            var dataPacket = response.get("dataPacket");
+                            vm.$set(vm.$data, "dataPacketDetail", dataPacket);
                         }
                     });
             	},
@@ -162,24 +162,24 @@
                     this.$refs[formName].resetFields();
                 },
                 retrieve:function() {
-                    var dataWrap = $.createAjaxDataWrap();
-                    dataWrap.setData(this.form);
-                    if(this.dataWrapMain!=null&&!this.$_.isUndefined(this.dataWrapMain.pageInfo))
-                    	dataWrap.pageInfo=this.dataWrapMain.pageInfo;
+                    var dataPacket = $.createAjaxDataPacket();
+                    dataPacket.setData(this.form);
+                    if(this.dataPacketMain!=null&&!this.$_.isUndefined(this.dataPacketMain.pageInfo))
+                    	dataPacket.pageInfo=this.dataPacketMain.pageInfo;
 
                     $.request({
                         url: $$pageContextPath + "sys/code/retrieve-classify",
                         data: {
-                            dataWrap: dataWrap
+                            dataPacket: dataPacket
                         },
                         success: function (response) {
-                            var dataWrap = response.get("dataWrap");
+                            var dataPacket = response.get("dataPacket");
                             
-                            vm.$set(vm.$data, "dataWrapMain", dataWrap);
-                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==0)
+                            vm.$set(vm.$data, "dataPacketMain", dataPacket);
+                            if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length ==0)
                                 $.msg("未查询到任何数据!");
                             else{
-                            	vm.retrieveDetail(dataWrap.dataList[0]);
+                            	vm.retrieveDetail(dataPacket.dataList[0]);
                             } 
                         }
                     });
@@ -203,13 +203,13 @@
                 },
                 delClassify:function() {
                     $.confirm("确定删除吗?", function () {
-                        var dataWrap = $.createAjaxDataWrap();
+                        var dataPacket = $.createAjaxDataPacket();
                         var dataList = vm.$refs["tableMain"].getSelectedRows();
-                        dataWrap.dataList = dataList;
+                        dataPacket.dataList = dataList;
                         $.request({
                             url: $$pageContextPath + "sys/code/delete-by-classify",
                             data: {
-                                dataWrap: dataWrap
+                                dataPacket: dataPacket
                             },
                             success: function (response) {
                                 if (!response) {
@@ -231,13 +231,13 @@
 
                 delDetail:function() {
                     $.confirm("确定删除吗?", function () {
-                        var dataWrap = $.createAjaxDataWrap();
+                        var dataPacket = $.createAjaxDataPacket();
                         var dataList = vm.$refs["tableDetail"].getSelectedRows();
-                        dataWrap.dataList = dataList;
+                        dataPacket.dataList = dataList;
                         $.request({
                             url: $$pageContextPath + "sys/code/delete-detail",
                             data: {
-                                dataWrap: dataWrap
+                                dataPacket: dataPacket
                             },
                             success: function (response) {
                                 if (!response) {
@@ -256,17 +256,17 @@
 
                 },
                 saveClassify:function() {
-                    //var addDataWrap = $.createAjaxDataWrap();
-                    var updateDataWrap = $.createAjaxDataWrap();
+                    //var addDataPacket = $.createAjaxDataPacket();
+                    var updateDataPacket = $.createAjaxDataPacket();
                     var updateDataList = vm.$refs["tableMain"].getUpdatedRows();
                    // var addDataList =  vm.$refs["tableMain"].getAddedRows();
-                    //addDataWrap.dataList = addDataList;
-                    updateDataWrap.dataList = updateDataList;
+                    //addDataPacket.dataList = addDataList;
+                    updateDataPacket.dataList = updateDataList;
                     $.request({
                         url: $$pageContextPath + "sys/code/save-main",
                         data: {
-                        	//addDataWrap: addDataWrap,
-                        	updateDataWrap: updateDataWrap
+                        	//addDataPacket: addDataPacket,
+                        	updateDataPacket: updateDataPacket
                         },
                         success: function (response) {
                             if (response) {
@@ -283,17 +283,17 @@
                     });
                 },
                 saveDetail:function() {
-                    var addDataWrap = $.createAjaxDataWrap();
-                    var updateDataWrap = $.createAjaxDataWrap();
+                    var addDataPacket = $.createAjaxDataPacket();
+                    var updateDataPacket = $.createAjaxDataPacket();
                     var addDataList = this.$refs.tableDetail.getAddedRows();
                     var updateDataList = this.$refs.tableDetail.getUpdatedRows();
-                    addDataWrap.dataList = addDataList;
-                    updateDataWrap.dataList = updateDataList;
+                    addDataPacket.dataList = addDataList;
+                    updateDataPacket.dataList = updateDataList;
                     $.request({
                         url: $$pageContextPath + "sys/code/save-detail",
                         data: {
-                        	addDataWrap: addDataWrap,
-                        	updateDataWrap: updateDataWrap
+                        	addDataPacket: addDataPacket,
+                        	updateDataPacket: updateDataPacket
                         },
                         success: function (response) {
                             if (response) {

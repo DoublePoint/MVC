@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.util.DropBeanUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.DropBean;
 
 @Controller
@@ -25,11 +25,11 @@ public class FrameworkCommonPage {
 
 	@RequestMapping("sys/dropdown/datalist")
 	@ResponseBody
-	public AjaxDataWrap<DropBean> assistant(@RequestParam(required=false) String dropName) {
-		AjaxDataWrap<DropBean> dataWrap=new AjaxDataWrap<>();
+	public AjaxDataPacket<DropBean> assistant(@RequestParam(required=false) String dropName) {
+		AjaxDataPacket<DropBean> dataPacket=new AjaxDataPacket<>();
 		List<DropBean> dropBeans=DropBeanUtil.findDropList(dropName);
-		dataWrap.setDataList(dropBeans);
-		return dataWrap;
+		dataPacket.setDataList(dropBeans);
+		return dataPacket;
 	}
 	
 }

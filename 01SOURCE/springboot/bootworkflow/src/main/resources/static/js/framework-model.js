@@ -88,18 +88,18 @@ var _LL_Model = new function() {
 		return this;
 	};
 
-	this._AjaxDataWrap = function(name) {
+	this._AjaxDataPacket = function(name) {
 		// this.name = name;
 		this.code = "";
 		this.msg = "";
 		this.dataList = [];
 		this.data=null;
 		this.pageInfo = $.createPageInfo();
-		this.parse = function(jsonObjectDataWrap) {
-			if (jsonObjectDataWrap == null)
+		this.parse = function(jsonObjectDataPacket) {
+			if (jsonObjectDataPacket == null)
 				return;
-			this.dataList = jsonObjectDataWrap.dataList;
-			this.pageInfo.parse(jsonObjectDataWrap.pageInfo);
+			this.dataList = jsonObjectDataPacket.dataList;
+			this.pageInfo.parse(jsonObjectDataPacket.pageInfo);
 		};
 		this.setDataList = function(dataList) {
 			this.dataList = dataList;

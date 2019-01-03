@@ -53,8 +53,8 @@
             enable:"1"
         };
         if(type=="edit"){
-        	var dataWrap = ajaxResponse.get("dataWrap");
-        	formData=dataWrap.data;
+        	var dataPacket = ajaxResponse.get("dataPacket");
+        	formData=dataPacket.data;
         }
         	
         var vm = new Vue({
@@ -66,12 +66,12 @@
             },
             methods:{
             	save : function(){
-            		var dataWrap=$.createAjaxDataWrap();
-                	dataWrap.setData(vm.form);
+            		var dataPacket=$.createAjaxDataPacket();
+                	dataPacket.setData(vm.form);
                 	$.request({
                         url: $$pageContextPath + "sys/menu/add",
                         data: {
-                        	dataWrap:dataWrap,
+                        	dataPacket:dataPacket,
                         },
                         success: function (response) {
                             $.success("保存成功");

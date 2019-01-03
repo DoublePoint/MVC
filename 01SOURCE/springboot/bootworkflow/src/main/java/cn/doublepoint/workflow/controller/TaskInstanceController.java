@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOTask;
@@ -58,11 +58,11 @@ public class TaskInstanceController {
     	Task task=taskService.createTaskQuery()
     			.taskId(taskId)
     			.singleResult();
-    	AjaxDataWrap<VOTask> dataWrap=new AjaxDataWrap<VOTask>();
+    	AjaxDataPacket<VOTask> dataPacket=new AjaxDataPacket<VOTask>();
     	VOTask resultTask=new VOTask();
     	CommonBeanUtils.copyProperties(task, resultTask);
-    	dataWrap.setData(resultTask);
-    	response.setAjaxParameter("dataWrap", dataWrap);
+    	dataPacket.setData(resultTask);
+    	response.setAjaxParameter("dataPacket", dataPacket);
     	return response;
     }
     

@@ -1,6 +1,6 @@
 function retrieve() {
-	var worksheetDataWrap = ajaxgrid.collectDataWrap();
-	var queryDataWrap = ajaxform.collectDataWrap();
+	var worksheetDataPacket = ajaxgrid.collectDataPacket();
+	var queryDataPacket = ajaxform.collectDataPacket();
 	$.request({
 		url : $$pageContextPath + "sys/worksheet/retrieve",
 		type : "POST",
@@ -8,18 +8,18 @@ function retrieve() {
 		dataType : "json",
 		async : false,
 		data : {
-			queryDataWrap : queryDataWrap,
-			worksheetDataWrap : worksheetDataWrap
+			queryDataPacket : queryDataPacket,
+			worksheetDataPacket : worksheetDataPacket
 		},
 		success : retrieveSuccess
 	});
 }
 
 function retrieveSuccess(response) {
-	var dataWrap = response.get("dataWrap");
-	if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length == 0)
+	var dataPacket = response.get("dataPacket");
+	if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length == 0)
 		$.shakeTips("未查询到任何数据!", 2000);
-	ajaxgrid.setDataWrap(dataWrap);
+	ajaxgrid.setDataPacket(dataPacket);
 }
 
 function imageCustomer(a, record, c) {

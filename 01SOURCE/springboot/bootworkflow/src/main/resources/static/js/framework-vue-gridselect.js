@@ -33,8 +33,8 @@
 					async : false,
 					data : null,
 					noneSelectedText:"",
-					success : function(ajaxDataWrap) {
-						var dataList = ajaxDataWrap.dataList;
+					success : function(ajaxDataPacket) {
+						var dataList = ajaxDataPacket.dataList;
 						var source=new Array();
 						for (var i = 0; i < dataList.length; i++) {
 							var dropBean = dataList[i];

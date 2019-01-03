@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.code.CodeService;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
@@ -47,15 +47,15 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/retrieve-detail")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysCode> dataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
-		if (dataWrap == null)
+		AjaxDataPacket<SysCode> dataPacket = request.getAjaxDataPacket("dataPacket", SysCode.class);
+		if (dataPacket == null)
 			return null;
-		SysCode menuQuery = dataWrap.getData();
+		SysCode menuQuery = dataPacket.getData();
 		List<SysCode> list = service.findByClassify(menuQuery.getClassify());
-		dataWrap.setDataList(list);
+		dataPacket.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
-		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		ajaxResponse.setAjaxParameter("dataPacket", dataPacket);
 		return ajaxResponse;
 	}
 	
@@ -67,15 +67,15 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/retrieve-classify")
 	@ResponseBody
 	public AjaxResponse retrieveClassify(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysCode> dataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
-		if (dataWrap == null)
+		AjaxDataPacket<SysCode> dataPacket = request.getAjaxDataPacket("dataPacket", SysCode.class);
+		if (dataPacket == null)
 			return null;
-		SysCode menuQuery = dataWrap.getData();
-		List<SysCode> list = service.findClassify(menuQuery, dataWrap.getPageInfo());
-		dataWrap.setDataList(list);
+		SysCode menuQuery = dataPacket.getData();
+		List<SysCode> list = service.findClassify(menuQuery, dataPacket.getPageInfo());
+		dataPacket.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
-		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		ajaxResponse.setAjaxParameter("dataPacket", dataPacket);
 		return ajaxResponse;
 	}
 
@@ -87,13 +87,13 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/save-main")
 	@ResponseBody
 	public AjaxResponse save(@RequestBody AjaxRequest request) {
-//		AjaxDataWrap<SysCode> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysCode.class);
-		AjaxDataWrap<SysCode> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysCode.class);
-//		if (addDataWrap != null){
-//			service.saveOrUpdate(addDataWrap.getDataList());
+//		AjaxDataPacket<SysCode> addDataPacket = request.getAjaxDataPacket("addDataPacket", SysCode.class);
+		AjaxDataPacket<SysCode> updateDataPacket = request.getAjaxDataPacket("updateDataPacket", SysCode.class);
+//		if (addDataPacket != null){
+//			service.saveOrUpdate(addDataPacket.getDataList());
 //		}
-		if(updateDataWrap != null){
-			service.updateByClassify(updateDataWrap.getDataList());
+		if(updateDataPacket != null){
+			service.updateByClassify(updateDataPacket.getDataList());
 		}
 		return new AjaxResponse();
 	}
@@ -106,10 +106,10 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/save-detail")
 	@ResponseBody
 	public AjaxResponse saveDetail(@RequestBody AjaxRequest request){
-		AjaxDataWrap<SysCode> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysCode.class);
-		AjaxDataWrap<SysCode> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysCode.class);
-		service.saveOrUpdate(addDataWrap.getDataList());
-		service.saveOrUpdate(updateDataWrap.getDataList());
+		AjaxDataPacket<SysCode> addDataPacket = request.getAjaxDataPacket("addDataPacket", SysCode.class);
+		AjaxDataPacket<SysCode> updateDataPacket = request.getAjaxDataPacket("updateDataPacket", SysCode.class);
+		service.saveOrUpdate(addDataPacket.getDataList());
+		service.saveOrUpdate(updateDataPacket.getDataList());
 		return new AjaxResponse();
 	}
 	/**
@@ -121,10 +121,10 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("/delete-detail")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<SysCode> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
-		if (deleteDataWrap == null)
+		AjaxDataPacket<SysCode> deleteDataPacket = request.getAjaxDataPacket("dataPacket", SysCode.class);
+		if (deleteDataPacket == null)
 			return null;
-		List<SysCode> menuList = deleteDataWrap.getDataList();
+		List<SysCode> menuList = deleteDataPacket.getDataList();
 		service.remove(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;
@@ -139,10 +139,10 @@ public class CodeManagementController extends BaseController {
 	@RequestMapping("delete-by-classify")
 	@ResponseBody
 	public AjaxResponse deleteByClassify(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<SysCode> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
-		if (deleteDataWrap == null)
+		AjaxDataPacket<SysCode> deleteDataPacket = request.getAjaxDataPacket("dataPacket", SysCode.class);
+		if (deleteDataPacket == null)
 			return null;
-		List<SysCode> menuList = deleteDataWrap.getDataList();
+		List<SysCode> menuList = deleteDataPacket.getDataList();
 		service.removeByClassify(menuList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;
@@ -158,10 +158,10 @@ public class CodeManagementController extends BaseController {
 	@ResponseBody
 	public AjaxResponse updateByClassify(@RequestBody AjaxRequest request, AjaxResponse responseData) {
 		try{
-			AjaxDataWrap<SysCode> dataWrap = request.getAjaxDataWrap("dataWrap", SysCode.class);
-			if (dataWrap == null)
+			AjaxDataPacket<SysCode> dataPacket = request.getAjaxDataPacket("dataPacket", SysCode.class);
+			if (dataPacket == null)
 				return null;
-			SysCode code = dataWrap.getData();
+			SysCode code = dataPacket.getData();
 			service.updateByClassify(code);
 		}
 		catch(Exception e){

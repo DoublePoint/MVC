@@ -8,12 +8,12 @@ function addNewRecord() {
 }
 
 function retrieve() {
-	var dataWrap = ajaxgrid.collectDataWrap();
+	var dataPacket = ajaxgrid.collectDataPacket();
 
-	var formData = ajaxform.collectDataWrap();
+	var formData = ajaxform.collectDataPacket();
 	var array = [];
 	array.push(formData);
-	dataWrap.setDataList(array);
+	dataPacket.setDataList(array);
 
 	$.request({
 		url : $$pageContextPath + "sys/code/retrieve",
@@ -22,23 +22,23 @@ function retrieve() {
 		dataType : "json",
 		async : false,
 		data : {
-			dataWrap : dataWrap
+			dataPacket : dataPacket
 		},
 		success : function(response) {
-			var dataWrap = response.get("dataWrap");
-			if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length == 0)
+			var dataPacket = response.get("dataPacket");
+			if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length == 0)
 				$.shakeTips("未查询到任何数据!", 2000);
-			ajaxgrid.setDataWrap(dataWrap);
+			ajaxgrid.setDataPacket(dataPacket);
 		}
 	});
 }
 
 function onClickSave() {
-	var data = ajaxgrid.collectDataWrap("all");
+	var data = ajaxgrid.collectDataPacket("all");
 	$.request({
 		url : $$pageContextPath + "sys/code/add",
 		data : {
-			dataWrap : data
+			dataPacket : data
 		},
 		success : function(response) {
 			if (response){
@@ -56,7 +56,7 @@ function onClickSave() {
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			deleteDataWrap : ajaxgrid.collectDataWrap("checked")
+			deleteDataPacket : ajaxgrid.collectDataPacket("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "sys/code/delete",

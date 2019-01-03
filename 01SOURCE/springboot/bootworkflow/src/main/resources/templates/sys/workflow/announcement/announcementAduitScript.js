@@ -1,13 +1,13 @@
 function retrieve() {
-	var dataWrap = lltestdatagrid.collectDataWrap();
+	var dataPacket = lltestdatagrid.collectDataPacket();
 	var nodes = treeDemo.getSelectedNodes();
 	var selectNodeCdbs="";
 	if (nodes.length > 0) {
 		selectNodeCdbs = nodes[0].code;
 	}
-	var formData=ajaxform.collectDataWrap();
+	var formData=ajaxform.collectDataPacket();
 	formData.data.id=selectNodeCdbs;
-	dataWrap.setData(formData.data);
+	dataPacket.setData(formData.data);
 	$.request({
 		url : $$pageContextPath + "sys/menu/retrieve",
 		type : "POST",
@@ -15,17 +15,17 @@ function retrieve() {
 		dataType : "json",
 		async : false,
 		data :{
-			dataWrap:dataWrap
+			dataPacket:dataPacket
 		},
 		success : retrieveSuccess
 	});
 }
 
 function retrieveSuccess(response){
-	var dataWrap=response.get("dataWrap");
-	if(dataWrap==null||dataWrap.dataList==null||dataWrap.dataList.length==0)
+	var dataPacket=response.get("dataPacket");
+	if(dataPacket==null||dataPacket.dataList==null||dataPacket.dataList.length==0)
 		$.shakeTips("未查询到任何数据!",2000);
-	lltestdatagrid.setDataWrap(dataWrap);
+	lltestdatagrid.setDataPacket(dataPacket);
 }
 
 function retrieveTree() {
@@ -40,8 +40,8 @@ function onClickSave() {
 	} else {
 		parentMenuId = nodes[0].code;
 	}
-	var ajaxDataWrap =  $.createAjaxDataWrap();
-	ajaxDataWrap.setDataList(nodes[0]);
+	var ajaxDataPacket =  $.createAjaxDataPacket();
+	ajaxDataPacket.setDataList(nodes[0]);
 	$.openDialog({
 		type : 2,
 		title : "维护菜单",
@@ -53,7 +53,7 @@ function onClickSave() {
 		maxmin : true,
 		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
 		data : {
-			ajaxDataWrap:ajaxDataWrap,
+			ajaxDataPacket:ajaxDataPacket,
 			type:"add",
 			parentMenuId:parentMenuId
 		},
@@ -73,7 +73,7 @@ function onClickTransmit() {
 	$.request({
 		url:$$pageContextPath+"sys/workflow/announcement/save",
 		data:{
-			annChangedWrap:ajaxformAnnouncement.collectDataWrap(),
+			annChangedPacket:ajaxformAnnouncement.collectDataPacket(),
 		},
 		success:function(response){
 			if(response.get("worksheetNo")!=null){
@@ -90,16 +90,16 @@ function onClickTransmit() {
 }
 
 function zTreeOnClick(event, treeId, treeNode) {
-	lltestdatagrid.getDataWrap().getPageInfo().clear();
+	lltestdatagrid.getDataPacket().getPageInfo().clear();
 	retrieve();
 	return false;
 };
 
 function dbclickgrid(para1,data,index){
-	var ajaxDataWrap =  $.createAjaxDataWrap();
+	var ajaxDataPacket =  $.createAjaxDataPacket();
 	var dataArr=new Array();
 	dataArr.push(data);
-	ajaxDataWrap.setDataList(dataArr);
+	ajaxDataPacket.setDataList(dataArr);
 	$.openDialog({
 		type : 2,
 		title : "维护菜单",
@@ -111,7 +111,7 @@ function dbclickgrid(para1,data,index){
 		maxmin : true,
 		url : $$pageContextPath + '/sys/menu/menuDialog?type=edit',
 		data : {
-			dataWrap:ajaxDataWrap,
+			dataPacket:ajaxDataPacket,
 			type:"edit",
 		},
 		yes : function() {

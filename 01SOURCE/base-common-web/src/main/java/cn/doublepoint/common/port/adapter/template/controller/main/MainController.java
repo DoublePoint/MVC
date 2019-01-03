@@ -22,12 +22,12 @@ public class MainController {
 	
 	@RequestMapping("main")
 	public AjaxResponse hello(AjaxResponse response) {
-		/*AjaxDataWrap<Worksheet> worksheetDataWrap=new AjaxDataWrap<Worksheet>();
+		/*AjaxDataPacket<Worksheet> worksheetDataPacket=new AjaxDataPacket<Worksheet>();
 		Worksheet query=new Worksheet();
-		List<Worksheet> list=instanceService.getPersonalWorksheetList(query, worksheetDataWrap.getPageInfo());
+		List<Worksheet> list=instanceService.getPersonalWorksheetList(query, worksheetDataPacket.getPageInfo());
 		
-		worksheetDataWrap.setDataList(list);
-		response.setAjaxParameter("worksheetDataWrap", worksheetDataWrap);*/
+		worksheetDataPacket.setDataList(list);
+		response.setAjaxParameter("worksheetDataPacket", worksheetDataPacket);*/
 		response.setViewName("sys/index/main.html");
 		return response;
 	}

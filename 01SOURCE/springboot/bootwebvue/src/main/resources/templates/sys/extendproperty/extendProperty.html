@@ -55,7 +55,7 @@
                             </ll-col>
                         </ll-row>
                     </div>
-                    <ll-table-zz :data-wrap="dataWrap" :readonly="false" ref="tableMain" @current-change="retrieve">
+                    <ll-table-zz :data-wrap="dataPacket" :readonly="false" ref="tableMain" @current-change="retrieve">
                         <ll-table-column-zz type="selection" :width="55">
                         </ll-table-column-zz>
                         <ll-table-column-zz prop="code" label="扩展属性代码" :width="150">
@@ -71,12 +71,12 @@
 	</div>
 </body>
 <script type="text/javascript">
-var dataWrap = ajaxResponse.get("dataWrap");
+var dataPacket = ajaxResponse.get("dataPacket");
 
 var vm = new Vue({
     el: '#app',
     data: {
-        dataWrap: dataWrap,
+        dataPacket: dataPacket,
         datasource: $$pageContextPath + "sys/menu-tree/menus",
         data: [],
         form: {
@@ -87,33 +87,33 @@ var vm = new Vue({
     },
     methods: {
         retrieve:function() {
-        	var dataWrap=$.createAjaxDataWrap();
-        	dataWrap.setData(this.form);
-        	if(this.dataWrapMain!=null&&!this.$_.isUndefined(this.dataWrapMain.pageInfo))
-            	dataWrap.pageInfo=this.dataWrapMain.pageInfo;
+        	var dataPacket=$.createAjaxDataPacket();
+        	dataPacket.setData(this.form);
+        	if(this.dataPacketMain!=null&&!this.$_.isUndefined(this.dataPacketMain.pageInfo))
+            	dataPacket.pageInfo=this.dataPacketMain.pageInfo;
             $.request({
             	url : $$pageContextPath + "sys/extendproperty/retrieve",
                 data: {
-                	dataWrap:dataWrap
+                	dataPacket:dataPacket
                 },
                 success: function (response) {
-                    var dataWrap = response.get("dataWrap");
-                    if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
+                    var dataPacket = response.get("dataPacket");
+                    if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length ==
                         0)
                         $.msg("未查询到任何数据!");
-                    vm.$set(vm.$data, "dataWrap", dataWrap);
+                    vm.$set(vm.$data, "dataPacket", dataPacket);
                 }
             });
         },
         del:function(){
         	$.confirm("确定删除吗?",function(){
-        		var dataWrap=$.createAjaxDataWrap();
+        		var dataPacket=$.createAjaxDataPacket();
             	var dataList = vm.$refs["tableMain"].getSelectedRows();
-            	dataWrap.dataList=dataList;
+            	dataPacket.dataList=dataList;
             	$.request({
             		url : $$pageContextPath + "sys/extendproperty/delete",
                     data: {
-                    	dataWrap:dataWrap,
+                    	dataPacket:dataPacket,
                     },
                     success: function (response) {
                         $.success("删除成功");
@@ -124,17 +124,17 @@ var vm = new Vue({
         	
         },
         save:function(){
-            var addDataWrap = $.createAjaxDataWrap();
-            var updateDataWrap = $.createAjaxDataWrap();
+            var addDataPacket = $.createAjaxDataPacket();
+            var updateDataPacket = $.createAjaxDataPacket();
             var addDataList = this.$refs.tableMain.getAddedRows();
             var updateDataList = this.$refs.tableMain.getUpdatedRows();
-            addDataWrap.dataList = addDataList;
-            updateDataWrap.dataList = updateDataList;
+            addDataPacket.dataList = addDataList;
+            updateDataPacket.dataList = updateDataList;
             $.request({
             	url : $$pageContextPath + "sys/extendproperty/save",
                 data: {
-                	addDataWrap: addDataWrap,
-                	updateDataWrap: updateDataWrap
+                	addDataPacket: addDataPacket,
+                	updateDataPacket: updateDataPacket
                 },
                 success: function (response) {
                     if (response) {

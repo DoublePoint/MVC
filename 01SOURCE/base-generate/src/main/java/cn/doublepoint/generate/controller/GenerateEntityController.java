@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.annotation.RequestForm;
@@ -73,9 +73,9 @@ public class GenerateEntityController extends BaseController {
 		file.transferTo(filev);
 
 		List<TemplateEntityModel> beanModelList = GenerateTemplateUtil.buildTableNameList(filev);
-		AjaxDataWrap<TemplateEntityModel> ajaxDataWrap = new AjaxDataWrap<TemplateEntityModel>();
-		ajaxDataWrap.setDataList(beanModelList);
-		responseData.setAjaxParameter("ajaxDataWrap", ajaxDataWrap);
+		AjaxDataPacket<TemplateEntityModel> ajaxDataPacket = new AjaxDataPacket<TemplateEntityModel>();
+		ajaxDataPacket.setDataList(beanModelList);
+		responseData.setAjaxParameter("ajaxDataPacket", ajaxDataPacket);
 		responseData.setAjaxParameter("oomName", oomName);
 		return responseData;
 	
@@ -225,7 +225,7 @@ public class GenerateEntityController extends BaseController {
 
 	@RequestMapping("sys/config/entityFilter")
 	@ResponseBody
-	public AjaxDataWrap<SysEntityFilter> getEntityFilter(@RequestParam(required = false) String userId) {
+	public AjaxDataPacket<SysEntityFilter> getEntityFilter(@RequestParam(required = false) String userId) {
 		return efQueryService.findAllEntityFilter(null);
 	}
 

@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
@@ -54,13 +54,13 @@ public class ModelController {
 	 */
 	@RequestMapping(value = "oll/model/model-list")
 	public AjaxResponse modelList(AjaxResponse response) {
-		AjaxDataWrap<VOActReModel> dataWrap = new AjaxDataWrap<VOActReModel>();
+		AjaxDataPacket<VOActReModel> dataPacket = new AjaxDataPacket<VOActReModel>();
 		List<VOActReModel> resultList = new ArrayList<VOActReModel>();
 		List<Model> list = repositoryService.createModelQuery().list();
 		resultList = CommonBeanUtils.copyTo(list, VOActReModel.class);
 		response.setViewName("/model/modelList.html");
-		dataWrap.setDataList(resultList);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		dataPacket.setDataList(resultList);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 
@@ -70,12 +70,12 @@ public class ModelController {
 	@RequestMapping(value = "/oll/model/model-retrieve")
 	@ResponseBody
 	public AjaxResponse retrieveModel(AjaxResponse response) {
-		AjaxDataWrap<VOActReModel> dataWrap = new AjaxDataWrap<VOActReModel>();
+		AjaxDataPacket<VOActReModel> dataPacket = new AjaxDataPacket<VOActReModel>();
 		List<VOActReModel> resultList = new ArrayList<VOActReModel>();
 		List<Model> list = repositoryService.createModelQuery().list();
 		resultList = CommonBeanUtils.copyTo(list, VOActReModel.class);
-		dataWrap.setDataList(resultList);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		dataPacket.setDataList(resultList);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 	
@@ -86,9 +86,9 @@ public class ModelController {
 //	@ResponseBody
 //	public AjaxResponse retrieveModel(AjaxResponse response,@RequestBody WorkflowModelRequest workflowModelRequest) {
 //		List<VOActReModel> list=modelService.retrieve(workflowModelRequest);
-//		AjaxDataWrap<VOActReModel> dataWrap= new AjaxDataWrap<>();
-//		dataWrap.setDataList(list);
-//		response.setAjaxParameter("dataWrap", dataWrap);
+//		AjaxDataPacket<VOActReModel> dataPacket= new AjaxDataPacket<>();
+//		dataPacket.setDataList(list);
+//		response.setAjaxParameter("dataPacket", dataPacket);
 //		return response;
 //	}
 	
@@ -101,8 +101,8 @@ public class ModelController {
 	@RequestMapping(value = "oll/model/model-delete")
 	@ResponseBody
 	public AjaxResponse modelDelete(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<VOActReModel> dataWrap = request.getAjaxDataWrap("dataWrap", VOActReModel.class);
-		List<VOActReModel> deleteList = dataWrap.getDataList();
+		AjaxDataPacket<VOActReModel> dataPacket = request.getAjaxDataPacket("dataPacket", VOActReModel.class);
+		List<VOActReModel> deleteList = dataPacket.getDataList();
 		if (deleteList != null && deleteList.size() > 0) {
 			deleteList.stream().forEach(item -> repositoryService.deleteModel(item.getId()));
 		}

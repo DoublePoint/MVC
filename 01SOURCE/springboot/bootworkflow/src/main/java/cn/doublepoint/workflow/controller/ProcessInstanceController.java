@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOProcessDefinition;
@@ -56,14 +56,14 @@ public class ProcessInstanceController {
 	 */
 	@RequestMapping(value = "process-list")
 	public AjaxResponse processList(AjaxResponse response) {
-		AjaxDataWrap<VOProcessDefinition> dataWrap = new AjaxDataWrap<VOProcessDefinition>();
+		AjaxDataPacket<VOProcessDefinition> dataPacket = new AjaxDataPacket<VOProcessDefinition>();
 		List<VOProcessDefinition> processDefinitionList = new ArrayList<VOProcessDefinition>();
 		List<ProcessDefinition> source = repositoryService.createProcessDefinitionQuery().orderByDeploymentId().desc()
 				.list();
 		processDefinitionList = CommonBeanUtils.copyTo(source, VOProcessDefinition.class);
 		response.setViewName("/process/processList.html");
-		dataWrap.setDataList(processDefinitionList);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		dataPacket.setDataList(processDefinitionList);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 

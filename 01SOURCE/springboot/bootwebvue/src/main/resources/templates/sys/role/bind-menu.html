@@ -36,7 +36,7 @@
     </div>
 </body>
 <script type="text/javascript">
-    var dataWrap = ajaxResponse.get("dataWrap");
+    var dataPacket = ajaxResponse.get("dataPacket");
 	var roleId = ajaxResponse.get("roleId");
     var vm = new Vue({
         el: '#app',
@@ -51,12 +51,12 @@
         },
         methods: {
 			save:function(){
-				var dataWrap=$.createAjaxDataWrap();
-            	dataWrap.setDataList(this.updateList);
+				var dataPacket=$.createAjaxDataPacket();
+            	dataPacket.setDataList(this.updateList);
                 $.request({
                     url: $$pageContextPath + "sys/role/"+roleId+"/binding",
                     data: {
-                    	dataWrap:dataWrap
+                    	dataPacket:dataPacket
                     },
                     success: function (response) {
                        if(response==true){

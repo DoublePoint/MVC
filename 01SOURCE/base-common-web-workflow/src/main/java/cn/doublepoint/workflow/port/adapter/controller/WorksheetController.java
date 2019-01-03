@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
@@ -42,23 +42,23 @@ public class WorksheetController {
 	public AjaxResponse historicTaskList(AjaxResponse response){
 		response.setViewName("historicTaskList");
 		List<VOTask> list=instanceService.getHistoricTasks("10001");
-		AjaxDataWrap<VOTask> dataWrap=new AjaxDataWrap<VOTask>();
-		dataWrap.setDataList(list);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		AjaxDataPacket<VOTask> dataPacket=new AjaxDataPacket<VOTask>();
+		dataPacket.setDataList(list);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 	
 	@RequestMapping("retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request,AjaxResponse response){
-		AjaxDataWrap<SysWorksheet> queryDataWrap=request.getAjaxDataWrap("queryDataWrap", SysWorksheet.class);
-		AjaxDataWrap<SysWorksheet> dataWrap=request.getAjaxDataWrap("worksheetDataWrap", SysWorksheet.class);
+		AjaxDataPacket<SysWorksheet> queryDataPacket=request.getAjaxDataPacket("queryDataPacket", SysWorksheet.class);
+		AjaxDataPacket<SysWorksheet> dataPacket=request.getAjaxDataPacket("worksheetDataPacket", SysWorksheet.class);
 		
-		SysWorksheet query=queryDataWrap.getData();
-		dataWrap.getPageInfo().setPageSize(10);
-		List<SysWorksheet> list=worksheetService.find(query, dataWrap.getPageInfo());
-		dataWrap.setDataList(list);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		SysWorksheet query=queryDataPacket.getData();
+		dataPacket.getPageInfo().setPageSize(10);
+		List<SysWorksheet> list=worksheetService.find(query, dataPacket.getPageInfo());
+		dataPacket.setDataList(list);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 }

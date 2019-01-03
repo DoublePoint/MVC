@@ -313,8 +313,8 @@
 			return this;
 		},
 
-		createAjaxDataWrap : function(name) {
-			return new _LL_Model._AjaxDataWrap();
+		createAjaxDataPacket : function(name) {
+			return new _LL_Model._AjaxDataPacket();
 		},
 		_Clone : function clone(obj) {
 			// Handle the 3 simple types, and null or undefined

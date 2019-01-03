@@ -9,7 +9,7 @@
 */
 package cn.doublepoint.workflow.process;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModelQuery;
 
@@ -20,5 +20,5 @@ public interface ModelService {
 	 * @param query
 	 * @return
 	 */
-	public AjaxDataWrap<VOActReModel> retrieve(VOActReModelQuery query);
+	public AjaxDataPacket<VOActReModel> retrieve(VOActReModelQuery query);
 }

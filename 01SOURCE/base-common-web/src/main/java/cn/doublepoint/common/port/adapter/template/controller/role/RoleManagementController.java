@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.MenuRoleService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.RoleService;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
@@ -47,42 +47,42 @@ public class RoleManagementController extends BaseController {
 	public AjaxResponse bindMenuJsp(@PathVariable Integer roleId, AjaxResponse response) {
 		response.setViewName("/sys/role/bind-menu.html");
 		response.setAjaxParameter("roleId", roleId);
-		AjaxDataWrap<SysMenuRole> dataWrap = new AjaxDataWrap<SysMenuRole>();
+		AjaxDataPacket<SysMenuRole> dataPacket = new AjaxDataPacket<SysMenuRole>();
 		SysMenuRole query = new SysMenuRole();
 		query.setRoleId(roleId);
-		dataWrap.setDataList(menuRoleService.find(query, null));
-		response.setAjaxParameter("dataWrap", dataWrap);
+		dataPacket.setDataList(menuRoleService.find(query, null));
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse roleDataList(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysRole.class);
-		if (dataWrap == null)
+		AjaxDataPacket<SysRole> dataPacket = request.getAjaxDataPacket("dataPacket", SysRole.class);
+		if (dataPacket == null)
 			return null;
-		dataWrap.setDataList(roleService.findAll(dataWrap.getPageInfo()));
-		response.setAjaxParameter("dataWrap", dataWrap);
+		dataPacket.setDataList(roleService.findAll(dataPacket.getPageInfo()));
+		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
 	public boolean save(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysRole> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysRole.class);
-		AjaxDataWrap<SysRole> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysRole.class);
-		roleService.saveOrUpdate(addDataWrap.getDataList());
-		roleService.saveOrUpdate(updateDataWrap.getDataList());
+		AjaxDataPacket<SysRole> addDataPacket = request.getAjaxDataPacket("addDataPacket", SysRole.class);
+		AjaxDataPacket<SysRole> updateDataPacket = request.getAjaxDataPacket("updateDataPacket", SysRole.class);
+		roleService.saveOrUpdate(addDataPacket.getDataList());
+		roleService.saveOrUpdate(updateDataPacket.getDataList());
 		return true;
 	}
 
 	@RequestMapping("/{roleId}/binding")
 	@ResponseBody
 	public boolean bindMenu(@PathVariable Long roleId,@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysMenuRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysMenuRole.class);
-		if (dataWrap == null)
+		AjaxDataPacket<SysMenuRole> dataPacket = request.getAjaxDataPacket("dataPacket", SysMenuRole.class);
+		if (dataPacket == null)
 			return true;
-		List<SysMenuRole> menus = dataWrap.getDataList();
+		List<SysMenuRole> menus = dataPacket.getDataList();
 		menuRoleService.saveOrUpdate(menus);
 		return true;
 	}
@@ -90,10 +90,10 @@ public class RoleManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public boolean delete(@RequestBody AjaxRequest request, AjaxResponse response) throws Exception {
-		AjaxDataWrap<SysRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysRole.class);
-		if (dataWrap == null)
+		AjaxDataPacket<SysRole> dataPacket = request.getAjaxDataPacket("dataPacket", SysRole.class);
+		if (dataPacket == null)
 			return true;
-		roleService.remove(dataWrap.getDataList());
+		roleService.remove(dataPacket.getDataList());
 		return true;
 	}
 

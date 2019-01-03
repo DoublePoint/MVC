@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSONObject;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
@@ -167,8 +167,8 @@ public class InstanceServiceImpl implements InstanceService {
                 null, 
                 new ParameterizedTypeReference<AjaxResponse>() {},
                 instanceId).getBody();
-		Object object=response.getParameterMap().get("dataWrap");
-		AjaxDataWrap<VOTask> dataWrap=(AjaxDataWrap<VOTask>)object;
-		return dataWrap.getDataList();
+		Object object=response.getParameterMap().get("dataPacket");
+		AjaxDataPacket<VOTask> dataPacket=(AjaxDataPacket<VOTask>)object;
+		return dataPacket.getDataList();
 	}
 }

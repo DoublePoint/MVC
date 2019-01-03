@@ -6,8 +6,8 @@ function init(response) {
 	var testParamn = response.get("test111");
 }
 function fileuploaded(response) {
-	var ajaxDataWrap = response.get("ajaxDataWrap");
-	gridResource.setDataWrap(ajaxDataWrap);
+	var ajaxDataPacket = response.get("ajaxDataPacket");
+	gridResource.setDataPacket(ajaxDataPacket);
 	oomName = response.get("oomName");
 }
 
@@ -19,9 +19,9 @@ function stepChanging(event, currentIndex, newIndex) {
 			return false;
 		}
 	} else if (currentIndex == 2) {
-		gridAim.setDataWrap(gridResource.collectDataWrap("checked"));
+		gridAim.setDataPacket(gridResource.collectDataPacket("checked"));
 		var data1 = {
-			dataWrap : gridResource.collectDataWrap("checked"),
+			dataPacket : gridResource.collectDataPacket("checked"),
 			oomName : oomName
 		};
 		$.request({

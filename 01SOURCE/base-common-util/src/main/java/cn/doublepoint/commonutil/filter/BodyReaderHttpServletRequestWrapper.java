@@ -23,7 +23,7 @@
 //import javax.servlet.ReadListener;
 //import javax.servlet.ServletInputStream;
 //import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletRequestWrapper;
+//import javax.servlet.http.HttpServletRequestPacketper;
 //
 //import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.JSONObject;
@@ -32,22 +32,22 @@
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //
 //import cn.doublepoint.commonutil.StringUtil;
-//import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+//import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 //import cn.doublepoint.commonutil.log.Log4jUtil;
 //import cn.doublepoint.template.dto.domain.model.entity.BaseModel;
 //
 ///**
 // * 1、对于Ajax 数据直接封装到json对象中，对于form.submit由于this.body为空，所以json对象为null
-// * 2、获取参数首先从super.parameter中读取，String和AjaxDataWrap分别转义，再从json对象中取，最后从map中取
+// * 2、获取参数首先从super.parameter中读取，String和AjaxDataPacket分别转义，再从json对象中取，最后从map中取
 // * @author Administrator
 // *
 // */
-//public class BodyReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
+//public class BodyReaderHttpServletRequestPacketper extends HttpServletRequestPacketper {
 //	private final byte[] body;
 //	private Map<String, Object> map;
 //	private JSONObject jsonObject;
 //
-//	public BodyReaderHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
+//	public BodyReaderHttpServletRequestPacketper(HttpServletRequest request) throws IOException {
 //		super(request);
 //		map = new HashMap<String, Object>();
 //		body = readBytes(request.getReader(), "utf-8");
@@ -89,37 +89,37 @@
 //	}
 //
 //	/**
-//	 * 获取ajaxdataWrap
+//	 * 获取ajaxdataPacket
 //	 * 
-//	 * @param ajaxDataWrapName
+//	 * @param ajaxDataPacketName
 //	 * @param clazz
 //	 * @return
 //	 */
-//	public <T  extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String ajaxDataWrapName, Class<T> clazz) {
+//	public <T  extends BaseModel> AjaxDataPacket<T> getAjaxDataPacket(String ajaxDataPacketName, Class<T> clazz) {
 //		
 //		//1.从父中获取
-//		String dataWrapJsonString=super.getParameter(ajaxDataWrapName);
-//		if(!StringUtil.isNullOrEmpty(dataWrapJsonString)){
-//			return translateJsonStringToAjaxDataWrap(dataWrapJsonString, clazz);
+//		String dataPacketJsonString=super.getParameter(ajaxDataPacketName);
+//		if(!StringUtil.isNullOrEmpty(dataPacketJsonString)){
+//			return translateJsonStringToAjaxDataPacket(dataPacketJsonString, clazz);
 //		}
 //		
 //		//2.从json对象中获取
-//		dataWrapJsonString = "";
+//		dataPacketJsonString = "";
 //		JSONObject obj = null;
 //		if (jsonObject != null)
-//			obj = jsonObject.getJSONObject(ajaxDataWrapName);
+//			obj = jsonObject.getJSONObject(ajaxDataPacketName);
 //		try {
 //			if (obj == null) {
-//				Object wrapObj = map.get(ajaxDataWrapName);
+//				Object wrapObj = map.get(ajaxDataPacketName);
 //				if (wrapObj == null)
-//					return new AjaxDataWrap<T>();
-//				dataWrapJsonString = String.valueOf(wrapObj);
-//				obj = JSON.parseObject(dataWrapJsonString);
+//					return new AjaxDataPacket<T>();
+//				dataPacketJsonString = String.valueOf(wrapObj);
+//				obj = JSON.parseObject(dataPacketJsonString);
 //			}
 //		} catch (Exception e) {
 //			Log4jUtil.error(e);
 //		}
-//		return translateJsonStringToAjaxDataWrap(obj.toJSONString(), clazz);
+//		return translateJsonStringToAjaxDataPacket(obj.toJSONString(), clazz);
 //	}
 //
 //	@Override
@@ -206,19 +206,19 @@
 //		}
 //	}
 //
-//	private <T  extends BaseModel> AjaxDataWrap<T> translateJsonStringToAjaxDataWrap(String jsonString,Class clazz){
+//	private <T  extends BaseModel> AjaxDataPacket<T> translateJsonStringToAjaxDataPacket(String jsonString,Class clazz){
 //		ObjectMapper mspp = new ObjectMapper();
 //		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 //		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
+//		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataPacket.class, clazz);
 //		try {
-//			AjaxDataWrap<T> dataWrap = mspp.readValue(jsonString, type);
-//			if(dataWrap==null)
-//				dataWrap=new AjaxDataWrap<T>();
-//			return dataWrap;
+//			AjaxDataPacket<T> dataPacket = mspp.readValue(jsonString, type);
+//			if(dataPacket==null)
+//				dataPacket=new AjaxDataPacket<T>();
+//			return dataPacket;
 //		} catch (Exception e) {
 //			Log4jUtil.error(e);
-//			return new AjaxDataWrap<T>();
+//			return new AjaxDataPacket<T>();
 //		}
 //	}
 //}

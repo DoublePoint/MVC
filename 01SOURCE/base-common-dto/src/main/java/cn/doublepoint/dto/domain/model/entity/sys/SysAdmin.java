@@ -37,9 +37,6 @@ public class SysAdmin extends cn.doublepoint.dto.domain.model.entity.BaseEntity 
 	@Column(name="MODIFY_TIME")
 	private Date modifyTime;
 
-	@Column(name="ROLE_ID")
-	private Integer roleId;
-
 	public SysAdmin() {
 	}
 
@@ -97,14 +94,6 @@ public class SysAdmin extends cn.doublepoint.dto.domain.model.entity.BaseEntity 
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
-	}
-
-	public Integer getRoleId() {
-		return this.roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
 	}
 
 }

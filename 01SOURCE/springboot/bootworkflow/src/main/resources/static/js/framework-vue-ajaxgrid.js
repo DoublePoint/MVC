@@ -79,7 +79,7 @@ function AjaxGrid(domId) {
 		align : 'center'
 	} ];
 	this.datasource = "";
-	this.datawrap = $.createAjaxDataWrap();
+	this.datawrap = $.createAjaxDataPacket();
 	this.height = 300;
 
 	/* bootstrap */
@@ -205,11 +205,11 @@ function AjaxGrid(domId) {
 		}
 		return bootstrapColumns;
 	}
-	this.getDataWrap = function(isGetData) {
+	this.getDataPacket = function(isGetData) {
 		if (isGetData == null)
 			isGetData = true;
 		if (!isGetData) {
-			var adw = $.createAjaxDataWrap();
+			var adw = $.createAjaxDataPacket();
 			adw.pageInfo = this.datawrap.pageInfo;
 			return adw;
 		}
@@ -253,8 +253,8 @@ function AjaxGrid(domId) {
 			dataType : "json",
 			data : JSON.stringify({}),
 			async : false,
-			success : function(ajaxDataWrap) {
-				grid.datawrap.parse(ajaxDataWrap);
+			success : function(ajaxDataPacket) {
+				grid.datawrap.parse(ajaxDataPacket);
 				grid.initBootstrapSetting(grid);
 				grid.setPager(grid.datawrap.getPageInfo());
 			},
@@ -304,13 +304,13 @@ function AjaxGrid(domId) {
 	this.setDataSource = function(ds) {
 		this.datasource = ds;
 	}
-	this.setDataWrap = function(ajaxDataWrap) {
-		if (ajaxDataWrap == null) {
-			ajaxDataWrap = $.createAjaxDataWrap();
+	this.setDataPacket = function(ajaxDataPacket) {
+		if (ajaxDataPacket == null) {
+			ajaxDataPacket = $.createAjaxDataPacket();
 		}
 		try {
-			this.datawrap.parse(ajaxDataWrap);
-			$("#" + this.domId).bootstrapTable('load', $._Clone(ajaxDataWrap.dataList));
+			this.datawrap.parse(ajaxDataPacket);
+			$("#" + this.domId).bootstrapTable('load', $._Clone(ajaxDataPacket.dataList));
 		} catch (e) {
 			console.log(e);
 		}
@@ -323,14 +323,14 @@ function AjaxGrid(domId) {
 	this.initBootstrapSetting = function() {
 		var ajaxgrid = this;
 		var id = ajaxgrid.domId;
-		var ajaxDataWrap = ajaxgrid.datawrap;
+		var ajaxDataPacket = ajaxgrid.datawrap;
 		var datasource = ajaxgrid.datasource;
 		var columns = ajaxgrid.getBootStrapCols();
 		var height = ajaxgrid.height;
 		var $table = $("#" + id);
 		$table.bootstrapTable({
 			buttonsAlign : 'right',// 按钮对齐方式
-			data : $._Clone(ajaxDataWrap.dataList),
+			data : $._Clone(ajaxDataPacket.dataList),
 			dataField : "dataList",// 这是返回的json数组的key.默认好像是"rows".这里只有前后端约定好就行
 			height : height,
 			idField : "rowId",
@@ -394,8 +394,8 @@ function AjaxGrid(domId) {
 				if (!first) {
 					var currentPageNum = obj.curr;
 					var pageSize = obj.limit;
-					ajaxDataGrid.getDataWrap().pageInfo.pageSize = pageSize;
-					ajaxDataGrid.getDataWrap().pageInfo.currentPageNum = currentPageNum;
+					ajaxDataGrid.getDataPacket().pageInfo.pageSize = pageSize;
+					ajaxDataGrid.getDataPacket().pageInfo.currentPageNum = currentPageNum;
 					if (ajaxDataGrid.getOnPageClick() != null)
 						$._Eval(ajaxDataGrid.getOnPageClick());
 				}
@@ -446,20 +446,20 @@ function AjaxGrid(domId) {
 	}
 
 	// getData
-	this.collectDataWrap = function(type) {
+	this.collectDataPacket = function(type) {
 		if (type == "checked") {
-			var wrap = $._Clone(this.getDataWrap());
+			var wrap = $._Clone(this.getDataPacket());
 			var dataList = this.getCheckedRecords();
 			wrap.dataList = $._Clone(dataList);
 			return wrap;
 		} else if (type == "all") {
-			var wrap = $._Clone(this.getDataWrap());
+			var wrap = $._Clone(this.getDataPacket());
 			var dataList = this.getDom().bootstrapTable('getData');
 			;
 			wrap.dataList = $._Clone(dataList);
 			return wrap;
 		} else {
-			var wrap = $._Clone(this.getDataWrap());
+			var wrap = $._Clone(this.getDataPacket());
 			return wrap;
 		}
 	}

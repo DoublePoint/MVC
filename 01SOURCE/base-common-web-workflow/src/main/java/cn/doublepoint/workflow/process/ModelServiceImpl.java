@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModelQuery;
 import cn.doublepoint.workflow.util.WorksheetUtil;
@@ -35,16 +35,16 @@ public class ModelServiceImpl implements ModelService {
 	RestTemplate restTemplate;
 	
 	@Override
-	public AjaxDataWrap<VOActReModel> retrieve(VOActReModelQuery query) {
+	public AjaxDataPacket<VOActReModel> retrieve(VOActReModelQuery query) {
 		String  requestString=JSONObject.toJSONString(query.getRequest());
 		HttpHeaders headers = new HttpHeaders(); 
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> requestBody=new HttpEntity<>(requestString,headers);
 		// 启动流程并返回实例标识
-		AjaxDataWrap<VOActReModel> response = restTemplate.exchange(WorksheetUtil.getWorkflowUrl()+START_INSTANCE_URL, 
+		AjaxDataPacket<VOActReModel> response = restTemplate.exchange(WorksheetUtil.getWorkflowUrl()+START_INSTANCE_URL, 
                 HttpMethod.POST, 
                 requestBody, 
-                new ParameterizedTypeReference<AjaxDataWrap<VOActReModel>>() {}).getBody();
+                new ParameterizedTypeReference<AjaxDataPacket<VOActReModel>>() {}).getBody();
 		return response;
 	}
 }

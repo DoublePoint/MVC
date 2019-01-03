@@ -25,7 +25,7 @@ import cn.doublepoint.common.port.adapter.template.persistence.sys.admin.AdminRo
 import cn.doublepoint.common.port.adapter.template.persistence.sys.admin.AdminService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.role.RoleService;
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.annotation.RequestForm;
@@ -52,9 +52,9 @@ public class AdminManagerController extends BaseController{
 	@RequestMapping("/{adminId}/detail")
 	public AjaxResponse detail(@RequestForm AjaxRequest request,@PathVariable Integer adminId, AjaxResponse response) {
 		SysAdmin admin = adminService.getById(adminId);
-		AjaxDataWrap<SysAdmin> dataWrap = new AjaxDataWrap<SysAdmin>();
-		dataWrap.setData(admin);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		AjaxDataPacket<SysAdmin> dataPacket = new AjaxDataPacket<SysAdmin>();
+		dataPacket.setData(admin);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		response.setAjaxParameter("pageType", "modify");
 		response.setViewName("sys/admin/detail.html");
 		return response;
@@ -62,17 +62,17 @@ public class AdminManagerController extends BaseController{
 
 	@RequestMapping("/bind-role")
 	public AjaxResponse adminDialog(@RequestForm AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<VOAdminRole> dataWrap = new AjaxDataWrap<VOAdminRole>();
+		AjaxDataPacket<VOAdminRole> dataPacket = new AjaxDataPacket<VOAdminRole>();
 		String id = request.getParameter("id");
-		List<VOAdminRole> adminRoles = adminRoleService.findRolesByAdminId(Integer.valueOf(id), dataWrap.getPageInfo());
-		dataWrap.setDataList(adminRoles);
+		List<VOAdminRole> adminRoles = adminRoleService.findRolesByAdminId(Integer.valueOf(id), dataPacket.getPageInfo());
+		dataPacket.setDataList(adminRoles);
 		response.setViewName("sys/admin/bind-role.html");
-		response.setAjaxParameter("roleAdminDataWrap", dataWrap);
+		response.setAjaxParameter("roleAdminDataPacket", dataPacket);
 		
-		AjaxDataWrap<SysRole> roleDataWrap = new AjaxDataWrap<SysRole>();
+		AjaxDataPacket<SysRole> roleDataPacket = new AjaxDataPacket<SysRole>();
 		List<SysRole> roles = adminRoleService.findRolesNotAdminId(Integer.valueOf(id));
-		roleDataWrap.setDataList(roles);
-		response.setAjaxParameter("roleDataWrap",roleDataWrap);
+		roleDataPacket.setDataList(roles);
+		response.setAjaxParameter("roleDataPacket",roleDataPacket);
 		response.setAjaxParameter("adminId", id);
 		return response;
 	}
@@ -81,25 +81,25 @@ public class AdminManagerController extends BaseController{
 	@RequestMapping("/{adminId}/admin-role")
 	@ResponseBody
 	public AjaxResponse saveAdminRole(@PathVariable Integer adminId,@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysAdminRole> dataWrap = request.getAjaxDataWrap("dataWrap", SysAdminRole.class);
+		AjaxDataPacket<SysAdminRole> dataPacket = request.getAjaxDataPacket("dataPacket", SysAdminRole.class);
 		adminRoleService.removeByAdminId(adminId);
-		adminRoleService.saveOrUpdate(dataWrap.getDataList());
+		adminRoleService.saveOrUpdate(dataPacket.getDataList());
 		return response;
 	}
 
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysAdmin> dataWrap = request.getAjaxDataWrap("dataWrap", SysAdmin.class);
-		SysAdmin query = dataWrap.getData();
+		AjaxDataPacket<SysAdmin> dataPacket = request.getAjaxDataPacket("dataPacket", SysAdmin.class);
+		SysAdmin query = dataPacket.getData();
 		if(query==null)
 			query=new SysAdmin();
 		if(!StringUtil.isNullOrEmpty(request.getParameter("departmentId"))){
 			query.setDepartmentId(Integer.valueOf(request.getParameter("departmentId")));
 		}
-		List<SysAdmin> resultList = adminService.find(query, dataWrap.getPageInfo());
-		dataWrap.setDataList(resultList);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		List<SysAdmin> resultList = adminService.find(query, dataPacket.getPageInfo());
+		dataPacket.setDataList(resultList);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		response.setViewName("adminDialog");
 		return response;
 	}
@@ -107,20 +107,20 @@ public class AdminManagerController extends BaseController{
 	@RequestMapping("/save")
 	@ResponseBody
 	public AjaxResponse save(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysAdmin> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysAdmin.class);
-		AjaxDataWrap<SysAdmin> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysAdmin.class);
-		adminService.saveOrUpdate(addDataWrap.getDataList());
-		adminService.saveOrUpdate(updateDataWrap.getDataList());
+		AjaxDataPacket<SysAdmin> addDataPacket = request.getAjaxDataPacket("addDataPacket", SysAdmin.class);
+		AjaxDataPacket<SysAdmin> updateDataPacket = request.getAjaxDataPacket("updateDataPacket", SysAdmin.class);
+		adminService.saveOrUpdate(addDataPacket.getDataList());
+		adminService.saveOrUpdate(updateDataPacket.getDataList());
 		return new AjaxResponse();
 	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public boolean delete(@RequestBody AjaxRequest request, AjaxResponse response) {
-		AjaxDataWrap<SysAdmin> dataWrap = request.getAjaxDataWrap("dataWrap", SysAdmin.class);
-		if (dataWrap == null)
+		AjaxDataPacket<SysAdmin> dataPacket = request.getAjaxDataPacket("dataPacket", SysAdmin.class);
+		if (dataPacket == null)
 			return false;
-		return adminService.remove(dataWrap.getDataList());
+		return adminService.remove(dataPacket.getDataList());
 	}
 
 }

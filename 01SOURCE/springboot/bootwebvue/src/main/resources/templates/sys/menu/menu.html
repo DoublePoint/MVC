@@ -55,7 +55,7 @@
                                     </ll-col>
                                 </ll-row>
                             </div>
-                            <ll-table-zz :data-wrap="dataWrap" :readonly="false" 
+                            <ll-table-zz :data-wrap="dataPacket" :readonly="false" 
                             		ref="tableMenu"
                             		@current-change="retrieve" 
                             		@row-dblclick="rowDblcick">
@@ -89,12 +89,12 @@
     </div>
 
     <script type="text/javascript">
-        var dataWrap = ajaxResponse.get("dataWrap");
+        var dataPacket = ajaxResponse.get("dataPacket");
 
         var vm = new Vue({
             el: '#app',
             data: {
-                dataWrap: dataWrap,
+                dataPacket: dataPacket,
                 datasource: $$pageContextPath + "sys/menu-tree/menus",
                 data: [],
                 dataTree:null,
@@ -109,21 +109,21 @@
             },
             methods: {
                 retrieve:function() {
-                	var dataWrap=this.dataWrap;
-                	if(dataWrap==null)
-                		dataWrap=$.createAjaxDataWrap();
-                	dataWrap.data=this.menuForm;
+                	var dataPacket=this.dataPacket;
+                	if(dataPacket==null)
+                		dataPacket=$.createAjaxDataPacket();
+                	dataPacket.data=this.menuForm;
                     $.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
                         data: {
-                        	dataWrap:dataWrap
+                        	dataPacket:dataPacket
                         },
                         success: function (response) {
-                            var dataWrap = response.get("dataWrap");
-                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==
+                            var dataPacket = response.get("dataPacket");
+                            if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length ==
                                 0)
                                 vm.$alert("未查询到任何数据!");
-                            vm.$set(vm.$data, "dataWrap", dataWrap);
+                            vm.$set(vm.$data, "dataPacket", dataPacket);
                         }
                     });
                 },
@@ -135,15 +135,15 @@
                         dataType: "json",
                         async: false,
                         data: {
-                        	dataWrap:this.dataWrap,
+                        	dataPacket:this.dataPacket,
                         	parentId:nodeData.nodeBean==null?0:nodeData.nodeBean.id
                         },
                         success: function (response) {
-                            var dataWrap = response.get("dataWrap");
-                            if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length ==0){
+                            var dataPacket = response.get("dataPacket");
+                            if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length ==0){
                             	$.msg('未查询到任何数据');
                             }
-                            vm.$set(vm.$data, "dataWrap", dataWrap);
+                            vm.$set(vm.$data, "dataPacket", dataPacket);
                         }
                     });
                 },
@@ -162,15 +162,15 @@
                 	});
                 },
                 rowDblcick:function(row){
-                	var dataWrap=$.createAjaxDataWrap();
-                	dataWrap.setData(row);
+                	var dataPacket=$.createAjaxDataPacket();
+                	dataPacket.setData(row);
                 	$.openDialog({
                 		title : "维护菜单",
                 		height:440,
                 		width:630,
                 		url : $$pageContextPath + '/sys/menu/menuDialog?aaa=2&testParam=321',
                 		data : {
-                			dataWrap:dataWrap,
+                			dataPacket:dataPacket,
                 			type:"edit"
                 		},
                 		yes : function() {
@@ -182,13 +182,13 @@
                 },
                 del:function(){
                 	$.confirm("确定删除吗?",function(){
-                		var dataWrap=$.createAjaxDataWrap();
+                		var dataPacket=$.createAjaxDataPacket();
                     	var dataList = vm.$refs["tableMenu"].getSelectedRows();
-                    	dataWrap.dataList=dataList;
+                    	dataPacket.dataList=dataList;
                     	$.request({
                             url: $$pageContextPath + "sys/menu/delete",
                             data: {
-                            	dataWrap:dataWrap,
+                            	dataPacket:dataPacket,
                             },
                             success: function (response) {
                                 $.success("删除成功");
@@ -199,13 +199,13 @@
                 	
                 },
                 save:function(){
-                	var dataWrap=$.createAjaxDataWrap();
+                	var dataPacket=$.createAjaxDataPacket();
                 	var dataList = vm.$refs["tableMenu"].getUpdatedRows();
-                	dataWrap.dataList=dataList;
+                	dataPacket.dataList=dataList;
                 	$.request({
                         url: $$pageContextPath + "sys/menu/save",
                         data: {
-                        	dataWrap:dataWrap,
+                        	dataPacket:dataPacket,
                         },
                         success: function (response) {
                             $.success("保存成功");

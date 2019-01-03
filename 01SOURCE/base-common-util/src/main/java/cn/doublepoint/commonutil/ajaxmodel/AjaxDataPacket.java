@@ -17,18 +17,18 @@ import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
-public class AjaxDataWrap<T> implements Serializable {
+public class AjaxDataPacket<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private List<T> dataList=new ArrayList<T>();
 	private T data;
 	private PageInfo pageInfo;
 
-	public <R extends BaseModel> AjaxDataWrap<R> copy(Class<R> targetClass) {
-		AjaxDataWrap<R> ajaxDataWrap = new AjaxDataWrap<>();
-		ajaxDataWrap.setPageInfo(this.pageInfo);
-		ajaxDataWrap.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));
-		return ajaxDataWrap;
+	public <R extends BaseModel> AjaxDataPacket<R> copy(Class<R> targetClass) {
+		AjaxDataPacket<R> ajaxDataPacket = new AjaxDataPacket<>();
+		ajaxDataPacket.setPageInfo(this.pageInfo);
+		ajaxDataPacket.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));
+		return ajaxDataPacket;
 	}
 
 	public List<T> getDataList() {
@@ -53,7 +53,7 @@ public class AjaxDataWrap<T> implements Serializable {
 		this.pageInfo = pageInfo;
 	}
 
-	public AjaxDataWrap() {
+	public AjaxDataPacket() {
 		super();
 		this.pageInfo = new PageInfo();
 	}

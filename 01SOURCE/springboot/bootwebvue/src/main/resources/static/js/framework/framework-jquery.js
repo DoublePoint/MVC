@@ -79,8 +79,8 @@
             return null;
         },
 
-        createAjaxDataWrap: function(name) {
-            return new _LL_Model._AjaxDataWrap();
+        createAjaxDataPacket: function(name) {
+            return new _LL_Model._AjaxDataPacket();
         },
         
         createNewRow:function(rowId){

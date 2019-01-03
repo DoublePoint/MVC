@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 
 /**
@@ -39,8 +39,8 @@ public class HistoryController {
 	public AjaxResponse historicTasksGet(AjaxResponse response, @PathVariable("instanceId") String processInstanceId) {
 		List<HistoricTaskInstance> historicTaskList=this.getHistoricTasks(processInstanceId);
 		response.setViewName("history/historicTaskList.html");
-		AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance>();
-		dataWrap.setDataList(historicTaskList);
+		AjaxDataPacket<HistoricTaskInstance> dataPacket = new AjaxDataPacket<HistoricTaskInstance>();
+		dataPacket.setDataList(historicTaskList);
 		historicTaskList.stream().forEach(task -> {
 			System.out.println("taskId:" + task.getId());
 			System.out.println("taskName:" + task.getName());
@@ -53,7 +53,7 @@ public class HistoryController {
 			System.out.println("--------------------------");
 			System.out.println("--------------------------");
 		});
-		response.setAjaxParameter("dataWrap", dataWrap);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		response.setAjaxParameter("instanceId", processInstanceId);
 		return response;
 	}
@@ -71,10 +71,10 @@ public class HistoryController {
 		Map<String,String> allRequestParams =new HashMap<>();
 		allRequestParams.put("processInstanceId", processInstanceId);
 		DataResponse dataResponse=historicTaskInstanceCollectionResource.getHistoricProcessInstances(allRequestParams, request);
-		AjaxDataWrap<HistoricTaskInstance> dataWrap = new AjaxDataWrap<HistoricTaskInstance>();
-		dataWrap.setDataList((List<HistoricTaskInstance>)dataResponse.getData());
+		AjaxDataPacket<HistoricTaskInstance> dataPacket = new AjaxDataPacket<HistoricTaskInstance>();
+		dataPacket.setDataList((List<HistoricTaskInstance>)dataResponse.getData());
 		
-		response.setAjaxParameter("dataWrap", dataWrap);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		response.setViewName("sys/workflow/historicTaskList.html");
 		return response;
 	}

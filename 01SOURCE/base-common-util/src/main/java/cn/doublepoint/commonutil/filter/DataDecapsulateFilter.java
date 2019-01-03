@@ -74,14 +74,14 @@
 //	 * @throws ServletException
 //	 */
 //	private void doOtherRequest(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException{
-//		ServletRequest requestWrapper = null;
+//		ServletRequest requestPacketper = null;
 //		if (request instanceof HttpServletRequest) {
-//			requestWrapper = new BodyReaderHttpServletRequestWrapper((HttpServletRequest) request);
+//			requestPacketper = new BodyReaderHttpServletRequestPacketper((HttpServletRequest) request);
 //		}
-//		if (null == requestWrapper) {
+//		if (null == requestPacketper) {
 //			filterChain.doFilter(request, response);
 //			return;
 //		}
-//		filterChain.doFilter(requestWrapper, response);
+//		filterChain.doFilter(requestPacketper, response);
 //	}
 //}

@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 import cn.doublepoint.dto.domain.model.vo.query.QueryParamList;
@@ -53,7 +53,7 @@ public interface BaseRepositoryUtil {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	<T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, PageInfo pageInfo);
+	<T extends BaseModel> AjaxDataPacket<T> load(Class<T> clazz, PageInfo pageInfo);
 
 	/**
 	 * 带参数的实体检索
@@ -87,7 +87,7 @@ public interface BaseRepositoryUtil {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	<T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, SortParamList sortParams, PageInfo pageInfo);
+	<T extends BaseModel> AjaxDataPacket<T> load(Class<T> clazz, SortParamList sortParams, PageInfo pageInfo);
 
 	/**
 	 * 带参数、分页的实体检索
@@ -102,7 +102,7 @@ public interface BaseRepositoryUtil {
 	 *            分页信息
 	 * @return 检索后得到的实体列表 @ 出错抛出异常
 	 */
-	<T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, QueryParamList params, PageInfo pageInfo);
+	<T extends BaseModel> AjaxDataPacket<T> load(Class<T> clazz, QueryParamList params, PageInfo pageInfo);
 
 	/**
 	 * 带参数、分页的实体检索
@@ -121,7 +121,7 @@ public interface BaseRepositoryUtil {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	<T extends BaseModel> AjaxDataWrap<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams,
+	<T extends BaseModel> AjaxDataPacket<T> load(Class<T> clazz, QueryParamList params, SortParamList sortParams,
 			PageInfo pageInfo);
 
 	/**

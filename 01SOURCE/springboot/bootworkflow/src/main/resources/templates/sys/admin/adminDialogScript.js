@@ -12,15 +12,15 @@ function onClickSave() {
 	if (!ajaxform.validate(true)) {
 		return;
 	}
-	var data = ajaxform.collectDataWrap();
-	var dataWrap = $.createAjaxDataWrap();
+	var data = ajaxform.collectDataPacket();
+	var dataPacket = $.createAjaxDataPacket();
 	var dataList = new Array();
 	dataList[0] = data;
-	dataWrap.setDataList(dataList);
+	dataPacket.setDataList(dataList);
 	$.request({
 		url : $$pageContextPath + "sys/admin/save?testtest=111&test=123",
 		data : {
-			dataWrap : dataWrap
+			dataPacket : dataPacket
 		},
 		success : function(data1) {
 			$.tips('保存成功');

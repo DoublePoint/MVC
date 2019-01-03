@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.department.DepartmentService;
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.annotation.RequestForm;
@@ -48,8 +48,8 @@ public class DepartmentManagementController extends BaseController {
 	public AjaxResponse departmentDialog(@RequestForm(name = "requestForm") AjaxRequest request,AjaxResponse response) {
 		String type=request.getParameter("type");
 		if ("edit".equals(type)) {
-			AjaxDataWrap<SysDepartment> ajaxDataWrap = request.getAjaxDataWrap("dataWrap", SysDepartment.class);
-			response.setAjaxParameter("dataWrap", ajaxDataWrap);
+			AjaxDataPacket<SysDepartment> ajaxDataPacket = request.getAjaxDataPacket("dataPacket", SysDepartment.class);
+			response.setAjaxParameter("dataPacket", ajaxDataPacket);
 		} else {
 			String parentDepartmentId = request.getParameter("parentDepartmentId");
 			if (!StringUtil.isNullOrEmpty(parentDepartmentId))
@@ -81,39 +81,39 @@ public class DepartmentManagementController extends BaseController {
 	@RequestMapping("/retrieve")
 	@ResponseBody
 	public AjaxResponse retrieve(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysDepartment> dataWrap = request.getAjaxDataWrap("dataWrap", SysDepartment.class);
-		SysDepartment departmentQuery = dataWrap.getData();
+		AjaxDataPacket<SysDepartment> dataPacket = request.getAjaxDataPacket("dataPacket", SysDepartment.class);
+		SysDepartment departmentQuery = dataPacket.getData();
 		if (departmentQuery==null) {
 			departmentQuery=new SysDepartment();
 		}
 		if(!StringUtil.isNullOrEmpty(request.getParameter("parentId"))){
 			departmentQuery.setId(Integer.valueOf(request.getParameter("parentId")));
 		}
-		List<SysDepartment> list = departmentService.findChildrenDepartment(departmentQuery, dataWrap.getPageInfo());
-		dataWrap.setDataList(list);
+		List<SysDepartment> list = departmentService.findChildrenDepartment(departmentQuery, dataPacket.getPageInfo());
+		dataPacket.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();
-		ajaxResponse.setAjaxParameter("dataWrap", dataWrap);
+		ajaxResponse.setAjaxParameter("dataPacket", dataPacket);
 		return ajaxResponse;
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
 	public AjaxResponse save(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysDepartment> addDataWrap = request.getAjaxDataWrap("addDataWrap", SysDepartment.class);
-		AjaxDataWrap<SysDepartment> updateDataWrap = request.getAjaxDataWrap("updateDataWrap", SysDepartment.class);
-		departmentService.saveOrUpdate(addDataWrap.getDataList());
-		departmentService.saveOrUpdate(updateDataWrap.getDataList());
+		AjaxDataPacket<SysDepartment> addDataPacket = request.getAjaxDataPacket("addDataPacket", SysDepartment.class);
+		AjaxDataPacket<SysDepartment> updateDataPacket = request.getAjaxDataPacket("updateDataPacket", SysDepartment.class);
+		departmentService.saveOrUpdate(addDataPacket.getDataList());
+		departmentService.saveOrUpdate(updateDataPacket.getDataList());
 		return new AjaxResponse();
 	}
 
 	@RequestMapping("/add")
 	@ResponseBody
 	public AjaxResponse add(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysDepartment> addDataWrap = request.getAjaxDataWrap("dataWrap", SysDepartment.class);
-		if (addDataWrap == null)
+		AjaxDataPacket<SysDepartment> addDataPacket = request.getAjaxDataPacket("dataPacket", SysDepartment.class);
+		if (addDataPacket == null)
 			return null;
-		SysDepartment department = addDataWrap.getData();
+		SysDepartment department = addDataPacket.getData();
 		departmentService.saveOrUpdate(department);
 		return new AjaxResponse();
 	}
@@ -121,10 +121,10 @@ public class DepartmentManagementController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public AjaxResponse delete(@RequestBody AjaxRequest request, AjaxResponse responseData) {
-		AjaxDataWrap<SysDepartment> deleteDataWrap = request.getAjaxDataWrap("dataWrap", SysDepartment.class);
-		if (deleteDataWrap == null)
+		AjaxDataPacket<SysDepartment> deleteDataPacket = request.getAjaxDataPacket("dataPacket", SysDepartment.class);
+		if (deleteDataPacket == null)
 			return null;
-		List<SysDepartment> departmentList = deleteDataWrap.getDataList();
+		List<SysDepartment> departmentList = deleteDataPacket.getDataList();
 		departmentService.removeDepartment(departmentList);
 		responseData.setAjaxParameter("deleteState", true);
 		return responseData;

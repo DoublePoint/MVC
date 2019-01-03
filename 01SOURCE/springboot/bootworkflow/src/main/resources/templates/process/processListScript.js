@@ -1,6 +1,6 @@
 function init(response){
-	var dataWrap = response.get("dataWrap");
-	ajaxgrid.setDataWrap(dataWrap);
+	var dataPacket = response.get("dataPacket");
+	ajaxgrid.setDataPacket(dataPacket);
 }
 
 function customerFunction(a, process, c) {

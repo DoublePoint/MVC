@@ -52,8 +52,8 @@
 					dataType : "json",
 					async : false,
 					data : null,
-					success : function(ajaxDataWrap) {
-						var dataList = ajaxDataWrap.dataList;
+					success : function(ajaxDataPacket) {
+						var dataList = ajaxDataPacket.dataList;
 						if(dataList.length==0){
 							dataList=[{},{}];
 						}

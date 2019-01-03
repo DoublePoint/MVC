@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menuvisitlog.MenuVisitLogService;
 import cn.doublepoint.commonutil.DateTimeUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.port.adapter.controller.BaseController;
 import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
@@ -33,9 +33,9 @@ public class MenuVisitController extends BaseController{
 	@RequestMapping("add-log")
 	@ResponseBody
 	public void cd(@RequestBody AjaxRequest request) {
-		AjaxDataWrap<SysMenu> dataWrap=request.getAjaxDataWrap("dataWrap", SysMenu.class);
+		AjaxDataPacket<SysMenu> dataPacket=request.getAjaxDataPacket("dataPacket", SysMenu.class);
 		SysMenuVisitLog newLog=new SysMenuVisitLog();
-		newLog.setMenuId(dataWrap.getDataList().get(0).getId());
+		newLog.setMenuId(dataPacket.getDataList().get(0).getId());
 		newLog.setVisitTime(DateTimeUtil.getCurrentDate());
 		menuVisitLogService.saveOrUpdate(newLog);
 	}

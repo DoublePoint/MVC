@@ -12,7 +12,7 @@ package cn.doublepoint.workflow.util;
 import java.util.List;
 
 import cn.doublepoint.commonutil.ApplicationContextUtil;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModelQuery;
@@ -108,7 +108,7 @@ public class WorksheetUtil {
 	 * @param query
 	 * @return
 	 */
-	public static AjaxDataWrap<VOActReModel> retrieveModel(VOActReModelQuery query){
+	public static AjaxDataPacket<VOActReModel> retrieveModel(VOActReModelQuery query){
 		ModelService modelService = getModelService();
 		return modelService.retrieve(query);
 	}

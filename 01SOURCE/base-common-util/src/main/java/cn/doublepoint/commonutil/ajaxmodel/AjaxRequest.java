@@ -49,23 +49,23 @@ public class AjaxRequest {
 		return map.get(parameterName).toString();
 	}
 	
-	public <T extends BaseModel> AjaxDataWrap<T> getAjaxDataWrap(String parameterName,Class<T> clazz){
+	public <T extends BaseModel> AjaxDataPacket<T> getAjaxDataPacket(String parameterName,Class<T> clazz){
 		if(map==null)
-			return new AjaxDataWrap<T>();
+			return new AjaxDataPacket<T>();
 		if(map.get(parameterName)==null)
-			return new AjaxDataWrap<T>();
+			return new AjaxDataPacket<T>();
 		
 		String jsonString=JSONObject.toJSONString(map.get(parameterName));
 		ObjectMapper mspp = new ObjectMapper();
 		mspp.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		mspp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataWrap.class, clazz);
+		JavaType type = mspp.getTypeFactory().constructParametricType(AjaxDataPacket.class, clazz);
 		try {
-			AjaxDataWrap<T> dataWrap=mspp.readValue(jsonString, type);
-			return dataWrap;
+			AjaxDataPacket<T> dataPacket=mspp.readValue(jsonString, type);
+			return dataPacket;
 		} catch (Exception e) {
 			Log4jUtil.error(e);
-			return new AjaxDataWrap<T>();
+			return new AjaxDataPacket<T>();
 		}
 	}
 }

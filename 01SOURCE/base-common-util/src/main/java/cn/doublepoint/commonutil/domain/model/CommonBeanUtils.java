@@ -76,32 +76,32 @@ public class CommonBeanUtils extends BeanUtils {
 	}
 
 	/**
-	 * Spring Data Jpa Page转换成AjaxDataWrap
+	 * Spring Data Jpa Page转换成AjaxDataPacket
 	 * 
 	 * @param page
 	 * @param cla
 	 * @return
 	 *//*
-		 * public static <T> AjaxDataWrap<T> copyPageToAjaxDataWrap(Page
-		 * page,Class<T> cla){ AjaxDataWrap<T> ajaxDataWrap=new
-		 * AjaxDataWrap<T>(); PageInfo pager=new PageInfo(); if(page!=null){
+		 * public static <T> AjaxDataPacket<T> copyPageToAjaxDataPacket(Page
+		 * page,Class<T> cla){ AjaxDataPacket<T> ajaxDataPacket=new
+		 * AjaxDataPacket<T>(); PageInfo pager=new PageInfo(); if(page!=null){
 		 * pager.setCurrentPageCount(page.getNumberOfElements());//本页条数
 		 * pager.setCurrentPageNum(page.getNumber());//当前是第几页
 		 * pager.setTotalPageCount(page.getTotalPages());//总页数
 		 * pager.setTotalElementCount(page.getTotalElements());//总条数
 		 * pager.setPageSize(page.getSize());//每页条数 } List<T>
-		 * resList=copyTo(page.getContent(),cla); ajaxDataWrap.setData(resList);
-		 * ajaxDataWrap.setPageInfo(pager); return ajaxDataWrap; }
+		 * resList=copyTo(page.getContent(),cla); ajaxDataPacket.setData(resList);
+		 * ajaxDataPacket.setPageInfo(pager); return ajaxDataPacket; }
 		 */
 //	/**
-//	 * Spring Data Jpa Page转换成AjaxDataWrap
+//	 * Spring Data Jpa Page转换成AjaxDataPacket
 //	 * 
 //	 * @param page
 //	 * @param cla
 //	 * @return
 //	 */
-//	public static <T, E extends BaseEntity> AjaxDataWrap<E > copyPageToAjaxDataWrap(Page<T> page, Class<E> cla) {
-//		AjaxDataWrap<E> ajaxDataWrap = new AjaxDataWrap<E>();
+//	public static <T, E extends BaseEntity> AjaxDataPacket<E > copyPageToAjaxDataPacket(Page<T> page, Class<E> cla) {
+//		AjaxDataPacket<E> ajaxDataPacket = new AjaxDataPacket<E>();
 //		PageInfo pageInfo = new PageInfo();
 //		if (page != null) {
 //			pageInfo.setCurrentPageCount(page.getNumberOfElements());// 本页条数
@@ -111,12 +111,12 @@ public class CommonBeanUtils extends BeanUtils {
 //			pageInfo.setPageSize(page.getSize());// 每页条数
 //		}
 //		List<E> resList = copyTo(page.getContent(), cla);
-//		ajaxDataWrap.setDataList(resList);
-//		ajaxDataWrap.setPageInfo(pageInfo);
-//		return ajaxDataWrap;
+//		ajaxDataPacket.setDataList(resList);
+//		ajaxDataPacket.setPageInfo(pageInfo);
+//		return ajaxDataPacket;
 //	}
 //
-//	public static <T extends BaseModel> AjaxDataWrap<T> copyPageToAjaxDataWrap(Page<T> page) {
+//	public static <T extends BaseModel> AjaxDataPacket<T> copyPageToAjaxDataPacket(Page<T> page) {
 //		List<T> list = page.getContent();
 //		PageInfo pageInfo = new PageInfo();
 //		pageInfo.setCurrentPageNum(page.getNumber()+1);//索引页+1 当前是第几页
@@ -124,9 +124,9 @@ public class CommonBeanUtils extends BeanUtils {
 //		pageInfo.setTotalElementCount(page.getTotalElements());
 //		pageInfo.setTotalPageCount(page.getTotalPages());
 //		pageInfo.setPageSize(page.getSize());
-//		AjaxDataWrap<T> ajaxDataWrap = new AjaxDataWrap<>();
-//		ajaxDataWrap.setDataList(list);
-//		ajaxDataWrap.setPageInfo(pageInfo);
-//		return ajaxDataWrap;
+//		AjaxDataPacket<T> ajaxDataPacket = new AjaxDataPacket<>();
+//		ajaxDataPacket.setDataList(list);
+//		ajaxDataPacket.setPageInfo(pageInfo);
+//		return ajaxDataPacket;
 //	}
 }

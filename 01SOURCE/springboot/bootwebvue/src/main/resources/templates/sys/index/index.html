@@ -74,7 +74,7 @@
     </div>
 
     <script type="text/javascript">
-        var dataWrap = ajaxResponse.get("dataWrap");
+        var dataPacket = ajaxResponse.get("dataPacket");
 		var rightMenuTabIndex="首页";
 		var rightMenuTabName="";
         var vm = new Vue({
@@ -257,7 +257,7 @@
                     icon: "icon"
                 },
                 tabs: [],
-                items: dataWrap.dataList,
+                items: dataPacket.dataList,
                 style:{
                     asideWidth:"200px"
                 }

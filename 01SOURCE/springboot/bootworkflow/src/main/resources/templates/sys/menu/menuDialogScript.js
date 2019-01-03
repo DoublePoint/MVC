@@ -6,18 +6,18 @@ function init(response) {
 		inpbtn_sjcdbs.setData(parentMenuId);
 	}
 	else{
-		var dataWrap=response.get("dataWrap");
-		var data=dataWrap.dataList[0];
+		var dataPacket=response.get("dataPacket");
+		var data=dataPacket.dataList[0];
 		ajaxform.setData(data);
 	}
 }
 
 function onClickSave(){
-	var addDataWrap=ajaxform.collectDataWrap();
+	var addDataPacket=ajaxform.collectDataPacket();
 	$.request({
 		url : $$pageContextPath + "sys/menu/add?testtest=111&test=123",
 		data : {
-			addDataWrap:addDataWrap
+			addDataPacket:addDataPacket
 		},
 		success : function(data1) {
 			$.tips('保存成功');

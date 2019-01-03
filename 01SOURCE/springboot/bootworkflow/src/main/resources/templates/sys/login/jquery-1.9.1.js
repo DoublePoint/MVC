@@ -1381,7 +1381,7 @@ jQuery.support = (function() {
 		deleteExpando: true,
 		noCloneEvent: true,
 		inlineBlockNeedsLayout: false,
-		shrinkWrapBlocks: false,
+		shrinkPacketBlocks: false,
 		reliableMarginRight: true,
 		boxSizingReliable: true,
 		pixelPosition: false
@@ -1523,7 +1523,7 @@ jQuery.support = (function() {
 			div.style.display = "block";
 			div.innerHTML = "<div></div>";
 			div.firstChild.style.width = "5px";
-			support.shrinkWrapBlocks = ( div.offsetWidth !== 3 );
+			support.shrinkPacketBlocks = ( div.offsetWidth !== 3 );
 
 			if ( support.inlineBlockNeedsLayout ) {
 				// Prevent IE 6 from affecting layout for positioned elements #11048
@@ -6845,7 +6845,7 @@ jQuery.extend({
 			// If a hook was provided, use that value, otherwise just set the specified value
 			if ( !hooks || !("set" in hooks) || (value = hooks.set( elem, value, extra )) !== undefined ) {
 
-				// Wrapped to prevent IE from throwing errors when 'invalid' values are provided
+				// Packetped to prevent IE from throwing errors when 'invalid' values are provided
 				// Fixes bug #5509
 				try {
 					style[ name ] = value;
@@ -8937,7 +8937,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 	if ( opts.overflow ) {
 		style.overflow = "hidden";
-		if ( !jQuery.support.shrinkWrapBlocks ) {
+		if ( !jQuery.support.shrinkPacketBlocks ) {
 			anim.always(function() {
 				style.overflow = opts.overflow[ 0 ];
 				style.overflowX = opts.overflow[ 1 ];

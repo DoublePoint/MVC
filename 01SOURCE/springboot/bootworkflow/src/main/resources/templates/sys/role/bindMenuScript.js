@@ -1,12 +1,12 @@
 var roleId;
-var dataWrap;
+var dataPacket;
 function init(response){
 	roleId=response.get("roleId");
-	dataWrap=response.get("dataWrap");
+	dataPacket=response.get("dataPacket");
 }
 
 function treeOnLoad(){
-	var dataList=dataWrap.dataList;
+	var dataList=dataPacket.dataList;
 	menuTree.checkNodesByDataList(dataList,"menuId","id");
 }
 
@@ -16,12 +16,12 @@ function onOk(){
 		$.alert("请至少选中一个菜单。");
 		return;
 	}
-	var dataWrap=$.createAjaxDataWrap();
-	dataWrap.dataList=checkNodes;
+	var dataPacket=$.createAjaxDataPacket();
+	dataPacket.dataList=checkNodes;
 	$.request({
 		url:$$pageContextPath+"sys/role/bind-menu",
 		data:{
-			dataWrap:dataWrap,
+			dataPacket:dataPacket,
 			roleId:roleId
 		},
 		success:function(responseState){

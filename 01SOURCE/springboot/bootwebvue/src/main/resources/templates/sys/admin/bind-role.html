@@ -14,7 +14,7 @@
                 	<div slot="header" class="clearfix">
                             <span class="ll-main-span">绑定角色</span>
                     </div>
-                    <ll-table-zz ref="tableRole" :show-pager="false" v-model="roleDataWrap" :readonly="false" @current-change="retrieve">
+                    <ll-table-zz ref="tableRole" :show-pager="false" v-model="roleDataPacket" :readonly="false" @current-change="retrieve">
                         <ll-table-column-zz type="selection" :width="55">
                         </ll-table-column-zz>
                         <ll-table-column-zz prop="id" label="角色代码" :width="100">
@@ -39,7 +39,7 @@
                     	<div slot="header" class="clearfix">
                             <span class="ll-main-span">已经绑定的角色</span>
                     	</div>
-	                    <ll-table-zz ref="tableRoleAdmin" :show-pager="false"  v-model="roleAdminDataWrap" :readonly="false"  @current-change="retrieve">
+	                    <ll-table-zz ref="tableRoleAdmin" :show-pager="false"  v-model="roleAdminDataPacket" :readonly="false"  @current-change="retrieve">
 	                        <ll-table-column-zz type="selection" :width="55">
 	                        </ll-table-column-zz>
 	                        <ll-table-column-zz prop="roleId" label="角色代码" :width="100">
@@ -62,14 +62,14 @@
             </ll-container>
 	</div>
 <script type="text/javascript">
-var roleDataWrap = ajaxResponse.get("roleDataWrap");
-var roleAdminDataWrap = ajaxResponse.get("roleAdminDataWrap");
+var roleDataPacket = ajaxResponse.get("roleDataPacket");
+var roleAdminDataPacket = ajaxResponse.get("roleAdminDataPacket");
 var adminId = ajaxResponse.get("adminId")
 var vm = new Vue({
     el: '#app',
     data: {
-    	roleDataWrap: roleDataWrap,
-    	roleAdminDataWrap: roleAdminDataWrap
+    	roleDataPacket: roleDataPacket,
+    	roleAdminDataPacket: roleAdminDataPacket
     },
     methods:{
     	retrieve:function(){
@@ -79,7 +79,7 @@ var vm = new Vue({
         	$.request({
                 url: $$pageContextPath + "sys/admin/"+ adminId +"/admin-role",
                 data: {
-                	dataWrap: this.roleAdminDataWrap,
+                	dataPacket: this.roleAdminDataPacket,
                 },
                 success: function (response) {
                     $.error("保存成功");
@@ -90,12 +90,12 @@ var vm = new Vue({
     		
     	},
     	toAdminRoleAll:function(){
-    		for(var i=0;i<this.roleDataWrap.dataList.length;i++){
-    			var newRoleRow = this.roleToAdminRole(this.roleDataWrap.dataList[i]);
+    		for(var i=0;i<this.roleDataPacket.dataList.length;i++){
+    			var newRoleRow = this.roleToAdminRole(this.roleDataPacket.dataList[i]);
     			this.$refs.tableRoleAdmin.addRow(newRoleRow);
     		}
 
-            vm.$set(vm.$data, "roleDataWrap",$.createAjaxDataWrap());
+            vm.$set(vm.$data, "roleDataPacket",$.createAjaxDataPacket());
     		
     	},
     	toAdminRole:function(){
@@ -109,8 +109,8 @@ var vm = new Vue({
     			this.$refs.tableRoleAdmin.addRow(newRoleRow);
     		}
     		
-    		var roleDataList = this.$_.difference(this.roleDataWrap.dataList,dataList);
-    		vm.$set(vm.roleDataWrap, "dataList", roleDataList);
+    		var roleDataList = this.$_.difference(this.roleDataPacket.dataList,dataList);
+    		vm.$set(vm.roleDataPacket, "dataList", roleDataList);
     	},
     	toRole:function(){
     		var dataList = this.$refs.tableRoleAdmin.getSelectedRows();
@@ -123,15 +123,15 @@ var vm = new Vue({
     			this.$refs.tableRole.addRow(newRoleRow);
     		}
     		
-    		var roleAdminDataList = this.$_.difference(this.roleAdminDataWrap.dataList,dataList);
-    		vm.$set(vm.roleAdminDataWrap, "dataList", roleAdminDataList);
+    		var roleAdminDataList = this.$_.difference(this.roleAdminDataPacket.dataList,dataList);
+    		vm.$set(vm.roleAdminDataPacket, "dataList", roleAdminDataList);
     	},
     	toRoleAll:function(){
-    		for(var i=0;i<this.roleAdminDataWrap.dataList.length;i++){
-    			var newRoleRow = this.adminRoleToRole(this.roleAdminDataWrap.dataList[i]);
+    		for(var i=0;i<this.roleAdminDataPacket.dataList.length;i++){
+    			var newRoleRow = this.adminRoleToRole(this.roleAdminDataPacket.dataList[i]);
     			this.$refs.tableRole.addRow(newRoleRow);
     		}
-            vm.$set(vm.$data, "roleAdminDataWrap",$.createAjaxDataWrap());
+            vm.$set(vm.$data, "roleAdminDataPacket",$.createAjaxDataPacket());
     	},
     	adminRoleToRole:function(adminRole){
     		var newRoleRow = $.createNewRow();

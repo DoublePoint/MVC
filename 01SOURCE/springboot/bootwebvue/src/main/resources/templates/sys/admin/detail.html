@@ -46,12 +46,12 @@
     </div>
 
     <script type="text/javascript">
-        var dataWrap = ajaxResponse.get("dataWrap");
+        var dataPacket = ajaxResponse.get("dataPacket");
         var pageType = ajaxResponse.get("pageType");
         var formData;
         if(pageType=="modify"){
-        	if(dataWrap!=null)
-        		formData=dataWrap.data;
+        	if(dataPacket!=null)
+        		formData=dataPacket.data;
         }
         else{
         	formData={
@@ -66,17 +66,17 @@
             },
             methods: {
                 save:function(){
-                	var addDataWrap = $.createAjaxDataWrap();
-                    var updateDataWrap = $.createAjaxDataWrap();
+                	var addDataPacket = $.createAjaxDataPacket();
+                    var updateDataPacket = $.createAjaxDataPacket();
                     var addDataList = this.$refs.tableAdmin.getAddedRows();
                     var updateDataList = this.$refs.tableAdmin.getUpdatedRows();
-                    addDataWrap.dataList = addDataList;
-                    updateDataWrap.dataList = updateDataList;
+                    addDataPacket.dataList = addDataList;
+                    updateDataPacket.dataList = updateDataList;
                 	$.request({
                         url: $$pageContextPath + "sys/admin/save",
                         data: {
-                        	addDataWrap: addDataWrap,
-                        	updateDataWrap: updateDataWrap
+                        	addDataPacket: addDataPacket,
+                        	updateDataPacket: updateDataPacket
                         },
                         success: function (response) {
                             $.success("保存成功");

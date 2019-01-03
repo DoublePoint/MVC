@@ -47,7 +47,7 @@
 //import com.fasterxml.jackson.databind.node.ObjectNode;
 //
 //import cn.doublepoint.commonutil.StringUtil;
-//import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+//import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 //import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 //import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 //import cn.doublepoint.commonutil.log.Log4jUtil;
@@ -72,14 +72,14 @@
 //	 */
 //	@RequestMapping(value = "process-list")
 //	public AjaxResponse processList(AjaxResponse response) {
-//		AjaxDataWrap<VOProcessDefinition> dataWrap = new AjaxDataWrap<VOProcessDefinition>();
+//		AjaxDataPacket<VOProcessDefinition> dataPacket = new AjaxDataPacket<VOProcessDefinition>();
 //		List<VOProcessDefinition> processDefinitionList = new ArrayList<VOProcessDefinition>();
 //		List<ProcessDefinition> source = repositoryService.createProcessDefinitionQuery().orderByDeploymentId().desc()
 //				.list();
 //		processDefinitionList = CommonBeanUtils.copyTo(source, VOProcessDefinition.class);
 //		response.setViewName("/process/processList.html");
-//		dataWrap.setDataList(processDefinitionList);
-//		response.setAjaxParameter("dataWrap", dataWrap);
+//		dataPacket.setDataList(processDefinitionList);
+//		response.setAjaxParameter("dataPacket", dataPacket);
 //		return response;
 //	}
 //

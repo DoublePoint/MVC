@@ -1,9 +1,9 @@
 function retrieve() {
-	var dataWrap = ajaxgrid.collectDataWrap();
-	var formData = ajaxform.collectDataWrap();
+	var dataPacket = ajaxgrid.collectDataPacket();
+	var formData = ajaxform.collectDataPacket();
 	var array = [];
 	array.push(formData);
-	dataWrap.setDataList(array);
+	dataPacket.setDataList(array);
 	$.request({
 		url : $$pageContextPath + "sys/admin/retrieve",
 		type : "POST",
@@ -11,24 +11,24 @@ function retrieve() {
 		dataType : "json",
 		async : false,
 		data : {
-			dataWrap : dataWrap
+			dataPacket : dataPacket
 		},
 		success : retrieveSuccess
 	});
 }
 
 function retrieveSuccess(response) {
-	var dataWrap = response.get("dataWrap");
-	if (dataWrap == null || dataWrap.dataList == null || dataWrap.dataList.length == 0)
+	var dataPacket = response.get("dataPacket");
+	if (dataPacket == null || dataPacket.dataList == null || dataPacket.dataList.length == 0)
 		$.shakeTips("未查询到任何数据!", 2000);
-	ajaxgrid.setDataWrap(dataWrap);
+	ajaxgrid.setDataPacket(dataPacket);
 }
 
 
 function onClickDelete() {
 	$.confirm('确定要删除吗？', function() {
 		var data = {
-			dataWrap : ajaxgrid.collectDataWrap("checked")
+			dataPacket : ajaxgrid.collectDataPacket("checked")
 		};
 		$.request({
 			url : $$pageContextPath + "sys/admin/delete",

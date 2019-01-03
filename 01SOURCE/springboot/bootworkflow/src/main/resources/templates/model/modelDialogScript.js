@@ -12,8 +12,8 @@ function onClickSave() {
 	if (!ajaxform.validate(true)) {
 		return;
 	}
-	var dataWrap = ajaxform.collectDataWrap();
-	var data=dataWrap.getData();
+	var dataPacket = ajaxform.collectDataPacket();
+	var data=dataPacket.getData();
 	$.request({
 		url : $$pageContextPath + "oll/model/model-create?key=" + data.key + "&name=" + data.name + "&description=" + data.description,
 		data : {

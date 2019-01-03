@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
-import cn.doublepoint.commonutil.ajaxmodel.AjaxDataWrap;
+import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseRequestController;
@@ -49,9 +49,9 @@ public class PageController extends BaseRequestController {
 		} else {
 			returnMenuList = getChildrenMenuList(null);
 		}
-		AjaxDataWrap<VOMenu> dataWrap = new AjaxDataWrap<>();
-		dataWrap.setDataList(returnMenuList);
-		response.setAjaxParameter("dataWrap", dataWrap);
+		AjaxDataPacket<VOMenu> dataPacket = new AjaxDataPacket<>();
+		dataPacket.setDataList(returnMenuList);
+		response.setAjaxParameter("dataPacket", dataPacket);
 		response.setViewName("sys/index/index.html");
 		return response;
 	}
