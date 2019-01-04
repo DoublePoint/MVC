@@ -130,4 +130,14 @@ public class AdminServiceImpl  implements AdminService{
 	public List<SysAdmin> findAll(PageInfo pageInfo) {
 		return JPAUtil.load(SysAdmin.class,pageInfo);
 	}
+
+	@Override
+	public SysAdmin getByLoginAccountNo(String loginAccountNo) {
+		QueryParamList paramList = new QueryParamList();
+		paramList.addParam("loginAccountNo", loginAccountNo);
+		List<SysAdmin> admins = JPAUtil.load(SysAdmin.class,paramList);
+		if(admins.size()==0)
+			return null;
+		return admins.get(0);
+	}
 }

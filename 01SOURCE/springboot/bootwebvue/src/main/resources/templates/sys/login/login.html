@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+</head>
+<body style="background: #f6f6f6">
+<div id="app" style="height: 100%;width: 100%;" v-cloak>
+	<ll-form status-icon ref="form" label-width="100px" class="demo-ruleForm">
+	  <ll-form-item label="密码" prop="pass">
+	    <ll-input name="username" type="username" v-model="form.username" ></ll-input>
+	  </ll-form-item>
+	  <ll-form-item label="确认密码" prop="checkPass">
+	    <ll-input name="password" type="password" v-model="form.password" ></ll-input>
+	  </ll-form-item>
+	  <ll-form-item>
+	    <ll-button type="primary" @click="login">提交</ll-button>
+	  </ll-form-item>
+	</ll-form>
+	<form id="popWinForm" method="post">
+		
+	</form>
+</div>
+<script type="text/javascript">
+var vm = new Vue({
+    el: '#app',
+    data: {
+    	form: {
+    		username: '',
+    		password: '',
+        },
+    },
+    methods: {
+    	login:function(){
+    		$.request({
+                url: $$pageContextPath + "login/figure",
+                data: {
+                	username:"liulei",
+                },
+                success: function (response) {
+                    $.success("保存成功");
+                    var url = $$pageContextPath + "/login/";
+                	var form = $("#popWinForm");// 定义一个form表单
+                	form.attr("style", "display:none");
+                	form.attr("target", "");
+                	form.attr("method", "post");
+                	form.attr("action", url);
+                	var fileInput = $("<input>");
+            		fileInput.attr("type", "hidden");
+            		fileInput.attr("name", "username");// 设置属性的名字
+            		fileInput.attr("value", vm.form.username);// 设置属性的值
+            		form.append(fileInput);
+            		
+            		var fileInput2 = $("<input>");
+            		fileInput2.attr("type", "hidden");
+            		fileInput2.attr("name", "password");// 设置属性的名字
+            		fileInput2.attr("value", vm.form.password);// 设置属性的值
+            		form.append(fileInput2);
+                	//$("body").append(form);// 将表单放置在web中 */
+                	form.submit();// 表单提交
+                }
+            });
+    	}
+    }
+});
+</script>
+</body>
+</html>

@@ -53,6 +53,11 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- 测试相关↑↑↑-->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>cn.doublepoint.base</groupId>

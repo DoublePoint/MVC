@@ -56,5 +56,12 @@ public interface AdminService {
 	 * @return
 	 */
 	public boolean saveOrUpdate(List<SysAdmin> adminList) ;
+	
+	/**
+	 * 根据登录账号获取用户
+	 * @param loginAccountNo
+	 * @return
+	 */
+	public SysAdmin getByLoginAccountNo(String loginAccountNo);
 
 }

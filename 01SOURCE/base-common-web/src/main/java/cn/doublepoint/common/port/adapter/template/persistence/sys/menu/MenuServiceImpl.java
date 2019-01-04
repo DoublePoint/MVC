@@ -161,6 +161,16 @@ public class MenuServiceImpl implements MenuService{
 			queryParamList.addParam("parentId",parentMenuId);
 		return JPAUtil.getDaoService().count(SysMenu.class, queryParamList);
 	}
+
+	@Override
+	public SysMenu getByLink(String link) {
+		QueryParamList queryParamList=new QueryParamList();
+		queryParamList.addParam("link", link);
+		List<SysMenu> list=JPAUtil.load(SysMenu.class, queryParamList);
+		if(list.size()==0)
+			return null;
+		return list.get(0);
+	}
 	
 }
 

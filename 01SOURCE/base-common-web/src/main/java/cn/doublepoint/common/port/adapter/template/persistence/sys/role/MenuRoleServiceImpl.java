@@ -276,5 +276,23 @@ public class MenuRoleServiceImpl implements MenuRoleService {
 		return count>0;
 	}
 	
+	/**
+	 * 通过Menulink获取roleIds
+	 * @param menuLink
+	 * @return
+	 */
+	@Override
+	public List<String> getRoleIdsByMenuLink(String menuLink){
+		QueryParamList paramList=new QueryParamList();
+		StringBuffer jpql = new StringBuffer();
+		jpql.append(" select mr.roleId from SysMenuRole mr where exists (select 1 from SysMenu m where m.link like :menuLink and mr.menuId = m.id)");
+		menuLink.replace("/web/", "");
+		paramList.addParam("menuLink","%"+menuLink+"%");
+		
+		List<Object> objects = JPAUtil.executeQuery(jpql.toString(),paramList);
+		return objects.stream().map(obj->{
+			return String.valueOf(obj);
+		}).collect(Collectors.toList());
+	}
 	
 }

@@ -79,11 +79,6 @@ public class PageController extends BaseRequestController {
 		}).collect(Collectors.toList());
 	}
 
-	@RequestMapping("sys/login/{actionname}")
-	public String login(@PathVariable String actionname) {
-		return "sys/login/" + actionname + ".html";
-	}
-
 	@RequestMapping("sys/register/{actionname}")
 	public String register(@PathVariable String actionname) {
 		return "sys/register/" + actionname + ".html";

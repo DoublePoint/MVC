@@ -122,4 +122,11 @@ public interface MenuRoleService {
      * @return
      */
     public boolean isExistByRoleId(Integer roleId);
+    
+    /**
+	 * 通过Menulink获取roleIds
+	 * @param menuLink
+	 * @return
+	 */
+    public List<String> getRoleIdsByMenuLink(String menuLink);
 }

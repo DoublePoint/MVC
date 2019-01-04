@@ -80,4 +80,11 @@ public interface MenuService {
 	 * @return
 	 */
 	public boolean saveOrUpdate(List<SysMenu> menuList) ;
+	
+	/**
+	 * 根据link获取菜单
+	 * @param link
+	 * @return
+	 */
+	public SysMenu getByLink(String link);
 }
