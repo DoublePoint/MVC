@@ -3,6 +3,7 @@ package cn.doublepoint.common.session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -61,5 +62,7 @@ public final class SysCommonUtil {
     	return defaultVal;
     }
     
-    
+    public static Object getCurrentUser(){
+		return SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
+    }
 }

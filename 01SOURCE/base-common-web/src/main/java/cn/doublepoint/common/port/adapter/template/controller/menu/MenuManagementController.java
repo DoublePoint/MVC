@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuAdminService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
@@ -32,6 +33,8 @@ import cn.doublepoint.dto.domain.model.entity.sys.SysMenu;
 @RequestMapping("/sys/menu")
 public class MenuManagementController extends BaseController {
 
+	@Autowired
+	MenuAdminService menuAdminService;
 	@Autowired
 	MenuService menuService;
 
@@ -64,7 +67,7 @@ public class MenuManagementController extends BaseController {
 		String id = request.getParameter("id");
 		String menuName = "";
 		try {
-			SysMenu menu = menuService.getById(Integer.valueOf(id));
+			SysMenu menu = menuAdminService.getById(Integer.valueOf(id));
 			if (menu != null) {
 				menuName = menu.getName();
 			}
@@ -85,7 +88,7 @@ public class MenuManagementController extends BaseController {
 		if(!StringUtil.isNullOrEmpty(request.getParameter("parentId"))){
 			menuQuery.setId(Integer.valueOf(request.getParameter("parentId")));
 		}
-		List<SysMenu> list = menuService.findChildrenMenu(menuQuery, dataPacket.getPageInfo());
+		List<SysMenu> list = menuAdminService.findChildrenMenu(menuQuery, dataPacket.getPageInfo());
 		dataPacket.setDataList(list);
 
 		AjaxResponse ajaxResponse = new AjaxResponse();

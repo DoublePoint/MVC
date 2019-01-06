@@ -15,12 +15,14 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuAdminService;
 import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
@@ -33,6 +35,8 @@ import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 public class PageController extends BaseRequestController {
 	@Resource
 	MenuService menuService;
+	@Resource
+	MenuAdminService menuAdminService;
 
 	// 索引页
 	@RequestMapping(value = "sys/index")
@@ -60,11 +64,11 @@ public class PageController extends BaseRequestController {
 		PageInfo pageRequest = new PageInfo(1, 999999);
 		List<VOMenu> menuList;
 		if (cd == null || cd.getId() == null)
-			menuList = CommonBeanUtils.copyTo(menuService.findRootMenu(pageRequest), VOMenu.class);
+			menuList = CommonBeanUtils.copyTo(menuAdminService.findRootMenu(pageRequest), VOMenu.class);
 		else {
 			SysMenu query = new SysMenu();
 			query.setId(cd.getId());
-			menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
+			menuList = CommonBeanUtils.copyTo(menuAdminService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		}
 		if (menuList == null) {
 			return null;

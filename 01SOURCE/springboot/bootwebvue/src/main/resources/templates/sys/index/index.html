@@ -131,7 +131,7 @@
                         this.activeTab = activeName;
                         //this.tabs = tabs.filter(tab => tab.name !== targetName);
                         this.tabs = this.$_.filter(tabs,function(tab){
-                    		return tab.name == targetName;
+                    		return tab.name != targetName;
                     	})
                         if(this.tabs==null||this.tabs.length==0){
                         	this.activeTab="首页";
@@ -160,7 +160,7 @@
                     
                 	//this.tabs = tabs.filter(tab => tab.tabIndex !== rightMenuTabIndex);
                 	this.tabs = this.$_.filter(tabs,function(tab){
-                		return tab.tabIndex == rightMenuTabIndex;
+                		return tab.tabIndex != rightMenuTabIndex;
                 	})
                     if(this.tabs==null||this.tabs.length==0){
                     	this.activeTab="首页";

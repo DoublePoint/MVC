@@ -128,6 +128,7 @@
                     });
                 },
                 handleNodeClick:function(nodeData, node) {
+                	this.dataPacket.pageInfo.currentPageNum=1;
                 	$.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
                         type: "POST",

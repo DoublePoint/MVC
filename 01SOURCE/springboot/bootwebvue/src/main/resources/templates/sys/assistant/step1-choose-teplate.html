@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <template th:replace="/base.html"></template>
+     <style>
+  .image {
+    width: 100%;
+    display: block;
+  }
+  .llRadio{
+  	position:absolute;
+  	top:0;
+  }
+</style>
+</head>
+
+<body>
+    <div id="app" style="height: 100%;width: 100%;" v-cloak>
+		<ll-row stype="margin-bottom:5px;">
+		  <ll-col :gutter="0" :span="4" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
+		    <ll-card :body-style="{ padding: '0px' }">
+		      <img th:src="@{/images/aa.png}" class="image" />
+		      <ll-radio v-model="radio" :label="index" class="llRadio">备选项</ll-radio>
+		    </ll-card>
+		  </ll-col>
+		</ll-col>
+		</ll-row>
+		<ll-row>
+		  <ll-col :span="4" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
+		    <ll-card :body-style="{ padding: '0px' }">
+		      <img th:src="@{/images/aa.png}" class="image">
+		      <ll-radio v-model="radio" label="1" class="llRadio">备选项</ll-radio>
+		    </ll-card>
+		  </ll-col>
+		</ll-row>
+ 	</div>
+    <script type="text/javascript"> 
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        	radio:"1"
+    	}
+    });
+    </script>
+   
+</body>
+
+</html>

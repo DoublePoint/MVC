@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOMenu;
-import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuService;
+import cn.doublepoint.common.port.adapter.template.persistence.sys.menu.MenuAdminService;
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
 import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
@@ -33,13 +33,13 @@ import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 public class MenuTreeController extends BaseTreeController {
 
 	@Resource
-	MenuService menuService;
+	MenuAdminService menuAdminService;
 	
 	@RequestMapping("/menu/label")
 	@ResponseBody
 	public String getMenuTree(@RequestParam(required=true)String code) {
 		try{
-			SysMenu menu = menuService.getById(Integer.valueOf(code));
+			SysMenu menu = menuAdminService.getById(Integer.valueOf(code));
 			return menu.getName();
 		}
 		catch(Exception e){
@@ -88,7 +88,7 @@ public class MenuTreeController extends BaseTreeController {
 	}
 
 	private boolean isHasChild(Integer id) {
-		return menuService.getChildrenCount(id) > 0;
+		return menuAdminService.getChildrenCount(id) > 0;
 	}
 
 	private List<VOMenu> getChildrenMenuList(Integer id) {
@@ -96,7 +96,7 @@ public class MenuTreeController extends BaseTreeController {
 		List<VOMenu> menuList;
 		SysMenu query = new SysMenu();
 		query.setId(id);
-		menuList = CommonBeanUtils.copyTo(menuService.findChildrenMenu(query, pageRequest), VOMenu.class);
+		menuList = CommonBeanUtils.copyTo(menuAdminService.findChildrenMenu(query, pageRequest), VOMenu.class);
 		return menuList;
 	}
 }

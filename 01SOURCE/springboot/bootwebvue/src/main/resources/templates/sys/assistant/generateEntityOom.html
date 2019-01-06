@@ -9,7 +9,7 @@
 <body>
     <div id="app" style="height: 100%;width: 100%;" v-cloak>
         <ll-container style="height: 100%; ">
-            <ll-aside width="200px" style="border-right:1px solid #eee;">
+            <ll-aside width="150px" style="border-right:1px solid #eee;">
                 <ll-steps direction="vertical" :active="activeStep" style='overflow:hidden;'>
                     <ll-step title="选择Table"></ll-step>
                     <ll-step title="实体字段映射"></ll-step>
@@ -21,12 +21,8 @@
             </ll-aside>
             <ll-container style="height: 100%; ">
                 <ll-card v-show="activeStep==1">
-                    <div slot="header" class="clearfix">
-                        <span>卡片名称</span>
-                    </div>
-                    <div v-for="o in 4" :key="o" class="text item">
-                        {{'列表内容 ' + o }}
-                    </div>
+                     <iframe th:src="@{/sys/assistant/step1-choose-teplate}" style="height: 100%;width: 100%;display:block"
+                                frameborder='0'></iframe>
                 </ll-card>
                 <ll-card class="box-card" v-show="activeStep==2">
                     <div slot="header" class="clearfix">
