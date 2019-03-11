@@ -27,7 +27,7 @@ import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.dto.domain.model.entity.sys.SysWorksheet;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
@@ -156,7 +156,7 @@ public class InstanceServiceImpl implements InstanceService {
 			}
 		}
 		List<Object> sourceList=JPAUtil.executeQuery(sBuffer.toString(), queryParamList, pageInfo);
-		return CommonBeanUtils.copyTo(sourceList, SysWorksheet.class);
+		return CommonBeanUtil.copyTo(sourceList, SysWorksheet.class);
 	}
 	
 

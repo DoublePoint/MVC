@@ -19,5 +19,6 @@
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdminRole</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysMenuRole</class>
 		<class>cn.doublepoint.dto.domain.model.entity.sys.SysAdmin</class>
+		<class>cn.doublepoint.dto.domain.model.entity.sys.SysFile</class>
 	</persistence-unit>
 </persistence>

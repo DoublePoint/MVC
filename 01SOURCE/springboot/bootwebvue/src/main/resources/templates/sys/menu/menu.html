@@ -128,7 +128,10 @@
                     });
                 },
                 handleNodeClick:function(nodeData, node) {
-                	this.dataPacket.pageInfo.currentPageNum=1;
+                	var dataPacket=this.dataPacket;
+                	if(dataPacket==null)
+                		dataPacket=$.createAjaxDataPacket();
+                	dataPacket.pageInfo.currentPageNum=1;
                 	$.request({
                         url: $$pageContextPath + "sys/menu/retrieve",
                         type: "POST",
@@ -136,7 +139,7 @@
                         dataType: "json",
                         async: false,
                         data: {
-                        	dataPacket:this.dataPacket,
+                        	dataPacket:dataPacket,
                         	parentId:nodeData.nodeBean==null?0:nodeData.nodeBean.id
                         },
                         success: function (response) {

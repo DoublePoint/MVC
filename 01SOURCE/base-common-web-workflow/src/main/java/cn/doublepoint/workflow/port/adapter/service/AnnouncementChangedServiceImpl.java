@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
 import cn.doublepoint.commonutil.StringUtil;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.dto.domain.model.entity.sys.SysAnnouncementChanged;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
@@ -33,7 +33,7 @@ public class AnnouncementChangedServiceImpl  implements AnnouncementChangedServi
 			}
 		}
 		List<Object> sourceList=JPAUtil.executeQuery(stringBuffer.toString(), params,pageInfo);
-		return CommonBeanUtils.copyTo(sourceList, SysAnnouncementChanged.class);
+		return CommonBeanUtil.copyTo(sourceList, SysAnnouncementChanged.class);
 	}
 	
 	/**

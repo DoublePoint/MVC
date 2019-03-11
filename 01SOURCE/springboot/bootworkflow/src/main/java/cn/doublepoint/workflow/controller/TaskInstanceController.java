@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOTask;
 
 /**
@@ -60,7 +60,7 @@ public class TaskInstanceController {
     			.singleResult();
     	AjaxDataPacket<VOTask> dataPacket=new AjaxDataPacket<VOTask>();
     	VOTask resultTask=new VOTask();
-    	CommonBeanUtils.copyProperties(task, resultTask);
+    	CommonBeanUtil.copyProperties(task, resultTask);
     	dataPacket.setData(resultTask);
     	response.setAjaxParameter("dataPacket", dataPacket);
     	return response;

@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 //        		.antMatchers(ApplicationContextUtil.getApplicationName()+"/js/**",ApplicationContextUtil.getApplicationName()+"/login/**",ApplicationContextUtil.getApplicationName()+"/plugins/**",ApplicationContextUtil.getApplicationName()+"/css/**", ApplicationContextUtil.getApplicationName()+"/message/").permitAll()
-        		.antMatchers("/js/**","/images/**","/login/**","/plugins/**","/css/**", "/message/").permitAll()
+        		.antMatchers("**","/js/**","/images/**","/login/**","/plugins/**","/css/**", "/message/").permitAll()
                 .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
                 .headers().frameOptions().disable()

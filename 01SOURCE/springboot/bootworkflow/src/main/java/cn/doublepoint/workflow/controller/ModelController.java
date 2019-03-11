@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxRequest;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOActReModel;
 import cn.doublepoint.workflow.service.ModelService;
@@ -57,7 +57,7 @@ public class ModelController {
 		AjaxDataPacket<VOActReModel> dataPacket = new AjaxDataPacket<VOActReModel>();
 		List<VOActReModel> resultList = new ArrayList<VOActReModel>();
 		List<Model> list = repositoryService.createModelQuery().list();
-		resultList = CommonBeanUtils.copyTo(list, VOActReModel.class);
+		resultList = CommonBeanUtil.copyTo(list, VOActReModel.class);
 		response.setViewName("/model/modelList.html");
 		dataPacket.setDataList(resultList);
 		response.setAjaxParameter("dataPacket", dataPacket);
@@ -73,7 +73,7 @@ public class ModelController {
 		AjaxDataPacket<VOActReModel> dataPacket = new AjaxDataPacket<VOActReModel>();
 		List<VOActReModel> resultList = new ArrayList<VOActReModel>();
 		List<Model> list = repositoryService.createModelQuery().list();
-		resultList = CommonBeanUtils.copyTo(list, VOActReModel.class);
+		resultList = CommonBeanUtil.copyTo(list, VOActReModel.class);
 		dataPacket.setDataList(resultList);
 		response.setAjaxParameter("dataPacket", dataPacket);
 		return response;

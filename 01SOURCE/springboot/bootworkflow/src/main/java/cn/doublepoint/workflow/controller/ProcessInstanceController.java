@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.ajaxmodel.AjaxDataPacket;
 import cn.doublepoint.commonutil.ajaxmodel.AjaxResponse;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.dto.domain.model.vo.workflow.VOProcessDefinition;
 
 /**
@@ -60,7 +60,7 @@ public class ProcessInstanceController {
 		List<VOProcessDefinition> processDefinitionList = new ArrayList<VOProcessDefinition>();
 		List<ProcessDefinition> source = repositoryService.createProcessDefinitionQuery().orderByDeploymentId().desc()
 				.list();
-		processDefinitionList = CommonBeanUtils.copyTo(source, VOProcessDefinition.class);
+		processDefinitionList = CommonBeanUtil.copyTo(source, VOProcessDefinition.class);
 		response.setViewName("/process/processList.html");
 		dataPacket.setDataList(processDefinitionList);
 		response.setAjaxParameter("dataPacket", dataPacket);

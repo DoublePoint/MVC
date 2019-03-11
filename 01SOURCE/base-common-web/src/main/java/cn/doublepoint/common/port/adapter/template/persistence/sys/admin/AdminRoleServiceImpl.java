@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import cn.doublepoint.common.domain.model.viewmodel.sys.VOAdminRole;
-import cn.doublepoint.common.session.SysCommonUtil;
+import cn.doublepoint.commonutil.CommonUtil;
 import cn.doublepoint.commonutil.DateTimeUtil;
 import cn.doublepoint.commonutil.SequenceUtil;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.commonutil.persitence.jpa.JPAUtil;
 import cn.doublepoint.dto.domain.model.entity.sys.SysAdminRole;
 import cn.doublepoint.dto.domain.model.entity.sys.SysRole;
@@ -44,8 +44,8 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 			list.stream().forEach(item->{
 				Object[] arr = (Object[]) item;
 				VOAdminRole adminRole = new VOAdminRole();
-				CommonBeanUtils.copyProperties((SysAdminRole)arr[0],adminRole);
-				adminRole.setRoleName(SysCommonUtil.getDefaultRecordString(arr[1], ""));
+				CommonBeanUtil.copyProperties((SysAdminRole)arr[0],adminRole);
+				adminRole.setRoleName(CommonUtil.getDefaultRecordString(arr[1], ""));
 				resultList.add(adminRole);
 			});
 			

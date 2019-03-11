@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author HenryYan
  */
-public class WorkflowUtils {
+public class WorkflowUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(WorkflowUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(WorkflowUtil.class);
 
     /**
      * 转换流程节点类型为中文说明

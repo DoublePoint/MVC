@@ -16,7 +16,7 @@ import org.springframework.beans.BeanUtils;
 
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 
-public class CommonBeanUtils extends BeanUtils {
+public class CommonBeanUtil extends BeanUtils {
 
 	public List<Object> copyListProperties(List<Object> sourceList, List<Object> targetList) {
 		if (sourceList == null || targetList == null)

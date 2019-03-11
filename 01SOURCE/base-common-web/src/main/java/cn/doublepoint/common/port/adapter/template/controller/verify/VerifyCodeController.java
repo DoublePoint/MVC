@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.doublepoint.commonutil.domain.model.VerifyCodeUtils;
+import cn.doublepoint.commonutil.domain.model.VerifyCodeUtil;
 
 @Controller
 public class VerifyCodeController {
@@ -39,7 +39,7 @@ public class VerifyCodeController {
         response.setContentType("image/jpeg"); 
            
         //生成随机字串 
-        String verifyCode = VerifyCodeUtils.generateVerifyCode(4); 
+        String verifyCode = VerifyCodeUtil.generateVerifyCode(4); 
         //存入会话session 
         HttpSession session = request.getSession(true); 
         //删除以前的
@@ -47,6 +47,6 @@ public class VerifyCodeController {
         session.setAttribute("verCode", verifyCode.toLowerCase()); 
         //生成图片 
         int w = 100, h = 30; 
-        VerifyCodeUtils.outputImage(w, h, response.getOutputStream(), verifyCode); 
+        VerifyCodeUtil.outputImage(w, h, response.getOutputStream(), verifyCode); 
 	}
 }

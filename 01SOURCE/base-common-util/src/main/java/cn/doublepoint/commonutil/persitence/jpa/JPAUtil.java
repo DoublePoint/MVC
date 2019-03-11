@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 import javax.persistence.Id;
 
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.commonutil.log.Log4jUtil;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
@@ -368,7 +368,7 @@ public class JPAUtil extends DataBaseUtil {
 		List<Object> objects = daoService.executeQuery(jpql, queryParamList, pageInfo);
 		if(objects.size()==0)
 			return new ArrayList<T>();
-		return CommonBeanUtils.copyTo(objects, clazz);
+		return CommonBeanUtil.copyTo(objects, clazz);
 	}
 
 	/**
