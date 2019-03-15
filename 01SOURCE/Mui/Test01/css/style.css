@@ -1,0 +1,18 @@
+.public-bg-color{
+	background: #F0421B;
+}
+.public-bg-color a,.public-bg-color h1{
+	color: white;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+	color: #F0421B;
+}
+.public-padding{
+	padding: 0px 15px;
+}
+.public-margin-top{
+	margin-top: 10px;
+}
+.public-grid-back{
+	background-color: white!important;
+}
