@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">手势</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell cell">单击</li>
+				<li class="mui-table-view-cell cell">双击</li>
+				<li class="mui-table-view-cell cell">长按</li>
+				<li class="mui-table-view-cell cell">向右滑动</li>
+				<li class="mui-table-view-cell cell">拖拽</li>
+			</ul>
+		</div>
+		
+		<script src="js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				gestureconfig:{
+					tap:true,//默认true
+					doubletap:true,//默认false
+					longtap:true,//默认位false
+					swipe:true,//默认位true
+					drag:true,//默认位true
+					hold:false,//默认位false 不监听
+					release:false//默认位false 不监听
+				}
+			})
+			
+			var cell = document.getElementsByClassName("cell");
+			cell["0"].addEventListener("tap",function(){
+				alert("我被单击了");
+			});
+			cell["2"].addEventListener("longtap",function(){
+				alert("我被长按了");
+			});
+			cell["3"].addEventListener("swiperight",function(){
+				alert("我被右划了");
+			});
+			cell["4"].addEventListener("drag",function(){
+				alert("我被拽动了");
+			});
+			cell["1"].addEventListener("doubletap",function(){
+				alert("我被双击了");
+			});
+		</script>
+	</body>
+
+</html>

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.doublepoint.workflow.util.WorkflowUtils;
+import cn.doublepoint.workflow.util.WorkflowUtil;
 
 /**
  * 工作流跟踪相关Service
@@ -107,7 +107,7 @@ public class WorkflowTraceService {
         setWidthAndHeight(activity, activityInfo);
 
         Map<String, Object> properties = activity.getProperties();
-        vars.put("任务类型", WorkflowUtils.parseToZhType(properties.get("type").toString()));
+        vars.put("任务类型", WorkflowUtil.parseToZhType(properties.get("type").toString()));
 
         ActivityBehavior activityBehavior = activity.getActivityBehavior();
         logger.debug("activityBehavior={}", activityBehavior);

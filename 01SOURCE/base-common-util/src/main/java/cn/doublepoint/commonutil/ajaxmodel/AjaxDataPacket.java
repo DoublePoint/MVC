@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.dto.domain.model.entity.BaseModel;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
 
@@ -27,7 +27,7 @@ public class AjaxDataPacket<T> implements Serializable {
 	public <R extends BaseModel> AjaxDataPacket<R> copy(Class<R> targetClass) {
 		AjaxDataPacket<R> ajaxDataPacket = new AjaxDataPacket<>();
 		ajaxDataPacket.setPageInfo(this.pageInfo);
-		ajaxDataPacket.setDataList(CommonBeanUtils.copyTo(this.dataList, targetClass));
+		ajaxDataPacket.setDataList(CommonBeanUtil.copyTo(this.dataList, targetClass));
 		return ajaxDataPacket;
 	}
 

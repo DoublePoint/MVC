@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.doublepoint.commonutil.ajaxmodel.TreeNodeBean;
-import cn.doublepoint.commonutil.domain.model.CommonBeanUtils;
+import cn.doublepoint.commonutil.domain.model.CommonBeanUtil;
 import cn.doublepoint.commonutil.port.adapter.controller.request.BaseTreeController;
 import cn.doublepoint.dto.domain.model.entity.sys.SysDepartment;
 import cn.doublepoint.dto.domain.model.vo.query.PageInfo;
@@ -96,7 +96,7 @@ public class DepartmentTreeController extends BaseTreeController {
 		List<SysDepartment> departmentList;
 		SysDepartment query = new SysDepartment();
 		query.setId(id);
-		departmentList = CommonBeanUtils.copyTo(departmentService.findChildrenDepartment(query, pageRequest), SysDepartment.class);
+		departmentList = CommonBeanUtil.copyTo(departmentService.findChildrenDepartment(query, pageRequest), SysDepartment.class);
 		return departmentList;
 	}
 }

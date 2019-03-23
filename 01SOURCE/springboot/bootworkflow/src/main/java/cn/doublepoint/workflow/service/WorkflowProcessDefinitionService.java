@@ -20,7 +20,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import cn.doublepoint.workflow.util.WorkflowUtils;
+import cn.doublepoint.workflow.util.WorkflowUtil;
 
 /**
  * 工作流中流程以及流程实例相关Service
@@ -135,7 +135,7 @@ public class WorkflowProcessDefinitionService {
             // export diagram
             List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).list();
             for (ProcessDefinition processDefinition : list) {
-                WorkflowUtils.exportDiagramToFile(repositoryService, processDefinition, exportDir);
+                WorkflowUtil.exportDiagramToFile(repositoryService, processDefinition, exportDir);
             }
         }
     }
